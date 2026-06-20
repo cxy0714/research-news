@@ -95,7 +95,7 @@
 - [x] (2026-06-21) `--only JBES --n-issues 8`
 
 IEEE 系列 ieee（月刊、每期很大，全部先 dry-run、用小 N）：
-- [ ] `--only TIT --n-issues 2`   ⚠
+- [x] (2026-06-21) `--only TIT --n-issues 2`   ⚠
 - [ ] `--only TPAMI --n-issues 2`   ⚠
 - [ ] `--only TSP --n-issues 2`   ⚠
 - [ ] `--only JSAIT --n-issues 4`
