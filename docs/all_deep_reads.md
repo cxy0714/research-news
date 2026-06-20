@@ -197,6 +197,74 @@
 - [Doubly robust estimation of policy-relevant causal effects under interference](deep_reads/2026-06-20-10.1093_jrsssc_qlae066.md)  
   9/10 [journals]
 
+#### Journal of the American Statistical Association Vol 121 Issue 553
+
+- [Reinforcement Learning with Continuous Actions Under Unmeasured Confounding](deep_reads/2026-06-20-10.1080_01621459.2025.2590175.md)  
+  9/10 [journals]
+- [Improved Bounds and Inference on Optimal Regimes](deep_reads/2026-06-20-10.1080_01621459.2025.2537451.md)  
+  9/10 [journals]
+- [The Effect of Alcohol Intake on Brain White Matter Microstructural Integrity: A New Causal Inference Framework for Incomplete Phenomic Data](deep_reads/2026-06-20-10.1080_01621459.2025.2542553.md)  
+  9/10 [journals]
+- [Incorporating Auxiliary Variables to Improve the Efficiency of Time-Varying Treatment Effect Estimation](deep_reads/2026-06-20-10.1080_01621459.2025.2516197.md)  
+  9/10 [journals]
+- [A Bayesian Nonparametric Approach to Mediation and Spillover Effects with Multiple Mediators in Cluster-Randomized Trials](deep_reads/2026-06-20-10.1080_01621459.2025.2544366.md)  
+  8/10 [journals]
+- [Effect Aliasing in Observational Studies](deep_reads/2026-06-20-10.1080_01621459.2025.2537456.md)  
+  8/10 [journals]
+- [Design and Analysis of Randomized Trials to Estimate Spatio-Temporally Heterogeneous Treatment Effects](deep_reads/2026-06-20-10.1080_01621459.2025.2527424.md)  
+  8/10 [journals]
+- [Design-Based Causal Inference with Missing Outcomes: Missingness Mechanisms, Imputation-Assisted Randomization Tests, and Covariate Adjustment](deep_reads/2026-06-20-10.1080_01621459.2025.2516204.md)  
+  8/10 [journals]
+- [Design-Based Uncertainty for Quasi-Experiments](deep_reads/2026-06-20-10.1080_01621459.2025.2526700.md)  
+  8/10 [journals]
+- [Long-Term Effect Estimation When Combining Clinical Trial and Observational Follow-Up Datasets](deep_reads/2026-06-20-10.1080_01621459.2025.2526703.md)  
+  8/10 [journals]
+- [Causality-Oriented Robustness: Exploiting General Noise Interventions](deep_reads/2026-06-20-10.1080_01621459.2025.2544365.md)  
+  7/10 [journals]
+- [Online Policy Learning and Inference by Matrix Completion](deep_reads/2026-06-20-10.1080_01621459.2025.2537454.md)  
+  6/10 [journals]
+- [Toward Interpretable Deep Generative Models via Causal Representation Learning](deep_reads/2026-06-20-10.1080_01621459.2026.2620154.md)  
+  5/10 [journals]
+
+#### Journal of the American Statistical Association Vol 120 Issue 552
+
+- [Causal Inference for Genomic Data with Multiple Heterogeneous Outcomes](deep_reads/2026-06-20-10.1080_01621459.2025.2468014.md)  
+  9/10 [journals]
+- [On the Comparative Analysis of Average Treatment Effects Estimation via Data Combination](deep_reads/2026-06-20-10.1080_01621459.2024.2435656.md)  
+  9/10 [journals]
+- [Manipulating an Instrumental Variable in an Observational Study of Premature Babies: Design, Bounds, and Inference](deep_reads/2026-06-20-10.1080_01621459.2025.2510711.md)  
+  8/10 [journals]
+- [Estimating Racial Disparities When Race is Not Observed](deep_reads/2026-06-20-10.1080_01621459.2025.2526695.md)  
+  7/10 [journals]
+- [A Bayesian Criterion for Rerandomization](deep_reads/2026-06-20-10.1080_01621459.2025.2507432.md)  
+  7/10 [journals]
+- [Dynamic Regression of Longitudinal Trajectory Features](deep_reads/2026-06-20-10.1080_01621459.2025.2474265.md)  
+  6/10 [journals]
+- [A Latent Variable Model for Individual Degree Measures in Respondent-Driven Sampling](deep_reads/2026-06-20-10.1080_01621459.2025.2516185.md)  
+  5/10 [journals]
+
+#### Journal of the American Statistical Association Vol 120 Issue 551
+
+- [Estimating Heterogeneous Causal Mediation Effects with Bayesian Decision Tree Ensembles](deep_reads/2026-06-20-10.1080_01621459.2025.2491155.md)  
+  8/10 [journals]
+- [Federated Adaptive Causal Estimation (FACE) of Target Treatment Effects](deep_reads/2026-06-20-10.1080_01621459.2025.2453249.md)  
+  8/10 [journals]
+- [Distributional Off-Policy Evaluation in Reinforcement Learning](deep_reads/2026-06-20-10.1080_01621459.2025.2506197.md)  
+  7/10 [journals]
+- [<i>Who Are We Missing?</i> : A Principled Approach to Characterizing the Underrepresented Population](deep_reads/2026-06-20-10.1080_01621459.2025.2495319.md)  
+  7/10 [journals]
+- [Estimating Heterogeneous Exposure Effects in the Case-Crossover Design Using BART](deep_reads/2026-06-20-10.1080_01621459.2025.2460231.md)  
+  7/10 [journals]
+- [Sensitivity Analysis for Quantiles of Hidden Biases in Matched Observational Studies](deep_reads/2026-06-20-10.1080_01621459.2024.2441527.md)  
+  7/10 [journals]
+
+#### Journal of the American Statistical Association Vol 120 Issue 550
+
+- [Inferring Causal Effect of a Digital Communication Strategy under a Latent Sequential Ignorability Assumption and Treatment Noncompliance](deep_reads/2026-06-20-10.1080_01621459.2024.2435655.md)  
+  8/10 [journals]
+- [Combining Broad and Narrow Case Definitions in Matched Case-Control Studies: Firearms in the Home and Suicide Risk](deep_reads/2026-06-20-10.1080_01621459.2024.2441519.md)  
+  6/10 [journals]
+
 #### Biostatistics Vol 27 Issue 1
 
 - [IV-learner: learning conditional average treatment effects using instrumental variables](deep_reads/2026-06-10-10.1093_biostatistics_kxag009.md)  
@@ -1060,6 +1128,49 @@
 
 ### 期刊
 
+#### Journal of the American Statistical Association Vol 121 Issue 553
+
+- [Inference for Low-Rank Models Without Estimating the Rank](deep_reads/2026-06-20-10.1080_01621459.2025.2538272.md)  
+  9/10 [journals]
+- [Inference on the Proportion of Variance Explained in Principal Component Analysis](deep_reads/2026-06-20-10.1080_01621459.2025.2538895.md)  
+  8/10 [journals]
+- [Estimation of Out-of-Sample Sharpe Ratio for High Dimensional Portfolio Optimization](deep_reads/2026-06-20-10.1080_01621459.2025.2535757.md)  
+  8/10 [journals]
+- [High-Dimensional Covariance Regression with Application to Co-Expression QTL Detection](deep_reads/2026-06-20-10.1080_01621459.2025.2520996.md)  
+  7/10 [journals]
+- [Dimension Reduction for Large-Scale Federated Data: Statistical Rate and Asymptotic Inference](deep_reads/2026-06-20-10.1080_01621459.2025.2537453.md)  
+  6/10 [journals]
+- [Data-Driven Tuning Parameter Selection for High-Dimensional Vector Autoregressions](deep_reads/2026-06-20-10.1080_01621459.2025.2516190.md)  
+  6/10 [journals]
+- [PALAR: Estimation of Absolute Abundance Effects in Regression with Relative Abundance Predictors](deep_reads/2026-06-20-10.1080_01621459.2025.2596250.md)  
+  5/10 [journals]
+
+#### Journal of the American Statistical Association Vol 120 Issue 552
+
+- [Identifying the Structure of High-Dimensional Time Series via Eigen-Analysis](deep_reads/2026-06-20-10.1080_01621459.2025.2507436.md)  
+  8/10 [journals]
+- [Optimal Multitask Linear Regression and Contextual Bandits under Sparse Heterogeneity](deep_reads/2026-06-20-10.1080_01621459.2024.2439622.md)  
+  8/10 [journals]
+- [Aggregated Projection Method: A New Approach for Group Factor Model](deep_reads/2026-06-20-10.1080_01621459.2025.2491154.md)  
+  7/10 [journals]
+- [Distributed Tensor Principal Component Analysis with Data Heterogeneity](deep_reads/2026-06-20-10.1080_01621459.2025.2483481.md)  
+  7/10 [journals]
+- [Discovering the Network Granger Causality in Large Vector Autoregressive Models](deep_reads/2026-06-20-10.1080_01621459.2025.2450836.md)  
+  7/10 [journals]
+- [Large Precision Matrix Estimation with Unknown Group Structure](deep_reads/2026-06-20-10.1080_01621459.2024.2442092.md)  
+  6/10 [journals]
+- [Class-Specific Joint Feature Screening in Ultrahigh-Dimensional Mixture Regression](deep_reads/2026-06-20-10.1080_01621459.2025.2468011.md)  
+  5/10 [journals]
+
+#### Journal of the American Statistical Association Vol 120 Issue 551
+
+- [Simultaneous Inference for Generalized Linear Models with Unmeasured Confounders](deep_reads/2026-06-20-10.1080_01621459.2025.2485379.md)  
+  8/10 [journals]
+- [Frequency Domain Statistical Inference for High-Dimensional Time Series](deep_reads/2026-06-20-10.1080_01621459.2025.2479244.md)  
+  7/10 [journals]
+- [Kernel Spectral Joint Embeddings for High-Dimensional Noisy Datasets Using Duo-Landmark Integral Operators](deep_reads/2026-06-20-10.1080_01621459.2025.2539539.md)  
+  6/10 [journals]
+
 #### Annals of Statistics Vol 54 Issue 2
 
 - [Generalized linear spectral statistics of high-dimensional sample covariance matrices and its applications](deep_reads/2026-05-26-10.1214_25-aos2601.md)  
@@ -1568,6 +1679,68 @@
 #### Journal of the Royal Statistical Society Series C Vol 74 Issue 1
 
 - [Predicting 5G throughput with BAMMO, a boosted additive model for data with missing observations](deep_reads/2026-06-20-10.1093_jrsssc_qlae054.md)  
+  4/10 [journals]
+
+#### Journal of the American Statistical Association Vol 121 Issue 553
+
+- [Statistical Quantile Learning for Large Additive Latent Variable Models](deep_reads/2026-06-20-10.1080_01621459.2025.2526697.md)  
+  7/10 [journals]
+- [Kernel Density Estimation with Polyspherical Data and its Applications](deep_reads/2026-06-20-10.1080_01621459.2025.2521898.md)  
+  7/10 [journals]
+- [A Practical Interval Estimation Method for Spectral Density Function](deep_reads/2026-06-20-10.1080_01621459.2025.2516211.md)  
+  7/10 [journals]
+- [Deep Discrete Encoders: Identifiable Deep Generative Models for Rich Data with Discrete Latent Layers](deep_reads/2026-06-20-10.1080_01621459.2025.2587922.md)  
+  6/10 [journals]
+- [Word-Level Maximum Mean Discrepancy Regularization for Word Embedding](deep_reads/2026-06-20-10.1080_01621459.2025.2547978.md)  
+  4/10 [journals]
+- [On a Notion of Graph Centrality Based on <i>L</i> <sub>1</sub> Data Depth](deep_reads/2026-06-20-10.1080_01621459.2025.2520467.md)  
+  4/10 [journals]
+
+#### Journal of the American Statistical Association Vol 120 Issue 552
+
+- [Mixture Models: Parametric, Semiparametric, and New Directions](deep_reads/2026-06-20-10.1080_01621459.2025.2561150.md)  
+  7/10 [journals]
+- [Adaptation Using Spatially Distributed Gaussian Processes](deep_reads/2026-06-20-10.1080_01621459.2025.2501717.md)  
+  7/10 [journals]
+- [Kernel Meets Sieve: Transformed Hazards Models with Sparse Longitudinal Covariates](deep_reads/2026-06-20-10.1080_01621459.2025.2476781.md)  
+  7/10 [journals]
+- [Deep Regression for Repeated Measurements](deep_reads/2026-06-20-10.1080_01621459.2025.2458344.md)  
+  7/10 [journals]
+- [A New Approach to Optimal Design under Model Uncertainty Motivated by Multi-Armed Bandits](deep_reads/2026-06-20-10.1080_01621459.2025.2487223.md)  
+  6/10 [journals]
+- [Boosting AI-Generated Biomedical Images with Confidence through Advanced Statistical Inference](deep_reads/2026-06-20-10.1080_01621459.2025.2552510.md)  
+  6/10 [journals]
+- [Comparison of Longitudinal Trajectories Using a High-Dimensional Partial Linear Semiparametric Mixed-Effects Model](deep_reads/2026-06-20-10.1080_01621459.2024.2441523.md)  
+  6/10 [journals]
+- [Semiparametric Regression Analysis of Interval-Censored Multi-State Data with An Absorbing State](deep_reads/2026-06-20-10.1080_01621459.2024.2448858.md)  
+  5/10 [journals]
+- [Analysis of Variance of Tensor Product Reproducing Kernel Hilbert Spaces on Metric Spaces](deep_reads/2026-06-20-10.1080_01621459.2024.2441525.md)  
+  4/10 [journals]
+- [Estimation and Inference for Nonparametric Expected Shortfall Regression over RKHS](deep_reads/2026-06-20-10.1080_01621459.2024.2441657.md)  
+  4/10 [journals]
+
+#### Journal of the American Statistical Association Vol 120 Issue 551
+
+- [Deep Mutual Density Ratio Estimation with Bregman Divergence and Its Applications](deep_reads/2026-06-20-10.1080_01621459.2025.2507437.md)  
+  8/10 [journals]
+- [Higher Order Accurate Symmetric Bootstrap Confidence Intervals in High Dimensional Penalized Regression](deep_reads/2026-06-20-10.1080_01621459.2024.2445873.md)  
+  8/10 [journals]
+- [Deep Fréchet Regression](deep_reads/2026-06-20-10.1080_01621459.2025.2507982.md)  
+  7/10 [journals]
+- [Phase-Type Distributions for Sieve Estimation](deep_reads/2026-06-20-10.1080_01621459.2025.2459442.md)  
+  7/10 [journals]
+- [Deconvolution Density Estimation with Penalized MLE](deep_reads/2026-06-20-10.1080_01621459.2024.2436686.md)  
+  7/10 [journals]
+- [Conformal Prediction for Network-Assisted Regression](deep_reads/2026-06-20-10.1080_01621459.2025.2506198.md)  
+  6/10 [journals]
+- [A Unified Framework for Residual Diagnostics in Generalized Linear Models and Beyond](deep_reads/2026-06-20-10.1080_01621459.2025.2504037.md)  
+  5/10 [journals]
+- [Prediction of Cognitive Function via Brain Region Volumes with Applications to Alzheimer’s Disease Based on Space-Factor-Guided Functional Principal Component Analysis](deep_reads/2026-06-20-10.1080_01621459.2025.2479220.md)  
+  2/10 [journals]
+
+#### Journal of the American Statistical Association Vol 120 Issue 550
+
+- [Sparse Bayesian Group Factor Model for Feature Interactions in Multiple Count Tables Data](deep_reads/2026-06-20-10.1080_01621459.2025.2449721.md)  
   4/10 [journals]
 
 #### Biostatistics Vol 27 Issue 1
@@ -2296,6 +2469,22 @@
 
 ### 期刊
 
+#### Journal of the American Statistical Association Vol 120 Issue 552
+
+- [Communication-Efficient Distributed Sparse Learning with Oracle Property and Geometric Convergence](deep_reads/2026-06-20-10.1080_01621459.2025.2479237.md)  
+  8/10 [journals]
+- [Data Fusion Using Weakly Aligned Sources](deep_reads/2026-06-20-10.1080_01621459.2025.2476780.md)  
+  8/10 [journals]
+- [Statistical Inference for High-Dimensional Convoluted Rank Regression](deep_reads/2026-06-20-10.1080_01621459.2025.2471054.md)  
+  8/10 [journals]
+
+#### Journal of the American Statistical Association Vol 120 Issue 551
+
+- [Communication-Efficient Distributed Estimation and Inference for Cox’s Model](deep_reads/2026-06-20-10.1080_01621459.2025.2516820.md)  
+  7/10 [journals]
+- [High-Dimensional Expected Shortfall Regression](deep_reads/2026-06-20-10.1080_01621459.2024.2448860.md)  
+  6/10 [journals]
+
 #### Annals of Statistics Vol 53 Issue 3
 
 - [Semiparametric adaptive estimation under informative sampling](deep_reads/2026-06-20-10.1214_25-aos2509.md)  
@@ -2569,6 +2758,63 @@
 
 - [Inferring bivariate associations with continuous data from studies using respondent-driven sampling](deep_reads/2026-06-20-10.1093_jrsssc_qlae061.md)  
   7/10 [journals]
+
+#### Journal of the American Statistical Association Vol 121 Issue 553
+
+- [Testing and Support Recovery in Population-Based Image Data](deep_reads/2026-06-20-10.1080_01621459.2025.2525585.md)  
+  8/10 [journals]
+- [A Minimax Two-Sample Test for Functional Data via Grothendieck’s Divergence](deep_reads/2026-06-20-10.1080_01621459.2025.2537455.md)  
+  8/10 [journals]
+- [Confidence Sets for Causal Orderings](deep_reads/2026-06-20-10.1080_01621459.2025.2542552.md)  
+  8/10 [journals]
+- [Testing Elliptical Models in High Dimensions](deep_reads/2026-06-20-10.1080_01621459.2025.2518617.md)  
+  8/10 [journals]
+- [Variable Significance Testing for the Deep Cox Model](deep_reads/2026-06-20-10.1080_01621459.2026.2615850.md)  
+  7/10 [journals]
+- [A Goodness-of-Fit Assessment for General Learning Procedures in High Dimensions](deep_reads/2026-06-20-10.1080_01621459.2025.2529602.md)  
+  7/10 [journals]
+- [Higher-Order Accurate Two-Sample Network Inference and Network Hashing](deep_reads/2026-06-20-10.1080_01621459.2025.2520459.md)  
+  7/10 [journals]
+- [Adaptive Selection for False Discovery Rate Control Leveraging Symmetry](deep_reads/2026-06-20-10.1080_01621459.2025.2519814.md)  
+  6/10 [journals]
+- [A Powerful Transformation of Quantitative Responses for Biobank-Scale Association Studies](deep_reads/2026-06-20-10.1080_01621459.2025.2540083.md)  
+  6/10 [journals]
+- [Integrated Path Stability Selection](deep_reads/2026-06-20-10.1080_01621459.2025.2525589.md)  
+  6/10 [journals]
+- [Checking the Cox Proportional Hazards Model with Interval-Censored Data](deep_reads/2026-06-20-10.1080_01621459.2025.2520460.md)  
+  5/10 [journals]
+- [Towards Better Statistical Understanding of Watermarking LLMs](deep_reads/2026-06-20-10.1080_01621459.2026.2618290.md)  
+  4/10 [journals]
+
+#### Journal of the American Statistical Association Vol 120 Issue 552
+
+- [A Novel Approach of High Dimensional Linear Hypothesis Testing Problem](deep_reads/2026-06-20-10.1080_01621459.2024.2428467.md)  
+  9/10 [journals]
+- [Likelihood Ratio Tests in Random Graph Models with Increasing Dimensions](deep_reads/2026-06-20-10.1080_01621459.2025.2488477.md)  
+  8/10 [journals]
+- [Hypothesis Testing for a Functional Parameter via Self-Normalization](deep_reads/2026-06-20-10.1080_01621459.2025.2483483.md)  
+  8/10 [journals]
+- [Inference in Generalized Linear Models with Robustness to Misspecified Variances](deep_reads/2026-06-20-10.1080_01621459.2025.2491775.md)  
+  7/10 [journals]
+- [Testing Mutually Exclusive Hypotheses for Multi-Response Regressions](deep_reads/2026-06-20-10.1080_01621459.2025.2455191.md)  
+  7/10 [journals]
+- [Nonparametric Test for Rough Volatility](deep_reads/2026-06-20-10.1080_01621459.2025.2495316.md)  
+  6/10 [journals]
+- [Posterior Predictive Design for Phase I Clinical Trials](deep_reads/2026-06-20-10.1080_01621459.2025.2484044.md)  
+  3/10 [journals]
+- [Fair Coins Tend to Land on the Same Side They Started: Evidence from 350,757 Flips](deep_reads/2026-06-20-10.1080_01621459.2025.2516210.md)  
+  1/10 [journals]
+
+#### Journal of the American Statistical Association Vol 120 Issue 551
+
+- [Adaptive Testing for High-Dimensional Data](deep_reads/2026-06-20-10.1080_01621459.2024.2439617.md)  
+  8/10 [journals]
+- [Statistical Inference for High-Dimensional Spectral Density Matrix](deep_reads/2026-06-20-10.1080_01621459.2025.2468013.md)  
+  7/10 [journals]
+- [Simulation-Based, Finite-Sample Inference for Privatized Data](deep_reads/2026-06-20-10.1080_01621459.2024.2427436.md)  
+  7/10 [journals]
+- [Identifying Genetic Variants for Brain Connectivity Using Ball Covariance Ranking and Aggregation](deep_reads/2026-06-20-10.1080_01621459.2025.2450837.md)  
+  5/10 [journals]
 
 #### Biostatistics Vol 25 Issue 2
 
@@ -3148,6 +3394,32 @@
 
 - [Exploring first and second-order spatio-temporal structures of lightning strike impacts in the French Alps using heavy subsampling](deep_reads/2026-06-20-10.1093_jrsssc_qlae068.md)  
   6/10 [journals]
+
+#### Journal of the American Statistical Association Vol 121 Issue 553
+
+- [Provably Efficient Posterior Sampling for Sparse Linear Regression via Measure Decomposition](deep_reads/2026-06-20-10.1080_01621459.2025.2537461.md)  
+  7/10 [journals]
+- [Linear-Cost Vecchia Approximation of Multivariate Normal Probabilities](deep_reads/2026-06-20-10.1080_01621459.2025.2546586.md)  
+  7/10 [journals]
+- [Data Thinning for Poisson Factor Models and its Applications](deep_reads/2026-06-20-10.1080_01621459.2025.2546577.md)  
+  6/10 [journals]
+- [LAMBDA: A Large Model Based Data Agent](deep_reads/2026-06-20-10.1080_01621459.2025.2510000.md)  
+  6/10 [journals]
+- [Efficient Optimization of Plasma Radiation Detector Configurations using Imperfect Inference Models](deep_reads/2026-06-20-10.1080_01621459.2025.2582601.md)  
+  4/10 [journals]
+
+#### Journal of the American Statistical Association Vol 120 Issue 551
+
+- [Efficient Estimation for Longitudinal Networks via Adaptive Merging](deep_reads/2026-06-20-10.1080_01621459.2025.2455202.md)  
+  8/10 [journals]
+- [When Composite Likelihood meets Stochastic Approximation](deep_reads/2026-06-20-10.1080_01621459.2024.2436219.md)  
+  6/10 [journals]
+- [Cutting Feedback in Misspecified Copula Models](deep_reads/2026-06-20-10.1080_01621459.2025.2464270.md)  
+  4/10 [journals]
+- [Optimal Transport based Cross-Domain Integration for Heterogeneous Data](deep_reads/2026-06-20-10.1080_01621459.2025.2540653.md)  
+  3/10 [journals]
+- [Financial Data Analytics with R: Monte-Carlo Validation](deep_reads/2026-06-20-10.1080_01621459.2025.2526711.md)  
+  0/10 [journals]
 
 #### Biostatistics Vol 25 Issue 3
 
@@ -3899,6 +4171,29 @@
 - [Modelling particle number size distribution: a continuous approach](deep_reads/2026-06-20-10.1093_jrsssc_qlae053.md)  
   2/10 [journals]
 
+#### Journal of the American Statistical Association Vol 121 Issue 553
+
+- [SMART-MC: Characterizing the Dynamics of Multiple Sclerosis Therapy Transitions Using a Covariate-Based Markov Model](deep_reads/2026-06-20-10.1080_01621459.2025.2555055.md)  
+  7/10 [journals]
+- [Understanding Inequalities in Cancer Survival Using Bayesian Machine Learning](deep_reads/2026-06-20-10.1080_01621459.2025.2547968.md)  
+  5/10 [journals]
+
+#### Journal of the American Statistical Association Vol 120 Issue 552
+
+- [Estimation and Variable Selection for Interval-Censored Failure Time Data with Random Change Point and Application to Breast Cancer Study](deep_reads/2026-06-20-10.1080_01621459.2024.2441522.md)  
+  5/10 [journals]
+- [Global and Episode-Specific Prediction of Recurrent Events Using Longitudinal Health Informatics Data](deep_reads/2026-06-20-10.1080_01621459.2025.2497569.md)  
+  4/10 [journals]
+- [Integrative Analysis of Microbial 16S Gene and Shotgun Metagenomic Sequencing Data Improves Statistical Efficiency in Testing Differential Abundance](deep_reads/2026-06-20-10.1080_01621459.2025.2516205.md)  
+  2/10 [journals]
+
+#### Journal of the American Statistical Association Vol 120 Issue 550
+
+- [Unlocking Retrospective Prevalent Information in EHRs—A Revisit to the Pairwise Pseudolikelihood](deep_reads/2026-06-20-10.1080_01621459.2024.2427431.md)  
+  5/10 [journals]
+- [Immune Profiling Among Colorectal Cancer Subtypes Using Dependent Mixture Models](deep_reads/2026-06-20-10.1080_01621459.2024.2427936.md)  
+  3/10 [journals]
+
 #### Biostatistics Vol 25 Issue 4
 
 - [Identifying predictors of resilience to stressors in single-arm studies of pre–post change](deep_reads/2026-06-20-10.1093_biostatistics_kxad018.md)  
@@ -4495,6 +4790,31 @@
 
 - [A noisy-input generalized additive model for relative sea-level change along the Atlantic coast of North America](deep_reads/2026-06-20-10.1093_jrsssc_qlae044.md)  
   4/10 [journals]
+
+#### Journal of the American Statistical Association Vol 121 Issue 553
+
+- [A Factor-Copula Latent-Vine Time Series Model for Extreme Flood Insurance Losses](deep_reads/2026-06-20-10.1080_01621459.2025.2579953.md)  
+  3/10 [journals]
+- [Likelihood Methods in Survival Analysis: With R Examples](deep_reads/2026-06-20-10.1080_01621459.2025.2605106.md)  
+  2/10 [journals]
+- [Comments: Systems Thinking, Data Minding, and Mindware Agents for Multi-Agent Data Analysis Systems](deep_reads/2026-06-20-10.1080_01621459.2025.2593538.md)  
+  1/10 [journals]
+
+#### Journal of the American Statistical Association Vol 120 Issue 552
+
+- [Asymptotic Behavior of Adversarial Training Estimator under <i>ℓ</i> <sub>∞</sub> -Perturbation](deep_reads/2026-06-20-10.1080_01621459.2025.2485346.md)  
+  5/10 [journals]
+- [Fairness in Machine Learning: A Review for Statisticians](deep_reads/2026-06-20-10.1080_01621459.2025.2579579.md)  
+  3/10 [journals]
+- [Exponential Families in Theory and Practice](deep_reads/2026-06-20-10.1080_01621459.2025.2552416.md)  
+  3/10 [journals]
+
+#### Journal of the American Statistical Association Vol 120 Issue 551
+
+- [U-Statistic Reduction: Higher-Order Accurate Risk Control and Statistical-Computational Trade-Off](deep_reads/2026-06-20-10.1080_01621459.2024.2448029.md)  
+  10/10 [journals]
+- [Joint Spectral Clustering in Multilayer Degree-Corrected Stochastic Blockmodels](deep_reads/2026-06-20-10.1080_01621459.2025.2516201.md)  
+  6/10 [journals]
 
 #### Biostatistics Vol 25 Issue 4
 

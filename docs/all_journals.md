@@ -29,6 +29,10 @@
 
 ### JASA
 
+- [Vol 121 Issue 553 · 2026-06-20](journals/2026-06-20-jasa-v121-i553.md)
+- [Vol 120 Issue 552 · 2026-06-20](journals/2026-06-20-jasa-v120-i552.md)
+- [Vol 120 Issue 551 · 2026-06-20](journals/2026-06-20-jasa-v120-i551.md)
+- [Vol 120 Issue 550 · 2026-06-20](journals/2026-06-20-jasa-v120-i550.md)
 - [2026-05-26](journals/2026-05-26-jasa.md)
 
 ### JMLR
