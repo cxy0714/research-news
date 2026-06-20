@@ -92,7 +92,7 @@
 - [x] (2026-06-21) `--only Econometrica --n-issues 12`
 - [x] (2026-06-21) `--only "J. Econometrics" --n-issues 4`   ⚠ 出刊密、量大
 - [x] (2026-06-21) `--only "Quant. Econ." --n-issues 8`
-- [ ] `--only JBES --n-issues 8`
+- [x] (2026-06-21) `--only JBES --n-issues 8`
 
 IEEE 系列 ieee（月刊、每期很大，全部先 dry-run、用小 N）：
 - [ ] `--only TIT --n-issues 2`   ⚠
