@@ -85,7 +85,7 @@
 - [x] (2026-06-20) `--only AoS --n-issues 12`
 - [x] (2026-06-20) `--only JASA --n-issues 12`
 - [x] (2026-06-20) `--only JRSSB --n-issues 12`
-- [ ] `--only Biometrika --n-issues 12`
+- [x] (2026-06-21) `--only Biometrika --n-issues 12`
 - [ ] `--only JMLR --jmlr-n 3`   （JMLR 用 --jmlr-n，不是 --n-issues）
 
 经济 / 计量 econ：
