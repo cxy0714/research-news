@@ -173,6 +173,15 @@
 
 ### 期刊
 
+#### Quantitative Economics Vol 15 Issue 4
+
+- [Covariate adjustment in stratified experiments](deep_reads/2026-06-21-10.3982_qe2475.md)  
+  9/10 [journals]
+- [Dynamic regression discontinuity under treatment effect heterogeneity](deep_reads/2026-06-21-10.3982_qe2150.md)  
+  8/10 [journals]
+- [Design‐robust two‐way‐fixed‐effects regression for panel data](deep_reads/2026-06-21-10.3982_qe1962.md)  
+  7/10 [journals]
+
 #### Journal of Econometrics Vol 256
 
 - [Treatment effects with targeting instruments](deep_reads/2026-06-07-10.1016_j.jeconom.2026.106253.md)  
@@ -2864,6 +2873,11 @@
 
 ### 期刊
 
+#### Quantitative Economics Vol 15 Issue 3
+
+- [Efficient bias correction for cross‐section and panel data](deep_reads/2026-06-21-10.3982_qe2350.md)  
+  9/10 [journals]
+
 #### Econometrica Vol 93 Issue 2
 
 - [Double Robust Bayesian Inference on Average Treatment Effects](deep_reads/2026-06-21-10.3982_ecta21442.md)  
@@ -3185,6 +3199,16 @@
   8/10 [daily]
 
 ### 期刊
+
+#### Quantitative Economics Vol 15 Issue 4
+
+- [Optimal HAR inference](deep_reads/2026-06-21-10.3982_qe1762.md)  
+  7/10 [journals]
+
+#### Quantitative Economics Vol 15 Issue 3
+
+- [Specification testing for conditional moment restrictions under local identification failure](deep_reads/2026-06-21-10.3982_qe2242.md)  
+  8/10 [journals]
 
 #### Econometrica Vol 93 Issue 3
 
@@ -4589,6 +4613,62 @@
   6/10 [daily]
 
 ### 期刊
+
+#### Quantitative Economics Vol 16 Issue 2
+
+- [The role of storage in commodity markets: Indirect inference based on grain data](deep_reads/2026-06-21-10.3982_qe2329.md)  
+  8/10 [journals]
+- [Real‐time detection of local no‐arbitrage violations](deep_reads/2026-06-21-10.3982_qe2585.md)  
+  7/10 [journals]
+- [Understanding regressions with observations collected at high frequency over long span](deep_reads/2026-06-21-10.3982_qe2055.md)  
+  7/10 [journals]
+- [Linear regression with weak exogeneity](deep_reads/2026-06-21-10.3982_qe2622.md)  
+  7/10 [journals]
+- [Power of personalized smoking cessation: A quantitative lifecycle framework for policy evaluation](deep_reads/2026-06-21-10.3982_qe1412.md)  
+  6/10 [journals]
+- [Insurance, redistribution, and the inequality of lifetime income](deep_reads/2026-06-21-10.3982_qe1637.md)  
+  5/10 [journals]
+
+#### Quantitative Economics Vol 16 Issue 1
+
+- [Econometrics of insurance with multidimensional types](deep_reads/2026-06-21-10.3982_qe1071.md)  
+  8/10 [journals]
+- [Double robust inference for continuous updating GMM](deep_reads/2026-06-21-10.3982_qe2347.md)  
+  7/10 [journals]
+- [An ordinal approach to the empirical analysis of games with monotone best responses](deep_reads/2026-06-21-10.3982_qe2192.md)  
+  7/10 [journals]
+- [Programming FPGAs for economics: An introduction to electrical engineering economics](deep_reads/2026-06-21-10.3982_qe2344.md)  
+  7/10 [journals]
+- [Prospering through <i>Prospera</i>: A dynamic model of CCT impacts on educational attainment and achievement in Mexico](deep_reads/2026-06-21-10.3982_qe2291.md)  
+  6/10 [journals]
+- [Can teaching be taught? Improving teachers' pedagogical skills at scale in rural Peru](deep_reads/2026-06-21-10.3982_qe2079.md)  
+  4/10 [journals]
+- [Estimating macroeconomic models of financial crises: An endogenous regime‐switching approach](deep_reads/2026-06-21-10.3982_qe2038.md)  
+  3/10 [journals]
+
+#### Quantitative Economics Vol 15 Issue 4
+
+- [Deconvolution from two order statistics](deep_reads/2026-06-21-10.3982_qe2077.md)  
+  8/10 [journals]
+- [Robust machine learning algorithms for text analysis](deep_reads/2026-06-21-10.3982_qe1825.md)  
+  5/10 [journals]
+- [Estimation and inference in games of incomplete information with unobserved heterogeneity and large state space](deep_reads/2026-06-21-10.3982_qe2169.md)  
+  4/10 [journals]
+- [Purchasing seats in school choice and inequality](deep_reads/2026-06-21-10.3982_qe2220.md)  
+  3/10 [journals]
+- [Capital income jumps and wealth distribution](deep_reads/2026-06-21-10.3982_qe2096.md)  
+  1/10 [journals]
+
+#### Quantitative Economics Vol 15 Issue 3
+
+- [Changes in the span of systematic risk exposures](deep_reads/2026-06-21-10.3982_qe2330.md)  
+  7/10 [journals]
+- [Testing firm conduct](deep_reads/2026-06-21-10.3982_qe2319.md)  
+  6/10 [journals]
+- [Analyzing matching patterns in marriage: Theory and application to Italian data](deep_reads/2026-06-21-10.3982_qe2306.md)  
+  5/10 [journals]
+- [How do voters respond to welfare vis‐à‐vis public good programs? Theory and evidence of political clientelism](deep_reads/2026-06-21-10.3982_qe2315.md)  
+  1/10 [journals]
 
 #### Journal of Econometrics Vol 256
 
