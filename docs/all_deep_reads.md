@@ -197,6 +197,75 @@
 - [Doubly robust estimation of policy-relevant causal effects under interference](deep_reads/2026-06-20-10.1093_jrsssc_qlae066.md)  
   9/10 [journals]
 
+#### Journal of the Royal Statistical Society Series B Vol 87 Issue 4
+
+- [A conditioning tactic that increases design sensitivity in observational block designs](deep_reads/2026-06-20-10.1093_jrsssb_qkaf007.md)  
+  8/10 [journals]
+- [Adaptive experiments toward learning treatment effect heterogeneity](deep_reads/2026-06-20-10.1093_jrsssb_qkaf006.md)  
+  8/10 [journals]
+
+#### Journal of the Royal Statistical Society Series B Vol 87 Issue 3
+
+- [Causal mediation analysis: selection with asymptotically valid inference](deep_reads/2026-06-20-10.1093_jrsssb_qkae109.md)  
+  9/10 [journals]
+- [Robust evaluation of longitudinal surrogate markers with censored data](deep_reads/2026-06-20-10.1093_jrsssb_qkae119.md)  
+  7/10 [journals]
+
+#### Journal of the Royal Statistical Society Series B Vol 87 Issue 2
+
+- [A focusing framework for testing bi-directional causal effects in Mendelian randomization](deep_reads/2026-06-20-10.1093_jrsssb_qkae101.md)  
+  8/10 [journals]
+- [Long-term causal inference under persistent confounding via data combination](deep_reads/2026-06-20-10.1093_jrsssb_qkae095.md)  
+  8/10 [journals]
+
+#### Journal of the Royal Statistical Society Series B Vol 87 Issue 1
+
+- [A nonparametric framework for treatment effect modifier discovery in high dimensions](deep_reads/2026-06-20-10.1093_jrsssb_qkae084.md)  
+  9/10 [journals]
+- [Debiased inference for a covariate-adjusted regression function](deep_reads/2026-06-20-10.1093_jrsssb_qkae041.md)  
+  9/10 [journals]
+- [Graphical criteria for the identification of marginal causal effects in continuous-time survival and event-history analyses](deep_reads/2026-06-20-10.1093_jrsssb_qkae056.md)  
+  8/10 [journals]
+
+#### Journal of the Royal Statistical Society Series B Vol 86 Issue 5
+
+- [Proximal survival analysis to handle dependent right censoring](deep_reads/2026-06-20-10.1093_jrsssb_qkae037.md)  
+  9/10 [journals]
+- [Model-assisted sensitivity analysis for treatment effects under unmeasured confounding via regularized calibrated estimation](deep_reads/2026-06-20-10.1093_jrsssb_qkae034.md)  
+  9/10 [journals]
+- [Covariate-adaptive randomization inference in matched designs](deep_reads/2026-06-20-10.1093_jrsssb_qkae033.md)  
+  8/10 [journals]
+
+#### Journal of the Royal Statistical Society Series B Vol 86 Issue 4
+
+- [On the instrumental variable estimation with many weak and invalid instruments](deep_reads/2026-06-20-10.1093_jrsssb_qkae025.md)  
+  9/10 [journals]
+- [GENIUS-MAWII: for robust Mendelian randomization with many weak invalid instruments](deep_reads/2026-06-20-10.1093_jrsssb_qkae024.md)  
+  9/10 [journals]
+
+#### Journal of the Royal Statistical Society Series B Vol 86 Issue 3
+
+- [Parameterizing and simulating from causal models](deep_reads/2026-06-20-10.1093_jrsssb_qkad058.md)  
+  9/10 [journals]
+- [Policy evaluation for temporal and/or spatial dependent experiments](deep_reads/2026-06-20-10.1093_jrsssb_qkad136.md)  
+  8/10 [journals]
+- [Optimal individualized treatment rule for combination treatments under budget constraints](deep_reads/2026-06-20-10.1093_jrsssb_qkad141.md)  
+  7/10 [journals]
+
+#### Journal of the Royal Statistical Society Series B Vol 86 Issue 2
+
+- [Identification and estimation of causal peer effects using double negative controls for unmeasured network confounding](deep_reads/2026-06-20-10.1093_jrsssb_qkad132.md)  
+  9/10 [journals]
+- [Non-agency interventions for causal mediation in the presence of intermediate confounding](deep_reads/2026-06-20-10.1093_jrsssb_qkad130.md)  
+  8/10 [journals]
+- [Adaptive bootstrap tests for composite null hypotheses in the mediation pathway analysis](deep_reads/2026-06-20-10.1093_jrsssb_qkad129.md)  
+  8/10 [journals]
+
+#### Journal of the Royal Statistical Society Series B Vol 86 Issue 1
+
+- [Dynamic synthetic control method for evaluating treatment effects in auto-regressive processes](deep_reads/2026-06-20-10.1093_jrsssb_qkad103.md)  
+  8/10 [journals]
+
 #### Journal of the American Statistical Association Vol 121 Issue 553
 
 - [Reinforcement Learning with Continuous Actions Under Unmeasured Confounding](deep_reads/2026-06-20-10.1080_01621459.2025.2590175.md)  
@@ -1128,6 +1197,23 @@
 
 ### 期刊
 
+#### Journal of the Royal Statistical Society Series B Vol 87 Issue 3
+
+- [Robust angle-based transfer learning in high dimensions](deep_reads/2026-06-20-10.1093_jrsssb_qkae111.md)  
+  8/10 [journals]
+
+#### Journal of the Royal Statistical Society Series B Vol 87 Issue 1
+
+- [Mode-wise principal subspace pursuit and matrix spiked covariance model](deep_reads/2026-06-20-10.1093_jrsssb_qkae088.md)  
+  8/10 [journals]
+
+#### Journal of the Royal Statistical Society Series B Vol 86 Issue 5
+
+- [CP factor model for dynamic tensors](deep_reads/2026-06-20-10.1093_jrsssb_qkae036.md)  
+  6/10 [journals]
+- [Spherical random projection](deep_reads/2026-06-20-10.1093_jrsssb_qkae035.md)  
+  4/10 [journals]
+
 #### Journal of the American Statistical Association Vol 121 Issue 553
 
 - [Inference for Low-Rank Models Without Estimating the Rank](deep_reads/2026-06-20-10.1080_01621459.2025.2538272.md)  
@@ -1680,6 +1766,60 @@
 
 - [Predicting 5G throughput with BAMMO, a boosted additive model for data with missing observations](deep_reads/2026-06-20-10.1093_jrsssc_qlae054.md)  
   4/10 [journals]
+
+#### Journal of the Royal Statistical Society Series B Vol 87 Issue 4
+
+- [Semiparametric posterior corrections](deep_reads/2026-06-20-10.1093_jrsssb_qkaf005.md)  
+  8/10 [journals]
+- [Convexity and measures of statistical association](deep_reads/2026-06-20-10.1093_jrsssb_qkaf018.md)  
+  7/10 [journals]
+- [A general framework for cutting feedback within modularized Bayesian inference](deep_reads/2026-06-20-10.1093_jrsssb_qkaf012.md)  
+  4/10 [journals]
+
+#### Journal of the Royal Statistical Society Series B Vol 87 Issue 3
+
+- [Moving beyond population variable importance: concept, theory and applications of individual variable importance](deep_reads/2026-06-20-10.1093_jrsssb_qkae115.md)  
+  7/10 [journals]
+- [<i>α</i>-separability and adjustable combination of amplitude and phase model for functional data](deep_reads/2026-06-20-10.1093_jrsssb_qkae112.md)  
+  2/10 [journals]
+
+#### Journal of the Royal Statistical Society Series B Vol 87 Issue 2
+
+- [Nonparametric estimation via partial derivatives](deep_reads/2026-06-20-10.1093_jrsssb_qkae093.md)  
+  9/10 [journals]
+- [Conformal prediction with local weights: randomization enables robust guarantees](deep_reads/2026-06-20-10.1093_jrsssb_qkae103.md)  
+  5/10 [journals]
+
+#### Journal of the Royal Statistical Society Series B Vol 87 Issue 1
+
+- [Multivariate, heteroscedastic empirical Bayes via nonparametric maximum likelihood](deep_reads/2026-06-20-10.1093_jrsssb_qkae040.md)  
+  7/10 [journals]
+
+#### Journal of the Royal Statistical Society Series B Vol 86 Issue 5
+
+- [Broadcasted nonparametric tensor regression](deep_reads/2026-06-20-10.1093_jrsssb_qkae027.md)  
+  8/10 [journals]
+- [Neural networks meet random forests](deep_reads/2026-06-20-10.1093_jrsssb_qkae038.md)  
+  6/10 [journals]
+- [Nonparametric measure-transportation-based methods for directional data](deep_reads/2026-06-20-10.1093_jrsssb_qkae026.md)  
+  6/10 [journals]
+
+#### Journal of the Royal Statistical Society Series B Vol 86 Issue 4
+
+- [Full-model estimation for non-parametric multivariate finite mixture models](deep_reads/2026-06-20-10.1093_jrsssb_qkae002.md)  
+  7/10 [journals]
+- [Interpretable discriminant analysis for functional data supported on random nonlinear domains with an application to Alzheimer’s disease](deep_reads/2026-06-20-10.1093_jrsssb_qkae023.md)  
+  4/10 [journals]
+
+#### Journal of the Royal Statistical Society Series B Vol 86 Issue 3
+
+- [Gradient synchronization for multivariate functional data, with application to brain connectivity](deep_reads/2026-06-20-10.1093_jrsssb_qkad140.md)  
+  2/10 [journals]
+
+#### Journal of the Royal Statistical Society Series B Vol 86 Issue 2
+
+- [Least squares estimation of a quasiconvex regression function](deep_reads/2026-06-20-10.1093_jrsssb_qkad133.md)  
+  6/10 [journals]
 
 #### Journal of the American Statistical Association Vol 121 Issue 553
 
@@ -2469,6 +2609,28 @@
 
 ### 期刊
 
+#### Journal of the Royal Statistical Society Series B Vol 87 Issue 3
+
+- [Prediction sets for high-dimensional mixture of experts models](deep_reads/2026-06-20-10.1093_jrsssb_qkae117.md)  
+  8/10 [journals]
+
+#### Journal of the Royal Statistical Society Series B Vol 87 Issue 2
+
+- [On the role of surrogates in the efficient estimation of treatment effects with limited outcome data](deep_reads/2026-06-20-10.1093_jrsssb_qkae099.md)  
+  8/10 [journals]
+
+#### Journal of the Royal Statistical Society Series B Vol 86 Issue 5
+
+- [Correlation adjusted debiased Lasso: debiasing the Lasso with inaccurate covariate model](deep_reads/2026-06-20-10.1093_jrsssb_qkae039.md)  
+  8/10 [journals]
+- [Sandwich boosting for accurate estimation in partially linear models for grouped data](deep_reads/2026-06-20-10.1093_jrsssb_qkae032.md)  
+  7/10 [journals]
+
+#### Journal of the Royal Statistical Society Series B Vol 86 Issue 4
+
+- [Doubly robust calibration of prediction sets under covariate shift](deep_reads/2026-06-20-10.1093_jrsssb_qkae009.md)  
+  8/10 [journals]
+
 #### Journal of the American Statistical Association Vol 120 Issue 552
 
 - [Communication-Efficient Distributed Sparse Learning with Oracle Property and Geometric Convergence](deep_reads/2026-06-20-10.1080_01621459.2025.2479237.md)  
@@ -2758,6 +2920,76 @@
 
 - [Inferring bivariate associations with continuous data from studies using respondent-driven sampling](deep_reads/2026-06-20-10.1093_jrsssc_qlae061.md)  
   7/10 [journals]
+
+#### Journal of the Royal Statistical Society Series B Vol 87 Issue 4
+
+- [Randomized empirical likelihood test for ultra-high dimensional means under general covariances](deep_reads/2026-06-20-10.1093_jrsssb_qkaf004.md)  
+  9/10 [journals]
+- [Strong oracle guarantees for partial penalized tests of high-dimensional generalized linear models](deep_reads/2026-06-20-10.1093_jrsssb_qkaf010.md)  
+  8/10 [journals]
+- [Sequential Monte Carlo testing by betting](deep_reads/2026-06-20-10.1093_jrsssb_qkaf014.md)  
+  7/10 [journals]
+- [Confidence on the focal: conformal prediction with selection-conditional coverage](deep_reads/2026-06-20-10.1093_jrsssb_qkaf016.md)  
+  6/10 [journals]
+- [Selecting informative conformal prediction sets with false coverage rate control](deep_reads/2026-06-20-10.1093_jrsssb_qkae120.md)  
+  6/10 [journals]
+- [Conformal prediction with conditional guarantees](deep_reads/2026-06-20-10.1093_jrsssb_qkaf008.md)  
+  6/10 [journals]
+
+#### Journal of the Royal Statistical Society Series B Vol 87 Issue 2
+
+- [Multiscale scanning with nuisance parameters](deep_reads/2026-06-20-10.1093_jrsssb_qkae100.md)  
+  6/10 [journals]
+
+#### Journal of the Royal Statistical Society Series B Vol 87 Issue 1
+
+- [Isotonic subgroup selection](deep_reads/2026-06-20-10.1093_jrsssb_qkae083.md)  
+  7/10 [journals]
+- [Rank-transformed subsampling: inference for multiple data splitting and exchangeable <i>p</i>-values](deep_reads/2026-06-20-10.1093_jrsssb_qkae091.md)  
+  6/10 [journals]
+
+#### Journal of the Royal Statistical Society Series B Vol 86 Issue 5
+
+- [Minimax detection boundary and sharp optimal test for Gaussian graphical models](deep_reads/2026-06-20-10.1093_jrsssb_qkae029.md)  
+  9/10 [journals]
+- [Safe testing](deep_reads/2026-06-20-10.1093_jrsssb_qkae011.md)  
+  8/10 [journals]
+
+#### Journal of the Royal Statistical Society Series B Vol 86 Issue 4
+
+- [Testing many constraints in possibly irregular models using incomplete <i>U</i>-statistics](deep_reads/2026-06-20-10.1093_jrsssb_qkae022.md)  
+  9/10 [journals]
+- [Simultaneous false discovery proportion bounds via knockoffs and closed testing](deep_reads/2026-06-20-10.1093_jrsssb_qkae012.md)  
+  8/10 [journals]
+- [Testing high-dimensional multinomials with applications to text analysis](deep_reads/2026-06-20-10.1093_jrsssb_qkae003.md)  
+  7/10 [journals]
+
+#### Journal of the Royal Statistical Society Series B Vol 86 Issue 3
+
+- [The HulC: confidence regions from convex hulls](deep_reads/2026-06-20-10.1093_jrsssb_qkad134.md)  
+  7/10 [journals]
+- [Simultaneous directional inference](deep_reads/2026-06-20-10.1093_jrsssb_qkad137.md)  
+  7/10 [journals]
+- [Integrative conformal <i>p</i>-values for out-of-distribution testing with labelled outliers](deep_reads/2026-06-20-10.1093_jrsssb_qkad138.md)  
+  6/10 [journals]
+
+#### Journal of the Royal Statistical Society Series B Vol 86 Issue 2
+
+- [Ensemble methods for testing a global null](deep_reads/2026-06-20-10.1093_jrsssb_qkad131.md)  
+  7/10 [journals]
+- [Controlling the false discovery rate in transformational sparsity: Split Knockoffs](deep_reads/2026-06-20-10.1093_jrsssb_qkad126.md)  
+  6/10 [journals]
+
+#### Journal of the Royal Statistical Society Series B Vol 86 Issue 1
+
+- [GRASP: a goodness-of-fit test for classification learning](deep_reads/2026-06-20-10.1093_jrsssb_qkad106.md)  
+  7/10 [journals]
+- [Derandomised knockoffs: leveraging <i>e</i>-values for false discovery rate control](deep_reads/2026-06-20-10.1093_jrsssb_qkad085.md)  
+  7/10 [journals]
+- [Another look at bandwidth-free inference: a sample splitting approach](deep_reads/2026-06-20-10.1093_jrsssb_qkad108.md)  
+  6/10 [journals]
+- [Holdout predictive checks for Bayesian model criticism](deep_reads/2026-06-20-10.1093_jrsssb_qkad105.md)  
+  4/10 [journals]
 
 #### Journal of the American Statistical Association Vol 121 Issue 553
 
@@ -3394,6 +3626,47 @@
 
 - [Exploring first and second-order spatio-temporal structures of lightning strike impacts in the French Alps using heavy subsampling](deep_reads/2026-06-20-10.1093_jrsssc_qlae068.md)  
   6/10 [journals]
+
+#### Journal of the Royal Statistical Society Series B Vol 87 Issue 5
+
+- [Graphical methods for Order-of-Addition experiments](deep_reads/2026-06-20-10.1093_jrsssb_qkaf020.md)  
+  3/10 [journals]
+
+#### Journal of the Royal Statistical Society Series B Vol 87 Issue 4
+
+- [Analytic natural gradient updates for Cholesky factor in Gaussian variational approximation](deep_reads/2026-06-20-10.1093_jrsssb_qkaf001.md)  
+  7/10 [journals]
+- [Multi-resolution subsampling for linear classification with massive data](deep_reads/2026-06-20-10.1093_jrsssb_qkaf017.md)  
+  6/10 [journals]
+- [Bayesian penalized empirical likelihood and Markov Chain Monte Carlo sampling](deep_reads/2026-06-20-10.1093_jrsssb_qkaf009.md)  
+  6/10 [journals]
+
+#### Journal of the Royal Statistical Society Series B Vol 87 Issue 2
+
+- [Probabilistic Richardson extrapolation](deep_reads/2026-06-20-10.1093_jrsssb_qkae098.md)  
+  6/10 [journals]
+- [Corrected generalized cross-validation for finite ensembles of penalized estimators](deep_reads/2026-06-20-10.1093_jrsssb_qkae092.md)  
+  6/10 [journals]
+
+#### Journal of the Royal Statistical Society Series B Vol 86 Issue 5
+
+- [Green’s matching: an efficient approach to parameter estimation in complex dynamic systems](deep_reads/2026-06-20-10.1093_jrsssb_qkae031.md)  
+  7/10 [journals]
+
+#### Journal of the Royal Statistical Society Series B Vol 86 Issue 3
+
+- [Semi-parametric tensor factor analysis by iteratively projected singular value decomposition](deep_reads/2026-06-20-10.1093_jrsssb_qkae001.md)  
+  7/10 [journals]
+
+#### Journal of the Royal Statistical Society Series B Vol 86 Issue 2
+
+- [Stratification pattern enumerator and its applications](deep_reads/2026-06-20-10.1093_jrsssb_qkad125.md)  
+  2/10 [journals]
+
+#### Journal of the Royal Statistical Society Series B Vol 86 Issue 1
+
+- [Empirical bias-reducing adjustments to estimating functions](deep_reads/2026-06-20-10.1093_jrsssb_qkad083.md)  
+  7/10 [journals]
 
 #### Journal of the American Statistical Association Vol 121 Issue 553
 
@@ -4171,6 +4444,11 @@
 - [Modelling particle number size distribution: a continuous approach](deep_reads/2026-06-20-10.1093_jrsssc_qlae053.md)  
   2/10 [journals]
 
+#### Journal of the Royal Statistical Society Series B Vol 87 Issue 3
+
+- [Frequentist inference for semi-mechanistic epidemic models with interventions](deep_reads/2026-06-20-10.1093_jrsssb_qkae110.md)  
+  7/10 [journals]
+
 #### Journal of the American Statistical Association Vol 121 Issue 553
 
 - [SMART-MC: Characterizing the Dynamics of Multiple Sclerosis Therapy Transitions Using a Covariate-Based Markov Model](deep_reads/2026-06-20-10.1080_01621459.2025.2555055.md)  
@@ -4790,6 +5068,11 @@
 
 - [A noisy-input generalized additive model for relative sea-level change along the Atlantic coast of North America](deep_reads/2026-06-20-10.1093_jrsssc_qlae044.md)  
   4/10 [journals]
+
+#### Journal of the Royal Statistical Society Series B Vol 87 Issue 2
+
+- [Robust model averaging prediction of longitudinal response with ultrahigh-dimensional covariates](deep_reads/2026-06-20-10.1093_jrsssb_qkae094.md)  
+  6/10 [journals]
 
 #### Journal of the American Statistical Association Vol 121 Issue 553
 
