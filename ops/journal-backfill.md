@@ -82,7 +82,7 @@
 - [x] (2026-06-20) `--only "JRSS-C" --n-issues 8`
 
 理论核心 core：
-- [ ] `--only AoS --n-issues 12`
+- [x] (2026-06-20) `--only AoS --n-issues 12`
 - [ ] `--only JASA --n-issues 12`
 - [ ] `--only JRSSB --n-issues 12`
 - [ ] `--only Biometrika --n-issues 12`
