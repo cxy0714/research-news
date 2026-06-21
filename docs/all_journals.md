@@ -251,6 +251,7 @@
 
 - [Vol 7 · 2026-06-05](journals/2026-06-05-jsait-v7.md)
 - [Vol 6 · 2026-06-05](journals/2026-06-05-jsait-v6.md)
+- [2026-06-21](journals/2026-06-21-jsait.md)
 - [2026-06-05](journals/2026-06-05-jsait.md)
 
 ### TIT
