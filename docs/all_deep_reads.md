@@ -273,6 +273,11 @@
 - [FNETS: Factor-Adjusted Network Estimation and Forecasting for High-Dimensional Time Series](deep_reads/2026-06-21-10.1080_07350015.2023.2257270.md)  
   7/10 [journals]
 
+#### IEEE Transactions on Pattern Analysis and Machine Intelligence Vol 48 Issue 7
+
+- [Local Causal Discovery With Background Knowledge](deep_reads/2026-06-21-10.1109_tpami.2026.3667409.md)  
+  8/10 [journals]
+
 #### Econometrica Vol 93 Issue 4
 
 - [Fisher–Schultz Lecture: Generic Machine Learning Inference on Heterogeneous Treatment Effects in Randomized Experiments, With an Application to Immunization in India](deep_reads/2026-06-21-10.3982_ecta19303.md)  
@@ -4200,6 +4205,19 @@
 - [Unconditional Quantile Regression for Streaming Datasets](deep_reads/2026-06-21-10.1080_07350015.2023.2293162.md)  
   6/10 [journals]
 
+#### IEEE Transactions on Pattern Analysis and Machine Intelligence Vol 48 Issue 7
+
+- [Nonlinear Bayesian Filtering With <b>N</b> atural Gr <b>a</b> dient Gaussia <b>n</b> Appr <b>o</b> ximation](deep_reads/2026-06-21-10.1109_tpami.2026.3674120.md)  
+  4/10 [journals]
+- [Generalized Distribution Aggregation Protocol for Federated Statistical Heterogeneity](deep_reads/2026-06-21-10.1109_tpami.2026.3663744.md)  
+  3/10 [journals]
+- [Learning With Partial and Noisy Correspondence in Graph Matching](deep_reads/2026-06-21-10.1109_tpami.2026.3670236.md)  
+  3/10 [journals]
+- [Knowledge-Embedded Hypergraph Neural Networks](deep_reads/2026-06-21-10.1109_tpami.2026.3674800.md)  
+  1/10 [journals]
+- [UDFStudio: A Unified Framework of Datasets, Benchmarks and Generative Models for Unsigned Distance Functions](deep_reads/2026-06-21-10.1109_tpami.2026.3668763.md)  
+  1/10 [journals]
+
 #### Journal of the Royal Statistical Society Series C Vol 74 Issue 5
 
 - [Robust sparse Bayesian regression for longitudinal gene–environment interactions](deep_reads/2026-06-20-10.1093_jrsssc_qlaf027.md)  
@@ -5927,6 +5945,41 @@
   8/10 [daily]
 
 ### 期刊
+
+#### IEEE Transactions on Pattern Analysis and Machine Intelligence Vol 48 Issue 7
+
+- [Toward a Unified Complementary Fusion Framework for Robust Polarimetric Imaging](deep_reads/2026-06-21-10.1109_tpami.2026.3665927.md)  
+  1/10 [journals]
+- [SELongVLM: Empowering Long Video Language Models With Self-Corrective Clip Selection](deep_reads/2026-06-21-10.1109_tpami.2026.3673141.md)  
+  1/10 [journals]
+- [Out-of-Distribution-Resistant Evaluations for Explanations of Graph Neural Networks](deep_reads/2026-06-21-10.1109_tpami.2026.3664091.md)  
+  1/10 [journals]
+- [StarIR: Convolutional Image Restoration With Spatial-Frequency Fusion](deep_reads/2026-06-21-10.1109_tpami.2026.3672465.md)  
+  1/10 [journals]
+- [Visual-in-Visual: A Unified and Efficient Baseline for Image Restoration](deep_reads/2026-06-21-10.1109_tpami.2026.3669720.md)  
+  1/10 [journals]
+- [Semi-Supervised VQA Multi-Modal Explanation via Self-Critical Learning](deep_reads/2026-06-21-10.1109_tpami.2026.3669188.md)  
+  1/10 [journals]
+- [ProtoComp++: Diverse Point Cloud Completion With Controllable Prototype](deep_reads/2026-06-21-10.1109_tpami.2026.3674197.md)  
+  1/10 [journals]
+- [Causal Prompts for Open-Vocabulary Video Instance Segmentation](deep_reads/2026-06-21-10.1109_tpami.2026.3669976.md)  
+  0/10 [journals]
+- [OptimalCap: Efficient and Robust LiDAR-Based Motion Capture in Free Environments](deep_reads/2026-06-21-10.1109_tpami.2026.3669427.md)  
+  0/10 [journals]
+- [Improved and Accelerated Text-to-Image Generation With <i>Collect, Reflect, and Refine</i>](deep_reads/2026-06-21-10.1109_tpami.2026.3674984.md)  
+  0/10 [journals]
+- [Deployment Prior Injection for Run-Time Re-Biasable Object Detection](deep_reads/2026-06-21-10.1109_tpami.2026.3667914.md)  
+  0/10 [journals]
+- [SHC: Deeply Activating Human-Like Cognitive Ability for Visual Question Answering](deep_reads/2026-06-21-10.1109_tpami.2026.3673273.md)  
+  0/10 [journals]
+- [D2S-RSG-SSD: Dual Double-Sampling With Random Sub-Samples Generation for Self-Supervised Real Image Denoising](deep_reads/2026-06-21-10.1109_tpami.2026.3665610.md)  
+  0/10 [journals]
+- [CLIP-Actor-X: Text-Driven 4D Human Avatar Generation via Cross-Modal Synthesis-Through-Optimization](deep_reads/2026-06-21-10.1109_tpami.2026.3665111.md)  
+  0/10 [journals]
+- [DFormer++: Improving RGBD Representation Learning for Semantic Segmentation](deep_reads/2026-06-21-10.1109_tpami.2026.3658114.md)  
+  0/10 [journals]
+- [Brightness-Aware Synthetic-to-Real Learning for Nighttime Hazy Image Enhancement](deep_reads/2026-06-21-10.1109_tpami.2026.3671754.md)  
+  0/10 [journals]
 
 #### Journal of the Royal Statistical Society Series C Vol 75 Issue 3
 
