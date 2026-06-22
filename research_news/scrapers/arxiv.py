@@ -172,11 +172,12 @@ def _fetch_api(params: dict) -> str:
 def _date_window(for_date: date) -> tuple[str, str]:
     """Return the submittedDate window for papers announced on `for_date`.
 
-    arXiv announces papers submitted the previous business day. We use a
-    ±1 day window around for_date to be tolerant of timezone drift, then
-    rely on arXiv's own primary-category filtering.
+    Reaches back 4 days so a Monday run still covers the weekend (Friday-afternoon
+    submissions are announced Monday). The pipeline's dedup (seen_papers.json)
+    filters the older papers this wider window also pulls in, so processing days
+    in order still gives each date only its new papers.
     """
-    start = datetime(for_date.year, for_date.month, for_date.day, 0, 0, tzinfo=timezone.utc) - timedelta(days=2)
+    start = datetime(for_date.year, for_date.month, for_date.day, 0, 0, tzinfo=timezone.utc) - timedelta(days=4)
     end   = datetime(for_date.year, for_date.month, for_date.day, 23, 59, tzinfo=timezone.utc)
     fmt = "%Y%m%d%H%M"
     return start.strftime(fmt), end.strftime(fmt)
@@ -337,4 +338,24 @@ def fetch_all(cfg: dict, for_date: date | None = None) -> list[Paper]:
                     max_results=cfg.get("max_per_category", 80),
                 )
             )
+
+    # arXiv's RSS feed lags some mornings — notably Mondays, when the Sunday-ET
+    # announcement isn't in rss.arxiv.org yet at our ~09:10 run, so every category
+    # comes back empty. The search API queries submittedDate and is more reliable,
+    # so fall back to it for the same date when the RSS gave nothing. dedup
+    # (seen_papers.json) filters the older papers the wider window also pulls in.
+    if not use_api and not papers:
+        target = for_date or today
+        log.warning("arXiv RSS returned 0 papers for %s — falling back to the search API",
+                    target)
+        for cat in cfg.get("categories", []):
+            papers.extend(
+                fetch_api(
+                    cat,
+                    target,
+                    include_cross_listed=cfg.get("include_cross_listed", False),
+                    max_results=cfg.get("max_per_category", 80),
+                )
+            )
+        log.info("arXiv API fallback collected %d papers", len(papers))
     return papers

@@ -83,14 +83,18 @@ def run(dry_run: bool = False, for_date: date | None = None,
     # Re-run guard. The seen-set (data/seen_papers.json) is global, so re-running
     # daily for a date that already has a report makes filter_new strip that
     # date's already-processed papers, and render_daily would then overwrite the
-    # good page with an almost-empty one. Refuse to clobber unless --force.
+    # good page with an almost-empty one. Refuse to clobber a *non-empty* report
+    # unless --force. An *empty* one (e.g. the arXiv RSS was lagging at 09:10) is
+    # left re-runnable, so a later run recovers it once the papers are available.
     if out_path.exists() and not force and not dry_run:
-        log.warning(
-            "daily report %s already exists — skipping render so a re-run can't "
-            "clobber it with a deduped (near-empty) page. Pass --force to "
-            "regenerate from scratch.", out_path,
-        )
-        return out_path
+        if "相关性" in out_path.read_text(encoding="utf-8", errors="ignore"):
+            log.warning(
+                "daily report %s already exists — skipping render so a re-run "
+                "can't clobber it. Pass --force to regenerate from scratch.",
+                out_path,
+            )
+            return out_path
+        log.info("existing report %s has no papers — regenerating", out_path)
 
     log.info("collecting papers for %s ...", report_date)
     papers = _collect_papers(sources_cfg, for_date=for_date)

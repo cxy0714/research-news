@@ -112,6 +112,11 @@
   补全复用，保证两条路径渲染一致。
 
 ### Fixed
+- **周一（及任何 RSS 延迟的早晨）daily 抓到 0 篇 / 空报告**：`rss.arxiv.org` feed 周一早上
+  9:10 还没刷出当天批次（周日 20:00 美东公告，到点还没传到 RSS），五个分类全返回 0、当天报告
+  整空。三处修复：① RSS 抓到 0 篇时**自动回退 search API**（按 submittedDate 查、更可靠）；
+  ② API 时间窗从回溯 2 天放宽到 **4 天**，让周一也覆盖到周末（周五下午提交、周一才公告的论文）；
+  ③ 重跑保护对**空报告**放行——空报告（抓 0 篇那种）不再被 guard 锁住，之后重跑能就地恢复。
 - **收尾 `git push` 被远程超前拒绝时会先 rebase 再重试**：之前 push 失败只是原样重试（带退避），
   对 non-fast-forward（远程在本次运行期间被另一台机器 / 网页合并推进）无效，于是放弃、要手动
   `git pull` 再推。现在 `run_daily.ps1` / `catch-up.ps1` / `run_daily.sh` / `run_journal_backfill.sh`
