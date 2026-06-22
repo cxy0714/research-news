@@ -4,6 +4,18 @@
 
 ### Daily
 
+- [A case study of causal mediation using Bayesian nonparametrics and semiparametric corrections](deep_reads/2026-06-22-2606.20148.md)  
+  9/10 [daily]
+- [Two-Sample IV: Efficient Two-Step Estimation and Tests for Overidentification and Weak-Instruments](deep_reads/2026-06-22-2606.20240.md)  
+  9/10 [daily]
+- [Choosing A Headline Estimand from Matching, DID, and Hybrid Designs: A Minimax-Regret Approach](deep_reads/2026-06-22-2606.20435.md)  
+  8/10 [daily]
+- [Anchors Away: Navigating Unanchored Indirect Comparisons with Multilevel Unanchored Meta-Regression (ML-UMR)](deep_reads/2026-06-22-2606.20341.md)  
+  7/10 [daily]
+- [Private Rate-Double-Robust Inference](deep_reads/2026-06-22-2606.20427.md)  
+  7/10 [daily]
+- [Biodiversity Media Narratives and Stock Market Performance: Evidence from Europe](deep_reads/2026-06-22-2606.19972.md)  
+  7/10 [daily]
 - [Apportioning Causal Responsibility of Two Risk Factors for an Adverse Outcome via Counterfactual Attribution](deep_reads/2026-06-19-2606.18459.md)  
   8/10 [daily]
 - [Wasserstein Policy Learning for Distributional Outcomes](deep_reads/2026-06-19-2606.19117.md)  
@@ -1366,6 +1378,11 @@
 - [Counterfactual inference in sequential experiments](deep_reads/2026-05-26-10.1214_25-aos2519.md)  
   9/10 [journals]
 
+### 其他
+
+- [Causal isotonic regression](deep_reads/2026-06-22-1810.03269.md)  
+  9/10 [manual]
+
 ## 高维统计 / 随机矩阵
 
 ### Daily
@@ -1925,6 +1942,8 @@
 
 ### Daily
 
+- [Leveraging tails for adaptation](deep_reads/2026-06-22-2606.20480.md)  
+  8/10 [daily]
 - [Optimal score function estimation via derivatives constraints](deep_reads/2026-06-19-2606.19084.md)  
   7/10 [daily]
 - [Bayesian Prediction in Gamma Models: Admissibility and Infinitesimal Prediction](deep_reads/2026-06-19-2606.18700.md)  
@@ -2971,6 +2990,11 @@
 - [Yurinskii’s coupling for martingales](deep_reads/2026-05-26-10.1214_25-aos2538.md)  
   8/10 [journals]
 
+### 其他
+
+- [Thin Sets Are Not Equally Thin: Minimax Learning of Submanifold Integrals](deep_reads/2026-06-22-2507.12673.md)  
+  9/10 [manual]
+
 ## 效率理论 / Debiased ML
 
 ### Daily
@@ -3246,6 +3270,14 @@
 
 ### Daily
 
+- [Hypergraph Variable Selection with False Discovery Rate Control](deep_reads/2026-06-22-2606.20514.md)  
+  7/10 [daily]
+- [Calibration without labels in multiple testing](deep_reads/2026-06-22-2606.19737.md)  
+  7/10 [daily]
+- [A minimum-risk and cost-efficient two-sample sequential testing framework for the shifted exponential models with application to precipitation data](deep_reads/2026-06-22-2606.20069.md)  
+  6/10 [daily]
+- [A Laplace equation approach to the Behrens--Fisher problem](deep_reads/2026-06-22-2606.19726.md)  
+  6/10 [daily]
 - [Paired Sample Tests for High-dimensional Uncorrelatedness via Random Integration](deep_reads/2026-06-17-2606.15636.md)  
   9/10 [daily]
 - [Wild bootstrap for mean response inference in functional linear regression models](deep_reads/2026-06-17-2606.16089.md)  
@@ -4628,6 +4660,10 @@
 
 ### Daily
 
+- [ELMA: ELlipse-based bar MAjor axis estimator](deep_reads/2026-06-22-2606.20370.md)  
+  6/10 [daily]
+- [NNNN: Neural Networks for Newtonian Noise Mitigation at the Einstein Telescope](deep_reads/2026-06-22-2606.19907.md)  
+  6/10 [daily]
 - [Ultra-High-Resolution Astronomy with the Solar Gravitational Lens](deep_reads/2026-06-19-2606.18300.md)  
   7/10 [daily]
 - [The Chandra-Gaia Catalog of Counterparts: Resolving ambiguous Gaia matches to X-ray sources in the Chandra Source Catalog using Machine Learning](deep_reads/2026-06-19-2606.19329.md)  
@@ -4778,6 +4814,8 @@
 
 ### Daily
 
+- [Institutions, Inputs, and Agricultural Growth in China:Revisiting Several Controversies, 1949--1986](deep_reads/2026-06-22-2606.20286.md)  
+  6/10 [daily]
 - [Granular Instrumental Variables: Estimation and Inference](deep_reads/2026-06-12-2606.14057.md)  
   9/10 [daily]
 - [What is the Long-Term Value of Reliability?](deep_reads/2026-06-12-2606.11526.md)  
@@ -5289,6 +5327,8 @@
 
 ### Daily
 
+- [Built-in Selection Bias in Proportional Hazards Models with Omitted Covariates: Simulation Evidence and Alternative Approaches](deep_reads/2026-06-22-2606.19982.md)  
+  7/10 [daily]
 - [Applying the Weibull Shape Parameter test for signal detection in pharmacovigilance using the R package WSPsignal](deep_reads/2026-06-19-2606.18809.md)  
   6/10 [daily]
 - [Typical Healthcare Pathways as a Basis for Admixture Modeling of Patient Trajectories](deep_reads/2026-06-12-2606.14587.md)  
