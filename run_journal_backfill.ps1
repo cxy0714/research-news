@@ -5,9 +5,10 @@
 #
 #   -Max N       : stop after N units (default 0 = run until the queue is empty)
 #   -DailyHour H : the daily run's hour (default 9). The loop pauses during
-#                  H:00–(H+2):00 until today's report exists, so daily gets the
+#                  H:00–(H+5):00 until today's report exists, so daily gets the
 #                  lock first. (run_daily.ps1 also waits for the lock, so daily
-#                  is never skipped even if a unit straddles the window.)
+#                  is never skipped even if a unit straddles the window; and a
+#                  rare skipped daily self-heals via catch-up the next day.)
 
 param(
     [int]$Max = 0,
@@ -37,11 +38,13 @@ if (Test-Path $venvActivate) { . $venvActivate }
 Log "journal backfill loop start (Max=$Max)"
 $done = 0
 while ($Max -le 0 -or $done -lt $Max) {
-    # Yield to the daily run: during its window, if today's report isn't out yet,
-    # pause (don't take the lock) so daily runs first.
+    # Yield to the daily run: while today's report isn't out yet and we're in the
+    # daily window, pause (don't take the lock) so daily runs first. A wide window
+    # (H..H+5) so even a longer unit that straddled 09:10 ends up yielding once it
+    # finishes, letting the waiting daily grab the lock.
     $today = Get-Date -Format "yyyy-MM-dd"
     $hour = (Get-Date).Hour
-    if ($hour -ge $DailyHour -and $hour -lt ($DailyHour + 2) -and -not (Test-Path "docs\daily\$today.md")) {
+    if ($hour -ge $DailyHour -and $hour -lt ($DailyHour + 5) -and -not (Test-Path "docs\daily\$today.md")) {
         Log "daily not out yet - yielding 5 min"
         Start-Sleep -Seconds 300
         continue

@@ -104,3 +104,50 @@ IEEE 系列 ieee（月刊、每期很大，全部先 dry-run、用小 N）：
 
 清单全打勾后，想继续往更早的年份补：把对应项的 `--n-issues` 调更大重跑即可（去重只会处理
 更老的新期）。例如 `--only AoS --n-issues 24`。建议另起一轮、重置勾选，或在行尾追记 `(→24)`。
+
+### 阶段三 · 再往前翻一轮（每刊 +~6 期；去重只处理更老的新期）
+
+> 比阶段二再深一截。**单元控制在 ~1.5-2h**（高频/大刊 ⚠ 用小步），避免一格跑太久撞 daily；
+> 万一某格太久让 daily 当天没跑成，第二天 catch-up 会用 `--date` 自动补上，能自愈。
+
+概率统计 prob_stats：
+- [ ] `--only AoP --n-issues 14`
+- [ ] `--only Bernoulli --n-issues 14`
+- [ ] `--only EJS --n-issues 7`   ⚠ 电子刊、文章多
+- [ ] `--only "Statistica Sinica" --n-issues 14`
+- [ ] `--only "Scand. J. Stat." --n-issues 14`
+
+流行病 epi：
+- [ ] `--only StatMed --n-issues 4`   ⚠ 双周刊、量大
+- [ ] `--only SMMR --n-issues 10`
+- [ ] `--only AJE --n-issues 7`   ⚠ 月刊
+- [ ] `--only Epidemiology --n-issues 10`
+
+应用 / 生物统计 applied：
+- [ ] `--only AoAS --n-issues 14`
+- [ ] `--only Biometrics --n-issues 14`
+- [ ] `--only Biostatistics --n-issues 14`
+- [ ] `--only "JRSS-C" --n-issues 14`
+
+理论核心 core：
+- [ ] `--only AoS --n-issues 18`
+- [ ] `--only JASA --n-issues 18`
+- [ ] `--only JRSSB --n-issues 18`
+- [ ] `--only Biometrika --n-issues 18`
+- [ ] `--only JMLR --jmlr-n 5`
+
+经济 / 计量 econ：
+- [ ] `--only Econometrica --n-issues 18`
+- [ ] `--only "J. Econometrics" --n-issues 7`   ⚠ 出刊密、量大
+- [ ] `--only "Quant. Econ." --n-issues 14`
+- [ ] `--only JBES --n-issues 14`
+
+IEEE 系列 ieee（月刊、每期大，用小步）：
+- [ ] `--only TIT --n-issues 3`   ⚠
+- [ ] `--only TPAMI --n-issues 3`   ⚠
+- [ ] `--only TSP --n-issues 3`   ⚠
+- [ ] `--only JSAIT --n-issues 7`
+
+天文 astro（体量巨大，放最后、用小步）：
+- [ ] `--only ApJS --n-issues 3`   ⚠
+- [ ] `--only MNRAS --n-issues 2`   ⚠⚠ 每期上百篇，跑得最久
