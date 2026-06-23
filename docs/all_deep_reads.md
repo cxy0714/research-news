@@ -288,6 +288,32 @@
 - [A note on response-adaptive randomization from a Bayesian prediction viewpoint](deep_reads/2026-06-24-10.1177_09622802251360413.md)  
   6/10 [journals]
 
+#### American Journal of Epidemiology Vol 195 Issue 4
+
+- [A framework for the rigorous assessment of heterogeneous treatment effects from a single randomized controlled trial](deep_reads/2026-06-24-10.1093_aje_kwaf253.md)  
+  8/10 [journals]
+- [Evaluating treatment benefit predictors using observational data: contending with identification and confounding bias](deep_reads/2026-06-24-10.1093_aje_kwaf239.md)  
+  8/10 [journals]
+
+#### American Journal of Epidemiology Vol 195 Issue 3
+
+- [Estimating sex-specific population-level effects of limiting sugar-sweetened beverages or 100% fruit juices during childhood on insulin resistance, central adiposity, and glycemic outcomes in late adolescence](deep_reads/2026-06-24-10.1093_aje_kwaf225.md)  
+  8/10 [journals]
+
+#### American Journal of Epidemiology Vol 195 Issue 2
+
+- [Combining target trial emulation and qualitative research to understand the effect of health visiting on child hospital admissions in England](deep_reads/2026-06-24-10.1093_aje_kwaf207.md)  
+  7/10 [journals]
+
+#### American Journal of Epidemiology Vol 194 Issue 12
+
+- [The exposure potential restriction rule revisited](deep_reads/2026-06-24-10.1093_aje_kwaf204.md)  
+  8/10 [journals]
+- [Disaster-related home loss, mental health, and risk of cognitive disability: causal mediation analysis using longitudinal data of disaster survivors](deep_reads/2026-06-24-10.1093_aje_kwaf208.md)  
+  7/10 [journals]
+- [Combining the list-experiment and direct question to improve estimation of abortion incidence](deep_reads/2026-06-24-10.1093_aje_kwaf185.md)  
+  6/10 [journals]
+
 #### Statistica Sinica
 
 - [Rematching Estimators For Average Treatment Effects](deep_reads/2026-06-23-10.5705_ss.202024.0306.md)  
@@ -3563,6 +3589,11 @@
 
 ### 期刊
 
+#### American Journal of Epidemiology Vol 195 Issue 6
+
+- [Constructing targeted minimum loss/maximum likelihood estimators: a simple illustration to build intuition](deep_reads/2026-06-24-10.1093_aje_kwaf261.md)  
+  9/10 [journals]
+
 #### Statistica Sinica
 
 - [Efficient Estimation of the Accelerated Failure Time Model with Auxiliary Aggregate Information](deep_reads/2026-06-23-10.5705_ss.202024.0105.md)  
@@ -6244,6 +6275,219 @@
 - [Health utility adjusted survival: A composite endpoint for clinical trial designs](deep_reads/2026-06-24-10.1177_09622802251338409.md)  
   3/10 [journals]
 
+#### American Journal of Epidemiology Vol 195 Issue 6
+
+- [Evaluating the 2023 Mexican Dietary Guidelines for type 2 diabetes prevention: a target trial emulation in Mexican women](deep_reads/2026-06-19-10.1093_aje_kwag037.md)  
+  9/10 [journals]
+- [Referral of patients with cognitive impairment to specialty memory care: associations with patient-centered outcomes and specificity of diagnoses](deep_reads/2026-06-19-10.1093_aje_kwag034.md)  
+  8/10 [journals]
+- [The protective effect of housing affordability on childhood asthma risk: a longitudinal fixed-effects analysis](deep_reads/2026-06-19-10.1093_aje_kwag013.md)  
+  8/10 [journals]
+- [Estimating effects of hypothetical public health interventions on health disparities: a standardization-based simulation approach](deep_reads/2026-06-24-10.1093_aje_kwaf279.md)  
+  7/10 [journals]
+- [Smoking hot joint models for attrition bias—XMAR-ks the spot](deep_reads/2026-06-19-10.1093_aje_kwag063.md)  
+  7/10 [journals]
+- [Leukotriene-modifying agent chemoprophylaxis for severe influenza illness: a multi-approach study](deep_reads/2026-06-19-10.1093_aje_kwag072.md)  
+  7/10 [journals]
+- [Estimating the effect of hepatitis C infection on multidrug-resistant tuberculosis treatment outcomes under hypothetical interventions on regimen composition and adherence](deep_reads/2026-06-19-10.1093_aje_kwag024.md)  
+  7/10 [journals]
+- [Exploring the association between higher education and steeper cognitive decline in a nationally representative longitudinal study in India](deep_reads/2026-06-19-10.1093_aje_kwag009.md)  
+  7/10 [journals]
+- [Magnitude of potential biases in COVID-19 vaccine effectiveness studies due to differential health care seeking following home testing: implications for test-negative design studies](deep_reads/2026-06-24-10.1093_aje_kwag021.md)  
+  6/10 [journals]
+- [Pregnancy identification method as a source of bias in studies of prenatal exposures using real-world data](deep_reads/2026-06-24-10.1093_aje_kwaf260.md)  
+  6/10 [journals]
+- [Commentary on “ <i>Resurrecting complete-case analysis: a defense</i> ”: the loss of information remains unresolved](deep_reads/2026-06-19-10.1093_aje_kwag068.md)  
+  6/10 [journals]
+- [Requirement for written informed consent and selection bias in a chart-review prostate cancer study](deep_reads/2026-06-19-10.1093_aje_kwag043.md)  
+  6/10 [journals]
+- [Cardiovascular disease and mortality following placental abruption](deep_reads/2026-06-19-10.1093_aje_kwaf289.md)  
+  6/10 [journals]
+- [Spatiotemporal analysis of human response to wildfire events and PM2.5 exposure](deep_reads/2026-06-19-10.1093_aje_kwag002.md)  
+  6/10 [journals]
+- [Obstructive sleep apnea and functional hearing loss over 8 years: results from the National Health and Aging Trends Study](deep_reads/2026-06-19-10.1093_aje_kwag006.md)  
+  6/10 [journals]
+- [Long-term impact of fine particulate matter on mortality is exacerbated when wildfire events occur](deep_reads/2026-06-24-10.1093_aje_kwaf278.md)  
+  4/10 [journals]
+- [Network analysis of pairwise relative tuberculosis transmission probabilities in Lima, Peru](deep_reads/2026-06-19-10.1093_aje_kwag067.md)  
+  4/10 [journals]
+- [Rising Black life expectancy in an era of increased immigration](deep_reads/2026-06-24-10.1093_aje_kwaf273.md)  
+  3/10 [journals]
+- [Beyond Black and White: relationships between segregation, environmental burden, and birth outcomes among Black and Latino populations](deep_reads/2026-06-19-10.1093_aje_kwag051.md)  
+  3/10 [journals]
+- [Flush with data: harnessing emergency department wastewater as an innovative approach for surveillance of infectious diseases](deep_reads/2026-06-19-10.1093_aje_kwag019.md)  
+  3/10 [journals]
+- [The relationship between psychological stress and SARS-CoV-2 nucleocapsid-antibody response following natural infection: longitudinal findings from the Aegis study](deep_reads/2026-06-19-10.1093_aje_kwag048.md)  
+  2/10 [journals]
+
+#### American Journal of Epidemiology Vol 195 Issue 5
+
+- [Statistical methods for estimating the protective effects of immune markers using test-negative designs](deep_reads/2026-06-24-10.1093_aje_kwaf280.md)  
+  8/10 [journals]
+- [Initiation of proton pump inhibitors is associated with gut microbiome diversity and composition: a new-user target trial emulation within the Baltimore Longitudinal Study of Aging](deep_reads/2026-06-24-10.1093_aje_kwag026.md)  
+  7/10 [journals]
+- [Living DAGs: the future of DAGs in epidemiology](deep_reads/2026-06-19-10.1093_aje_kwag029.md)  
+  7/10 [journals]
+- [How can the use of different modes of survey data collection introduce bias? An introduction to mode effects using directed acyclic graphs (DAGs)](deep_reads/2026-06-19-10.1093_aje_kwag017.md)  
+  7/10 [journals]
+- [On modeling the shared environment](deep_reads/2026-06-24-10.1093_aje_kwaf255.md)  
+  6/10 [journals]
+- [Use of the test-negative design to estimate the protective effect of a scalar immune measure: a simulation analysis](deep_reads/2026-06-19-10.1093_aje_kwag036.md)  
+  6/10 [journals]
+- [Cash transfers do not increase traumatic injury and mortality: evidence from Alaska](deep_reads/2026-06-19-10.1093_aje_kwag007.md)  
+  5/10 [journals]
+- [Use of chemical hair straighteners in relation to incidence and growth of uterine leiomyomata: a prospective ultrasound study](deep_reads/2026-06-24-10.1093_aje_kwaf286.md)  
+  4/10 [journals]
+- [COVID-19 infection and risk of incident hypertension: a case-control time-to-event study](deep_reads/2026-06-24-10.1093_aje_kwaf283.md)  
+  4/10 [journals]
+- [Association of naturalistic e-cigarette use and smoking cessation in US adults](deep_reads/2026-06-24-10.1093_aje_kwaf270.md)  
+  4/10 [journals]
+- [Predicting first onset of suicide attempt among children with suicidal ideation or non-suicidal self-injury using machine learning: a prospective population-based cohort study](deep_reads/2026-06-24-10.1093_aje_kwaf242.md)  
+  4/10 [journals]
+- [Association of nonfatal overdose surveillance data with concurrent and future overdose deaths in Rhode Island](deep_reads/2026-06-19-10.1093_aje_kwag018.md)  
+  4/10 [journals]
+- [Damp housing conditions as a determinant of psychological distress: a longitudinal analysis of the British Household Panel Survey](deep_reads/2026-06-24-10.1093_aje_kwaf263.md)  
+  3/10 [journals]
+- [The effect of damp housing on psychological distress: does respiratory health matter?](deep_reads/2026-06-19-10.1093_aje_kwag042.md)  
+  3/10 [journals]
+- [The role of institutional trust in shaping the relationship between vaccine concerns and ongoing COVID-19 vaccination in a US national cohort](deep_reads/2026-06-19-10.1093_aje_kwag012.md)  
+  3/10 [journals]
+- [An adaptive method of emergency department syndromic surveillance to nowcast the frequency of presentations that will have a severe 28-day outcome following influenza or COVID-19 infection: a retrospective analytical record linkage study](deep_reads/2026-06-19-10.1093_aje_kwag028.md)  
+  2/10 [journals]
+- [Interaction effects are only a piece of the puzzle: reintroducing MAIHDA as a powerful tool to advance understanding of intersectional inequities](deep_reads/2026-06-19-10.1093_aje_kwag022.md)  
+  2/10 [journals]
+- [Trends in obesity-related cardiovascular and cancer mortality in Switzerland 1995-2019: an analysis of multiple causes of death](deep_reads/2026-06-19-10.1093_aje_kwag003.md)  
+  2/10 [journals]
+- [Increasing and inequitable US pregnancy-related mortality ratios among non-Hispanic Black and White women, 2000-2019](deep_reads/2026-06-19-10.1093_aje_kwaf287.md)  
+  2/10 [journals]
+
+#### American Journal of Epidemiology Vol 195 Issue 4
+
+- [Reframing the fragility index as bias analysis: sensitivity analysis, <i>P-</i> values, parameterizations, and confidence intervals](deep_reads/2026-06-24-10.1093_aje_kwaf276.md)  
+  8/10 [journals]
+- [Evaluation of potential approaches for counting person-time in instances where no active comparator is present](deep_reads/2026-06-24-10.1093_aje_kwaf266.md)  
+  8/10 [journals]
+- [Historical redlining, breast cancer survival, and the mediating and modifying role of contemporary neighborhood socioeconomic conditions](deep_reads/2026-06-24-10.1093_aje_kwaf282.md)  
+  7/10 [journals]
+- [Sampling for computational efficiency when conducting analyses in big data](deep_reads/2026-06-24-10.1093_aje_kwaf268.md)  
+  7/10 [journals]
+- [Marginal structural models for quantifying the causal effects of exposure to ambient air pollution on progression of CT emphysema in the MESA lung and MESA air studies](deep_reads/2026-06-24-10.1093_aje_kwaf252.md)  
+  7/10 [journals]
+- [Comparative risk of nonvertebral fractures associated with oral anticoagulants in patients with venous thromboembolism](deep_reads/2026-06-24-10.1093_aje_kwaf235.md)  
+  7/10 [journals]
+- [Target trial emulation under nonmutually exclusive assignment: structural pitfalls and methodological remedies](deep_reads/2026-06-19-10.1093_aje_kwag014.md)  
+  7/10 [journals]
+- [Hypertensive disorders of pregnancy, maternal cardiovascular disease mortality and the role of familial predisposition: a Norwegian population-based sibling-comparison, sibling-spillover and negative-control cohort study](deep_reads/2026-06-24-10.1093_aje_kwaf257.md)  
+  6/10 [journals]
+- [Mitigating the risk of bias exacerbation when controlling for unmeasured spatial confounding for binary exposures](deep_reads/2026-06-24-10.1093_aje_kwaf248.md)  
+  6/10 [journals]
+- [Residential segregation and late-stage colorectal cancer in the United States: a population-based study of 1.2 million adults](deep_reads/2026-06-24-10.1093_aje_kwaf285.md)  
+  5/10 [journals]
+- [Derivation of three occupational status measures in young Black women: the study of environment, lifestyle, and fibroids](deep_reads/2026-06-24-10.1093_aje_kwaf275.md)  
+  5/10 [journals]
+- [A preconception cohort study of historical mortgage lending discrimination and present-day fecundability](deep_reads/2026-06-24-10.1093_aje_kwaf237.md)  
+  5/10 [journals]
+- [Recommendations for estimating and reporting vaccine effectiveness by time since vaccination: a COVID-19 case study](deep_reads/2026-06-24-10.1093_aje_kwaf254.md)  
+  5/10 [journals]
+- [An alternative method for assessing the fragility of survival analysis results: a proof-of-concept study based on the log-rank test](deep_reads/2026-06-24-10.1093_aje_kwaf229.md)  
+  5/10 [journals]
+- [Association of state-level structural racism with subjective cognitive decline prevalence—Behavioral Risk Factor Surveillance System, 2015-2016](deep_reads/2026-06-24-10.1093_aje_kwaf262.md)  
+  4/10 [journals]
+- [Childhood adversity and spontaneous abortion in a North American preconception cohort study](deep_reads/2026-06-24-10.1093_aje_kwaf246.md)  
+  3/10 [journals]
+- [Augmenting fact and date of death in electronic health records using internet media sources: a validation study from two large healthcare systems](deep_reads/2026-06-24-10.1093_aje_kwaf258.md)  
+  2/10 [journals]
+- [More lessons from the Lung Health Study](deep_reads/2026-06-19-10.1093_aje_kwag004.md)  
+  2/10 [journals]
+- [Implementing and retaining a large-scale technology-mediated cohort to study HIV incidence and PrEP uptake among vulnerable cisgender men as well as transgender individuals in the United States, the Together 5000 cohort](deep_reads/2026-06-24-10.1093_aje_kwaf250.md)  
+  1/10 [journals]
+- [The effects of a smoking cessation intervention on mortality after a 32.5-year follow-up period: a randomized clinical trial](deep_reads/2026-06-24-10.1093_aje_kwaf240.md)  
+  1/10 [journals]
+- [Screening of adolescents for testicular cancer-a nationwide retrospective cohort study](deep_reads/2026-06-24-10.1093_aje_kwaf241.md)  
+  0/10 [journals]
+
+#### American Journal of Epidemiology Vol 195 Issue 3
+
+- [Obtaining population-based estimates for survey data using Bayesian hierarchical models with poststratification](deep_reads/2026-06-24-10.1093_aje_kwaf209.md)  
+  7/10 [journals]
+- [Covariate adjustment in LGBTQ+ health disparities research: aligning methods with assumptions](deep_reads/2026-06-24-10.1093_aje_kwaf197.md)  
+  7/10 [journals]
+- [Memory trajectories before and after a negative wealth shock, the United States Health and Retirement Study, 1998-2020](deep_reads/2026-06-24-10.1093_aje_kwaf272.md)  
+  6/10 [journals]
+- [Improving classification of myocardial infarction with machine learning in a diverse population](deep_reads/2026-06-24-10.1093_aje_kwaf223.md)  
+  5/10 [journals]
+- [All-cause mortality around the anniversary of a sibling’s death: findings from Swedish National Register Data](deep_reads/2026-06-24-10.1093_aje_kwaf213.md)  
+  5/10 [journals]
+- [Revisiting the social determinants of health with explainable AI: a cross-country perspective](deep_reads/2026-06-24-10.1093_aje_kwaf205.md)  
+  5/10 [journals]
+
+#### American Journal of Epidemiology Vol 195 Issue 2
+
+- [Using directed acyclic graphs to determine whether multiple imputation or subsample-multiple imputation estimates of an exposure-outcome association are unbiased](deep_reads/2026-06-24-10.1093_aje_kwaf265.md)  
+  8/10 [journals]
+- [Impact of time zero designation on estimated COVID-19 antiviral effectiveness in observational studies](deep_reads/2026-06-24-10.1093_aje_kwaf221.md)  
+  8/10 [journals]
+- [REFINE2: a simplified simulation tool to help epidemiologists evaluate the suitability and sensitivity of effect estimation within user-specified data](deep_reads/2026-06-24-10.1093_aje_kwaf195.md)  
+  8/10 [journals]
+- [Heterogeneous impact of mask mandates on U.S. masking behavior: an interrupted time series study](deep_reads/2026-06-24-10.1093_aje_kwaf236.md)  
+  7/10 [journals]
+- [Applying mixtures methodology to analyze how exposure to structural racism and economic disadvantage affect perinatal health outcomes: an ECHO study](deep_reads/2026-06-24-10.1093_aje_kwaf224.md)  
+  7/10 [journals]
+- [Combined effects of ambient air pollution exposure and biological aging on incident liver diseases: a large prospective cohort study](deep_reads/2026-06-24-10.1093_aje_kwaf196.md)  
+  7/10 [journals]
+- [To what extent can attributable fractions in occupational epidemiology be estimated in the absence of key data?](deep_reads/2026-06-24-10.1093_aje_kwaf188.md)  
+  7/10 [journals]
+- [Potential for extreme bias due to outcome misclassification in relative measures of effect for rare time-to-event outcomes](deep_reads/2026-06-24-10.1093_aje_kwaf228.md)  
+  6/10 [journals]
+- [Staying sharp: gendered work–family life courses and later-life cognitive functioning across four European welfare states](deep_reads/2026-06-24-10.1093_aje_kwaf194.md)  
+  6/10 [journals]
+- [Independent and joint associations of key social exposome components with cognitive aging: triangulating evidence through cross-national data](deep_reads/2026-06-24-10.1093_aje_kwaf189.md)  
+  6/10 [journals]
+- [Pre-diagnostic body mass index trajectories and associations with lung cancer risk](deep_reads/2026-06-24-10.1093_aje_kwaf084.md)  
+  5/10 [journals]
+- [The “long arm of childhood” on mortality in older adulthood in the United States and Brazil: examining the role of educational attainment and differences by gender](deep_reads/2026-06-24-10.1093_aje_kwaf186.md)  
+  5/10 [journals]
+- [The association between long-term exposure to PM2.5 constituents and diabetes incidence and blood glucose levels among World Trade Center Health Program general responders](deep_reads/2026-06-24-10.1093_aje_kwaf238.md)  
+  4/10 [journals]
+- [Evaluating the association between upstream perceived individual and neighborhood determinants of health and intensity of breast cancer screening](deep_reads/2026-06-24-10.1093_aje_kwaf234.md)  
+  4/10 [journals]
+- [Identifying observable medication use time in administrative databases: a tutorial using nursing home residents](deep_reads/2026-06-24-10.1093_aje_kwaf227.md)  
+  4/10 [journals]
+- [Differences in protective resources and risks for depressive symptoms among recent widows in the United States and India](deep_reads/2026-06-24-10.1093_aje_kwaf210.md)  
+  3/10 [journals]
+- [Improving work-related estimates to make health inequalities visible](deep_reads/2026-06-24-10.1093_aje_kwaf247.md)  
+  2/10 [journals]
+
+#### American Journal of Epidemiology Vol 195 Issue 1
+
+- [Electronic health record-enhanced signal detection using tree-based scan statistic methods](deep_reads/2026-06-24-10.1093_aje_kwaf199.md)  
+  7/10 [journals]
+- [Ratios in regression analysis with causal questions—response to commentary](deep_reads/2026-06-24-10.1093_aje_kwaf249.md)  
+  6/10 [journals]
+- [The cumulative incidence and infection hospitalization risk of SARS-CoV-2 by variant: a longitudinal study in England](deep_reads/2026-06-24-10.1093_aje_kwaf203.md)  
+  5/10 [journals]
+- [Intimate partner violence Google searches before and after the Dobbs decision](deep_reads/2026-06-24-10.1093_aje_kwaf230.md)  
+  4/10 [journals]
+
+#### American Journal of Epidemiology Vol 194 Issue 12
+
+- [Mendelian randomization, lipids, and coronary artery disease: trade-offs between study designs and assumptions](deep_reads/2026-06-24-10.1093_aje_kwaf190.md)  
+  8/10 [journals]
+- [Spillovers and effect attenuation in firearm policy research in the United States](deep_reads/2026-06-24-10.1093_aje_kwaf220.md)  
+  7/10 [journals]
+- [Studies based on health administrative data regarding rare outcomes in inflammatory bowel disease significantly underestimate the true risk—the importance of specificity](deep_reads/2026-06-24-10.1093_aje_kwaf216.md)  
+  6/10 [journals]
+- [Impacts of the 2021 child tax credit advance monthly payments on birth outcomes in the United States: a natural experiment](deep_reads/2026-06-24-10.1093_aje_kwaf211.md)  
+  6/10 [journals]
+- [Tree canopy cover and injurious pedestrian falls: a location-based case-control study](deep_reads/2026-06-24-10.1093_aje_kwaf231.md)  
+  5/10 [journals]
+- [Eviction, inability to pay rent, and youth mental health: a fixed effects study](deep_reads/2026-06-24-10.1093_aje_kwaf212.md)  
+  5/10 [journals]
+- [Risk of opioid overdose associated with concurrent use of hydrocodone and CYP3A4-inhibiting calcium channel blockers: a population-based cohort study](deep_reads/2026-06-24-10.1093_aje_kwaf198.md)  
+  5/10 [journals]
+- [Invited commentary: building rigorous clinical evidence for drug–drug interactions](deep_reads/2026-06-24-10.1093_aje_kwaf222.md)  
+  4/10 [journals]
+
 #### Scandinavian Journal of Statistics Vol 50 Issue 3
 
 - [Generalizing the information content for stepped wedge designs: A marginal modeling approach](deep_reads/2026-06-23-10.1111_sjos.12615.md)  
@@ -6746,73 +6990,6 @@
   4/10 [journals]
 - [Joint mixed membership modeling of multivariate longitudinal and survival data for learning the individualized disease progression](deep_reads/2026-06-19-10.1214_23-aoas1864.md)  
   3/10 [journals]
-
-#### American Journal of Epidemiology Vol 195 Issue 6
-
-- [Evaluating the 2023 Mexican Dietary Guidelines for type 2 diabetes prevention: a target trial emulation in Mexican women](deep_reads/2026-06-19-10.1093_aje_kwag037.md)  
-  9/10 [journals]
-- [Referral of patients with cognitive impairment to specialty memory care: associations with patient-centered outcomes and specificity of diagnoses](deep_reads/2026-06-19-10.1093_aje_kwag034.md)  
-  8/10 [journals]
-- [The protective effect of housing affordability on childhood asthma risk: a longitudinal fixed-effects analysis](deep_reads/2026-06-19-10.1093_aje_kwag013.md)  
-  8/10 [journals]
-- [Smoking hot joint models for attrition bias—XMAR-ks the spot](deep_reads/2026-06-19-10.1093_aje_kwag063.md)  
-  7/10 [journals]
-- [Leukotriene-modifying agent chemoprophylaxis for severe influenza illness: a multi-approach study](deep_reads/2026-06-19-10.1093_aje_kwag072.md)  
-  7/10 [journals]
-- [Estimating the effect of hepatitis C infection on multidrug-resistant tuberculosis treatment outcomes under hypothetical interventions on regimen composition and adherence](deep_reads/2026-06-19-10.1093_aje_kwag024.md)  
-  7/10 [journals]
-- [Exploring the association between higher education and steeper cognitive decline in a nationally representative longitudinal study in India](deep_reads/2026-06-19-10.1093_aje_kwag009.md)  
-  7/10 [journals]
-- [Commentary on “ <i>Resurrecting complete-case analysis: a defense</i> ”: the loss of information remains unresolved](deep_reads/2026-06-19-10.1093_aje_kwag068.md)  
-  6/10 [journals]
-- [Requirement for written informed consent and selection bias in a chart-review prostate cancer study](deep_reads/2026-06-19-10.1093_aje_kwag043.md)  
-  6/10 [journals]
-- [Cardiovascular disease and mortality following placental abruption](deep_reads/2026-06-19-10.1093_aje_kwaf289.md)  
-  6/10 [journals]
-- [Spatiotemporal analysis of human response to wildfire events and PM2.5 exposure](deep_reads/2026-06-19-10.1093_aje_kwag002.md)  
-  6/10 [journals]
-- [Obstructive sleep apnea and functional hearing loss over 8 years: results from the National Health and Aging Trends Study](deep_reads/2026-06-19-10.1093_aje_kwag006.md)  
-  6/10 [journals]
-- [Network analysis of pairwise relative tuberculosis transmission probabilities in Lima, Peru](deep_reads/2026-06-19-10.1093_aje_kwag067.md)  
-  4/10 [journals]
-- [Beyond Black and White: relationships between segregation, environmental burden, and birth outcomes among Black and Latino populations](deep_reads/2026-06-19-10.1093_aje_kwag051.md)  
-  3/10 [journals]
-- [Flush with data: harnessing emergency department wastewater as an innovative approach for surveillance of infectious diseases](deep_reads/2026-06-19-10.1093_aje_kwag019.md)  
-  3/10 [journals]
-- [The relationship between psychological stress and SARS-CoV-2 nucleocapsid-antibody response following natural infection: longitudinal findings from the Aegis study](deep_reads/2026-06-19-10.1093_aje_kwag048.md)  
-  2/10 [journals]
-
-#### American Journal of Epidemiology Vol 195 Issue 5
-
-- [Living DAGs: the future of DAGs in epidemiology](deep_reads/2026-06-19-10.1093_aje_kwag029.md)  
-  7/10 [journals]
-- [How can the use of different modes of survey data collection introduce bias? An introduction to mode effects using directed acyclic graphs (DAGs)](deep_reads/2026-06-19-10.1093_aje_kwag017.md)  
-  7/10 [journals]
-- [Use of the test-negative design to estimate the protective effect of a scalar immune measure: a simulation analysis](deep_reads/2026-06-19-10.1093_aje_kwag036.md)  
-  6/10 [journals]
-- [Cash transfers do not increase traumatic injury and mortality: evidence from Alaska](deep_reads/2026-06-19-10.1093_aje_kwag007.md)  
-  5/10 [journals]
-- [Association of nonfatal overdose surveillance data with concurrent and future overdose deaths in Rhode Island](deep_reads/2026-06-19-10.1093_aje_kwag018.md)  
-  4/10 [journals]
-- [The effect of damp housing on psychological distress: does respiratory health matter?](deep_reads/2026-06-19-10.1093_aje_kwag042.md)  
-  3/10 [journals]
-- [The role of institutional trust in shaping the relationship between vaccine concerns and ongoing COVID-19 vaccination in a US national cohort](deep_reads/2026-06-19-10.1093_aje_kwag012.md)  
-  3/10 [journals]
-- [An adaptive method of emergency department syndromic surveillance to nowcast the frequency of presentations that will have a severe 28-day outcome following influenza or COVID-19 infection: a retrospective analytical record linkage study](deep_reads/2026-06-19-10.1093_aje_kwag028.md)  
-  2/10 [journals]
-- [Interaction effects are only a piece of the puzzle: reintroducing MAIHDA as a powerful tool to advance understanding of intersectional inequities](deep_reads/2026-06-19-10.1093_aje_kwag022.md)  
-  2/10 [journals]
-- [Trends in obesity-related cardiovascular and cancer mortality in Switzerland 1995-2019: an analysis of multiple causes of death](deep_reads/2026-06-19-10.1093_aje_kwag003.md)  
-  2/10 [journals]
-- [Increasing and inequitable US pregnancy-related mortality ratios among non-Hispanic Black and White women, 2000-2019](deep_reads/2026-06-19-10.1093_aje_kwaf287.md)  
-  2/10 [journals]
-
-#### American Journal of Epidemiology Vol 195 Issue 4
-
-- [Target trial emulation under nonmutually exclusive assignment: structural pitfalls and methodological remedies](deep_reads/2026-06-19-10.1093_aje_kwag014.md)  
-  7/10 [journals]
-- [More lessons from the Lung Health Study](deep_reads/2026-06-19-10.1093_aje_kwag004.md)  
-  2/10 [journals]
 
 #### Journal of the Royal Statistical Society Series C Vol 75 Issue 2
 
