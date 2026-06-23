@@ -124,6 +124,7 @@
 
 ### Statistica Sinica
 
+- [2026-06-23](journals/2026-06-23-statistica-sinica.md)
 - [2026-06-19](journals/2026-06-19-statistica-sinica.md)
 
 ## 应用 / 生物统计 (Applied & Biostat)

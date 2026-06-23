@@ -189,6 +189,47 @@
 
 ### 期刊
 
+#### Statistica Sinica
+
+- [Rematching Estimators For Average Treatment Effects](deep_reads/2026-06-23-10.5705_ss.202024.0306.md)  
+  9/10 [journals]
+- [Identification and Efficient Estimation in Regression Analysis with Response Missing Not At Random](deep_reads/2026-06-23-10.5705_ss.202024.0204.md)  
+  9/10 [journals]
+- [Conditional Generative Adversarial Network for Individualized Causal Mediation Analysis with Survival Outcome](deep_reads/2026-06-23-10.5705_ss.202024.0188.md)  
+  9/10 [journals]
+- [Estimation of Subsidiary Performance Metrics under Optimal Policies](deep_reads/2026-06-23-10.5705_ss.202024.0013.md)  
+  9/10 [journals]
+- [Conformal Causal Inference for Cluster Randomized Trials: Model-robust Inference Without Asymptotic Approximations](deep_reads/2026-06-19-10.5705_ss.202025.0476.md)  
+  9/10 [journals]
+- [Semiparametric Causal Discovery and Inference with Invalid Instruments](deep_reads/2026-06-19-10.5705_ss.202025.0331.md)  
+  9/10 [journals]
+- [Efficient Estimation of Average Treatment Effects with Unmeasured Confounding and Proxies](deep_reads/2026-06-19-10.5705_ss.202025.0104.md)  
+  9/10 [journals]
+- [Kernel-Profile Efficient Estimation in Generalized Partially Linear Models with Missing Outcomes in Longitudinal Studies](deep_reads/2026-06-19-10.5705_ss.202024.0380.md)  
+  9/10 [journals]
+- [Doubly Robust Estimation of Optimal Individual Treatment Regime in A Semi-supervised Framework](deep_reads/2026-06-19-10.5705_ss.202025.0168.md)  
+  9/10 [journals]
+- [Semi-Parametric Estimation of Potential Outcome Distributions and General Causal Estimands by Borrowing Information from Both Treatments and Controls](deep_reads/2026-06-19-10.5705_ss.202025.0267.md)  
+  9/10 [journals]
+- [Semi-supervised Regression Analysis with Model Misspecification and High-dimensional Data](deep_reads/2026-06-23-10.5705_ss.202024.0261.md)  
+  8/10 [journals]
+- [Statistical Inference for Local Granger Causality](deep_reads/2026-06-23-10.5705_ss.202023.0317.md)  
+  8/10 [journals]
+- [Balancing Covariates in Survey Experiments](deep_reads/2026-06-19-10.5705_ss.202025.0315.md)  
+  8/10 [journals]
+- [Semiparametric Principal Stratification Analysis Beyond Monotonicity](deep_reads/2026-06-19-10.5705_ss.202025.0066.md)  
+  8/10 [journals]
+- [Quantification and Inference of Asymmetric Relations Under Generative Exposure Mappings](deep_reads/2026-06-19-10.5705_ss.202025.0236.md)  
+  8/10 [journals]
+- [Collaborative Analysis for Paired A/B Testing Experiments](deep_reads/2026-06-23-10.5705_ss.202024.0227.md)  
+  7/10 [journals]
+- [Addressing Label Noise in Causation Classification via Kernel Embeddings](deep_reads/2026-06-23-10.5705_ss.202023.0202.md)  
+  7/10 [journals]
+- [Conformal Prediction Under Nonignorable Missingness](deep_reads/2026-06-19-10.5705_ss.202025.0156.md)  
+  7/10 [journals]
+- [Assumption-Lean Quantile Regression](deep_reads/2026-06-19-10.5705_ss.202025.0034.md)  
+  7/10 [journals]
+
 #### Electronic Journal of Statistics Vol 19 Issue 2
 
 - [Instrumental variable estimation of distributional causal effects](deep_reads/2026-06-23-10.1214_25-ejs2460.md)  
@@ -837,31 +878,6 @@
 - [Augmented two-stage estimation for treatment switching in oncology trials: Leveraging external data for improved precision](deep_reads/2026-06-19-10.1177_09622802251374838.md)  
   8/10 [journals]
 
-#### Statistica Sinica
-
-- [Conformal Causal Inference for Cluster Randomized Trials: Model-robust Inference Without Asymptotic Approximations](deep_reads/2026-06-19-10.5705_ss.202025.0476.md)  
-  9/10 [journals]
-- [Semiparametric Causal Discovery and Inference with Invalid Instruments](deep_reads/2026-06-19-10.5705_ss.202025.0331.md)  
-  9/10 [journals]
-- [Efficient Estimation of Average Treatment Effects with Unmeasured Confounding and Proxies](deep_reads/2026-06-19-10.5705_ss.202025.0104.md)  
-  9/10 [journals]
-- [Kernel-Profile Efficient Estimation in Generalized Partially Linear Models with Missing Outcomes in Longitudinal Studies](deep_reads/2026-06-19-10.5705_ss.202024.0380.md)  
-  9/10 [journals]
-- [Doubly Robust Estimation of Optimal Individual Treatment Regime in A Semi-supervised Framework](deep_reads/2026-06-19-10.5705_ss.202025.0168.md)  
-  9/10 [journals]
-- [Semi-Parametric Estimation of Potential Outcome Distributions and General Causal Estimands by Borrowing Information from Both Treatments and Controls](deep_reads/2026-06-19-10.5705_ss.202025.0267.md)  
-  9/10 [journals]
-- [Balancing Covariates in Survey Experiments](deep_reads/2026-06-19-10.5705_ss.202025.0315.md)  
-  8/10 [journals]
-- [Semiparametric Principal Stratification Analysis Beyond Monotonicity](deep_reads/2026-06-19-10.5705_ss.202025.0066.md)  
-  8/10 [journals]
-- [Quantification and Inference of Asymmetric Relations Under Generative Exposure Mappings](deep_reads/2026-06-19-10.5705_ss.202025.0236.md)  
-  8/10 [journals]
-- [Conformal Prediction Under Nonignorable Missingness](deep_reads/2026-06-19-10.5705_ss.202025.0156.md)  
-  7/10 [journals]
-- [Assumption-Lean Quantile Regression](deep_reads/2026-06-19-10.5705_ss.202025.0034.md)  
-  7/10 [journals]
-
 #### Scandinavian Journal of Statistics Vol 53 Issue 2
 
 - [Interval identification of natural effects in the presence of outcome‐related unmeasured confounding](deep_reads/2026-06-19-10.1111_sjos.70055.md)  
@@ -1465,6 +1481,39 @@
 
 ### 期刊
 
+#### Statistica Sinica
+
+- [Large Dimensional Spearman's Rank Correlation Matrices: The Central Limit Theorem and Its Applications](deep_reads/2026-06-23-10.5705_ss.202024.0395.md)  
+  9/10 [journals]
+- [Efficient Learning of DAG Structures in Heavy-tailed Data](deep_reads/2026-06-23-10.5705_ss.202024.0199.md)  
+  8/10 [journals]
+- [Concentration Inequalities for High-Dimensional Linear Processes with Dependent Innovations](deep_reads/2026-06-23-10.5705_ss.202023.0364.md)  
+  8/10 [journals]
+- [High-Dimensional Log Contrast Models with Measurement Errors](deep_reads/2026-06-19-10.5705_ss.202025.0223.md)  
+  8/10 [journals]
+- [Estimation and Inference for High-dimensional Multi-response Growth Curve Model](deep_reads/2026-06-23-10.5705_ss.202024.0307.md)  
+  7/10 [journals]
+- [Auxiliary Learning and its Statistical Understanding](deep_reads/2026-06-23-10.5705_ss.202024.0310.md)  
+  7/10 [journals]
+- [Detecting Structural Breaks in High-dimensional Functional Time Series Factor Models](deep_reads/2026-06-19-10.5705_ss.202025.0014.md)  
+  7/10 [journals]
+- [Distributed Algorithms for High-Dimensional Statistical Inference and Structure Learning with Heterogeneous Data](deep_reads/2026-06-19-10.5705_ss.202025.0087.md)  
+  7/10 [journals]
+- [Hybrid Denoising-screening for High-dimensional Contaminated Data](deep_reads/2026-06-19-10.5705_ss.202024.0248.md)  
+  7/10 [journals]
+- [Adaptive Block Banding Precision Matrix Estimation For Multivariate Longitudinal Data](deep_reads/2026-06-23-10.5705_ss.202023.0131.md)  
+  6/10 [journals]
+- [Network Assisted Approximate Factor Model Estimation](deep_reads/2026-06-23-10.5705_ss.202024.0170.md)  
+  6/10 [journals]
+- [Random Weighting Approximation of M-estimators with Increasing Dimensions of Parameter](deep_reads/2026-06-19-10.5705_ss.202025.0132.md)  
+  6/10 [journals]
+- [Estimating Covariance Matrices at Different Levels in Repeated Measurements](deep_reads/2026-06-23-10.5705_ss.202024.0279.md)  
+  5/10 [journals]
+- [Uncertainty Quantification for Large-Scale Deep Neural Networks via Post-StoNet Modeling](deep_reads/2026-06-19-10.5705_ss.202024.0294.md)  
+  4/10 [journals]
+- [Efficient Decoding from Heterogeneous 1-Bit Compressive Measurements over Networks](deep_reads/2026-06-19-10.5705_ss.202024.0329.md)  
+  3/10 [journals]
+
 #### Electronic Journal of Statistics Vol 19 Issue 2
 
 - [Correlation tests and sample spectral coherence matrix in the high-dimensional regime](deep_reads/2026-06-18-10.1214_25-ejs2467.md)  
@@ -1798,23 +1847,6 @@
 
 - [Joint estimation of multiple graphical models for an fMRI study of brain connectivity networks](deep_reads/2026-06-19-10.1177_09622802261432804.md)  
   7/10 [journals]
-
-#### Statistica Sinica
-
-- [High-Dimensional Log Contrast Models with Measurement Errors](deep_reads/2026-06-19-10.5705_ss.202025.0223.md)  
-  8/10 [journals]
-- [Detecting Structural Breaks in High-dimensional Functional Time Series Factor Models](deep_reads/2026-06-19-10.5705_ss.202025.0014.md)  
-  7/10 [journals]
-- [Distributed Algorithms for High-Dimensional Statistical Inference and Structure Learning with Heterogeneous Data](deep_reads/2026-06-19-10.5705_ss.202025.0087.md)  
-  7/10 [journals]
-- [Hybrid Denoising-screening for High-dimensional Contaminated Data](deep_reads/2026-06-19-10.5705_ss.202024.0248.md)  
-  7/10 [journals]
-- [Random Weighting Approximation of M-estimators with Increasing Dimensions of Parameter](deep_reads/2026-06-19-10.5705_ss.202025.0132.md)  
-  6/10 [journals]
-- [Uncertainty Quantification for Large-Scale Deep Neural Networks via Post-StoNet Modeling](deep_reads/2026-06-19-10.5705_ss.202024.0294.md)  
-  4/10 [journals]
-- [Efficient Decoding from Heterogeneous 1-Bit Compressive Measurements over Networks](deep_reads/2026-06-19-10.5705_ss.202024.0329.md)  
-  3/10 [journals]
 
 #### Scandinavian Journal of Statistics Vol 53 Issue 2
 
@@ -2162,6 +2194,63 @@
   8/10 [daily]
 
 ### 期刊
+
+#### Statistica Sinica
+
+- [Asymptotic Theory for Linear Functionals of Kernel Ridge Regression](deep_reads/2026-06-19-10.5705_ss.202024.0256.md)  
+  9/10 [journals]
+- [Semiparametric Efficient Estimation of Quantile Regression](deep_reads/2026-06-19-10.5705_ss.202024.0378.md)  
+  9/10 [journals]
+- [On the Optimality of Functional Sliced Inverse Regression](deep_reads/2026-06-23-10.5705_ss.202023.0396.md)  
+  8/10 [journals]
+- [A Semiparametric Quantile Single-Index Model for Zero-Inflated and Overdispersed Outcomes](deep_reads/2026-06-23-10.5705_ss.202024.0104.md)  
+  8/10 [journals]
+- [Semiparametric Inference for Functional Survival Models](deep_reads/2026-06-23-10.5705_ss.202024.0180.md)  
+  8/10 [journals]
+- [Minimax Rates of Convergence for Nonparametric Regression Under Adversarial Attacks](deep_reads/2026-06-19-10.5705_ss.202024.0298.md)  
+  8/10 [journals]
+- [Conditional Density Estimation with Deep Neural Networks](deep_reads/2026-06-19-10.5705_ss.202025.0144.md)  
+  8/10 [journals]
+- [Variable Selection and Minimax Prediction in High-dimensional Functional Linear Models](deep_reads/2026-06-19-10.5705_ss.202025.0151.md)  
+  8/10 [journals]
+- [Empirical Bayes Data Integration for Multi-Response Regression](deep_reads/2026-06-19-10.5705_ss.202025.0115.md)  
+  8/10 [journals]
+- [Nonparametric Inference on Treatment-biomarker Interaction Based on Probability Index](deep_reads/2026-06-19-10.5705_ss.202025.0076.md)  
+  8/10 [journals]
+- [On Efficient Estimation for Value-at-Risk via Location-Scale Time Series Models](deep_reads/2026-06-19-10.5705_ss.202024.0167.md)  
+  8/10 [journals]
+- [Functional Tensor Regression](deep_reads/2026-06-23-10.5705_ss.202024.0342.md)  
+  7/10 [journals]
+- [Asymmetric Estimation for Varying-Coefficient Additive Model with Functional Response in Reproducing Kernel Hilbert Space](deep_reads/2026-06-23-10.5705_ss.202022.0206.md)  
+  7/10 [journals]
+- [Empirical Risk Minimization for Losses without Variance](deep_reads/2026-06-23-10.5705_ss.202023.0329.md)  
+  7/10 [journals]
+- [Semiparametric Analysis for Paired Comparisons with Covariates](deep_reads/2026-06-19-10.5705_ss.202025.0318.md)  
+  7/10 [journals]
+- [Conformal Inference for Missing Data Under Multiple Robust Learning](deep_reads/2026-06-19-10.5705_ss.202025.0389.md)  
+  7/10 [journals]
+- [Empirical Bayes Estimation with Side Information: A Nonparametric Integrative Tweedie Approach](deep_reads/2026-06-23-10.5705_ss.202024.0063.md)  
+  6/10 [journals]
+- [Dimension Reduction for Extreme Regression via Contour Projection](deep_reads/2026-06-23-10.5705_ss.202024.0159.md)  
+  6/10 [journals]
+- [Sufficient Dimension Reduction for Classification](deep_reads/2026-06-23-10.5705_ss.202023.0143.md)  
+  6/10 [journals]
+- [Kernel Mode-Based Regression under Random Truncation](deep_reads/2026-06-23-10.5705_ss.202023.0288.md)  
+  6/10 [journals]
+- [Sufficient Dimension Reduction for the Conditional Quantiles of Functional Data](deep_reads/2026-06-23-10.5705_ss.202024.0211.md)  
+  6/10 [journals]
+- [Non-parametric Testing for Survival Data with Time-dependent Covariates](deep_reads/2026-06-19-10.5705_ss.202025.0478.md)  
+  6/10 [journals]
+- [Semiparametric Regression Analysis of Clustered Interval-censored Failure Time Data with Random Change Points and Application to Breast Cancer Study](deep_reads/2026-06-19-10.5705_ss.202025.0305.md)  
+  6/10 [journals]
+- [Inference on Two-Sample Covariance Difference for Large-Scale Functional Data](deep_reads/2026-06-19-10.5705_ss.202025.0295.md)  
+  6/10 [journals]
+- [Robust Mean Signal Estimation and Inference for Imaging Data](deep_reads/2026-06-19-10.5705_ss.202024.0402.md)  
+  6/10 [journals]
+- [Nonparametric Shrinkage Estimation in High Dimensional Glms via Polya Trees](deep_reads/2026-06-19-10.5705_ss.202025.0221.md)  
+  6/10 [journals]
+- [Robust Jackknife Model Averaging](deep_reads/2026-06-19-10.5705_ss.202025.0057.md)  
+  6/10 [journals]
 
 #### Electronic Journal of Statistics Vol 19 Issue 2
 
@@ -2737,41 +2826,6 @@
 - [Penalized estimation of general frailty Poisson models for recurrent count events](deep_reads/2026-06-19-10.1177_09622802251393722.md)  
   5/10 [journals]
 
-#### Statistica Sinica
-
-- [Asymptotic Theory for Linear Functionals of Kernel Ridge Regression](deep_reads/2026-06-19-10.5705_ss.202024.0256.md)  
-  9/10 [journals]
-- [Semiparametric Efficient Estimation of Quantile Regression](deep_reads/2026-06-19-10.5705_ss.202024.0378.md)  
-  9/10 [journals]
-- [Minimax Rates of Convergence for Nonparametric Regression Under Adversarial Attacks](deep_reads/2026-06-19-10.5705_ss.202024.0298.md)  
-  8/10 [journals]
-- [Conditional Density Estimation with Deep Neural Networks](deep_reads/2026-06-19-10.5705_ss.202025.0144.md)  
-  8/10 [journals]
-- [Variable Selection and Minimax Prediction in High-dimensional Functional Linear Models](deep_reads/2026-06-19-10.5705_ss.202025.0151.md)  
-  8/10 [journals]
-- [Empirical Bayes Data Integration for Multi-Response Regression](deep_reads/2026-06-19-10.5705_ss.202025.0115.md)  
-  8/10 [journals]
-- [Nonparametric Inference on Treatment-biomarker Interaction Based on Probability Index](deep_reads/2026-06-19-10.5705_ss.202025.0076.md)  
-  8/10 [journals]
-- [On Efficient Estimation for Value-at-Risk via Location-Scale Time Series Models](deep_reads/2026-06-19-10.5705_ss.202024.0167.md)  
-  8/10 [journals]
-- [Semiparametric Analysis for Paired Comparisons with Covariates](deep_reads/2026-06-19-10.5705_ss.202025.0318.md)  
-  7/10 [journals]
-- [Conformal Inference for Missing Data Under Multiple Robust Learning](deep_reads/2026-06-19-10.5705_ss.202025.0389.md)  
-  7/10 [journals]
-- [Non-parametric Testing for Survival Data with Time-dependent Covariates](deep_reads/2026-06-19-10.5705_ss.202025.0478.md)  
-  6/10 [journals]
-- [Semiparametric Regression Analysis of Clustered Interval-censored Failure Time Data with Random Change Points and Application to Breast Cancer Study](deep_reads/2026-06-19-10.5705_ss.202025.0305.md)  
-  6/10 [journals]
-- [Inference on Two-Sample Covariance Difference for Large-Scale Functional Data](deep_reads/2026-06-19-10.5705_ss.202025.0295.md)  
-  6/10 [journals]
-- [Robust Mean Signal Estimation and Inference for Imaging Data](deep_reads/2026-06-19-10.5705_ss.202024.0402.md)  
-  6/10 [journals]
-- [Nonparametric Shrinkage Estimation in High Dimensional Glms via Polya Trees](deep_reads/2026-06-19-10.5705_ss.202025.0221.md)  
-  6/10 [journals]
-- [Robust Jackknife Model Averaging](deep_reads/2026-06-19-10.5705_ss.202025.0057.md)  
-  6/10 [journals]
-
 #### Scandinavian Journal of Statistics Vol 53 Issue 2
 
 - [Smooth and Rough Sample Paths in Mean Derivative Estimation for Functional Data](deep_reads/2026-06-19-10.1111_sjos.70069.md)  
@@ -3278,6 +3332,17 @@
 
 ### 期刊
 
+#### Statistica Sinica
+
+- [Efficient Estimation of the Accelerated Failure Time Model with Auxiliary Aggregate Information](deep_reads/2026-06-23-10.5705_ss.202024.0105.md)  
+  8/10 [journals]
+- [Inference for High-dimensional Model Averaging Estimators](deep_reads/2026-06-19-10.5705_ss.202025.0211.md)  
+  8/10 [journals]
+- [A Maximin Optimal Approach for Sampling Designs in Two-phase Studies](deep_reads/2026-06-19-10.5705_ss.202024.0359.md)  
+  7/10 [journals]
+- [Estimation and Inference for Density-convoluted Support Vector Machine with Streaming Data](deep_reads/2026-06-19-10.5705_ss.202025.0083.md)  
+  4/10 [journals]
+
 #### Electronic Journal of Statistics Vol 19 Issue 2
 
 - [Online inference in high-dimensional regression with streaming clustered data](deep_reads/2026-06-23-10.1214_25-ejs2446.md)  
@@ -3392,15 +3457,6 @@
 
 - [Rank‐Based Transfer Learning for High‐Dimensional Survival Data With Application to Sepsis Data](deep_reads/2026-06-19-10.1002_sim.70629.md)  
   6/10 [journals]
-
-#### Statistica Sinica
-
-- [Inference for High-dimensional Model Averaging Estimators](deep_reads/2026-06-19-10.5705_ss.202025.0211.md)  
-  8/10 [journals]
-- [A Maximin Optimal Approach for Sampling Designs in Two-phase Studies](deep_reads/2026-06-19-10.5705_ss.202024.0359.md)  
-  7/10 [journals]
-- [Estimation and Inference for Density-convoluted Support Vector Machine with Streaming Data](deep_reads/2026-06-19-10.5705_ss.202025.0083.md)  
-  4/10 [journals]
 
 #### Scandinavian Journal of Statistics Vol 53 Issue 2
 
@@ -3627,6 +3683,71 @@
   8/10 [daily]
 
 ### 期刊
+
+#### Statistica Sinica
+
+- [Center-Outward Ranks and Signs for Testing Conditional Quantile Independence](deep_reads/2026-06-23-10.5705_ss.202024.0266.md)  
+  9/10 [journals]
+- [Statistical Inference For Ultrahigh Dimensional Location Parameter Based On Spatial Median](deep_reads/2026-06-23-10.5705_ss.202023.0242.md)  
+  9/10 [journals]
+- [Structural Testing of High-dimensional Correlation Matrices](deep_reads/2026-06-19-10.5705_ss.202024.0078.md)  
+  9/10 [journals]
+- [Spatial-Sign Based Maxsum Test for High Dimensional Location Parameters](deep_reads/2026-06-23-10.5705_ss.202024.0051.md)  
+  8/10 [journals]
+- [Universally Consistent Tests for the Graph of a Gaussian Graphical Model](deep_reads/2026-06-23-10.5705_ss.202023.0385.md)  
+  8/10 [journals]
+- [Multiple Testing of One-Sided Hypotheses under Unknown Dependence](deep_reads/2026-06-23-10.5705_ss.202024.0022.md)  
+  8/10 [journals]
+- [Testing High-dimensional White Noise Based On Modified Portmanteau Tests](deep_reads/2026-06-23-10.5705_ss.202024.0037.md)  
+  8/10 [journals]
+- [Robust Max Statistics for High-dimensional Inference](deep_reads/2026-06-19-10.5705_ss.202025.0036.md)  
+  8/10 [journals]
+- [Sequential Multiple Testing of Multiple Composite Hypotheses: an Asymptotic Optimality Theory with General Information Functions](deep_reads/2026-06-19-10.5705_ss.202025.0042.md)  
+  8/10 [journals]
+- [Subgroup Testing in Change-Plane Models and Its Applications to Medical Data](deep_reads/2026-06-19-10.5705_ss.202025.0155.md)  
+  8/10 [journals]
+- [A Conditionally Studentized Test for High-dimensional Parametric Regression via Sample Splitting](deep_reads/2026-06-19-10.5705_ss.202025.0183.md)  
+  8/10 [journals]
+- [Weighted Conditional Network Testing for Multiple High-Dimensional Correlated Data Sets](deep_reads/2026-06-23-10.5705_ss.202024.0330.md)  
+  7/10 [journals]
+- [Testing for Treatment Effect in Multitreatment Case](deep_reads/2026-06-23-10.5705_ss.202024.0255.md)  
+  7/10 [journals]
+- [A Locally Adaptive Algorithm for Multiple Testing with Network Structure](deep_reads/2026-06-23-10.5705_ss.202024.0002.md)  
+  7/10 [journals]
+- [Asymptotic Normality of Robust Risk Minimizers](deep_reads/2026-06-23-10.5705_ss.202024.0268.md)  
+  7/10 [journals]
+- [Robust Control Experiments for Multivariate Tests with Covariates and Network Information](deep_reads/2026-06-23-10.5705_ss.202025.0157.md)  
+  7/10 [journals]
+- [Robust Score Tests for Censored Outcomes and Incomplete Covariates Leveraging High-Dimensional Auxiliary Variables](deep_reads/2026-06-23-10.5705_ss.202024.0391.md)  
+  7/10 [journals]
+- [Statistical Inference for Functional Data over Multi Dimensional Domain](deep_reads/2026-06-23-10.5705_ss.202024.0344.md)  
+  7/10 [journals]
+- [A Data-Adaptive Integrated Approach to Covariance Change Point Detection in High-dimensional Settings](deep_reads/2026-06-19-10.5705_ss.202025.0327.md)  
+  7/10 [journals]
+- [Tests on Dynamic Ranking](deep_reads/2026-06-23-10.5705_ss.202024.0153.md)  
+  6/10 [journals]
+- [An Automatic MDDM-Based Test for Martingale Difference Hypothesis](deep_reads/2026-06-23-10.5705_ss.202024.0035.md)  
+  6/10 [journals]
+- [Reproducible Learning in Large-Scale Multiple Graphical Models](deep_reads/2026-06-23-10.5705_ss.202023.0099.md)  
+  6/10 [journals]
+- [Catoni-type Confidence Sequences under Infinite Variance](deep_reads/2026-06-23-10.5705_ss.202024.0249.md)  
+  6/10 [journals]
+- [The Method of Limits and Its Application to The Analysis of Count Data in Genome-wide Association Studies](deep_reads/2026-06-23-10.5705_ss.202024.0092.md)  
+  6/10 [journals]
+- [Model-robust Inference for Seamless Ii/iii Trials with Covariate Adaptive Randomization](deep_reads/2026-06-23-10.5705_ss.202025.0427.md)  
+  6/10 [journals]
+- [Sequential Change Point Detection in High-dimensional Vector Auto-regressive Models](deep_reads/2026-06-23-10.5705_ss.202024.0182.md)  
+  6/10 [journals]
+- [Multiple Testing of Local Extrema for Detection of Structural Breaks in Piecewise Linear Models](deep_reads/2026-06-19-10.5705_ss.202025.0113.md)  
+  6/10 [journals]
+- [Model-free Multivariate Change Point Detection and Localization with Statistical Guarantee](deep_reads/2026-06-19-10.5705_ss.202024.0320.md)  
+  6/10 [journals]
+- [Integrating External Summary Information via James-Stein Shrinkage](deep_reads/2026-06-19-10.5705_ss.202025.0225.md)  
+  5/10 [journals]
+- [Optimal Robust Sequential Tests of Circular Nonconforming Probability](deep_reads/2026-06-19-10.5705_ss.202024.0334.md)  
+  4/10 [journals]
+- [Classification Uncertainty Quantification: A Comparison Between Bootstrap and Conformal ROC Confidence Bands](deep_reads/2026-06-19-10.5705_ss.202025.0127.md)  
+  4/10 [journals]
 
 #### Electronic Journal of Statistics Vol 19 Issue 2
 
@@ -4172,31 +4293,6 @@
 - [Rank-based methods for assessing equivalence/non-inferiority with assay sensitivity in a three-arm trial with ordinal endpoints](deep_reads/2026-06-19-10.1177_09622802261417216.md)  
   3/10 [journals]
 
-#### Statistica Sinica
-
-- [Structural Testing of High-dimensional Correlation Matrices](deep_reads/2026-06-19-10.5705_ss.202024.0078.md)  
-  9/10 [journals]
-- [Robust Max Statistics for High-dimensional Inference](deep_reads/2026-06-19-10.5705_ss.202025.0036.md)  
-  8/10 [journals]
-- [Sequential Multiple Testing of Multiple Composite Hypotheses: an Asymptotic Optimality Theory with General Information Functions](deep_reads/2026-06-19-10.5705_ss.202025.0042.md)  
-  8/10 [journals]
-- [Subgroup Testing in Change-Plane Models and Its Applications to Medical Data](deep_reads/2026-06-19-10.5705_ss.202025.0155.md)  
-  8/10 [journals]
-- [A Conditionally Studentized Test for High-dimensional Parametric Regression via Sample Splitting](deep_reads/2026-06-19-10.5705_ss.202025.0183.md)  
-  8/10 [journals]
-- [A Data-Adaptive Integrated Approach to Covariance Change Point Detection in High-dimensional Settings](deep_reads/2026-06-19-10.5705_ss.202025.0327.md)  
-  7/10 [journals]
-- [Multiple Testing of Local Extrema for Detection of Structural Breaks in Piecewise Linear Models](deep_reads/2026-06-19-10.5705_ss.202025.0113.md)  
-  6/10 [journals]
-- [Model-free Multivariate Change Point Detection and Localization with Statistical Guarantee](deep_reads/2026-06-19-10.5705_ss.202024.0320.md)  
-  6/10 [journals]
-- [Integrating External Summary Information via James-Stein Shrinkage](deep_reads/2026-06-19-10.5705_ss.202025.0225.md)  
-  5/10 [journals]
-- [Optimal Robust Sequential Tests of Circular Nonconforming Probability](deep_reads/2026-06-19-10.5705_ss.202024.0334.md)  
-  4/10 [journals]
-- [Classification Uncertainty Quantification: A Comparison Between Bootstrap and Conformal ROC Confidence Bands](deep_reads/2026-06-19-10.5705_ss.202025.0127.md)  
-  4/10 [journals]
-
 #### Scandinavian Journal of Statistics Vol 53 Issue 2
 
 - [Powerful kernel‐based association tests for multivariate responses](deep_reads/2026-06-19-10.1111_sjos.70064.md)  
@@ -4579,6 +4675,15 @@
 
 ### 期刊
 
+#### Statistica Sinica
+
+- [Generalized Tensor Regression with Internal Variation Regularization](deep_reads/2026-06-23-10.5705_ss.202024.0281.md)  
+  6/10 [journals]
+- [Heterogeneous Autoregressive Modeling with Flexible Cascade Structures](deep_reads/2026-06-19-10.5705_ss.202024.0308.md)  
+  6/10 [journals]
+- [Gaussian Variational Approximation with Composite Likelihood for Crossed Random Effect Models](deep_reads/2026-06-19-10.5705_ss.202024.0346.md)  
+  6/10 [journals]
+
 #### Electronic Journal of Statistics Vol 19 Issue 1
 
 - [Auxiliary MCMC samplers for parallelisable inference in high-dimensional latent dynamical systems](deep_reads/2026-06-23-10.1214_25-ejs2363.md)  
@@ -4789,13 +4894,6 @@
 
 - [The use of the EM algorithm for regularization problems in high-dimensional linear mixed-effects models](deep_reads/2026-06-19-10.1177_09622802251399913.md)  
   8/10 [journals]
-
-#### Statistica Sinica
-
-- [Heterogeneous Autoregressive Modeling with Flexible Cascade Structures](deep_reads/2026-06-19-10.5705_ss.202024.0308.md)  
-  6/10 [journals]
-- [Gaussian Variational Approximation with Composite Likelihood for Crossed Random Effect Models](deep_reads/2026-06-19-10.5705_ss.202024.0346.md)  
-  6/10 [journals]
 
 #### Scandinavian Journal of Statistics Vol 53 Issue 1
 
@@ -6366,6 +6464,13 @@
   8/10 [daily]
 
 ### 期刊
+
+#### Statistica Sinica
+
+- [Simple Inferential Analyses of Big Gwas Data](deep_reads/2026-06-23-10.5705_ss.202025.0022.md)  
+  6/10 [journals]
+- [Maximizing Area Under the Receiver Operating Characteristic Curve for Biomarker Combination](deep_reads/2026-06-23-10.5705_ss.202024.0195.md)  
+  6/10 [journals]
 
 #### Electronic Journal of Statistics Vol 19 Issue 1
 
