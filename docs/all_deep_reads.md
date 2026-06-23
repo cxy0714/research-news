@@ -256,6 +256,38 @@
 - [Predicting Win‐Loss Probabilities for Composite Time‐to‐Event Outcomes Under The Proportional Win‐Fractions Regression Model](deep_reads/2026-06-24-10.1002_sim.70569.md)  
   4/10 [journals]
 
+#### Statistical Methods in Medical Research Vol 35 Issue 6
+
+- [A flexible semiparametric approach for robust causal inference with invalid instruments and unmeasured confounder](deep_reads/2026-06-24-10.1177_09622802261439252.md)  
+  9/10 [journals]
+- [Beyond weighting: Propensity score modeling for causal inference](deep_reads/2026-06-24-10.1177_09622802261436960.md)  
+  8/10 [journals]
+- [Sensitivity bounds for bias in hazard ratios: A causal hazard perspective](deep_reads/2026-06-24-10.1177_09622802261436811.md)  
+  7/10 [journals]
+
+#### Statistical Methods in Medical Research Vol 34 Issue 9
+
+- [Covariate selection for optimizing balance with an innovative adaptive randomization approach](deep_reads/2026-06-24-10.1177_09622802241313283.md)  
+  7/10 [journals]
+
+#### Statistical Methods in Medical Research Vol 34 Issue 11
+
+- [A Bayesian approach towards the identification of latent subgroups](deep_reads/2026-06-24-10.1177_09622802251367442.md)  
+  6/10 [journals]
+
+#### Statistical Methods in Medical Research Vol 34 Issue 10
+
+- [Design of egocentric network-based studies to estimate causal effects under interference](deep_reads/2026-06-24-10.1177_09622802251357021.md)  
+  8/10 [journals]
+- [Optimal treatment regimes in the presence of a cure fraction](deep_reads/2026-06-24-10.1177_09622802251338399.md)  
+  7/10 [journals]
+- [Inference procedures in sequential trial emulation with survival outcomes: Comparing confidence intervals based on the sandwich variance estimator, bootstrap and jackknife](deep_reads/2026-06-24-10.1177_09622802251356594.md)  
+  7/10 [journals]
+- [Selecting the optimal longitudinal cluster randomized design with a continuous outcome: Parallel-arm, crossover, or stepped-wedge](deep_reads/2026-06-24-10.1177_09622802251360409.md)  
+  6/10 [journals]
+- [A note on response-adaptive randomization from a Bayesian prediction viewpoint](deep_reads/2026-06-24-10.1177_09622802251360413.md)  
+  6/10 [journals]
+
 #### Statistica Sinica
 
 - [Rematching Estimators For Average Treatment Effects](deep_reads/2026-06-23-10.5705_ss.202024.0306.md)  
@@ -2324,6 +2356,21 @@
 - [Win Ratio as an Effect Size Measure Under Non‐Proportional Hazards: A Comparison With Difference in Restricted Mean Survival](deep_reads/2026-06-24-10.1002_sim.70554.md)  
   5/10 [journals]
 
+#### Statistical Methods in Medical Research Vol 35 Issue 6
+
+- [A double-semiparametric approach for extending mixture cure models with interval-censored data](deep_reads/2026-06-24-10.1177_09622802261442911.md)  
+  5/10 [journals]
+
+#### Statistical Methods in Medical Research Vol 34 Issue 11
+
+- [A comparison of semi-parametric statistical modeling approaches to dynamic classification of irregularly and sparsely sampled curves](deep_reads/2026-06-24-10.1177_09622802251374288.md)  
+  6/10 [journals]
+
+#### Statistical Methods in Medical Research Vol 34 Issue 10
+
+- [Semiparametric regression analysis of interval-censored failure time data with a cure subgroup and nonignorable missing covariates](deep_reads/2026-06-24-10.1177_09622802251356592.md)  
+  7/10 [journals]
+
 #### Statistica Sinica
 
 - [Asymptotic Theory for Linear Functionals of Kernel Ridge Regression](deep_reads/2026-06-19-10.5705_ss.202024.0256.md)  
@@ -3907,6 +3954,23 @@
 - [A Unified Framework for Statistical Inference and Power Analysis of Single and Comparative Fβ Scores](deep_reads/2026-06-24-10.1002_sim.70557.md)  
   2/10 [journals]
 
+#### Statistical Methods in Medical Research Vol 35 Issue 6
+
+- [The applicability to systematic reviews of common effect, random effects and fixed effects approaches to meta-analysis](deep_reads/2026-06-24-10.1177_09622802261439260.md)  
+  2/10 [journals]
+
+#### Statistical Methods in Medical Research Vol 34 Issue 9
+
+- [Extension of Fisher’s least significant difference method to multi-armed group-sequential response-adaptive designs](deep_reads/2026-06-24-10.1177_09622802251319896.md)  
+  6/10 [journals]
+- [Model-based optimal randomization procedure for treatment–covariate interaction tests](deep_reads/2026-06-24-10.1177_09622802241298703.md)  
+  6/10 [journals]
+
+#### Statistical Methods in Medical Research Vol 34 Issue 10
+
+- [Group sequential designs for survival outcomes with adaptive randomization](deep_reads/2026-06-24-10.1177_09622802251340250.md)  
+  5/10 [journals]
+
 #### Statistica Sinica
 
 - [Center-Outward Ranks and Signs for Testing Conditional Quantile Independence](deep_reads/2026-06-23-10.5705_ss.202024.0266.md)  
@@ -4948,6 +5012,11 @@
 
 - [Interpretable ROI Identification in Brain Image Analysis: Overcoming CNN Black Box Challenges With Kriging‐Enhanced Adaptive Sampling](deep_reads/2026-06-24-10.1002_sim.70653.md)  
   6/10 [journals]
+
+#### Statistical Methods in Medical Research Vol 34 Issue 11
+
+- [Imputation of incomplete ordinal and nominal data by predictive mean matching](deep_reads/2026-06-24-10.1177_09622802251362642.md)  
+  3/10 [journals]
 
 #### Statistica Sinica
 
@@ -6156,6 +6225,25 @@
 - [Authors' Response to Comments by Di Tanna et al.](deep_reads/2026-06-19-10.1002_sim.70594.md)  
   0/10 [journals]
 
+#### Statistical Methods in Medical Research Vol 35 Issue 6
+
+- [Likelihood-based modeling of covariate-specific time-dependent receiver operating characteristic curves](deep_reads/2026-06-24-10.1177_09622802261445416.md)  
+  4/10 [journals]
+- [Screening for diabetes mellitus in the US population using neural network-based modeling and complex survey designs](deep_reads/2026-06-24-10.1177_09622802261442893.md)  
+  3/10 [journals]
+
+#### Statistical Methods in Medical Research Vol 34 Issue 9
+
+- [Efficient randomized adaptive designs for multi-arm clinical trials](deep_reads/2026-06-24-10.1177_09622802251362644.md)  
+  7/10 [journals]
+- [Covariate-adjusted response-adaptive designs for semiparametric survival models](deep_reads/2026-06-24-10.1177_09622802241287704.md)  
+  7/10 [journals]
+
+#### Statistical Methods in Medical Research Vol 34 Issue 10
+
+- [Health utility adjusted survival: A composite endpoint for clinical trial designs](deep_reads/2026-06-24-10.1177_09622802251338409.md)  
+  3/10 [journals]
+
 #### Scandinavian Journal of Statistics Vol 50 Issue 3
 
 - [Generalizing the information content for stepped wedge designs: A marginal modeling approach](deep_reads/2026-06-23-10.1111_sjos.12615.md)  
@@ -6810,6 +6898,20 @@
   6/10 [journals]
 - [Simultaneous Representation Learning of Multi‐Omics and Clinical Outcome Data via a Supervised Knowledge‐Guided Bayesian Factor Model](deep_reads/2026-06-24-10.1002_sim.70570.md)  
   4/10 [journals]
+
+#### Statistical Methods in Medical Research Vol 35 Issue 6
+
+- [A quantile cure model with partially functional covariate effects](deep_reads/2026-06-24-10.1177_09622802261445414.md)  
+  6/10 [journals]
+
+#### Statistical Methods in Medical Research Vol 34 Issue 9
+
+- [Covariate-adjusted inference for doubly adaptive biased coin design](deep_reads/2026-06-24-10.1177_09622802251324750.md)  
+  7/10 [journals]
+- [A family of Bayesian prognostic and predictive covariate-adjusted response-adaptive randomization designs](deep_reads/2026-06-24-10.1177_09622802251335150.md)  
+  6/10 [journals]
+- [Biomarker-driven optimal designs for patient enrollment restriction](deep_reads/2026-06-24-10.1177_09622802251327690.md)  
+  6/10 [journals]
 
 #### Statistica Sinica
 

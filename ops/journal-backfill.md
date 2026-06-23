@@ -119,7 +119,7 @@ IEEE 系列 ieee（月刊、每期很大，全部先 dry-run、用小 N）：
 
 流行病 epi：
 - [x] (2026-06-24) `--only StatMed --n-issues 4`   ⚠ 双周刊、量大
-- [ ] `--only SMMR --n-issues 10`
+- [x] (2026-06-24) `--only SMMR --n-issues 10`
 - [ ] `--only AJE --n-issues 7`   ⚠ 月刊
 - [ ] `--only Epidemiology --n-issues 10`
 
