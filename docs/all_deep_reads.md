@@ -4,6 +4,10 @@
 
 ### Daily
 
+- [What's the Magic Formula Instrument?](deep_reads/2026-06-23-2606.21569.md)  
+  9/10 [daily]
+- [Uniform Confidence Bands for Infinite-Dimensional Partially Identified Parameters](deep_reads/2026-06-23-2606.21224.md)  
+  8/10 [daily]
 - [A case study of causal mediation using Bayesian nonparametrics and semiparametric corrections](deep_reads/2026-06-22-2606.20148.md)  
   9/10 [daily]
 - [Two-Sample IV: Efficient Two-Step Estimation and Tests for Overidentification and Weak-Instruments](deep_reads/2026-06-22-2606.20240.md)  
@@ -4660,6 +4664,10 @@
 
 ### Daily
 
+- [Quality Assessment of Spectroscopic Data Reduction Pipelines Using Artificial Intelligence: Scrutinizing Data Release 2 from the DESI Survey](deep_reads/2026-06-23-2606.21035.md)  
+  7/10 [daily]
+- [Classification of Eclipsing Binary Light Curves in Gaia DR3: A Machine Learning Approach](deep_reads/2026-06-23-2606.21017.md)  
+  7/10 [daily]
 - [ELMA: ELlipse-based bar MAjor axis estimator](deep_reads/2026-06-22-2606.20370.md)  
   6/10 [daily]
 - [NNNN: Neural Networks for Newtonian Noise Mitigation at the Einstein Telescope](deep_reads/2026-06-22-2606.19907.md)  
