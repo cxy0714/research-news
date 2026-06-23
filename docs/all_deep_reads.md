@@ -1436,6 +1436,28 @@
 
 ### 期刊
 
+#### Annals of Probability Vol 53 Issue 1
+
+- [Tracy-Widom limit for free sum of random matrices](deep_reads/2026-06-23-10.1214_24-aop1705.md)  
+  9/10 [journals]
+
+#### Annals of Probability Vol 52 Issue 5
+
+- [A large deviation inequality for the rank of a random matrix](deep_reads/2026-06-23-10.1214_24-aop1695.md)  
+  8/10 [journals]
+
+#### Annals of Probability Vol 52 Issue 3
+
+- [Bulk universality and quantum unique ergodicity for random band matrices in high dimensions](deep_reads/2026-06-23-10.1214_23-aop1670.md)  
+  8/10 [journals]
+- [Superconvergence phenomenon in Wiener chaoses](deep_reads/2026-06-23-10.1214_24-aop1689.md)  
+  7/10 [journals]
+
+#### Annals of Probability Vol 52 Issue 2
+
+- [Mutual information for the sparse stochastic block model](deep_reads/2026-06-23-10.1214_23-aop1665.md)  
+  9/10 [journals]
+
 #### Journal of Business & Economic Statistics Vol 43 Issue 4
 
 - [Precision Least Squares: Estimation and Inference in High-Dimensions](deep_reads/2026-06-21-10.1080_07350015.2024.2440573.md)  
@@ -4231,6 +4253,11 @@
 
 ### 期刊
 
+#### Annals of Probability Vol 52 Issue 3
+
+- [Sudakov–Fernique post-AMP, and a new proof of the local convexity of the TAP free energy](deep_reads/2026-06-23-10.1214_23-aop1675.md)  
+  6/10 [journals]
+
 #### Journal of Business & Economic Statistics Vol 43 Issue 4
 
 - [Bayesian Inference of Vector Autoregressions with Tensor Decompositions](deep_reads/2026-06-21-10.1080_07350015.2024.2447302.md)  
@@ -5993,6 +6020,30 @@
   8/10 [daily]
 
 ### 期刊
+
+#### Annals of Probability Vol 53 Issue 1
+
+- [A determinantal point process approach to scaling and local limits of random Young tableaux](deep_reads/2026-06-23-10.1214_24-aop1706.md)  
+  0/10 [journals]
+
+#### Annals of Probability Vol 52 Issue 4
+
+- [The discrete Gaussian model, II. Infinite-volume scaling limit at high temperature](deep_reads/2026-06-23-10.1214_23-aop1659.md)  
+  1/10 [journals]
+- [The Discrete Gaussian model, I. Renormalisation group flow at high temperature](deep_reads/2026-06-23-10.1214_23-aop1658.md)  
+  1/10 [journals]
+
+#### Annals of Probability Vol 52 Issue 3
+
+- [A central limit theorem for the number of excursion set components of Gaussian fields](deep_reads/2026-06-23-10.1214_23-aop1672.md)  
+  3/10 [journals]
+- [The spine of the Fleming–Viot process driven by Brownian motion](deep_reads/2026-06-23-10.1214_23-aop1678.md)  
+  1/10 [journals]
+
+#### Annals of Probability Vol 52 Issue 2
+
+- [A limit law for the most favorite point of simplerandom walk on a regular tree](deep_reads/2026-06-23-10.1214_23-aop1644.md)  
+  2/10 [journals]
 
 #### IEEE Transactions on Pattern Analysis and Machine Intelligence Vol 48 Issue 7
 

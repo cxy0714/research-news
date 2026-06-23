@@ -111,7 +111,7 @@ IEEE 系列 ieee（月刊、每期很大，全部先 dry-run、用小 N）：
 > 万一某格太久让 daily 当天没跑成，第二天 catch-up 会用 `--date` 自动补上，能自愈。
 
 概率统计 prob_stats：
-- [ ] `--only AoP --n-issues 14`
+- [x] (2026-06-23) `--only AoP --n-issues 14`
 - [ ] `--only Bernoulli --n-issues 14`
 - [ ] `--only EJS --n-issues 7`   ⚠ 电子刊、文章多
 - [ ] `--only "Statistica Sinica" --n-issues 14`
