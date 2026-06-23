@@ -17,8 +17,16 @@
 
 [→ 查看完整报告](daily/2026-06-23.md)
 
-### 精读论文（202 篇）
+### 精读论文（267 篇）
 
+- [Multiply robust matching estimators of average and quantile treatment effects](deep_reads/2026-06-23-10.1111_sjos.12585.md)  
+  `因果推断` · 相关性 9/10
+- [Targeted estimation of state occupation probabilities for the non‐Markov illness‐death model](deep_reads/2026-06-23-10.1111_sjos.12644.md)  
+  `效率理论 / Debiased ML` · 相关性 9/10
+- [Distributed inference for two‐sample <i>U</i>‐statistics in massive data analysis](deep_reads/2026-06-23-10.1111_sjos.12620.md)  
+  `其他` · 相关性 9/10
+- [Nonparametric conditional mean testing via an extreme‐type statistic in high dimension](deep_reads/2026-06-23-10.1111_sjos.12697.md)  
+  `数理统计 / 假设检验` · 相关性 9/10
 - [Large Dimensional Spearman's Rank Correlation Matrices: The Central Limit Theorem and Its Applications](deep_reads/2026-06-23-10.5705_ss.202024.0395.md)  
   `高维统计 / 随机矩阵` · 相关性 9/10
 - [Center-Outward Ranks and Signs for Testing Conditional Quantile Independence](deep_reads/2026-06-23-10.5705_ss.202024.0266.md)  
@@ -77,6 +85,30 @@
   `高维统计 / 随机矩阵` · 相关性 9/10
 - [What's the Magic Formula Instrument?](deep_reads/2026-06-23-2606.21569.md)  
   `因果推断` · 相关性 9/10
+- [Optimal designs for the development of personalized treatment rules](deep_reads/2026-06-23-10.1111_sjos.12621.md)  
+  `其他` · 相关性 8/10
+- [General purpose multiply robust data integration procedures for handling nonprobability samples](deep_reads/2026-06-23-10.1111_sjos.12605.md)  
+  `因果推断` · 相关性 8/10
+- [Minimax powerful functional analysis of covariance tests with application to longitudinal genome‐wide association studies](deep_reads/2026-06-23-10.1111_sjos.12583.md)  
+  `数理统计 / 假设检验` · 相关性 8/10
+- [Bayesian inverse problems with heterogeneous variance](deep_reads/2026-06-23-10.1111_sjos.12622.md)  
+  `非参数 / 半参数` · 相关性 8/10
+- [Sparse principal component analysis for high‐dimensional stationary time series](deep_reads/2026-06-23-10.1111_sjos.12664.md)  
+  `高维统计 / 随机矩阵` · 相关性 8/10
+- [Nonparametric adaptive estimation for interacting particle systems](deep_reads/2026-06-23-10.1111_sjos.12661.md)  
+  `非参数 / 半参数` · 相关性 8/10
+- [Statistical inference with semiparametric nonignorable nonresponse models](deep_reads/2026-06-23-10.1111_sjos.12652.md)  
+  `非参数 / 半参数` · 相关性 8/10
+- [Adaptive estimation of intensity in a doubly stochastic Poisson process](deep_reads/2026-06-23-10.1111_sjos.12651.md)  
+  `非参数 / 半参数` · 相关性 8/10
+- [Efficient t0$$ {t}_0 $$‐year risk regression using the logistic model](deep_reads/2026-06-23-10.1111_sjos.12658.md)  
+  `效率理论 / Debiased ML` · 相关性 8/10
+- [Testing the missing at random assumption in generalized linear models in the presence of instrumental variables](deep_reads/2026-06-23-10.1111_sjos.12685.md)  
+  `因果推断` · 相关性 8/10
+- [Communication‐efficient low‐dimensional parameter estimation and inference for high‐dimensional Lp$$ {L}^p $$‐quantile regression](deep_reads/2026-06-23-10.1111_sjos.12683.md)  
+  `效率理论 / Debiased ML` · 相关性 8/10
+- [A nested semiparametric method for case‐control study with missingness](deep_reads/2026-06-23-10.1111_sjos.12673.md)  
+  `非参数 / 半参数` · 相关性 8/10
 - [Efficient Learning of DAG Structures in Heavy-tailed Data](deep_reads/2026-06-23-10.5705_ss.202024.0199.md)  
   `高维统计 / 随机矩阵` · 相关性 8/10
 - [On the Optimality of Functional Sliced Inverse Regression](deep_reads/2026-06-23-10.5705_ss.202023.0396.md)  
@@ -177,6 +209,46 @@
   `高维统计 / 随机矩阵` · 相关性 8/10
 - [Uniform Confidence Bands for Infinite-Dimensional Partially Identified Parameters](deep_reads/2026-06-23-2606.21224.md)  
   `因果推断` · 相关性 8/10
+- [Large‐scale simultaneous inference under dependence](deep_reads/2026-06-23-10.1111_sjos.12614.md)  
+  `数理统计 / 假设检验` · 相关性 7/10
+- [Nadaraya–Watson estimator for I.I.D. paths of diffusion processes](deep_reads/2026-06-23-10.1111_sjos.12593.md)  
+  `非参数 / 半参数` · 相关性 7/10
+- [Statistical inference for Cox proportional hazards models with a diverging number of covariates](deep_reads/2026-06-23-10.1111_sjos.12595.md)  
+  `非参数 / 半参数` · 相关性 7/10
+- [Divergence versus decision<i>P</i>‐values: A distinction worth making in theory and keeping in practice: Or, how divergence<i>P</i>‐values measure evidence even when decision<i>P</i>‐values do not](deep_reads/2026-06-23-10.1111_sjos.12625.md)  
+  `数理统计 / 假设检验` · 相关性 7/10
+- [Exact uniformly most powerful postselection confidence distributions](deep_reads/2026-06-23-10.1111_sjos.12581.md)  
+  `数理统计 / 假设检验` · 相关性 7/10
+- [Nonparametric bounds for the survivor function under general dependent truncation](deep_reads/2026-06-23-10.1111_sjos.12582.md)  
+  `非参数 / 半参数` · 相关性 7/10
+- [Statistical evidence and surprise unified under possibility theory](deep_reads/2026-06-23-10.1111_sjos.12648.md)  
+  `数理统计 / 假设检验` · 相关性 7/10
+- [Variable selection for high‐dimensional generalized linear model with block‐missing data](deep_reads/2026-06-23-10.1111_sjos.12632.md)  
+  `高维统计 / 随机矩阵` · 相关性 7/10
+- [Robust sure independence screening for nonpolynomial dimensional generalized linear models](deep_reads/2026-06-23-10.1111_sjos.12628.md)  
+  `高维统计 / 随机矩阵` · 相关性 7/10
+- [Robust quasi‐randomization‐based estimation with ensemble learning for missing data](deep_reads/2026-06-23-10.1111_sjos.12626.md)  
+  `因果推断` · 相关性 7/10
+- [Plug‐in machine learning for partially linear mixed‐effects models with repeated measurements](deep_reads/2026-06-23-10.1111_sjos.12639.md)  
+  `效率理论 / Debiased ML` · 相关性 7/10
+- [Time‐varying <i>β</i>‐model for dynamic directed networks](deep_reads/2026-06-23-10.1111_sjos.12650.md)  
+  `非参数 / 半参数` · 相关性 7/10
+- [Finite sample inference for empirical Bayesian methods](deep_reads/2026-06-23-10.1111_sjos.12643.md)  
+  `数理统计 / 假设检验` · 相关性 7/10
+- [Robust inference for high‐dimensional single index models](deep_reads/2026-06-23-10.1111_sjos.12638.md)  
+  `非参数 / 半参数` · 相关性 7/10
+- [Marginal additive models for population‐averaged inference in longitudinal and cluster‐correlated data](deep_reads/2026-06-23-10.1111_sjos.12681.md)  
+  `非参数 / 半参数` · 相关性 7/10
+- [Sparse additive models in high dimensions with wavelets](deep_reads/2026-06-23-10.1111_sjos.12680.md)  
+  `非参数 / 半参数` · 相关性 7/10
+- [Flexible specification testing in quantile regression models](deep_reads/2026-06-23-10.1111_sjos.12671.md)  
+  `数理统计 / 假设检验` · 相关性 7/10
+- [Extrapolation estimation for nonparametric regression with measurement error](deep_reads/2026-06-23-10.1111_sjos.12670.md)  
+  `非参数 / 半参数` · 相关性 7/10
+- [Accurate bias estimation with applications to focused model selection](deep_reads/2026-06-23-10.1111_sjos.12696.md)  
+  `数理统计 / 假设检验` · 相关性 7/10
+- [A new paradigm for high‐dimensional data: Distance‐based semiparametric feature aggregation framework via between‐subject attributes](deep_reads/2026-06-23-10.1111_sjos.12695.md)  
+  `非参数 / 半参数` · 相关性 7/10
 - [Collaborative Analysis for Paired A/B Testing Experiments](deep_reads/2026-06-23-10.5705_ss.202024.0227.md)  
   `因果推断` · 相关性 7/10
 - [Weighted Conditional Network Testing for Multiple High-Dimensional Correlated Data Sets](deep_reads/2026-06-23-10.5705_ss.202024.0330.md)  
@@ -279,6 +351,42 @@
   `天体统计` · 相关性 7/10
 - [Classification of Eclipsing Binary Light Curves in Gaia DR3: A Machine Learning Approach](deep_reads/2026-06-23-2606.21017.md)  
   `天体统计` · 相关性 7/10
+- [Nonparametric asymptotic confidence intervals for extreme quantiles](deep_reads/2026-06-23-10.1111_sjos.12610.md)  
+  `非参数 / 半参数` · 相关性 6/10
+- [Remove unwanted variation retrieves unknown experimental designs](deep_reads/2026-06-23-10.1111_sjos.12633.md)  
+  `其他` · 相关性 6/10
+- [Use of multiple imputation in supersampled nested case‐control and case‐cohort studies](deep_reads/2026-06-23-10.1111_sjos.12624.md)  
+  `流行病学` · 相关性 6/10
+- [Unconditional empirical likelihood approach for analytic use of public survey data](deep_reads/2026-06-23-10.1111_sjos.12590.md)  
+  `因果推断` · 相关性 6/10
+- [Estimation for change point of discretely observed ergodic diffusion processes](deep_reads/2026-06-23-10.1111_sjos.12567.md)  
+  `数理统计 / 假设检验` · 相关性 6/10
+- [Daisee: Adaptive importance sampling by balancing exploration and exploitation](deep_reads/2026-06-23-10.1111_sjos.12637.md)  
+  `统计计算 / 算法` · 相关性 6/10
+- [Inference for low‐ and high‐dimensional inhomogeneous Gibbs point processes](deep_reads/2026-06-23-10.1111_sjos.12616.md)  
+  `高维统计 / 随机矩阵` · 相关性 6/10
+- [Consistent Bayesian information criterion based on a mixture prior for possibly high‐dimensional multivariate linear regression models](deep_reads/2026-06-23-10.1111_sjos.12617.md)  
+  `数理统计 / 假设检验` · 相关性 6/10
+- [A robust model averaging approach for partially linear models with responses missing at random](deep_reads/2026-06-23-10.1111_sjos.12659.md)  
+  `非参数 / 半参数` · 相关性 6/10
+- [Epistemic confidence in the observed confidence interval](deep_reads/2026-06-23-10.1111_sjos.12654.md)  
+  `数理统计 / 假设检验` · 相关性 6/10
+- [Greenland, S. (2023). Divergence vs. decision P‐values: A distinction worth making in theory and keeping in practice. <i>Scandinavian Journal of Statistics</i> , 50, 1–35, https://onlinelibrary.wiley.com/doi/10.1111/sjos.12625](deep_reads/2026-06-23-10.1111_sjos.12687.md)  
+  `数理统计 / 假设检验` · 相关性 6/10
+- [Locally adaptive Bayesian isotonic regression using half shrinkage priors](deep_reads/2026-06-23-10.1111_sjos.12676.md)  
+  `非参数 / 半参数` · 相关性 6/10
+- [Partial correlation graphical LASSO](deep_reads/2026-06-23-10.1111_sjos.12675.md)  
+  `高维统计 / 随机矩阵` · 相关性 6/10
+- [On the expectations of equivariant matrix‐valued functions of Wishart and inverse Wishart matrices](deep_reads/2026-06-23-10.1111_sjos.12707.md)  
+  `高维统计 / 随机矩阵` · 相关性 6/10
+- [Consistent covariances estimation for stratum imbalances under minimization method for covariate‐adaptive randomization](deep_reads/2026-06-23-10.1111_sjos.12703.md)  
+  `数理统计 / 假设检验` · 相关性 6/10
+- [Envelopes for multivariate linear regression with linearly constrained coefficients](deep_reads/2026-06-23-10.1111_sjos.12690.md)  
+  `效率理论 / Debiased ML` · 相关性 6/10
+- [Kernel mean embedding of probability measures and its applications to functional data analysis](deep_reads/2026-06-23-10.1111_sjos.12691.md)  
+  `非参数 / 半参数` · 相关性 6/10
+- [Density estimation and regression analysis on hyperspheres in the presence of measurement error](deep_reads/2026-06-23-10.1111_sjos.12684.md)  
+  `非参数 / 半参数` · 相关性 6/10
 - [Simple Inferential Analyses of Big Gwas Data](deep_reads/2026-06-23-10.5705_ss.202025.0022.md)  
   `其他` · 相关性 6/10
 - [Tests on Dynamic Ranking](deep_reads/2026-06-23-10.5705_ss.202024.0153.md)  
@@ -385,6 +493,12 @@
   `数理统计 / 假设检验` · 相关性 6/10
 - [Sudakov–Fernique post-AMP, and a new proof of the local convexity of the TAP free energy](deep_reads/2026-06-23-10.1214_23-aop1675.md)  
   `统计计算 / 算法` · 相关性 6/10
+- [Approximate exchangeability and de Finetti priors in 2022](deep_reads/2026-06-23-10.1111_sjos.12609.md)  
+  `其他` · 相关性 5/10
+- [Dimension‐independent Markov chain Monte Carlo on the sphere](deep_reads/2026-06-23-10.1111_sjos.12653.md)  
+  `统计计算 / 算法` · 相关性 5/10
+- [The effect of the working correlation on fitting models to longitudinal data](deep_reads/2026-06-23-10.1111_sjos.12704.md)  
+  `非参数 / 半参数` · 相关性 5/10
 - [Estimating Covariance Matrices at Different Levels in Repeated Measurements](deep_reads/2026-06-23-10.5705_ss.202024.0279.md)  
   `高维统计 / 随机矩阵` · 相关性 5/10
 - [High-dimensional generalized linear models for Hilbert manifold covariates](deep_reads/2026-06-23-10.1214_25-ejs2431.md)  
@@ -395,6 +509,12 @@
   `非参数 / 半参数` · 相关性 5/10
 - [Sequential change diagnosis revisited and the Adaptive Matrix CuSum](deep_reads/2026-06-23-10.3150_23-bej1671.md)  
   `数理统计 / 假设检验` · 相关性 5/10
+- [Frequentist model averaging for envelope models](deep_reads/2026-06-23-10.1111_sjos.12634.md)  
+  `其他` · 相关性 4/10
+- [Generalizing the information content for stepped wedge designs: A marginal modeling approach](deep_reads/2026-06-23-10.1111_sjos.12615.md)  
+  `流行病学` · 相关性 4/10
+- [Sparse concordance‐based ordinal classification](deep_reads/2026-06-23-10.1111_sjos.12606.md)  
+  `非参数 / 半参数` · 相关性 4/10
 - [Bayesian analysis with conditionally identically distributed sequences](deep_reads/2026-06-23-10.1214_25-ejs2369.md)  
   `其他` · 相关性 4/10
 - [Nonstationary fractionally integrated functional time series](deep_reads/2026-06-23-10.3150_22-bej1508.md)  
@@ -403,16 +523,26 @@
   `非参数 / 半参数` · 相关性 4/10
 - [Optimal weighted pooling for inference about the tail index and extreme quantiles](deep_reads/2026-06-23-10.3150_23-bej1632.md)  
   `其他` · 相关性 4/10
+- [Benchmarked linear shrinkage prediction in the Fay–Herriot small area model](deep_reads/2026-06-23-10.1111_sjos.12596.md)  
+  `非参数 / 半参数` · 相关性 3/10
+- [Deep neural network classifier for multidimensional functional data](deep_reads/2026-06-23-10.1111_sjos.12660.md)  
+  `非参数 / 半参数` · 相关性 3/10
 - [Compound Poisson disorder problem with uniformly distributed disorder time](deep_reads/2026-06-23-10.3150_22-bej1541.md)  
   `数理统计 / 假设检验` · 相关性 3/10
 - [Refined behaviour of a conditioned random walk in the large deviations regime](deep_reads/2026-06-23-10.3150_23-bej1601.md)  
   `数理统计 / 假设检验` · 相关性 3/10
 - [A central limit theorem for the number of excursion set components of Gaussian fields](deep_reads/2026-06-23-10.1214_23-aop1672.md)  
   `其他` · 相关性 3/10
+- [Outlier detection based on extreme value theory and applications](deep_reads/2026-06-23-10.1111_sjos.12665.md)  
+  `数理统计 / 假设检验` · 相关性 2/10
+- [Truncated two‐parameter Poisson–Dirichlet approximation for Pitman–Yor process hierarchical models](deep_reads/2026-06-23-10.1111_sjos.12688.md)  
+  `非参数 / 半参数` · 相关性 2/10
 - [Fisher’s measure of variability in repeated samples](deep_reads/2026-06-23-10.3150_22-bej1494.md)  
   `其他` · 相关性 2/10
 - [A limit law for the most favorite point of simplerandom walk on a regular tree](deep_reads/2026-06-23-10.1214_23-aop1644.md)  
   `其他` · 相关性 2/10
+- [A historical overview of textbook presentations of statistical science](deep_reads/2026-06-23-10.1111_sjos.12641.md)  
+  `其他` · 相关性 1/10
 - [The spine of the Fleming–Viot process driven by Brownian motion](deep_reads/2026-06-23-10.1214_23-aop1678.md)  
   `其他` · 相关性 1/10
 - [The discrete Gaussian model, II. Infinite-volume scaling limit at high temperature](deep_reads/2026-06-23-10.1214_23-aop1659.md)  

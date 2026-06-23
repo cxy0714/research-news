@@ -121,6 +121,12 @@
 - [Vol 52 Issue 1 · 2026-06-19](journals/2026-06-19-scand-j-stat-v52-i1.md)
 - [Vol 51 Issue 4 · 2026-06-19](journals/2026-06-19-scand-j-stat-v51-i4.md)
 - [Vol 51 Issue 3 · 2026-06-19](journals/2026-06-19-scand-j-stat-v51-i3.md)
+- [Vol 51 Issue 2 · 2026-06-23](journals/2026-06-23-scand-j-stat-v51-i2.md)
+- [Vol 51 Issue 1 · 2026-06-23](journals/2026-06-23-scand-j-stat-v51-i1.md)
+- [Vol 50 Issue 4 · 2026-06-23](journals/2026-06-23-scand-j-stat-v50-i4.md)
+- [Vol 50 Issue 3 · 2026-06-23](journals/2026-06-23-scand-j-stat-v50-i3.md)
+- [Vol 50 Issue 2 · 2026-06-23](journals/2026-06-23-scand-j-stat-v50-i2.md)
+- [Vol 50 Issue 1 · 2026-06-23](journals/2026-06-23-scand-j-stat-v50-i1.md)
 
 ### Statistica Sinica
 

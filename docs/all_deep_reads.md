@@ -230,6 +230,28 @@
 - [Assumption-Lean Quantile Regression](deep_reads/2026-06-19-10.5705_ss.202025.0034.md)  
   7/10 [journals]
 
+#### Scandinavian Journal of Statistics Vol 51 Issue 1
+
+- [Testing the missing at random assumption in generalized linear models in the presence of instrumental variables](deep_reads/2026-06-23-10.1111_sjos.12685.md)  
+  8/10 [journals]
+
+#### Scandinavian Journal of Statistics Vol 50 Issue 3
+
+- [Robust quasi‐randomization‐based estimation with ensemble learning for missing data](deep_reads/2026-06-23-10.1111_sjos.12626.md)  
+  7/10 [journals]
+
+#### Scandinavian Journal of Statistics Vol 50 Issue 2
+
+- [General purpose multiply robust data integration procedures for handling nonprobability samples](deep_reads/2026-06-23-10.1111_sjos.12605.md)  
+  8/10 [journals]
+
+#### Scandinavian Journal of Statistics Vol 50 Issue 1
+
+- [Multiply robust matching estimators of average and quantile treatment effects](deep_reads/2026-06-23-10.1111_sjos.12585.md)  
+  9/10 [journals]
+- [Unconditional empirical likelihood approach for analytic use of public survey data](deep_reads/2026-06-23-10.1111_sjos.12590.md)  
+  6/10 [journals]
+
 #### Electronic Journal of Statistics Vol 19 Issue 2
 
 - [Instrumental variable estimation of distributional causal effects](deep_reads/2026-06-23-10.1214_25-ejs2460.md)  
@@ -1514,6 +1536,30 @@
 - [Efficient Decoding from Heterogeneous 1-Bit Compressive Measurements over Networks](deep_reads/2026-06-19-10.5705_ss.202024.0329.md)  
   3/10 [journals]
 
+#### Scandinavian Journal of Statistics Vol 51 Issue 2
+
+- [On the expectations of equivariant matrix‐valued functions of Wishart and inverse Wishart matrices](deep_reads/2026-06-23-10.1111_sjos.12707.md)  
+  6/10 [journals]
+
+#### Scandinavian Journal of Statistics Vol 51 Issue 1
+
+- [Partial correlation graphical LASSO](deep_reads/2026-06-23-10.1111_sjos.12675.md)  
+  6/10 [journals]
+
+#### Scandinavian Journal of Statistics Vol 50 Issue 4
+
+- [Sparse principal component analysis for high‐dimensional stationary time series](deep_reads/2026-06-23-10.1111_sjos.12664.md)  
+  8/10 [journals]
+
+#### Scandinavian Journal of Statistics Vol 50 Issue 3
+
+- [Variable selection for high‐dimensional generalized linear model with block‐missing data](deep_reads/2026-06-23-10.1111_sjos.12632.md)  
+  7/10 [journals]
+- [Robust sure independence screening for nonpolynomial dimensional generalized linear models](deep_reads/2026-06-23-10.1111_sjos.12628.md)  
+  7/10 [journals]
+- [Inference for low‐ and high‐dimensional inhomogeneous Gibbs point processes](deep_reads/2026-06-23-10.1111_sjos.12616.md)  
+  6/10 [journals]
+
 #### Electronic Journal of Statistics Vol 19 Issue 2
 
 - [Correlation tests and sample spectral coherence matrix in the high-dimensional regime](deep_reads/2026-06-18-10.1214_25-ejs2467.md)  
@@ -2251,6 +2297,72 @@
   6/10 [journals]
 - [Robust Jackknife Model Averaging](deep_reads/2026-06-19-10.5705_ss.202025.0057.md)  
   6/10 [journals]
+
+#### Scandinavian Journal of Statistics Vol 51 Issue 2
+
+- [A new paradigm for high‐dimensional data: Distance‐based semiparametric feature aggregation framework via between‐subject attributes](deep_reads/2026-06-23-10.1111_sjos.12695.md)  
+  7/10 [journals]
+- [Kernel mean embedding of probability measures and its applications to functional data analysis](deep_reads/2026-06-23-10.1111_sjos.12691.md)  
+  6/10 [journals]
+- [Density estimation and regression analysis on hyperspheres in the presence of measurement error](deep_reads/2026-06-23-10.1111_sjos.12684.md)  
+  6/10 [journals]
+- [The effect of the working correlation on fitting models to longitudinal data](deep_reads/2026-06-23-10.1111_sjos.12704.md)  
+  5/10 [journals]
+- [Truncated two‐parameter Poisson–Dirichlet approximation for Pitman–Yor process hierarchical models](deep_reads/2026-06-23-10.1111_sjos.12688.md)  
+  2/10 [journals]
+
+#### Scandinavian Journal of Statistics Vol 51 Issue 1
+
+- [A nested semiparametric method for case‐control study with missingness](deep_reads/2026-06-23-10.1111_sjos.12673.md)  
+  8/10 [journals]
+- [Marginal additive models for population‐averaged inference in longitudinal and cluster‐correlated data](deep_reads/2026-06-23-10.1111_sjos.12681.md)  
+  7/10 [journals]
+- [Sparse additive models in high dimensions with wavelets](deep_reads/2026-06-23-10.1111_sjos.12680.md)  
+  7/10 [journals]
+- [Extrapolation estimation for nonparametric regression with measurement error](deep_reads/2026-06-23-10.1111_sjos.12670.md)  
+  7/10 [journals]
+- [Locally adaptive Bayesian isotonic regression using half shrinkage priors](deep_reads/2026-06-23-10.1111_sjos.12676.md)  
+  6/10 [journals]
+
+#### Scandinavian Journal of Statistics Vol 50 Issue 4
+
+- [Nonparametric adaptive estimation for interacting particle systems](deep_reads/2026-06-23-10.1111_sjos.12661.md)  
+  8/10 [journals]
+- [Statistical inference with semiparametric nonignorable nonresponse models](deep_reads/2026-06-23-10.1111_sjos.12652.md)  
+  8/10 [journals]
+- [Adaptive estimation of intensity in a doubly stochastic Poisson process](deep_reads/2026-06-23-10.1111_sjos.12651.md)  
+  8/10 [journals]
+- [Time‐varying <i>β</i>‐model for dynamic directed networks](deep_reads/2026-06-23-10.1111_sjos.12650.md)  
+  7/10 [journals]
+- [Robust inference for high‐dimensional single index models](deep_reads/2026-06-23-10.1111_sjos.12638.md)  
+  7/10 [journals]
+- [A robust model averaging approach for partially linear models with responses missing at random](deep_reads/2026-06-23-10.1111_sjos.12659.md)  
+  6/10 [journals]
+- [Deep neural network classifier for multidimensional functional data](deep_reads/2026-06-23-10.1111_sjos.12660.md)  
+  3/10 [journals]
+
+#### Scandinavian Journal of Statistics Vol 50 Issue 3
+
+- [Bayesian inverse problems with heterogeneous variance](deep_reads/2026-06-23-10.1111_sjos.12622.md)  
+  8/10 [journals]
+- [Sparse concordance‐based ordinal classification](deep_reads/2026-06-23-10.1111_sjos.12606.md)  
+  4/10 [journals]
+
+#### Scandinavian Journal of Statistics Vol 50 Issue 2
+
+- [Nadaraya–Watson estimator for I.I.D. paths of diffusion processes](deep_reads/2026-06-23-10.1111_sjos.12593.md)  
+  7/10 [journals]
+- [Statistical inference for Cox proportional hazards models with a diverging number of covariates](deep_reads/2026-06-23-10.1111_sjos.12595.md)  
+  7/10 [journals]
+- [Nonparametric asymptotic confidence intervals for extreme quantiles](deep_reads/2026-06-23-10.1111_sjos.12610.md)  
+  6/10 [journals]
+- [Benchmarked linear shrinkage prediction in the Fay–Herriot small area model](deep_reads/2026-06-23-10.1111_sjos.12596.md)  
+  3/10 [journals]
+
+#### Scandinavian Journal of Statistics Vol 50 Issue 1
+
+- [Nonparametric bounds for the survivor function under general dependent truncation](deep_reads/2026-06-23-10.1111_sjos.12582.md)  
+  7/10 [journals]
 
 #### Electronic Journal of Statistics Vol 19 Issue 2
 
@@ -3343,6 +3455,28 @@
 - [Estimation and Inference for Density-convoluted Support Vector Machine with Streaming Data](deep_reads/2026-06-19-10.5705_ss.202025.0083.md)  
   4/10 [journals]
 
+#### Scandinavian Journal of Statistics Vol 51 Issue 2
+
+- [Envelopes for multivariate linear regression with linearly constrained coefficients](deep_reads/2026-06-23-10.1111_sjos.12690.md)  
+  6/10 [journals]
+
+#### Scandinavian Journal of Statistics Vol 51 Issue 1
+
+- [Communication‐efficient low‐dimensional parameter estimation and inference for high‐dimensional Lp$$ {L}^p $$‐quantile regression](deep_reads/2026-06-23-10.1111_sjos.12683.md)  
+  8/10 [journals]
+
+#### Scandinavian Journal of Statistics Vol 50 Issue 4
+
+- [Efficient t0$$ {t}_0 $$‐year risk regression using the logistic model](deep_reads/2026-06-23-10.1111_sjos.12658.md)  
+  8/10 [journals]
+- [Plug‐in machine learning for partially linear mixed‐effects models with repeated measurements](deep_reads/2026-06-23-10.1111_sjos.12639.md)  
+  7/10 [journals]
+
+#### Scandinavian Journal of Statistics Vol 50 Issue 3
+
+- [Targeted estimation of state occupation probabilities for the non‐Markov illness‐death model](deep_reads/2026-06-23-10.1111_sjos.12644.md)  
+  9/10 [journals]
+
 #### Electronic Journal of Statistics Vol 19 Issue 2
 
 - [Online inference in high-dimensional regression with streaming clustered data](deep_reads/2026-06-23-10.1214_25-ejs2446.md)  
@@ -3748,6 +3882,54 @@
   4/10 [journals]
 - [Classification Uncertainty Quantification: A Comparison Between Bootstrap and Conformal ROC Confidence Bands](deep_reads/2026-06-19-10.5705_ss.202025.0127.md)  
   4/10 [journals]
+
+#### Scandinavian Journal of Statistics Vol 51 Issue 2
+
+- [Nonparametric conditional mean testing via an extreme‐type statistic in high dimension](deep_reads/2026-06-23-10.1111_sjos.12697.md)  
+  9/10 [journals]
+- [Accurate bias estimation with applications to focused model selection](deep_reads/2026-06-23-10.1111_sjos.12696.md)  
+  7/10 [journals]
+- [Consistent covariances estimation for stratum imbalances under minimization method for covariate‐adaptive randomization](deep_reads/2026-06-23-10.1111_sjos.12703.md)  
+  6/10 [journals]
+
+#### Scandinavian Journal of Statistics Vol 51 Issue 1
+
+- [Flexible specification testing in quantile regression models](deep_reads/2026-06-23-10.1111_sjos.12671.md)  
+  7/10 [journals]
+- [Greenland, S. (2023). Divergence vs. decision P‐values: A distinction worth making in theory and keeping in practice. <i>Scandinavian Journal of Statistics</i> , 50, 1–35, https://onlinelibrary.wiley.com/doi/10.1111/sjos.12625](deep_reads/2026-06-23-10.1111_sjos.12687.md)  
+  6/10 [journals]
+
+#### Scandinavian Journal of Statistics Vol 50 Issue 4
+
+- [Finite sample inference for empirical Bayesian methods](deep_reads/2026-06-23-10.1111_sjos.12643.md)  
+  7/10 [journals]
+- [Epistemic confidence in the observed confidence interval](deep_reads/2026-06-23-10.1111_sjos.12654.md)  
+  6/10 [journals]
+
+#### Scandinavian Journal of Statistics Vol 50 Issue 3
+
+- [Statistical evidence and surprise unified under possibility theory](deep_reads/2026-06-23-10.1111_sjos.12648.md)  
+  7/10 [journals]
+- [Consistent Bayesian information criterion based on a mixture prior for possibly high‐dimensional multivariate linear regression models](deep_reads/2026-06-23-10.1111_sjos.12617.md)  
+  6/10 [journals]
+- [Outlier detection based on extreme value theory and applications](deep_reads/2026-06-23-10.1111_sjos.12665.md)  
+  2/10 [journals]
+
+#### Scandinavian Journal of Statistics Vol 50 Issue 2
+
+- [Large‐scale simultaneous inference under dependence](deep_reads/2026-06-23-10.1111_sjos.12614.md)  
+  7/10 [journals]
+
+#### Scandinavian Journal of Statistics Vol 50 Issue 1
+
+- [Minimax powerful functional analysis of covariance tests with application to longitudinal genome‐wide association studies](deep_reads/2026-06-23-10.1111_sjos.12583.md)  
+  8/10 [journals]
+- [Divergence versus decision<i>P</i>‐values: A distinction worth making in theory and keeping in practice: Or, how divergence<i>P</i>‐values measure evidence even when decision<i>P</i>‐values do not](deep_reads/2026-06-23-10.1111_sjos.12625.md)  
+  7/10 [journals]
+- [Exact uniformly most powerful postselection confidence distributions](deep_reads/2026-06-23-10.1111_sjos.12581.md)  
+  7/10 [journals]
+- [Estimation for change point of discretely observed ergodic diffusion processes](deep_reads/2026-06-23-10.1111_sjos.12567.md)  
+  6/10 [journals]
 
 #### Electronic Journal of Statistics Vol 19 Issue 2
 
@@ -4682,6 +4864,16 @@
 - [Heterogeneous Autoregressive Modeling with Flexible Cascade Structures](deep_reads/2026-06-19-10.5705_ss.202024.0308.md)  
   6/10 [journals]
 - [Gaussian Variational Approximation with Composite Likelihood for Crossed Random Effect Models](deep_reads/2026-06-19-10.5705_ss.202024.0346.md)  
+  6/10 [journals]
+
+#### Scandinavian Journal of Statistics Vol 50 Issue 4
+
+- [Dimension‐independent Markov chain Monte Carlo on the sphere](deep_reads/2026-06-23-10.1111_sjos.12653.md)  
+  5/10 [journals]
+
+#### Scandinavian Journal of Statistics Vol 50 Issue 3
+
+- [Daisee: Adaptive importance sampling by balancing exploration and exploitation](deep_reads/2026-06-23-10.1111_sjos.12637.md)  
   6/10 [journals]
 
 #### Electronic Journal of Statistics Vol 19 Issue 1
@@ -5823,6 +6015,16 @@
 
 ### 期刊
 
+#### Scandinavian Journal of Statistics Vol 50 Issue 3
+
+- [Generalizing the information content for stepped wedge designs: A marginal modeling approach](deep_reads/2026-06-23-10.1111_sjos.12615.md)  
+  4/10 [journals]
+
+#### Scandinavian Journal of Statistics Vol 50 Issue 1
+
+- [Use of multiple imputation in supersampled nested case‐control and case‐cohort studies](deep_reads/2026-06-23-10.1111_sjos.12624.md)  
+  6/10 [journals]
+
 #### Journal of the Royal Statistical Society Series C Vol 75 Issue 3
 
 - [Precision mental health: predicting heterogeneous treatment effects for depression through data integration](deep_reads/2026-06-20-10.1093_jrsssc_qlaf068.md)  
@@ -6471,6 +6673,30 @@
   6/10 [journals]
 - [Maximizing Area Under the Receiver Operating Characteristic Curve for Biomarker Combination](deep_reads/2026-06-23-10.5705_ss.202024.0195.md)  
   6/10 [journals]
+
+#### Scandinavian Journal of Statistics Vol 50 Issue 4
+
+- [A historical overview of textbook presentations of statistical science](deep_reads/2026-06-23-10.1111_sjos.12641.md)  
+  1/10 [journals]
+
+#### Scandinavian Journal of Statistics Vol 50 Issue 3
+
+- [Distributed inference for two‐sample <i>U</i>‐statistics in massive data analysis](deep_reads/2026-06-23-10.1111_sjos.12620.md)  
+  9/10 [journals]
+- [Frequentist model averaging for envelope models](deep_reads/2026-06-23-10.1111_sjos.12634.md)  
+  4/10 [journals]
+
+#### Scandinavian Journal of Statistics Vol 50 Issue 2
+
+- [Optimal designs for the development of personalized treatment rules](deep_reads/2026-06-23-10.1111_sjos.12621.md)  
+  8/10 [journals]
+
+#### Scandinavian Journal of Statistics Vol 50 Issue 1
+
+- [Remove unwanted variation retrieves unknown experimental designs](deep_reads/2026-06-23-10.1111_sjos.12633.md)  
+  6/10 [journals]
+- [Approximate exchangeability and de Finetti priors in 2022](deep_reads/2026-06-23-10.1111_sjos.12609.md)  
+  5/10 [journals]
 
 #### Electronic Journal of Statistics Vol 19 Issue 1
 

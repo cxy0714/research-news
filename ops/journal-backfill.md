@@ -115,7 +115,7 @@ IEEE 系列 ieee（月刊、每期很大，全部先 dry-run、用小 N）：
 - [x] (2026-06-23) `--only Bernoulli --n-issues 14`
 - [x] (2026-06-23) `--only EJS --n-issues 7`   ⚠ 电子刊、文章多
 - [x] (2026-06-23) `--only "Statistica Sinica" --n-issues 14`
-- [ ] `--only "Scand. J. Stat." --n-issues 14`
+- [x] (2026-06-24) `--only "Scand. J. Stat." --n-issues 14`
 
 流行病 epi：
 - [ ] `--only StatMed --n-issues 4`   ⚠ 双周刊、量大
