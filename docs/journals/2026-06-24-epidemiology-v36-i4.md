@@ -132,13 +132,11 @@
 ### 7. [10.1097/ede.0000000000001852](https://doi.org/10.1097/ede.0000000000001852) — Right Censoring and Mortality in the Multicenter AIDS Cohort Study and Women’s Interagency HIV Study
 - **作者**: Jessie K. Edwards, Tiffany L. Breger, Stephen R. Cole, Paul N. Zivich, Bonnie E. Shook-Sa, Leah M. Sadinski et al.
 - **期刊/来源**: Epidemiology
-- **机构**: University of North Carolina at Chapel Hill · Emory University · Georgetown University · Johns Hopkins University · Johns Hopkins Medicine · University of Mississippi Medical Center · Northwestern University · Los Angeles LGBT Center 等
 - **分类**: vol 36 · issue 4 · pp 511-519
 - 相关性 5/10 · novelty: `application`
-- **摘要**: 本文研究队列研究中因参与者失访导致右删失对死亡率估计的偏倚问题，设定为 MACS 和 WIHS 两个 HIV 队列，关键假设是删失机制可能依赖于未观测的健康状态。核心方法是比较"金标准分析"（利用死亡登记数据获取全样本死亡率）与常规删失分析的结果差异，并应用 inverse probability of censoring weights (IPCW) 进行偏倚校正。实证结果显示，删失导致死亡率估计偏低 0-5%，IPCW 能部分校正这种衰减。本文属于应用方法学论文，展示了 IPCW 在真实队列数据中的实际效果，对您理解流行病学研究中缺失数据处理实践有参考价值。
-- ⚠️ *摘要不完整，待重跑（`python -m research_news.rerun`）*
-- **关键技术**: `inverse probability of censoring weights (IPCW)`, `right censoring`, `missing data mechanism`, `cohort study design`, `sensitivity to dropout`
-- **为什么对您有用**: (1) 连接到流行病学队列研究的因果推断应用，具体是缺失数据/删失机制对估计量的影响评估。(2) IPCW 是您 very_familiar 的 estimation theory in causal inference 中的标准工具，可评估其文中 IPCW 实现是否正确使用了 stabilized weights、是否考虑了 time-varying confounding 等细节。(3) **立即可做**：用您熟悉的 semiparametric efficiency 理论可分析其 IPCW estimator 的效率性质，或考虑是否可用 TMLE 进一步改进。
+- **摘要**: 本文研究队列研究中因参与者连续失访导致的右删失对死亡率估计的影响，利用 MACS 和 WIHS 两个 HIV 队列与生命统计登记系统的链接数据作为 gold standard。核心方法是比较三种分析策略：无删失的 gold standard 分析、连续两次失访后删失、以及应用 inverse probability of censoring weights (IPCW) 校正删失偏差。主要发现在 MACS 和 WIHS 中，10 年死亡率分别为 23% 和 21%，删失导致的偏差 modest（0%–5% 低估），IPCW 能部分校正这种衰减。结论是此类队列研究中常规删失处理对死亡率估计影响有限，但 IPCW 仍是推荐的校正手段。对您而言，这是一个经典的 IPCW 应用案例，展示了 sensitivity analysis 在真实队列数据中的具体操作。
+- **关键技术**: `inverse probability of censoring weights (IPCW)`, `right censoring`, `selection bias`, `cohort study design`, `sensitivity analysis`
+- **为什么对您有用**: (1) 本文属于流行病学队列研究的应用论文，涉及您 primary interest 中因果推断的 IPCW 方法在真实数据中的应用，以及 sensitivity analysis 的实践。(2) 从 technical_arsenal 角度，本文方法学门槛较低，IPCW 和 selection bias 校正属于您 very_familiar 的 estimation theory in causal inference 范畴，无需额外长肌肉即可完全理解。(3) Follow-up 判断：**立即可做**——若您对流行病学队列研究的实际数据分析流程感兴趣，本文是很好的入门读物；但若您追求方法学 novelty，本文 novelty 有限（属于 routine application），不建议花时间精读全文。
 
 ### 8. [10.1097/ede.0000000000001853](https://doi.org/10.1097/ede.0000000000001853) — The Impact of Power Outages on Cardiovascular Hospitalizations Among Medicare Fee-for-service Enrollees in New York State, 2017–2018
 - **作者**: Vivian Do, Heather Kathleen McBrien, Donald Edmondson, Marianthi-Anna Kioumourtzoglou, Joan Allison Casey

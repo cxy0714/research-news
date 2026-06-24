@@ -18,14 +18,11 @@
 ### 1. [10.1097/ede.0000000000001986](https://doi.org/10.1097/ede.0000000000001986) — The Authors Respond
 - **作者**: Stephen Burgess, Emily Bassett
 - **期刊/来源**: Epidemiology
-- **机构**: University of Cambridge · MRC Biostatistics Unit · Medical Research Council
 - **分类**: vol 37 · issue 4 · pp e9-e9
 - 相关性 3/10 · novelty: `minor`
-- **摘要**: 本文是对非线性孟德尔随机化（NLMR）方法批评的回应，核心辩护理由是：任何因果推断方法都依赖不可检验的假设，方法在假设成立时有效、假设被违反时产生偏差，这并非方法本身的缺陷。作者指出 NLMR 的 residual-stratified 方法已被 doubly-ranked 方法改进，且多项后续研究显示更新后的 NLMR 结果与随机对照试验结论一致。批评者提供的经验反例仅涉及少数暴露和数据集，类似批评可施加于任何统计方法；方法有效性的评估必须依赖理论分析而非零星经验案例。本文属于立场性短文，无新方法或理论贡献。
-- ⚠️ *摘要不完整，待重跑（`python -m research_news.rerun`）*
-- **关键技术**: `Mendelian randomization`, `nonlinear IV`, `doubly-ranked method`, `instrument validity`, `sensitivity to assumption violations`
-- **为什么对您有用**: 本文是流行病学领域关于 IV 方法可靠性争论的案例，涉及您 primary interest 中 IV / sensitivity analysis 的方法论讨论。但作为 letter 回应，它不提供新的 identification 条件、sensitivity analysis 框架或效率理论，仅是立场辩护。若您关注 IV 方法在流行病学应用中的实际争议与"自校正"过程，可快速浏览；若寻找可推进的理论问题，本文价值有限。
-
+- **摘要**: 本文是对非线性孟德尔随机化方法批评的回应，核心辩护理由是：任何因果推断方法都依赖不可检验的假设，方法在假设成立时有效、假设违反时产生偏差是统计学的常态。作者指出 NLMR 比传统线性 MR 需要更强的假设，因此对假设违反更敏感，但使用更新方法（如 doubly-ranked method）和有效工具变量的 NLMR 研究仍具可信度。文章强调统计方法的可靠性评估需要理论与实证双重视角，不能仅凭少数失败案例否定方法本身。这是流行病学方法论辩论的 position piece，无新方法或理论贡献。
+- **关键技术**: `Mendelian randomization`, `instrumental variable`, `nonlinear MR`, `doubly-ranked method`, `residual-stratified method`
+- **为什么对您有用**: 本文属于流行病学因果推断方法论的立场性文章，涉及 IV 假设违反与敏感性分析的话题，但无新方法或理论。对您而言，这是了解 MR 方法在流行病学实践中如何被批评与辩护的入门阅读，但武器库中的 identification theory 和 sensitivity analysis 工具已远超此文深度。作为 gateway reading 值得一扫（了解 MR 实践中的争议点），但无需花时间精读全文。
 
 ---
 

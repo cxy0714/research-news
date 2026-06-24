@@ -62,13 +62,11 @@
 ### 3. [10.1097/ede.0000000000001821](https://doi.org/10.1097/ede.0000000000001821) — Adjusting Adjustments: Using External Data to Estimate the Impact of Different Confounder Sets on Published Associations
 - **作者**: Thomas P. Ahern, Lindsay J. Collin, Richard F. MacLehose, Benjamin Littenberg, Laura Haines, Michaela Bonnett et al.
 - **期刊/来源**: Epidemiology
-- **机构**: University of Vermont · U.S. National Science Foundation · University of Utah · Huntsman Cancer Institute · University of Minnesota · Vermont Department of Health · Emory University · Aarhus University
 - **分类**: vol 36 · issue 3 · pp 381-390
 - 相关性 8/10 · novelty: `application`
-- **摘要**: 本文针对观察性研究 meta-analysis 中各原始研究混杂调整不一致的问题，提出利用外部数据（NHANES III）进行"外部调整"的方法。核心 estimand 是暴露-结局关联（此处为超重 BMI 与全因死亡率的 risk ratio）在不同混杂调整集下的变化；关键假设是外部数据中暴露-混杂因子、混杂因子-结局的关联可迁移到目标研究人群。方法上，作者基于外部数据估计 bias factor，量化从原始调整集切换到"充分调整集"时 ratio measure 的位移，进而对原始效应估计进行校正。理论层面未涉及 formal identification 理论或 semiparametric efficiency，属于应用驱动的 sensitivity-type 调整；实证结果显示，对 33 项研究统一调整年龄、性别、吸烟后，汇总效应从 0.88 变为 0.90，异质性 I² 从 38.4% 降至 34.6%。对您而言，这是一个流行病学应用案例，展示了如何用外部数据校正混杂调整差异——方法学 novelty 有限，但数据集和操作流程可作为因果推断 sensitivity analysis 的实证参考。
-- ⚠️ *摘要不完整，待重跑（`python -m research_news.rerun`）*
-- **关键技术**: `external adjustment`, `bias factor`, `confounder selection`, `meta-analysis heterogeneity`, `transportability assumption`
-- **为什么对您有用**: (1) 连接到流行病学队列研究的因果推断应用，展示了外部数据在混杂调整校正中的实际操作。(2) 本文方法本质上是 sensitivity analysis 的一个特例，但缺乏 formal identification 理论和 semiparametric efficiency 视角——您熟悉的 identification theory 和 semiparametric theory 可以用来严格刻画外部调整所需的 transportability 假设，并构造更高效的 estimator。(3) **中期可做**：需先在 moderately_familiar 的 identification theory 上长肌肉，将本文的 ad-hoc bias factor 方法嵌入到更严格的 sensitivity analysis 框架中（如 proximal CI 或 negative control 设定），形式化外部数据的使用条件。
+- **摘要**: 本文在观察性研究的 meta-analysis 框架下，研究如何利用外部数据（NHANES III）对已发表研究进行 confounder adjustment 的事后校正。核心 estimand 是 BMI-死亡率关联的相对风险比，关键假设是外部数据中 confounder-exposure-outcome 的联合分布可迁移到目标研究。方法上，作者基于外部数据估计原始调整集与充分调整集之间的 bias factor（ratio measure 的位移因子），然后对原始效应估计进行乘法校正。技术工具包括 standardization / g-formula 思想、外部数据插补、以及 random-effects meta-analysis 的异质性评估（I² 统计量）。实证结果显示，对 33 项研究进行统一调整后，汇总 RR 从 0.88 变为 0.90，异质性略有下降（I² 从 38.4% 降至 34.6%），但保护性关联仍然存在。本文属于应用方法学论文，novelty 在于将外部调整程序系统化并应用于真实 meta-analysis 场景。对您而言，这是流行病学因果推断应用的一个具体案例，展示了如何用外部数据解决 confounder adjustment 不一致的问题。
+- **关键技术**: `external adjustment`, `bias factor`, `g-formula standardization`, `random-effects meta-analysis`, `confounder selection`
+- **为什么对您有用**: (1) 本文是流行病学应用因果推断的 gateway reading，展示了外部数据在 confounder adjustment 校正中的实际应用，属于您 secondary interest 中 epidemiology 的范畴。(2) 武器库中的 identification theory in causal inference 和 estimation theory in causal inference 足以理解本文的方法框架，但本文不涉及高维或 semiparametric efficiency 等您更关注的理论深度。(3) 作为入门读物，本文清晰易懂，适合了解流行病学 meta-analysis 中 adjustment 问题的实际操作，但方法学 novelty 有限，不值得花时间深读全文。
 
 ### 4. [10.1097/ede.0000000000001841](https://doi.org/10.1097/ede.0000000000001841) — A Quasi-experimental Study of General Practices’ Referral to Mammography in the Posttrial Treatment Era
 - **作者**: Mette Lise Lousdal, Timothy L. Lash, W. Dana Flanders, M. Alan Brookhart, Ivar Sønbø Kristiansen, Peter Vedsted et al.

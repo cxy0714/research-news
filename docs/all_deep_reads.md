@@ -4,6 +4,24 @@
 
 ### Daily
 
+- [Semi- and non-parametric approaches to individualized treatment regimes in the presence of causal mediation](deep_reads/2026-06-24-2606.21708.md)  
+  9/10 [daily]
+- [Cumulative Natural Direct and Indirect Effects for Causal Mediation Analysis](deep_reads/2026-06-24-2606.22165.md)  
+  9/10 [daily]
+- [Sensitivity Analysis for the Average Treatment Effect under Discrete Unobserved Confounders](deep_reads/2026-06-24-2606.22255.md)  
+  9/10 [daily]
+- [A Test for Treatment Heterogeneity under a Distributional Difference-in-Difference Framework](deep_reads/2026-06-24-2606.21840.md)  
+  8/10 [daily]
+- [A generalized multiple-intervention stepped wedge design framework for treatment effect estimation in the presence of non-uniform cluster-period correlation structures](deep_reads/2026-06-24-2606.23499.md)  
+  8/10 [daily]
+- [Causal Inference with Multiple Misclassified Exposures: A Control Variate-Adjusted Calibration Weighting Approach](deep_reads/2026-06-24-2606.23656.md)  
+  8/10 [daily]
+- [Distributional Granger Causality: Identification, Sequential Inference, and Adaptive Testing](deep_reads/2026-06-24-2606.22230.md)  
+  8/10 [daily]
+- [On the use of auxiliary variables in multiple imputation when estimating the average causal effect with missing data](deep_reads/2026-06-24-2606.22016.md)  
+  7/10 [daily]
+- [A Bias-Corrected Two-Stage Approach for Joint Modelling of Multidimensional Longitudinal HRQoL and Survival Data](deep_reads/2026-06-24-2606.23146.md)  
+  7/10 [daily]
 - [What's the Magic Formula Instrument?](deep_reads/2026-06-23-2606.21569.md)  
   9/10 [daily]
 - [Uniform Confidence Bands for Infinite-Dimensional Partially Identified Parameters](deep_reads/2026-06-23-2606.21224.md)  
@@ -1607,6 +1625,10 @@
 
 ### Daily
 
+- [Variance or Standard Deviation? Shell Geometry and Global-Scale Priors in High-Dimensional Shrinkage](deep_reads/2026-06-24-2606.23509.md)  
+  8/10 [daily]
+- [Principal Covariate Regression with Nuclear Norm Penalty](deep_reads/2026-06-24-2606.23174.md)  
+  7/10 [daily]
 - [Non-asymptotic Tail Bounds for the Kostlan--Shub--Smale Field: Tensor PCA and Spherical $k$-Spin Complexity](deep_reads/2026-06-17-2606.17665.md)  
   8/10 [daily]
 - [Higher-order spectral perturbation expansions II: Kernel matrices and manifold learning](deep_reads/2026-06-17-2606.16373.md)  
@@ -2304,6 +2326,22 @@
 
 ### Daily
 
+- [Generalized nonparametric regression in reproducing kernel Hilbert spaces: Consistency and rates of convergence](deep_reads/2026-06-24-2606.22993.md)  
+  8/10 [daily]
+- [kNN estimation in semi-functional partial linear regression with missing responses at random](deep_reads/2026-06-24-2606.20930.md)  
+  7/10 [daily]
+- [Quasi-Bayes empirical Bayes estimation of sums of random variables](deep_reads/2026-06-24-2606.21707.md)  
+  7/10 [daily]
+- [Nonparametric Deconvolution and Denoising using Simulation Based Inference](deep_reads/2026-06-24-2606.21907.md)  
+  7/10 [daily]
+- [Manifold Fitting: A Review of Methods and Applications](deep_reads/2026-06-24-2606.22356.md)  
+  7/10 [daily]
+- [Logistic Gaussian process density regression: a generalized Bayesian approach](deep_reads/2026-06-24-2606.22915.md)  
+  7/10 [daily]
+- [Gaussian Process Differential Ensembles for Joint Inference on Curves, Derivatives, and Integrals](deep_reads/2026-06-24-2606.23036.md)  
+  7/10 [daily]
+- [Kendall and Spearman bounds for Chatterjee's rank correlation under positive dependence](deep_reads/2026-06-24-2606.22074.md)  
+  7/10 [daily]
 - [Leveraging tails for adaptation](deep_reads/2026-06-22-2606.20480.md)  
   8/10 [daily]
 - [Optimal score function estimation via derivatives constraints](deep_reads/2026-06-19-2606.19084.md)  
@@ -3601,6 +3639,12 @@
 
 ### Daily
 
+- [Semiparametric Efficiency Theory as Differential Calculus on a Space of Probability Distributions](deep_reads/2026-06-24-2606.22784.md)  
+  9/10 [daily]
+- [On the Asymptotic Inadmissibility of Double Machine Learning Estimators Under Structure-Agnostic Models](deep_reads/2026-06-24-2606.22391.md)  
+  9/10 [daily]
+- [Multi-Source Prediction-Powered Inference](deep_reads/2026-06-24-2606.21232.md)  
+  7/10 [daily]
 - [Bias-Aware External-Model-Assisted Inference in High-Dimensional Regression](deep_reads/2026-06-17-2606.15602.md)  
   9/10 [daily]
 - [Statistical Optimality of Prediction-Powered Inference](deep_reads/2026-06-09-2606.08730.md)  
@@ -3911,6 +3955,10 @@
 
 ### Daily
 
+- [An Optimal Transportation Approach for Improved Confidence Intervals](deep_reads/2026-06-24-2606.22008.md)  
+  7/10 [daily]
+- [Bayesian Model Pursuit and Near-Oracle Sparse Signal Discovery Under Dependence](deep_reads/2026-06-24-2606.22490.md)  
+  6/10 [daily]
 - [Hypergraph Variable Selection with False Discovery Rate Control](deep_reads/2026-06-22-2606.20514.md)  
   7/10 [daily]
 - [Calibration without labels in multiple testing](deep_reads/2026-06-22-2606.19737.md)  
@@ -5051,6 +5099,8 @@
 
 ### Daily
 
+- [Target-Aware Linear Regression Under Distribution Shift](deep_reads/2026-06-24-2606.22775.md)  
+  6/10 [daily]
 - [A Polyak-Ruppert Central Limit Theorem for SA-Adam with Momentum and Non-Convergent Adaptive Preconditioning](deep_reads/2026-06-17-2606.17364.md)  
   7/10 [daily]
 - [Spectral Sparsification of Laplacian-Constrained Gaussian and H\"usler-Reiss Graphical Models](deep_reads/2026-06-17-2606.16681.md)  
@@ -5561,6 +5611,20 @@
 
 ### Daily
 
+- [OASIS: Observation-Aware Simulation-Based Inference via Distributional Matching](deep_reads/2026-06-24-2606.22572.md)  
+  8/10 [daily]
+- [Distributed Peer Review at ALMA: An Empirical Comparison with Panel-Based Review](deep_reads/2026-06-24-2606.22160.md)  
+  8/10 [daily]
+- [ReLaTS: a Reinforcement Learning-based method for dynamically determining the coupling Time Step in multi-scale simulations of self-gravitating systems](deep_reads/2026-06-24-2606.20832.md)  
+  7/10 [daily]
+- [Ground control to major time-lag: on-sky results of data-driven predictive wavefront control at Keck Observatory](deep_reads/2026-06-24-2606.20838.md)  
+  7/10 [daily]
+- [Deep RL for Fast Long-Horizon Operations Scheduling on NASA's Carruthers Geocorona Observatory Mission](deep_reads/2026-06-24-2606.22159.md)  
+  7/10 [daily]
+- [ffortissimo: A Freeform Forward-Modeling Pipeline for High-Contrast Images of Circumstellar Disks Based on Automatic Differentiation](deep_reads/2026-06-24-2606.23478.md)  
+  7/10 [daily]
+- [Optimization and robustness of cost-efficient seismic arrays for Newtonian noise cancellation at the Einstein Telescope](deep_reads/2026-06-24-2606.21110.md)  
+  6/10 [daily]
 - [Quality Assessment of Spectroscopic Data Reduction Pipelines Using Artificial Intelligence: Scrutinizing Data Release 2 from the DESI Survey](deep_reads/2026-06-23-2606.21035.md)  
   7/10 [daily]
 - [Classification of Eclipsing Binary Light Curves in Gaia DR3: A Machine Learning Approach](deep_reads/2026-06-23-2606.21017.md)  
@@ -5719,6 +5783,14 @@
 
 ### Daily
 
+- [A missed opportunity? Labor demand and workforce diversity](deep_reads/2026-06-24-2606.23150.md)  
+  8/10 [daily]
+- [A Censored Transformed Model for Proportional Outcomes with Boundary Mass and an Application to Loss Given Default Modeling](deep_reads/2026-06-24-2606.21515.md)  
+  6/10 [daily]
+- [Inference methods for unit-specific coefficients in panel data models with latent group structure](deep_reads/2026-06-24-2606.22035.md)  
+  6/10 [daily]
+- [Learning Dependence Structures for Econometric Inference](deep_reads/2026-06-24-2606.22555.md)  
+  6/10 [daily]
 - [Institutions, Inputs, and Agricultural Growth in China:Revisiting Several Controversies, 1949--1986](deep_reads/2026-06-22-2606.20286.md)  
   6/10 [daily]
 - [Granular Instrumental Variables: Estimation and Inference](deep_reads/2026-06-12-2606.14057.md)  
@@ -7179,6 +7251,12 @@
 
 ### Daily
 
+- [Unbiased estimation of normalized scale-invariant indices under the gamma distribution](deep_reads/2026-06-24-2606.22712.md)  
+  7/10 [daily]
+- [What is your Prior Worth? Effective Sample Size and Sample Size Planning for Gaussian Graphical Models](deep_reads/2026-06-24-2606.22687.md)  
+  6/10 [daily]
+- [Reformulation Invariance and the Axiomatic Foundations of Inference](deep_reads/2026-06-24-2606.21551.md)  
+  6/10 [daily]
 - [Testing Preferential Sampling](deep_reads/2026-06-12-2606.14615.md)  
   6/10 [daily]
 - [Introducing precision-weighted bias as a performance measure to inform the inclusion of adaptive designs in meta-analysis](deep_reads/2026-06-12-2606.12015.md)  

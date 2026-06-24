@@ -122,14 +122,11 @@
 ### 10. [10.1097/ede.0000000000001823](https://doi.org/10.1097/ede.0000000000001823) — Validation of Lactational Mastitis Diagnosis Codes in Electronic Health Care Data
 - **作者**: Malini B. DeSilva, Elisabeth M. Seburg, Kirsten Ehresmann, Gabriela Vazquez-Benitez, Yihe G. Daida, Kimberly K. Vesco et al.
 - **期刊/来源**: Epidemiology
-- **机构**: HealthPartners · Kaiser Permanente · Kaiser Permanente Center for Health Research
 - **分类**: vol 36 · issue 2 · pp 160-164
 - 相关性 2/10 · novelty: `application`
-- **摘要**: 本文评估电子健康记录（EHR）中 ICD-10-CM 诊断编码（N61.0 和 O91.2）识别哺乳期乳腺炎的效度，目标 estimand 是阳性预测值（PPV）。研究设计为经典的诊断试验验证：以病历人工审查作为金标准，定义"probable"（乳房症状+全身症状）和"possible"（仅有乳房症状）两层病例判定标准。在 19,660 名符合条件的产后患者中，5.2% 有目标诊断码；对 119 例随机样本进行病历审查，计算 PPV 及其 95% 置信区间。主要结果：仅用诊断码时，probable mastitis 的 PPV 为 76%（95% CI: 67.3-82.9），probable 或 possible 合并的 PPV 为 97%；若进一步要求有抗生素处方（n=87），PPV 分别提升至 80% 和 100%。结论是 ICD-10 编码单独使用即有良好 PPV，联合抗生素数据可进一步提升效度但样本量下降。本文属于流行病学数据验证研究，方法学 novelty 有限，但提供了可复用的 EHR 数据处理流程和效度评估框架。
-- ⚠️ *摘要不完整，待重跑（`python -m research_news.rerun`）*
-- **关键技术**: `positive predictive value`, `medical record review validation`, `ICD-10-CM coding`, `electronic health record data`, `diagnosis code algorithm`
-- **为什么对您有用**: (1) 本文是流行病学 EHR 数据验证的入门级读物，清晰展示了诊断编码效度评估的标准流程，适合作为 secondary interest 中 epidemiology 的 gateway reading。(2) 武器库中的 estimation theory 和 software development 足够支撑进入此方向，但本文不涉及因果推断或高维方法，技术深度较浅。(3) 值得快速浏览摘要和图表以了解 EHR 数据验证范式，但无需精读全文——除非您近期有使用 EHR 数据进行因果推断或 IV 研究的具体计划，此时诊断编码效度是关键的测量误差来源。
-
+- **摘要**: 该研究旨在验证电子健康记录中哺乳期乳腺炎诊断代码（ICD-10-CM代码N61.0和O91.2）的阳性预测值（PPV）。在三个医疗系统中纳入2020年12月至2022年9月分娩且有哺乳记录的19,660名患者，通过医疗记录审查确认诊断。对119份随机抽样的疑似病例进行审查，评估“很可能”（乳房症状伴全身症状）和“可能”（仅乳房症状）的乳腺炎定义。结果显示，仅代码的PPV为76%（很可能）和97%（很可能或可能）；添加抗生素处方后PPV提高至80%和100%，但病例数减少。研究结论是诊断代码单独使用具有较好的PPV，抗生素数据可进一步改善准确性，但会降低敏感性。该研究为流行病学中诊断代码验证提供了具体范例，其PPV估计方法可直接应用于其他疾病代码验证场景。
+- **关键技术**: `Positive Predictive Value (PPV)`, `ICD-10-CM coding validation`, `Electronic health record (EHR) data`, `Medical record review`, `Confidence interval estimation`
+- **为什么对您有用**: 该论文直接对应您的二级兴趣——流行病学应用，展示了如何使用医疗记录审查来验证诊断代码的有效性。您武器库中的‘estimation theory in causal inference’（如置信区间构造）可用于批判性评估本文PPV估计的精密度；同时，该验证设计可作为您将来处理流行病学数据集中的测量误差问题的入门参考。属于值得一读的应用典范。
 
 ---
 
