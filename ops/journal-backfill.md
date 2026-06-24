@@ -124,7 +124,7 @@ IEEE 系列 ieee（月刊、每期很大，全部先 dry-run、用小 N）：
 - [x] (2026-06-24) `--only Epidemiology --n-issues 10`
 
 应用 / 生物统计 applied：
-- [ ] `--only AoAS --n-issues 14`
+- [x] (2026-06-24) `--only AoAS --n-issues 14`
 - [ ] `--only Biometrics --n-issues 14`
 - [ ] `--only Biostatistics --n-issues 14`
 - [ ] `--only "JRSS-C" --n-issues 14`

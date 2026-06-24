@@ -17,8 +17,22 @@
 
 [→ 查看完整报告](daily/2026-06-24.md)
 
-### 精读论文（254 篇）
+### 精读论文（386 篇）
 
+- [The risk of maternal complications after cesarean delivery: Near-far matching for instrumental variables study designs with large observational datasets](deep_reads/2026-06-24-10.1214_22-aoas1691.md)  
+  `因果推断` · 相关性 9/10
+- [Hospital quality risk standardization via approximate balancing weights](deep_reads/2026-06-24-10.1214_22-aoas1629.md)  
+  `因果推断` · 相关性 9/10
+- [An efficient doubly-robust imputation framework for longitudinal dropout, with an application to an Alzheimer’s clinical trial](deep_reads/2026-06-24-10.1214_23-aoas1728.md)  
+  `因果推断` · 相关性 9/10
+- [Debiased lasso for stratified Cox models with application to the national kidney transplant data](deep_reads/2026-06-24-10.1214_23-aoas1775.md)  
+  `效率理论 / Debiased ML` · 相关性 9/10
+- [Testing for the causal mediation effects of multiple mediators using the kernel machine difference method in genome-wide epigenetic studies](deep_reads/2026-06-24-10.1214_23-aoas1814.md)  
+  `因果推断` · 相关性 9/10
+- [A latent mixture model for heterogeneous causal mechanisms in Mendelian randomization](deep_reads/2026-06-24-10.1214_23-aoas1816.md)  
+  `因果推断` · 相关性 9/10
+- [Privacy-preserving, communication-efficient, and target-flexible hospital quality measurement](deep_reads/2026-06-24-10.1214_23-aoas1837.md)  
+  `因果推断` · 相关性 9/10
 - [Semi- and non-parametric approaches to individualized treatment regimes in the presence of causal mediation](deep_reads/2026-06-24-2606.21708.md)  
   `因果推断` · 相关性 9/10
 - [Cumulative Natural Direct and Indirect Effects for Causal Mediation Analysis](deep_reads/2026-06-24-2606.22165.md)  
@@ -43,6 +57,48 @@
   `因果推断` · 相关性 9/10
 - [Hypothesis Tests of Direct and Indirect Effects Under Various Semicompeting Risks Models](deep_reads/2026-06-24-10.1002_sim.70530.md)  
   `因果推断` · 相关性 9/10
+- [Randomization inference for cluster-randomized test-negative designs with application to Dengue studies: Unbiased estimation, partial compliance, and stepped-wedge design](deep_reads/2026-06-24-10.1214_22-aoas1684.md)  
+  `因果推断` · 相关性 8/10
+- [Estimation of Gaussian directed acyclic graphs using partial ordering information with applications to DREAM3 networks and dairy cattle data](deep_reads/2026-06-24-10.1214_22-aoas1636.md)  
+  `因果推断` · 相关性 8/10
+- [Detecting distributional differences in labeled sequence data with application to tropical cyclone satellite imagery](deep_reads/2026-06-24-10.1214_22-aoas1668.md)  
+  `天体统计` · 相关性 8/10
+- [Surrogate marker assessment using mediation and instrumental variable analyses in a case-cohort design](deep_reads/2026-06-24-10.1214_22-aoas1667.md)  
+  `因果推断` · 相关性 8/10
+- [Evaluating the use of generalized dynamic weighted ordinary least squares for individualized HIV treatment strategies](deep_reads/2026-06-24-10.1214_22-aoas1726.md)  
+  `因果推断` · 相关性 8/10
+- [Estimating causal effects of HIV prevention interventions with interference in network-based studies among people who inject drugs](deep_reads/2026-06-24-10.1214_22-aoas1713.md)  
+  `因果推断` · 相关性 8/10
+- [Leveraging population outcomes to improve the generalization of experimental results: Application to the JTPA study](deep_reads/2026-06-24-10.1214_22-aoas1712.md)  
+  `因果推断` · 相关性 8/10
+- [Association and causation: Attributes and effects of judges in equal employment opportunity commission litigation outcomes](deep_reads/2026-06-24-10.1214_23-aoas1774.md)  
+  `因果推断` · 相关性 8/10
+- [Optimal sampling designs for multidimensional streaming time series with application to power grid sensor data](deep_reads/2026-06-24-10.1214_23-aoas1757.md)  
+  `统计计算 / 算法` · 相关性 8/10
+- [A reluctant additive model framework for interpretable nonlinear individualized treatment rules](deep_reads/2026-06-24-10.1214_23-aoas1767.md)  
+  `因果推断` · 相关性 8/10
+- [What makes forest-based heterogeneous treatment effect estimators work?](deep_reads/2026-06-24-10.1214_23-aoas1799.md)  
+  `因果推断` · 相关性 8/10
+- [A Bayesian machine learning approach for estimating heterogeneous survivor causal effects: Applications to a critical care trial](deep_reads/2026-06-24-10.1214_23-aoas1792.md)  
+  `因果推断` · 相关性 8/10
+- [Nonnegative tensor completion for dynamic counterfactual prediction on COVID-19 pandemic](deep_reads/2026-06-24-10.1214_23-aoas1787.md)  
+  `因果推断` · 相关性 8/10
+- [Using simultaneous regression calibration to study the effect of multiple error-prone exposures on disease risk utilizing biomarkers developed from a controlled feeding study](deep_reads/2026-06-24-10.1214_23-aoas1782.md)  
+  `因果推断` · 相关性 8/10
+- [A continuous multiple hypothesis testing framework for optimal exoplanet detection](deep_reads/2026-06-24-10.1214_23-aoas1810.md)  
+  `天体统计` · 相关性 8/10
+- [A simple and flexible test of sample exchangeability with applications to statistical genomics](deep_reads/2026-06-24-10.1214_23-aoas1817.md)  
+  `数理统计 / 假设检验` · 相关性 8/10
+- [Tensor quantile regression with low-rank tensor train estimation](deep_reads/2026-06-24-10.1214_23-aoas1835.md)  
+  `统计计算 / 算法` · 相关性 8/10
+- [Flexible instrumental variable models with Bayesian additive regression trees](deep_reads/2026-06-24-10.1214_23-aoas1843.md)  
+  `因果推断` · 相关性 8/10
+- [Risk-aware restricted outcome learning for individualized treatment regimes of schizophrenia](deep_reads/2026-06-24-10.1214_23-aoas1836.md)  
+  `因果推断` · 相关性 8/10
+- [MASH: Mediation analysis of survival outcome and high-dimensional omics mediators with application to complex diseases](deep_reads/2026-06-24-10.1214_23-aoas1838.md)  
+  `因果推断` · 相关性 8/10
+- [Selecting invalid instruments to improve Mendelian randomization with two-sample summary data](deep_reads/2026-06-24-10.1214_23-aoas1856.md)  
+  `因果推断` · 相关性 8/10
 - [A Test for Treatment Heterogeneity under a Distributional Difference-in-Difference Framework](deep_reads/2026-06-24-2606.21840.md)  
   `因果推断` · 相关性 8/10
 - [OASIS: Observation-Aware Simulation-Based Inference via Distributional Matching](deep_reads/2026-06-24-2606.22572.md)  
@@ -123,6 +179,64 @@
   `因果推断` · 相关性 8/10
 - [Moving Toward Best Practice When Using Propensity Score Weighting in Survey Observational Studies](deep_reads/2026-06-24-10.1002_sim.70555.md)  
   `因果推断` · 相关性 8/10
+- [Estimation and inference for exposure effects with latency in the Cox proportional hazards model in the presence of exposure measurement error](deep_reads/2026-06-24-10.1214_22-aoas1682.md)  
+  `因果推断` · 相关性 7/10
+- [Balancing weights for region-level analysis: The effect of Medicaid expansion on the uninsurance rate among states that did not expand Medicaid](deep_reads/2026-06-24-10.1214_22-aoas1678.md)  
+  `因果推断` · 相关性 7/10
+- [Robust joint modelling of left-censored longitudinal data and survival data with application to HIV vaccine studies](deep_reads/2026-06-24-10.1214_22-aoas1656.md)  
+  `流行病学` · 相关性 7/10
+- [Bayesian analysis for imbalanced positive-unlabelled diagnosis codes in electronic health records](deep_reads/2026-06-24-10.1214_22-aoas1666.md)  
+  `流行病学` · 相关性 7/10
+- [distinct: A novel approach to differential distribution analyses](deep_reads/2026-06-24-10.1214_22-aoas1689.md)  
+  `数理统计 / 假设检验` · 相关性 7/10
+- [Estimating the effects of a California gun control program with multitask Gaussian processes](deep_reads/2026-06-24-10.1214_22-aoas1654.md)  
+  `因果推断` · 相关性 7/10
+- [Real-time mechanistic Bayesian forecasts of COVID-19 mortality](deep_reads/2026-06-24-10.1214_22-aoas1671.md)  
+  `流行病学` · 相关性 7/10
+- [Bayesian inference and dynamic prediction for multivariate longitudinal and survival data](deep_reads/2026-06-24-10.1214_23-aoas1733.md)  
+  `流行病学` · 相关性 7/10
+- [Using predictability to improve matching of urban locations in Philadelphia](deep_reads/2026-06-24-10.1214_23-aoas1739.md)  
+  `因果推断` · 相关性 7/10
+- [A Bayesian decision framework for optimizing sequential combination antiretroviral therapy in people with HIV](deep_reads/2026-06-24-10.1214_23-aoas1750.md)  
+  `流行病学` · 相关性 7/10
+- [Estimating COVID-19 vaccine protection rates via dynamic epidemiological models—a study of 10 countries](deep_reads/2026-06-24-10.1214_23-aoas1764.md)  
+  `流行病学` · 相关性 7/10
+- [Modeling racial/ethnic differences in COVID-19 incidence with covariates subject to nonrandom missingness](deep_reads/2026-06-24-10.1214_22-aoas1711.md)  
+  `流行病学` · 相关性 7/10
+- [Bayesian learning of Covid-19 vaccine safety while incorporating adverse events ontology](deep_reads/2026-06-24-10.1214_23-aoas1743.md)  
+  `流行病学` · 相关性 7/10
+- [Generalized matrix decomposition regression: Estimation and inference for two-way structured data](deep_reads/2026-06-24-10.1214_23-aoas1746.md)  
+  `高维统计 / 随机矩阵` · 相关性 7/10
+- [A multiagent reinforcement learning framework for off-policy evaluation in two-sided markets](deep_reads/2026-06-24-10.1214_22-aoas1700.md)  
+  `因果推断` · 相关性 7/10
+- [Addressing selection bias and measurement error in COVID-19 case count data using auxiliary information](deep_reads/2026-06-24-10.1214_23-aoas1744.md)  
+  `流行病学` · 相关性 7/10
+- [Dynamic risk prediction for cervical precancer screening with continuous and binary longitudinal biomarkers](deep_reads/2026-06-24-10.1214_23-aoas1788.md)  
+  `流行病学` · 相关性 7/10
+- [Weak signal inclusion under dependence and applications in genome-wide association study](deep_reads/2026-06-24-10.1214_23-aoas1815.md)  
+  `高维统计 / 随机矩阵` · 相关性 7/10
+- [Retrospective varying coefficient association analysis of longitudinal binary traits: Application to the identification of genetic loci associated with hypertension](deep_reads/2026-06-24-10.1214_23-aoas1798.md)  
+  `数理统计 / 假设检验` · 相关性 7/10
+- [Density-based matching rule: Optimality, estimation, and application in forensic problems](deep_reads/2026-06-24-10.1214_23-aoas1812.md)  
+  `数理统计 / 假设检验` · 相关性 7/10
+- [Distributed proportional likelihood ratio model with application to data integration across clinical sites](deep_reads/2026-06-24-10.1214_23-aoas1779.md)  
+  `非参数 / 半参数` · 相关性 7/10
+- [Change point detection in dynamic Gaussian graphical models: The impact of COVID-19 pandemic on the U.S. stock market](deep_reads/2026-06-24-10.1214_23-aoas1801.md)  
+  `经济理论 / 应用` · 相关性 7/10
+- [Semiparametric bivariate hierarchical state space model with application to hormone circadian relationship](deep_reads/2026-06-24-10.1214_23-aoas1834.md)  
+  `非参数 / 半参数` · 相关性 7/10
+- [Forecasting U.S. inflation using Bayesian nonparametric models](deep_reads/2026-06-24-10.1214_23-aoas1841.md)  
+  `经济理论 / 应用` · 相关性 7/10
+- [As treated analyses of cluster randomized trials](deep_reads/2026-06-24-10.1214_23-aoas1846.md)  
+  `流行病学` · 相关性 7/10
+- [A marginal structural model for partial compliance in SMARTs](deep_reads/2026-06-24-10.1214_21-aoas1586.md)  
+  `因果推断` · 相关性 7/10
+- [Evaluation of transplant benefits with the U.S. Scientific Registry of Transplant Recipients by semiparametric regression of mean residual life](deep_reads/2026-06-24-10.1214_24-aoas1887.md)  
+  `流行病学` · 相关性 7/10
+- [Bivariate functional patterns of lifetime medicare costs among ESRD patients](deep_reads/2026-06-24-10.1214_24-aoas1897.md)  
+  `流行病学` · 相关性 7/10
+- [Mixture conditional regression with ultrahigh dimensional text data for estimating extralegal factor effects](deep_reads/2026-06-24-10.1214_24-aoas1893.md)  
+  `因果推断` · 相关性 7/10
 - [kNN estimation in semi-functional partial linear regression with missing responses at random](deep_reads/2026-06-24-2606.20930.md)  
   `非参数 / 半参数` · 相关性 7/10
 - [Multi-Source Prediction-Powered Inference](deep_reads/2026-06-24-2606.21232.md)  
@@ -247,6 +361,68 @@
   `因果推断` · 相关性 7/10
 - [Improving Variance and Confidence Interval Estimation in Small‐Sample Propensity Score Analyses: Bootstrap Versus Asymptotic Methods](deep_reads/2026-06-24-10.1002_sim.70643.md)  
   `因果推断` · 相关性 7/10
+- [Knockoffs with side information](deep_reads/2026-06-24-10.1214_22-aoas1663.md)  
+  `数理统计 / 假设检验` · 相关性 6/10
+- [Truncated rank-based tests for two-part models with excessive zeros and applications to microbiome data](deep_reads/2026-06-24-10.1214_22-aoas1688.md)  
+  `数理统计 / 假设检验` · 相关性 6/10
+- [A Bayesian panel vector autoregression to analyze the impact of climate shocks on high-income economies](deep_reads/2026-06-24-10.1214_22-aoas1681.md)  
+  `经济理论 / 应用` · 相关性 6/10
+- [Estimating global and country-specific excess mortality during the Covid-19 pandemic](deep_reads/2026-06-24-10.1214_22-aoas1673.md)  
+  `流行病学` · 相关性 6/10
+- [Integrating multiple built environment data sources](deep_reads/2026-06-24-10.1214_22-aoas1692.md)  
+  `流行病学` · 相关性 6/10
+- [A tensor decomposition model for longitudinal microbiome studies](deep_reads/2026-06-24-10.1214_22-aoas1661.md)  
+  `非参数 / 半参数` · 相关性 6/10
+- [Identification of immune response combinations associated with heterogeneous infection risk in the immune correlates analysis of HIV vaccine studies](deep_reads/2026-06-24-10.1214_22-aoas1665.md)  
+  `流行病学` · 相关性 6/10
+- [Postelection analysis of presidential election/poll data](deep_reads/2026-06-24-10.1214_22-aoas1707.md)  
+  `经济理论 / 应用` · 相关性 6/10
+- [Structure learning for zero-inflated counts with an application to single-cell RNA sequencing data](deep_reads/2026-06-24-10.1214_23-aoas1732.md)  
+  `其他` · 相关性 6/10
+- [The scalable birth–death MCMC algorithm for mixed graphical model learning with application to genomic data integration](deep_reads/2026-06-24-10.1214_22-aoas1701.md)  
+  `统计计算 / 算法` · 相关性 6/10
+- [Signal-noise ratio of genetic associations and statistical power of SNP-set tests](deep_reads/2026-06-24-10.1214_22-aoas1725.md)  
+  `流行病学` · 相关性 6/10
+- [A semiparametric promotion time cure model with support vector machine](deep_reads/2026-06-24-10.1214_23-aoas1741.md)  
+  `非参数 / 半参数` · 相关性 6/10
+- [Estimating HIV epidemics for subnational areas](deep_reads/2026-06-24-10.1214_23-aoas1730.md)  
+  `流行病学` · 相关性 6/10
+- [Varying impacts of letters of recommendation on college admissions](deep_reads/2026-06-24-10.1214_23-aoas1740.md)  
+  `因果推断` · 相关性 6/10
+- [Multimodel ensemble analysis with neural network Gaussian processes](deep_reads/2026-06-24-10.1214_23-aoas1768.md)  
+  `其他` · 相关性 6/10
+- [Model-independent detection of new physics signals using interpretable SemiSupervised classifier tests](deep_reads/2026-06-24-10.1214_22-aoas1722.md)  
+  `数理统计 / 假设检验` · 相关性 6/10
+- [Targeting underrepresented populations in precision medicine: A federated transfer learning approach](deep_reads/2026-06-24-10.1214_23-aoas1747.md)  
+  `效率理论 / Debiased ML` · 相关性 6/10
+- [A dynamic additive and multiplicative effects network model with application to the United Nations voting behaviors](deep_reads/2026-06-24-10.1214_23-aoas1762.md)  
+  `经济理论 / 应用` · 相关性 6/10
+- [Selective inference for sparse multitask regression with applications in neuroimaging](deep_reads/2026-06-24-10.1214_23-aoas1796.md)  
+  `数理统计 / 假设检验` · 相关性 6/10
+- [Composite scores for transplant center evaluation: A new individualized empirical null method](deep_reads/2026-06-24-10.1214_23-aoas1809.md)  
+  `流行病学` · 相关性 6/10
+- [Bayesian adaptive and interpretable functional regression for exposure profiles](deep_reads/2026-06-24-10.1214_23-aoas1805.md)  
+  `流行病学` · 相关性 6/10
+- [A partially functional linear regression framework for integrating genetic, imaging, and clinical data](deep_reads/2026-06-24-10.1214_23-aoas1808.md)  
+  `非参数 / 半参数` · 相关性 6/10
+- [Penalized joint models of high-dimensional longitudinal biomarkers and a survival outcome](deep_reads/2026-06-24-10.1214_23-aoas1844.md)  
+  `流行病学` · 相关性 6/10
+- [A high-dimensional approach to measure connectivity in the financial sector](deep_reads/2026-06-24-10.1214_22-aoas1702.md)  
+  `经济理论 / 应用` · 相关性 6/10
+- [Estimating the likelihood of arrest from police records in presence of unreported crimes](deep_reads/2026-06-24-10.1214_23-aoas1833.md)  
+  `流行病学` · 相关性 6/10
+- [Variance as a predictor of health outcomes: Subject-level trajectories and variability of sex hormones to predict body fat changes in peri- and postmenopausal women](deep_reads/2026-06-24-10.1214_23-aoas1852.md)  
+  `流行病学` · 相关性 6/10
+- [Efficient and effective calibration of numerical model outputs using hierarchical dynamic models](deep_reads/2026-06-24-10.1214_23-aoas1823.md)  
+  `统计计算 / 算法` · 相关性 6/10
+- [A Bayesian hierarchical small area population model accounting for data source specific methodologies from American Community Survey, Population Estimates Program, and Decennial census data](deep_reads/2026-06-24-10.1214_23-aoas1849.md)  
+  `流行病学` · 相关性 6/10
+- [Assessing screening efficacy in the presence of cancer overdiagnosis](deep_reads/2026-06-24-10.1214_23-aoas1848.md)  
+  `流行病学` · 相关性 6/10
+- [A framework for analysing longitudinal data involving time-varying covariates](deep_reads/2026-06-24-10.1214_23-aoas1851.md)  
+  `流行病学` · 相关性 6/10
+- [Prediction intervals for economic fixed-event forecasts](deep_reads/2026-06-24-10.1214_24-aoas1900.md)  
+  `经济理论 / 应用` · 相关性 6/10
 - [A Censored Transformed Model for Proportional Outcomes with Boundary Mass and an Application to Loss Given Default Modeling](deep_reads/2026-06-24-2606.21515.md)  
   `经济理论 / 应用` · 相关性 6/10
 - [Bayesian Model Pursuit and Near-Oracle Sparse Signal Discovery Under Dependence](deep_reads/2026-06-24-2606.22490.md)  
@@ -359,6 +535,18 @@
   `因果推断` · 相关性 6/10
 - [Interpretable ROI Identification in Brain Image Analysis: Overcoming CNN Black Box Challenges With Kriging‐Enhanced Adaptive Sampling](deep_reads/2026-06-24-10.1002_sim.70653.md)  
   `统计计算 / 算法` · 相关性 6/10
+- [Variational Bayesian analysis of nonhomogeneous hidden Markov models with long and ultralong sequences](deep_reads/2026-06-24-10.1214_22-aoas1685.md)  
+  `统计计算 / 算法` · 相关性 5/10
+- [Imputation scores](deep_reads/2026-06-24-10.1214_22-aoas1727.md)  
+  `其他` · 相关性 5/10
+- [A Bayesian growth mixture model for complex survey data: Clustering postdisaster PTSD trajectories](deep_reads/2026-06-24-10.1214_23-aoas1729.md)  
+  `流行病学` · 相关性 5/10
+- [Estimating Covid-19 transmission time using Hawkes point processes](deep_reads/2026-06-24-10.1214_23-aoas1765.md)  
+  `流行病学` · 相关性 5/10
+- [Tensor regression for incomplete observations with application to longitudinal studies](deep_reads/2026-06-24-10.1214_23-aoas1830.md)  
+  `高维统计 / 随机矩阵` · 相关性 5/10
+- [Functional partial least squares with censored outcomes: Prediction of breast cancer risk with mammogram images](deep_reads/2026-06-24-10.1214_23-aoas1822.md)  
+  `流行病学` · 相关性 5/10
 - [Advanced Approaches to Generating High-validity Real-world Evidence in Asthma](deep_reads/2026-06-24-10.1097_ede.0000000000001803.md)  
   `流行病学` · 相关性 5/10
 - [Characterization of Additive Gene–environment Interactions For Colorectal Cancer Risk](deep_reads/2026-06-24-10.1097_ede.0000000000001795.md)  
@@ -425,6 +613,26 @@
   `流行病学` · 相关性 5/10
 - [Win Ratio as an Effect Size Measure Under Non‐Proportional Hazards: A Comparison With Difference in Restricted Mean Survival](deep_reads/2026-06-24-10.1002_sim.70554.md)  
   `非参数 / 半参数` · 相关性 5/10
+- [Tracking hematopoietic stem cell evolution in a Wiskott–Aldrich clinical trial](deep_reads/2026-06-24-10.1214_22-aoas1686.md)  
+  `流行病学` · 相关性 4/10
+- [Penalized estimating equations for generalized linear models with multiple imputation](deep_reads/2026-06-24-10.1214_22-aoas1721.md)  
+  `其他` · 相关性 4/10
+- [Building a dose toxo-equivalence model from a Bayesian meta-analysis of published clinical trials](deep_reads/2026-06-24-10.1214_23-aoas1748.md)  
+  `流行病学` · 相关性 4/10
+- [When ecological individual heterogeneity models and large data collide: An importance sampling approach](deep_reads/2026-06-24-10.1214_23-aoas1753.md)  
+  `统计计算 / 算法` · 相关性 4/10
+- [Quantifying replicability of multiple studies in a meta-analysis](deep_reads/2026-06-24-10.1214_23-aoas1806.md)  
+  `数理统计 / 假设检验` · 相关性 4/10
+- [Tensor mixture discriminant analysis with applications to sensor array data analysis](deep_reads/2026-06-24-10.1214_23-aoas1804.md)  
+  `统计计算 / 算法` · 相关性 4/10
+- [Applied regression analysis of correlations for correlated data](deep_reads/2026-06-24-10.1214_23-aoas1785.md)  
+  `统计计算 / 算法` · 相关性 4/10
+- [Accurate estimation of rare cell-type fractions from tissue omics data via hierarchical deconvolution](deep_reads/2026-06-24-10.1214_23-aoas1829.md)  
+  `流行病学` · 相关性 4/10
+- [Hierarchical dependence modeling for the analysis of large insurance claims data](deep_reads/2026-06-24-10.1214_23-aoas1840.md)  
+  `经济理论 / 应用` · 相关性 4/10
+- [Information-incorporated clustering analysis of disease prevalence trends](deep_reads/2026-06-24-10.1214_23-aoas1821.md)  
+  `非参数 / 半参数` · 相关性 4/10
 - [Progressing “Positive Epidemiology”: A Cross-national Analysis of Adolescents’ Positive Mental Health and Outcomes During the COVID-19 Pandemic](deep_reads/2026-06-24-10.1097_ede.0000000000001798.md)  
   `流行病学` · 相关性 4/10
 - [Doubly Marginalized: The Interplay of Racism and Disability in Outcomes for Minoritized People With Down Syndrome](deep_reads/2026-06-24-10.1097_ede.0000000000001789.md)  
@@ -481,6 +689,26 @@
   `因果推断` · 相关性 4/10
 - [Simultaneous Representation Learning of Multi‐Omics and Clinical Outcome Data via a Supervised Knowledge‐Guided Bayesian Factor Model](deep_reads/2026-06-24-10.1002_sim.70570.md)  
   `其他` · 相关性 4/10
+- [Spatiotemporal local interpolation of global ocean heat transport using Argo floats: A debiased latent Gaussian process approach](deep_reads/2026-06-24-10.1214_22-aoas1679.md)  
+  `非参数 / 半参数` · 相关性 3/10
+- [Joint modeling of playing time and purchase propensity in massively multiplayer online role-playing games using crossed random effects](deep_reads/2026-06-24-10.1214_23-aoas1731.md)  
+  `经济理论 / 应用` · 相关性 3/10
+- [A dynamic screening algorithm for hierarchical binary marketing data](deep_reads/2026-06-24-10.1214_22-aoas1720.md)  
+  `高维统计 / 随机矩阵` · 相关性 3/10
+- [ANOPOW for replicated nonstationary time series in experiments](deep_reads/2026-06-24-10.1214_23-aoas1791.md)  
+  `其他` · 相关性 3/10
+- [Online monitoring of air quality using PCA-based sequential learning](deep_reads/2026-06-24-10.1214_23-aoas1803.md)  
+  `统计计算 / 算法` · 相关性 3/10
+- [Learning healthcare delivery network with longitudinal electronic health records data](deep_reads/2026-06-24-10.1214_23-aoas1818.md)  
+  `其他` · 相关性 3/10
+- [Estimating fiber orientation distribution with application to study brain lateralization using HCP D-MRI data](deep_reads/2026-06-24-10.1214_23-aoas1781.md)  
+  `统计计算 / 算法` · 相关性 3/10
+- [Bayesian projections of total fertility rate conditional on the United Nations sustainable development goals](deep_reads/2026-06-24-10.1214_23-aoas1793.md)  
+  `流行病学` · 相关性 3/10
+- [Filtrated common functional principal component analysis of multigroup functional data](deep_reads/2026-06-24-10.1214_23-aoas1827.md)  
+  `非参数 / 半参数` · 相关性 3/10
+- [A flexible model for correlated count data, with application to multicondition differential expression analyses of single-cell RNA sequencing data](deep_reads/2026-06-24-10.1214_24-aoas1894.md)  
+  `其他` · 相关性 3/10
 - [Multilevel Resilience and Appointment Attendance Among African American/Black Adults with HIV: A Prospective Multisite Cohort Study](deep_reads/2026-06-24-10.1097_ede.0000000000001801.md)  
   `流行病学` · 相关性 3/10
 - [Potential of a Second Screening Test for Alloimmunization in Pregnancies of Rhesus-positive Women: A Swedish Population-based Cohort Study](deep_reads/2026-06-24-10.1097_ede.0000000000001794.md)  
@@ -507,6 +735,34 @@
   `流行病学` · 相关性 3/10
 - [A Tutorial on Bayesian Multi‐Study Factor Analysis With Applications in Nutrition and Genomics](deep_reads/2026-06-24-10.1002_sim.70531.md)  
   `流行病学` · 相关性 3/10
+- [Bayesian combinatorial MultiStudy factor analysis](deep_reads/2026-06-24-10.1214_22-aoas1715.md)  
+  `流行病学` · 相关性 2/10
+- [Bayesian nonparametric mixture modeling for temporal dynamics of gender stereotypes](deep_reads/2026-06-24-10.1214_22-aoas1717.md)  
+  `非参数 / 半参数` · 相关性 2/10
+- [The Bayesian nested lasso for mixed frequency regression models](deep_reads/2026-06-24-10.1214_22-aoas1718.md)  
+  `经济理论 / 应用` · 相关性 2/10
+- [Spatial quantile autoregression for season within year daily maximum temperature data](deep_reads/2026-06-24-10.1214_22-aoas1719.md)  
+  `其他` · 相关性 2/10
+- [Bayesian modeling of interaction between features in sparse multivariate count data with application to microbiome study](deep_reads/2026-06-24-10.1214_22-aoas1690.md)  
+  `流行病学` · 相关性 2/10
+- [Joint stochastic simulation of extreme coastal and offshore significant wave heights](deep_reads/2026-06-24-10.1214_23-aoas1766.md)  
+  `非参数 / 半参数` · 相关性 2/10
+- [A Bayesian group selection with compositional responses for analysis of radiologic tumor proportions and their genomic determinants](deep_reads/2026-06-24-10.1214_23-aoas1749.md)  
+  `流行病学` · 相关性 2/10
+- [Network-level traffic flow prediction: Functional time series vs. functional neural network approach](deep_reads/2026-06-24-10.1214_23-aoas1795.md)  
+  `非参数 / 半参数` · 相关性 2/10
+- [Bayesian multiple instance classification based on hierarchical probit regression](deep_reads/2026-06-24-10.1214_23-aoas1780.md)  
+  `其他` · 相关性 2/10
+- [A quantitative linguistic analysis of a cancer online health community with a smooth latent space model](deep_reads/2026-06-24-10.1214_23-aoas1783.md)  
+  `其他` · 相关性 2/10
+- [Flexible multivariate spatiotemporal Hawkes process models of terrorism](deep_reads/2026-06-24-10.1214_23-aoas1839.md)  
+  `其他` · 相关性 2/10
+- [Athlete rating in multicompetitor games with scored outcomes via monotone transformations](deep_reads/2026-06-24-10.1214_23-aoas1832.md)  
+  `非参数 / 半参数` · 相关性 2/10
+- [A novel Bayesian model for assessing intratumor heterogeneity of tumor infiltrating leukocytes with multiregion gene expression sequencing](deep_reads/2026-06-24-10.1214_23-aoas1862.md)  
+  `其他` · 相关性 2/10
+- [A latent process model for monitoring progress toward hard-to-measure targets with applications to mental health and online educational assessments](deep_reads/2026-06-24-10.1214_24-aoas1873.md)  
+  `其他` · 相关性 2/10
 - [ZIP Code and ZIP Code Tabulation Area Linkage: Implications for Bias in Epidemiologic Research](deep_reads/2026-06-24-10.1097_ede.0000000000001800.md)  
   `流行病学` · 相关性 2/10
 - [Improving work-related estimates to make health inequalities visible](deep_reads/2026-06-24-10.1093_aje_kwaf247.md)  
@@ -519,6 +775,14 @@
   `其他` · 相关性 2/10
 - [A Unified Framework for Statistical Inference and Power Analysis of Single and Comparative Fβ Scores](deep_reads/2026-06-24-10.1002_sim.70557.md)  
   `数理统计 / 假设检验` · 相关性 2/10
+- [A rotation-based feature and Bayesian hierarchical model for the forensic evaluation of handwriting evidence in a closed set](deep_reads/2026-06-24-10.1214_22-aoas1662.md)  
+  `其他` · 相关性 1/10
+- [Calibration of SpatioTemporal forecasts from citizen science urban air pollution data with sparse recurrent neural networks](deep_reads/2026-06-24-10.1214_22-aoas1683.md)  
+  `其他` · 相关性 1/10
+- [Land-use filtering for nonstationary spatial prediction of collective efficacy in an urban environment](deep_reads/2026-06-24-10.1214_23-aoas1813.md)  
+  `非参数 / 半参数` · 相关性 1/10
+- [A behavioral approach to repeated Bayesian security games](deep_reads/2026-06-24-10.1214_23-aoas1786.md)  
+  `经济理论 / 应用` · 相关性 1/10
 - [The Authors Respond](deep_reads/2026-06-24-10.1097_ede.0000000000001861.md)  
   `因果推断` · 相关性 1/10
 - [Implementing and retaining a large-scale technology-mediated cohort to study HIV incidence and PrEP uptake among vulnerable cisgender men as well as transgender individuals in the United States, the Together 5000 cohort](deep_reads/2026-06-24-10.1093_aje_kwaf250.md)  

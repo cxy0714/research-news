@@ -144,7 +144,13 @@
 - [Vol 19 Issue 2 · 2026-06-19](journals/2026-06-19-aoas-v19-i2.md)
 - [Vol 19 Issue 1 · 2026-06-19](journals/2026-06-19-aoas-v19-i1.md)
 - [Vol 18 Issue 4 · 2026-06-19](journals/2026-06-19-aoas-v18-i4.md)
+- [Vol 18 Issue 3 · 2026-06-24](journals/2026-06-24-aoas-v18-i3.md)
 - [Vol 18 Issue 3 · 2026-06-19](journals/2026-06-19-aoas-v18-i3.md)
+- [Vol 18 Issue 2 · 2026-06-24](journals/2026-06-24-aoas-v18-i2.md)
+- [Vol 18 Issue 1 · 2026-06-24](journals/2026-06-24-aoas-v18-i1.md)
+- [Vol 17 Issue 4 · 2026-06-24](journals/2026-06-24-aoas-v17-i4.md)
+- [Vol 17 Issue 3 · 2026-06-24](journals/2026-06-24-aoas-v17-i3.md)
+- [Vol 17 Issue 2 · 2026-06-24](journals/2026-06-24-aoas-v17-i2.md)
 
 ### Biometrics
 
