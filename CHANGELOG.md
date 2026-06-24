@@ -26,6 +26,10 @@
   「`paper_id` 已在精读索引中则跳过」，无需把状态写回 Gist；精读完成后前端从
   `deep_reads_index.json` 回填收藏 / 录入列表的 **🔍 精读** 链接。无 `GIST_TOKEN` 时该步安静跳过，
   绝不影响日跑。新增共享模块 `research_news.gist_state`（`publish_favorites` 同步改用）。
+- **收藏即补读：收藏未精读的论文，次日自动补精读**：在日报里点 ☆ 收藏一篇没精读的 arXiv 论文，
+  下次 `manual_requests` 会把它当成隐式队列（`favorite_deepread_ids`，按收藏时间新→旧）自动补一份
+  精读，无需再去录入框。每次限量 `MANUAL_FAV_LIMIT`(默认 10) 篇，剩余后续几天补完（日志记录余量）；
+  `AUTO_DEEPREAD_FAVORITES=0` 可整体关闭。已带精读链接的收藏、非 arXiv 书签会跳过。
 - **手动录入支持非 arXiv 论文（按标题找预印本）**：录入框现在也接受**标题 / 整条引用 / DOI**，
   不必是 arXiv。这类 `kind:"lookup"` 请求由 `manual_requests` 处理：LLM 抽出干净标题 → 复用
   `crossref._arxiv_search_match` 按标题去 arXiv 找预印本——找到就解析 id、照常精读；找不到就只作

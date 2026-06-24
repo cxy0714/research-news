@@ -174,6 +174,31 @@ def test_stale():
     assert mr._stale(date.today().isoformat()) is False
 
 
+def test_favorite_deepread_ids_selects_un_deep_read_arxiv_newest_first():
+    state = {"favorites": {
+        "2405.08525": {"paper_id": "2405.08525",
+                       "url": "https://arxiv.org/abs/2405.08525",
+                       "added": "2026-06-18T00:00:00Z"},
+        "2401.00001": {"paper_id": "2401.00001",
+                       "url": "https://arxiv.org/abs/2401.00001",
+                       "added": "2026-06-19T00:00:00Z"},
+        "2399.55555": {"paper_id": "2399.55555", "added": "2026-06-17",
+                       "deep_read_url": "/deep_reads/x/"},        # already read → skip
+        "q:foo": {"paper_id": "q:foo", "manual_lookup": True,
+                  "added": "2026-06-19"},                          # bookmark → skip
+        "doi-x": {"paper_id": "10.1/x", "url": "https://doi.org/10.1/x",
+                  "added": "2026-06-19"},                          # no arXiv id → skip
+        "2300.00002": {"paper_id": "2300.00002", "added": "2026-06-10"},  # excluded
+    }}
+    ids = mr.favorite_deepread_ids(state, exclude={"2300.00002"})
+    assert ids == ["2401.00001", "2405.08525"]   # newest favorited first
+
+
+def test_favorite_deepread_ids_empty():
+    assert mr.favorite_deepread_ids({}, exclude=set()) == []
+    assert mr.favorite_deepread_ids({"favorites": {}}, exclude=set()) == []
+
+
 # ── section rendering + injection ─────────────────────────────────────────────
 
 def _paper(pid="2405.08525", topic="causal_inference", score=7.0):

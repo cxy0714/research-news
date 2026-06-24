@@ -193,8 +193,8 @@ def render_manual_section(papers: list[Paper]) -> list[str]:
         return []
     out = [
         MANUAL_SECTION_HEADING + "\n",
-        "> 你在网页上手动录入（粘贴 arXiv 链接）申请精读的论文，已默认加入收藏，"
-        "并由当天的定时任务精读。点标题旁的 **🔍 精读** 查看解读。\n",
+        "> 你手动录入（粘贴 arXiv 链接 / 标题）申请精读、或**收藏后补读**的论文，"
+        "由当天的定时任务精读。点标题旁的 **🔍 精读** 查看解读。\n",
     ]
     out.extend(_render_topic_groups(papers, heading_prefix="###"))
     return out

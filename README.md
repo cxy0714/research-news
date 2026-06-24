@@ -600,9 +600,16 @@ Token（classic）。Token 只存在你本机浏览器的 localStorage，首次�
 作为只读回传给浏览器的通道，也充当去重记录）；前端据此显示每条状态（排队中 / 已精读 / 未找到预印本），
 并把找到预印本的书签链到精读页。"找不到预印本"的会每 `NO_PREPRINT_RETRY_DAYS`(7) 天复查一次。
 
+**收藏即补读**：你在日报里看到一篇没精读的论文，点 **☆ 收藏**，下次定时任务就会自动给它**补一份精读**
+——无需再去录入框。机制是把「收藏里还没精读的 arXiv 论文」当成一个隐式队列（`favorite_deepread_ids`），
+按收藏时间新→旧补读。为了避免一次性把历史收藏全精读（烧 token / 拖长日跑），每次**限量**补几篇
+（`MANUAL_FAV_LIMIT`，默认 10），剩下的后续几天慢慢补完（日志里会写还剩多少）。整体可用
+`AUTO_DEEPREAD_FAVORITES=0` 关掉。已带精读链接的收藏、非 arXiv 书签（`q:` lookup）会跳过。
+
 去重：arXiv 条目里 `paper_id` 已在精读索引中的直接跳过；lookup 条目按 `manual_resolved.json`
-的状态跳过，所以重复跑既便宜又不会精读两遍。**本机需要 `GIST_TOKEN`**（与 publish-favorites 同一个
-`gist` PAT，写进 `.env`）；没配 token 时这一步会安静跳过，绝不影响日跑提交。`--date` / `--dry-run` 可调。
+的状态跳过；收藏补读也排除已精读 / 已在队列的，所以重复跑既便宜又不会精读两遍。**本机需要
+`GIST_TOKEN`**（与 publish-favorites 同一个 `gist` PAT，写进 `.env`）；没配 token 时这一步会安静跳过，
+绝不影响日跑提交。`--date` / `--dry-run` 可调。
 
 ### 公开收藏快照（让访客也能看）
 

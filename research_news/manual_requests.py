@@ -130,6 +130,33 @@ def _already_deep_read() -> set[str]:
     return {e.get("paper_id") for e in load_index() if e.get("paper_id")}
 
 
+def favorite_deepread_ids(state: dict, *, exclude: set[str]) -> list[str]:
+    """arXiv ids of *favorites that have no deep read yet* — an implicit backfill
+    queue. Use case: you star a paper in a daily report that wasn't deep-read; the
+    next run should deep-read it. Newest-favorited first; ``exclude`` drops ones
+    already handled (already deep-read / in the explicit queue). Non-arXiv
+    bookmarks (``manual_lookup`` / no arXiv id) and favorites that already link a
+    deep read are skipped."""
+    favs = (state or {}).get("favorites") or {}
+    cands: list[tuple[str, str]] = []
+    for fav in favs.values():
+        fav = fav or {}
+        if fav.get("manual_lookup") or fav.get("deep_read_url"):
+            continue
+        aid = (arxiv_scraper.normalize_arxiv_id(fav.get("paper_id") or "")
+               or arxiv_scraper.normalize_arxiv_id(fav.get("url") or ""))
+        if aid and aid not in exclude:
+            cands.append((fav.get("added") or "", aid))
+    cands.sort(key=lambda t: t[0], reverse=True)   # newest favorited first
+    out: list[str] = []
+    seen: set[str] = set()
+    for _, aid in cands:
+        if aid not in seen:
+            seen.add(aid)
+            out.append(aid)
+    return out
+
+
 # ── resolving non-arXiv "lookup" requests to an arXiv preprint ─────────────────
 
 def _load_resolved() -> dict:
@@ -435,21 +462,36 @@ def run(*, date_str: str | None = None, dry_run: bool = False,
         log.info("no state gist found — skipping manual deep-read queue.")
         return 0
 
+    # Auto-deep-read favorites that have no deep read yet (capped per run so a
+    # large backlog drains over several days instead of one giant run). Toggle /
+    # cap via env; read here so a .env value applies.
+    auto_fav = os.environ.get("AUTO_DEEPREAD_FAVORITES", "1").strip().lower() \
+        not in ("0", "false", "no", "")
+    try:
+        fav_limit = max(0, int(os.environ.get("MANUAL_FAV_LIMIT", "10")))
+    except ValueError:
+        fav_limit = 10
+
     entries = queue_entries(state)
     arxiv_direct = [e["arxiv_id"] for e in entries if e["kind"] == "arxiv"]
     lookups = [e for e in entries if e["kind"] == "lookup"]
-    if not entries:
-        log.info("manual deep-read queue is empty.")
-        return 0
-    log.info("manual queue: %d arXiv link(s), %d non-arXiv lookup(s)",
-             len(arxiv_direct), len(lookups))
-
     already = _already_deep_read()
+    fav_pending = (favorite_deepread_ids(state, exclude=already | set(arxiv_direct))
+                   if auto_fav else [])
+
+    if not entries and not fav_pending:
+        log.info("manual queue + favorites: nothing to deep-read.")
+        return 0
+    log.info("manual queue: %d arXiv link(s), %d non-arXiv lookup(s); "
+             "%d favorite(s) awaiting deep read",
+             len(arxiv_direct), len(lookups), len(fav_pending))
 
     if dry_run:
         new_direct = [a for a in arxiv_direct if a not in already]
-        log.info("dry run: %d new arXiv to deep-read (%s); %d lookup(s) to resolve",
-                 len(new_direct), ", ".join(new_direct) or "—", len(lookups))
+        log.info("dry run: %d new arXiv to deep-read (%s); %d lookup(s) to resolve; "
+                 "%d favorite(s) to backfill (cap %d)",
+                 len(new_direct), ", ".join(new_direct) or "—", len(lookups),
+                 min(len(fav_pending), fav_limit), fav_limit)
         update_daily_page(run_date, dry_run=True)
         return 0
 
@@ -465,10 +507,19 @@ def run(*, date_str: str | None = None, dry_run: bool = False,
     resolved_ids = _resolve_lookups(lookups, resolved, client=client,
                                     run_date=run_date, model=model)
 
-    # 2) Deep-read every new arXiv id (pasted links + resolved preprints), in
-    #    queue order, skipping anything already deep-read.
-    to_read = [a for a in dict.fromkeys(arxiv_direct + sorted(resolved_ids))
-               if a not in already]
+    # 2) Build the read set: explicit requests (pasted links + resolved preprints)
+    #    are always read; favorites are an implicit backfill, capped per run.
+    explicit = [a for a in dict.fromkeys(arxiv_direct + sorted(resolved_ids))
+                if a not in already]
+    fav_all = (favorite_deepread_ids(
+        state, exclude=already | set(arxiv_direct) | set(resolved_ids))
+        if auto_fav else [])
+    fav_take = fav_all[:fav_limit]
+    if len(fav_all) > len(fav_take):
+        log.info("favorites backfill: %d this run, %d more pending (cap=%d)",
+                 len(fav_take), len(fav_all) - len(fav_take), fav_limit)
+    to_read = list(dict.fromkeys(explicit + fav_take))
+
     n_done = 0
     if to_read:
         papers = arxiv_scraper.fetch_by_ids(to_read)
