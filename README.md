@@ -54,9 +54,31 @@ python -m research_news.daily
 python -m research_news.daily --date 2026-05-14
 python -m research_news.daily --lookback-days 3   # 周一补周五的
 
-# 临时换模型
+# 临时换模型（只影响本次；持久改用 .env，见下）
 $env:DAILY_MODEL="deepseek-chat"; python -m research_news.daily
 ```
+
+### 模型配置（一处改，全局生效）
+
+所有跑 LLM 的模块都从 `.env` 读模型名。**总开关只有两个**，其余按需级联：
+
+| 变量 | 用途 | 级联/默认 |
+|---|---|---|
+| `DAILY_MODEL` | 打分 / 摘要 / 概览等轻量任务（daily 及多数模块） | 总开关 |
+| `DEEP_READ_MODEL` | 长文精读（daily / 手动队列） | 总开关 |
+| `JOURNALS_MODEL` | 期刊 | 空 → `DAILY_MODEL` |
+| `SYNTHESIS_MODEL` | 综述合成 | 空 → `DAILY_MODEL` |
+| `TALK_OVERVIEW_MODEL` | talk 概览 | 空 → `DAILY_MODEL` |
+| `TALK_MODEL` | talk 深读 | 空 → `DEEP_READ_MODEL` |
+| `SJTU_MODEL_FAST` / `SJTU_MODEL_DEEP` | client 底层默认（调用方不显式传 model 时才用） | 独立 |
+
+要换模型（比如 `glm-5.1` 用不了），**只改 `.env` 里的 `DAILY_MODEL` 一行**即可，期刊 / 综述 /
+talk 概览会自动跟着换；只有想给某类任务单独钉一个模型时才去填对应的分变量。改完直接重跑，
+无需改代码。
+
+> 这些模型值在包 `research_news/__init__.py` 里的 `load_dotenv()` 时统一加载，早于任何子模块
+> 读取，所以 `.env` 的改动一定生效（0.10 之前有个加载顺序 bug 会让 `.env` 被忽略、一律回落
+> 硬编码的 `glm-5.1`，已修）。
 
 ### 重跑乱码 / 没跑完的摘要
 
@@ -181,6 +203,38 @@ venv、`git pull --rebase --autostash`（先同步网页 / agent 合进来的改
 ```
 
 放仓库外（如 `/root/run_rn.sh`）就设 `RN_REPO=/root/research-news`；放仓库里则自动定位。
+
+#### Windows：任务计划程序（Task Scheduler）
+
+台式机上一次性注册三个任务（详见 `scripts/register-task.ps1`）：
+
+```powershell
+# 一次性注册：daily（工作日 09:10）+ catch-up（登录补齐缺天）+ journals（期刊回补循环）
+.\scripts\register-task.ps1
+```
+
+日常操作：
+
+```powershell
+# 查看三个任务的状态（Ready = 已启用待触发，Running = 正在跑，Disabled = 已暂停）
+Get-ScheduledTask -TaskName 'research-news-*' | Select-Object TaskName, State
+
+# 手动立即跑某个任务（不必等到点）
+Start-ScheduledTask -TaskName 'research-news-daily'      # 或 -catchup / -journals
+
+# 暂停 / 恢复某个任务（比如只想临时停掉期刊回补循环）
+Disable-ScheduledTask -TaskName 'research-news-journals'
+Enable-ScheduledTask  -TaskName 'research-news-journals'
+
+# 看某个任务上次跑的结果（LastTaskResult=0 为成功；267009/0x41301 表示正在运行）
+Get-ScheduledTaskInfo -TaskName 'research-news-catchup'
+```
+
+- `research-news-daily`：工作日 09:10 跑当天日报（完整管道 + 提交推送）。
+- `research-news-catchup`：登录后触发，把**关机期间漏掉的过去工作日**用 `daily --date <X>` 一次性补齐（今天留给 daily 任务；补跑日志写在**运行当天**日期的 `logs\<今天>-<机器名>.log` 里）。
+- `research-news-journals`：期刊往期回补的连续循环，登录自启 + 每日 10:30 兜底重启，给 daily 时段让路。
+
+各任务的完整日志在 `logs\`：控制台 transcript 是 `run-<日期>-<机器名>.log` / `catchup-…` / `journal-loop-…`，管道自身日志是 `<日期>-<机器名>.log`。
 
 ### 显示全部论文（含低相关）+ 补全历史
 

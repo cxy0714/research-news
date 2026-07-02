@@ -122,6 +122,7 @@
 ### 10. [10.1097/ede.0000000000001823](https://doi.org/10.1097/ede.0000000000001823) — Validation of Lactational Mastitis Diagnosis Codes in Electronic Health Care Data
 - **作者**: Malini B. DeSilva, Elisabeth M. Seburg, Kirsten Ehresmann, Gabriela Vazquez-Benitez, Yihe G. Daida, Kimberly K. Vesco et al.
 - **期刊/来源**: Epidemiology
+- **机构**: HealthPartners · Kaiser Permanente · Kaiser Permanente Center for Health Research
 - **分类**: vol 36 · issue 2 · pp 160-164
 - 相关性 2/10 · novelty: `application`
 - **摘要**: 该研究旨在验证电子健康记录中哺乳期乳腺炎诊断代码（ICD-10-CM代码N61.0和O91.2）的阳性预测值（PPV）。在三个医疗系统中纳入2020年12月至2022年9月分娩且有哺乳记录的19,660名患者，通过医疗记录审查确认诊断。对119份随机抽样的疑似病例进行审查，评估“很可能”（乳房症状伴全身症状）和“可能”（仅乳房症状）的乳腺炎定义。结果显示，仅代码的PPV为76%（很可能）和97%（很可能或可能）；添加抗生素处方后PPV提高至80%和100%，但病例数减少。研究结论是诊断代码单独使用具有较好的PPV，抗生素数据可进一步改善准确性，但会降低敏感性。该研究为流行病学中诊断代码验证提供了具体范例，其PPV估计方法可直接应用于其他疾病代码验证场景。

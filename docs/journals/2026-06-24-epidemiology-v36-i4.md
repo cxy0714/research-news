@@ -132,6 +132,7 @@
 ### 7. [10.1097/ede.0000000000001852](https://doi.org/10.1097/ede.0000000000001852) — Right Censoring and Mortality in the Multicenter AIDS Cohort Study and Women’s Interagency HIV Study
 - **作者**: Jessie K. Edwards, Tiffany L. Breger, Stephen R. Cole, Paul N. Zivich, Bonnie E. Shook-Sa, Leah M. Sadinski et al.
 - **期刊/来源**: Epidemiology
+- **机构**: University of North Carolina at Chapel Hill · Emory University · Georgetown University · Johns Hopkins University · Johns Hopkins Medicine · University of Mississippi Medical Center · Northwestern University · Los Angeles LGBT Center 等
 - **分类**: vol 36 · issue 4 · pp 511-519
 - 相关性 5/10 · novelty: `application`
 - **摘要**: 本文研究队列研究中因参与者连续失访导致的右删失对死亡率估计的影响，利用 MACS 和 WIHS 两个 HIV 队列与生命统计登记系统的链接数据作为 gold standard。核心方法是比较三种分析策略：无删失的 gold standard 分析、连续两次失访后删失、以及应用 inverse probability of censoring weights (IPCW) 校正删失偏差。主要发现在 MACS 和 WIHS 中，10 年死亡率分别为 23% 和 21%，删失导致的偏差 modest（0%–5% 低估），IPCW 能部分校正这种衰减。结论是此类队列研究中常规删失处理对死亡率估计影响有限，但 IPCW 仍是推荐的校正手段。对您而言，这是一个经典的 IPCW 应用案例，展示了 sensitivity analysis 在真实队列数据中的具体操作。

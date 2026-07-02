@@ -16,6 +16,44 @@
 
 ## [Unreleased]
 
+（暂无未发布改动。）
+
+---
+
+## [0.10] — 2026-07-02
+
+模型配置一处集中、一键全局切换，并修好一个「改了 `.env` 却不生效」的加载顺序 bug。
+
+### Fixed
+- **`.env` 里的模型配置从未生效，一律回落硬编码的 `glm-5.1`（加载顺序 bug）**：各模块在
+  **import 时**就把模型名读进模块级常量（`DAILY_MODEL = os.environ.get("DAILY_MODEL", "glm-5.1")`），
+  而 `load_dotenv()` 却在各自的入口函数里才调用——等它跑时常量早已绑定，`.env` 的值根本没被
+  读到，于是所有跑批（daily / journals / synthesize / talks / manual / backfill / rerun）都在用
+  硬编码默认值 `glm-5.1`。这就是「glm-5.1 挂了、改了 `.env` 也切不掉」的根因。修法：在包
+  `research_news/__init__.py` 里提前 `load_dotenv()`——`python -m research_news.X` 必先导入包，
+  故 `.env` 在任何子模块读常量之前就已加载，一处修复覆盖所有模块。子模块入口里原有的
+  `load_dotenv()` 保留无害（幂等）。
+
+### Changed
+- **模型配置集中进 `.env`，一处改全局生效**：把散落各模块的模型环境变量整理成一块，注释写清
+  级联关系。真正的**总开关只有两个**——`DAILY_MODEL`（轻量任务：打分 / 摘要 / 概览）与
+  `DEEP_READ_MODEL`（长文精读）；`JOURNALS_MODEL` / `SYNTHESIS_MODEL` / `TALK_OVERVIEW_MODEL`
+  默认级联自 `DAILY_MODEL`，`TALK_MODEL` 级联自 `DEEP_READ_MODEL`（留空即跟随，只想给某类任务
+  单独钉模型时才填）。`SJTU_MODEL_FAST` / `SJTU_MODEL_DEEP` 是 client 底层默认（调用方不显式传
+  model 时才用，多数调用会显式传）。`glm-5.1` 用不了时只改 `DAILY_MODEL` 一行，期刊 / 综述 /
+  talk 概览自动跟着换。`.env.example` 同步。
+
+### Docs
+- **README 增补模型切换与 Windows 定时任务的常用命令**：模型一节讲清「改 `.env` 的两个总开关
+  即全局切换」；新增查看 / 手动触发 / 启停三个计划任务（`research-news-daily` /
+  `research-news-catchup` / `research-news-journals`）的 PowerShell 命令。
+
+---
+
+## [0.9] — 2026-06-25
+
+网页手动录入 + 收藏即补读，期刊往期全自动回补，Windows 开机补齐缺天。
+
 ### Added
 - **网页手动录入论文 → 次日定时精读（与 Gist 联动）**：收藏页顶部新增「✍️ 手动录入论文」框，
   登录后粘贴 arXiv 链接 / 编号（可多条）即可。论文 **默认加入收藏**，并写进同一个私密 Gist 的
@@ -150,6 +188,12 @@
   这能避免突发请求触发 429、并从限流中自动恢复。可用 `ARXIV_USER_AGENT` / `ARXIV_MIN_INTERVAL`
   / `ARXIV_FETCH_ATTEMPTS` 调。
 
+---
+
+## [0.8] — 2026-06-13
+
+跨篇综合 / 选题引擎，讲座（OCIS / seminar 录像）精读管道，每日报告展示全部论文。
+
 ### Added
 - **OCIS 目录批量导入 `talks import-ocis`**：把
   [Online Causal Inference Seminar](https://sites.google.com/view/ocis/past-talks)
@@ -237,6 +281,12 @@
   少数 topic ≥6"统一改为**所有 topic ≥ `score_threshold_deepread`（默认 6）**；并放宽
   `SCORE_SYSTEM` 的打分标准（拿不准就往 6-7 靠，避免漏掉相关论文）。原先按 topic 分桶的
   deep-read 选择逻辑（`DEEP_READ_LOWER_THRESHOLD_TOPICS`、application≥7）由统一阈值取代。
+
+---
+
+## [0.7] — 2026-06-01
+
+精读方向重构：从「这篇讲了啥」转向「先把方向综述透、再谈值不值得做」；机构绿灯、核心被引文献、账户 + 收藏。
 
 ### Added
 - **机构绿灯：top 学者免分进入精读**：新增 `config/institutions.yaml`（US News 2024

@@ -62,6 +62,7 @@
 ### 3. [10.1097/ede.0000000000001821](https://doi.org/10.1097/ede.0000000000001821) — Adjusting Adjustments: Using External Data to Estimate the Impact of Different Confounder Sets on Published Associations
 - **作者**: Thomas P. Ahern, Lindsay J. Collin, Richard F. MacLehose, Benjamin Littenberg, Laura Haines, Michaela Bonnett et al.
 - **期刊/来源**: Epidemiology
+- **机构**: University of Vermont · U.S. National Science Foundation · University of Utah · Huntsman Cancer Institute · University of Minnesota · Vermont Department of Health · Emory University · Aarhus University
 - **分类**: vol 36 · issue 3 · pp 381-390
 - 相关性 8/10 · novelty: `application`
 - **摘要**: 本文在观察性研究的 meta-analysis 框架下，研究如何利用外部数据（NHANES III）对已发表研究进行 confounder adjustment 的事后校正。核心 estimand 是 BMI-死亡率关联的相对风险比，关键假设是外部数据中 confounder-exposure-outcome 的联合分布可迁移到目标研究。方法上，作者基于外部数据估计原始调整集与充分调整集之间的 bias factor（ratio measure 的位移因子），然后对原始效应估计进行乘法校正。技术工具包括 standardization / g-formula 思想、外部数据插补、以及 random-effects meta-analysis 的异质性评估（I² 统计量）。实证结果显示，对 33 项研究进行统一调整后，汇总 RR 从 0.88 变为 0.90，异质性略有下降（I² 从 38.4% 降至 34.6%），但保护性关联仍然存在。本文属于应用方法学论文，novelty 在于将外部调整程序系统化并应用于真实 meta-analysis 场景。对您而言，这是流行病学因果推断应用的一个具体案例，展示了如何用外部数据解决 confounder adjustment 不一致的问题。

@@ -18,6 +18,7 @@
 ### 1. [10.1097/ede.0000000000001986](https://doi.org/10.1097/ede.0000000000001986) — The Authors Respond
 - **作者**: Stephen Burgess, Emily Bassett
 - **期刊/来源**: Epidemiology
+- **机构**: University of Cambridge · MRC Biostatistics Unit · Medical Research Council
 - **分类**: vol 37 · issue 4 · pp e9-e9
 - 相关性 3/10 · novelty: `minor`
 - **摘要**: 本文是对非线性孟德尔随机化方法批评的回应，核心辩护理由是：任何因果推断方法都依赖不可检验的假设，方法在假设成立时有效、假设违反时产生偏差是统计学的常态。作者指出 NLMR 比传统线性 MR 需要更强的假设，因此对假设违反更敏感，但使用更新方法（如 doubly-ranked method）和有效工具变量的 NLMR 研究仍具可信度。文章强调统计方法的可靠性评估需要理论与实证双重视角，不能仅凭少数失败案例否定方法本身。这是流行病学方法论辩论的 position piece，无新方法或理论贡献。
