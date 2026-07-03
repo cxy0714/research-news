@@ -11,40 +11,24 @@
 - **[收藏](favorites.md)** — 登录后在各页点 ☆ 收藏的论文，自动汇总到这里（总收藏按类别分组、可切换按周；每篇可写评论，无需手动维护）。
 - **[模型测评](all_shootout.md)** — 不同 LLM 在同一批论文上的打分 / 解读对比。
 
-## 今日 · 2026-06-26
+## 今日 · 2026-07-03
 
 ### 每日 arXiv 速览
 
-[→ 查看完整报告](daily/2026-06-26.md)
+[→ 查看完整报告](daily/2026-07-03.md)
 
-### 精读论文（13 篇）
+### 精读论文（5 篇）
 
-- [A Toolkit for the Study of Treatment-Effect Discontinuities](deep_reads/2026-06-26-2606.28017.md)  
+- [An Instrumental Variable Approach to Account for Informative Treatment Switching in Real-world Evidence](deep_reads/2026-07-03-2607.00980.md)  
   `因果推断` · 相关性 8/10
-- [A bootstrap approach to prediction-powered inference](deep_reads/2026-06-26-2606.28621.md)  
+- [Robust Estimation and Inference with Selective Borrowing in Hybrid Controlled Trials: A Tutorial with SelectiveIntegrative and intFRT](deep_reads/2026-07-03-2607.00350.md)  
   `因果推断` · 相关性 7/10
-- [Experimental Design When N Equals One](deep_reads/2026-06-26-2606.28200.md)  
+- [Post-selection inference for network structure](deep_reads/2026-07-03-2607.00312.md)  
   `因果推断` · 相关性 7/10
-- [Robust estimation of occupation probabilities for coarsened multistate processes](deep_reads/2026-06-26-2606.27952.md)  
-  `因果推断` · 相关性 7/10
-- [Design-Aware Variance Reduction for Switchback Experiments: A Comparative Study](deep_reads/2026-06-26-2606.27662.md)  
-  `因果推断` · 相关性 7/10
-- [Revisiting local regression: shape regularity, uniform rates, and the limits of random splits](deep_reads/2026-06-26-2606.28641.md)  
-  `非参数 / 半参数` · 相关性 7/10
-- [Optimal Estimators for Heavy-Tailed Mean Estimation via Convex Analysis](deep_reads/2026-06-26-2606.27899.md)  
-  `数理统计 / 假设检验` · 相关性 7/10
-- [Domain-Informed Multi-View Self-Distillation for Astronomical Light-Curve Representation Learning with JEPA](deep_reads/2026-06-26-2606.28446.md)  
-  `天体统计` · 相关性 7/10
-- [Focused median bias reduction](deep_reads/2026-06-26-2606.28597.md)  
-  `数理统计 / 假设检验` · 相关性 6/10
-- [Robust and Scalable Sure Screening of Fixed effects in Ultrahigh-dimensional Linear Mixed Models](deep_reads/2026-06-26-2606.27789.md)  
-  `高维统计 / 随机矩阵` · 相关性 6/10
-- [The multiply iterated law of the iterated logarithm: game-theoretic foundations of sequential detection boundaries](deep_reads/2026-06-26-2606.28324.md)  
-  `数理统计 / 假设检验` · 相关性 6/10
-- [The Galaxy's Guide to the Tokenizer: A Benchmark for Scientific Foundation Models](deep_reads/2026-06-26-2606.25610.md)  
+- [Distributed Prediction under Heterogeneity with Unidentifiable Parameter](deep_reads/2026-07-03-2607.00376.md)  
+  `其他` · 相关性 6/10
+- [GTLS: A GPU-accelerated method for periodic transit detection](deep_reads/2026-07-03-2607.00348.md)  
   `天体统计` · 相关性 6/10
-- [The performance of the TA$\times$4 surface detector array: 4.3 years of the first-half expansion](deep_reads/2026-06-26-2606.28051.md)  
-  `天体统计` · 相关性 2/10
 
 ## 收藏
 
@@ -52,11 +36,11 @@
 
 ## 本周每日报告
 
-- [2026-06-25](daily/2026-06-25.md)
-- [2026-06-24](daily/2026-06-24.md)
-- [2026-06-23](daily/2026-06-23.md)
-- [2026-06-22](daily/2026-06-22.md)
-- [2026-06-19](daily/2026-06-19.md)
+- [2026-07-02](daily/2026-07-02.md)
+- [2026-07-01](daily/2026-07-01.md)
+- [2026-06-30](daily/2026-06-30.md)
+- [2026-06-29](daily/2026-06-29.md)
+- [2026-06-26](daily/2026-06-26.md)
 
 
 ---
