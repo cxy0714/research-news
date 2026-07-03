@@ -155,6 +155,7 @@
 ### Biometrics
 
 - [Vol 82 Issue 3 · 2026-07-03](journals/2026-07-03-biometrics-v82-i3.md)
+- [Vol 82 Issue 2 · 2026-07-03](journals/2026-07-03-biometrics-v82-i2.md)
 - [Vol 82 Issue 2 · 2026-06-24](journals/2026-06-24-biometrics-v82-i2.md)
 - [Vol 82 Issue 2 · 2026-06-19](journals/2026-06-19-biometrics-v82-i2.md)
 - [Vol 82 Issue 2 · 2026-06-10](journals/2026-06-10-biometrics-v82-i2.md)
@@ -163,11 +164,16 @@
 - [Vol 81 Issue 4 · 2026-06-19](journals/2026-06-19-biometrics-v81-i4.md)
 - [Vol 81 Issue 3 · 2026-06-19](journals/2026-06-19-biometrics-v81-i3.md)
 - [Vol 81 Issue 2 · 2026-06-19](journals/2026-06-19-biometrics-v81-i2.md)
+- [Vol 81 Issue 1 · 2026-07-03](journals/2026-07-03-biometrics-v81-i1.md)
 - [Vol 81 Issue 1 · 2026-06-24](journals/2026-06-24-biometrics-v81-i1.md)
 - [Vol 81 Issue 1 · 2026-06-19](journals/2026-06-19-biometrics-v81-i1.md)
+- [Vol 80 Issue 4 · 2026-07-03](journals/2026-07-03-biometrics-v80-i4.md)
 - [Vol 80 Issue 4 · 2026-06-24](journals/2026-06-24-biometrics-v80-i4.md)
+- [Vol 80 Issue 3 · 2026-07-03](journals/2026-07-03-biometrics-v80-i3.md)
 - [Vol 80 Issue 3 · 2026-06-24](journals/2026-06-24-biometrics-v80-i3.md)
+- [Vol 80 Issue 2 · 2026-07-03](journals/2026-07-03-biometrics-v80-i2.md)
 - [Vol 80 Issue 2 · 2026-06-24](journals/2026-06-24-biometrics-v80-i2.md)
+- [Vol 80 Issue 1 · 2026-07-03](journals/2026-07-03-biometrics-v80-i1.md)
 - [Vol 80 Issue 1 · 2026-06-24](journals/2026-06-24-biometrics-v80-i1.md)
 
 ### Biostatistics
