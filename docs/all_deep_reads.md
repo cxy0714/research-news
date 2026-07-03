@@ -10,6 +10,12 @@
   7/10 [daily]
 - [Post-selection inference for network structure](deep_reads/2026-07-03-2607.00312.md)  
   7/10 [daily]
+- [From Subgroups to Population Composition: A Transportability Approach to Effect Heterogeneity](deep_reads/2026-07-02-2607.01717.md)  
+  8/10 [daily]
+- [A condition for the identification of multivariate models with binary instruments -- with Corrigendum and Addendum](deep_reads/2026-07-02-2607.01429.md)  
+  8/10 [daily]
+- [Conformal Bayes for Two-Sided Censored Gaussian Regression under Label Shift](deep_reads/2026-07-02-2607.02173.md)  
+  6/10 [daily]
 - [Semiparametric Efficiency in Sequential Experiments: Characterization and Design via Average Propensity](deep_reads/2026-06-30-2606.31190.md)  
   9/10 [daily]
 - [Cross-Fitted Survey-Weighted TMLE with Design-Based Variance for Causal Machine Learning](deep_reads/2026-06-30-2606.30918.md)  
@@ -1879,6 +1885,8 @@
 
 ### Daily
 
+- [A note on "The volume of random simplices from elliptical distributions in high dimension"](deep_reads/2026-07-02-2607.02169.md)  
+  6/10 [daily]
 - [Robust and Scalable Sure Screening of Fixed effects in Ultrahigh-dimensional Linear Mixed Models](deep_reads/2026-06-26-2606.27789.md)  
   6/10 [daily]
 - [Bayesian Estimation of the Eigenstructure in High-Dimensional Approximate Factor Models](deep_reads/2026-06-25-2606.24652.md)  
@@ -2629,6 +2637,10 @@
 
 ### Daily
 
+- [Transferring supremum-norm rates and weak convergence of covariance kernel estimators to functional principal components](deep_reads/2026-07-02-2607.01931.md)  
+  7/10 [daily]
+- [Beyond Degree: Rooted Motif Signatures for Latent Position Identifiability in Graphon Models](deep_reads/2026-07-02-2607.01358.md)  
+  6/10 [daily]
 - [Two-stage semiparametric inference for regime-switching jump diffusions with unknown Lévy densities](deep_reads/2026-06-30-2606.31057.md)  
   7/10 [daily]
 - [Adaptive nonparametric regression from repeated measurements under common noise](deep_reads/2026-06-30-2606.30000.md)  
@@ -4355,6 +4367,14 @@
 
 ### Daily
 
+- [MATCH: Multiplier-Assisted Tests for Conditional Hypotheses in Non-Euclidean Data](deep_reads/2026-07-02-2607.02295.md)  
+  8/10 [daily]
+- [Cross-Audit Projection for Model Risk Prediction](deep_reads/2026-07-02-2607.02328.md)  
+  7/10 [daily]
+- [Aggregation with Exponential Weights is Optimal in Expectation](deep_reads/2026-07-02-2607.02247.md)  
+  7/10 [daily]
+- [Goodness of Fit Tests Based on Joint Densities of Multiple Sample Statistics](deep_reads/2026-07-02-2607.02285.md)  
+  6/10 [daily]
 - [High-Confidence Minimax Testing with Prescribed Errors](deep_reads/2026-06-30-2606.31593.md)  
   8/10 [daily]
 - [Testing hypotheses via orthogonalization](deep_reads/2026-06-30-2606.29732.md)  
@@ -5600,6 +5620,8 @@
 
 ### Daily
 
+- [Sequential Structure-Sensitive Residual Diagnostics for PDE Inverse Problems](deep_reads/2026-07-02-2607.02101.md)  
+  7/10 [daily]
 - [Error bounds for simultaneous Wasserstein contractive adaptive increasingly rare MCMC](deep_reads/2026-06-30-2606.30018.md)  
   6/10 [daily]
 - [Incomplete Matrix Regression](deep_reads/2026-06-25-2606.26325.md)  
@@ -6160,6 +6182,8 @@
 
 - [GTLS: A GPU-accelerated method for periodic transit detection](deep_reads/2026-07-03-2607.00348.md)  
   6/10 [daily]
+- [Periodic Radio Technosignature Search toward 3I/ATLAS with FAST](deep_reads/2026-07-02-2607.01666.md)  
+  6/10 [daily]
 - [Gaussian processes on ray-guided transformed uniform grids for fast, flexible, and auto-differentiable adaptive source reconstruction in lens modelling](deep_reads/2026-06-30-2606.30620.md)  
   7/10 [daily]
 - [Multi-Scale Contrastive Attention for Light-Curve Representation Learning](deep_reads/2026-06-30-2606.31627.md)  
@@ -6368,6 +6392,8 @@
 
 ### Daily
 
+- [Granular Instrumental Variables in Large Panels: Identification and Inference Across Strong, Nearly Weak, and Weak GIV](deep_reads/2026-07-02-2607.02095.md)  
+  8/10 [daily]
 - [Sensitivity, Informativeness, and Misspecification in GMM Estimation](deep_reads/2026-06-30-2606.29833.md)  
   7/10 [daily]
 - [Literature Review and Evidence Aggregation: a Toolkit for Applied Micro](deep_reads/2026-06-30-2606.28848.md)  
@@ -8017,6 +8043,8 @@
 ### Daily
 
 - [Distributed Prediction under Heterogeneity with Unidentifiable Parameter](deep_reads/2026-07-03-2607.00376.md)  
+  6/10 [daily]
+- [Continuous-Time Bayesian Networks with Structured Shrinkage Priors for Modelling Multimorbidity Trajectories in Large-Scale Electronic Health Records](deep_reads/2026-07-02-2607.01549.md)  
   6/10 [daily]
 - [Multi-Source Transfer Learning of Sparse Single-Index Models](deep_reads/2026-06-30-2606.29658.md)  
   7/10 [daily]

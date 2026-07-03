@@ -154,6 +154,7 @@
 
 ### Biometrics
 
+- [Vol 82 Issue 3 · 2026-07-03](journals/2026-07-03-biometrics-v82-i3.md)
 - [Vol 82 Issue 2 · 2026-06-24](journals/2026-06-24-biometrics-v82-i2.md)
 - [Vol 82 Issue 2 · 2026-06-19](journals/2026-06-19-biometrics-v82-i2.md)
 - [Vol 82 Issue 2 · 2026-06-10](journals/2026-06-10-biometrics-v82-i2.md)
