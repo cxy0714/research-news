@@ -281,6 +281,41 @@
 
 ### 期刊
 
+#### Journal of the Royal Statistical Society Series C Vol 73 Issue 5
+
+- [Estimating spatially varying health effects of wildland fire smoke using mobile health data](deep_reads/2026-07-04-10.1093_jrsssc_qlae034.md)  
+  6/10 [journals]
+- [Learning local cascading failure pattern from massive network failure data](deep_reads/2026-07-04-10.1093_jrsssc_qlae030.md)  
+  4/10 [journals]
+
+#### Journal of the Royal Statistical Society Series C Vol 73 Issue 3
+
+- [Revisiting the effects of maternal education on adolescents’ academic performance: Doubly robust estimation in a network-based observational study](deep_reads/2026-07-04-10.1093_jrsssc_qlae008.md)  
+  7/10 [journals]
+- [Testing unit root non-stationarity in the presence of missing data in univariate time series of mobile health studies](deep_reads/2026-07-04-10.1093_jrsssc_qlae010.md)  
+  3/10 [journals]
+
+#### Journal of the Royal Statistical Society Series C Vol 73 Issue 2
+
+- [Adaptive hybrid control design for comparative clinical trials with historical control data](deep_reads/2026-07-04-10.1093_jrsssc_qlad103.md)  
+  7/10 [journals]
+- [Variable selection for individualised treatment rules with discrete outcomes](deep_reads/2026-07-04-10.1093_jrsssc_qlad096.md)  
+  7/10 [journals]
+- [Comparison of paired ordinal data with mis-classification and covariates adjustment](deep_reads/2026-07-04-10.1093_jrsssc_qlad105.md)  
+  6/10 [journals]
+
+#### Journal of the Royal Statistical Society Series C Vol 73 Issue 1
+
+- [Causal inference with a functional outcome](deep_reads/2026-07-04-10.1093_jrsssc_qlad092.md)  
+  8/10 [journals]
+
+#### Journal of the Royal Statistical Society Series C Vol 72 Issue 5
+
+- [Estimating the causal effects of multiple intermittent treatments with application to COVID-19](deep_reads/2026-07-04-10.1093_jrsssc_qlad076.md)  
+  8/10 [journals]
+- [Causal analysis at extreme quantiles with application to London traffic flow data](deep_reads/2026-07-04-10.1093_jrsssc_qlad080.md)  
+  7/10 [journals]
+
 #### Biostatistics Vol 23 Issue 4
 
 - [Marginal structural models for multilevel clustered data](deep_reads/2026-07-04-10.1093_biostatistics_kxac027.md)  
@@ -4720,6 +4755,18 @@
 
 ### 期刊
 
+#### Journal of the Royal Statistical Society Series C Vol 73 Issue 4
+
+- [Inverse set estimation and inversion of simultaneous confidence intervals](deep_reads/2026-07-04-10.1093_jrsssc_qlae027.md)  
+  7/10 [journals]
+- [Testing for distributional structural change with unknown breaks: application to pricing crop insurance contracts](deep_reads/2026-07-04-10.1093_jrsssc_qlae020.md)  
+  6/10 [journals]
+
+#### Journal of the Royal Statistical Society Series C Vol 72 Issue 5
+
+- [A novel agreement statistic using data on uncertainty in ratings](deep_reads/2026-07-04-10.1093_jrsssc_qlad063.md)  
+  3/10 [journals]
+
 #### Biostatistics Vol 24 Issue 1
 
 - [Smaller<i>p</i>-values in genomics studies using distilled auxiliary information](deep_reads/2026-07-04-10.1093_biostatistics_kxaa053.md)  
@@ -5896,6 +5943,11 @@
 
 ### 期刊
 
+#### Journal of the Royal Statistical Society Series C Vol 73 Issue 3
+
+- [Prediction for distributional outcomes in high-performance computing input/output variability](deep_reads/2026-07-04-10.1093_jrsssc_qlae001.md)  
+  2/10 [journals]
+
 #### Biostatistics Vol 23 Issue 2
 
 - [Fast Lasso method for large-scale and ultrahigh-dimensional Cox model with applications to UK Biobank](deep_reads/2026-07-04-10.1093_biostatistics_kxaa038.md)  
@@ -6719,6 +6771,11 @@
 
 ### 期刊
 
+#### Journal of the Royal Statistical Society Series C Vol 73 Issue 3
+
+- [Macroeconomic and financial mixed frequency factors in a big data environment](deep_reads/2026-07-04-10.1093_jrsssc_qlae007.md)  
+  4/10 [journals]
+
 #### Statistics in Medicine Vol 45 Issue 8-9
 
 - [Optimizing Medical Guidelines: Insights Using a Generalized Method of Moments Approach](deep_reads/2026-06-24-10.1002_sim.70486.md)  
@@ -7258,6 +7315,41 @@
   7/10 [daily]
 
 ### 期刊
+
+#### Journal of the Royal Statistical Society Series C Vol 73 Issue 5
+
+- [Joint modelling of survival and backwards recurrence outcomes: an analysis of factors associated with fertility treatment in the U.S.](deep_reads/2026-07-04-10.1093_jrsssc_qlae039.md)  
+  7/10 [journals]
+- [Two-phase biomarker studies for disease progression with multiple registries](deep_reads/2026-07-04-10.1093_jrsssc_qlae028.md)  
+  7/10 [journals]
+- [Non-parametric Bayesian approach to multiple treatment comparisons in network meta-analysis with application to comparisons of anti-depressants](deep_reads/2026-07-04-10.1093_jrsssc_qlae038.md)  
+  6/10 [journals]
+
+#### Journal of the Royal Statistical Society Series C Vol 73 Issue 4
+
+- [Estimating disease transmission in a closed population under repeated testing](deep_reads/2026-07-04-10.1093_jrsssc_qlae021.md)  
+  5/10 [journals]
+
+#### Journal of the Royal Statistical Society Series C Vol 73 Issue 2
+
+- [A Bayesian latent class model for integrating multi-source longitudinal data: application to the CHILD cohort study](deep_reads/2026-07-04-10.1093_jrsssc_qlad100.md)  
+  4/10 [journals]
+
+#### Journal of the Royal Statistical Society Series C Vol 73 Issue 1
+
+- [Multivariate longitudinal analysis for the association between brain atrophy and cognitive impairment in prodromal Huntington’s disease subjects](deep_reads/2026-07-04-10.1093_jrsssc_qlad087.md)  
+  6/10 [journals]
+- [Penalised semi-parametric copula method for semi-competing risks data: application to hip fracture in elderly](deep_reads/2026-07-04-10.1093_jrsssc_qlad093.md)  
+  5/10 [journals]
+- [Bayesian kernel machine regression for count data: modelling the association between social vulnerability and COVID-19 deaths in South Carolina](deep_reads/2026-07-04-10.1093_jrsssc_qlad094.md)  
+  4/10 [journals]
+- [Modelling change processes in multivariate interrupted time series data using a multivariate dynamic additive model: An application to heart rate and blood pressure self-monitoring in heart failure with drug changes](deep_reads/2026-07-04-10.1093_jrsssc_qlad088.md)  
+  3/10 [journals]
+
+#### Journal of the Royal Statistical Society Series C Vol 72 Issue 5
+
+- [Bayesian estimation of real-time epidemic growth rates using Gaussian processes: local dynamics of SARS-CoV-2 in England](deep_reads/2026-07-04-10.1093_jrsssc_qlad056.md)  
+  5/10 [journals]
 
 #### Biostatistics Vol 24 Issue 1
 
@@ -8426,6 +8518,64 @@
   8/10 [daily]
 
 ### 期刊
+
+#### Journal of the Royal Statistical Society Series C Vol 73 Issue 5
+
+- [A semi-parametric maximum-likelihood analysis of measurement error in population size estimation](deep_reads/2026-07-04-10.1093_jrsssc_qlae037.md)  
+  6/10 [journals]
+- [A state-space perspective on modelling and inference for online skill rating](deep_reads/2026-07-04-10.1093_jrsssc_qlae035.md)  
+  4/10 [journals]
+- [A Bayesian valuation framework for catastrophe bonds](deep_reads/2026-07-04-10.1093_jrsssc_qlae041.md)  
+  2/10 [journals]
+- [Walking fingerprinting](deep_reads/2026-07-04-10.1093_jrsssc_qlae033.md)  
+  2/10 [journals]
+
+#### Journal of the Royal Statistical Society Series C Vol 73 Issue 4
+
+- [Joint analysis of multivariate longitudinal, imaging, and time-to-event data](deep_reads/2026-07-04-10.1093_jrsssc_qlae018.md)  
+  6/10 [journals]
+- [Bats monitoring: a classification procedure of bats behaviours based on Hawkes processes](deep_reads/2026-07-04-10.1093_jrsssc_qlae024.md)  
+  4/10 [journals]
+- [A bi-endpoint expectation-maximisation algorithm for re-estimating sample size for the time-to-event endpoint under the blind condition](deep_reads/2026-07-04-10.1093_jrsssc_qlae019.md)  
+  3/10 [journals]
+
+#### Journal of the Royal Statistical Society Series C Vol 73 Issue 3
+
+- [Nonlinear network-based quantitative trait prediction from biological data](deep_reads/2026-07-04-10.1093_jrsssc_qlae012.md)  
+  4/10 [journals]
+- [Bayesian smoothing for time-varying extremal dependence](deep_reads/2026-07-04-10.1093_jrsssc_qlae002.md)  
+  4/10 [journals]
+
+#### Journal of the Royal Statistical Society Series C Vol 73 Issue 2
+
+- [Efficient auxiliary information synthesis for cure rate model](deep_reads/2026-07-04-10.1093_jrsssc_qlad106.md)  
+  5/10 [journals]
+- [Augmenting predictive models in forensic psychiatry with Cultural Consensus Theory](deep_reads/2026-07-04-10.1093_jrsssc_qlad109.md)  
+  4/10 [journals]
+- [CRP-Tree: a phylogenetic association test for binary traits](deep_reads/2026-07-04-10.1093_jrsssc_qlad098.md)  
+  4/10 [journals]
+- [Combining individual- and population-level data to develop a Bayesian parity-specific fertility projection model](deep_reads/2026-07-04-10.1093_jrsssc_qlad095.md)  
+  3/10 [journals]
+
+#### Journal of the Royal Statistical Society Series C Vol 73 Issue 1
+
+- [Semiparametric M-quantile regression with measurement error in spatial covariates: an application to housing price modelling](deep_reads/2026-07-04-10.1093_jrsssc_qlad086.md)  
+  6/10 [journals]
+- [Models and methods for analysing clustered recurrent hospitalisations in the presence of COVID-19 effects](deep_reads/2026-07-04-10.1093_jrsssc_qlad082.md)  
+  5/10 [journals]
+- [CAViaR models for Value-at-Risk and Expected Shortfall with long range dependency features](deep_reads/2026-07-04-10.1093_jrsssc_qlad081.md)  
+  3/10 [journals]
+- [Categorising the world into local climate zones: towards quantifying labelling uncertainty for machine learning models](deep_reads/2026-07-04-10.1093_jrsssc_qlad089.md)  
+  2/10 [journals]
+
+#### Journal of the Royal Statistical Society Series C Vol 72 Issue 5
+
+- [Automated calibration for stability selection in penalised regression and graphical models](deep_reads/2026-07-04-10.1093_jrsssc_qlad058.md)  
+  6/10 [journals]
+- [Phase-type distributions for product return data with two-layer censoring](deep_reads/2026-07-04-10.1093_jrsssc_qlad079.md)  
+  4/10 [journals]
+- [Confidence tubes for curves on SO(3) and identification of subject-specific gait change after kneeling](deep_reads/2026-07-04-10.1093_jrsssc_qlad060.md)  
+  1/10 [journals]
 
 #### Biostatistics Vol 24 Issue 1
 
