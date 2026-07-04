@@ -281,6 +281,59 @@
 
 ### 期刊
 
+#### Biostatistics Vol 23 Issue 4
+
+- [Marginal structural models for multilevel clustered data](deep_reads/2026-07-04-10.1093_biostatistics_kxac027.md)  
+  7/10 [journals]
+- [Estimation and false discovery control for the analysis of environmental mixtures](deep_reads/2026-07-04-10.1093_biostatistics_kxac001.md)  
+  6/10 [journals]
+- [Adaptive randomization in a two-stage sequential multiple assignment randomized trial](deep_reads/2026-07-04-10.1093_biostatistics_kxab020.md)  
+  6/10 [journals]
+- [A note on median regression for complex surveys](deep_reads/2026-07-04-10.1093_biostatistics_kxab035.md)  
+  4/10 [journals]
+
+#### Biostatistics Vol 23 Issue 3
+
+- [Efficiently transporting causal direct and indirect effects to new populations under intermediate confounding and with multiple mediators](deep_reads/2026-07-04-10.1093_biostatistics_kxaa057.md)  
+  8/10 [journals]
+- [Semiparametric regression on cumulative incidence function with interval-censored competing risks data and missing event types](deep_reads/2026-07-04-10.1093_biostatistics_kxaa052.md)  
+  5/10 [journals]
+
+#### Biostatistics Vol 23 Issue 2
+
+- [An efficient and robust approach to Mendelian randomization with measured pleiotropic effects in a high-dimensional setting](deep_reads/2026-07-04-10.1093_biostatistics_kxaa045.md)  
+  8/10 [journals]
+- [Adaptive treatment strategies for chronic conditions: shared-parameter G-estimation with an application to rheumatoid arthritis](deep_reads/2026-07-04-10.1093_biostatistics_kxaa033.md)  
+  8/10 [journals]
+- [A sparse additive model for treatment effect-modifier selection](deep_reads/2026-07-04-10.1093_biostatistics_kxaa032.md)  
+  8/10 [journals]
+- [Evaluation of treatment effect modification by biomarkers measured pre- and post-randomization in the presence of non-monotone missingness](deep_reads/2026-07-04-10.1093_biostatistics_kxaa040.md)  
+  7/10 [journals]
+- [Bayesian design of clinical trials using joint models for longitudinal and time-to-event data](deep_reads/2026-07-04-10.1093_biostatistics_kxaa044.md)  
+  5/10 [journals]
+
+#### Biostatistics Vol 23 Issue 1
+
+- [Causal inference for recurrent event data using pseudo-observations](deep_reads/2026-07-04-10.1093_biostatistics_kxaa020.md)  
+  7/10 [journals]
+- [Evaluating biomarkers for treatment selection from reproducibility studies](deep_reads/2026-07-04-10.1093_biostatistics_kxaa018.md)  
+  7/10 [journals]
+- [A Bayesian nonparametric approach for evaluating the causal effect of treatment in randomized trials with semi-competing risks](deep_reads/2026-07-04-10.1093_biostatistics_kxaa008.md)  
+  7/10 [journals]
+- [Nonparametric targeted Bayesian estimation of class proportions in unlabeled data](deep_reads/2026-07-04-10.1093_biostatistics_kxaa022.md)  
+  6/10 [journals]
+- [Depth importance in precision medicine (DIPM): a tree- and forest-based method for right-censored survival outcomes](deep_reads/2026-07-04-10.1093_biostatistics_kxaa021.md)  
+  6/10 [journals]
+
+#### Biostatistics Vol 22 Issue 4
+
+- [Randomization-based confidence intervals for cluster randomized trials](deep_reads/2026-07-04-10.1093_biostatistics_kxaa007.md)  
+  8/10 [journals]
+- [Bias due to Berkson error: issues when using predicted values in place of observed covariates](deep_reads/2026-07-04-10.1093_biostatistics_kxaa002.md)  
+  7/10 [journals]
+- [Dynamic borrowing in the presence of treatment effect heterogeneity](deep_reads/2026-07-04-10.1093_biostatistics_kxz066.md)  
+  6/10 [journals]
+
 #### Biometrics Vol 82 Issue 2
 
 - [Causally-interpretable random-effects meta-analysis](deep_reads/2026-06-24-10.1093_biomtc_ujag108.md)  
@@ -4667,6 +4720,20 @@
 
 ### 期刊
 
+#### Biostatistics Vol 24 Issue 1
+
+- [Smaller<i>p</i>-values in genomics studies using distilled auxiliary information](deep_reads/2026-07-04-10.1093_biostatistics_kxaa053.md)  
+  6/10 [journals]
+- [Bayesian multivariate probability of success using historical data with type I error rate control](deep_reads/2026-07-04-10.1093_biostatistics_kxab050.md)  
+  4/10 [journals]
+
+#### Biostatistics Vol 23 Issue 3
+
+- [Testing for similarity of binary efficacy–toxicity responses](deep_reads/2026-07-04-10.1093_biostatistics_kxaa058.md)  
+  7/10 [journals]
+- [Testing calibration of phenotyping models using positive-only electronic health record data](deep_reads/2026-07-04-10.1093_biostatistics_kxab003.md)  
+  5/10 [journals]
+
 #### Biometrics Vol 82 Issue 2
 
 - [Statistical inference for mean function of partially observed functional time series](deep_reads/2026-06-24-10.1093_biomtc_ujag111.md)  
@@ -5828,6 +5895,18 @@
   6/10 [daily]
 
 ### 期刊
+
+#### Biostatistics Vol 23 Issue 2
+
+- [Fast Lasso method for large-scale and ultrahigh-dimensional Cox model with applications to UK Biobank](deep_reads/2026-07-04-10.1093_biostatistics_kxaa038.md)  
+  5/10 [journals]
+- [A divide-and-conquer method for sparse risk prediction and evaluation](deep_reads/2026-07-04-10.1093_biostatistics_kxaa031.md)  
+  5/10 [journals]
+
+#### Biostatistics Vol 23 Issue 1
+
+- [Multiway generalized canonical correlation analysis](deep_reads/2026-07-04-10.1093_biostatistics_kxaa010.md)  
+  5/10 [journals]
 
 #### Biometrics Vol 82 Issue 3
 
@@ -7180,6 +7259,49 @@
 
 ### 期刊
 
+#### Biostatistics Vol 24 Issue 1
+
+- [Joint frailty modeling of time-to-event data to elicit the evolution pathway of events: a generalized linear mixed model approach](deep_reads/2026-07-04-10.1093_biostatistics_kxab037.md)  
+  5/10 [journals]
+- [Semiparametric regression analysis of bivariate censored events in a family study of Alzheimer’s disease](deep_reads/2026-07-04-10.1093_biostatistics_kxab014.md)  
+  5/10 [journals]
+
+#### Biostatistics Vol 23 Issue 3
+
+- [A spatiotemporal recommendation engine for malaria control](deep_reads/2026-07-04-10.1093_biostatistics_kxab010.md)  
+  6/10 [journals]
+- [Estimation of the generation interval using pairwise relative transmission probabilities](deep_reads/2026-07-04-10.1093_biostatistics_kxaa059.md)  
+  5/10 [journals]
+- [Marginal modeling of cluster-period means and intraclass correlations in stepped wedge designs with binary outcomes](deep_reads/2026-07-04-10.1093_biostatistics_kxaa056.md)  
+  4/10 [journals]
+
+#### Biostatistics Vol 23 Issue 2
+
+- [The role of body mass index at diagnosis of colorectal cancer on Black–White disparities in survival: a density regression mediation approach](deep_reads/2026-07-04-10.1093_biostatistics_kxaa034.md)  
+  7/10 [journals]
+- [Immune correlates analysis using vaccinees from test negative designs](deep_reads/2026-07-04-10.1093_biostatistics_kxaa037.md)  
+  7/10 [journals]
+- [Quantifying diagnostic accuracy improvement of new biomarkers for competing risk outcomes](deep_reads/2026-07-04-10.1093_biostatistics_kxaa048.md)  
+  7/10 [journals]
+- [Dose–response modeling in high-throughput cancer drug screenings: an end-to-end approach](deep_reads/2026-07-04-10.1093_biostatistics_kxaa047.md)  
+  6/10 [journals]
+- [Surrogate-guided sampling designs for classification of rare outcomes from electronic medical records data](deep_reads/2026-07-04-10.1093_biostatistics_kxaa028.md)  
+  6/10 [journals]
+
+#### Biostatistics Vol 23 Issue 1
+
+- [Joint modeling and multiple comparisons with the best of data from a SMART with survival outcomes](deep_reads/2026-07-04-10.1093_biostatistics_kxaa025.md)  
+  6/10 [journals]
+- [Two-part joint model for a longitudinal semicontinuous marker and a terminal event with application to metastatic colorectal cancer data](deep_reads/2026-07-04-10.1093_biostatistics_kxaa012.md)  
+  6/10 [journals]
+
+#### Biostatistics Vol 22 Issue 4
+
+- [Estimation and inference for the population attributable risk in the presence of misclassification](deep_reads/2026-07-04-10.1093_biostatistics_kxz067.md)  
+  7/10 [journals]
+- [A mixed-model approach for powerful testing of genetic associations with cancer risk incorporating tumor characteristics](deep_reads/2026-07-04-10.1093_biostatistics_kxz065.md)  
+  5/10 [journals]
+
 #### Biometrics Vol 81 Issue 1
 
 - [Sparse Bernoulli mixture modeling with negative-unlabeled data: an approach to identify and characterize long COVID](deep_reads/2026-07-03-10.1093_biomtc_ujaf021.md)  
@@ -8304,6 +8426,74 @@
   8/10 [daily]
 
 ### 期刊
+
+#### Biostatistics Vol 24 Issue 1
+
+- [Bayesian integrative analysis and prediction with application to atherosclerosis cardiovascular disease](deep_reads/2026-07-04-10.1093_biostatistics_kxab016.md)  
+  6/10 [journals]
+- [Single-index models with functional connectivity network predictors](deep_reads/2026-07-04-10.1093_biostatistics_kxab015.md)  
+  6/10 [journals]
+- [Capturing discrete latent structures: choose LDs over PCs](deep_reads/2026-07-04-10.1093_biostatistics_kxab030.md)  
+  5/10 [journals]
+- [A sparse negative binomial mixture model for clustering RNA-seq count data](deep_reads/2026-07-04-10.1093_biostatistics_kxab025.md)  
+  5/10 [journals]
+- [Accounting for technical noise in Bayesian graphical models of single-cell RNA-sequencing data](deep_reads/2026-07-04-10.1093_biostatistics_kxab011.md)  
+  4/10 [journals]
+
+#### Biostatistics Vol 23 Issue 4
+
+- [Estimation of sparse functional quantile regression with measurement error: a SIMEX approach](deep_reads/2026-07-04-10.1093_biostatistics_kxac017.md)  
+  5/10 [journals]
+- [A probabilistic gene expression barcode for annotation of cell types from single-cell RNA-seq data](deep_reads/2026-07-04-10.1093_biostatistics_kxac021.md)  
+  3/10 [journals]
+
+#### Biostatistics Vol 23 Issue 3
+
+- [An optimal kernel-based multivariate U-statistic to test for associations with multiple phenotypes](deep_reads/2026-07-04-10.1093_biostatistics_kxaa049.md)  
+  7/10 [journals]
+- [Information enhanced model selection for Gaussian graphical model with application to metabolomic data](deep_reads/2026-07-04-10.1093_biostatistics_kxab006.md)  
+  6/10 [journals]
+- [Structure-preserving integrated analysis for risk stratification with application to cancer staging](deep_reads/2026-07-04-10.1093_biostatistics_kxab005.md)  
+  5/10 [journals]
+- [Bayesian biclustering for microbial metagenomic sequencing data via multinomial matrix factorization](deep_reads/2026-07-04-10.1093_biostatistics_kxab002.md)  
+  4/10 [journals]
+- [A benchmark for dose-finding studies with unknown ordering](deep_reads/2026-07-04-10.1093_biostatistics_kxaa054.md)  
+  4/10 [journals]
+- [Penalized model-based clustering of fMRI data](deep_reads/2026-07-04-10.1093_biostatistics_kxaa061.md)  
+  3/10 [journals]
+- [Bayesian adaptive design for concurrent trials involving biologically related diseases](deep_reads/2026-07-04-10.1093_biostatistics_kxab008.md)  
+  3/10 [journals]
+
+#### Biostatistics Vol 23 Issue 2
+
+- [Integrative functional linear model for genome-wide association studies with multiple traits](deep_reads/2026-07-04-10.1093_biostatistics_kxaa043.md)  
+  4/10 [journals]
+- [Bayesian analysis of longitudinal and multidimensional functional data](deep_reads/2026-07-04-10.1093_biostatistics_kxaa041.md)  
+  4/10 [journals]
+- [Bayesian sparse heritability analysis with high-dimensional neuroimaging phenotypes](deep_reads/2026-07-04-10.1093_biostatistics_kxaa035.md)  
+  4/10 [journals]
+- [Principal curve approaches for inferring 3D chromatin architecture](deep_reads/2026-07-04-10.1093_biostatistics_kxaa046.md)  
+  3/10 [journals]
+
+#### Biostatistics Vol 23 Issue 1
+
+- [Matrix decomposition for modeling lesion development processes in multiple sclerosis](deep_reads/2026-07-04-10.1093_biostatistics_kxaa016.md)  
+  5/10 [journals]
+- [Assessing the accuracy of predictive models with interval-censored data](deep_reads/2026-07-04-10.1093_biostatistics_kxaa011.md)  
+  5/10 [journals]
+- [Estimating diversity in networked ecological communities](deep_reads/2026-07-04-10.1093_biostatistics_kxaa015.md)  
+  4/10 [journals]
+- [A decision-theoretic approach to Bayesian clinical trial design and evaluation of robustness to prior-data conflict](deep_reads/2026-07-04-10.1093_biostatistics_kxaa027.md)  
+  3/10 [journals]
+- [Modeling continuous glucose monitoring (CGM) data during sleep](deep_reads/2026-07-04-10.1093_biostatistics_kxaa023.md)  
+  2/10 [journals]
+
+#### Biostatistics Vol 22 Issue 4
+
+- [RoBoT: a robust Bayesian hypothesis testing method for basket trials](deep_reads/2026-07-04-10.1093_biostatistics_kxaa005.md)  
+  4/10 [journals]
+- [Estimating disease onset from change points of markers measured with error](deep_reads/2026-07-04-10.1093_biostatistics_kxz068.md)  
+  4/10 [journals]
 
 #### Biometrics Vol 82 Issue 2
 
