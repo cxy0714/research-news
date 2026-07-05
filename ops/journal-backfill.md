@@ -132,7 +132,7 @@ IEEE 系列 ieee（月刊、每期很大，全部先 dry-run、用小 N）：
 理论核心 core：
 - [x] (2026-07-05) `--only AoS --n-issues 18`
 - [x] (2026-07-05) `--only JASA --n-issues 18`
-- [ ] `--only JRSSB --n-issues 18`
+- [x] (2026-07-06) `--only JRSSB --n-issues 18`
 - [ ] `--only Biometrika --n-issues 18`
 - [ ] `--only JMLR --jmlr-n 5`
 
