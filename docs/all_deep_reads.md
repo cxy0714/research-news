@@ -369,6 +369,55 @@
 - [Dynamic borrowing in the presence of treatment effect heterogeneity](deep_reads/2026-07-04-10.1093_biostatistics_kxz066.md)  
   6/10 [journals]
 
+#### Annals of Statistics Vol 54 Issue 3
+
+- [Towards a unified theory for semiparametric data fusion with individual-level data](deep_reads/2026-07-04-10.1214_25-aos2609.md)  
+  9/10 [journals]
+
+#### Annals of Statistics Vol 52 Issue 3
+
+- [Reconciling model-X and doubly robust approaches to conditional independence testing](deep_reads/2026-07-04-10.1214_24-aos2372.md)  
+  8/10 [journals]
+- [Distributed estimation and inference for semiparametric binary response models](deep_reads/2026-07-04-10.1214_24-aos2376.md)  
+  7/10 [journals]
+- [Change acceleration and detection](deep_reads/2026-07-04-10.1214_24-aos2382.md)  
+  4/10 [journals]
+
+#### Annals of Statistics Vol 52 Issue 2
+
+- [Minimax rates for heterogeneous causal effect estimation](deep_reads/2026-07-04-10.1214_24-aos2369.md)  
+  10/10 [journals]
+- [High-dimensional inference for dynamic treatment effects](deep_reads/2026-07-04-10.1214_24-aos2352.md)  
+  9/10 [journals]
+- [Finding the optimal dynamic treatment regimes using smooth Fisher consistent surrogate loss](deep_reads/2026-07-04-10.1214_24-aos2363.md)  
+  8/10 [journals]
+
+#### Annals of Statistics Vol 52 Issue 1
+
+- [Characterization of causal ancestral graphs for time series with latent confounders](deep_reads/2026-07-04-10.1214_23-aos2325.md)  
+  7/10 [journals]
+
+#### Annals of Statistics Vol 51 Issue 6
+
+- [Nonlinear network autoregression](deep_reads/2026-07-04-10.1214_23-aos2345.md)  
+  7/10 [journals]
+
+#### Annals of Statistics Vol 51 Issue 5
+
+- [Nonparametric conditional local independence testing](deep_reads/2026-07-04-10.1214_23-aos2323.md)  
+  8/10 [journals]
+- [The impacts of unobserved covariates on covariate-adaptive randomized experiments](deep_reads/2026-07-04-10.1214_23-aos2308.md)  
+  7/10 [journals]
+- [Efficient estimation of the maximal association between multiple predictors and a survival outcome](deep_reads/2026-07-04-10.1214_23-aos2313.md)  
+  6/10 [journals]
+
+#### Annals of Statistics Vol 51 Issue 4
+
+- [Projected state-action balancing weights for offline reinforcement learning](deep_reads/2026-07-04-10.1214_23-aos2302.md)  
+  8/10 [journals]
+- [Off-policy evaluation in partially observed Markov decision processes under sequential ignorability](deep_reads/2026-07-04-10.1214_23-aos2287.md)  
+  8/10 [journals]
+
 #### Biometrics Vol 82 Issue 2
 
 - [Causally-interpretable random-effects meta-analysis](deep_reads/2026-06-24-10.1093_biomtc_ujag108.md)  
@@ -2169,6 +2218,65 @@
 
 ### 期刊
 
+#### Annals of Statistics Vol 54 Issue 3
+
+- [Statistical inference for low-rank tensors: Heteroskedasticity, subgaussianity, and applications](deep_reads/2026-07-04-10.1214_25-aos2589.md)  
+  8/10 [journals]
+- [Gradient descent inference in empirical risk minimization](deep_reads/2026-07-04-10.1214_25-aos2600.md)  
+  7/10 [journals]
+- [Sparse PCA: A new scalable estimator based on integer programming](deep_reads/2026-07-04-10.1214_25-aos2551.md)  
+  7/10 [journals]
+- [Uncertainty quantification for iterative algorithms in linear models with application to early stopping](deep_reads/2026-07-04-10.1214_25-aos2606.md)  
+  6/10 [journals]
+
+#### Annals of Statistics Vol 52 Issue 3
+
+- [Spectral analysis of gram matrices with missing at random observations: Convergence, central limit theorems, and applications in statistical inference](deep_reads/2026-07-04-10.1214_24-aos2392.md)  
+  9/10 [journals]
+- [High-dimensional covariance matrices under dynamic volatility models: Asymptotics and shrinkage estimation](deep_reads/2026-07-04-10.1214_24-aos2381.md)  
+  8/10 [journals]
+- [Change-point inference in high-dimensional regression models under temporal dependence](deep_reads/2026-07-04-10.1214_24-aos2380.md)  
+  6/10 [journals]
+- [On blockwise and reference panel-based estimators for genetic data prediction in high dimensions](deep_reads/2026-07-04-10.1214_24-aos2378.md)  
+  5/10 [journals]
+
+#### Annals of Statistics Vol 52 Issue 2
+
+- [ℓ2 inference for change points in high-dimensional time series via a Two-Way MOSUM](deep_reads/2026-07-04-10.1214_24-aos2360.md)  
+  7/10 [journals]
+- [Inference for heteroskedastic PCA with missing data](deep_reads/2026-07-04-10.1214_24-aos2366.md)  
+  7/10 [journals]
+- [The curse of overparametrization in adversarial training: Precise analysis of robust generalization for random features regression](deep_reads/2026-07-04-10.1214_24-aos2353.md)  
+  6/10 [journals]
+- [Early stopping for L2-boosting in high-dimensional linear models](deep_reads/2026-07-04-10.1214_24-aos2356.md)  
+  6/10 [journals]
+
+#### Annals of Statistics Vol 52 Issue 1
+
+- [Rates of estimation for high-dimensional multireference alignment](deep_reads/2026-07-04-10.1214_23-aos2346.md)  
+  7/10 [journals]
+
+#### Annals of Statistics Vol 51 Issue 6
+
+- [Local Whittle estimation of high-dimensional long-run variance and precision matrices](deep_reads/2026-07-04-10.1214_23-aos2330.md)  
+  7/10 [journals]
+
+#### Annals of Statistics Vol 51 Issue 5
+
+- [A CLT for the LSS of large-dimensional sample covariance matrices with diverging spikes](deep_reads/2026-07-04-10.1214_23-aos2333.md)  
+  9/10 [journals]
+- [The Lasso with general Gaussian designs with applications to hypothesis testing](deep_reads/2026-07-04-10.1214_23-aos2327.md)  
+  7/10 [journals]
+
+#### Annals of Statistics Vol 51 Issue 4
+
+- [Noisy linear inverse problems under convex constraints: Exact risk asymptotics in high dimensions](deep_reads/2026-07-04-10.1214_23-aos2301.md)  
+  9/10 [journals]
+- [Universality of regularized regression estimators in high dimensions](deep_reads/2026-07-04-10.1214_23-aos2309.md)  
+  7/10 [journals]
+- [Matching recovery threshold for correlated random graphs](deep_reads/2026-07-04-10.1214_23-aos2305.md)  
+  6/10 [journals]
+
 #### Biometrics Vol 80 Issue 4
 
 - [Debiased high-dimensional regression calibration for errors-in-variables log-contrast models](deep_reads/2026-06-24-10.1093_biomtc_ujae153.md)  
@@ -2993,6 +3101,46 @@
   8/10 [daily]
 
 ### 期刊
+
+#### Annals of Statistics Vol 52 Issue 3
+
+- [Nonparametric classification with missing data](deep_reads/2026-07-04-10.1214_24-aos2389.md)  
+  8/10 [journals]
+- [Plugin estimation of smooth optimal transport maps](deep_reads/2026-07-04-10.1214_24-aos2379.md)  
+  7/10 [journals]
+- [MARS via LASSO](deep_reads/2026-07-04-10.1214_24-aos2384.md)  
+  7/10 [journals]
+- [Deep nonlinear sufficient dimension reduction](deep_reads/2026-07-04-10.1214_24-aos2390.md)  
+  6/10 [journals]
+
+#### Annals of Statistics Vol 52 Issue 2
+
+- [Transfer learning for functional mean estimation: Phase transition and adaptive algorithms](deep_reads/2026-07-04-10.1214_24-aos2362.md)  
+  7/10 [journals]
+
+#### Annals of Statistics Vol 52 Issue 1
+
+- [Estimation and inference for minimizer and minimum of convex functions: Optimality, adaptivity and uncertainty principles](deep_reads/2026-07-04-10.1214_24-aos2355.md)  
+  8/10 [journals]
+
+#### Annals of Statistics Vol 51 Issue 6
+
+- [Gaussian process regression in the flat limit](deep_reads/2026-07-04-10.1214_23-aos2336.md)  
+  6/10 [journals]
+
+#### Annals of Statistics Vol 51 Issue 5
+
+- [Estimation of expected Euler characteristic curves of nonstationary smooth random fields](deep_reads/2026-07-04-10.1214_23-aos2337.md)  
+  3/10 [journals]
+
+#### Annals of Statistics Vol 51 Issue 4
+
+- [On lower bounds for the bias-variance trade-off](deep_reads/2026-07-04-10.1214_23-aos2279.md)  
+  8/10 [journals]
+- [Learning low-dimensional nonlinear structures from high-dimensional noisy data: An integral operator approach](deep_reads/2026-07-04-10.1214_23-aos2306.md)  
+  6/10 [journals]
+- [A cross-validation framework for signal denoising with applications to trend filtering, dyadic CART and beyond](deep_reads/2026-07-04-10.1214_23-aos2283.md)  
+  6/10 [journals]
 
 #### Biometrics Vol 81 Issue 1
 
@@ -4781,6 +4929,73 @@
 - [Testing calibration of phenotyping models using positive-only electronic health record data](deep_reads/2026-07-04-10.1093_biostatistics_kxab003.md)  
   5/10 [journals]
 
+#### Annals of Statistics Vol 54 Issue 3
+
+- [Adaptive robust confidence intervals](deep_reads/2026-07-04-10.1214_25-aos2574.md)  
+  7/10 [journals]
+- [Test of independence using generalized distance correlation](deep_reads/2026-07-04-10.1214_25-aos2613.md)  
+  7/10 [journals]
+- [Approximate independence of permutation mixtures](deep_reads/2026-07-04-10.1214_26-aos2619.md)  
+  6/10 [journals]
+- [Dual induction CLT for high-dimensional m-dependent data](deep_reads/2026-07-04-10.1214_25-aos2616.md)  
+  6/10 [journals]
+- [A two-step estimating approach for heavy-tailed AR models with nonzero median GARCH-type noises](deep_reads/2026-07-04-10.1214_25-aos2610.md)  
+  4/10 [journals]
+
+#### Annals of Statistics Vol 52 Issue 3
+
+- [Sharp adaptive and pathwise stable similarity testing for scalar ergodic diffusions](deep_reads/2026-07-04-10.1214_24-aos2386.md)  
+  6/10 [journals]
+- [Spectral regularized kernel two-sample tests](deep_reads/2026-07-04-10.1214_24-aos2383.md)  
+  6/10 [journals]
+- [A blockwise empirical likelihood method for time series in frequency domain inference](deep_reads/2026-07-04-10.1214_24-aos2388.md)  
+  4/10 [journals]
+
+#### Annals of Statistics Vol 52 Issue 2
+
+- [Testing for practically significant dependencies in high dimensions via bootstrapping maxima of U-statistics](deep_reads/2026-07-04-10.1214_24-aos2361.md)  
+  9/10 [journals]
+
+#### Annals of Statistics Vol 52 Issue 1
+
+- [Testing for independence in high dimensions based on empirical copulas](deep_reads/2026-07-04-10.1214_23-aos2348.md)  
+  7/10 [journals]
+- [Rank-based indices for testing independence between two high-dimensional vectors](deep_reads/2026-07-04-10.1214_23-aos2339.md)  
+  7/10 [journals]
+- [The right complexity measure in locally private estimation: It is not the Fisher information](deep_reads/2026-07-04-10.1214_22-aos2227.md)  
+  7/10 [journals]
+- [Adaptive novelty detection with false discovery rate guarantee](deep_reads/2026-07-04-10.1214_23-aos2338.md)  
+  6/10 [journals]
+- [StarTrek: Combinatorial variable selection with false discovery rate control](deep_reads/2026-07-04-10.1214_23-aos2296.md)  
+  6/10 [journals]
+
+#### Annals of Statistics Vol 51 Issue 6
+
+- [Testing nonparametric shape restrictions](deep_reads/2026-07-04-10.1214_23-aos2311.md)  
+  8/10 [journals]
+- [Optimal subgroup selection](deep_reads/2026-07-04-10.1214_23-aos2328.md)  
+  7/10 [journals]
+- [Efficient shape-constrained inference for the autocovariance sequence from a reversible Markov chain](deep_reads/2026-07-04-10.1214_23-aos2335.md)  
+  7/10 [journals]
+- [Adjusted chi-square test for degree-corrected block models](deep_reads/2026-07-04-10.1214_23-aos2329.md)  
+  7/10 [journals]
+- [Carving model-free inference](deep_reads/2026-07-04-10.1214_23-aos2318.md)  
+  6/10 [journals]
+
+#### Annals of Statistics Vol 51 Issue 5
+
+- [Sharp optimality for high-dimensional covariance testing under sparse signals](deep_reads/2026-07-04-10.1214_23-aos2310.md)  
+  8/10 [journals]
+- [Optimal nonparametric testing of Missing Completely At Random and its connections to compatibility](deep_reads/2026-07-04-10.1214_23-aos2326.md)  
+  7/10 [journals]
+- [Robust high-dimensional tuning free multiple testing](deep_reads/2026-07-04-10.1214_23-aos2322.md)  
+  7/10 [journals]
+
+#### Annals of Statistics Vol 51 Issue 4
+
+- [Optimal change-point detection and localization](deep_reads/2026-07-04-10.1214_23-aos2297.md)  
+  6/10 [journals]
+
 #### Biometrics Vol 82 Issue 2
 
 - [Statistical inference for mean function of partially observed functional time series](deep_reads/2026-06-24-10.1093_biomtc_ujag111.md)  
@@ -5959,6 +6174,34 @@
 
 - [Multiway generalized canonical correlation analysis](deep_reads/2026-07-04-10.1093_biostatistics_kxaa010.md)  
   5/10 [journals]
+
+#### Annals of Statistics Vol 54 Issue 3
+
+- [Statistical inference in tensor completion: Optimal uncertainty quantification and statistical-to-computational gaps](deep_reads/2026-07-04-10.1214_25-aos2617.md)  
+  9/10 [journals]
+- [Online tensor learning: Computational and statistical trade-offs, adaptivity and optimal regret](deep_reads/2026-07-04-10.1214_25-aos2588.md)  
+  9/10 [journals]
+- [Statistical-computational trade-offs for recursive adaptive partitioning estimators](deep_reads/2026-07-04-10.1214_25-aos2603.md)  
+  8/10 [journals]
+- [Minimax optimal seriation in polynomial time](deep_reads/2026-07-04-10.1214_25-aos2615.md)  
+  8/10 [journals]
+
+#### Annals of Statistics Vol 52 Issue 2
+
+- [Edge differentially private estimation in the β-model via jittering and method of moments](deep_reads/2026-07-04-10.1214_24-aos2365.md)  
+  4/10 [journals]
+- [Parameter estimation in nonlinear multivariate stochastic differential equations based on splitting schemes](deep_reads/2026-07-04-10.1214_24-aos2371.md)  
+  3/10 [journals]
+
+#### Annals of Statistics Vol 52 Issue 1
+
+- [Statistical-computational trade-offs in tensor PCA and related problems via communication complexity](deep_reads/2026-07-04-10.1214_23-aos2331.md)  
+  8/10 [journals]
+
+#### Annals of Statistics Vol 51 Issue 5
+
+- [Differentially private inference via noisy optimization](deep_reads/2026-07-04-10.1214_23-aos2321.md)  
+  7/10 [journals]
 
 #### Biometrics Vol 82 Issue 3
 
@@ -8644,6 +8887,25 @@
   4/10 [journals]
 - [Estimating disease onset from change points of markers measured with error](deep_reads/2026-07-04-10.1093_biostatistics_kxz068.md)  
   4/10 [journals]
+
+#### Annals of Statistics Vol 52 Issue 1
+
+- [Maximum likelihood for high-noise group orbit estimation and single-particle cryo-EM](deep_reads/2026-07-04-10.1214_23-aos2292.md)  
+  6/10 [journals]
+- [Adaptive variational Bayes: Optimality, computation and applications](deep_reads/2026-07-04-10.1214_23-aos2349.md)  
+  5/10 [journals]
+
+#### Annals of Statistics Vol 51 Issue 5
+
+- [Adaptive and robust multi-task learning](deep_reads/2026-07-04-10.1214_23-aos2319.md)  
+  6/10 [journals]
+
+#### Annals of Statistics Vol 51 Issue 4
+
+- [Bootstrapping persistent Betti numbers and other stabilizing statistics](deep_reads/2026-07-04-10.1214_23-aos2277.md)  
+  4/10 [journals]
+- [Order-of-addition orthogonal arrays to study the effect of treatment ordering](deep_reads/2026-07-04-10.1214_23-aos2317.md)  
+  3/10 [journals]
 
 #### Biometrics Vol 82 Issue 2
 

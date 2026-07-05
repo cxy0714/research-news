@@ -130,7 +130,7 @@ IEEE 系列 ieee（月刊、每期很大，全部先 dry-run、用小 N）：
 - [x] (2026-07-04) `--only "JRSS-C" --n-issues 14`
 
 理论核心 core：
-- [ ] `--only AoS --n-issues 18`
+- [x] (2026-07-05) `--only AoS --n-issues 18`
 - [ ] `--only JASA --n-issues 18`
 - [ ] `--only JRSSB --n-issues 18`
 - [ ] `--only Biometrika --n-issues 18`
