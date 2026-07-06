@@ -4,6 +4,8 @@
 
 ### Daily
 
+- [Inference for Group Interaction Experiments](deep_reads/2026-07-06-2607.02385.md)  
+  7/10 [daily]
 - [An Instrumental Variable Approach to Account for Informative Treatment Switching in Real-world Evidence](deep_reads/2026-07-03-2607.00980.md)  
   8/10 [daily]
 - [Robust Estimation and Inference with Selective Borrowing in Hybrid Controlled Trials: A Tutorial with SelectiveIntegrative and intFRT](deep_reads/2026-07-03-2607.00350.md)  
@@ -7302,6 +7304,10 @@
 
 ### Daily
 
+- [Design and development of a near-IR integral field spectrograph for the HWO Coronagraph Instrument](deep_reads/2026-07-06-2607.02243.md)  
+  1/10 [daily]
+- [HARMONI at ELT: line spread functions in a diffraction limited spectrometer](deep_reads/2026-07-06-2607.02223.md)  
+  1/10 [daily]
 - [GTLS: A GPU-accelerated method for periodic transit detection](deep_reads/2026-07-03-2607.00348.md)  
   6/10 [daily]
 - [Gaussian processes on ray-guided transformed uniform grids for fast, flexible, and auto-differentiable adaptive source reconstruction in lens modelling](deep_reads/2026-06-30-2606.30620.md)  

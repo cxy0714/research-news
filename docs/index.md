@@ -11,306 +11,166 @@
 - **[收藏](favorites.md)** — 登录后在各页点 ☆ 收藏的论文，自动汇总到这里（总收藏按类别分组、可切换按周；每篇可写评论，无需手动维护）。
 - **[模型测评](all_shootout.md)** — 不同 LLM 在同一批论文上的打分 / 解读对比。
 
-## 今日 · 2026-07-03
+## 今日 · 2026-07-06
 
 ### 每日 arXiv 速览
 
-[→ 查看完整报告](daily/2026-07-03.md)
+[→ 查看完整报告](daily/2026-07-06.md)
 
-### 精读论文（146 篇）
+### 精读论文（76 篇）
 
-- [Doubly robust estimation and sensitivity analysis for marginal structural quantile models](deep_reads/2026-07-03-10.1093_biomtc_ujae045.md)  
+- [Quasi-oracle estimation of heterogeneous treatment effects](deep_reads/2026-07-06-10.1093_biomet_asaa076.md)  
   `因果推断` · 相关性 9/10
-- [Using instrumental variables to address unmeasured confounding in causal mediation analysis](deep_reads/2026-07-03-10.1093_biomtc_ujad037.md)  
+- [Nonparametric efficient causal mediation with intermediate confounders](deep_reads/2026-07-06-10.1093_biomet_asaa085.md)  
+  `因果推断` · 相关性 9/10
+- [On the phase transition of Wilks’ phenomenon](deep_reads/2026-07-06-10.1093_biomet_asaa078.md)  
+  `数理统计 / 假设检验` · 相关性 9/10
+- [Estimating time-varying causal excursion effects in mobile health with binary outcomes](deep_reads/2026-07-06-10.1093_biomet_asaa070.md)  
+  `因果推断` · 相关性 9/10
+- [Learning block structures in U-statistic-based matrices](deep_reads/2026-07-06-10.1093_biomet_asaa099.md)  
+  `高维统计 / 随机矩阵` · 相关性 9/10
+- [Fast and powerful conditional randomization testing via distillation](deep_reads/2026-07-06-10.1093_biomet_asab039.md)  
+  `数理统计 / 假设检验` · 相关性 9/10
+- [A high-dimensional power analysis of the conditional randomization test and knockoffs](deep_reads/2026-07-06-10.1093_biomet_asab052.md)  
+  `高维统计 / 随机矩阵` · 相关性 9/10
+- [Inference for treatment effect parameters in potentially misspecified high-dimensional models](deep_reads/2026-07-06-10.1093_biomet_asaa071.md)  
   `因果推断` · 相关性 8/10
-- [Adaptive selection of the optimal strategy to improve precision and power in randomized trials](deep_reads/2026-07-03-10.1093_biomtc_ujad034.md)  
-  `因果推断` · 相关性 8/10
-- [Principal stratification analysis of noncompliance with time-to-event outcomes](deep_reads/2026-07-03-10.1093_biomtc_ujad016.md)  
-  `因果推断` · 相关性 8/10
-- [Confounder-dependent Bayesian mixture model: Characterizing heterogeneity of causal effects in air pollution epidemiology](deep_reads/2026-07-03-10.1093_biomtc_ujae025.md)  
-  `因果推断` · 相关性 8/10
-- [Causal inference for time-to-event data with a cured subpopulation](deep_reads/2026-07-03-10.1093_biomtc_ujae028.md)  
-  `因果推断` · 相关性 8/10
-- [Direct and indirect treatment effects in the presence of semicompeting risks](deep_reads/2026-07-03-10.1093_biomtc_ujae032.md)  
-  `因果推断` · 相关性 8/10
-- [Integrating randomized and observational studies to estimate optimal dynamic treatment regimes](deep_reads/2026-07-03-10.1093_biomtc_ujae046.md)  
-  `因果推断` · 相关性 8/10
-- [Doubly robust proximal synthetic controls](deep_reads/2026-07-03-10.1093_biomtc_ujae055.md)  
-  `因果推断` · 相关性 8/10
-- [Single proxy control](deep_reads/2026-07-03-10.1093_biomtc_ujae027.md)  
-  `因果推断` · 相关性 8/10
-- [Propensity weighting plus adjustment in proportional hazards model is not doubly robust](deep_reads/2026-07-03-10.1093_biomtc_ujae069.md)  
-  `因果推断` · 相关性 8/10
-- [Joint structure learning and causal effect estimation for categorical graphical models](deep_reads/2026-07-03-10.1093_biomtc_ujae067.md)  
-  `因果推断` · 相关性 8/10
-- [Multiply robust estimation of marginal structural models in observational studies subject to covariate-driven observations](deep_reads/2026-07-03-10.1093_biomtc_ujae065.md)  
-  `因果推断` · 相关性 8/10
-- [A Bayesian nonparametric approach for causal mediation with a post-treatment confounder](deep_reads/2026-07-03-10.1093_biomtc_ujae099.md)  
-  `因果推断` · 相关性 8/10
-- [Causal inference using multivariate generalized linear mixed-effects models](deep_reads/2026-07-03-10.1093_biomtc_ujae100.md)  
-  `因果推断` · 相关性 8/10
-- [A causal inference framework for leveraging external controls in hybrid trials](deep_reads/2026-07-03-10.1093_biomtc_ujae095.md)  
-  `因果推断` · 相关性 8/10
-- [Debiased high-dimensional regression calibration for errors-in-variables log-contrast models](deep_reads/2026-07-03-10.1093_biomtc_ujae153.md)  
-  `因果推断` · 相关性 8/10
-- [Semiparametric sensitivity analysis: unmeasured confounding in observational studies](deep_reads/2026-07-03-10.1093_biomtc_ujae106.md)  
-  `因果推断` · 相关性 8/10
-- [The subtype-free average causal effect for heterogeneous disease etiology](deep_reads/2026-07-03-10.1093_biomtc_ujaf016.md)  
-  `因果推断` · 相关性 8/10
-- [Multiply robust difference-in-differences estimation of causal effect curves for continuous exposures](deep_reads/2026-07-03-10.1093_biomtc_ujaf015.md)  
-  `因果推断` · 相关性 8/10
-- [A simple and powerful method for large-scale composite null hypothesis testing with applications in mediation analysis](deep_reads/2026-07-03-10.1093_biomtc_ujaf011.md)  
+- [Jackknife empirical likelihood: small bandwidth, sparse network and high-dimensional asymptotics](deep_reads/2026-07-06-10.1093_biomet_asaa081.md)  
   `数理统计 / 假设检验` · 相关性 8/10
-- [Combining experimental and observational data through a power likelihood](deep_reads/2026-07-03-10.1093_biomtc_ujaf008.md)  
+- [Estimation of local treatment effects under the binary instrumental variable model](deep_reads/2026-07-06-10.1093_biomet_asab003.md)  
   `因果推断` · 相关性 8/10
-- [Causally-interpretable random-effects meta-analysis](deep_reads/2026-07-03-10.1093_biomtc_ujag108.md)  
+- [Efficient adjustment sets in causal graphical models with hidden variables](deep_reads/2026-07-06-10.1093_biomet_asab018.md)  
   `因果推断` · 相关性 8/10
-- [An Instrumental Variable Approach to Account for Informative Treatment Switching in Real-world Evidence](deep_reads/2026-07-03-2607.00980.md)  
+- [Interpoint-ranking sign covariance for the test of independence](deep_reads/2026-07-06-10.1093_biomet_asab011.md)  
+  `数理统计 / 假设检验` · 相关性 8/10
+- [High-dimensional semi-supervised learning: in search of optimal inference of the mean](deep_reads/2026-07-06-10.1093_biomet_asab042.md)  
   `因果推断` · 相关性 8/10
-- [Bayesian nonparametric for causal inference and missing data by Michael J. Daniels, Antonio Linero, and Jason Roy, CRC Press, 2023 ISBN-13: 978-0367341008, https://www.routledge.com/Bayesian-Nonparametrics-for-Causal-Inference-and-Missing-Data/Daniels-Linero-Roy/p/book/9780367341008](deep_reads/2026-07-03-10.1093_biomtc_ujad026.md)  
+- [On the inconsistency of matching without replacement](deep_reads/2026-07-06-10.1093_biomet_asab035.md)  
+  `因果推断` · 相关性 8/10
+- [Heterogeneous coefficients, control variables and identification of multiple treatment effects](deep_reads/2026-07-06-10.1093_biomet_asab060.md)  
+  `因果推断` · 相关性 8/10
+- [Searching for robust associations with a multi-environment knockoff filter](deep_reads/2026-07-06-10.1093_biomet_asab055.md)  
+  `因果推断` · 相关性 8/10
+- [Regression-based causal inference with factorial experiments: estimands, model specifications and design-based properties](deep_reads/2026-07-06-10.1093_biomet_asab051.md)  
+  `因果推断` · 相关性 8/10
+- [Inference for Group Interaction Experiments](deep_reads/2026-07-06-2607.02385.md)  
   `因果推断` · 相关性 7/10
-- [A scalar-on-quantile-function approach for estimating short-term health effects of environmental exposures](deep_reads/2026-07-03-10.1093_biomtc_ujae008.md)  
-  `流行病学` · 相关性 7/10
-- [Asymptotic uncertainty of false discovery proportion](deep_reads/2026-07-03-10.1093_biomtc_ujae015.md)  
+- [Posterior contraction in sparse generalized linear models](deep_reads/2026-07-06-10.1093_biomet_asaa074.md)  
+  `高维统计 / 随机矩阵` · 相关性 7/10
+- [Specification tests for covariance structures in high-dimensional statistical models](deep_reads/2026-07-06-10.1093_biomet_asaa073.md)  
+  `高维统计 / 随机矩阵` · 相关性 7/10
+- [Finite-time analysis of vector autoregressive models under linear restrictions](deep_reads/2026-07-06-10.1093_biomet_asaa065.md)  
+  `高维统计 / 随机矩阵` · 相关性 7/10
+- [Statistical properties of sketching algorithms](deep_reads/2026-07-06-10.1093_biomet_asaa062.md)  
+  `统计计算 / 算法` · 相关性 7/10
+- [Consistency guarantees for greedy permutation-based causal inference algorithms](deep_reads/2026-07-06-10.1093_biomet_asaa104.md)  
+  `因果推断` · 相关性 7/10
+- [Regression adjustment in completely randomized experiments with a diverging number of covariates](deep_reads/2026-07-06-10.1093_biomet_asaa103.md)  
+  `因果推断` · 相关性 7/10
+- [Nontestability of instrument validity under continuous treatments](deep_reads/2026-07-06-10.1093_biomet_asaa101.md)  
+  `因果推断` · 相关性 7/10
+- [On semiparametric modelling, estimation and inference for survival data subject to dependent censoring](deep_reads/2026-07-06-10.1093_biomet_asaa095.md)  
+  `因果推断` · 相关性 7/10
+- [Identifiability of causal effects with multiple causes and a binary outcome](deep_reads/2026-07-06-10.1093_biomet_asab016.md)  
+  `因果推断` · 相关性 7/10
+- [Integrated conditional moment test and beyond: when the number of covariates is divergent](deep_reads/2026-07-06-10.1093_biomet_asab009.md)  
   `数理统计 / 假设检验` · 相关性 7/10
-- [Fitting the Cox proportional hazards model to big data](deep_reads/2026-07-03-10.1093_biomtc_ujae018.md)  
+- [Missing at random: a stochastic process perspective](deep_reads/2026-07-06-10.1093_biomet_asab002.md)  
   `因果推断` · 相关性 7/10
-- [Individualized treatment rule characterization via a value function surrogate](deep_reads/2026-07-03-10.1093_biomtc_ujad012.md)  
+- [Large-scale model selection in misspecified generalized linear models](deep_reads/2026-07-06-10.1093_biomet_asab005.md)  
+  `高维统计 / 随机矩阵` · 相关性 7/10
+- [Multiplicative effect modelling: the general case](deep_reads/2026-07-06-10.1093_biomet_asab064.md)  
   `因果推断` · 相关性 7/10
-- [Incorporating nonparametric methods for estimating causal excursion effects in mobile health with zero-inflated count outcomes](deep_reads/2026-07-03-10.1093_biomtc_ujae054.md)  
-  `因果推断` · 相关性 7/10
-- [Dissecting the colocalized GWAS and eQTLs with mediation analysis for high-dimensional exposures and confounders](deep_reads/2026-07-03-10.1093_biomtc_ujae050.md)  
-  `因果推断` · 相关性 7/10
-- [Differential recall bias in estimating treatment effects in observational studies](deep_reads/2026-07-03-10.1093_biomtc_ujae058.md)  
-  `因果推断` · 相关性 7/10
-- [Testing conditional quantile independence with functional covariate](deep_reads/2026-07-03-10.1093_biomtc_ujae036.md)  
+- [On the power of Chatterjee’s rank correlation](deep_reads/2026-07-06-10.1093_biomet_asab028.md)  
   `数理统计 / 假设检验` · 相关性 7/10
-- [Case weighted power priors for hybrid control analyses with time-to-event data](deep_reads/2026-07-03-10.1093_biomtc_ujae019.md)  
-  `因果推断` · 相关性 7/10
-- [Adjusting for incomplete baseline covariates in randomized controlled trials: a cross-world imputation framework](deep_reads/2026-07-03-10.1093_biomtc_ujae094.md)  
-  `因果推断` · 相关性 7/10
-- [Leveraging independence in high-dimensional mixed linear regression](deep_reads/2026-07-03-10.1093_biomtc_ujae103.md)  
-  `因果推断` · 相关性 7/10
-- [A generalized outcome-adaptive sequential multiple assignment randomized trial design](deep_reads/2026-07-03-10.1093_biomtc_ujae073.md)  
-  `因果推断` · 相关性 7/10
-- [High-dimensional multivariate analysis of variance via geometric median and bootstrapping](deep_reads/2026-07-03-10.1093_biomtc_ujae088.md)  
+- [Confidence regions in Wasserstein distributionally robust estimation](deep_reads/2026-07-06-10.1093_biomet_asab026.md)  
+  `其他` · 相关性 7/10
+- [High-dimensional log-error-in-variable regression with applications to microbial compositional data analysis](deep_reads/2026-07-06-10.1093_biomet_asab020.md)  
+  `高维统计 / 随机矩阵` · 相关性 7/10
+- [Multi-scale Fisher’s independence test for multivariate dependence](deep_reads/2026-07-06-10.1093_biomet_asac013.md)  
   `数理统计 / 假设检验` · 相关性 7/10
-- [Causal meta-analysis by integrating multiple observational studies with multivariate outcomes](deep_reads/2026-07-03-10.1093_biomtc_ujae070.md)  
-  `因果推断` · 相关性 7/10
-- [Controlling false discovery rate for mediator selection in high-dimensional data](deep_reads/2026-07-03-10.1093_biomtc_ujae064.md)  
-  `因果推断` · 相关性 7/10
-- [A Bayesian framework for causal analysis of recurrent events with timing misalignment](deep_reads/2026-07-03-10.1093_biomtc_ujae145.md)  
-  `因果推断` · 相关性 7/10
-- [Sensitivity analysis for studies transporting prediction models](deep_reads/2026-07-03-10.1093_biomtc_ujae129.md)  
-  `因果推断` · 相关性 7/10
-- [A generalized logrank-type test for comparison of treatment regimes in sequential multiple assignment randomized trials](deep_reads/2026-07-03-10.1093_biomtc_ujae139.md)  
-  `因果推断` · 相关性 7/10
-- [Causal effect estimation in survival analysis with high dimensional confounders](deep_reads/2026-07-03-10.1093_biomtc_ujae110.md)  
-  `因果推断` · 相关性 7/10
-- [A Bayesian joint model for mediation analysis with matrix-valued mediators](deep_reads/2026-07-03-10.1093_biomtc_ujae143.md)  
-  `因果推断` · 相关性 7/10
-- [Semi-parametric sensitivity analysis for trials with irregular and informative assessment times](deep_reads/2026-07-03-10.1093_biomtc_ujae154.md)  
-  `因果推断` · 相关性 7/10
-- [Joint mirror procedure: controlling false discovery rate for identifying simultaneous signals](deep_reads/2026-07-03-10.1093_biomtc_ujae142.md)  
-  `数理统计 / 假设检验` · 相关性 7/10
-- [Estimating marginal treatment effect in cluster randomized trials with multi-level missing outcomes](deep_reads/2026-07-03-10.1093_biomtc_ujae135.md)  
-  `因果推断` · 相关性 7/10
-- [Group sequential testing of a treatment effect using a surrogate marker](deep_reads/2026-07-03-10.1093_biomtc_ujae108.md)  
-  `因果推断` · 相关性 7/10
-- [Individualized multi-treatment response curves estimation using RBF-net with shared neurons](deep_reads/2026-07-03-10.1093_biomtc_ujaf019.md)  
-  `因果推断` · 相关性 7/10
-- [Weighted Q-learning for optimal dynamic treatment regimes with nonignorable missing covariates](deep_reads/2026-07-03-10.1093_biomtc_ujae161.md)  
-  `因果推断` · 相关性 7/10
-- [Estimating hypothetical estimands with causal inference and missing data estimators in a diabetes trial case study](deep_reads/2026-07-03-10.1093_biomtc_ujae167.md)  
-  `因果推断` · 相关性 7/10
-- [Robust Estimation and Inference with Selective Borrowing in Hybrid Controlled Trials: A Tutorial with SelectiveIntegrative and intFRT](deep_reads/2026-07-03-2607.00350.md)  
-  `因果推断` · 相关性 7/10
-- [Post-selection inference for network structure](deep_reads/2026-07-03-2607.00312.md)  
-  `因果推断` · 相关性 7/10
-- [Bias correction models for electronic health records data in the presence of non-random sampling](deep_reads/2026-07-03-10.1093_biomtc_ujae014.md)  
-  `流行病学` · 相关性 6/10
-- [The central role of the identifying assumption in population size estimation](deep_reads/2026-07-03-10.1093_biomtc_ujad028.md)  
-  `因果推断` · 相关性 6/10
-- [Inferring a directed acyclic graph of phenotypes from GWAS summary statistics](deep_reads/2026-07-03-10.1093_biomtc_ujad039.md)  
-  `因果推断` · 相关性 6/10
-- [Efficient computation of high-dimensional penalized generalized linear mixed models by latent factor modeling of the random effects](deep_reads/2026-07-03-10.1093_biomtc_ujae016.md)  
-  `统计计算 / 算法` · 相关性 6/10
-- [Multiple augmented reduced rank regression for pan-cancer analysis](deep_reads/2026-07-03-10.1093_biomtc_ujad002.md)  
-  `高维统计 / 随机矩阵` · 相关性 6/10
-- [Adaptive sequential surveillance with network and temporal dependence](deep_reads/2026-07-03-10.1093_biomtc_ujad007.md)  
-  `因果推断` · 相关性 6/10
-- [Estimating the effect of latent time-varying count exposures using multiple lists](deep_reads/2026-07-03-10.1093_biomtc_ujad027.md)  
-  `流行病学` · 相关性 6/10
-- [Efficient designs and analysis of two-phase studies with longitudinal binary data](deep_reads/2026-07-03-10.1093_biomtc_ujad010.md)  
-  `因果推断` · 相关性 6/10
-- [Nonparametric predictive model for sparse and irregular longitudinal data](deep_reads/2026-07-03-10.1093_biomtc_ujad023.md)  
-  `非参数 / 半参数` · 相关性 6/10
-- [High-dimensional covariate-augmented overdispersed poisson factor model](deep_reads/2026-07-03-10.1093_biomtc_ujae031.md)  
-  `高维统计 / 随机矩阵` · 相关性 6/10
-- [Efficient data integration under prior probability shift](deep_reads/2026-07-03-10.1093_biomtc_ujae035.md)  
-  `非参数 / 半参数` · 相关性 6/10
-- [High-dimensional multisubject time series transition matrix inference with application to brain connectivity analysis](deep_reads/2026-07-03-10.1093_biomtc_ujae021.md)  
-  `因果推断` · 相关性 6/10
-- [Improving prediction of linear regression models by integrating external information from heterogeneous populations: James–Stein estimators](deep_reads/2026-07-03-10.1093_biomtc_ujae072.md)  
-  `因果推断` · 相关性 6/10
-- [Semiparametric inference of effective reproduction number dynamics from wastewater pathogen surveillance data](deep_reads/2026-07-03-10.1093_biomtc_ujae074.md)  
-  `流行病学` · 相关性 6/10
-- [Post-selection inference in regression models for group testing data](deep_reads/2026-07-03-10.1093_biomtc_ujae101.md)  
-  `其他` · 相关性 6/10
-- [Nonparametric worst-case bounds for publication bias on the summary receiver operating characteristic curve](deep_reads/2026-07-03-10.1093_biomtc_ujae080.md)  
-  `因果推断` · 相关性 6/10
-- [Summary statistics knockoffs inference with family-wise error rate control](deep_reads/2026-07-03-10.1093_biomtc_ujae082.md)  
+- [Risk bounds for quantile trend filtering](deep_reads/2026-07-06-10.1093_biomet_asab045.md)  
+  `非参数 / 半参数` · 相关性 7/10
+- [Determining the number of factors in high-dimensional generalized latent factor models](deep_reads/2026-07-06-10.1093_biomet_asab044.md)  
+  `高维统计 / 随机矩阵` · 相关性 7/10
+- [An assumption-free exact test for fixed-design linear models with exchangeable errors](deep_reads/2026-07-06-10.1093_biomet_asaa079.md)  
   `数理统计 / 假设检验` · 相关性 6/10
-- [Bayesian pathway analysis over brain network mediators for survival data](deep_reads/2026-07-03-10.1093_biomtc_ujae132.md)  
+- [Approximating posteriors with high-dimensional nuisance parameters via integrated rotated Gaussian approximation](deep_reads/2026-07-06-10.1093_biomet_asaa068.md)  
+  `统计计算 / 算法` · 相关性 6/10
+- [A parsimonious personalized dose-finding model via dimension reduction](deep_reads/2026-07-06-10.1093_biomet_asaa087.md)  
   `因果推断` · 相关性 6/10
-- [Large-scale survival analysis with a cure fraction](deep_reads/2026-07-03-10.1093_biomtc_ujae138.md)  
-  `其他` · 相关性 6/10
-- [Robust and flexible learning of a high-dimensional classification rule using auxiliary outcomes](deep_reads/2026-07-03-10.1093_biomtc_ujae144.md)  
-  `高维统计 / 随机矩阵` · 相关性 6/10
-- [Adaptive randomization methods for sequential multiple assignment randomized trials (smarts) via thompson sampling](deep_reads/2026-07-03-10.1093_biomtc_ujae152.md)  
+- [On order determination by predictor augmentation](deep_reads/2026-07-06-10.1093_biomet_asaa077.md)  
+  `数理统计 / 假设检验` · 相关性 6/10
+- [Changepoint inference in the presence of missing covariates for principal surrogate evaluation in vaccine trials](deep_reads/2026-07-06-10.1093_biomet_asaa100.md)  
   `因果推断` · 相关性 6/10
-- [How to achieve model-robust inference in stepped wedge trials with model-based methods?](deep_reads/2026-07-03-10.1093_biomtc_ujae123.md)  
-  `因果推断` · 相关性 6/10
-- [Wasserstein regression with empirical measures and density estimation for sparse data](deep_reads/2026-07-03-10.1093_biomtc_ujae127.md)  
+- [Maximum likelihood estimation for semiparametric regression models with panel count data](deep_reads/2026-07-06-10.1093_biomet_asaa091.md)  
   `非参数 / 半参数` · 相关性 6/10
-- [An efficient joint model for high dimensional longitudinal and survival data via generic association features](deep_reads/2026-07-03-10.1093_biomtc_ujae149.md)  
-  `其他` · 相关性 6/10
-- [Feature screening for metric space-valued responses based on Fréchet regression with its applications](deep_reads/2026-07-03-10.1093_biomtc_ujaf007.md)  
+- [Inference on the average treatment effect under minimization and other covariate-adaptive randomization methods](deep_reads/2026-07-06-10.1093_biomet_asab015.md)  
+  `因果推断` · 相关性 6/10
+- [Optimal post-selection inference for sparse signals: a nonparametric empirical Bayes approach](deep_reads/2026-07-06-10.1093_biomet_asab014.md)  
+  `数理统计 / 假设检验` · 相关性 6/10
+- [Statistical inference on shape and size indexes for counting processes](deep_reads/2026-07-06-10.1093_biomet_asab008.md)  
   `非参数 / 半参数` · 相关性 6/10
-- [Sparse Bernoulli mixture modeling with negative-unlabeled data: an approach to identify and characterize long COVID](deep_reads/2026-07-03-10.1093_biomtc_ujaf021.md)  
-  `流行病学` · 相关性 6/10
-- [Bayesian nonparametric trees for principal causal effects](deep_reads/2026-07-03-10.1093_biomtc_ujaf024.md)  
+- [Backfitting tests in generalized structured models](deep_reads/2026-07-06-10.1093_biomet_asaa108.md)  
+  `非参数 / 半参数` · 相关性 6/10
+- [Smoothed nested testing on directed acyclic graphs](deep_reads/2026-07-06-10.1093_biomet_asab041.md)  
+  `数理统计 / 假设检验` · 相关性 6/10
+- [Inverse moment methods for sufficient forecasting using high-dimensional predictors](deep_reads/2026-07-06-10.1093_biomet_asab037.md)  
   `因果推断` · 相关性 6/10
-- [Finite mixtures of linear quantile regressions with concomitant variables: a solution to endogeneity in longitudinal data modeling](deep_reads/2026-07-03-10.1093_biomtc_ujag095.md)  
+- [On the relative efficiency of the intent-to-treat Wilcoxon–Mann–Whitney test in the presence of noncompliance](deep_reads/2026-07-06-10.1093_biomet_asab053.md)  
   `因果推断` · 相关性 6/10
-- [Subgroup identification via Interaction Tree and Mixed Model for Repeated Measures with application to Alzheimer’s disease](deep_reads/2026-07-03-10.1093_biomtc_ujag104.md)  
-  `因果推断` · 相关性 6/10
-- [Distributed Prediction under Heterogeneity with Unidentifiable Parameter](deep_reads/2026-07-03-2607.00376.md)  
-  `其他` · 相关性 6/10
-- [GTLS: A GPU-accelerated method for periodic transit detection](deep_reads/2026-07-03-2607.00348.md)  
-  `天体统计` · 相关性 6/10
-- [Robust data integration from multiple external sources for generalized linear models with binary outcomes](deep_reads/2026-07-03-10.1093_biomtc_ujad005.md)  
-  `因果推断` · 相关性 5/10
-- [Simultaneous variable selection and estimation in semiparametric regression of mixed panel count data](deep_reads/2026-07-03-10.1093_biomtc_ujad041.md)  
+- [On quadratic forms in multivariate generalized hyperbolic random vectors](deep_reads/2026-07-06-10.1093_biomet_asaa067.md)  
   `其他` · 相关性 5/10
-- [Accounting for network noise in graph-guided Bayesian modeling of structured high-dimensional data](deep_reads/2026-07-03-10.1093_biomtc_ujae012.md)  
-  `其他` · 相关性 5/10
-- [Semisupervised transfer learning for evaluation of model classification performance](deep_reads/2026-07-03-10.1093_biomtc_ujae002.md)  
-  `因果推断` · 相关性 5/10
-- [Conditional modeling of panel count data with partly interval-censored failure event](deep_reads/2026-07-03-10.1093_biomtc_ujae020.md)  
-  `因果推断` · 相关性 5/10
-- [Proportional rates models for multivariate panel count data](deep_reads/2026-07-03-10.1093_biomtc_ujad011.md)  
-  `因果推断` · 相关性 5/10
-- [Multiobjective tree-based reinforcement learning for estimating tolerant dynamic treatment regimes](deep_reads/2026-07-03-10.1093_biomtc_ujad017.md)  
-  `因果推断` · 相关性 5/10
-- [Incorporating participants’ welfare into sequential multiple assignment randomized trials](deep_reads/2026-07-03-10.1093_biomtc_ujad004.md)  
-  `因果推断` · 相关性 5/10
-- [Efficient estimation for left-truncated competing risks regression for case-cohort studies](deep_reads/2026-07-03-10.1093_biomtc_ujad008.md)  
-  `流行病学` · 相关性 5/10
-- [A Bayesian semi-parametric model for learning biomarker trajectories and changepoints in the preclinical phase of Alzheimer’s disease](deep_reads/2026-07-03-10.1093_biomtc_ujae048.md)  
-  `其他` · 相关性 5/10
-- [Efficient testing of the biomarker positive and negative subgroups in a biomarker-stratified trial](deep_reads/2026-07-03-10.1093_biomtc_ujae056.md)  
+- [A general interactive framework for false discovery rate control under structural constraints](deep_reads/2026-07-06-10.1093_biomet_asaa064.md)  
   `数理统计 / 假设检验` · 相关性 5/10
-- [Heterogeneous latent transfer learning in Gaussian graphical models](deep_reads/2026-07-03-10.1093_biomtc_ujae096.md)  
+- [Block bootstrap optimality and empirical block selection for sample quantiles with dependent data](deep_reads/2026-07-06-10.1093_biomet_asaa075.md)  
+  `数理统计 / 假设检验` · 相关性 5/10
+- [Sparse functional linear discriminant analysis](deep_reads/2026-07-06-10.1093_biomet_asaa107.md)  
+  `非参数 / 半参数` · 相关性 5/10
+- [Heterogeneity-aware and communication-efficient distributed statistical inference](deep_reads/2026-07-06-10.1093_biomet_asab007.md)  
+  `因果推断` · 相关性 5/10
+- [Estimation of genetic correlation with summary association statistics](deep_reads/2026-07-06-10.1093_biomet_asab030.md)  
   `高维统计 / 随机矩阵` · 相关性 5/10
-- [Unit information Dirichlet process prior](deep_reads/2026-07-03-10.1093_biomtc_ujae091.md)  
-  `其他` · 相关性 5/10
-- [Optimal refinement of strata to balance covariates](deep_reads/2026-07-03-10.1093_biomtc_ujae061.md)  
-  `因果推断` · 相关性 5/10
-- [Hypothesis tests in ordinal predictive models with optimal accuracy](deep_reads/2026-07-03-10.1093_biomtc_ujae079.md)  
+- [Joint latent space models for network data with high-dimensional node variables](deep_reads/2026-07-06-10.1093_biomet_asab063.md)  
+  `高维统计 / 随机矩阵` · 相关性 5/10
+- [Local linear graphon estimation using covariates](deep_reads/2026-07-06-10.1093_biomet_asab057.md)  
+  `非参数 / 半参数` · 相关性 5/10
+- [Asymptotic distribution-free changepoint detection for data with repeated observations](deep_reads/2026-07-06-10.1093_biomet_asab048.md)  
   `数理统计 / 假设检验` · 相关性 5/10
-- [Case-crossover designs and overdispersion with application to air pollution epidemiology](deep_reads/2026-07-03-10.1093_biomtc_ujae117.md)  
-  `流行病学` · 相关性 5/10
-- [Leveraging information from secondary endpoints to enhance dynamic borrowing across subpopulations](deep_reads/2026-07-03-10.1093_biomtc_ujae118.md)  
-  `因果推断` · 相关性 5/10
-- [On network deconvolution for undirected graphs](deep_reads/2026-07-03-10.1093_biomtc_ujae112.md)  
-  `因果推断` · 相关性 5/10
-- [A likelihood approach to incorporating self-report data in HIV recency classification](deep_reads/2026-07-03-10.1093_biomtc_ujae147.md)  
-  `流行病学` · 相关性 5/10
-- [Temporal generative models for learning heterogeneous group dynamics of ecological momentary assessment data](deep_reads/2026-07-03-10.1093_biomtc_ujae115.md)  
-  `其他` · 相关性 5/10
-- [A formal goodness-of-fit test for spatial binary Markov random field models](deep_reads/2026-07-03-10.1093_biomtc_ujae119.md)  
-  `数理统计 / 假设检验` · 相关性 5/10
-- [Time-dependent prognostic accuracy measures for recurrent event data](deep_reads/2026-07-03-10.1093_biomtc_ujae150.md)  
-  `其他` · 相关性 5/10
-- [A unified combination framework for dependent tests with applications to microbiome association studies](deep_reads/2026-07-03-10.1093_biomtc_ujaf001.md)  
-  `数理统计 / 假设检验` · 相关性 5/10
-- [Evaluating the effects of high-throughput structural neuroimaging predictors on whole-brain functional connectome outcomes via network-based matrix-on-vector regression](deep_reads/2026-07-03-10.1093_biomtc_ujaf027.md)  
-  `其他` · 相关性 5/10
-- [Robust Bayesian graphical regression models for assessing tumor heterogeneity in proteomic networks](deep_reads/2026-07-03-10.1093_biomtc_ujae160.md)  
-  `其他` · 相关性 5/10
-- [Statistical inference for mean function of partially observed functional time series](deep_reads/2026-07-03-10.1093_biomtc_ujag111.md)  
-  `数理统计 / 假设检验` · 相关性 5/10
-- [Fast penalized generalized estimating equations for large longitudinal functional datasets](deep_reads/2026-07-03-10.1093_biomtc_ujag106.md)  
-  `统计计算 / 算法` · 相关性 5/10
-- [Longitudinal varying coefficient single-index model with censored covariates](deep_reads/2026-07-03-10.1093_biomtc_ujad006.md)  
-  `其他` · 相关性 4/10
-- [Two-phase designs with failure time processes subject to nonsusceptibility](deep_reads/2026-07-03-10.1093_biomtc_ujad038.md)  
-  `流行病学` · 相关性 4/10
-- [Merging or ensembling: integrative analysis in multiple neuroimaging studies](deep_reads/2026-07-03-10.1093_biomtc_ujae003.md)  
-  `其他` · 相关性 4/10
-- [Incorporating graph information in Bayesian factor analysis with robust and adaptive shrinkage priors](deep_reads/2026-07-03-10.1093_biomtc_ujad014.md)  
-  `其他` · 相关性 4/10
-- [Regression models for average hazard](deep_reads/2026-07-03-10.1093_biomtc_ujae037.md)  
-  `因果推断` · 相关性 4/10
-- [Identifying temporal pathways using biomarkers in the presence of latent non-Gaussian components](deep_reads/2026-07-03-10.1093_biomtc_ujae033.md)  
-  `因果推断` · 相关性 4/10
-- [Bayesian inference for multivariate probit model with latent envelope](deep_reads/2026-07-03-10.1093_biomtc_ujae059.md)  
-  `其他` · 相关性 4/10
-- [Factor-augmented transformation models for interval-censored failure time data](deep_reads/2026-07-03-10.1093_biomtc_ujae078.md)  
-  `其他` · 相关性 4/10
-- [Nonparametric receiver operating characteristic curve analysis with an imperfect gold standard](deep_reads/2026-07-03-10.1093_biomtc_ujae063.md)  
+- [On the use of a penalized quasilikelihood information criterion for generalized linear mixed models](deep_reads/2026-07-06-10.1093_biomet_asaa069.md)  
   `数理统计 / 假设检验` · 相关性 4/10
-- [Optimal adaptive SMART designs with binary outcomes](deep_reads/2026-07-03-10.1093_biomtc_ujae140.md)  
-  `因果推断` · 相关性 4/10
-- [Composite dyadic models for spatio-temporal data](deep_reads/2026-07-03-10.1093_biomtc_ujae107.md)  
+- [Poisson reduced-rank models with an application to political text data](deep_reads/2026-07-06-10.1093_biomet_asaa063.md)  
   `其他` · 相关性 4/10
-- [A hierarchical random effects state-space model for modeling brain activities from electroencephalogram data](deep_reads/2026-07-03-10.1093_biomtc_ujae130.md)  
+- [Nonsmooth backfitting for the excess risk additive regression model with two survival time scales](deep_reads/2026-07-06-10.1093_biomet_asaa058.md)  
   `其他` · 相关性 4/10
-- [Derivation of outcome-dependent dietary patterns for low-income women obtained from survey data using a supervised weighted overfitted latent class analysis](deep_reads/2026-07-03-10.1093_biomtc_ujae122.md)  
-  `流行病学` · 相关性 4/10
-- [Heterogeneity-aware integrative regression for ancestry-specific association studies](deep_reads/2026-07-03-10.1093_biomtc_ujae109.md)  
+- [Assessing cure status prediction from survival data using receiver operating characteristic curves](deep_reads/2026-07-06-10.1093_biomet_asaa080.md)  
   `其他` · 相关性 4/10
-- [Modeling longitudinal skewed functional data](deep_reads/2026-07-03-10.1093_biomtc_ujae121.md)  
+- [More for less: predicting and maximizing genomic variant discovery via Bayesian nonparametrics](deep_reads/2026-07-06-10.1093_biomet_asab012.md)  
   `其他` · 相关性 4/10
-- [Distributed model building and recursive integration for big spatial data modeling](deep_reads/2026-07-03-10.1093_biomtc_ujae159.md)  
-  `统计计算 / 算法` · 相关性 4/10
-- [A general, flexible, and harmonious framework to construct interpretable functions in regression analysis](deep_reads/2026-07-03-10.1093_biomtc_ujaf014.md)  
-  `其他` · 相关性 4/10
-- [INTACT: a method for integration of longitudinal physical activity data from multiple sources](deep_reads/2026-07-03-10.1093_biomtc_ujag112.md)  
-  `其他` · 相关性 4/10
-- [Homogeneity pursuit and variable selection in regression models for multivariate abundance data](deep_reads/2026-07-03-10.1093_biomtc_ujad001.md)  
-  `其他` · 相关性 3/10
-- [Soft classification and regression analysis of audiometric phenotypes of age-related hearing loss](deep_reads/2026-07-03-10.1093_biomtc_ujae013.md)  
-  `流行病学` · 相关性 3/10
-- [Bayesian two-stage modeling of longitudinal and time-to-event data with an integrated fractional Brownian motion covariance structure](deep_reads/2026-07-03-10.1093_biomtc_ujae011.md)  
-  `其他` · 相关性 3/10
-- [Sparse ordinal discriminant analysis](deep_reads/2026-07-03-10.1093_biomtc_ujad040.md)  
-  `其他` · 相关性 3/10
-- [An interpretable Bayesian clustering approach with feature selection for analyzing spatially resolved transcriptomics data](deep_reads/2026-07-03-10.1093_biomtc_ujae066.md)  
-  `其他` · 相关性 3/10
-- [Nonparametric second-order estimation for spatiotemporal point patterns](deep_reads/2026-07-03-10.1093_biomtc_ujae071.md)  
-  `非参数 / 半参数` · 相关性 3/10
-- [A Bayesian latent-subgroup platform design for dose optimization](deep_reads/2026-07-03-10.1093_biomtc_ujae093.md)  
-  `其他` · 相关性 3/10
-- [PathGPS: discover shared genetic architecture using GWAS summary data](deep_reads/2026-07-03-10.1093_biomtc_ujae060.md)  
-  `因果推断` · 相关性 3/10
-- [Clustering computer mouse tracking data with informed hierarchical shrinkage partition priors](deep_reads/2026-07-03-10.1093_biomtc_ujae124.md)  
-  `其他` · 相关性 3/10
-- [Unlocking the power of multi-institutional data: Integrating and harmonizing genomic data across institutions](deep_reads/2026-07-03-10.1093_biomtc_ujae146.md)  
-  `其他` · 相关性 3/10
-- [Structured feature ranking for genomic marker identification accommodating multiple types of networks](deep_reads/2026-07-03-10.1093_biomtc_ujae158.md)  
-  `其他` · 相关性 3/10
-- [Pseudo-observations for bivariate survival data](deep_reads/2026-07-03-10.1093_biomtc_ujaf006.md)  
-  `其他` · 相关性 3/10
-- [Bayesian scalar-on-network regression with applications to brain functional connectivity](deep_reads/2026-07-03-10.1093_biomtc_ujaf023.md)  
-  `其他` · 相关性 3/10
-- [A generalized phase 1-2-3 design integrating dose optimization with confirmatory treatment comparison](deep_reads/2026-07-03-10.1093_biomtc_ujad022.md)  
-  `其他` · 相关性 2/10
-- [Randomized phase II selection design with order constrained strata](deep_reads/2026-07-03-10.1093_biomtc_ujad013.md)  
+- [Distributed inference for the extreme value index](deep_reads/2026-07-06-10.1093_biomet_asab001.md)  
+  `数理统计 / 假设检验` · 相关性 4/10
+- [Asymptotics of sample tail autocorrelations for tail-dependent time series: phase transition and visualization](deep_reads/2026-07-06-10.1093_biomet_asab038.md)  
+  `数理统计 / 假设检验` · 相关性 4/10
+- [Covariate adaptive familywise error rate control for genome-wide association studies](deep_reads/2026-07-06-10.1093_biomet_asaa098.md)  
+  `数理统计 / 假设检验` · 相关性 3/10
+- [Stratification and optimal resampling for sequential Monte Carlo](deep_reads/2026-07-06-10.1093_biomet_asab004.md)  
+  `统计计算 / 算法` · 相关性 3/10
+- [Inverses of Matérn covariances on grids](deep_reads/2026-07-06-10.1093_biomet_asab017.md)  
+  `统计计算 / 算法` · 相关性 3/10
+- [Uniqueness and global optimality of the maximum likelihood estimator for the generalized extreme value distribution](deep_reads/2026-07-06-10.1093_biomet_asab043.md)  
+  `数理统计 / 假设检验` · 相关性 3/10
+- [Composite grid designs for adaptive computer experiments with fast inference](deep_reads/2026-07-06-10.1093_biomet_asaa084.md)  
+  `统计计算 / 算法` · 相关性 2/10
+- [Admissible estimators of a multivariate normal mean vector when the scale is unknown](deep_reads/2026-07-06-10.1093_biomet_asaa102.md)  
   `数理统计 / 假设检验` · 相关性 2/10
-- [Designing cancer screening trials for reduction in late-stage cancer incidence](deep_reads/2026-07-03-10.1093_biomtc_ujae097.md)  
-  `流行病学` · 相关性 2/10
+- [Estimation of the cure rate for distributions in the Gumbel maximum domain of attraction under insufficient follow-up](deep_reads/2026-07-06-10.1093_biomet_asaa106.md)  
+  `其他` · 相关性 2/10
+- [A minimum aberration-type criterion for selecting space-filling designs](deep_reads/2026-07-06-10.1093_biomet_asab021.md)  
+  `其他` · 相关性 2/10
+- [Design and development of a near-IR integral field spectrograph for the HWO Coronagraph Instrument](deep_reads/2026-07-06-2607.02243.md)  
+  `天体统计` · 相关性 1/10
+- [HARMONI at ELT: line spread functions in a diffraction limited spectrometer](deep_reads/2026-07-06-2607.02223.md)  
+  `天体统计` · 相关性 1/10
 
 ## 收藏
 
@@ -318,11 +178,11 @@
 
 ## 本周每日报告
 
+- [2026-07-03](daily/2026-07-03.md)
 - [2026-07-02](daily/2026-07-02.md)
 - [2026-07-01](daily/2026-07-01.md)
 - [2026-06-30](daily/2026-06-30.md)
 - [2026-06-29](daily/2026-06-29.md)
-- [2026-06-26](daily/2026-06-26.md)
 
 
 ---
