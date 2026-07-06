@@ -143,7 +143,7 @@ IEEE 系列 ieee（月刊、每期很大，全部先 dry-run、用小 N）：
 - [x] (2026-07-07) `--only JBES --n-issues 14`
 
 IEEE 系列 ieee（月刊、每期大，用小步）：
-- [ ] `--only TIT --n-issues 3`   ⚠
+- [x] (2026-07-07) `--only TIT --n-issues 3`   ⚠
 - [ ] `--only TPAMI --n-issues 3`   ⚠
 - [ ] `--only TSP --n-issues 3`   ⚠
 - [ ] `--only JSAIT --n-issues 7`

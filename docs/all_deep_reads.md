@@ -2522,6 +2522,13 @@
 
 ### 期刊
 
+#### IEEE Transactions on Information Theory Vol 72 Issue 7
+
+- [One-Bit Phase Retrieval: Optimal Rates and Efficient Algorithms](deep_reads/2026-07-07-10.1109_tit.2026.3692592.md)  
+  7/10 [journals]
+- [Bit-Efficient Toeplitz Covariance Estimation](deep_reads/2026-07-07-10.1109_tit.2026.3697612.md)  
+  6/10 [journals]
+
 #### Journal of Business & Economic Statistics Vol 42 Issue 2
 
 - [Monitoring Network Changes in Social Media](deep_reads/2026-07-06-10.1080_07350015.2021.2016425.md)  
@@ -5435,6 +5442,13 @@
   8/10 [daily]
 
 ### 期刊
+
+#### IEEE Transactions on Information Theory Vol 72 Issue 7
+
+- [Testing Dependency of Weighted Random Graphs](deep_reads/2026-07-07-10.1109_tit.2026.3696669.md)  
+  7/10 [journals]
+- [Hypothesis Testing for Adversarial Channels: Chernoff–Stein Exponents](deep_reads/2026-07-07-10.1109_tit.2026.3691175.md)  
+  6/10 [journals]
 
 #### Quantitative Economics Vol 15 Issue 1
 
@@ -9857,6 +9871,17 @@
   8/10 [daily]
 
 ### 期刊
+
+#### IEEE Transactions on Information Theory Vol 72 Issue 7
+
+- [Sibson α-Mutual Information and Its Variational Representations](deep_reads/2026-07-07-10.1109_tit.2025.3587340.md)  
+  7/10 [journals]
+- [Instance-Optimality in Optimal Value Estimation: Adaptivity via Variance-Reduced <i>Q</i> -Learning](deep_reads/2026-07-07-10.1109_tit.2024.3386122.md)  
+  6/10 [journals]
+- [Reinforcement Learning With Partial Online State Information in POMDPs: Regret Bounds and Limits](deep_reads/2026-07-07-10.1109_tit.2026.3694700.md)  
+  3/10 [journals]
+- [New Sphere-Packing Bounds for Finite-Blocklength Coding Over Additive Noise Channels](deep_reads/2026-07-07-10.1109_tit.2026.3689501.md)  
+  1/10 [journals]
 
 #### Journal of Econometrics Vol 254
 

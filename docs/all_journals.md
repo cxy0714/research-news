@@ -377,6 +377,7 @@
 
 ### TIT
 
+- [Vol 72 Issue 7 · 2026-07-07](journals/2026-07-07-tit-v72-i7.md)
 - [Vol 72 Issue 6 · 2026-06-05](journals/2026-06-05-tit-v72-i6.md)
 - [Vol 72 Issue 5 · 2026-06-05](journals/2026-06-05-tit-v72-i5.md)
 - [Vol 72 Issue 4 · 2026-06-05](journals/2026-06-05-tit-v72-i4.md)
