@@ -139,7 +139,7 @@ IEEE 系列 ieee（月刊、每期很大，全部先 dry-run、用小 N）：
 经济 / 计量 econ：
 - [x] (2026-07-06) `--only Econometrica --n-issues 18`
 - [x] (2026-07-06) `--only "J. Econometrics" --n-issues 7`   ⚠ 出刊密、量大
-- [ ] `--only "Quant. Econ." --n-issues 14`
+- [x] (2026-07-06) `--only "Quant. Econ." --n-issues 14`
 - [ ] `--only JBES --n-issues 14`
 
 IEEE 系列 ieee（月刊、每期大，用小步）：

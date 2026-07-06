@@ -17,7 +17,7 @@
 
 [→ 查看完整报告](daily/2026-07-06.md)
 
-### 精读论文（137 篇）
+### 精读论文（169 篇）
 
 - [Quasi-oracle estimation of heterogeneous treatment effects](deep_reads/2026-07-06-10.1093_biomet_asaa076.md)  
   `因果推断` · 相关性 9/10
@@ -33,6 +33,12 @@
   `数理统计 / 假设检验` · 相关性 9/10
 - [A high-dimensional power analysis of the conditional randomization test and knockoffs](deep_reads/2026-07-06-10.1093_biomet_asab052.md)  
   `高维统计 / 随机矩阵` · 相关性 9/10
+- [Inference on heterogeneous treatment effects in high‐dimensional dynamic panels under weak dependence](deep_reads/2026-07-06-10.3982_qe1670.md)  
+  `因果推断` · 相关性 8/10
+- [Inference for matched tuples and fully blocked factorial designs](deep_reads/2026-07-06-10.3982_qe2354.md)  
+  `因果推断` · 相关性 8/10
+- [A robust permutation test for subvector inference in linear regressions](deep_reads/2026-07-06-10.3982_qe2269.md)  
+  `数理统计 / 假设检验` · 相关性 8/10
 - [Nonrandom Exposure to Exogenous Shocks](deep_reads/2026-07-06-10.3982_ecta19367.md)  
   `经济理论 / 应用` · 相关性 8/10
 - [Estimation Based on Nearest Neighbor Matching: From Density Ratio to Average Treatment Effect](deep_reads/2026-07-06-10.3982_ecta20598.md)  
@@ -61,6 +67,14 @@
   `因果推断` · 相关性 8/10
 - [Regression-based causal inference with factorial experiments: estimands, model specifications and design-based properties](deep_reads/2026-07-06-10.1093_biomet_asab051.md)  
   `因果推断` · 相关性 8/10
+- [Selection and the distribution of female real hourly wages in the United States](deep_reads/2026-07-06-10.3982_qe1777.md)  
+  `经济理论 / 应用` · 相关性 7/10
+- [Locally robust inference for non‐Gaussian SVAR models](deep_reads/2026-07-06-10.3982_qe2274.md)  
+  `经济理论 / 应用` · 相关性 7/10
+- [Confidence set for group membership](deep_reads/2026-07-06-10.3982_qe1975.md)  
+  `因果推断` · 相关性 7/10
+- [Moment inequalities for multinomial choice with fixed effects](deep_reads/2026-07-06-10.3982_qe1776.md)  
+  `经济理论 / 应用` · 相关性 7/10
 - [Quasi-Bayesian estimation and inference with control functions](deep_reads/2026-07-06-10.1016_j.jeconom.2025.106126.md)  
   `因果推断` · 相关性 7/10
 - [Diffusion index forecasting with tensor data](deep_reads/2026-07-06-10.1016_j.jeconom.2026.106204.md)  
@@ -129,6 +143,18 @@
   `非参数 / 半参数` · 相关性 7/10
 - [Determining the number of factors in high-dimensional generalized latent factor models](deep_reads/2026-07-06-10.1093_biomet_asab044.md)  
   `高维统计 / 随机矩阵` · 相关性 7/10
+- [Demand estimation with infrequent purchases and small market sizes](deep_reads/2026-07-06-10.3982_qe2147.md)  
+  `经济理论 / 应用` · 相关性 6/10
+- [Local projections, autocorrelation, and efficiency](deep_reads/2026-07-06-10.3982_qe1988.md)  
+  `经济理论 / 应用` · 相关性 6/10
+- [Bootstrapping Laplace transforms of volatility](deep_reads/2026-07-06-10.3982_qe1929.md)  
+  `数理统计 / 假设检验` · 相关性 6/10
+- [Fiscal multipliers: A heterogenous‐agent perspective](deep_reads/2026-07-06-10.3982_qe1901.md)  
+  `经济理论 / 应用` · 相关性 6/10
+- [The origins and effects of macroeconomic uncertainty](deep_reads/2026-07-06-10.3982_qe1979.md)  
+  `经济理论 / 应用` · 相关性 6/10
+- [Bootstrap inference under cross‐sectional dependence](deep_reads/2026-07-06-10.3982_qe1626.md)  
+  `数理统计 / 假设检验` · 相关性 6/10
 - [Text-term selection and analysis: Frequentist and Bayesian strategies and interpretations](deep_reads/2026-07-06-10.1016_j.jeconom.2025.106163.md)  
   `经济理论 / 应用` · 相关性 6/10
 - [Sequential Veto Bargaining With Incomplete Information](deep_reads/2026-07-06-10.3982_ecta20658.md)  
@@ -167,6 +193,16 @@
   `因果推断` · 相关性 6/10
 - [On the relative efficiency of the intent-to-treat Wilcoxon–Mann–Whitney test in the presence of noncompliance](deep_reads/2026-07-06-10.1093_biomet_asab053.md)  
   `因果推断` · 相关性 6/10
+- [Estimating demand for differentiated products with zeroes in market share data](deep_reads/2026-07-06-10.3982_qe1593.md)  
+  `经济理论 / 应用` · 相关性 5/10
+- [Quantifying noise in survey expectations](deep_reads/2026-07-06-10.3982_qe1633.md)  
+  `经济理论 / 应用` · 相关性 5/10
+- [Heterogeneous effects of tariff and nontariff trade‐policy barriers in quantitative general equilibrium](deep_reads/2026-07-06-10.3982_qe1994.md)  
+  `经济理论 / 应用` · 相关性 5/10
+- [Geometric methods for finite rational inattention](deep_reads/2026-07-06-10.3982_qe2050.md)  
+  `经济理论 / 应用` · 相关性 5/10
+- [Measuring trust in institutions and its causal effect](deep_reads/2026-07-06-10.3982_qe1914.md)  
+  `经济理论 / 应用` · 相关性 5/10
 - [Large Bayesian matrix autoregressions](deep_reads/2026-07-06-10.1016_j.jeconom.2025.105955.md)  
   `经济理论 / 应用` · 相关性 5/10
 - [General Equilibrium Effects of (Improving) Public Employment Programs: Experimental Evidence From India](deep_reads/2026-07-06-10.3982_ecta18181.md)  
@@ -199,6 +235,16 @@
   `非参数 / 半参数` · 相关性 5/10
 - [Asymptotic distribution-free changepoint detection for data with repeated observations](deep_reads/2026-07-06-10.1093_biomet_asab048.md)  
   `数理统计 / 假设检验` · 相关性 5/10
+- [Behavioral learning equilibria in New Keynesian models](deep_reads/2026-07-06-10.3982_qe1533.md)  
+  `经济理论 / 应用` · 相关性 4/10
+- [Costly information acquisition in centralized matching markets](deep_reads/2026-07-06-10.3982_qe1955.md)  
+  `经济理论 / 应用` · 相关性 4/10
+- [A dynamic model of rational “panic buying”](deep_reads/2026-07-06-10.3982_qe2126.md)  
+  `经济理论 / 应用` · 相关性 4/10
+- [Stamping out stamp duty: Housing mismatch and welfare](deep_reads/2026-07-06-10.3982_qe1984.md)  
+  `经济理论 / 应用` · 相关性 4/10
+- [On the complexity of forming mental models](deep_reads/2026-07-06-10.3982_qe2264.md)  
+  `经济理论 / 应用` · 相关性 4/10
 - [Probability distributions for realized covariance measures](deep_reads/2026-07-06-10.1016_j.jeconom.2025.105954.md)  
   `其他` · 相关性 4/10
 - [Partial identification of structural vector autoregressions with non-centred stochastic volatility](deep_reads/2026-07-06-10.1016_j.jeconom.2025.106107.md)  
@@ -227,6 +273,12 @@
   `数理统计 / 假设检验` · 相关性 4/10
 - [Asymptotics of sample tail autocorrelations for tail-dependent time series: phase transition and visualization](deep_reads/2026-07-06-10.1093_biomet_asab038.md)  
   `数理统计 / 假设检验` · 相关性 4/10
+- [Expertise, gender, and equilibrium play](deep_reads/2026-07-06-10.3982_qe1563.md)  
+  `经济理论 / 应用` · 相关性 3/10
+- [A simple but powerful simulated certainty equivalent approximation method for dynamic stochastic problems](deep_reads/2026-07-06-10.3982_qe1835.md)  
+  `经济理论 / 应用` · 相关性 3/10
+- [Difficulties in testing for capital overaccumulation](deep_reads/2026-07-06-10.3982_qe2413.md)  
+  `经济理论 / 应用` · 相关性 3/10
 - [Time-varying macroeconomic announcement risk](deep_reads/2026-07-06-10.1016_j.jeconom.2026.106194.md)  
   `经济理论 / 应用` · 相关性 3/10
 - [Likelihood specification in simultaneous equation models for discrete data](deep_reads/2026-07-06-10.1016_j.jeconom.2026.106190.md)  
@@ -255,6 +307,14 @@
   `统计计算 / 算法` · 相关性 3/10
 - [Uniqueness and global optimality of the maximum likelihood estimator for the generalized extreme value distribution](deep_reads/2026-07-06-10.1093_biomet_asab043.md)  
   `数理统计 / 假设检验` · 相关性 3/10
+- [Redistribution and the monetary‐fiscal policy mix](deep_reads/2026-07-06-10.3982_qe2030.md)  
+  `经济理论 / 应用` · 相关性 2/10
+- [Ellsberg meets Keynes at an urn](deep_reads/2026-07-06-10.3982_qe2253.md)  
+  `经济理论 / 应用` · 相关性 2/10
+- [Anticipated productivity and the labor market](deep_reads/2026-07-06-10.3982_qe2029.md)  
+  `经济理论 / 应用` · 相关性 2/10
+- [Monetary policy and long‐term interest rates](deep_reads/2026-07-06-10.3982_qe1287.md)  
+  `经济理论 / 应用` · 相关性 2/10
 - [Networks, Phillips Curves, and Monetary Policy](deep_reads/2026-07-06-10.3982_ecta18654.md)  
   `经济理论 / 应用` · 相关性 2/10
 - [Presidential Address: Demand‐Side Constraints in Development. The Role of Market Size, Trade, and (In)Equality](deep_reads/2026-07-06-10.3982_ecta20787.md)  
@@ -293,6 +353,10 @@
   `天体统计` · 相关性 1/10
 - [HARMONI at ELT: line spread functions in a diffraction limited spectrometer](deep_reads/2026-07-06-2607.02223.md)  
   `天体统计` · 相关性 1/10
+- [Three reasons to price carbon under uncertainty: Accuracy of simple rules](deep_reads/2026-07-06-10.3982_qe2681.md)  
+  `经济理论 / 应用` · 相关性 0/10
+- [Remittance frictions and seasonal poverty](deep_reads/2026-07-06-10.3982_qe2674.md)  
+  `经济理论 / 应用` · 相关性 0/10
 
 ## 收藏
 

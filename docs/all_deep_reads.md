@@ -283,6 +283,18 @@
 
 ### 期刊
 
+#### Quantitative Economics Vol 15 Issue 2
+
+- [Inference for matched tuples and fully blocked factorial designs](deep_reads/2026-07-06-10.3982_qe2354.md)  
+  8/10 [journals]
+- [Confidence set for group membership](deep_reads/2026-07-06-10.3982_qe1975.md)  
+  7/10 [journals]
+
+#### Quantitative Economics Vol 14 Issue 2
+
+- [Inference on heterogeneous treatment effects in high‐dimensional dynamic panels under weak dependence](deep_reads/2026-07-06-10.3982_qe1670.md)  
+  8/10 [journals]
+
 #### Journal of Econometrics Vol 253
 
 - [Quasi-Bayesian estimation and inference with control functions](deep_reads/2026-07-06-10.1016_j.jeconom.2025.106126.md)  
@@ -5296,6 +5308,21 @@
 
 ### 期刊
 
+#### Quantitative Economics Vol 15 Issue 1
+
+- [A robust permutation test for subvector inference in linear regressions](deep_reads/2026-07-06-10.3982_qe2269.md)  
+  8/10 [journals]
+
+#### Quantitative Economics Vol 14 Issue 3
+
+- [Bootstrapping Laplace transforms of volatility](deep_reads/2026-07-06-10.3982_qe1929.md)  
+  6/10 [journals]
+
+#### Quantitative Economics Vol 14 Issue 2
+
+- [Bootstrap inference under cross‐sectional dependence](deep_reads/2026-07-06-10.3982_qe1626.md)  
+  6/10 [journals]
+
 #### Journal of Econometrics Vol 257
 
 - [A goodness-of-fit test for sparse networks](deep_reads/2026-07-06-10.1016_j.jeconom.2026.106276.md)  
@@ -7612,6 +7639,76 @@
   6/10 [daily]
 
 ### 期刊
+
+#### Quantitative Economics Vol 17 Issue 3
+
+- [Three reasons to price carbon under uncertainty: Accuracy of simple rules](deep_reads/2026-07-06-10.3982_qe2681.md)  
+  0/10 [journals]
+- [Remittance frictions and seasonal poverty](deep_reads/2026-07-06-10.3982_qe2674.md)  
+  0/10 [journals]
+
+#### Quantitative Economics Vol 15 Issue 2
+
+- [Locally robust inference for non‐Gaussian SVAR models](deep_reads/2026-07-06-10.3982_qe2274.md)  
+  7/10 [journals]
+- [Heterogeneous effects of tariff and nontariff trade‐policy barriers in quantitative general equilibrium](deep_reads/2026-07-06-10.3982_qe1994.md)  
+  5/10 [journals]
+- [A dynamic model of rational “panic buying”](deep_reads/2026-07-06-10.3982_qe2126.md)  
+  4/10 [journals]
+- [Stamping out stamp duty: Housing mismatch and welfare](deep_reads/2026-07-06-10.3982_qe1984.md)  
+  4/10 [journals]
+
+#### Quantitative Economics Vol 15 Issue 1
+
+- [Moment inequalities for multinomial choice with fixed effects](deep_reads/2026-07-06-10.3982_qe1776.md)  
+  7/10 [journals]
+- [Geometric methods for finite rational inattention](deep_reads/2026-07-06-10.3982_qe2050.md)  
+  5/10 [journals]
+- [Measuring trust in institutions and its causal effect](deep_reads/2026-07-06-10.3982_qe1914.md)  
+  5/10 [journals]
+- [On the complexity of forming mental models](deep_reads/2026-07-06-10.3982_qe2264.md)  
+  4/10 [journals]
+- [Difficulties in testing for capital overaccumulation](deep_reads/2026-07-06-10.3982_qe2413.md)  
+  3/10 [journals]
+
+#### Quantitative Economics Vol 14 Issue 4
+
+- [Demand estimation with infrequent purchases and small market sizes](deep_reads/2026-07-06-10.3982_qe2147.md)  
+  6/10 [journals]
+- [Local projections, autocorrelation, and efficiency](deep_reads/2026-07-06-10.3982_qe1988.md)  
+  6/10 [journals]
+- [Behavioral learning equilibria in New Keynesian models](deep_reads/2026-07-06-10.3982_qe1533.md)  
+  4/10 [journals]
+- [Costly information acquisition in centralized matching markets](deep_reads/2026-07-06-10.3982_qe1955.md)  
+  4/10 [journals]
+
+#### Quantitative Economics Vol 14 Issue 3
+
+- [Fiscal multipliers: A heterogenous‐agent perspective](deep_reads/2026-07-06-10.3982_qe1901.md)  
+  6/10 [journals]
+- [The origins and effects of macroeconomic uncertainty](deep_reads/2026-07-06-10.3982_qe1979.md)  
+  6/10 [journals]
+- [Expertise, gender, and equilibrium play](deep_reads/2026-07-06-10.3982_qe1563.md)  
+  3/10 [journals]
+- [Redistribution and the monetary‐fiscal policy mix](deep_reads/2026-07-06-10.3982_qe2030.md)  
+  2/10 [journals]
+- [Ellsberg meets Keynes at an urn](deep_reads/2026-07-06-10.3982_qe2253.md)  
+  2/10 [journals]
+- [Anticipated productivity and the labor market](deep_reads/2026-07-06-10.3982_qe2029.md)  
+  2/10 [journals]
+
+#### Quantitative Economics Vol 14 Issue 2
+
+- [Selection and the distribution of female real hourly wages in the United States](deep_reads/2026-07-06-10.3982_qe1777.md)  
+  7/10 [journals]
+- [Estimating demand for differentiated products with zeroes in market share data](deep_reads/2026-07-06-10.3982_qe1593.md)  
+  5/10 [journals]
+- [Quantifying noise in survey expectations](deep_reads/2026-07-06-10.3982_qe1633.md)  
+  5/10 [journals]
+- [A simple but powerful simulated certainty equivalent approximation method for dynamic stochastic problems](deep_reads/2026-07-06-10.3982_qe1835.md)  
+  3/10 [journals]
+- [Monetary policy and long‐term interest rates](deep_reads/2026-07-06-10.3982_qe1287.md)  
+  2/10 [journals]
 
 #### Journal of Econometrics Vol 256
 
