@@ -283,6 +283,11 @@
 
 ### 期刊
 
+#### IEEE Transactions on Pattern Analysis and Machine Intelligence Vol 48 Issue 8
+
+- [Mechanisms Under Shifts: Interpretable Clustering With Self-Improving Heterogeneous Causal Graphs](deep_reads/2026-07-07-10.1109_tpami.2026.3683072.md)  
+  3/10 [journals]
+
 #### Quantitative Economics Vol 15 Issue 2
 
 - [Inference for matched tuples and fully blocked factorial designs](deep_reads/2026-07-06-10.3982_qe2354.md)  
@@ -6931,6 +6936,13 @@
 
 ### 期刊
 
+#### IEEE Transactions on Pattern Analysis and Machine Intelligence Vol 48 Issue 8
+
+- [Separable Decomposition for Ragged Tensors](deep_reads/2026-07-07-10.1109_tpami.2026.3679727.md)  
+  7/10 [journals]
+- [Learning Continuous Spatiotemporal Implicit Neural Fields for Unsupervised Video Denoising](deep_reads/2026-07-07-10.1109_tpami.2026.3680159.md)  
+  2/10 [journals]
+
 #### Journal of Business & Economic Statistics Vol 41 Issue 2
 
 - [Bayesian Dynamic Tensor Regression](deep_reads/2026-07-06-10.1080_07350015.2022.2032721.md)  
@@ -9871,6 +9883,33 @@
   8/10 [daily]
 
 ### 期刊
+
+#### IEEE Transactions on Pattern Analysis and Machine Intelligence Vol 48 Issue 8
+
+- [Sparse Variational Information Bottleneck Gaussian Processes for Uncertainty Estimation](deep_reads/2026-07-07-10.1109_tpami.2026.3675000.md)  
+  4/10 [journals]
+- [How Can State Space Models Enhance Machine Learning on Graphs?](deep_reads/2026-07-07-10.1109_tpami.2026.3680437.md)  
+  2/10 [journals]
+- [From Image to Pixels: Towards Fine-Grained Medical Vision-Language Models](deep_reads/2026-07-07-10.1109_tpami.2026.3682684.md)  
+  1/10 [journals]
+- [Distilling Object Detectors via Monte Carlo Dropout](deep_reads/2026-07-07-10.1109_tpami.2026.3674980.md)  
+  1/10 [journals]
+- [Mirror Descent Safe Policy Optimization for Reinforcement Learning Agents](deep_reads/2026-07-07-10.1109_tpami.2026.3674995.md)  
+  1/10 [journals]
+- [A Non-Negative Deep VAE: The Generalized Gamma Belief Network](deep_reads/2026-07-07-10.1109_tpami.2026.3680869.md)  
+  1/10 [journals]
+- [Confidence-Aware Pseudo-Label Self-Correction for Weakly Supervised Visual Grounding](deep_reads/2026-07-07-10.1109_tpami.2026.3673741.md)  
+  0/10 [journals]
+- [ChatTracker: Enhancing Visual Tracking via LLM-Driven Iterative Description Refinement](deep_reads/2026-07-07-10.1109_tpami.2026.3674357.md)  
+  0/10 [journals]
+- [Toward Ultrafast Depth Sensing via Active Event-Based Stereo Vision](deep_reads/2026-07-07-10.1109_tpami.2026.3674575.md)  
+  0/10 [journals]
+- [One-Step Diffusion and Flow Distillation Through Implicit Generator Matching](deep_reads/2026-07-07-10.1109_tpami.2026.3676894.md)  
+  0/10 [journals]
+- [Probing Effective and Efficient Category-Level Articulated Object Pose Perception](deep_reads/2026-07-07-10.1109_tpami.2026.3682504.md)  
+  0/10 [journals]
+- [Principals and Pupils of Lenslet-Based Light Field Camera Calibration](deep_reads/2026-07-07-10.1109_tpami.2026.3683350.md)  
+  0/10 [journals]
 
 #### IEEE Transactions on Information Theory Vol 72 Issue 7
 
