@@ -283,6 +283,11 @@
 
 ### 期刊
 
+#### Journal of Econometrics Vol 253
+
+- [Quasi-Bayesian estimation and inference with control functions](deep_reads/2026-07-06-10.1016_j.jeconom.2025.106126.md)  
+  7/10 [journals]
+
 #### Econometrica Vol 92 Issue 3
 
 - [Bias‐Aware Inference in Fuzzy Regression Discontinuity Designs](deep_reads/2026-07-06-10.3982_ecta19466.md)  
@@ -5291,6 +5296,18 @@
 
 ### 期刊
 
+#### Journal of Econometrics Vol 257
+
+- [A goodness-of-fit test for sparse networks](deep_reads/2026-07-06-10.1016_j.jeconom.2026.106276.md)  
+  7/10 [journals]
+
+#### Journal of Econometrics Vol 254
+
+- [BUMVU estimators](deep_reads/2026-07-06-10.1016_j.jeconom.2024.105942.md)  
+  7/10 [journals]
+- [Testing for jumps in a discretely observed price process with endogenous sampling times](deep_reads/2026-06-07-10.1016_j.jeconom.2025.106132.md)  
+  6/10 [journals]
+
 #### Econometrica Vol 91 Issue 4
 
 - [Robust Inference on Infinite and Growing Dimensional Time‐Series Regression](deep_reads/2026-07-06-10.3982_ecta17918.md)  
@@ -6573,11 +6590,6 @@
 - [The information matrix test for Gaussian mixtures](deep_reads/2026-06-07-10.1016_j.jeconom.2026.106234.md)  
   6/10 [journals]
 
-#### Journal of Econometrics Vol 254
-
-- [Testing for jumps in a discretely observed price process with endogenous sampling times](deep_reads/2026-06-07-10.1016_j.jeconom.2025.106132.md)  
-  6/10 [journals]
-
 #### Journal of Business & Economic Statistics Vol 44 Issue 2
 
 - [An Adaptive Residual-Based Test for Factor Structure](deep_reads/2026-06-07-10.1080_07350015.2025.2548893.md)  
@@ -7601,6 +7613,30 @@
 
 ### 期刊
 
+#### Journal of Econometrics Vol 256
+
+- [Distributional effects with two-sided measurement error: An application to intergenerational income mobility](deep_reads/2026-06-21-10.1016_j.jeconom.2026.106268.md)  
+  7/10 [journals]
+- [Text-term selection and analysis: Frequentist and Bayesian strategies and interpretations](deep_reads/2026-07-06-10.1016_j.jeconom.2025.106163.md)  
+  6/10 [journals]
+- [Large Bayesian matrix autoregressions](deep_reads/2026-07-06-10.1016_j.jeconom.2025.105955.md)  
+  5/10 [journals]
+- [Partial identification of structural vector autoregressions with non-centred stochastic volatility](deep_reads/2026-07-06-10.1016_j.jeconom.2025.106107.md)  
+  4/10 [journals]
+- [Estimation of characteristics-based quantile factor models](deep_reads/2026-06-07-10.1016_j.jeconom.2026.106267.md)  
+  4/10 [journals]
+- [Likelihood specification in simultaneous equation models for discrete data](deep_reads/2026-07-06-10.1016_j.jeconom.2026.106190.md)  
+  3/10 [journals]
+
+#### Journal of Econometrics Vol 254
+
+- [Diffusion index forecasting with tensor data](deep_reads/2026-07-06-10.1016_j.jeconom.2026.106204.md)  
+  7/10 [journals]
+- [Time-varying macroeconomic announcement risk](deep_reads/2026-07-06-10.1016_j.jeconom.2026.106194.md)  
+  3/10 [journals]
+- [Efficient sampling for realized variance estimation in time-changed diffusion models](deep_reads/2026-06-07-10.1016_j.jeconom.2025.106150.md)  
+  3/10 [journals]
+
 #### Econometrica Vol 92 Issue 3
 
 - [Identification and Estimation in Many‐to‐One Two‐Sided Matching Without Transfers](deep_reads/2026-07-06-10.3982_ecta19636.md)  
@@ -7819,13 +7855,6 @@
   5/10 [journals]
 - [How do voters respond to welfare vis‐à‐vis public good programs? Theory and evidence of political clientelism](deep_reads/2026-06-21-10.3982_qe2315.md)  
   1/10 [journals]
-
-#### Journal of Econometrics Vol 256
-
-- [Distributional effects with two-sided measurement error: An application to intergenerational income mobility](deep_reads/2026-06-21-10.1016_j.jeconom.2026.106268.md)  
-  7/10 [journals]
-- [Estimation of characteristics-based quantile factor models](deep_reads/2026-06-07-10.1016_j.jeconom.2026.106267.md)  
-  4/10 [journals]
 
 #### Journal of Business & Economic Statistics Vol 43 Issue 4
 
@@ -8121,11 +8150,6 @@
 
 - [Robust econometrics for growth-at-risk](deep_reads/2026-06-07-10.1016_j.jeconom.2026.106235.md)  
   2/10 [journals]
-
-#### Journal of Econometrics Vol 254
-
-- [Efficient sampling for realized variance estimation in time-changed diffusion models](deep_reads/2026-06-07-10.1016_j.jeconom.2025.106150.md)  
-  3/10 [journals]
 
 #### Journal of Econometrics
 
@@ -9470,6 +9494,11 @@
   8/10 [daily]
 
 ### 期刊
+
+#### Journal of Econometrics Vol 254
+
+- [Probability distributions for realized covariance measures](deep_reads/2026-07-06-10.1016_j.jeconom.2025.105954.md)  
+  4/10 [journals]
 
 #### Biometrika Vol 109 Issue 2
 

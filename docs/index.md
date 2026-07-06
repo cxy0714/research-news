@@ -17,7 +17,7 @@
 
 [→ 查看完整报告](daily/2026-07-06.md)
 
-### 精读论文（127 篇）
+### 精读论文（137 篇）
 
 - [Quasi-oracle estimation of heterogeneous treatment effects](deep_reads/2026-07-06-10.1093_biomet_asaa076.md)  
   `因果推断` · 相关性 9/10
@@ -61,6 +61,14 @@
   `因果推断` · 相关性 8/10
 - [Regression-based causal inference with factorial experiments: estimands, model specifications and design-based properties](deep_reads/2026-07-06-10.1093_biomet_asab051.md)  
   `因果推断` · 相关性 8/10
+- [Quasi-Bayesian estimation and inference with control functions](deep_reads/2026-07-06-10.1016_j.jeconom.2025.106126.md)  
+  `因果推断` · 相关性 7/10
+- [Diffusion index forecasting with tensor data](deep_reads/2026-07-06-10.1016_j.jeconom.2026.106204.md)  
+  `经济理论 / 应用` · 相关性 7/10
+- [BUMVU estimators](deep_reads/2026-07-06-10.1016_j.jeconom.2024.105942.md)  
+  `数理统计 / 假设检验` · 相关性 7/10
+- [A goodness-of-fit test for sparse networks](deep_reads/2026-07-06-10.1016_j.jeconom.2026.106276.md)  
+  `数理统计 / 假设检验` · 相关性 7/10
 - [Robust Inference on Infinite and Growing Dimensional Time‐Series Regression](deep_reads/2026-07-06-10.3982_ecta17918.md)  
   `数理统计 / 假设检验` · 相关性 7/10
 - [Ideology and Performance in Public Organizations](deep_reads/2026-07-06-10.3982_ecta20355.md)  
@@ -121,6 +129,8 @@
   `非参数 / 半参数` · 相关性 7/10
 - [Determining the number of factors in high-dimensional generalized latent factor models](deep_reads/2026-07-06-10.1093_biomet_asab044.md)  
   `高维统计 / 随机矩阵` · 相关性 7/10
+- [Text-term selection and analysis: Frequentist and Bayesian strategies and interpretations](deep_reads/2026-07-06-10.1016_j.jeconom.2025.106163.md)  
+  `经济理论 / 应用` · 相关性 6/10
 - [Sequential Veto Bargaining With Incomplete Information](deep_reads/2026-07-06-10.3982_ecta20658.md)  
   `经济理论 / 应用` · 相关性 6/10
 - [Selection Into Credit Markets: Evidence From Agriculture in Mali](deep_reads/2026-07-06-10.3982_ecta18916.md)  
@@ -157,6 +167,8 @@
   `因果推断` · 相关性 6/10
 - [On the relative efficiency of the intent-to-treat Wilcoxon–Mann–Whitney test in the presence of noncompliance](deep_reads/2026-07-06-10.1093_biomet_asab053.md)  
   `因果推断` · 相关性 6/10
+- [Large Bayesian matrix autoregressions](deep_reads/2026-07-06-10.1016_j.jeconom.2025.105955.md)  
+  `经济理论 / 应用` · 相关性 5/10
 - [General Equilibrium Effects of (Improving) Public Employment Programs: Experimental Evidence From India](deep_reads/2026-07-06-10.3982_ecta18181.md)  
   `经济理论 / 应用` · 相关性 5/10
 - [What Can Time‐Series Regressions Tell Us About Policy Counterfactuals?](deep_reads/2026-07-06-10.3982_ecta21045.md)  
@@ -187,6 +199,10 @@
   `非参数 / 半参数` · 相关性 5/10
 - [Asymptotic distribution-free changepoint detection for data with repeated observations](deep_reads/2026-07-06-10.1093_biomet_asab048.md)  
   `数理统计 / 假设检验` · 相关性 5/10
+- [Probability distributions for realized covariance measures](deep_reads/2026-07-06-10.1016_j.jeconom.2025.105954.md)  
+  `其他` · 相关性 4/10
+- [Partial identification of structural vector autoregressions with non-centred stochastic volatility](deep_reads/2026-07-06-10.1016_j.jeconom.2025.106107.md)  
+  `经济理论 / 应用` · 相关性 4/10
 - [Testing Hurwicz Expected Utility](deep_reads/2026-07-06-10.3982_ecta19221.md)  
   `经济理论 / 应用` · 相关性 4/10
 - [The Effect of Macroeconomic Uncertainty on Firm Decisions](deep_reads/2026-07-06-10.3982_ecta21004.md)  
@@ -211,6 +227,10 @@
   `数理统计 / 假设检验` · 相关性 4/10
 - [Asymptotics of sample tail autocorrelations for tail-dependent time series: phase transition and visualization](deep_reads/2026-07-06-10.1093_biomet_asab038.md)  
   `数理统计 / 假设检验` · 相关性 4/10
+- [Time-varying macroeconomic announcement risk](deep_reads/2026-07-06-10.1016_j.jeconom.2026.106194.md)  
+  `经济理论 / 应用` · 相关性 3/10
+- [Likelihood specification in simultaneous equation models for discrete data](deep_reads/2026-07-06-10.1016_j.jeconom.2026.106190.md)  
+  `经济理论 / 应用` · 相关性 3/10
 - [Growing Like India—the Unequal Effects of Service‐Led Growth](deep_reads/2026-07-06-10.3982_ecta20964.md)  
   `经济理论 / 应用` · 相关性 3/10
 - [Algorithmic Mechanism Design With Investment](deep_reads/2026-07-06-10.3982_ecta19559.md)  
