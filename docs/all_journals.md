@@ -42,6 +42,12 @@
 - [Vol 110 Issue 2 · 2026-06-20](journals/2026-06-20-biometrika-v110-i2.md)
 - [Vol 110 Issue 1 · 2026-06-20](journals/2026-06-20-biometrika-v110-i1.md)
 - [Vol 109 Issue 4 · 2026-06-20](journals/2026-06-20-biometrika-v109-i4.md)
+- [Vol 109 Issue 3 · 2026-07-06](journals/2026-07-06-biometrika-v109-i3.md)
+- [Vol 109 Issue 2 · 2026-07-06](journals/2026-07-06-biometrika-v109-i2.md)
+- [Vol 109 Issue 1 · 2026-07-06](journals/2026-07-06-biometrika-v109-i1.md)
+- [Vol 108 Issue 4 · 2026-07-06](journals/2026-07-06-biometrika-v108-i4.md)
+- [Vol 108 Issue 3 · 2026-07-06](journals/2026-07-06-biometrika-v108-i3.md)
+- [Vol 108 Issue 2 · 2026-07-06](journals/2026-07-06-biometrika-v108-i2.md)
 
 ### JASA
 

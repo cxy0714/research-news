@@ -281,6 +281,72 @@
 
 ### 期刊
 
+#### Biometrika Vol 109 Issue 3
+
+- [Heterogeneous coefficients, control variables and identification of multiple treatment effects](deep_reads/2026-07-06-10.1093_biomet_asab060.md)  
+  8/10 [journals]
+- [Searching for robust associations with a multi-environment knockoff filter](deep_reads/2026-07-06-10.1093_biomet_asab055.md)  
+  8/10 [journals]
+- [Regression-based causal inference with factorial experiments: estimands, model specifications and design-based properties](deep_reads/2026-07-06-10.1093_biomet_asab051.md)  
+  8/10 [journals]
+- [On the relative efficiency of the intent-to-treat Wilcoxon–Mann–Whitney test in the presence of noncompliance](deep_reads/2026-07-06-10.1093_biomet_asab053.md)  
+  6/10 [journals]
+
+#### Biometrika Vol 109 Issue 2
+
+- [High-dimensional semi-supervised learning: in search of optimal inference of the mean](deep_reads/2026-07-06-10.1093_biomet_asab042.md)  
+  8/10 [journals]
+- [On the inconsistency of matching without replacement](deep_reads/2026-07-06-10.1093_biomet_asab035.md)  
+  8/10 [journals]
+- [Multiplicative effect modelling: the general case](deep_reads/2026-07-06-10.1093_biomet_asab064.md)  
+  7/10 [journals]
+- [Inverse moment methods for sufficient forecasting using high-dimensional predictors](deep_reads/2026-07-06-10.1093_biomet_asab037.md)  
+  6/10 [journals]
+
+#### Biometrika Vol 109 Issue 1
+
+- [Efficient adjustment sets in causal graphical models with hidden variables](deep_reads/2026-07-06-10.1093_biomet_asab018.md)  
+  8/10 [journals]
+- [Identifiability of causal effects with multiple causes and a binary outcome](deep_reads/2026-07-06-10.1093_biomet_asab016.md)  
+  7/10 [journals]
+- [Missing at random: a stochastic process perspective](deep_reads/2026-07-06-10.1093_biomet_asab002.md)  
+  7/10 [journals]
+- [Inference on the average treatment effect under minimization and other covariate-adaptive randomization methods](deep_reads/2026-07-06-10.1093_biomet_asab015.md)  
+  6/10 [journals]
+- [Heterogeneity-aware and communication-efficient distributed statistical inference](deep_reads/2026-07-06-10.1093_biomet_asab007.md)  
+  5/10 [journals]
+
+#### Biometrika Vol 108 Issue 4
+
+- [Estimation of local treatment effects under the binary instrumental variable model](deep_reads/2026-07-06-10.1093_biomet_asab003.md)  
+  8/10 [journals]
+- [Consistency guarantees for greedy permutation-based causal inference algorithms](deep_reads/2026-07-06-10.1093_biomet_asaa104.md)  
+  7/10 [journals]
+- [Regression adjustment in completely randomized experiments with a diverging number of covariates](deep_reads/2026-07-06-10.1093_biomet_asaa103.md)  
+  7/10 [journals]
+- [Nontestability of instrument validity under continuous treatments](deep_reads/2026-07-06-10.1093_biomet_asaa101.md)  
+  7/10 [journals]
+- [On semiparametric modelling, estimation and inference for survival data subject to dependent censoring](deep_reads/2026-07-06-10.1093_biomet_asaa095.md)  
+  7/10 [journals]
+- [Changepoint inference in the presence of missing covariates for principal surrogate evaluation in vaccine trials](deep_reads/2026-07-06-10.1093_biomet_asaa100.md)  
+  6/10 [journals]
+
+#### Biometrika Vol 108 Issue 3
+
+- [Nonparametric efficient causal mediation with intermediate confounders](deep_reads/2026-07-06-10.1093_biomet_asaa085.md)  
+  9/10 [journals]
+- [Estimating time-varying causal excursion effects in mobile health with binary outcomes](deep_reads/2026-07-06-10.1093_biomet_asaa070.md)  
+  9/10 [journals]
+- [A parsimonious personalized dose-finding model via dimension reduction](deep_reads/2026-07-06-10.1093_biomet_asaa087.md)  
+  6/10 [journals]
+
+#### Biometrika Vol 108 Issue 2
+
+- [Quasi-oracle estimation of heterogeneous treatment effects](deep_reads/2026-07-06-10.1093_biomet_asaa076.md)  
+  9/10 [journals]
+- [Inference for treatment effect parameters in potentially misspecified high-dimensional models](deep_reads/2026-07-06-10.1093_biomet_asaa071.md)  
+  8/10 [journals]
+
 #### Journal of the Royal Statistical Society Series B Vol 85 Issue 5
 
 - [Debiased inference on heterogeneous quantile treatment effects with regression rank scores](deep_reads/2026-07-05-10.1093_jrsssb_qkad075.md)  
@@ -2358,6 +2424,41 @@
 
 ### 期刊
 
+#### Biometrika Vol 109 Issue 3
+
+- [A high-dimensional power analysis of the conditional randomization test and knockoffs](deep_reads/2026-07-06-10.1093_biomet_asab052.md)  
+  9/10 [journals]
+- [Determining the number of factors in high-dimensional generalized latent factor models](deep_reads/2026-07-06-10.1093_biomet_asab044.md)  
+  7/10 [journals]
+- [Joint latent space models for network data with high-dimensional node variables](deep_reads/2026-07-06-10.1093_biomet_asab063.md)  
+  5/10 [journals]
+
+#### Biometrika Vol 109 Issue 2
+
+- [High-dimensional log-error-in-variable regression with applications to microbial compositional data analysis](deep_reads/2026-07-06-10.1093_biomet_asab020.md)  
+  7/10 [journals]
+- [Estimation of genetic correlation with summary association statistics](deep_reads/2026-07-06-10.1093_biomet_asab030.md)  
+  5/10 [journals]
+
+#### Biometrika Vol 109 Issue 1
+
+- [Large-scale model selection in misspecified generalized linear models](deep_reads/2026-07-06-10.1093_biomet_asab005.md)  
+  7/10 [journals]
+
+#### Biometrika Vol 108 Issue 4
+
+- [Learning block structures in U-statistic-based matrices](deep_reads/2026-07-06-10.1093_biomet_asaa099.md)  
+  9/10 [journals]
+
+#### Biometrika Vol 108 Issue 2
+
+- [Posterior contraction in sparse generalized linear models](deep_reads/2026-07-06-10.1093_biomet_asaa074.md)  
+  7/10 [journals]
+- [Specification tests for covariance structures in high-dimensional statistical models](deep_reads/2026-07-06-10.1093_biomet_asaa073.md)  
+  7/10 [journals]
+- [Finite-time analysis of vector autoregressive models under linear restrictions](deep_reads/2026-07-06-10.1093_biomet_asaa065.md)  
+  7/10 [journals]
+
 #### Journal of the Royal Statistical Society Series B Vol 85 Issue 5
 
 - [Core shrinkage covariance estimation for matrix-variate data](deep_reads/2026-07-05-10.1093_jrsssb_qkad070.md)  
@@ -3308,6 +3409,27 @@
   8/10 [daily]
 
 ### 期刊
+
+#### Biometrika Vol 109 Issue 3
+
+- [Risk bounds for quantile trend filtering](deep_reads/2026-07-06-10.1093_biomet_asab045.md)  
+  7/10 [journals]
+- [Local linear graphon estimation using covariates](deep_reads/2026-07-06-10.1093_biomet_asab057.md)  
+  5/10 [journals]
+
+#### Biometrika Vol 109 Issue 1
+
+- [Statistical inference on shape and size indexes for counting processes](deep_reads/2026-07-06-10.1093_biomet_asab008.md)  
+  6/10 [journals]
+- [Backfitting tests in generalized structured models](deep_reads/2026-07-06-10.1093_biomet_asaa108.md)  
+  6/10 [journals]
+- [Sparse functional linear discriminant analysis](deep_reads/2026-07-06-10.1093_biomet_asaa107.md)  
+  5/10 [journals]
+
+#### Biometrika Vol 108 Issue 4
+
+- [Maximum likelihood estimation for semiparametric regression models with panel count data](deep_reads/2026-07-06-10.1093_biomet_asaa091.md)  
+  6/10 [journals]
 
 #### Journal of the Royal Statistical Society Series B Vol 85 Issue 5
 
@@ -5148,6 +5270,64 @@
 
 ### 期刊
 
+#### Biometrika Vol 109 Issue 3
+
+- [Multi-scale Fisher’s independence test for multivariate dependence](deep_reads/2026-07-06-10.1093_biomet_asac013.md)  
+  7/10 [journals]
+- [Asymptotic distribution-free changepoint detection for data with repeated observations](deep_reads/2026-07-06-10.1093_biomet_asab048.md)  
+  5/10 [journals]
+- [Uniqueness and global optimality of the maximum likelihood estimator for the generalized extreme value distribution](deep_reads/2026-07-06-10.1093_biomet_asab043.md)  
+  3/10 [journals]
+
+#### Biometrika Vol 109 Issue 2
+
+- [Fast and powerful conditional randomization testing via distillation](deep_reads/2026-07-06-10.1093_biomet_asab039.md)  
+  9/10 [journals]
+- [On the power of Chatterjee’s rank correlation](deep_reads/2026-07-06-10.1093_biomet_asab028.md)  
+  7/10 [journals]
+- [Smoothed nested testing on directed acyclic graphs](deep_reads/2026-07-06-10.1093_biomet_asab041.md)  
+  6/10 [journals]
+- [Asymptotics of sample tail autocorrelations for tail-dependent time series: phase transition and visualization](deep_reads/2026-07-06-10.1093_biomet_asab038.md)  
+  4/10 [journals]
+
+#### Biometrika Vol 109 Issue 1
+
+- [Interpoint-ranking sign covariance for the test of independence](deep_reads/2026-07-06-10.1093_biomet_asab011.md)  
+  8/10 [journals]
+- [Integrated conditional moment test and beyond: when the number of covariates is divergent](deep_reads/2026-07-06-10.1093_biomet_asab009.md)  
+  7/10 [journals]
+- [Optimal post-selection inference for sparse signals: a nonparametric empirical Bayes approach](deep_reads/2026-07-06-10.1093_biomet_asab014.md)  
+  6/10 [journals]
+- [Distributed inference for the extreme value index](deep_reads/2026-07-06-10.1093_biomet_asab001.md)  
+  4/10 [journals]
+
+#### Biometrika Vol 108 Issue 4
+
+- [Covariate adaptive familywise error rate control for genome-wide association studies](deep_reads/2026-07-06-10.1093_biomet_asaa098.md)  
+  3/10 [journals]
+- [Admissible estimators of a multivariate normal mean vector when the scale is unknown](deep_reads/2026-07-06-10.1093_biomet_asaa102.md)  
+  2/10 [journals]
+
+#### Biometrika Vol 108 Issue 3
+
+- [On the phase transition of Wilks’ phenomenon](deep_reads/2026-07-06-10.1093_biomet_asaa078.md)  
+  9/10 [journals]
+- [Jackknife empirical likelihood: small bandwidth, sparse network and high-dimensional asymptotics](deep_reads/2026-07-06-10.1093_biomet_asaa081.md)  
+  8/10 [journals]
+- [On order determination by predictor augmentation](deep_reads/2026-07-06-10.1093_biomet_asaa077.md)  
+  6/10 [journals]
+- [Block bootstrap optimality and empirical block selection for sample quantiles with dependent data](deep_reads/2026-07-06-10.1093_biomet_asaa075.md)  
+  5/10 [journals]
+
+#### Biometrika Vol 108 Issue 2
+
+- [An assumption-free exact test for fixed-design linear models with exchangeable errors](deep_reads/2026-07-06-10.1093_biomet_asaa079.md)  
+  6/10 [journals]
+- [A general interactive framework for false discovery rate control under structural constraints](deep_reads/2026-07-06-10.1093_biomet_asaa064.md)  
+  5/10 [journals]
+- [On the use of a penalized quasilikelihood information criterion for generalized linear mixed models](deep_reads/2026-07-06-10.1093_biomet_asaa069.md)  
+  4/10 [journals]
+
 #### Journal of the Royal Statistical Society Series B Vol 86 Issue 1
 
 - [Estimating means of bounded random variables by betting](deep_reads/2026-07-05-10.1093_jrsssb_qkad009.md)  
@@ -6483,6 +6663,28 @@
   6/10 [daily]
 
 ### 期刊
+
+#### Biometrika Vol 109 Issue 2
+
+- [Inverses of Matérn covariances on grids](deep_reads/2026-07-06-10.1093_biomet_asab017.md)  
+  3/10 [journals]
+
+#### Biometrika Vol 109 Issue 1
+
+- [Stratification and optimal resampling for sequential Monte Carlo](deep_reads/2026-07-06-10.1093_biomet_asab004.md)  
+  3/10 [journals]
+
+#### Biometrika Vol 108 Issue 3
+
+- [Composite grid designs for adaptive computer experiments with fast inference](deep_reads/2026-07-06-10.1093_biomet_asaa084.md)  
+  2/10 [journals]
+
+#### Biometrika Vol 108 Issue 2
+
+- [Statistical properties of sketching algorithms](deep_reads/2026-07-06-10.1093_biomet_asaa062.md)  
+  7/10 [journals]
+- [Approximating posteriors with high-dimensional nuisance parameters via integrated rotated Gaussian approximation](deep_reads/2026-07-06-10.1093_biomet_asaa068.md)  
+  6/10 [journals]
 
 #### Journal of the Royal Statistical Society Series B Vol 85 Issue 5
 
@@ -9130,6 +9332,34 @@
   8/10 [daily]
 
 ### 期刊
+
+#### Biometrika Vol 109 Issue 2
+
+- [Confidence regions in Wasserstein distributionally robust estimation](deep_reads/2026-07-06-10.1093_biomet_asab026.md)  
+  7/10 [journals]
+- [A minimum aberration-type criterion for selecting space-filling designs](deep_reads/2026-07-06-10.1093_biomet_asab021.md)  
+  2/10 [journals]
+
+#### Biometrika Vol 109 Issue 1
+
+- [More for less: predicting and maximizing genomic variant discovery via Bayesian nonparametrics](deep_reads/2026-07-06-10.1093_biomet_asab012.md)  
+  4/10 [journals]
+- [Estimation of the cure rate for distributions in the Gumbel maximum domain of attraction under insufficient follow-up](deep_reads/2026-07-06-10.1093_biomet_asaa106.md)  
+  2/10 [journals]
+
+#### Biometrika Vol 108 Issue 3
+
+- [Assessing cure status prediction from survival data using receiver operating characteristic curves](deep_reads/2026-07-06-10.1093_biomet_asaa080.md)  
+  4/10 [journals]
+
+#### Biometrika Vol 108 Issue 2
+
+- [On quadratic forms in multivariate generalized hyperbolic random vectors](deep_reads/2026-07-06-10.1093_biomet_asaa067.md)  
+  5/10 [journals]
+- [Poisson reduced-rank models with an application to political text data](deep_reads/2026-07-06-10.1093_biomet_asaa063.md)  
+  4/10 [journals]
+- [Nonsmooth backfitting for the excess risk additive regression model with two survival time scales](deep_reads/2026-07-06-10.1093_biomet_asaa058.md)  
+  4/10 [journals]
 
 #### Journal of the Royal Statistical Society Series B Vol 85 Issue 4
 
