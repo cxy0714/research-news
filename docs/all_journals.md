@@ -289,6 +289,12 @@
 - [Vol 43 Issue 1 · 2026-06-21](journals/2026-06-21-jbes-v43-i1.md)
 - [Vol 42 Issue 4 · 2026-06-21](journals/2026-06-21-jbes-v42-i4.md)
 - [Vol 42 Issue 3 · 2026-06-21](journals/2026-06-21-jbes-v42-i3.md)
+- [Vol 42 Issue 2 · 2026-07-06](journals/2026-07-06-jbes-v42-i2.md)
+- [Vol 42 Issue 1 · 2026-07-06](journals/2026-07-06-jbes-v42-i1.md)
+- [Vol 41 Issue 4 · 2026-07-06](journals/2026-07-06-jbes-v41-i4.md)
+- [Vol 41 Issue 3 · 2026-07-06](journals/2026-07-06-jbes-v41-i3.md)
+- [Vol 41 Issue 2 · 2026-07-06](journals/2026-07-06-jbes-v41-i2.md)
+- [Vol 41 Issue 1 · 2026-07-06](journals/2026-07-06-jbes-v41-i1.md)
 
 ### Quant. Econ.
 

@@ -17,8 +17,10 @@
 
 [→ 查看完整报告](daily/2026-07-06.md)
 
-### 精读论文（169 篇）
+### 精读论文（263 篇）
 
+- [Assessing Sensitivity to Unconfoundedness: Estimation and Inference](deep_reads/2026-07-06-10.1080_07350015.2023.2183212.md)  
+  `因果推断` · 相关性 9/10
 - [Quasi-oracle estimation of heterogeneous treatment effects](deep_reads/2026-07-06-10.1093_biomet_asaa076.md)  
   `因果推断` · 相关性 9/10
 - [Nonparametric efficient causal mediation with intermediate confounders](deep_reads/2026-07-06-10.1093_biomet_asaa085.md)  
@@ -33,6 +35,18 @@
   `数理统计 / 假设检验` · 相关性 9/10
 - [A high-dimensional power analysis of the conditional randomization test and knockoffs](deep_reads/2026-07-06-10.1093_biomet_asab052.md)  
   `高维统计 / 随机矩阵` · 相关性 9/10
+- [Multi-Threshold Structural Equation Model](deep_reads/2026-07-06-10.1080_07350015.2021.2023553.md)  
+  `因果推断` · 相关性 8/10
+- [From Conditional Quantile Regression to Marginal Quantile Estimation with Applications to Missing Data and Causal Inference](deep_reads/2026-07-06-10.1080_07350015.2022.2140158.md)  
+  `因果推断` · 相关性 8/10
+- [Consistent Estimation of Distribution Functions under Increasing Concave and Convex Stochastic Ordering](deep_reads/2026-07-06-10.1080_07350015.2022.2116026.md)  
+  `非参数 / 半参数` · 相关性 8/10
+- [Identification of a Triangular Two Equation System Without Instruments](deep_reads/2026-07-06-10.1080_07350015.2023.2166052.md)  
+  `经济理论 / 应用` · 相关性 8/10
+- [A Design-Based Perspective on Synthetic Control Methods](deep_reads/2026-07-06-10.1080_07350015.2023.2238788.md)  
+  `因果推断` · 相关性 8/10
+- [Estimating a Continuous Treatment Model with Spillovers: A Control Function Approach](deep_reads/2026-07-06-10.1080_07350015.2023.2207617.md)  
+  `因果推断` · 相关性 8/10
 - [Inference on heterogeneous treatment effects in high‐dimensional dynamic panels under weak dependence](deep_reads/2026-07-06-10.3982_qe1670.md)  
   `因果推断` · 相关性 8/10
 - [Inference for matched tuples and fully blocked factorial designs](deep_reads/2026-07-06-10.3982_qe2354.md)  
@@ -67,6 +81,60 @@
   `因果推断` · 相关性 8/10
 - [Regression-based causal inference with factorial experiments: estimands, model specifications and design-based properties](deep_reads/2026-07-06-10.1093_biomet_asab051.md)  
   `因果推断` · 相关性 8/10
+- [Post-selection Inference of High-dimensional Logistic Regression Under Case–Control Design](deep_reads/2026-07-06-10.1080_07350015.2022.2050245.md)  
+  `高维统计 / 随机矩阵` · 相关性 7/10
+- [Estimating Density Ratio of Marginals to Joint: Applications to Causal Inference](deep_reads/2026-07-06-10.1080_07350015.2022.2035228.md)  
+  `因果推断` · 相关性 7/10
+- [A Novel Estimation Method in Generalized Single Index Models](deep_reads/2026-07-06-10.1080_07350015.2022.2027777.md)  
+  `非参数 / 半参数` · 相关性 7/10
+- [Robust Signal Recovery for High-Dimensional Linear Log-Contrast Models with Compositional Covariates](deep_reads/2026-07-06-10.1080_07350015.2022.2097911.md)  
+  `高维统计 / 随机矩阵` · 相关性 7/10
+- [A Robust Approach to Heteroscedasticity, Error Serial Correlation and Slope Heterogeneity in Linear Models with Interactive Effects for Large Panel Data](deep_reads/2026-07-06-10.1080_07350015.2022.2077349.md)  
+  `因果推断` · 相关性 7/10
+- [Covariate-Assisted Community Detection in Multi-Layer Networks](deep_reads/2026-07-06-10.1080_07350015.2022.2085726.md)  
+  `高维统计 / 随机矩阵` · 相关性 7/10
+- [Detection of Multiple Structural Breaks in Large Covariance Matrices](deep_reads/2026-07-06-10.1080_07350015.2022.2076686.md)  
+  `高维统计 / 随机矩阵` · 相关性 7/10
+- [Culling the Herd of Moments with Penalized Empirical Likelihood](deep_reads/2026-07-06-10.1080_07350015.2022.2071903.md)  
+  `数理统计 / 假设检验` · 相关性 7/10
+- [Panel Data Quantile Regression for Treatment Effect Models](deep_reads/2026-07-06-10.1080_07350015.2022.2061495.md)  
+  `因果推断` · 相关性 7/10
+- [Factor and Factor Loading Augmented Estimators for Panel Regression With Possibly Nonstrong Factors](deep_reads/2026-07-06-10.1080_07350015.2021.2011300.md)  
+  `因果推断` · 相关性 7/10
+- [Bootstrap Tests for High-Dimensional White-Noise](deep_reads/2026-07-06-10.1080_07350015.2021.2008407.md)  
+  `数理统计 / 假设检验` · 相关性 7/10
+- [Inference in Sparsity-Induced Weak Factor Models](deep_reads/2026-07-06-10.1080_07350015.2021.2003203.md)  
+  `高维统计 / 随机矩阵` · 相关性 7/10
+- [Optimal Covariate Balancing Conditions in Propensity Score Estimation](deep_reads/2026-07-06-10.1080_07350015.2021.2002159.md)  
+  `因果推断` · 相关性 7/10
+- [Risk Preference Types, Limited Consideration, and Welfare](deep_reads/2026-07-06-10.1080_07350015.2023.2239949.md)  
+  `经济理论 / 应用` · 相关性 7/10
+- [Teacher-to-Classroom Assignment and Student Achievement](deep_reads/2026-07-06-10.1080_07350015.2022.2126480.md)  
+  `因果推断` · 相关性 7/10
+- [Nonparametric Prediction Distribution from Resolution-Wise Regression with Heterogeneous Data](deep_reads/2026-07-06-10.1080_07350015.2022.2115498.md)  
+  `非参数 / 半参数` · 相关性 7/10
+- [Specification Testing of Regression Models with Mixed Discrete and Continuous Predictors](deep_reads/2026-07-06-10.1080_07350015.2022.2110879.md)  
+  `数理统计 / 假设检验` · 相关性 7/10
+- [Identification of SVAR Models by Combining Sign Restrictions With External Instruments](deep_reads/2026-07-06-10.1080_07350015.2022.2104857.md)  
+  `经济理论 / 应用` · 相关性 7/10
+- [Robust Covariance Matrix Estimation for High-Dimensional Compositional Data with Application to Sales Data Analysis](deep_reads/2026-07-06-10.1080_07350015.2022.2106990.md)  
+  `高维统计 / 随机矩阵` · 相关性 7/10
+- [Two-Directional Simultaneous Inference for High-Dimensional Models](deep_reads/2026-07-06-10.1080_07350015.2023.2191672.md)  
+  `数理统计 / 假设检验` · 相关性 7/10
+- [Estimations and Tests for Generalized Mediation Models with High-Dimensional Potential Mediators](deep_reads/2026-07-06-10.1080_07350015.2023.2174548.md)  
+  `因果推断` · 相关性 7/10
+- [Covariance Model with General Linear Structure and Divergent Parameters](deep_reads/2026-07-06-10.1080_07350015.2022.2142593.md)  
+  `高维统计 / 随机矩阵` · 相关性 7/10
+- [Extreme Changes in Changes](deep_reads/2026-07-06-10.1080_07350015.2023.2249509.md)  
+  `因果推断` · 相关性 7/10
+- [Generalizing the Results from Social Experiments: Theory and Evidence from India](deep_reads/2026-07-06-10.1080_07350015.2023.2241529.md)  
+  `经济理论 / 应用` · 相关性 7/10
+- [Instrumental Variable Estimation of Dynamic Treatment Effects on a Duration Outcome](deep_reads/2026-07-06-10.1080_07350015.2023.2231053.md)  
+  `因果推断` · 相关性 7/10
+- [Model-Assisted Complier Average Treatment Effect Estimates in Randomized Experiments with Noncompliance](deep_reads/2026-07-06-10.1080_07350015.2023.2224851.md)  
+  `因果推断` · 相关性 7/10
+- [Adaptive Testing for Alphas in High-Dimensional Factor Pricing Models](deep_reads/2026-07-06-10.1080_07350015.2023.2217871.md)  
+  `数理统计 / 假设检验` · 相关性 7/10
 - [Selection and the distribution of female real hourly wages in the United States](deep_reads/2026-07-06-10.3982_qe1777.md)  
   `经济理论 / 应用` · 相关性 7/10
 - [Locally robust inference for non‐Gaussian SVAR models](deep_reads/2026-07-06-10.3982_qe2274.md)  
@@ -143,6 +211,54 @@
   `非参数 / 半参数` · 相关性 7/10
 - [Determining the number of factors in high-dimensional generalized latent factor models](deep_reads/2026-07-06-10.1093_biomet_asab044.md)  
   `高维统计 / 随机矩阵` · 相关性 7/10
+- [Bayesian Dynamic Tensor Regression](deep_reads/2026-07-06-10.1080_07350015.2022.2032721.md)  
+  `统计计算 / 算法` · 相关性 6/10
+- [On Testing Equal Conditional Predictive Ability Under Measurement Error](deep_reads/2026-07-06-10.1080_07350015.2021.2021923.md)  
+  `数理统计 / 假设检验` · 相关性 6/10
+- [-Penalized Pairwise Difference Estimation for a High-Dimensional Censored Regression Model](deep_reads/2026-07-06-10.1080_07350015.2021.2013243.md)  
+  `高维统计 / 随机矩阵` · 相关性 6/10
+- [Large-Scale Generalized Linear Models for Longitudinal Data with Grouped Patterns of Unobserved Heterogeneity](deep_reads/2026-07-06-10.1080_07350015.2022.2097913.md)  
+  `因果推断` · 相关性 6/10
+- [Inference in a Class of Optimization Problems: Confidence Regions and Finite Sample Bounds on Errors in Coverage Probabilities](deep_reads/2026-07-06-10.1080_07350015.2022.2093883.md)  
+  `数理统计 / 假设检验` · 相关性 6/10
+- [Empirical Likelihood and Uniform Convergence Rates for Dyadic Kernel Density Estimation](deep_reads/2026-07-06-10.1080_07350015.2022.2080684.md)  
+  `非参数 / 半参数` · 相关性 6/10
+- [Tail Risk Inference via Expectiles in Heavy-Tailed Time Series](deep_reads/2026-07-06-10.1080_07350015.2022.2078332.md)  
+  `数理统计 / 假设检验` · 相关性 6/10
+- [Identification and Estimation of Structural VARMA Models Using Higher Order Dynamics](deep_reads/2026-07-06-10.1080_07350015.2022.2075000.md)  
+  `因果推断` · 相关性 6/10
+- [Combining <i>p</i>-values for Multivariate Predictive Ability Testing](deep_reads/2026-07-06-10.1080_07350015.2022.2067545.md)  
+  `数理统计 / 假设检验` · 相关性 6/10
+- [Reconciling Trends in U.S. Male Earnings Volatility: Results from Survey and Administrative Data](deep_reads/2026-07-06-10.1080_07350015.2022.2102020.md)  
+  `经济理论 / 应用` · 相关性 6/10
+- [Extreme Value Estimation for Heterogeneous Data](deep_reads/2026-07-06-10.1080_07350015.2021.2008408.md)  
+  `其他` · 相关性 6/10
+- [Testing for Structural Change of Predictive Regression Model to Threshold Predictive Regression Model](deep_reads/2026-07-06-10.1080_07350015.2021.2008406.md)  
+  `数理统计 / 假设检验` · 相关性 6/10
+- [Estimation of Sparsity-Induced Weak Factor Models](deep_reads/2026-07-06-10.1080_07350015.2021.2008405.md)  
+  `高维统计 / 随机矩阵` · 相关性 6/10
+- [Optimal Shrinkage-Based Portfolio Selection in High Dimensions](deep_reads/2026-07-06-10.1080_07350015.2021.2004897.md)  
+  `高维统计 / 随机矩阵` · 相关性 6/10
+- [Testing Error Distribution by Kernelized Stein Discrepancy in Multivariate Time Series Models](deep_reads/2026-07-06-10.1080_07350015.2021.2002160.md)  
+  `数理统计 / 假设检验` · 相关性 6/10
+- [Spatial Correlation Robust Inference in Linear Regression and Panel Models](deep_reads/2026-07-06-10.1080_07350015.2022.2127737.md)  
+  `经济理论 / 应用` · 相关性 6/10
+- [Synthetic Control with Time Varying Coefficients A State Space Approach with Bayesian Shrinkage](deep_reads/2026-07-06-10.1080_07350015.2022.2102025.md)  
+  `因果推断` · 相关性 6/10
+- [High-Dimensional Censored Regression via the Penalized Tobit Likelihood](deep_reads/2026-07-06-10.1080_07350015.2023.2182309.md)  
+  `高维统计 / 随机矩阵` · 相关性 6/10
+- [Two-Sample Testing for Tail Copulas with an Application to Equity Indices](deep_reads/2026-07-06-10.1080_07350015.2023.2166050.md)  
+  `数理统计 / 假设检验` · 相关性 6/10
+- [Likelihood Ratio Tests for Lorenz Dominance](deep_reads/2026-07-06-10.1080_07350015.2022.2146696.md)  
+  `数理统计 / 假设检验` · 相关性 6/10
+- [Homogeneity and Sparsity Analysis for High-Dimensional Panel Data Models](deep_reads/2026-07-06-10.1080_07350015.2022.2140667.md)  
+  `高维统计 / 随机矩阵` · 相关性 6/10
+- [A General Framework for Constructing Locally Self-Normalized Multiple-Change-Point Tests](deep_reads/2026-07-06-10.1080_07350015.2023.2231041.md)  
+  `数理统计 / 假设检验` · 相关性 6/10
+- [Tie-Break Bootstrap for Nonparametric Rank Statistics](deep_reads/2026-07-06-10.1080_07350015.2023.2210181.md)  
+  `数理统计 / 假设检验` · 相关性 6/10
+- [Dynamic Peer Groups of Arbitrage Characteristics](deep_reads/2026-07-06-10.1080_07350015.2021.2011736.md)  
+  `经济理论 / 应用` · 相关性 6/10
 - [Demand estimation with infrequent purchases and small market sizes](deep_reads/2026-07-06-10.3982_qe2147.md)  
   `经济理论 / 应用` · 相关性 6/10
 - [Local projections, autocorrelation, and efficiency](deep_reads/2026-07-06-10.3982_qe1988.md)  
@@ -193,6 +309,20 @@
   `因果推断` · 相关性 6/10
 - [On the relative efficiency of the intent-to-treat Wilcoxon–Mann–Whitney test in the presence of noncompliance](deep_reads/2026-07-06-10.1093_biomet_asab053.md)  
   `因果推断` · 相关性 6/10
+- [Testing for Trend Specifications in Panel Data Models](deep_reads/2026-07-06-10.1080_07350015.2022.2035227.md)  
+  `数理统计 / 假设检验` · 相关性 5/10
+- [Reconciling Trends in Male Earnings Volatility: Evidence from the SIPP Survey and Administrative Data](deep_reads/2026-07-06-10.1080_07350015.2022.2126845.md)  
+  `经济理论 / 应用` · 相关性 5/10
+- [Estimating Trends in Male Earnings Volatility with the Panel Study of Income Dynamics](deep_reads/2026-07-06-10.1080_07350015.2022.2102024.md)  
+  `流行病学` · 相关性 5/10
+- [A Scalable Frequentist Model Averaging Method](deep_reads/2026-07-06-10.1080_07350015.2022.2116442.md)  
+  `其他` · 相关性 5/10
+- [Testing For Global Covariate Effects in Dynamic Interaction Event Networks](deep_reads/2026-07-06-10.1080_07350015.2023.2263537.md)  
+  `数理统计 / 假设检验` · 相关性 5/10
+- [Uniform Nonparametric Inference for Spatially Dependent Panel Data](deep_reads/2026-07-06-10.1080_07350015.2023.2219283.md)  
+  `非参数 / 半参数` · 相关性 5/10
+- [Monitoring Network Changes in Social Media](deep_reads/2026-07-06-10.1080_07350015.2021.2016425.md)  
+  `高维统计 / 随机矩阵` · 相关性 5/10
 - [Estimating demand for differentiated products with zeroes in market share data](deep_reads/2026-07-06-10.3982_qe1593.md)  
   `经济理论 / 应用` · 相关性 5/10
 - [Quantifying noise in survey expectations](deep_reads/2026-07-06-10.3982_qe1633.md)  
@@ -235,6 +365,38 @@
   `非参数 / 半参数` · 相关性 5/10
 - [Asymptotic distribution-free changepoint detection for data with repeated observations](deep_reads/2026-07-06-10.1093_biomet_asab048.md)  
   `数理统计 / 假设检验` · 相关性 5/10
+- [QML and Efficient GMM Estimation of Spatial Autoregressive Models with Dominant (Popular) Units](deep_reads/2026-07-06-10.1080_07350015.2022.2041424.md)  
+  `经济理论 / 应用` · 相关性 4/10
+- [Diagnostic Testing of Finite Moment Conditions for the Consistency and Root-N Asymptotic Normality of the GMM and M Estimators](deep_reads/2026-07-06-10.1080_07350015.2021.2019047.md)  
+  `数理统计 / 假设检验` · 相关性 4/10
+- [Estimation of Leverage Effect: Kernel Function and Efficiency](deep_reads/2026-07-06-10.1080_07350015.2022.2097910.md)  
+  `其他` · 相关性 4/10
+- [Can a Machine Correct Option Pricing Models?](deep_reads/2026-07-06-10.1080_07350015.2022.2099871.md)  
+  `经济理论 / 应用` · 相关性 4/10
+- [Bootstrapping Two-Stage Quasi-Maximum Likelihood Estimators of Time Series Models](deep_reads/2026-07-06-10.1080_07350015.2022.2058949.md)  
+  `数理统计 / 假设检验` · 相关性 4/10
+- [Survey Response Behavior as a Proxy for Unobserved Ability: Theory and Evidence](deep_reads/2026-07-06-10.1080_07350015.2021.2008404.md)  
+  `经济理论 / 应用` · 相关性 4/10
+- [Test for Market Timing Using Daily Fund Returns](deep_reads/2026-07-06-10.1080_07350015.2021.2006670.md)  
+  `经济理论 / 应用` · 相关性 4/10
+- [Composite Index Construction with Expert Opinion](deep_reads/2026-07-06-10.1080_07350015.2021.2000418.md)  
+  `经济理论 / 应用` · 相关性 4/10
+- [Spectral Estimation of Large Stochastic Blockmodels with Discrete Nodal Covariates](deep_reads/2026-07-06-10.1080_07350015.2022.2139709.md)  
+  `因果推断` · 相关性 4/10
+- [Corporate Probability of Default: A Single-Index Hazard Model Approach](deep_reads/2026-07-06-10.1080_07350015.2022.2120484.md)  
+  `经济理论 / 应用` · 相关性 4/10
+- [Optimal Model Averaging of Mixed-Data Kernel-Weighted Spline Regressions](deep_reads/2026-07-06-10.1080_07350015.2022.2118126.md)  
+  `非参数 / 半参数` · 相关性 4/10
+- [Nonparametric Option Pricing with Generalized Entropic Estimators](deep_reads/2026-07-06-10.1080_07350015.2022.2115499.md)  
+  `其他` · 相关性 4/10
+- [A One-Sided Refined Symmetrized Data Aggregation Approach to Robust Mutual Fund Selection](deep_reads/2026-07-06-10.1080_07350015.2023.2174549.md)  
+  `数理统计 / 假设检验` · 相关性 4/10
+- [Dynamic Autoregressive Liquidity (DArLiQ)](deep_reads/2026-07-06-10.1080_07350015.2023.2238790.md)  
+  `其他` · 相关性 4/10
+- [Estimation and Inference on Time-Varying FAVAR Models](deep_reads/2026-07-06-10.1080_07350015.2023.2203726.md)  
+  `经济理论 / 应用` · 相关性 4/10
+- [Modeling Functional Time Series and Mixed-Type Predictors With Partially Functional Autoregressions](deep_reads/2026-07-06-10.1080_07350015.2021.2011299.md)  
+  `其他` · 相关性 4/10
 - [Behavioral learning equilibria in New Keynesian models](deep_reads/2026-07-06-10.3982_qe1533.md)  
   `经济理论 / 应用` · 相关性 4/10
 - [Costly information acquisition in centralized matching markets](deep_reads/2026-07-06-10.3982_qe1955.md)  
@@ -273,6 +435,26 @@
   `数理统计 / 假设检验` · 相关性 4/10
 - [Asymptotics of sample tail autocorrelations for tail-dependent time series: phase transition and visualization](deep_reads/2026-07-06-10.1093_biomet_asab038.md)  
   `数理统计 / 假设检验` · 相关性 4/10
+- [Detecting Unobserved Heterogeneity in Efficient Prices via Classifier-Lasso](deep_reads/2026-07-06-10.1080_07350015.2022.2036613.md)  
+  `经济理论 / 应用` · 相关性 3/10
+- [News-Driven Uncertainty Fluctuations](deep_reads/2026-07-06-10.1080_07350015.2022.2097912.md)  
+  `经济理论 / 应用` · 相关性 3/10
+- [Time Series Approach to the Evolution of Networks: Prediction and Estimation](deep_reads/2026-07-06-10.1080_07350015.2021.2006669.md)  
+  `经济理论 / 应用` · 相关性 3/10
+- [When are Google Data Useful to Nowcast GDP? An Approach via Preselection and Shrinkage](deep_reads/2026-07-06-10.1080_07350015.2022.2116025.md)  
+  `经济理论 / 应用` · 相关性 3/10
+- [Testing Stability in Functional Event Observations with an Application to IPO Performance](deep_reads/2026-07-06-10.1080_07350015.2022.2118127.md)  
+  `数理统计 / 假设检验` · 相关性 3/10
+- [Prediction Using Many Samples with Models Possibly Containing Partially Shared Parameters](deep_reads/2026-07-06-10.1080_07350015.2023.2166515.md)  
+  `因果推断` · 相关性 3/10
+- [Getting the ROC into Sync](deep_reads/2026-07-06-10.1080_07350015.2022.2154778.md)  
+  `经济理论 / 应用` · 相关性 3/10
+- [Asset Pricing via the Conditional Quantile Variational Autoencoder](deep_reads/2026-07-06-10.1080_07350015.2023.2223683.md)  
+  `经济理论 / 应用` · 相关性 3/10
+- [The Leverage Effect Puzzle under Semi-nonparametric Stochastic Volatility Models](deep_reads/2026-07-06-10.1080_07350015.2023.2203756.md)  
+  `经济理论 / 应用` · 相关性 3/10
+- [A Time-Varying Network for Cryptocurrencies](deep_reads/2026-07-06-10.1080_07350015.2022.2146695.md)  
+  `经济理论 / 应用` · 相关性 3/10
 - [Expertise, gender, and equilibrium play](deep_reads/2026-07-06-10.3982_qe1563.md)  
   `经济理论 / 应用` · 相关性 3/10
 - [A simple but powerful simulated certainty equivalent approximation method for dynamic stochastic problems](deep_reads/2026-07-06-10.3982_qe1835.md)  
@@ -307,6 +489,12 @@
   `统计计算 / 算法` · 相关性 3/10
 - [Uniqueness and global optimality of the maximum likelihood estimator for the generalized extreme value distribution](deep_reads/2026-07-06-10.1093_biomet_asab043.md)  
   `数理统计 / 假设检验` · 相关性 3/10
+- [On the Least Squares Estimation of Multiple-Threshold-Variable Autoregressive Models](deep_reads/2026-07-06-10.1080_07350015.2023.2174124.md)  
+  `因果推断` · 相关性 2/10
+- [A Simple Correction for Misspecification in Trend-Cycle Decompositions with an Application to Estimating <i>r</i> *](deep_reads/2026-07-06-10.1080_07350015.2023.2221974.md)  
+  `经济理论 / 应用` · 相关性 2/10
+- [Links and Legibility: Making Sense of Historical U.S. Census Automated Linking Methods](deep_reads/2026-07-06-10.1080_07350015.2023.2205918.md)  
+  `经济理论 / 应用` · 相关性 2/10
 - [Redistribution and the monetary‐fiscal policy mix](deep_reads/2026-07-06-10.3982_qe2030.md)  
   `经济理论 / 应用` · 相关性 2/10
 - [Ellsberg meets Keynes at an urn](deep_reads/2026-07-06-10.3982_qe2253.md)  
