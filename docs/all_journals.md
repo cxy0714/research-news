@@ -372,6 +372,9 @@
 
 - [Vol 7 · 2026-06-05](journals/2026-06-05-jsait-v7.md)
 - [Vol 6 · 2026-06-05](journals/2026-06-05-jsait-v6.md)
+- [Vol 3 Issue 4 · 2026-07-07](journals/2026-07-07-jsait-v3-i4.md)
+- [Vol 3 Issue 3 · 2026-07-07](journals/2026-07-07-jsait-v3-i3.md)
+- [Vol 3 Issue 2 · 2026-07-07](journals/2026-07-07-jsait-v3-i2.md)
 - [2026-06-21](journals/2026-06-21-jsait.md)
 - [2026-06-05](journals/2026-06-05-jsait.md)
 

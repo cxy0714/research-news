@@ -2534,6 +2534,11 @@
 - [Bit-Efficient Toeplitz Covariance Estimation](deep_reads/2026-07-07-10.1109_tit.2026.3697612.md)  
   6/10 [journals]
 
+#### IEEE Journal on Selected Areas in Information Theory Vol 3 Issue 3
+
+- [Sparsity-Free Compressed Sensing With Applications to Generative Priors](deep_reads/2026-07-07-10.1109_jsait.2022.3219807.md)  
+  6/10 [journals]
+
 #### Journal of Business & Economic Statistics Vol 42 Issue 2
 
 - [Monitoring Network Changes in Social Media](deep_reads/2026-07-06-10.1080_07350015.2021.2016425.md)  
@@ -9920,6 +9925,22 @@
 - [Reinforcement Learning With Partial Online State Information in POMDPs: Regret Bounds and Limits](deep_reads/2026-07-07-10.1109_tit.2026.3694700.md)  
   3/10 [journals]
 - [New Sphere-Packing Bounds for Finite-Blocklength Coding Over Additive Noise Channels](deep_reads/2026-07-07-10.1109_tit.2026.3689501.md)  
+  1/10 [journals]
+
+#### IEEE Journal on Selected Areas in Information Theory Vol 3 Issue 4
+
+- [Compression for Multi-Arm Bandits](deep_reads/2026-07-07-10.1109_jsait.2023.3260770.md)  
+  2/10 [journals]
+- [Neural Estimation of the Rate-Distortion Function With Applications to Operational Source Coding](deep_reads/2026-07-07-10.1109_jsait.2023.3273467.md)  
+  2/10 [journals]
+
+#### IEEE Journal on Selected Areas in Information Theory Vol 3 Issue 3
+
+- [Theoretical Perspectives on Deep Learning Methods in Inverse Problems](deep_reads/2026-07-07-10.1109_jsait.2023.3241123.md)  
+  7/10 [journals]
+- [Cross-Domain Lossy Compression as Entropy Constrained Optimal Transport](deep_reads/2026-07-07-10.1109_jsait.2022.3229670.md)  
+  2/10 [journals]
+- [Inventing Codes for Channels With Active Feedback via Deep Learning](deep_reads/2026-07-07-10.1109_jsait.2022.3216515.md)  
   1/10 [journals]
 
 #### Journal of Econometrics Vol 254
