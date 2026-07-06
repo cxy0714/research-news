@@ -283,6 +283,25 @@
 
 ### 期刊
 
+#### Econometrica Vol 92 Issue 3
+
+- [Bias‐Aware Inference in Fuzzy Regression Discontinuity Designs](deep_reads/2026-07-06-10.3982_ecta19466.md)  
+  7/10 [journals]
+
+#### Econometrica Vol 92 Issue 2
+
+- [Bootstrap Inference for Fixed‐Effect Models](deep_reads/2026-07-06-10.3982_ecta20712.md)  
+  8/10 [journals]
+- [Randomization Tests for Peer Effects in Group Formation Experiments](deep_reads/2026-07-06-10.3982_ecta20134.md)  
+  7/10 [journals]
+
+#### Econometrica Vol 91 Issue 6
+
+- [Estimation Based on Nearest Neighbor Matching: From Density Ratio to Average Treatment Effect](deep_reads/2026-07-06-10.3982_ecta20598.md)  
+  8/10 [journals]
+- [Same Root Different Leaves: Time Series and Cross‐Sectional Methods in Panel Data](deep_reads/2026-07-06-10.3982_ecta21248.md)  
+  7/10 [journals]
+
 #### Biometrika Vol 109 Issue 3
 
 - [Heterogeneous coefficients, control variables and identification of multiple treatment effects](deep_reads/2026-07-06-10.1093_biomet_asab060.md)  
@@ -5272,6 +5291,11 @@
 
 ### 期刊
 
+#### Econometrica Vol 91 Issue 4
+
+- [Robust Inference on Infinite and Growing Dimensional Time‐Series Regression](deep_reads/2026-07-06-10.3982_ecta17918.md)  
+  7/10 [journals]
+
 #### Biometrika Vol 109 Issue 3
 
 - [Multi-scale Fisher’s independence test for multivariate dependence](deep_reads/2026-07-06-10.1093_biomet_asac013.md)  
@@ -7576,6 +7600,114 @@
   6/10 [daily]
 
 ### 期刊
+
+#### Econometrica Vol 92 Issue 3
+
+- [Identification and Estimation in Many‐to‐One Two‐Sided Matching Without Transfers](deep_reads/2026-07-06-10.3982_ecta19636.md)  
+  7/10 [journals]
+- [A Demand Curve for Disaster Recovery Loans](deep_reads/2026-07-06-10.3982_ecta20417.md)  
+  6/10 [journals]
+- [Equilibrium Grading Policies With Implications for Female Interest in STEM Courses](deep_reads/2026-07-06-10.3982_ecta17876.md)  
+  5/10 [journals]
+- [Endogenous Information and Simplifying Insurance Choice](deep_reads/2026-07-06-10.3982_ecta18555.md)  
+  5/10 [journals]
+- [Implementation via Information Design in Binary‐Action Supermodular Games](deep_reads/2026-07-06-10.3982_ecta19149.md)  
+  3/10 [journals]
+- [Setbacks, Shutdowns, and Overruns](deep_reads/2026-07-06-10.3982_ecta21548.md)  
+  2/10 [journals]
+
+#### Econometrica Vol 92 Issue 2
+
+- [Adapting to Climate Risk With Guaranteed Credit: Evidence From Bangladesh](deep_reads/2026-07-06-10.3982_ecta19127.md)  
+  6/10 [journals]
+- [Toward a General Theory of Peer Effects](deep_reads/2026-07-06-10.3982_ecta21048.md)  
+  6/10 [journals]
+- [Production and Learning in Teams](deep_reads/2026-07-06-10.3982_ecta16748.md)  
+  5/10 [journals]
+- [Networks, Barriers, and Trade](deep_reads/2026-07-06-10.3982_ecta17513.md)  
+  5/10 [journals]
+- [Attributes: Selective Learning and Influence](deep_reads/2026-07-06-10.3982_ecta18355.md)  
+  3/10 [journals]
+- [Bargaining and Exclusion With Multiple Buyers](deep_reads/2026-07-06-10.3982_ecta19675.md)  
+  2/10 [journals]
+
+#### Econometrica Vol 92 Issue 1
+
+- [Can Restorative Justice Conferencing Reduce Recidivism? Evidence From the Make‐it‐Right Program](deep_reads/2026-07-06-10.3982_ecta20996.md)  
+  8/10 [journals]
+- [Designing Disability Insurance Reforms: Tightening Eligibility Rules or Reducing Benefits?](deep_reads/2026-07-06-10.3982_ecta19021.md)  
+  7/10 [journals]
+- [Wealth Inequality in a Low Rate Environment](deep_reads/2026-07-06-10.3982_ecta19092.md)  
+  4/10 [journals]
+- [Drilling Deadlines and Oil and Gas Development](deep_reads/2026-07-06-10.3982_ecta18436.md)  
+  3/10 [journals]
+- [Comparative Statics With Linear Objectives: Normality, Complementarity, and Ranking Multi‐Prior Beliefs](deep_reads/2026-07-06-10.3982_ecta19738.md)  
+  2/10 [journals]
+
+#### Econometrica Vol 91 Issue 6
+
+- [Nonrandom Exposure to Exogenous Shocks](deep_reads/2026-07-06-10.3982_ecta19367.md)  
+  8/10 [journals]
+- [The Anatomy of Sorting—Evidence From Danish Data](deep_reads/2026-07-06-10.3982_ecta16425.md)  
+  7/10 [journals]
+- [An Adversarial Approach to Structural Estimation](deep_reads/2026-07-06-10.3982_ecta18707.md)  
+  7/10 [journals]
+- [Tail Risk in Production Networks](deep_reads/2026-07-06-10.3982_ecta21064.md)  
+  4/10 [journals]
+- [Urban Growth and Its Aggregate Implications](deep_reads/2026-07-06-10.3982_ecta17936.md)  
+  4/10 [journals]
+- [Algorithmic Mechanism Design With Investment](deep_reads/2026-07-06-10.3982_ecta19559.md)  
+  3/10 [journals]
+- [Mixed Strategies in the Indefinitely Repeated Prisoner's Dilemma](deep_reads/2026-07-06-10.3982_ecta17482.md)  
+  3/10 [journals]
+- [Presidential Address: Demand‐Side Constraints in Development. The Role of Market Size, Trade, and (In)Equality](deep_reads/2026-07-06-10.3982_ecta20787.md)  
+  2/10 [journals]
+- [Intertemporal Hedging and Trade in Repeated Games With Recursive Utility](deep_reads/2026-07-06-10.3982_ecta17756.md)  
+  2/10 [journals]
+- [Price Setting With Strategic Complementarities as a Mean Field Game](deep_reads/2026-07-06-10.3982_ecta20797.md)  
+  2/10 [journals]
+
+#### Econometrica Vol 91 Issue 5
+
+- [Selection Into Credit Markets: Evidence From Agriculture in Mali](deep_reads/2026-07-06-10.3982_ecta18916.md)  
+  6/10 [journals]
+- [What Can Time‐Series Regressions Tell Us About Policy Counterfactuals?](deep_reads/2026-07-06-10.3982_ecta21045.md)  
+  5/10 [journals]
+- [The Investment Effects of Market Integration: Evidence From Renewable Energy Expansion in Chile](deep_reads/2026-07-06-10.3982_ecta20769.md)  
+  3/10 [journals]
+- [A Quantitative Theory of the Credit Score](deep_reads/2026-07-06-10.3982_ecta18771.md)  
+  3/10 [journals]
+- [The Macro Impact of Short‐Termism](deep_reads/2026-07-06-10.3982_ecta15420.md)  
+  2/10 [journals]
+- [Platform Design When Sellers Use Pricing Algorithms](deep_reads/2026-07-06-10.3982_ecta19978.md)  
+  2/10 [journals]
+- [Mitigating Disaster Risks in the Age of Climate Change](deep_reads/2026-07-06-10.3982_ecta20442.md)  
+  2/10 [journals]
+- [Monitoring versus Discounting in Repeated Games](deep_reads/2026-07-06-10.3982_ecta20206.md)  
+  1/10 [journals]
+- [Infinite Debt Rollover in Stochastic Economies](deep_reads/2026-07-06-10.3982_ecta21090.md)  
+  1/10 [journals]
+
+#### Econometrica Vol 91 Issue 4
+
+- [Ideology and Performance in Public Organizations](deep_reads/2026-07-06-10.3982_ecta20355.md)  
+  7/10 [journals]
+- [Scaling Auctions as Insurance: A Case Study in Infrastructure Procurement](deep_reads/2026-07-06-10.3982_ecta17673.md)  
+  7/10 [journals]
+- [Sequential Veto Bargaining With Incomplete Information](deep_reads/2026-07-06-10.3982_ecta20658.md)  
+  6/10 [journals]
+- [General Equilibrium Effects of (Improving) Public Employment Programs: Experimental Evidence From India](deep_reads/2026-07-06-10.3982_ecta18181.md)  
+  5/10 [journals]
+- [Testing Hurwicz Expected Utility](deep_reads/2026-07-06-10.3982_ecta19221.md)  
+  4/10 [journals]
+- [The Effect of Macroeconomic Uncertainty on Firm Decisions](deep_reads/2026-07-06-10.3982_ecta21004.md)  
+  4/10 [journals]
+- [Growing Like India—the Unequal Effects of Service‐Led Growth](deep_reads/2026-07-06-10.3982_ecta20964.md)  
+  3/10 [journals]
+- [Networks, Phillips Curves, and Monetary Policy](deep_reads/2026-07-06-10.3982_ecta18654.md)  
+  2/10 [journals]
+- [A Theory of Simplicity in Games and Mechanism Design](deep_reads/2026-07-06-10.3982_ecta16310.md)  
+  1/10 [journals]
 
 #### Journal of the American Statistical Association Vol 120 Issue 550
 

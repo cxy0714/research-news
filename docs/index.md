@@ -17,7 +17,7 @@
 
 [→ 查看完整报告](daily/2026-07-06.md)
 
-### 精读论文（76 篇）
+### 精读论文（127 篇）
 
 - [Quasi-oracle estimation of heterogeneous treatment effects](deep_reads/2026-07-06-10.1093_biomet_asaa076.md)  
   `因果推断` · 相关性 9/10
@@ -33,6 +33,14 @@
   `数理统计 / 假设检验` · 相关性 9/10
 - [A high-dimensional power analysis of the conditional randomization test and knockoffs](deep_reads/2026-07-06-10.1093_biomet_asab052.md)  
   `高维统计 / 随机矩阵` · 相关性 9/10
+- [Nonrandom Exposure to Exogenous Shocks](deep_reads/2026-07-06-10.3982_ecta19367.md)  
+  `经济理论 / 应用` · 相关性 8/10
+- [Estimation Based on Nearest Neighbor Matching: From Density Ratio to Average Treatment Effect](deep_reads/2026-07-06-10.3982_ecta20598.md)  
+  `因果推断` · 相关性 8/10
+- [Can Restorative Justice Conferencing Reduce Recidivism? Evidence From the Make‐it‐Right Program](deep_reads/2026-07-06-10.3982_ecta20996.md)  
+  `经济理论 / 应用` · 相关性 8/10
+- [Bootstrap Inference for Fixed‐Effect Models](deep_reads/2026-07-06-10.3982_ecta20712.md)  
+  `因果推断` · 相关性 8/10
 - [Inference for treatment effect parameters in potentially misspecified high-dimensional models](deep_reads/2026-07-06-10.1093_biomet_asaa071.md)  
   `因果推断` · 相关性 8/10
 - [Jackknife empirical likelihood: small bandwidth, sparse network and high-dimensional asymptotics](deep_reads/2026-07-06-10.1093_biomet_asaa081.md)  
@@ -53,6 +61,26 @@
   `因果推断` · 相关性 8/10
 - [Regression-based causal inference with factorial experiments: estimands, model specifications and design-based properties](deep_reads/2026-07-06-10.1093_biomet_asab051.md)  
   `因果推断` · 相关性 8/10
+- [Robust Inference on Infinite and Growing Dimensional Time‐Series Regression](deep_reads/2026-07-06-10.3982_ecta17918.md)  
+  `数理统计 / 假设检验` · 相关性 7/10
+- [Ideology and Performance in Public Organizations](deep_reads/2026-07-06-10.3982_ecta20355.md)  
+  `经济理论 / 应用` · 相关性 7/10
+- [Scaling Auctions as Insurance: A Case Study in Infrastructure Procurement](deep_reads/2026-07-06-10.3982_ecta17673.md)  
+  `经济理论 / 应用` · 相关性 7/10
+- [The Anatomy of Sorting—Evidence From Danish Data](deep_reads/2026-07-06-10.3982_ecta16425.md)  
+  `经济理论 / 应用` · 相关性 7/10
+- [Same Root Different Leaves: Time Series and Cross‐Sectional Methods in Panel Data](deep_reads/2026-07-06-10.3982_ecta21248.md)  
+  `因果推断` · 相关性 7/10
+- [An Adversarial Approach to Structural Estimation](deep_reads/2026-07-06-10.3982_ecta18707.md)  
+  `经济理论 / 应用` · 相关性 7/10
+- [Designing Disability Insurance Reforms: Tightening Eligibility Rules or Reducing Benefits?](deep_reads/2026-07-06-10.3982_ecta19021.md)  
+  `经济理论 / 应用` · 相关性 7/10
+- [Bias‐Aware Inference in Fuzzy Regression Discontinuity Designs](deep_reads/2026-07-06-10.3982_ecta19466.md)  
+  `因果推断` · 相关性 7/10
+- [Identification and Estimation in Many‐to‐One Two‐Sided Matching Without Transfers](deep_reads/2026-07-06-10.3982_ecta19636.md)  
+  `经济理论 / 应用` · 相关性 7/10
+- [Randomization Tests for Peer Effects in Group Formation Experiments](deep_reads/2026-07-06-10.3982_ecta20134.md)  
+  `因果推断` · 相关性 7/10
 - [Inference for Group Interaction Experiments](deep_reads/2026-07-06-2607.02385.md)  
   `因果推断` · 相关性 7/10
 - [Posterior contraction in sparse generalized linear models](deep_reads/2026-07-06-10.1093_biomet_asaa074.md)  
@@ -93,6 +121,16 @@
   `非参数 / 半参数` · 相关性 7/10
 - [Determining the number of factors in high-dimensional generalized latent factor models](deep_reads/2026-07-06-10.1093_biomet_asab044.md)  
   `高维统计 / 随机矩阵` · 相关性 7/10
+- [Sequential Veto Bargaining With Incomplete Information](deep_reads/2026-07-06-10.3982_ecta20658.md)  
+  `经济理论 / 应用` · 相关性 6/10
+- [Selection Into Credit Markets: Evidence From Agriculture in Mali](deep_reads/2026-07-06-10.3982_ecta18916.md)  
+  `经济理论 / 应用` · 相关性 6/10
+- [A Demand Curve for Disaster Recovery Loans](deep_reads/2026-07-06-10.3982_ecta20417.md)  
+  `经济理论 / 应用` · 相关性 6/10
+- [Adapting to Climate Risk With Guaranteed Credit: Evidence From Bangladesh](deep_reads/2026-07-06-10.3982_ecta19127.md)  
+  `经济理论 / 应用` · 相关性 6/10
+- [Toward a General Theory of Peer Effects](deep_reads/2026-07-06-10.3982_ecta21048.md)  
+  `经济理论 / 应用` · 相关性 6/10
 - [An assumption-free exact test for fixed-design linear models with exchangeable errors](deep_reads/2026-07-06-10.1093_biomet_asaa079.md)  
   `数理统计 / 假设检验` · 相关性 6/10
 - [Approximating posteriors with high-dimensional nuisance parameters via integrated rotated Gaussian approximation](deep_reads/2026-07-06-10.1093_biomet_asaa068.md)  
@@ -119,6 +157,18 @@
   `因果推断` · 相关性 6/10
 - [On the relative efficiency of the intent-to-treat Wilcoxon–Mann–Whitney test in the presence of noncompliance](deep_reads/2026-07-06-10.1093_biomet_asab053.md)  
   `因果推断` · 相关性 6/10
+- [General Equilibrium Effects of (Improving) Public Employment Programs: Experimental Evidence From India](deep_reads/2026-07-06-10.3982_ecta18181.md)  
+  `经济理论 / 应用` · 相关性 5/10
+- [What Can Time‐Series Regressions Tell Us About Policy Counterfactuals?](deep_reads/2026-07-06-10.3982_ecta21045.md)  
+  `经济理论 / 应用` · 相关性 5/10
+- [Equilibrium Grading Policies With Implications for Female Interest in STEM Courses](deep_reads/2026-07-06-10.3982_ecta17876.md)  
+  `经济理论 / 应用` · 相关性 5/10
+- [Endogenous Information and Simplifying Insurance Choice](deep_reads/2026-07-06-10.3982_ecta18555.md)  
+  `经济理论 / 应用` · 相关性 5/10
+- [Production and Learning in Teams](deep_reads/2026-07-06-10.3982_ecta16748.md)  
+  `经济理论 / 应用` · 相关性 5/10
+- [Networks, Barriers, and Trade](deep_reads/2026-07-06-10.3982_ecta17513.md)  
+  `经济理论 / 应用` · 相关性 5/10
 - [On quadratic forms in multivariate generalized hyperbolic random vectors](deep_reads/2026-07-06-10.1093_biomet_asaa067.md)  
   `其他` · 相关性 5/10
 - [A general interactive framework for false discovery rate control under structural constraints](deep_reads/2026-07-06-10.1093_biomet_asaa064.md)  
@@ -137,6 +187,16 @@
   `非参数 / 半参数` · 相关性 5/10
 - [Asymptotic distribution-free changepoint detection for data with repeated observations](deep_reads/2026-07-06-10.1093_biomet_asab048.md)  
   `数理统计 / 假设检验` · 相关性 5/10
+- [Testing Hurwicz Expected Utility](deep_reads/2026-07-06-10.3982_ecta19221.md)  
+  `经济理论 / 应用` · 相关性 4/10
+- [The Effect of Macroeconomic Uncertainty on Firm Decisions](deep_reads/2026-07-06-10.3982_ecta21004.md)  
+  `经济理论 / 应用` · 相关性 4/10
+- [Tail Risk in Production Networks](deep_reads/2026-07-06-10.3982_ecta21064.md)  
+  `经济理论 / 应用` · 相关性 4/10
+- [Urban Growth and Its Aggregate Implications](deep_reads/2026-07-06-10.3982_ecta17936.md)  
+  `经济理论 / 应用` · 相关性 4/10
+- [Wealth Inequality in a Low Rate Environment](deep_reads/2026-07-06-10.3982_ecta19092.md)  
+  `经济理论 / 应用` · 相关性 4/10
 - [On the use of a penalized quasilikelihood information criterion for generalized linear mixed models](deep_reads/2026-07-06-10.1093_biomet_asaa069.md)  
   `数理统计 / 假设检验` · 相关性 4/10
 - [Poisson reduced-rank models with an application to political text data](deep_reads/2026-07-06-10.1093_biomet_asaa063.md)  
@@ -151,6 +211,22 @@
   `数理统计 / 假设检验` · 相关性 4/10
 - [Asymptotics of sample tail autocorrelations for tail-dependent time series: phase transition and visualization](deep_reads/2026-07-06-10.1093_biomet_asab038.md)  
   `数理统计 / 假设检验` · 相关性 4/10
+- [Growing Like India—the Unequal Effects of Service‐Led Growth](deep_reads/2026-07-06-10.3982_ecta20964.md)  
+  `经济理论 / 应用` · 相关性 3/10
+- [Algorithmic Mechanism Design With Investment](deep_reads/2026-07-06-10.3982_ecta19559.md)  
+  `经济理论 / 应用` · 相关性 3/10
+- [Mixed Strategies in the Indefinitely Repeated Prisoner's Dilemma](deep_reads/2026-07-06-10.3982_ecta17482.md)  
+  `经济理论 / 应用` · 相关性 3/10
+- [The Investment Effects of Market Integration: Evidence From Renewable Energy Expansion in Chile](deep_reads/2026-07-06-10.3982_ecta20769.md)  
+  `经济理论 / 应用` · 相关性 3/10
+- [A Quantitative Theory of the Credit Score](deep_reads/2026-07-06-10.3982_ecta18771.md)  
+  `经济理论 / 应用` · 相关性 3/10
+- [Drilling Deadlines and Oil and Gas Development](deep_reads/2026-07-06-10.3982_ecta18436.md)  
+  `经济理论 / 应用` · 相关性 3/10
+- [Implementation via Information Design in Binary‐Action Supermodular Games](deep_reads/2026-07-06-10.3982_ecta19149.md)  
+  `经济理论 / 应用` · 相关性 3/10
+- [Attributes: Selective Learning and Influence](deep_reads/2026-07-06-10.3982_ecta18355.md)  
+  `经济理论 / 应用` · 相关性 3/10
 - [Covariate adaptive familywise error rate control for genome-wide association studies](deep_reads/2026-07-06-10.1093_biomet_asaa098.md)  
   `数理统计 / 假设检验` · 相关性 3/10
 - [Stratification and optimal resampling for sequential Monte Carlo](deep_reads/2026-07-06-10.1093_biomet_asab004.md)  
@@ -159,6 +235,26 @@
   `统计计算 / 算法` · 相关性 3/10
 - [Uniqueness and global optimality of the maximum likelihood estimator for the generalized extreme value distribution](deep_reads/2026-07-06-10.1093_biomet_asab043.md)  
   `数理统计 / 假设检验` · 相关性 3/10
+- [Networks, Phillips Curves, and Monetary Policy](deep_reads/2026-07-06-10.3982_ecta18654.md)  
+  `经济理论 / 应用` · 相关性 2/10
+- [Presidential Address: Demand‐Side Constraints in Development. The Role of Market Size, Trade, and (In)Equality](deep_reads/2026-07-06-10.3982_ecta20787.md)  
+  `经济理论 / 应用` · 相关性 2/10
+- [Intertemporal Hedging and Trade in Repeated Games With Recursive Utility](deep_reads/2026-07-06-10.3982_ecta17756.md)  
+  `经济理论 / 应用` · 相关性 2/10
+- [Price Setting With Strategic Complementarities as a Mean Field Game](deep_reads/2026-07-06-10.3982_ecta20797.md)  
+  `经济理论 / 应用` · 相关性 2/10
+- [The Macro Impact of Short‐Termism](deep_reads/2026-07-06-10.3982_ecta15420.md)  
+  `经济理论 / 应用` · 相关性 2/10
+- [Platform Design When Sellers Use Pricing Algorithms](deep_reads/2026-07-06-10.3982_ecta19978.md)  
+  `经济理论 / 应用` · 相关性 2/10
+- [Mitigating Disaster Risks in the Age of Climate Change](deep_reads/2026-07-06-10.3982_ecta20442.md)  
+  `经济理论 / 应用` · 相关性 2/10
+- [Comparative Statics With Linear Objectives: Normality, Complementarity, and Ranking Multi‐Prior Beliefs](deep_reads/2026-07-06-10.3982_ecta19738.md)  
+  `经济理论 / 应用` · 相关性 2/10
+- [Setbacks, Shutdowns, and Overruns](deep_reads/2026-07-06-10.3982_ecta21548.md)  
+  `经济理论 / 应用` · 相关性 2/10
+- [Bargaining and Exclusion With Multiple Buyers](deep_reads/2026-07-06-10.3982_ecta19675.md)  
+  `经济理论 / 应用` · 相关性 2/10
 - [Composite grid designs for adaptive computer experiments with fast inference](deep_reads/2026-07-06-10.1093_biomet_asaa084.md)  
   `统计计算 / 算法` · 相关性 2/10
 - [Admissible estimators of a multivariate normal mean vector when the scale is unknown](deep_reads/2026-07-06-10.1093_biomet_asaa102.md)  
@@ -167,6 +263,12 @@
   `其他` · 相关性 2/10
 - [A minimum aberration-type criterion for selecting space-filling designs](deep_reads/2026-07-06-10.1093_biomet_asab021.md)  
   `其他` · 相关性 2/10
+- [A Theory of Simplicity in Games and Mechanism Design](deep_reads/2026-07-06-10.3982_ecta16310.md)  
+  `经济理论 / 应用` · 相关性 1/10
+- [Monitoring versus Discounting in Repeated Games](deep_reads/2026-07-06-10.3982_ecta20206.md)  
+  `经济理论 / 应用` · 相关性 1/10
+- [Infinite Debt Rollover in Stochastic Economies](deep_reads/2026-07-06-10.3982_ecta21090.md)  
+  `经济理论 / 应用` · 相关性 1/10
 - [Design and development of a near-IR integral field spectrograph for the HWO Coronagraph Instrument](deep_reads/2026-07-06-2607.02243.md)  
   `天体统计` · 相关性 1/10
 - [HARMONI at ELT: line spread functions in a diffraction limited spectrometer](deep_reads/2026-07-06-2607.02223.md)  
