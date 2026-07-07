@@ -317,8 +317,10 @@
 
 ### ApJS
 
+- [Vol 285 Issue 1 · 2026-07-07](journals/2026-07-07-apjs-v285-i1.md)
 - [Vol 285 Issue 1 · 2026-06-19](journals/2026-06-19-apjs-v285-i1.md)
 - [Vol 284 Issue 2 · 2026-06-19](journals/2026-06-19-apjs-v284-i2.md)
+- [Vol 284 Issue 1 · 2026-07-07](journals/2026-07-07-apjs-v284-i1.md)
 
 ### MNRAS
 

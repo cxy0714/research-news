@@ -7718,6 +7718,44 @@
 
 ### 期刊
 
+#### Astrophysical Journal Supplement Series Vol 285 Issue 1
+
+- [A General Formulation of the Kinematic Dipole as a Functional of Selection and Source Properties: Beyond the Ellis–Baldwin Approximation](deep_reads/2026-06-19-10.3847_1538-4365_ae6a89.md)  
+  8/10 [journals]
+- [A Markov Chain Monte Carlo–based Hybrid Noise Inference for Continuous Wavelet Power Spectra: With Applications to Solar and Stellar Oscillatory Signals](deep_reads/2026-07-07-10.3847_1538-4365_ae7345.md)  
+  7/10 [journals]
+- [Photometric Redshift Probability Density Functions via Neural Network Classification for DESI Legacy Imaging Surveys and Pan-STARRS](deep_reads/2026-07-07-10.3847_1538-4365_ae6641.md)  
+  7/10 [journals]
+- [The Deep Learning–based Dual-branch Multimodal Fusion Model for Solar Flare Prediction](deep_reads/2026-07-07-10.3847_1538-4365_ae6cd5.md)  
+  6/10 [journals]
+- [The DESI Transients Survey: Legacy Classifications and Methodology](deep_reads/2026-07-07-10.3847_1538-4365_ae6509.md)  
+  6/10 [journals]
+- [The Phenomenological Classification of TESS Eclipsing Binaries](deep_reads/2026-06-19-10.3847_1538-4365_ae6eee.md)  
+  6/10 [journals]
+- [Hierarchical Cosmological Constraints through a Strong-lensing Distance Ratio](deep_reads/2026-06-19-10.3847_1538-4365_ae6782.md)  
+  6/10 [journals]
+- [An Improved HDBSCAN-based Detection and Tracking Method for Solar Active Regions in Magnetograms](deep_reads/2026-06-19-10.3847_1538-4365_ae6fb3.md)  
+  6/10 [journals]
+- [A Spatially Resolved H <scp>i</scp> Survey of Seyfert Galaxies: The Role of Active Galactic Nucleus Feedback in Shaping Atomic Gas Reservoirs](deep_reads/2026-07-07-10.3847_1538-4365_ae6ef1.md)  
+  3/10 [journals]
+- [GAMERA-OP: A Three-dimensional Finite-volume Magnetohydrodynamic Solver for Orthogonal Curvilinear Geometries](deep_reads/2026-07-07-10.3847_1538-4365_ae7344.md)  
+  1/10 [journals]
+- [Direct Determination of Neutron Capture Relevant to the <i>s</i> -process of <sup>127</sup> I and <sup>133</sup> Cs at the CSNS Back-n Facility](deep_reads/2026-07-07-10.3847_1538-4365_ae6f9f.md)  
+  1/10 [journals]
+
+#### Astrophysical Journal Supplement Series Vol 284 Issue 1
+
+- [Detection of Strong Gravitational Lenses with a Lens–Topology Relation and Arc-assisted Annotations](deep_reads/2026-07-07-10.3847_1538-4365_ae5812.md)  
+  6/10 [journals]
+- [The Nova Synthetic Data Base: A Principal Component/AI Analysis of Novae Synoptic Spectra](deep_reads/2026-07-07-10.3847_1538-4365_ae5641.md)  
+  6/10 [journals]
+- [PISP: Projected-Space Inference of Stellar Parameters](deep_reads/2026-07-07-10.3847_1538-4365_ae4ed2.md)  
+  6/10 [journals]
+- [The T16 Planet Hunt: 10,000 New Planet Candidates from TESS Cycle 1 and the Confirmation of a Hot Jupiter around TIC 183374187*](deep_reads/2026-07-07-10.3847_1538-4365_ae5b6c.md)  
+  3/10 [journals]
+- [The Hidden Life of Stars: Embedded Beginnings to Asymptotic Giant Branch Endings in the PHANGS–JWST Sample. I. Catalog of Mid-infrared Sources](deep_reads/2026-07-07-10.3847_1538-4365_ae4aa5.md)  
+  3/10 [journals]
+
 #### Annals of Applied Statistics Vol 18 Issue 1
 
 - [A continuous multiple hypothesis testing framework for optimal exoplanet detection](deep_reads/2026-06-24-10.1214_23-aoas1810.md)  
@@ -7727,17 +7765,6 @@
 
 - [Detecting distributional differences in labeled sequence data with application to tropical cyclone satellite imagery](deep_reads/2026-06-24-10.1214_22-aoas1668.md)  
   8/10 [journals]
-
-#### Astrophysical Journal Supplement Series Vol 285 Issue 1
-
-- [A General Formulation of the Kinematic Dipole as a Functional of Selection and Source Properties: Beyond the Ellis–Baldwin Approximation](deep_reads/2026-06-19-10.3847_1538-4365_ae6a89.md)  
-  8/10 [journals]
-- [The Phenomenological Classification of TESS Eclipsing Binaries](deep_reads/2026-06-19-10.3847_1538-4365_ae6eee.md)  
-  6/10 [journals]
-- [Hierarchical Cosmological Constraints through a Strong-lensing Distance Ratio](deep_reads/2026-06-19-10.3847_1538-4365_ae6782.md)  
-  6/10 [journals]
-- [An Improved HDBSCAN-based Detection and Tracking Method for Solar Active Regions in Magnetograms](deep_reads/2026-06-19-10.3847_1538-4365_ae6fb3.md)  
-  6/10 [journals]
 
 #### Astrophysical Journal Supplement Series Vol 284 Issue 2
 
