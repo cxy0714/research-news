@@ -7756,6 +7756,18 @@
 
 ### 期刊
 
+#### Monthly Notices of the Royal Astronomical Society Vol 550 Issue 2
+
+- [Impact of antenna structure and orientation on forward-modelled global 21 cm signal recovery](deep_reads/2026-07-07-10.1093_mnras_stag1216.md)  
+  7/10 [journals]
+
+#### Monthly Notices of the Royal Astronomical Society Vol 550 Issue 1
+
+- [Reducing the impact of satellite brightness for astronomy: laboratory characterization and simulations](deep_reads/2026-07-07-10.1093_mnras_stag1136.md)  
+  6/10 [journals]
+- [The multiwavelength structure of post-starburst galaxies at 0.5 &amp;lt; <i>z</i> &amp;lt; 3 with <i>JWST</i> PRIMER: compact morphologies and residual disturbances](deep_reads/2026-07-07-10.1093_mnras_stag987.md)  
+  6/10 [journals]
+
 #### Astrophysical Journal Supplement Series Vol 285 Issue 1
 
 - [A General Formulation of the Kinematic Dipole as a Functional of Selection and Source Properties: Beyond the Ellis–Baldwin Approximation](deep_reads/2026-06-19-10.3847_1538-4365_ae6a89.md)  

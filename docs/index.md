@@ -17,7 +17,7 @@
 
 [→ 查看完整报告](daily/2026-07-07.md)
 
-### 精读论文（60 篇）
+### 精读论文（63 篇）
 
 - [Proximal Mediation Analysis with Unmeasured Treatment-Induced Confounding](deep_reads/2026-07-07-2607.02901.md)  
   `因果推断` · 相关性 9/10
@@ -31,6 +31,8 @@
   `数理统计 / 假设检验` · 相关性 8/10
 - [Conformalized Lee Inference: Distribution-Free Individual Treatment Effect Intervals under Monotone Sample Selection](deep_reads/2026-07-07-2607.02898.md)  
   `因果推断` · 相关性 8/10
+- [Impact of antenna structure and orientation on forward-modelled global 21 cm signal recovery](deep_reads/2026-07-07-10.1093_mnras_stag1216.md)  
+  `天体统计` · 相关性 7/10
 - [Direct and Indirect Discrimination in Generalized Linear Models](deep_reads/2026-07-07-2606.23116.md)  
   `因果推断` · 相关性 7/10
 - [CaSPECT: Discovering Causally Homogeneous Subgroups via Directed Spectral Clustering](deep_reads/2026-07-07-2607.03364.md)  
@@ -55,6 +57,10 @@
   `其他` · 相关性 7/10
 - [One-Bit Phase Retrieval: Optimal Rates and Efficient Algorithms](deep_reads/2026-07-07-10.1109_tit.2026.3692592.md)  
   `高维统计 / 随机矩阵` · 相关性 7/10
+- [Reducing the impact of satellite brightness for astronomy: laboratory characterization and simulations](deep_reads/2026-07-07-10.1093_mnras_stag1136.md)  
+  `天体统计` · 相关性 6/10
+- [The multiwavelength structure of post-starburst galaxies at 0.5 &amp;lt; <i>z</i> &amp;lt; 3 with <i>JWST</i> PRIMER: compact morphologies and residual disturbances](deep_reads/2026-07-07-10.1093_mnras_stag987.md)  
+  `天体统计` · 相关性 6/10
 - [A Tutorial on Bregman Projection in Statistics](deep_reads/2026-07-07-2606.21714.md)  
   `其他` · 相关性 6/10
 - [Power and Limits of Subset Selection in Statistical Estimation](deep_reads/2026-07-07-2607.03391.md)  
