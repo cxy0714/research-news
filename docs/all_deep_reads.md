@@ -4,6 +4,14 @@
 
 ### Daily
 
+- [Proximal Mediation Analysis with Unmeasured Treatment-Induced Confounding](deep_reads/2026-07-07-2607.02901.md)  
+  9/10 [daily]
+- [Disentangling Causal Mechanisms in Conjoint Experiments Using Mediation](deep_reads/2026-07-07-2607.03508.md)  
+  8/10 [daily]
+- [Conformalized Lee Inference: Distribution-Free Individual Treatment Effect Intervals under Monotone Sample Selection](deep_reads/2026-07-07-2607.02898.md)  
+  8/10 [daily]
+- [CaSPECT: Discovering Causally Homogeneous Subgroups via Directed Spectral Clustering](deep_reads/2026-07-07-2607.03364.md)  
+  7/10 [daily]
 - [Inference for Group Interaction Experiments](deep_reads/2026-07-06-2607.02385.md)  
   7/10 [daily]
 - [An Instrumental Variable Approach to Account for Informative Treatment Switching in Real-world Evidence](deep_reads/2026-07-03-2607.00980.md)  
@@ -2465,6 +2473,10 @@
 
 - [Causal isotonic regression](deep_reads/2026-06-22-1810.03269.md)  
   9/10 [manual]
+- [Direct and Indirect Discrimination in Generalized Linear Models](deep_reads/2026-07-07-2606.23116.md)  
+  7/10 [manual]
+- [Landmarking with Latent Class Mixed Models for Dynamic Prediction of Time-to-event Data with Heterogeneous Biomarker Trajectories](deep_reads/2026-07-07-2606.24678.md)  
+  5/10 [manual]
 
 ## 高维统计 / 随机矩阵
 
@@ -4987,6 +4999,8 @@
 
 ### Daily
 
+- [Outcome-adapted Automatic Debiased Machine Learning](deep_reads/2026-07-07-2607.03351.md)  
+  8/10 [daily]
 - [Semiparametric Efficiency Theory as Differential Calculus on a Space of Probability Distributions](deep_reads/2026-06-24-2606.22784.md)  
   9/10 [daily]
 - [On the Asymptotic Inadmissibility of Double Machine Learning Estimators Under Structure-Agnostic Models](deep_reads/2026-06-24-2606.22391.md)  
@@ -5310,6 +5324,16 @@
 
 ### Daily
 
+- [Minimax Estimation of Kernel Stein Discrepancy: Trace versus Hilbert-Schmidt Scales](deep_reads/2026-07-07-2607.03367.md)  
+  8/10 [daily]
+- [Meager Success: A Theory of the Unlearnable for Hypothesis Testing](deep_reads/2026-07-07-2607.03518.md)  
+  7/10 [daily]
+- [A BHEP test for multivariate normality on incomplete data](deep_reads/2026-07-07-2607.03335.md)  
+  7/10 [daily]
+- [When Does Heteroskedasticity Matter? A Contrast-Specific Theory of Robust Inference](deep_reads/2026-07-07-2607.03331.md)  
+  7/10 [daily]
+- [Power and Limits of Subset Selection in Statistical Estimation](deep_reads/2026-07-07-2607.03391.md)  
+  6/10 [daily]
 - [High-Confidence Minimax Testing with Prescribed Errors](deep_reads/2026-06-30-2606.31593.md)  
   8/10 [daily]
 - [Testing hypotheses via orthogonalization](deep_reads/2026-06-30-2606.29732.md)  
@@ -6906,6 +6930,11 @@
 - [Tests of missing completely at random based on sample covariance matrices](deep_reads/2026-05-26-10.1214_25-aos2540.md)  
   8/10 [journals]
 
+### 其他
+
+- [Second order mixed moment inequalities based on Gram matrices](deep_reads/2026-07-07-2606.21636.md)  
+  4/10 [manual]
+
 ## 统计计算 / 算法
 
 ### Daily
@@ -7586,6 +7615,15 @@
   7/10 [journals]
 - [Solving the Poisson equation using coupled Markov chains](deep_reads/2026-05-26-10.1214_25-aos2564.md)  
   6/10 [journals]
+
+### 其他
+
+- [Structured Secant Methods to Select Smoothing Parameters For General Smooth Models](deep_reads/2026-07-07-2606.26804.md)  
+  5/10 [manual]
+- [Inferential applications of the moments of the logit-normal distribution](deep_reads/2026-07-07-2606.23998.md)  
+  4/10 [manual]
+- [Knowledge Cascade: Reverse Knowledge Distillation on Nonparametric Multivariate Functional Estimation](deep_reads/2026-07-07-2606.25927.md)  
+  3/10 [manual]
 
 ## 天体统计
 
@@ -11052,6 +11090,15 @@
 
 - [Symmetry: A general structure in nonparametric regression](deep_reads/2026-05-26-10.1214_25-aos2529.md)  
   8/10 [journals]
+
+### 其他
+
+- [Distributed Statistical Inference for Massive Data](deep_reads/2026-07-07-1805.11214.md)  
+  8/10 [manual]
+- [A Tutorial on Bregman Projection in Statistics](deep_reads/2026-07-07-2606.21714.md)  
+  6/10 [manual]
+- [Double zero-inflated spatio-temporal modeling of daily precipitation under detection thresholds](deep_reads/2026-07-07-2606.17717.md)  
+  4/10 [manual]
 
 
 ---
