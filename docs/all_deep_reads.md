@@ -4,6 +4,32 @@
 
 ### Daily
 
+- [A General Exposure-Mapping-Agnostic Framework for Causal Inference under Interference](deep_reads/2026-07-08-2607.04644.md)  
+  9/10 [daily]
+- [When Does Real-World Data Make a Randomized Trial More Efficient, and How Would You Know? A Report Card, an Efficiency Map, and Selection-Aware Inference for Adaptive-TMLE](deep_reads/2026-07-08-2607.02787.md)  
+  8/10 [daily]
+- [Targeted Highly Adaptive Lasso Minimum Loss Estimation of Target Functions](deep_reads/2026-07-08-2607.03824.md)  
+  8/10 [daily]
+- [Significance-First Splitting: Aligning Treatment Heterogeneity Detection with Honest Estimation](deep_reads/2026-07-08-2607.03999.md)  
+  8/10 [daily]
+- [B-CALM: Bias-Limited Bayesian Borrowing for RCT-Anchored Treatment Effects under Covariate Mismatch](deep_reads/2026-07-08-2607.04036.md)  
+  8/10 [daily]
+- [External anchors reveal target-population effects hidden by published clinical-trial evidence](deep_reads/2026-07-08-2607.04327.md)  
+  8/10 [daily]
+- [Identification and Bounding of Central Moments of Causal Effects Using Marginal Moments Information](deep_reads/2026-07-08-2607.04957.md)  
+  8/10 [daily]
+- [Doubly robust Methods for Recurrent Event Outcomes: Causal Effects of Blood Pressure Medications on Acute Kidney Injuries](deep_reads/2026-07-08-2607.05293.md)  
+  8/10 [daily]
+- [Targeted maximum likelihood estimation for longitudinal two-stage designs with outcome subsampling](deep_reads/2026-07-08-2607.02702.md)  
+  7/10 [daily]
+- [What is the Causal Effect of a Conversation? Estimands and Inference in AI Mediated Conversations](deep_reads/2026-07-08-2607.03597.md)  
+  7/10 [daily]
+- [Randomization Tests in Randomized Saturation Designs](deep_reads/2026-07-08-2607.04257.md)  
+  7/10 [daily]
+- [Emputation: Identification-Guided Neural Imputation Framework](deep_reads/2026-07-08-2607.05279.md)  
+  7/10 [daily]
+- [Causal Overlap Effects: A Cumulative Fixed Effect Approach](deep_reads/2026-07-08-2607.04567.md)  
+  7/10 [daily]
 - [Proximal Mediation Analysis with Unmeasured Treatment-Induced Confounding](deep_reads/2026-07-07-2607.02901.md)  
   9/10 [daily]
 - [Disentangling Causal Mechanisms in Conjoint Experiments Using Mediation](deep_reads/2026-07-07-2607.03508.md)  
@@ -2482,6 +2508,8 @@
 
 ### Daily
 
+- [Subgraph counting estimation for the $\beta$-model in sparse networks](deep_reads/2026-07-08-2607.05273.md)  
+  7/10 [daily]
 - [Robust and Scalable Sure Screening of Fixed effects in Ultrahigh-dimensional Linear Mixed Models](deep_reads/2026-06-26-2606.27789.md)  
   6/10 [daily]
 - [Bayesian Estimation of the Eigenstructure in High-Dimensional Approximate Factor Models](deep_reads/2026-06-25-2606.24652.md)  
@@ -3460,6 +3488,10 @@
 
 ### Daily
 
+- [Conditional Mean Independence and Global Sensitivity Analysis using Nearest Neighbor Graphs](deep_reads/2026-07-08-2607.04692.md)  
+  7/10 [daily]
+- [Minimax prediction in the Functional Autoregressive Model](deep_reads/2026-07-08-2607.04823.md)  
+  7/10 [daily]
 - [Two-stage semiparametric inference for regime-switching jump diffusions with unknown Lévy densities](deep_reads/2026-06-30-2606.31057.md)  
   7/10 [daily]
 - [Adaptive nonparametric regression from repeated measurements under common noise](deep_reads/2026-06-30-2606.30000.md)  
@@ -4999,6 +5031,8 @@
 
 ### Daily
 
+- [Stabilized Higher-Order Influence Functions: Statistical Theory of a Class of Bilinear Forms](deep_reads/2026-07-08-2607.04743.md)  
+  9/10 [daily]
 - [Outcome-adapted Automatic Debiased Machine Learning](deep_reads/2026-07-07-2607.03351.md)  
   8/10 [daily]
 - [Semiparametric Efficiency Theory as Differential Calculus on a Space of Probability Distributions](deep_reads/2026-06-24-2606.22784.md)  
@@ -5324,6 +5358,22 @@
 
 ### Daily
 
+- [Asymptotic Bayes Optimality Under Sparsity of the Gavrilov-Benjamini-Sarkar Step-Down Testing Procedure](deep_reads/2026-07-08-2607.03719.md)  
+  8/10 [daily]
+- [Sharp Lower Bound on the Minimax Risk for Multinomial Uniformity Testing via a Conditional Central Limit Theorem](deep_reads/2026-07-08-2607.05223.md)  
+  8/10 [daily]
+- [Tightening Control in Neyman--Pearson Linear Classification](deep_reads/2026-07-08-2607.03590.md)  
+  7/10 [daily]
+- [Empirical Bayes for correlated Gaussian sequence model](deep_reads/2026-07-08-2607.03596.md)  
+  7/10 [daily]
+- [Universally Optimal Robustness-Efficiency Tradeoffs for a General Class of Minimum Divergence Estimators](deep_reads/2026-07-08-2607.04343.md)  
+  7/10 [daily]
+- [Edgeworth Expansions for Linear Rank Statistics -- Consolidated Version](deep_reads/2026-07-08-2607.05284.md)  
+  7/10 [daily]
+- [Principles in harmony: Closed testing meets the partitioning principle for computational efficiency](deep_reads/2026-07-08-2607.04707.md)  
+  6/10 [daily]
+- [Focused Width in Adversarial Fake Detection: A Separation](deep_reads/2026-07-08-2607.05379.md)  
+  6/10 [daily]
 - [Minimax Estimation of Kernel Stein Discrepancy: Trace versus Hilbert-Schmidt Scales](deep_reads/2026-07-07-2607.03367.md)  
   8/10 [daily]
 - [Meager Success: A Theory of the Unlearnable for Hypothesis Testing](deep_reads/2026-07-07-2607.03518.md)  
@@ -6939,6 +6989,8 @@
 
 ### Daily
 
+- [Approximate Minimax Estimation of a Bounded Normal Mean via Stochastic Mirror Ascent](deep_reads/2026-07-08-2607.05350.md)  
+  7/10 [daily]
 - [Error bounds for simultaneous Wasserstein contractive adaptive increasingly rare MCMC](deep_reads/2026-06-30-2606.30018.md)  
   6/10 [daily]
 - [Incomplete Matrix Regression](deep_reads/2026-06-25-2606.26325.md)  
@@ -7629,6 +7681,14 @@
 
 ### Daily
 
+- [CausticFlow: An Efficient Machine Learning Framework Combining Neural Differential Equations and Normalizing Flows for Binary Microlensing Parameter Inference](deep_reads/2026-07-08-2607.04955.md)  
+  7/10 [daily]
+- [Multivariate Bayesian P-spline estimation of spectral density matrices, with application to LISA TDI noise](deep_reads/2026-07-08-2607.04833.md)  
+  6/10 [daily]
+- [Emulation of non-linear 1D spectral models: relativistic X-ray reflection](deep_reads/2026-07-08-2607.04785.md)  
+  6/10 [daily]
+- [Interpretable Human-Label-Free Deep Learning for Real-Bogus Classification with Uncertainty Quantification](deep_reads/2026-07-08-2607.05393.md)  
+  6/10 [daily]
 - [Design and development of a near-IR integral field spectrograph for the HWO Coronagraph Instrument](deep_reads/2026-07-06-2607.02243.md)  
   1/10 [daily]
 - [HARMONI at ELT: line spread functions in a diffraction limited spectrometer](deep_reads/2026-07-06-2607.02223.md)  
@@ -7882,6 +7942,12 @@
 
 ### Daily
 
+- [Properties of the Conditional Likelihood Ratio Test under Discrete Approximation](deep_reads/2026-07-08-2607.04380.md)  
+  7/10 [daily]
+- [Remote Work: Driver or Deterrent of Digital Product Innovation](deep_reads/2026-07-08-2607.03718.md)  
+  6/10 [daily]
+- [Variance Estimation for Saturated Fixed-Effect Specifications](deep_reads/2026-07-08-2607.05215.md)  
+  6/10 [daily]
 - [Sensitivity, Informativeness, and Misspecification in GMM Estimation](deep_reads/2026-06-30-2606.29833.md)  
   7/10 [daily]
 - [Literature Review and Evidence Aggregation: a Toolkit for Applied Micro](deep_reads/2026-06-30-2606.28848.md)  
@@ -9917,6 +9983,8 @@
 
 ### Daily
 
+- [A Partially Functional Dynamic Structural Equation Model for Multi-Resolution Environmental Data](deep_reads/2026-07-08-2607.04641.md)  
+  6/10 [daily]
 - [Distributed Prediction under Heterogeneity with Unidentifiable Parameter](deep_reads/2026-07-03-2607.00376.md)  
   6/10 [daily]
 - [Multi-Source Transfer Learning of Sparse Single-Index Models](deep_reads/2026-06-30-2606.29658.md)  
