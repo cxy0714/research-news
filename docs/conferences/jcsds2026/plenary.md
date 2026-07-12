@@ -15,7 +15,7 @@
 
 **讲者**：David Donoho（Stanford University）
 
-**对应论文**：Data Science at the Singularity · [arXiv:2310.00865](https://arxiv.org/abs/2310.00865)
+**对应论文**：Data Science at the Singularity · [arXiv:2310.00865](https://arxiv.org/abs/2310.00865) · 📖 [长篇精读](../../deep_reads/jcsds2026-2310.00865.md)
 
 David Donoho 是斯坦福统计系资深教授、美国科学院院士，现代高维统计与信号处理的奠基人之一：小波（wavelet）阈值去噪、压缩感知（compressed sensing）、$\ell_1$ 稀疏恢复、最小最大风险理论均与其名字紧密相连，长期思考"数据科学作为一门学科"的本质。此次大会报告并非对应单篇论文，而是基于其近年关于数据科学发展观的系列思辨，尤其是 2023 年的《Data Science at the Singularity》（arXiv:2310.00865）及其在 HDSR 上引发的大讨论。
 
@@ -69,7 +69,7 @@ Bing-Yi Jing（荆炳义）现为香港中文大学（深圳）数据科学学�
 
 **讲者**：Jun Liu（Tsinghua University）
 
-**对应论文**：Schrödinger bridge based deep conditional generative learning · [arXiv:2409.17294](https://arxiv.org/abs/2409.17294)
+**对应论文**：Schrödinger bridge based deep conditional generative learning · [arXiv:2409.17294](https://arxiv.org/abs/2409.17294) · 📖 [长篇精读](../../deep_reads/jcsds2026-2409.17294.md)
 
 Jun Liu（刘军）是国际顶尖统计学家、美国科学院院士，长期任教于哈佛大学统计系，近年回国执掌清华大学讲席教职并领衔其课题组。他是**贝叶斯计算与蒙特卡洛方法的奠基性人物**：序贯蒙特卡洛（sequential Monte Carlo）、数据增广、Gibbs 采样收敛分析及生物信息学中的基序发现（Gibbs motif sampler）均是其标志性贡献，著作《Monte Carlo Strategies in Scientific Computing》影响深远。他对"如何从复杂分布中采样"有着数十年的深刻积累，这与当代生成模型的核心问题高度契合。
 
@@ -105,7 +105,7 @@ Qi-Man Shao（邵启满）是南方科技大学统计与数据科学系讲席教
 
 **讲者**：Hongtu Zhu（University of North Carolina at Chapel Hill）
 
-**对应论文**：Causal Inference in Biomedical Imaging via Functional Linear Structural Equation Models · [arXiv:2601.20610](https://sph.unc.edu/adv_profile/hongtu-zhu-phd/)
+**对应论文**：Causal Inference in Biomedical Imaging via Functional Linear Structural Equation Models · [arXiv:2601.20610](https://sph.unc.edu/adv_profile/hongtu-zhu-phd/) · 📖 [长篇精读](../../deep_reads/jcsds2026-2601.20610.md)
 
 Hongtu Zhu（朱宏图）是北卡罗来纳大学教堂山分校（UNC Chapel Hill）生物统计系杰出教授、ASA/IMS Fellow，医学影像统计与神经影像大数据分析的国际领军人物。他长期主持 UK Biobank、ADNI 等大型影像遗传学（imaging genetics）研究，方法学贡献涵盖**函数型数据与流形上的回归、影像基因组关联、张量/高维成像数据的统计建模、以及大规模生物医学数据的因果推断**，兼具深厚统计理论与真实医疗场景落地经验。
 

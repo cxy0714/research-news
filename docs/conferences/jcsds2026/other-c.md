@@ -15,7 +15,7 @@
 
 **讲者**：Fang Han（University of Washington, Seattle）
 
-**对应论文**：Generative modeling for the bootstrap · [arXiv:2602.17052](https://arxiv.org/abs/2602.17052)
+**对应论文**：Generative modeling for the bootstrap · [arXiv:2602.17052](https://arxiv.org/abs/2602.17052) · 📖 [长篇精读](../../deep_reads/jcsds2026-2602.17052.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -57,7 +57,7 @@ Generative modeling builds on and substantially advances the classical idea of s
 
 **讲者**：Yiming Xing（Tongji University）
 
-**对应论文**：Sequential multiple testing with multiple hypotheses and prior information on the hypothesis configuration · [arXiv:2606.00839](https://arxiv.org/abs/2606.00839)
+**对应论文**：Sequential multiple testing with multiple hypotheses and prior information on the hypothesis configuration · [arXiv:2606.00839](https://arxiv.org/abs/2606.00839) · 📖 [长篇精读](../../deep_reads/jcsds2026-2606.00839.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -84,7 +84,7 @@ In this work, we study the problem of testing the marginal distributions of mult
 
 **讲者**：Yi Yang（McGill University）
 
-**对应论文**：Multivariate Conformal Selection · [arXiv:2505.00917](https://arxiv.org/abs/2505.00917)
+**对应论文**：Multivariate Conformal Selection · [arXiv:2505.00917](https://arxiv.org/abs/2505.00917) · 📖 [长篇精读](../../deep_reads/jcsds2026-2505.00917.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -154,7 +154,7 @@ Selecting high-quality candidates from large datasets is critical in application
 
 **讲者**：Hongfei Wang（Nanjing Audit University）
 
-**对应论文**：Double Robust high dimensional alpha test for linear factor pricing model · [arXiv:2408.06612](https://arxiv.org/abs/2408.06612)
+**对应论文**：Double Robust high dimensional alpha test for linear factor pricing model · [arXiv:2408.06612](https://arxiv.org/abs/2408.06612) · 📖 [长篇精读](../../deep_reads/jcsds2026-2408.06612.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -181,7 +181,7 @@ In this paper, we investigate alpha testing for high-dimensional linear factor p
 
 **讲者**：Chengde Qian（Shanghai Jiao Tong University）
 
-**对应论文**：Changepoint Detection in Complex Models: Cross-Fitting Is Needed · [arXiv:2411.07874](https://arxiv.org/abs/2411.07874)
+**对应论文**：Changepoint Detection in Complex Models: Cross-Fitting Is Needed · [arXiv:2411.07874](https://arxiv.org/abs/2411.07874) · 📖 [长篇精读](../../deep_reads/jcsds2026-2411.07874.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -303,7 +303,7 @@ Changepoint detection is commonly formulated by minimizing the sum of in-sample 
 
 **讲者**：Changbao Wu（University of Waterloo）
 
-**对应论文**：Statistical Inference with Nonignorable Non-Probability Survey Samples · [arXiv:2410.02920](https://arxiv.org/abs/2410.02920)
+**对应论文**：Statistical Inference with Nonignorable Non-Probability Survey Samples · [arXiv:2410.02920](https://arxiv.org/abs/2410.02920) · 📖 [长篇精读](../../deep_reads/jcsds2026-2410.02920.md)
 
 <details><summary>摘要（原文）</summary>
 

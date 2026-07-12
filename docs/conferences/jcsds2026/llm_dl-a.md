@@ -114,7 +114,7 @@
 
 **讲者**：Xihong Lin（Harvard University）
 
-**对应论文**：Harnessing Synthetic Data from Generative AI for Statistical Inference · [arXiv:2603.05396](https://arxiv.org/abs/2603.05396)
+**对应论文**：Harnessing Synthetic Data from Generative AI for Statistical Inference · [arXiv:2603.05396](https://arxiv.org/abs/2603.05396) · 📖 [长篇精读](../../deep_reads/jcsds2026-2603.05396.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -168,7 +168,7 @@ The emergence of generative AI models has dramatically expanded the availability
 
 **讲者**：Jingyuan Liu（Xiamen University）
 
-**对应论文**：How Does LLM Help Regional CPI Forecast: An LLM-powered Deep Panel Modeling Framework · [arXiv:2604.06894](https://arxiv.org/abs/2604.06894)
+**对应论文**：How Does LLM Help Regional CPI Forecast: An LLM-powered Deep Panel Modeling Framework · [arXiv:2604.06894](https://arxiv.org/abs/2604.06894) · 📖 [长篇精读](../../deep_reads/jcsds2026-2604.06894.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -252,7 +252,7 @@ Understanding regional Consumer Price Index (CPI) dynamics is essential for time
 
 **讲者**：Wenbo Jing（City University of Hong Kong）
 
-**对应论文**：Distributed Tensor Principal Component Analysis with Data Heterogeneity · [arXiv:2405.11681](https://arxiv.org/abs/2405.11681)
+**对应论文**：Distributed Tensor Principal Component Analysis with Data Heterogeneity · [arXiv:2405.11681](https://arxiv.org/abs/2405.11681) · 📖 [长篇精读](../../deep_reads/jcsds2026-2405.11681.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -374,7 +374,7 @@ As tensors become widespread in modern data analysis, Tucker low-rank Principal 
 
 **讲者**：Qi Kuang（Jiangxi University of Finance and Economics）
 
-**对应论文**：Distributional Off-Policy Evaluation with Deep Quantile Process Regression · [arXiv:2604.18143](https://arxiv.org/abs/2604.18143)
+**对应论文**：Distributional Off-Policy Evaluation with Deep Quantile Process Regression · [arXiv:2604.18143](https://arxiv.org/abs/2604.18143) · 📖 [长篇精读](../../deep_reads/jcsds2026-2604.18143.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -419,7 +419,7 @@ This paper investigates the off-policy evaluation (OPE) problem from a distribut
 
 **讲者**：Yancheng Yuan（The Hong Kong Polytechnic University）
 
-**对应论文**：Efficient and provably convergent end-to-end training of deep neural networks with linear constraints · [arXiv:2605.11526](https://arxiv.org/abs/2605.11526)
+**对应论文**：Efficient and provably convergent end-to-end training of deep neural networks with linear constraints · [arXiv:2605.11526](https://arxiv.org/abs/2605.11526) · 📖 [长篇精读](../../deep_reads/jcsds2026-2605.11526.md)
 
 <details><summary>摘要（原文）</summary>
 

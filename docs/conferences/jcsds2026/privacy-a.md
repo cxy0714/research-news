@@ -36,7 +36,7 @@
 
 **讲者**：Yicheng Li（East China Normal University）
 
-**对应论文**：Minimax and Adaptive Covariance Matrix Estimation under Differential Privacy · [arXiv:2603.19703](https://arxiv.org/abs/2603.19703)
+**对应论文**：Minimax and Adaptive Covariance Matrix Estimation under Differential Privacy · [arXiv:2603.19703](https://arxiv.org/abs/2603.19703) · 📖 [长篇精读](../../deep_reads/jcsds2026-2603.19703.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -64,7 +64,7 @@ The covariance matrix plays a fundamental role in the analysis of high-dimension
 
 **讲者**：Chendi Wang（Xiamen University）
 
-**对应论文**：Decentralized Federated Learning: A Segmented Gossip Approach · [arXiv:1908.07782](https://arxiv.org/abs/1908.07782)
+**对应论文**：Decentralized Federated Learning: A Segmented Gossip Approach · [arXiv:1908.07782](https://arxiv.org/abs/1908.07782) · 📖 [长篇精读](../../deep_reads/jcsds2026-1908.07782.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -91,7 +91,7 @@ The emerging concern about data privacy and security has motivated the proposal 
 
 **讲者**：Xintao Xia（Zhejiang University）
 
-**对应论文**：Statistical Inference for Differentially Private Stochastic Gradient Descent · [arXiv:2507.20560](https://arxiv.org/abs/2507.20560)
+**对应论文**：Statistical Inference for Differentially Private Stochastic Gradient Descent · [arXiv:2507.20560](https://arxiv.org/abs/2507.20560) · 📖 [长篇精读](../../deep_reads/jcsds2026-2507.20560.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -117,7 +117,7 @@ Privacy preservation in machine learning, particularly through Differentially Pr
 
 **讲者**：Lan Gao（University of Tennessee, Knoxville）
 
-**对应论文**：Knockoffs Inference under Privacy Constraints · [arXiv:2506.09690](https://arxiv.org/abs/2506.09690)
+**对应论文**：Knockoffs Inference under Privacy Constraints · [arXiv:2506.09690](https://arxiv.org/abs/2506.09690) · 📖 [长篇精读](../../deep_reads/jcsds2026-2506.09690.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -191,7 +191,7 @@ Model-X knockoff 框架（Candès et al., 2018）能在无模型假设下实现�
 
 **讲者**：Wenxin Zhou（University of Illinois Chicago）
 
-**对应论文**：Adapting to noise tails in private linear regression · [arXiv:2603.07505](https://arxiv.org/abs/2603.07505)
+**对应论文**：Adapting to noise tails in private linear regression · [arXiv:2603.07505](https://arxiv.org/abs/2603.07505) · 📖 [长篇精读](../../deep_reads/jcsds2026-2603.07505.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -316,7 +316,7 @@ While the traditional goal of statistics is to infer population parameters, mode
 
 **讲者**：Ziyuan Chen（Peking University）
 
-**对应论文**：Deconfounding via Profiled Transfer Learning · [arXiv:2508.11622](https://arxiv.org/abs/2508.11622)
+**对应论文**：Deconfounding via Profiled Transfer Learning · [arXiv:2508.11622](https://arxiv.org/abs/2508.11622) · 📖 [长篇精读](../../deep_reads/jcsds2026-2508.11622.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -459,7 +459,7 @@ Unmeasured confounders are a major source of bias in regression-based effect est
 
 **讲者**：Jiayan Chen（Shanghai Jiao Tong University）
 
-**对应论文**：Online Estimation and Inference for Robust Policy Evaluation in Reinforcement Learning · [arXiv:2310.02581](https://arxiv.org/abs/2310.02581)
+**对应论文**：Online Estimation and Inference for Robust Policy Evaluation in Reinforcement Learning · [arXiv:2310.02581](https://arxiv.org/abs/2310.02581) · 📖 [长篇精读](../../deep_reads/jcsds2026-2310.02581.md)
 
 <details><summary>摘要（原文）</summary>
 

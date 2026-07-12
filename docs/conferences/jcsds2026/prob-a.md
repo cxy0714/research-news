@@ -106,7 +106,7 @@
 
 **讲者**：Yuta Koike（The University of Tokyo）
 
-**对应论文**：Wasserstein bounds for denoising diffusion probabilistic models via the Föllmer process · [arXiv:2605.18069](https://arxiv.org/abs/2605.18069)
+**对应论文**：Wasserstein bounds for denoising diffusion probabilistic models via the Föllmer process · [arXiv:2605.18069](https://arxiv.org/abs/2605.18069) · 📖 [长篇精读](../../deep_reads/jcsds2026-2605.18069.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -133,7 +133,7 @@ Denoising Diffusion Probabilistic Model (DDPM) 的采样误差分析以往多集
 
 **讲者**：Nicolas Privault（Nanyang Technological University）
 
-**对应论文**：Gaussian fluctuations of generalized $U$-statistics and subgraph counting in the binomial random-connection model · [arXiv:2505.12338](https://arxiv.org/abs/2505.12338)
+**对应论文**：Gaussian fluctuations of generalized $U$-statistics and subgraph counting in the binomial random-connection model · [arXiv:2505.12338](https://arxiv.org/abs/2505.12338) · 📖 [长篇精读](../../deep_reads/jcsds2026-2505.12338.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -164,7 +164,7 @@ S_{n,k}(f)=\sum_{\beta\in[n]_{\neq}^k} f\big(X_{\beta(1)},\dots,X_{\beta(k)},Y_{
 
 **讲者**：Juho Leppanen（Tokai University）
 
-**对应论文**：Decay of correlations and limit theorems for random intermittent maps · [arXiv:2511.02359](https://arxiv.org/abs/2511.02359)
+**对应论文**：Decay of correlations and limit theorems for random intermittent maps · [arXiv:2511.02359](https://arxiv.org/abs/2511.02359) · 📖 [长篇精读](../../deep_reads/jcsds2026-2511.02359.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -191,7 +191,7 @@ In this paper, we revisit the problem of polynomial memory loss and the central 
 
 **讲者**：Zhijun Cai（Southern University of Science and Technology）
 
-**对应论文**：Nonuniform Berry-Esseen bounds for Studentized U-statistics · [arXiv:2303.08619](https://arxiv.org/abs/2303.08619)
+**对应论文**：Nonuniform Berry-Esseen bounds for Studentized U-statistics · [arXiv:2303.08619](https://arxiv.org/abs/2303.08619) · 📖 [长篇精读](../../deep_reads/jcsds2026-2303.08619.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -249,7 +249,7 @@ $$|P(T_n\le x)-\Phi(x)|\le \exp\!\left(-\frac{c n\sigma^6}{(E[|h|^3])^2}\right)+
 
 **讲者**：Shijie Shang（University of Science and Technology of China）
 
-**对应论文**：Large deviation principle for stochastic reaction-diffusion equations with super-linear drift on $\mathbb{R}$ driven by space-time white noise · [arXiv:2307.14554](https://arxiv.org/abs/2307.14554)
+**对应论文**：Large deviation principle for stochastic reaction-diffusion equations with super-linear drift on $\mathbb{R}$ driven by space-time white noise · [arXiv:2307.14554](https://arxiv.org/abs/2307.14554) · 📖 [长篇精读](../../deep_reads/jcsds2026-2307.14554.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -307,7 +307,7 @@ du^\epsilon(t,x)=\frac12\Delta u^\epsilon dt+b(u^\epsilon)dt+\sqrt{\epsilon}\sig
 
 **讲者**：Xiong Wang（Sun Yat-sen University）
 
-**对应论文**：Stochastic wave equation with additive fractional noise: solvability and global Hölder continuity · [arXiv:2305.02425](https://arxiv.org/abs/2305.02425)
+**对应论文**：Stochastic wave equation with additive fractional noise: solvability and global Hölder continuity · [arXiv:2305.02425](https://arxiv.org/abs/2305.02425) · 📖 [长篇精读](../../deep_reads/jcsds2026-2305.02425.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -333,7 +333,7 @@ We determine the range of Hurst parameters that provide the necessary and suffic
 
 **讲者**：Tianyi Bai（Chinese Academy of Sciences）
 
-**对应论文**：Central limit theorem for the range of critical branching random walk · [arXiv:2511.17101](https://arxiv.org/abs/2511.17101)
+**对应论文**：Central limit theorem for the range of critical branching random walk · [arXiv:2511.17101](https://arxiv.org/abs/2511.17101) · 📖 [长篇精读](../../deep_reads/jcsds2026-2511.17101.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -408,7 +408,7 @@ In this paper, we study second order fluctuations for the size of the range of a
 
 **讲者**：Yushu Zheng（Chinese Academy of Sciences）
 
-**对应论文**：Cover times for random walk on dynamical percolation · [arXiv:2312.06821](https://arxiv.org/abs/2312.06821)
+**对应论文**：Cover times for random walk on dynamical percolation · [arXiv:2312.06821](https://arxiv.org/abs/2312.06821) · 📖 [长篇精读](../../deep_reads/jcsds2026-2312.06821.md)
 
 <details><summary>摘要（原文）</summary>
 

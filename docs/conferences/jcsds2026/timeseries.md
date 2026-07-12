@@ -36,7 +36,7 @@
 
 **讲者**：Liuhua Peng（University of Melbourne）
 
-**对应论文**：USAD: Uncertainty-aware Statistical Adversarial Detection · [arXiv:2606.27832](https://arxiv.org/abs/2606.27832)
+**对应论文**：USAD: Uncertainty-aware Statistical Adversarial Detection · [arXiv:2606.27832](https://arxiv.org/abs/2606.27832) · 📖 [长篇精读](../../deep_reads/jcsds2026-2606.27832.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -82,7 +82,7 @@ Statistical adversarial detection (SAD) treats detection as a two-sample test. G
 
 **讲者**：Long Feng（Nankai University）
 
-**对应论文**：Spatial-Sign based High dimensional Change Point Inference · [arXiv:2504.19306](https://arxiv.org/abs/2504.19306)
+**对应论文**：Spatial-Sign based High dimensional Change Point Inference · [arXiv:2504.19306](https://arxiv.org/abs/2504.19306) · 📖 [长篇精读](../../deep_reads/jcsds2026-2504.19306.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -112,7 +112,7 @@ High-dimensional changepoint inference, adaptable to diverse alternative scenari
 
 **讲者**：Ganggang Xu（University of Miami）
 
-**对应论文**：On Ignorability of Preferential Sampling in Geostatistics · [arXiv:2511.03158](https://arxiv.org/abs/2511.03158)
+**对应论文**：On Ignorability of Preferential Sampling in Geostatistics · [arXiv:2511.03158](https://arxiv.org/abs/2511.03158) · 📖 [长篇精读](../../deep_reads/jcsds2026-2511.03158.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -133,7 +133,7 @@ Preferential sampling has attracted considerable attention in geostatistics sinc
 
 **讲者**：Jiazhen Xu（Macquarie University）
 
-**对应论文**：Spherically Embedded Time Series with Unknown Trend and Periodic Components · [arXiv:2604.03574](https://arxiv.org/abs/2604.03574)
+**对应论文**：Spherically Embedded Time Series with Unknown Trend and Periodic Components · [arXiv:2604.03574](https://arxiv.org/abs/2604.03574) · 📖 [长篇精读](../../deep_reads/jcsds2026-2604.03574.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -225,7 +225,7 @@ Marshall-Olkin 型分布是刻画多元寿命数据相依性的经典模型，�
 
 **讲者**：Yiping Hong（Beijing Institute of Technology）
 
-**对应论文**：Fisher Scoring for Exact Matérn Covariance Estimation through Stable Smoothness Optimization · [arXiv:2601.11437](https://arxiv.org/abs/2601.11437)
+**对应论文**：Fisher Scoring for Exact Matérn Covariance Estimation through Stable Smoothness Optimization · [arXiv:2601.11437](https://arxiv.org/abs/2601.11437) · 📖 [长篇精读](../../deep_reads/jcsds2026-2601.11437.md)
 
 <details><summary>摘要（原文）</summary>
 

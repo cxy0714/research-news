@@ -83,7 +83,7 @@
 
 **讲者**：Shen Zhang（Qufu Normal University）
 
-**对应论文**：CARE: Large Precision Matrix Estimation for Compositional Data · [arXiv:2309.06985](https://arxiv.org/abs/2309.06985)
+**对应论文**：CARE: Large Precision Matrix Estimation for Compositional Data · [arXiv:2309.06985](https://arxiv.org/abs/2309.06985) · 📖 [长篇精读](../../deep_reads/jcsds2026-2309.06985.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -125,7 +125,7 @@ High-dimensional compositional data are prevalent in many applications. The simp
 
 **讲者**：Lingling Tian（Beijing University of Technology）
 
-**对应论文**：Statistical inference of partially linear time-varying coefficients spatial autoregressive panel data model · [arXiv:2410.10647](https://arxiv.org/abs/2410.10647)
+**对应论文**：Statistical inference of partially linear time-varying coefficients spatial autoregressive panel data model · [arXiv:2410.10647](https://arxiv.org/abs/2410.10647) · 📖 [长篇精读](../../deep_reads/jcsds2026-2410.10647.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -329,7 +329,7 @@ Marginal Treatment Effect (MTE) 是刻画处理效应随未观测异质性（如
 
 **讲者**：Guanglin Huang（Southwestern University of Finance and Economics）
 
-**对应论文**：CP-factorization for high dimensional tensor time series and double projection iterations · [arXiv:2606.08560](https://arxiv.org/abs/2606.08560)
+**对应论文**：CP-factorization for high dimensional tensor time series and double projection iterations · [arXiv:2606.08560](https://arxiv.org/abs/2606.08560) · 📖 [长篇精读](../../deep_reads/jcsds2026-2606.08560.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -357,7 +357,7 @@ We adopt the canonical polyadic (CP) decomposition to model high-dimensional ten
 
 **讲者**：Degui Li（University of Macau）
 
-**对应论文**：Large-Scale Curve Time Series with Common Stochastic Trends · [arXiv:2509.11060](https://arxiv.org/abs/2509.11060)
+**对应论文**：Large-Scale Curve Time Series with Common Stochastic Trends · [arXiv:2509.11060](https://arxiv.org/abs/2509.11060) · 📖 [长篇精读](../../deep_reads/jcsds2026-2509.11060.md)
 
 <details><summary>摘要（原文）</summary>
 

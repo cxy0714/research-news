@@ -61,7 +61,7 @@
 
 **讲者**：Hui Shao（East China Normal University）
 
-**对应论文**：Space-filling foldover designs for order-of-addition experiments under Kendall tau distance criteria · [arXiv:2605.27248](https://arxiv.org/abs/2605.27248)
+**对应论文**：Space-filling foldover designs for order-of-addition experiments under Kendall tau distance criteria · [arXiv:2605.27248](https://arxiv.org/abs/2605.27248) · 📖 [长篇精读](../../deep_reads/jcsds2026-2605.27248.md)
 
 <details><summary>摘要（原文）</summary>
 

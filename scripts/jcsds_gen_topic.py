@@ -86,6 +86,8 @@ def gen(group_key):
                     links.append(f"[arXiv:{r['arxiv_id']}]({r['url']})")
                 else:
                     links.append(f"[论文/主页]({r['url']})")
+                if r.get('long_read'):
+                    links.append(f"📖 [长篇精读](../../{r['long_read']})")
                 w(f"**对应论文**：{pt} · " + " · ".join(links))
                 w("")
             elif r and not r.get('found'):

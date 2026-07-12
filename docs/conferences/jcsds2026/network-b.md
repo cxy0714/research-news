@@ -38,7 +38,7 @@
 
 **讲者**：Dong Xia（Hong Kong University of Science and Technology）
 
-**对应论文**：Optimal Clustering by Lloyd Algorithm for Low-Rank Mixture Model · [arXiv:2207.04600](https://arxiv.org/abs/2207.04600)
+**对应论文**：Optimal Clustering by Lloyd Algorithm for Low-Rank Mixture Model · [arXiv:2207.04600](https://arxiv.org/abs/2207.04600) · 📖 [长篇精读](../../deep_reads/jcsds2026-2207.04600.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -82,7 +82,7 @@ This paper investigates the computational and statistical limits in clustering m
 
 **讲者**：Ting Yan（Central China Normal University）
 
-**对应论文**：Triple-dyad ratio estimation for the $p_1$ model · [arXiv:2601.06481](https://arxiv.org/abs/2601.06481)
+**对应论文**：Triple-dyad ratio estimation for the $p_1$ model · [arXiv:2601.06481](https://arxiv.org/abs/2601.06481) · 📖 [长篇精读](../../deep_reads/jcsds2026-2601.06481.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -112,7 +112,7 @@ Although the $p_1$ model was proposed 40 years ago, little progress has been mad
 
 **讲者**：Yu Lu（Xi’an Jiaotong-Liverpool University）
 
-**对应论文**：Group-Sparse Smoothing for Longitudinal Models with Time-Varying Coefficients · [arXiv:2603.07656](https://arxiv.org/abs/2603.07656)
+**对应论文**：Group-Sparse Smoothing for Longitudinal Models with Time-Varying Coefficients · [arXiv:2603.07656](https://arxiv.org/abs/2603.07656) · 📖 [长篇精读](../../deep_reads/jcsds2026-2603.07656.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -157,7 +157,7 @@ Longitudinal data analysis is fundamental for understanding dynamic processes in
 
 **讲者**：Yuyao Wang（Xi'an Jiaotong-Liverpool University）
 
-**对应论文**：Adaptive Penalized Doubly Robust Regression for Longitudinal Data · [arXiv:2602.21711](https://arxiv.org/abs/2602.21711)
+**对应论文**：Adaptive Penalized Doubly Robust Regression for Longitudinal Data · [arXiv:2602.21711](https://arxiv.org/abs/2602.21711) · 📖 [长篇精读](../../deep_reads/jcsds2026-2602.21711.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -252,7 +252,7 @@ Longitudinal data often involve heterogeneity, sparse signals, and contamination
 
 **讲者**：Zhongyuan Lyu（The University of Sydney）
 
-**对应论文**：Adaptive Transfer Clustering: A Unified Framework · [arXiv:2410.21263](https://arxiv.org/abs/2410.21263)
+**对应论文**：Adaptive Transfer Clustering: A Unified Framework · [arXiv:2410.21263](https://arxiv.org/abs/2410.21263) · 📖 [长篇精读](../../deep_reads/jcsds2026-2410.21263.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -304,7 +304,7 @@ We propose a general transfer learning framework for clustering given a main dat
 
 **讲者**：Haoran Zhang（Southern University of Science and Technology）
 
-**对应论文**：Estimation and Statistical Inference for Generalized Multilayer Latent Space Model · [arXiv:2602.19129](https://arxiv.org/abs/2602.19129)
+**对应论文**：Estimation and Statistical Inference for Generalized Multilayer Latent Space Model · [arXiv:2602.19129](https://arxiv.org/abs/2602.19129) · 📖 [长篇精读](../../deep_reads/jcsds2026-2602.19129.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -377,7 +377,7 @@ $$\min_{\{C_k\},\{\beta_k\}} \sum_{k=1}^K \sum_{i \in C_k} \|x_i - \mu_k\|_2^2 +
 
 **讲者**：Chenlei Leng（The Hong Kong Polytechnic University）
 
-**对应论文**：Regression Analysis of Reciprocity in Directed Networks · [arXiv:2507.21469](https://arxiv.org/abs/2507.21469)
+**对应论文**：Regression Analysis of Reciprocity in Directed Networks · [arXiv:2507.21469](https://arxiv.org/abs/2507.21469) · 📖 [长篇精读](../../deep_reads/jcsds2026-2507.21469.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -421,7 +421,7 @@ Reciprocity--the tendency of individuals to form mutual ties--is a fundamental s
 
 **讲者**：Yuang Tian（The Hong Kong University of Science and Technology）
 
-**对应论文**：Bridging Theory and Practice: Statistical Inference for Latent Space Models of Networks · [arXiv:2605.08677](https://arxiv.org/abs/2605.08677)
+**对应论文**：Bridging Theory and Practice: Statistical Inference for Latent Space Models of Networks · [arXiv:2605.08677](https://arxiv.org/abs/2605.08677) · 📖 [长篇精读](../../deep_reads/jcsds2026-2605.08677.md)
 
 <details><summary>摘要（原文）</summary>
 

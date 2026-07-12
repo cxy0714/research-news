@@ -62,7 +62,7 @@
 
 **讲者**：Tianchen Gao（Peking University）
 
-**对应论文**：BASIC: Bipartite Assisted Spectral-clustering for Identifying Communities in Large-scale Networks · [arXiv:2503.06889](https://arxiv.org/abs/2503.06889)
+**对应论文**：BASIC: Bipartite Assisted Spectral-clustering for Identifying Communities in Large-scale Networks · [arXiv:2503.06889](https://arxiv.org/abs/2503.06889) · 📖 [长篇精读](../../deep_reads/jcsds2026-2503.06889.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -83,7 +83,7 @@ Community detection, which focuses on recovering the group structure within netw
 
 **讲者**：Xinyu Zhang（East China Normal University）
 
-**对应论文**：Spectral Change Point Estimation for High Dimensional Time Series by Sparse Tensor Decomposition · [arXiv:2305.10656](https://arxiv.org/abs/2305.10656)
+**对应论文**：Spectral Change Point Estimation for High Dimensional Time Series by Sparse Tensor Decomposition · [arXiv:2305.10656](https://arxiv.org/abs/2305.10656) · 📖 [长篇精读](../../deep_reads/jcsds2026-2305.10656.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -116,7 +116,7 @@ Multivariate time series may be subject to partial structural changes over certa
 
 **讲者**：Jiwei Zhao（University of Wisconsin-Madison）
 
-**对应论文**：SADA: Safe and Adaptive Aggregation of Multiple Black-Box Predictions in Semi-Supervised Learning · [arXiv:2509.21707](https://arxiv.org/abs/2509.21707)
+**对应论文**：SADA: Safe and Adaptive Aggregation of Multiple Black-Box Predictions in Semi-Supervised Learning · [arXiv:2509.21707](https://arxiv.org/abs/2509.21707) · 📖 [长篇精读](../../deep_reads/jcsds2026-2509.21707.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -211,7 +211,7 @@ Semi-supervised learning (SSL) arises in practice when labeled data are scarce o
 
 **讲者**：Dong Huang（Tsinghua University）
 
-**对应论文**：Prompt Perturbation for Reliable LLM Evaluation over Comparison Graphs · [arXiv:2606.17634](https://arxiv.org/abs/2606.17634)
+**对应论文**：Prompt Perturbation for Reliable LLM Evaluation over Comparison Graphs · [arXiv:2606.17634](https://arxiv.org/abs/2606.17634) · 📖 [长篇精读](../../deep_reads/jcsds2026-2606.17634.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -253,7 +253,7 @@ Evaluating large language models (LLMs) is important for understanding their cap
 
 **讲者**：Hao Zeng（Southern University of Science and Technology）
 
-**对应论文**：A note on the impossibility of conditional PAC-efficient reasoning in large language models · [arXiv:2512.03057](https://arxiv.org/abs/2512.03057)
+**对应论文**：A note on the impossibility of conditional PAC-efficient reasoning in large language models · [arXiv:2512.03057](https://arxiv.org/abs/2512.03057) · 📖 [长篇精读](../../deep_reads/jcsds2026-2512.03057.md)
 
 <details><summary>摘要（原文）</summary>
 

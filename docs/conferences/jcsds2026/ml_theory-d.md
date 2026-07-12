@@ -15,7 +15,7 @@
 
 **讲者**：Chuanchuan Qin（Shanghai University of Engineering Science）
 
-**对应论文**：Graph Neural Networks for Electricity Load Forecasting · [arXiv:2507.03690](https://arxiv.org/abs/2507.03690)
+**对应论文**：Graph Neural Networks for Electricity Load Forecasting · [arXiv:2507.03690](https://arxiv.org/abs/2507.03690) · 📖 [长篇精读](../../deep_reads/jcsds2026-2507.03690.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -60,7 +60,7 @@ Forecasting electricity demand is increasingly challenging as energy systems bec
 
 **讲者**：Haoran Tang（Shandong University）
 
-**对应论文**：Transfer Learning for Degree-Corrected Mixed Membership Network Models · [arXiv:2604.19152](https://arxiv.org/abs/2604.19152)
+**对应论文**：Transfer Learning for Degree-Corrected Mixed Membership Network Models · [arXiv:2604.19152](https://arxiv.org/abs/2604.19152) · 📖 [长篇精读](../../deep_reads/jcsds2026-2604.19152.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -81,7 +81,7 @@ Statistical analysis of network data has attracted considerable attention in rec
 
 **讲者**：Dingyi Yu（Tsinghua University）
 
-**对应论文**：Robust mean change point testing in high-dimensional data with heavy tails · [arXiv:2305.18987](https://arxiv.org/abs/2305.18987)
+**对应论文**：Robust mean change point testing in high-dimensional data with heavy tails · [arXiv:2305.18987](https://arxiv.org/abs/2305.18987) · 📖 [长篇精读](../../deep_reads/jcsds2026-2305.18987.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -182,7 +182,7 @@ SIRI（Stability Index with Random Initializations）的核心思想是：对于
 
 **讲者**：Junjie Ma（Chinese Academy of Sciences）
 
-**对应论文**：Optimality of Approximate Message Passing Algorithms for Spiked Matrix Models with Rotationally Invariant Noise · [arXiv:2405.18081](https://arxiv.org/abs/2405.18081)
+**对应论文**：Optimality of Approximate Message Passing Algorithms for Spiked Matrix Models with Rotationally Invariant Noise · [arXiv:2405.18081](https://arxiv.org/abs/2405.18081) · 📖 [长篇精读](../../deep_reads/jcsds2026-2405.18081.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -207,7 +207,7 @@ We study the problem of estimating a rank one signal matrix from an observed mat
 
 **讲者**：Wensen Ma（The Hong Kong Polytechnic University）
 
-**对应论文**：Distribution Matching for Self-Supervised Transfer Learning · [arXiv:2502.14424](https://arxiv.org/abs/2502.14424)
+**对应论文**：Distribution Matching for Self-Supervised Transfer Learning · [arXiv:2502.14424](https://arxiv.org/abs/2502.14424) · 📖 [长篇精读](../../deep_reads/jcsds2026-2502.14424.md)
 
 <details><summary>摘要（原文）</summary>
 

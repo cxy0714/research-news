@@ -43,7 +43,7 @@ A fundamental challenge in data synthesis is protecting the fairness and privacy
 
 **讲者**：Zhonghua Liu（Columbia University）
 
-**对应论文**：Constructive Instrumental Variable Identification and Inference with Many Weak Interaction Moments · [arXiv:2504.13565](https://arxiv.org/abs/2504.13565)
+**对应论文**：Constructive Instrumental Variable Identification and Inference with Many Weak Interaction Moments · [arXiv:2504.13565](https://arxiv.org/abs/2504.13565) · 📖 [长篇精读](../../deep_reads/jcsds2026-2504.13565.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -71,7 +71,7 @@ Instrumental variable methods are widely used for causal inference, but identifi
 
 **讲者**：Yifan Cui（Zhejiang University）
 
-**对应论文**：Double Machine Learning of Continuous Treatment Effects with General Instrumental Variables · [arXiv:2601.01471](https://arxiv.org/abs/2601.01471)
+**对应论文**：Double Machine Learning of Continuous Treatment Effects with General Instrumental Variables · [arXiv:2601.01471](https://arxiv.org/abs/2601.01471) · 📖 [长篇精读](../../deep_reads/jcsds2026-2601.01471.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -206,7 +206,7 @@ Fair regression methods typically rely on squared error loss, making them fragil
 
 **讲者**：Zheng Zhang（Renmin University of China）
 
-**对应论文**：Data-Automated Policy Learning for Nonlinear Welfare · [arXiv:2606.01659](https://arxiv.org/abs/2606.01659)
+**对应论文**：Data-Automated Policy Learning for Nonlinear Welfare · [arXiv:2606.01659](https://arxiv.org/abs/2606.01659) · 📖 [长篇精读](../../deep_reads/jcsds2026-2606.01659.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -227,7 +227,7 @@ This paper explores policy learning from observational data, focusing on a nonli
 
 **讲者**：Zixiao Wang（Harvard University）
 
-**对应论文**：Optimal Nuisance Function Tuning for Estimating a Doubly Robust Functional under Proportional Asymptotics · [arXiv:2509.25536](https://arxiv.org/abs/2509.25536)
+**对应论文**：Optimal Nuisance Function Tuning for Estimating a Doubly Robust Functional under Proportional Asymptotics · [arXiv:2509.25536](https://arxiv.org/abs/2509.25536) · 📖 [长篇精读](../../deep_reads/jcsds2026-2509.25536.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -270,7 +270,7 @@ In this paper, we explore the asymptotically optimal tuning parameter choice in 
 
 **讲者**：Zhejia Dong（Brown University）
 
-**对应论文**：Disentangling network dependence among multiple variables · [arXiv:2506.20974](https://arxiv.org/abs/2506.20974)
+**对应论文**：Disentangling network dependence among multiple variables · [arXiv:2506.20974](https://arxiv.org/abs/2506.20974) · 📖 [长篇精读](../../deep_reads/jcsds2026-2506.20974.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -285,7 +285,7 @@ When two variables depend on the same or similar underlying network, their share
 
 **讲者**：Kunhai Qing（East China Normal University）
 
-**对应论文**：Consistency Assessment of Regional Treatment Effect for Multi-Regional Clinical Trials in the Presence of Covariate Shift · [arXiv:2602.07468](https://arxiv.org/abs/2602.07468)
+**对应论文**：Consistency Assessment of Regional Treatment Effect for Multi-Regional Clinical Trials in the Presence of Covariate Shift · [arXiv:2602.07468](https://arxiv.org/abs/2602.07468) · 📖 [长篇精读](../../deep_reads/jcsds2026-2602.07468.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -300,7 +300,7 @@ Multi-Regional Clinical Trials (MRCTs) play a central role in the development of
 
 **讲者**：Zhen Qi（Renmin University of China）
 
-**对应论文**：Quadruply robust methods for causal mediation analysis · [arXiv:2601.22592](https://arxiv.org/abs/2601.22592)
+**对应论文**：Quadruply robust methods for causal mediation analysis · [arXiv:2601.22592](https://arxiv.org/abs/2601.22592) · 📖 [长篇精读](../../deep_reads/jcsds2026-2601.22592.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -333,7 +333,7 @@ Estimating natural effects is a core task in causal mediation analysis. Existing
 
 **讲者**：Yuqian Zhang（Renmin University of China）
 
-**对应论文**：Balancing utility and cost in dynamic treatment regimes · [arXiv:2507.17360](https://arxiv.org/abs/2507.17360)
+**对应论文**：Balancing utility and cost in dynamic treatment regimes · [arXiv:2507.17360](https://arxiv.org/abs/2507.17360) · 📖 [长篇精读](../../deep_reads/jcsds2026-2507.17360.md)
 
 <details><summary>摘要（原文）</summary>
 

@@ -36,7 +36,7 @@
 
 **讲者**：Jiaxin Shi（Peking University）
 
-**对应论文**：High-Dimensional Spatial Autoregression with Latent Factors by Diversified Projections · [arXiv:2509.00742](https://arxiv.org/abs/2509.00742)
+**对应论文**：High-Dimensional Spatial Autoregression with Latent Factors by Diversified Projections · [arXiv:2509.00742](https://arxiv.org/abs/2509.00742) · 📖 [长篇精读](../../deep_reads/jcsds2026-2509.00742.md)
 
 <details><summary>摘要（原文）</summary>
 

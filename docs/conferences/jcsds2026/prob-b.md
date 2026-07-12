@@ -59,7 +59,7 @@
 
 **讲者**：Chuanzhi Xing（Shandong University）
 
-**对应论文**：Comparison theorems for mean-field BSDEs whose generators depend on the law of the solution $(Y,Z)$ · [arXiv:2406.00286](https://arxiv.org/abs/2406.00286)
+**对应论文**：Comparison theorems for mean-field BSDEs whose generators depend on the law of the solution $(Y,Z)$ · [arXiv:2406.00286](https://arxiv.org/abs/2406.00286) · 📖 [长篇精读](../../deep_reads/jcsds2026-2406.00286.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -87,7 +87,7 @@ For general mean-field backward stochastic differential equations (BSDEs) it is 
 
 **讲者**：Jiaqiang Wen（Southern University of Science and Technology）
 
-**对应论文**：Backward doubly stochastic differential equations and SPDEs with quadratic growth · [arXiv:2205.05289](https://arxiv.org/abs/2205.05289)
+**对应论文**：Backward doubly stochastic differential equations and SPDEs with quadratic growth · [arXiv:2205.05289](https://arxiv.org/abs/2205.05289) · 📖 [长篇精读](../../deep_reads/jcsds2026-2205.05289.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -119,7 +119,7 @@ In this paper, we initiate the study of backward doubly stochastic differential 
 
 **讲者**：Falei Wang（Shandong University）
 
-**对应论文**：Propagation of Chaos for Mean-field Mean Reflected Backward Stochastic Differential Equations · [arXiv:2606.01944](https://arxiv.org/abs/2606.01944)
+**对应论文**：Propagation of Chaos for Mean-field Mean Reflected Backward Stochastic Differential Equations · [arXiv:2606.01944](https://arxiv.org/abs/2606.01944) · 📖 [长篇精读](../../deep_reads/jcsds2026-2606.01944.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -231,7 +231,7 @@ McKean-Vlasov 系统描述大量弱相互作用粒子的平均场极限，其漂
 
 **讲者**：Xiaoli Wei（Harbin Institute of Technology）
 
-**对应论文**：Mean Field Control with Poissonian Common Noise: A Pathwise Compactification Approach · [arXiv:2505.23441](https://arxiv.org/abs/2505.23441)
+**对应论文**：Mean Field Control with Poissonian Common Noise: A Pathwise Compactification Approach · [arXiv:2505.23441](https://arxiv.org/abs/2505.23441) · 📖 [长篇精读](../../deep_reads/jcsds2026-2505.23441.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -326,7 +326,7 @@ Bi-Coupling Approach的核心思想是同时构造两个耦合：一个“粗耦
 
 **讲者**：Xiequan Fan（Northeastern University at Qinhuangdao）
 
-**对应论文**：Rates of convergence in the distances of Kolmogorov and Wasserstein for standardized martingales · [arXiv:2309.08189](https://arxiv.org/abs/2309.08189)
+**对应论文**：Rates of convergence in the distances of Kolmogorov and Wasserstein for standardized martingales · [arXiv:2309.08189](https://arxiv.org/abs/2309.08189) · 📖 [长篇精读](../../deep_reads/jcsds2026-2309.08189.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -353,7 +353,7 @@ We give some rates of convergence in the distances of Kolmogorov and Wasserstein
 
 **讲者**：Zhuosong Zhang（Southern University of Science and Technology）
 
-**对应论文**：Refined Berry-Esseen bounds under local dependence · [arXiv:2602.02217](https://arxiv.org/abs/2602.02217)
+**对应论文**：Refined Berry-Esseen bounds under local dependence · [arXiv:2602.02217](https://arxiv.org/abs/2602.02217) · 📖 [长篇精读](../../deep_reads/jcsds2026-2602.02217.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -380,7 +380,7 @@ In this paper, we establish Berry--Esseen bounds for both self-normalized and no
 
 **讲者**：Xiaolin Wang（The Chinese University of Hong Kong）
 
-**对应论文**：High-dimensional normal approximations for sums of Langevin Markov chains · [arXiv:2512.19496](https://arxiv.org/abs/2512.19496)
+**对应论文**：High-dimensional normal approximations for sums of Langevin Markov chains · [arXiv:2512.19496](https://arxiv.org/abs/2512.19496) · 📖 [长篇精读](../../deep_reads/jcsds2026-2512.19496.md)
 
 <details><summary>摘要（原文）</summary>
 

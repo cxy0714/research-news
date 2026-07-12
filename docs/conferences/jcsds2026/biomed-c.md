@@ -267,7 +267,7 @@ COVID-19疫情预测对公共卫生决策至关重要，但北京市的病例数
 
 **讲者**：Yinan Lin（National Center for Applied Mathematics in Chongqing）
 
-**对应论文**：Testing High-Dimensional Mediation Effect with Arbitrary Exposure-Mediator Coefficients · [arXiv:2310.05539](https://arxiv.org/abs/2310.05539)
+**对应论文**：Testing High-Dimensional Mediation Effect with Arbitrary Exposure-Mediator Coefficients · [arXiv:2310.05539](https://arxiv.org/abs/2310.05539) · 📖 [长篇精读](../../deep_reads/jcsds2026-2310.05539.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -421,7 +421,7 @@ In response to the unique challenge created by high-dimensional mediators in med
 
 **讲者**：Haitian Xie（Peking University）
 
-**对应论文**：Data-Driven Policy Learning for Continuous Treatments · [arXiv:2402.02535](https://arxiv.org/abs/2402.02535)
+**对应论文**：Data-Driven Policy Learning for Continuous Treatments · [arXiv:2402.02535](https://arxiv.org/abs/2402.02535) · 📖 [长篇精读](../../deep_reads/jcsds2026-2402.02535.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -472,7 +472,7 @@ This paper studies policy learning for continuous treatments from observational 
 
 **讲者**：Wenhui Li（Chinese Academy of Sciences）
 
-**对应论文**：Multi-Source Prediction-Powered Inference · [arXiv:2606.21232](https://arxiv.org/abs/2606.21232)
+**对应论文**：Multi-Source Prediction-Powered Inference · [arXiv:2606.21232](https://arxiv.org/abs/2606.21232) · 📖 [长篇精读](../../deep_reads/jcsds2026-2606.21232.md)
 
 <details><summary>摘要（原文）</summary>
 

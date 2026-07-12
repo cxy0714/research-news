@@ -15,7 +15,7 @@
 
 **讲者**：Sai Li（Tsinghua University）
 
-**对应论文**：Personalizing black-box models for nonparametric regression with minimax optimality · [arXiv:2601.01432](https://arxiv.org/abs/2601.01432)
+**对应论文**：Personalizing black-box models for nonparametric regression with minimax optimality · [arXiv:2601.01432](https://arxiv.org/abs/2601.01432) · 📖 [长篇精读](../../deep_reads/jcsds2026-2601.01432.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -98,7 +98,7 @@ Potts 模型是 Ising 模型向多类别（$q \geq 2$）的推广，广泛用于
 
 **讲者**：Feng Zhou（Renmin University of China）
 
-**对应论文**：Flexformer: Flexible Linear Transformer with Learnable Attention Kernel · [arXiv:2606.27748](https://arxiv.org/abs/2606.27748)
+**对应论文**：Flexformer: Flexible Linear Transformer with Learnable Attention Kernel · [arXiv:2606.27748](https://arxiv.org/abs/2606.27748) · 📖 [长篇精读](../../deep_reads/jcsds2026-2606.27748.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -221,7 +221,7 @@ Transformer models rely on attention mechanism to capture long-range dependencie
 
 **讲者**：Jingshu Wang（University of Chicago）
 
-**对应论文**：Aggregating Dependent Signals with Heavy-Tailed Combination Tests · [arXiv:2310.20460](https://arxiv.org/abs/2310.20460)
+**对应论文**：Aggregating Dependent Signals with Heavy-Tailed Combination Tests · [arXiv:2310.20460](https://arxiv.org/abs/2310.20460) · 📖 [长篇精读](../../deep_reads/jcsds2026-2310.20460.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -248,7 +248,7 @@ Liu & Xie (2020) 和 Fang et al. (2023) 已证明 Cauchy 组合检验在双变�
 
 **讲者**：Qi Lei（New York University）
 
-**对应论文**：Data Reconstruction: Identifiability and Optimization with Sample Splitting · [arXiv:2602.08723](https://arxiv.org/abs/2602.08723)
+**对应论文**：Data Reconstruction: Identifiability and Optimization with Sample Splitting · [arXiv:2602.08723](https://arxiv.org/abs/2602.08723) · 📖 [长篇精读](../../deep_reads/jcsds2026-2602.08723.md)
 
 <details><summary>摘要（原文）</summary>
 

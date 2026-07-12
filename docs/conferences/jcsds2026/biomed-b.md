@@ -203,7 +203,7 @@ CausalGRN 的核心思路是将每个CRISPR靶向基因视为一个外生工具�
 
 **讲者**：Xinzhou Guo（The Hong Kong University of Science and Technology）
 
-**对应论文**：Stein-Encoder: A White-Box Supervised Encoder via Stein Identities in Multi-Modal Studies · [arXiv:2605.25734](https://arxiv.org/abs/2605.25734)
+**对应论文**：Stein-Encoder: A White-Box Supervised Encoder via Stein Identities in Multi-Modal Studies · [arXiv:2605.25734](https://arxiv.org/abs/2605.25734) · 📖 [长篇精读](../../deep_reads/jcsds2026-2605.25734.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -228,7 +228,7 @@ In multi-modal biomedical research, integrating high-dimensional genomic data wi
 
 **讲者**：Yi Li（University of Michigan）
 
-**对应论文**：Enhancing Inference for Small Cohorts via Transfer Learning and Weighted Integration of Multiple Datasets · [arXiv:2505.07153](https://arxiv.org/abs/2505.07153)
+**对应论文**：Enhancing Inference for Small Cohorts via Transfer Learning and Weighted Integration of Multiple Datasets · [arXiv:2505.07153](https://arxiv.org/abs/2505.07153) · 📖 [长篇精读](../../deep_reads/jcsds2026-2505.07153.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -249,7 +249,7 @@ Lung sepsis remains a significant concern in the Northeastern U.S., yet the nati
 
 **讲者**：Yang Ning（Cornell University）
 
-**对应论文**：Active Subsampling for Measurement-Constrained M-Estimation of Individualized Thresholds with High-Dimensional Data · [arXiv:2411.13763](https://arxiv.org/abs/2411.13763)
+**对应论文**：Active Subsampling for Measurement-Constrained M-Estimation of Individualized Thresholds with High-Dimensional Data · [arXiv:2411.13763](https://arxiv.org/abs/2411.13763) · 📖 [长篇精读](../../deep_reads/jcsds2026-2411.13763.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -274,7 +274,7 @@ Measurement-constrained problems frequently arise in modern applications such as
 
 **讲者**：Lu Tian（Stanford University）
 
-**对应论文**：Automatic and Structure-Aware Sparsification of Hybrid Neural ODEs · [arXiv:2505.18996](https://arxiv.org/abs/2505.18996)
+**对应论文**：Automatic and Structure-Aware Sparsification of Hybrid Neural ODEs · [arXiv:2505.18996](https://arxiv.org/abs/2505.18996) · 📖 [长篇精读](../../deep_reads/jcsds2026-2505.18996.md)
 
 <details><summary>摘要（原文）</summary>
 

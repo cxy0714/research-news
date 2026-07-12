@@ -36,7 +36,7 @@
 
 **讲者**：Yeqing Zhou（Tongji University）
 
-**对应论文**：Reducing multivariate independence testing to two bivariate means comparisons · [arXiv:2402.16053](https://arxiv.org/abs/2402.16053)
+**对应论文**：Reducing multivariate independence testing to two bivariate means comparisons · [arXiv:2402.16053](https://arxiv.org/abs/2402.16053) · 📖 [长篇精读](../../deep_reads/jcsds2026-2402.16053.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -57,7 +57,7 @@ Testing for independence between two random vectors is a fundamental problem in 
 
 **讲者**：Jing He（Southwestern University of Finance and Economics）
 
-**对应论文**：Testing independence and conditional independence in high dimensions via coordinatewise Gaussianization · [arXiv:2504.02233](https://arxiv.org/abs/2504.02233)
+**对应论文**：Testing independence and conditional independence in high dimensions via coordinatewise Gaussianization · [arXiv:2504.02233](https://arxiv.org/abs/2504.02233) · 📖 [长篇精读](../../deep_reads/jcsds2026-2504.02233.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -113,7 +113,7 @@ We propose new statistical tests, in high-dimensional settings, for testing the 
 
 **讲者**：Tong Wang（Southeast University）
 
-**对应论文**：Deep Transformation Model · [arXiv:2410.19226](https://arxiv.org/abs/2410.19226)
+**对应论文**：Deep Transformation Model · [arXiv:2410.19226](https://arxiv.org/abs/2410.19226) · 📖 [长篇精读](../../deep_reads/jcsds2026-2410.19226.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -134,7 +134,7 @@ There has been a significant recent surge in deep neural network (DNN) technique
 
 **讲者**：Shucong Zhang（University of International Business and Economics）
 
-**对应论文**：Logistic Normal Multinomial Factor Analyzers for Clustering Microbiome Data · [arXiv:2101.01871](https://arxiv.org/abs/2101.01871)
+**对应论文**：Logistic Normal Multinomial Factor Analyzers for Clustering Microbiome Data · [arXiv:2101.01871](https://arxiv.org/abs/2101.01871) · 📖 [长篇精读](../../deep_reads/jcsds2026-2101.01871.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -184,7 +184,7 @@ The human microbiome plays an important role in human health and disease status.
 
 **讲者**：Xuejun Jiang（Southern University of Science and Technology）
 
-**对应论文**：Cross-Semantic Transfer Learning for High-Dimensional Linear Regression · [arXiv:2512.21689](https://arxiv.org/abs/2512.21689)
+**对应论文**：Cross-Semantic Transfer Learning for High-Dimensional Linear Regression · [arXiv:2512.21689](https://arxiv.org/abs/2512.21689) · 📖 [长篇精读](../../deep_reads/jcsds2026-2512.21689.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -250,7 +250,7 @@ Current transfer learning methods for high-dimensional linear regression assume 
 
 **讲者**：Linyi Yang（Southern University of Science and Technology）
 
-**对应论文**：Memento: Fine-tuning LLM Agents without Fine-tuning LLMs · [arXiv:2508.16153](https://arxiv.org/abs/2508.16153)
+**对应论文**：Memento: Fine-tuning LLM Agents without Fine-tuning LLMs · [arXiv:2508.16153](https://arxiv.org/abs/2508.16153) · 📖 [长篇精读](../../deep_reads/jcsds2026-2508.16153.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -276,7 +276,7 @@ In this paper, we introduce a novel learning paradigm for Adaptive Large Languag
 
 **讲者**：Zhiqiang Cao（Shenzhen Technology University）
 
-**对应论文**：Generalized win fraction regression for composite survival endpoints · [arXiv:2604.04360](https://arxiv.org/abs/2604.04360)
+**对应论文**：Generalized win fraction regression for composite survival endpoints · [arXiv:2604.04360](https://arxiv.org/abs/2604.04360) · 📖 [长篇精读](../../deep_reads/jcsds2026-2604.04360.md)
 
 <details><summary>摘要（原文）</summary>
 

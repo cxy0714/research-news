@@ -39,7 +39,7 @@
 
 **讲者**：Xin He（Shanghai University of Finance and Economics）
 
-**对应论文**：Kernel Ridge Regression with Predicted Feature Inputs and Applications to Factor-Based Nonparametric Regression · [arXiv:2505.20022](https://arxiv.org/abs/2505.20022)
+**对应论文**：Kernel Ridge Regression with Predicted Feature Inputs and Applications to Factor-Based Nonparametric Regression · [arXiv:2505.20022](https://arxiv.org/abs/2505.20022) · 📖 [长篇精读](../../deep_reads/jcsds2026-2505.20022.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -141,7 +141,7 @@ Kernel Ridge Regression (KRR) 是经典的非参数回归工具，但其理论�
 
 **讲者**：Chen Wang（City University of Hong Kong）
 
-**对应论文**：Extremal eigenvectors of sparse random matrices · [arXiv:2501.16444](https://arxiv.org/abs/2501.16444)
+**对应论文**：Extremal eigenvectors of sparse random matrices · [arXiv:2501.16444](https://arxiv.org/abs/2501.16444) · 📖 [长篇精读](../../deep_reads/jcsds2026-2501.16444.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -198,7 +198,7 @@ We consider a class of sparse random matrices, which includes the adjacency matr
 
 **讲者**：Jingming Wang（University of Virginia）
 
-**对应论文**：Non-splitting Neyman-Pearson Classifiers · [arXiv:2112.00329](https://arxiv.org/abs/2112.00329)
+**对应论文**：Non-splitting Neyman-Pearson Classifiers · [arXiv:2112.00329](https://arxiv.org/abs/2112.00329) · 📖 [长篇精读](../../deep_reads/jcsds2026-2112.00329.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -254,7 +254,7 @@ Neyman-Pearson (NP) 分类范式要求在控制第一类错误（如误诊重症
 
 **讲者**：Rui Duan（Harvard University）
 
-**对应论文**：U-aggregation: Unsupervised Aggregation of Multiple Learning Algorithms · [arXiv:2501.18084](https://arxiv.org/abs/2501.18084)
+**对应论文**：U-aggregation: Unsupervised Aggregation of Multiple Learning Algorithms · [arXiv:2501.18084](https://arxiv.org/abs/2501.18084) · 📖 [长篇精读](../../deep_reads/jcsds2026-2501.18084.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -282,7 +282,7 @@ U-aggregation 提出两步谱方法。第一步：**方差稳定化**（Dyson Eq
 
 **讲者**：Yumou Qiu（Peking University）
 
-**对应论文**：Bregman projection for calibration estimation in Survey Sampling · [arXiv:2603.20780](https://arxiv.org/abs/2603.20780)
+**对应论文**：Bregman projection for calibration estimation in Survey Sampling · [arXiv:2603.20780](https://arxiv.org/abs/2603.20780) · 📖 [长篇精读](../../deep_reads/jcsds2026-2603.20780.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -355,7 +355,7 @@ Calibration weighting is a fundamental tool in survey sampling for incorporating
 
 **讲者**：Haolei Weng（Southern University of Science and Technology）
 
-**对应论文**：Signal-to-noise ratio aware minimax analysis of sparse linear regression · [arXiv:2501.13323](https://arxiv.org/abs/2501.13323)
+**对应论文**：Signal-to-noise ratio aware minimax analysis of sparse linear regression · [arXiv:2501.13323](https://arxiv.org/abs/2501.13323) · 📖 [长篇精读](../../deep_reads/jcsds2026-2501.13323.md)
 
 <details><summary>摘要（原文）</summary>
 

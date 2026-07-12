@@ -38,7 +38,7 @@
 
 **讲者**：Annie Qu（University of California Santa Barbara）
 
-**对应论文**：Dynamic Topic Modeling with a Higher-Order Hypergraphical Representation · [arXiv:2605.28269](https://arxiv.org/abs/2605.28269)
+**对应论文**：Dynamic Topic Modeling with a Higher-Order Hypergraphical Representation · [arXiv:2605.28269](https://arxiv.org/abs/2605.28269) · 📖 [长篇精读](../../deep_reads/jcsds2026-2605.28269.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -133,7 +133,7 @@ Latent space models (LSM) 是网络数据分析的经典框架，通过将每个
 
 **讲者**：Vladimir Ulyanov（Moscow State University）
 
-**对应论文**：Gaussian Approximation for Two-Timescale Linear Stochastic Approximation · [arXiv:2508.07928](https://arxiv.org/abs/2508.07928)
+**对应论文**：Gaussian Approximation for Two-Timescale Linear Stochastic Approximation · [arXiv:2508.07928](https://arxiv.org/abs/2508.07928) · 📖 [长篇精读](../../deep_reads/jcsds2026-2508.07928.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -202,7 +202,7 @@ In diverse fields of empirical research-including many in the biological science
 
 **讲者**：Shirong Xu（Xiamen University）
 
-**对应论文**：When Less Is More: Binary Feedback Can Outperform Ordinal Comparisons in Ranking Recovery · [arXiv:2507.01613](https://arxiv.org/abs/2507.01613)
+**对应论文**：When Less Is More: Binary Feedback Can Outperform Ordinal Comparisons in Ranking Recovery · [arXiv:2507.01613](https://arxiv.org/abs/2507.01613) · 📖 [长篇精读](../../deep_reads/jcsds2026-2507.01613.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -223,7 +223,7 @@ Paired comparison data, where users evaluate items in pairs, play a central role
 
 **讲者**：Yuanxing Chen（Tsinghua University）
 
-**对应论文**：Network Cross-Validation for Nested Models by Edge-Sampling · [arXiv:2506.14244](https://arxiv.org/abs/2506.14244)
+**对应论文**：Network Cross-Validation for Nested Models by Edge-Sampling · [arXiv:2506.14244](https://arxiv.org/abs/2506.14244) · 📖 [长篇精读](../../deep_reads/jcsds2026-2506.14244.md)
 
 <details><summary>摘要（原文）</summary>
 

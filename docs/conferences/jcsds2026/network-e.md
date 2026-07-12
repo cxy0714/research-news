@@ -36,7 +36,7 @@
 
 **讲者**：Qi Lv（Shanghai Jiao Tong University）
 
-**对应论文**：Reduced-Rank Autoregressive Model for High-Dimensional Multivariate Network Time Series · [arXiv:2601.01510](https://arxiv.org/abs/2601.01510)
+**对应论文**：Reduced-Rank Autoregressive Model for High-Dimensional Multivariate Network Time Series · [arXiv:2601.01510](https://arxiv.org/abs/2601.01510) · 📖 [长篇精读](../../deep_reads/jcsds2026-2601.01510.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -129,7 +129,7 @@ C_t = \beta_0 + \beta_1 C_{t-1} + \gamma_1 \cdot I(q_t \leq \tau) + \gamma_2 \cd
 
 **讲者**：Kewen Shi（Nanjing Audit University）
 
-**对应论文**：Autoregressive Models for Matrix-Valued Time Series · [arXiv:1812.08916](https://arxiv.org/abs/1812.08916)
+**对应论文**：Autoregressive Models for Matrix-Valued Time Series · [arXiv:1812.08916](https://arxiv.org/abs/1812.08916) · 📖 [长篇精读](../../deep_reads/jcsds2026-1812.08916.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -162,7 +162,7 @@ In finance, economics and many other fields, observations in a matrix form are o
 
 **讲者**：Pei Heng（Northeast Normal University）
 
-**对应论文**：Revisiting Madigan and Mosurski: Collapsibility via Minimal Separators · [arXiv:2510.09024](https://arxiv.org/abs/2510.09024)
+**对应论文**：Revisiting Madigan and Mosurski: Collapsibility via Minimal Separators · [arXiv:2510.09024](https://arxiv.org/abs/2510.09024) · 📖 [长篇精读](../../deep_reads/jcsds2026-2510.09024.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -187,7 +187,7 @@ Collapsibility provides a principled approach for dimension reduction in conting
 
 **讲者**：Xinyu Zhang（Xiamen University）
 
-**对应论文**：Powerful Large-scale Inference in High Dimensional Mediation Analysis · [arXiv:2402.13933](https://arxiv.org/abs/2402.13933)
+**对应论文**：Powerful Large-scale Inference in High Dimensional Mediation Analysis · [arXiv:2402.13933](https://arxiv.org/abs/2402.13933) · 📖 [长篇精读](../../deep_reads/jcsds2026-2402.13933.md)
 
 <details><summary>摘要（原文）</summary>
 

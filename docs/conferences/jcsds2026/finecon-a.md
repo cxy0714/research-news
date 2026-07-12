@@ -15,7 +15,7 @@
 
 **讲者**：Xingbai Xu（Xiamen University）
 
-**对应论文**：Limit Theorems for Network Data without Metric Structure · [arXiv:2511.17928](https://arxiv.org/abs/2511.17928)
+**对应论文**：Limit Theorems for Network Data without Metric Structure · [arXiv:2511.17928](https://arxiv.org/abs/2511.17928) · 📖 [长篇精读](../../deep_reads/jcsds2026-2511.17928.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -59,7 +59,7 @@ This paper develops limit theorems for random variables with network dependence,
 
 **讲者**：Biao Cai（City University of Hong Kong）
 
-**对应论文**：Generalized Tensor Completion with Non-Random Missingness · [arXiv:2509.06225](https://arxiv.org/abs/2509.06225)
+**对应论文**：Generalized Tensor Completion with Non-Random Missingness · [arXiv:2509.06225](https://arxiv.org/abs/2509.06225) · 📖 [长篇精读](../../deep_reads/jcsds2026-2509.06225.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -80,7 +80,7 @@ Tensor completion plays a crucial role in applications such as recommender syste
 
 **讲者**：Kuangnan Fang（Xiamen University）
 
-**对应论文**：Heterogeneous Multisource Transfer Learning via Model Averaging for Positive-Unlabeled Data · [arXiv:2511.10919](https://arxiv.org/abs/2511.10919)
+**对应论文**：Heterogeneous Multisource Transfer Learning via Model Averaging for Positive-Unlabeled Data · [arXiv:2511.10919](https://arxiv.org/abs/2511.10919) · 📖 [长篇精读](../../deep_reads/jcsds2026-2511.10919.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -182,7 +182,7 @@ $$r_{it} = \alpha_i + \beta_i^\top f_t + \gamma \sum_{j \neq i} w_{ij} r_{jt} + 
 
 **讲者**：Xinyu Zhang（Chinese Academy of Sciences）
 
-**对应论文**：Prediction-Powered Linear Regression: A Balance Between Interpretation and Prediction · [arXiv:2605.08773](https://arxiv.org/abs/2605.08773)
+**对应论文**：Prediction-Powered Linear Regression: A Balance Between Interpretation and Prediction · [arXiv:2605.08773](https://arxiv.org/abs/2605.08773) · 📖 [长篇精读](../../deep_reads/jcsds2026-2605.08773.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -259,7 +259,7 @@ Unlabeled data are increasingly prevalent in contemporary economic studies, yet 
 
 **讲者**：Jun Zhang（Southeast University）
 
-**对应论文**：Selecting and Testing Asset Pricing Models: A Stepwise Approach · [arXiv:2601.10279](https://arxiv.org/abs/2601.10279)
+**对应论文**：Selecting and Testing Asset Pricing Models: A Stepwise Approach · [arXiv:2601.10279](https://arxiv.org/abs/2601.10279) · 📖 [长篇精读](../../deep_reads/jcsds2026-2601.10279.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -280,7 +280,7 @@ The asset pricing literature emphasizes factor models that minimize pricing erro
 
 **讲者**：Wenyu Zhou（Zhejiang University）
 
-**对应论文**：Granular Instrumental Variables: Estimation and Inference · [arXiv:2606.14057](https://arxiv.org/abs/2606.14057)
+**对应论文**：Granular Instrumental Variables: Estimation and Inference · [arXiv:2606.14057](https://arxiv.org/abs/2606.14057) · 📖 [长篇精读](../../deep_reads/jcsds2026-2606.14057.md)
 
 <details><summary>摘要（原文）</summary>
 

@@ -15,7 +15,7 @@
 
 **讲者**：Dehan Kong（University of Toronto）
 
-**对应论文**：Successive Classification Learning for Estimating Quantile Optimal Treatment Regimes · [arXiv:2507.11255](https://arxiv.org/abs/2507.11255)
+**对应论文**：Successive Classification Learning for Estimating Quantile Optimal Treatment Regimes · [arXiv:2507.11255](https://arxiv.org/abs/2507.11255) · 📖 [长篇精读](../../deep_reads/jcsds2026-2507.11255.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -244,7 +244,7 @@ Quantile optimal treatment regimes (OTRs) aim to assign treatments that maximize
 
 **讲者**：Tianwei Gao（University of North Carolina at Chapel Hill）
 
-**对应论文**：Whom to Query for What: Adaptive Group Elicitation via Multi-Turn LLM Interactions · [arXiv:2602.14279](https://arxiv.org/abs/2602.14279)
+**对应论文**：Whom to Query for What: Adaptive Group Elicitation via Multi-Turn LLM Interactions · [arXiv:2602.14279](https://arxiv.org/abs/2602.14279) · 📖 [长篇精读](../../deep_reads/jcsds2026-2602.14279.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -302,7 +302,7 @@ Eliciting information to reduce uncertainty about latent group-level properties 
 
 **讲者**：Xiaoyu Hu（Xi'an Jiaotong University）
 
-**对应论文**：Fairness-aware Bayes optimal functional classification · [arXiv:2505.09471](https://arxiv.org/abs/2505.09471)
+**对应论文**：Fairness-aware Bayes optimal functional classification · [arXiv:2505.09471](https://arxiv.org/abs/2505.09471) · 📖 [长篇精读](../../deep_reads/jcsds2026-2505.09471.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -330,7 +330,7 @@ Algorithmic fairness has become a central topic in machine learning, and mitigat
 
 **讲者**：Yiran Huang（Nankai University）
 
-**对应论文**：Efficient Human-in-the-Loop Active Learning: A Novel Framework for Data Labeling in AI Systems · [arXiv:2501.00277](https://arxiv.org/abs/2501.00277)
+**对应论文**：Efficient Human-in-the-Loop Active Learning: A Novel Framework for Data Labeling in AI Systems · [arXiv:2501.00277](https://arxiv.org/abs/2501.00277) · 📖 [长篇精读](../../deep_reads/jcsds2026-2501.00277.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -460,7 +460,7 @@ Modern AI algorithms require labeled data. In real world, majority of data are u
 
 **讲者**：Yang Yang（East China Normal University）
 
-**对应论文**：Energy Score-Guided Neural Gaussian Mixture Model for Predictive Uncertainty Quantification · [arXiv:2603.27672](https://arxiv.org/abs/2603.27672)
+**对应论文**：Energy Score-Guided Neural Gaussian Mixture Model for Predictive Uncertainty Quantification · [arXiv:2603.27672](https://arxiv.org/abs/2603.27672) · 📖 [长篇精读](../../deep_reads/jcsds2026-2603.27672.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -504,7 +504,7 @@ Quantifying predictive uncertainty is essential for real world machine learning 
 
 **讲者**：Shixiang Liu（Renmin University of China）
 
-**对应论文**：Adversarial Contamination Meets Hard Thresholding: An Iterative Algorithm with Signal Adaptivity and Minimax Optimality · [arXiv:2606.27685](https://arxiv.org/abs/2606.27685)
+**对应论文**：Adversarial Contamination Meets Hard Thresholding: An Iterative Algorithm with Signal Adaptivity and Minimax Optimality · [arXiv:2606.27685](https://arxiv.org/abs/2606.27685) · 📖 [长篇精读](../../deep_reads/jcsds2026-2606.27685.md)
 
 <details><summary>摘要（原文）</summary>
 

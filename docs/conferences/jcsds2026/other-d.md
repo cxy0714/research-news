@@ -62,7 +62,7 @@
 
 **讲者**：Yanjuan Han（New York University）
 
-**对应论文**：Universal priors: solving empirical Bayes via Bayesian inference and pretraining · [arXiv:2602.15136](https://arxiv.org/abs/2602.15136)
+**对应论文**：Universal priors: solving empirical Bayes via Bayesian inference and pretraining · [arXiv:2602.15136](https://arxiv.org/abs/2602.15136) · 📖 [长篇精读](../../deep_reads/jcsds2026-2602.15136.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -83,7 +83,7 @@ We theoretically justify the recent empirical finding of [Teh et al., 2025] that
 
 **讲者**：Zhangsong Li（Peking University）
 
-**对应论文**：Fundamental Limits of Community Detection in Contextual Multi-Layer Stochastic Block Models · [arXiv:2602.08173](https://arxiv.org/abs/2602.08173)
+**对应论文**：Fundamental Limits of Community Detection in Contextual Multi-Layer Stochastic Block Models · [arXiv:2602.08173](https://arxiv.org/abs/2602.08173) · 📖 [长篇精读](../../deep_reads/jcsds2026-2602.08173.md)
 
 <details><summary>摘要（原文）</summary>
 

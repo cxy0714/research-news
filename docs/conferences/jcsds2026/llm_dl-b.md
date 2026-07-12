@@ -38,7 +38,7 @@
 
 **讲者**：Siming Zheng（Southeast University）
 
-**对应论文**：A Conditional Distribution Equality Testing Framework using Deep Generative Learning · [arXiv:2509.17729](https://arxiv.org/abs/2509.17729)
+**对应论文**：A Conditional Distribution Equality Testing Framework using Deep Generative Learning · [arXiv:2509.17729](https://arxiv.org/abs/2509.17729) · 📖 [长篇精读](../../deep_reads/jcsds2026-2509.17729.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -174,7 +174,7 @@ In this paper, we propose a general framework for testing the conditional distri
 
 **讲者**：Jeong Min Jeon（Seoul National University）
 
-**对应论文**：Additive regression with general imperfect variables · [arXiv:2212.05745](https://arxiv.org/abs/2212.05745)
+**对应论文**：Additive regression with general imperfect variables · [arXiv:2212.05745](https://arxiv.org/abs/2212.05745) · 📖 [长篇精读](../../deep_reads/jcsds2026-2212.05745.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -317,7 +317,7 @@ In this paper, we study an additive model where the response variable is Hilbert
 
 **讲者**：Junkai Yin（Shanghai Jiao Tong University）
 
-**对应论文**：Deep Partially Linear Transformation Model for Right-Censored Survival Data · [arXiv:2412.07611](https://arxiv.org/abs/2412.07611)
+**对应论文**：Deep Partially Linear Transformation Model for Right-Censored Survival Data · [arXiv:2412.07611](https://arxiv.org/abs/2412.07611) · 📖 [长篇精读](../../deep_reads/jcsds2026-2412.07611.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -401,7 +401,7 @@ GDP 数据发布存在显著时滞，而政策制定与市场监测需要实时�
 
 **讲者**：Feng Chen（UNSW Sydney）
 
-**对应论文**：Neural Networks for Parameter Estimation of the Discretely Observed Hawkes Process · [arXiv:2506.01258](https://arxiv.org/abs/2506.01258)
+**对应论文**：Neural Networks for Parameter Estimation of the Discretely Observed Hawkes Process · [arXiv:2506.01258](https://arxiv.org/abs/2506.01258) · 📖 [长篇精读](../../deep_reads/jcsds2026-2506.01258.md)
 
 <details><summary>摘要（原文）</summary>
 

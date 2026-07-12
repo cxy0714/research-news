@@ -156,7 +156,7 @@
 
 **讲者**：Peijun Sang（University of Waterloo）
 
-**对应论文**：Scalable inference in functional linear regression with streaming data · [arXiv:2302.02457](https://arxiv.org/abs/2302.02457)
+**对应论文**：Scalable inference in functional linear regression with streaming data · [arXiv:2302.02457](https://arxiv.org/abs/2302.02457) · 📖 [长篇精读](../../deep_reads/jcsds2026-2302.02457.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -255,7 +255,7 @@ Traditional static functional data analysis is facing new challenges due to stre
 
 **讲者**：Jie Tang（Beijing Normal University）
 
-**对应论文**：Empirical Likelihood-Based Fairness Auditing: Distribution-Free Certification and Flagging · [arXiv:2601.20269](https://arxiv.org/abs/2601.20269)
+**对应论文**：Empirical Likelihood-Based Fairness Auditing: Distribution-Free Certification and Flagging · [arXiv:2601.20269](https://arxiv.org/abs/2601.20269) · 📖 [长篇精读](../../deep_reads/jcsds2026-2601.20269.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -291,7 +291,7 @@ Machine learning models in high-stakes applications, such as recidivism predicti
 
 **讲者**：Yuchen Hu（Shanghai Jiao Tong University）
 
-**对应论文**：A Bias-Correction Decentralized Stochastic Gradient Algorithm with Momentum Acceleration · [arXiv:2501.19082](https://arxiv.org/abs/2501.19082)
+**对应论文**：A Bias-Correction Decentralized Stochastic Gradient Algorithm with Momentum Acceleration · [arXiv:2501.19082](https://arxiv.org/abs/2501.19082) · 📖 [长篇精读](../../deep_reads/jcsds2026-2501.19082.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -387,7 +387,7 @@ $$\min_{\{w_k,b_k\}} \sum_{i=1}^n \ell(y_i, f_1(x_i),\dots,f_K(x_i)) + \sum_{k=1
 
 **讲者**：Yifan Gu（Renmin University of China）
 
-**对应论文**：Collaborative Inference for Sparse High-Dimensional Models with Non-Shared Data · [arXiv:2504.19924](https://arxiv.org/abs/2504.19924)
+**对应论文**：Collaborative Inference for Sparse High-Dimensional Models with Non-Shared Data · [arXiv:2504.19924](https://arxiv.org/abs/2504.19924) · 📖 [长篇精读](../../deep_reads/jcsds2026-2504.19924.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -415,7 +415,7 @@ In modern data analysis, statistical efficiency improvement is expected via effe
 
 **讲者**：Yunyi Zhang（The Chinese University of Hong Kong, Shenzhen）
 
-**对应论文**：ANOVA for High-dimensional Non-stationary Time Series · [arXiv:2509.09079](https://arxiv.org/abs/2509.09079)
+**对应论文**：ANOVA for High-dimensional Non-stationary Time Series · [arXiv:2509.09079](https://arxiv.org/abs/2509.09079) · 📖 [长篇精读](../../deep_reads/jcsds2026-2509.09079.md)
 
 <details><summary>摘要（原文）</summary>
 

@@ -21,7 +21,7 @@
 
 **讲者**：Xinran Li（University of Chicago）
 
-**对应论文**：Randomization Inference with Sample Attrition · [arXiv:2507.00795](https://arxiv.org/abs/2507.00795)
+**对应论文**：Randomization Inference with Sample Attrition · [arXiv:2507.00795](https://arxiv.org/abs/2507.00795) · 📖 [长篇精读](../../deep_reads/jcsds2026-2507.00795.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -70,7 +70,7 @@ Randomization inference is a widely-used and appealing approach for analyzing tr
 
 **讲者**：Zhichao Jiang（Sun Yat-sen University）
 
-**对应论文**：Principled analysis of crossover designs: causal effects, efficient estimation, and robust inference · [arXiv:2511.09215](https://arxiv.org/abs/2511.09215)
+**对应论文**：Principled analysis of crossover designs: causal effects, efficient estimation, and robust inference · [arXiv:2511.09215](https://arxiv.org/abs/2511.09215) · 📖 [长篇精读](../../deep_reads/jcsds2026-2511.09215.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -98,7 +98,7 @@ Crossover designs randomly assign each unit to receive a sequence of treatments.
 
 **讲者**：Yao Zhang（National University of Singapore）
 
-**对应论文**：Fit CATE Once: Model-Assisted Randomization Tests Without Sample Splitting · [arXiv:2605.09116](https://arxiv.org/abs/2605.09116)
+**对应论文**：Fit CATE Once: Model-Assisted Randomization Tests Without Sample Splitting · [arXiv:2605.09116](https://arxiv.org/abs/2605.09116) · 📖 [长篇精读](../../deep_reads/jcsds2026-2605.09116.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -147,7 +147,7 @@ Randomization tests and flexible treatment-effect models offer complementary str
 
 **讲者**：Yue Liu（Renmin University of China）
 
-**对应论文**：Evaluating Surrogates in Individualized Treatment Rules · [arXiv:2512.00405](https://arxiv.org/abs/2512.00405)
+**对应论文**：Evaluating Surrogates in Individualized Treatment Rules · [arXiv:2512.00405](https://arxiv.org/abs/2512.00405) · 📖 [长篇精读](../../deep_reads/jcsds2026-2512.00405.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -168,7 +168,7 @@ In many decision-making problems, the primary outcome is expensive, time-consumi
 
 **讲者**：Yuhao Wang（Tsinghua University）
 
-**对应论文**：Long-term Causal Inference Under Persistent Confounding via Data Combination · [arXiv:2202.07234](https://arxiv.org/abs/2202.07234)
+**对应论文**：Long-term Causal Inference Under Persistent Confounding via Data Combination · [arXiv:2202.07234](https://arxiv.org/abs/2202.07234) · 📖 [长篇精读](../../deep_reads/jcsds2026-2202.07234.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -198,7 +198,7 @@ We study the identification and estimation of long-term treatment effects when b
 
 **讲者**：Peng Ding（University of California,Berkeley）
 
-**对应论文**：Introducing the b-value: combining unbiased and biased estimators from a sensitivity analysis perspective · [arXiv:2602.16310](https://arxiv.org/abs/2602.16310)
+**对应论文**：Introducing the b-value: combining unbiased and biased estimators from a sensitivity analysis perspective · [arXiv:2602.16310](https://arxiv.org/abs/2602.16310) · 📖 [长篇精读](../../deep_reads/jcsds2026-2602.16310.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -248,7 +248,7 @@ In empirical research, when we have multiple estimators for the same parameter o
 
 **讲者**：Lin Liu（Shanghai Jiao Tong University）
 
-**对应论文**：Assumption-lean covariate adjustment under covariate adaptive randomization when $p = o (n)$ · [arXiv:2512.20046](https://arxiv.org/abs/2512.20046)
+**对应论文**：Assumption-lean covariate adjustment under covariate adaptive randomization when $p = o (n)$ · [arXiv:2512.20046](https://arxiv.org/abs/2512.20046) · 📖 [长篇精读](../../deep_reads/jcsds2026-2512.20046.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -288,7 +288,7 @@ Adjusting for (baseline) covariates with working regression models becomes stand
 
 **讲者**：Xiao Liu（Renmin University of China）
 
-**对应论文**：Estimating Treatment and Spillover Effects with the Ego-Cluster Experimental Design · [arXiv:2605.00534](https://arxiv.org/abs/2605.00534)
+**对应论文**：Estimating Treatment and Spillover Effects with the Ego-Cluster Experimental Design · [arXiv:2605.00534](https://arxiv.org/abs/2605.00534) · 📖 [长篇精读](../../deep_reads/jcsds2026-2605.00534.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -382,7 +382,7 @@ SMS的核心思想是：将间接效应分解为两个方向分量（暴露→�
 
 **讲者**：Tian Gu（Columbia University）
 
-**对应论文**：Hierarchical Projection for Adaptive Knowledge Transfer · [arXiv:2606.08691](https://arxiv.org/abs/2606.08691)
+**对应论文**：Hierarchical Projection for Adaptive Knowledge Transfer · [arXiv:2606.08691](https://arxiv.org/abs/2606.08691) · 📖 [长篇精读](../../deep_reads/jcsds2026-2606.08691.md)
 
 <details><summary>摘要（原文）</summary>
 

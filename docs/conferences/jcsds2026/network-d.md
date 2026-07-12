@@ -226,7 +226,7 @@ Azadkia 与 Chatterjee 提出的 Conditional Graph Correlation (CGC) 是一种�
 
 **讲者**：Yuchao Dong（Tongji University）
 
-**对应论文**：Randomized Optimal Switching Problem and Related Mirror Descent Flow · [arXiv:2606.12875](https://arxiv.org/abs/2606.12875)
+**对应论文**：Randomized Optimal Switching Problem and Related Mirror Descent Flow · [arXiv:2606.12875](https://arxiv.org/abs/2606.12875) · 📖 [长篇精读](../../deep_reads/jcsds2026-2606.12875.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -279,7 +279,7 @@ We study continuous-time reinforcement learning for the optimal switching proble
 
 **讲者**：Rui Pan（Central University of Finance and Economics）
 
-**对应论文**：Bi-SCORE for Weighted Bipartite Networks with Application in Knowledge Source Discovery · [arXiv:2508.21467](https://arxiv.org/abs/2508.21467)
+**对应论文**：Bi-SCORE for Weighted Bipartite Networks with Application in Knowledge Source Discovery · [arXiv:2508.21467](https://arxiv.org/abs/2508.21467) · 📖 [长篇精读](../../deep_reads/jcsds2026-2508.21467.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -306,7 +306,7 @@ Bi-SCORE将单模无权重网络的SCORE方法（Jin, 2015）推广至加权二�
 
 **讲者**：Yimeng Ren（The Hong Kong University of Science and Technology）
 
-**对应论文**：Multi-relational Network Autoregression Model with Latent Group Structures · [arXiv:2406.03296](https://arxiv.org/abs/2406.03296)
+**对应论文**：Multi-relational Network Autoregression Model with Latent Group Structures · [arXiv:2406.03296](https://arxiv.org/abs/2406.03296) · 📖 [长篇精读](../../deep_reads/jcsds2026-2406.03296.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -366,7 +366,7 @@ Multi-relational networks among entities are frequently observed in the era of b
 
 **讲者**：Nanwei Wang（University of New Brunswick）
 
-**对应论文**：High-Dimensional Covariate-Dependent Discrete Graphical Models and Dynamic Ising Models · [arXiv:2511.14123](https://arxiv.org/abs/2511.14123)
+**对应论文**：High-Dimensional Covariate-Dependent Discrete Graphical Models and Dynamic Ising Models · [arXiv:2511.14123](https://arxiv.org/abs/2511.14123) · 📖 [长篇精读](../../deep_reads/jcsds2026-2511.14123.md)
 
 <details><summary>摘要（原文）</summary>
 

@@ -15,7 +15,7 @@
 
 **讲者**：Yehua Li（University of California, Riverside）
 
-**对应论文**：Independent component analysis for multivariate functional data · [arXiv:1712.07641](https://arxiv.org/abs/1712.07641)
+**对应论文**：Independent component analysis for multivariate functional data · [arXiv:1712.07641](https://arxiv.org/abs/1712.07641) · 📖 [长篇精读](../../deep_reads/jcsds2026-1712.07641.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -115,7 +115,7 @@ We extend two methods of independent component analysis, fourth order blind iden
 
 **讲者**：Jiyuan Zhang（South China University of Technology）
 
-**对应论文**：Matrix harmonic analysis at high temperature via the Dirichlet process · [arXiv:2508.21349](https://arxiv.org/abs/2508.21349)
+**对应论文**：Matrix harmonic analysis at high temperature via the Dirichlet process · [arXiv:2508.21349](https://arxiv.org/abs/2508.21349) · 📖 [长篇精读](../../deep_reads/jcsds2026-2508.21349.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -188,7 +188,7 @@ We investigate harmonic analysis of random matrices of large size with their Dys
 
 **讲者**：Wangjun Yuan（Southern University of Science and Technology）
 
-**对应论文**：Operator Norm Bounds for Multi-leg Matrix Tensors and Applications to Random Matrix Theory · [arXiv:2603.27659](https://arxiv.org/abs/2603.27659)
+**对应论文**：Operator Norm Bounds for Multi-leg Matrix Tensors and Applications to Random Matrix Theory · [arXiv:2603.27659](https://arxiv.org/abs/2603.27659) · 📖 [长篇精读](../../deep_reads/jcsds2026-2603.27659.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -343,7 +343,7 @@ REVS的核心是将每个变量视为一个“臂”（arm），变量选择过�
 
 **讲者**：Xiaofei Wu（Yunnan University）
 
-**对应论文**：Feature splitting parallel algorithm for Dantzig selectors · [arXiv:2504.02631](https://arxiv.org/abs/2504.02631)
+**对应论文**：Feature splitting parallel algorithm for Dantzig selectors · [arXiv:2504.02631](https://arxiv.org/abs/2504.02631) · 📖 [长篇精读](../../deep_reads/jcsds2026-2504.02631.md)
 
 <details><summary>摘要（原文）</summary>
 

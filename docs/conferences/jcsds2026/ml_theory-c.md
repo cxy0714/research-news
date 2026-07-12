@@ -36,7 +36,7 @@
 
 **讲者**：Huimin Cheng（Boston University）
 
-**对应论文**：Transfer Learning on Edge Connecting Probability Estimation under Graphon Model · [arXiv:2510.05527](https://arxiv.org/abs/2510.05527)
+**对应论文**：Transfer Learning on Edge Connecting Probability Estimation under Graphon Model · [arXiv:2510.05527](https://arxiv.org/abs/2510.05527) · 📖 [长篇精读](../../deep_reads/jcsds2026-2510.05527.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -119,7 +119,7 @@ Graphon models provide a flexible nonparametric framework for estimating latent 
 
 **讲者**：Jing Lei（Carnegie Mellon University）
 
-**对应论文**：Evaluating Black-Box Classifiers via Stable Adaptive Two-Sample Inference · [arXiv:2604.05470](https://arxiv.org/abs/2604.05470)
+**对应论文**：Evaluating Black-Box Classifiers via Stable Adaptive Two-Sample Inference · [arXiv:2604.05470](https://arxiv.org/abs/2604.05470) · 📖 [长篇精读](../../deep_reads/jcsds2026-2604.05470.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -144,7 +144,7 @@ We consider the problem of evaluating black-box multi-class classifiers. In the 
 
 **讲者**：Wenguang Sun（Zhejiang University）
 
-**对应论文**：Conformalized Large-Scale Selective Inference with Informative and Trustworthy Prediction Sets · [arXiv:2605.27012](https://arxiv.org/abs/2605.27012)
+**对应论文**：Conformalized Large-Scale Selective Inference with Informative and Trustworthy Prediction Sets · [arXiv:2605.27012](https://arxiv.org/abs/2605.27012) · 📖 [长篇精读](../../deep_reads/jcsds2026-2605.27012.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -165,7 +165,7 @@ In large-scale prediction problems, exhaustively following up on all test units 
 
 **讲者**：Ying Jin（University of Pennsylvania）
 
-**对应论文**：Conformal Selective Prediction with General Risk Control · [arXiv:2603.24704](https://arxiv.org/abs/2603.24704)
+**对应论文**：Conformal Selective Prediction with General Risk Control · [arXiv:2603.24704](https://arxiv.org/abs/2603.24704) · 📖 [长篇精读](../../deep_reads/jcsds2026-2603.24704.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -186,7 +186,7 @@ In deploying artificial intelligence (AI) models, selective prediction offers th
 
 **讲者**：Haojie Ren（Shanghai Jiao Tong University）
 
-**对应论文**：Generalized Boundary FDR Control under Arbitrary Dependence: An Approach on Closure Principle · [arXiv:2605.09953](https://arxiv.org/abs/2605.09953)
+**对应论文**：Generalized Boundary FDR Control under Arbitrary Dependence: An Approach on Closure Principle · [arXiv:2605.09953](https://arxiv.org/abs/2605.09953) · 📖 [长篇精读](../../deep_reads/jcsds2026-2605.09953.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -279,7 +279,7 @@ False discovery rate (FDR) is a cornerstone of modern multiple testing. However,
 
 **讲者**：Zixuan Liu（Henan University of Economics and Law）
 
-**对应论文**：Information matrix test for normality of innovations in stationary time series models · [arXiv:2407.08565](https://arxiv.org/abs/2407.08565)
+**对应论文**：Information matrix test for normality of innovations in stationary time series models · [arXiv:2407.08565](https://arxiv.org/abs/2407.08565) · 📖 [长篇精读](../../deep_reads/jcsds2026-2407.08565.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -311,7 +311,7 @@ IM 检验最初用于检验模型设定错误（如遗漏变量、错误分布�
 
 **讲者**：Yanlin Tang（East China Normal University）
 
-**对应论文**：Distribution-Free Prediction Sets for Regression under Target Shift · [arXiv:2510.10985](https://arxiv.org/abs/2510.10985)
+**对应论文**：Distribution-Free Prediction Sets for Regression under Target Shift · [arXiv:2510.10985](https://arxiv.org/abs/2510.10985) · 📖 [长篇精读](../../deep_reads/jcsds2026-2510.10985.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -332,7 +332,7 @@ In real-world applications, the limited availability of labeled outcomes present
 
 **讲者**：Xiaochao Xia（Chongqing University）
 
-**对应论文**：Biweighted Poisson Subsampling for Convoluted Rank Regression with Massive Data · [arXiv:2606.08668](https://arxiv.org/abs/2606.08668)
+**对应论文**：Biweighted Poisson Subsampling for Convoluted Rank Regression with Massive Data · [arXiv:2606.08668](https://arxiv.org/abs/2606.08668) · 📖 [长篇精读](../../deep_reads/jcsds2026-2606.08668.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -353,7 +353,7 @@ Optimal subsampling efficiently selects the most informative data points, enabli
 
 **讲者**：Songshan Yang（Renmin University of China）
 
-**对应论文**：Cost-aware Portfolios in a Large Universe of Assets · [arXiv:2412.11575](https://arxiv.org/abs/2412.11575)
+**对应论文**：Cost-aware Portfolios in a Large Universe of Assets · [arXiv:2412.11575](https://arxiv.org/abs/2412.11575) · 📖 [长篇精读](../../deep_reads/jcsds2026-2412.11575.md)
 
 <details><summary>摘要（原文）</summary>
 

@@ -109,7 +109,7 @@
 
 **讲者**：Yaru Tian（Southeast University）
 
-**对应论文**：Optimal estimators and tests for reciprocal effects · [arXiv:2601.01325](https://arxiv.org/abs/2601.01325)
+**对应论文**：Optimal estimators and tests for reciprocal effects · [arXiv:2601.01325](https://arxiv.org/abs/2601.01325) · 📖 [长篇精读](../../deep_reads/jcsds2026-2601.01325.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -130,7 +130,7 @@ The $p_1$ model plays a fundamental role in modeling directed networks, where th
 
 **讲者**：Xueli Wang（Beijing Technology and Business University）
 
-**对应论文**：Mediation analysis with the mediator and outcome missing not at random · [arXiv:2212.05577](https://arxiv.org/abs/2212.05577)
+**对应论文**：Mediation analysis with the mediator and outcome missing not at random · [arXiv:2212.05577](https://arxiv.org/abs/2212.05577) · 📖 [长篇精读](../../deep_reads/jcsds2026-2212.05577.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -165,7 +165,7 @@ Mediation analysis is widely used for investigating direct and indirect causal p
 
 **讲者**：Zhanrui Cai（The University of Hong Kong）
 
-**对应论文**：A Statistical Framework for Alignment with Biased AI Feedback · [arXiv:2602.08259](https://arxiv.org/abs/2602.08259)
+**对应论文**：A Statistical Framework for Alignment with Biased AI Feedback · [arXiv:2602.08259](https://arxiv.org/abs/2602.08259) · 📖 [长篇精读](../../deep_reads/jcsds2026-2602.08259.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -186,7 +186,7 @@ Modern alignment pipelines are increasingly replacing expensive human preference
 
 **讲者**：Xu Guo（Beijing Normal University）
 
-**对应论文**：Inference of high-dimensional weak instrumental variable regression models without ridge-regularization · [arXiv:2504.20686](https://arxiv.org/abs/2504.20686)
+**对应论文**：Inference of high-dimensional weak instrumental variable regression models without ridge-regularization · [arXiv:2504.20686](https://arxiv.org/abs/2504.20686) · 📖 [长篇精读](../../deep_reads/jcsds2026-2504.20686.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -231,7 +231,7 @@ Inference of instrumental variable regression models with many weak instruments 
 
 **讲者**：Danning Li（Northeast Normal University）
 
-**对应论文**：Strongly Consistent Community Detection in Popularity Adjusted Block Models · [arXiv:2506.07224](https://arxiv.org/abs/2506.07224)
+**对应论文**：Strongly Consistent Community Detection in Popularity Adjusted Block Models · [arXiv:2506.07224](https://arxiv.org/abs/2506.07224) · 📖 [长篇精读](../../deep_reads/jcsds2026-2506.07224.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -257,7 +257,7 @@ The Popularity Adjusted Block Model (PABM) provides a flexible framework for com
 
 **讲者**：Weiming Li（Shanghai University of Finance and Economics）
 
-**对应论文**：High-Dimensional Precision Matrix Quadratic Forms: Estimation Framework for $p > n$ · [arXiv:2601.03815](https://arxiv.org/abs/2601.03815)
+**对应论文**：High-Dimensional Precision Matrix Quadratic Forms: Estimation Framework for $p > n$ · [arXiv:2601.03815](https://arxiv.org/abs/2601.03815) · 📖 [长篇精读](../../deep_reads/jcsds2026-2601.03815.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -284,7 +284,7 @@ We propose a novel estimation framework for quadratic functionals of precision m
 
 **讲者**：Zeng Li（Southern University of Science and Technology）
 
-**对应论文**：Mean-Shift PCA by Knockoff Mean · [arXiv:2605.25460](https://arxiv.org/abs/2605.25460)
+**对应论文**：Mean-Shift PCA by Knockoff Mean · [arXiv:2605.25460](https://arxiv.org/abs/2605.25460) · 📖 [长篇精读](../../deep_reads/jcsds2026-2605.25460.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -324,7 +324,7 @@ Removing noise is difficult, but adding noise is easy. In this work, we show how
 
 **讲者**：Yaohua Rong（Beijing University of Technology）
 
-**对应论文**：Orthogonalized Kernel Debiased Machine Learning for Multimodal Data Analysis · [arXiv:2103.07088](https://arxiv.org/abs/2103.07088)
+**对应论文**：Orthogonalized Kernel Debiased Machine Learning for Multimodal Data Analysis · [arXiv:2103.07088](https://arxiv.org/abs/2103.07088) · 📖 [长篇精读](../../deep_reads/jcsds2026-2103.07088.md)
 
 <details><summary>摘要（原文）</summary>
 

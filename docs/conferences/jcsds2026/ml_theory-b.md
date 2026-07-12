@@ -61,7 +61,7 @@
 
 **讲者**：Yuchen Zhou（University of Illinois Urbana-Champaign）
 
-**对应论文**：Optimal Convergence Analysis of DDPM for General Distributions · [arXiv:2510.27562](https://arxiv.org/abs/2510.27562)
+**对应论文**：Optimal Convergence Analysis of DDPM for General Distributions · [arXiv:2510.27562](https://arxiv.org/abs/2510.27562) · 📖 [长篇精读](../../deep_reads/jcsds2026-2510.27562.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -117,7 +117,7 @@ DDPM（Denoising Diffusion Probabilistic Model）作为主流扩散采样器，�
 
 **讲者**：Xingyu Yan（Jiangsu Normal University）
 
-**对应论文**：Prediction-Powered Linear Regression: A Balance Between Interpretation and Prediction · [arXiv:2605.08773](https://arxiv.org/abs/2605.08773)
+**对应论文**：Prediction-Powered Linear Regression: A Balance Between Interpretation and Prediction · [arXiv:2605.08773](https://arxiv.org/abs/2605.08773) · 📖 [长篇精读](../../deep_reads/jcsds2026-2605.08773.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -185,7 +185,7 @@ Unlabeled data are increasingly prevalent in contemporary economic studies, yet 
 
 **讲者**：Lianqiang Qu（Central China Normal University）
 
-**对应论文**：Maximum likelihood estimation in the sparse Rasch model · [arXiv:2501.07770](https://arxiv.org/abs/2501.07770)
+**对应论文**：Maximum likelihood estimation in the sparse Rasch model · [arXiv:2501.07770](https://arxiv.org/abs/2501.07770) · 📖 [长篇精读](../../deep_reads/jcsds2026-2501.07770.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -312,7 +312,7 @@ The Rasch model has been widely used to analyse item response data in psychometr
 
 **讲者**：Yue Yu（Nankai University）
 
-**对应论文**：Aggregating Conformal Prediction Sets via α-Allocation · [arXiv:2511.12065](https://arxiv.org/abs/2511.12065)
+**对应论文**：Aggregating Conformal Prediction Sets via α-Allocation · [arXiv:2511.12065](https://arxiv.org/abs/2511.12065) · 📖 [长篇精读](../../deep_reads/jcsds2026-2511.12065.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -357,7 +357,7 @@ Conformal prediction offers a distribution-free framework for constructing predi
 
 **讲者**：Yifan Zhang（Shanghai Jiao Tong University）
 
-**对应论文**：Generalized Boundary FDR Control under Arbitrary Dependence: An Approach on Closure Principle · [arXiv:2605.09953](https://arxiv.org/abs/2605.09953)
+**对应论文**：Generalized Boundary FDR Control under Arbitrary Dependence: An Approach on Closure Principle · [arXiv:2605.09953](https://arxiv.org/abs/2605.09953) · 📖 [长篇精读](../../deep_reads/jcsds2026-2605.09953.md)
 
 <details><summary>摘要（原文）</summary>
 

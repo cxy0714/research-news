@@ -110,7 +110,7 @@ Gaussian Mixture Model (GMM) 是聚类与密度估计的经典工具，但高维
 
 **讲者**：Dangzheng Liu（University of Science and Technology of China）
 
-**对应论文**：Edge Universality for Inhomogeneous Random Matrices II: Markov Chain Comparison and Critical Statistics · [arXiv:2604.20215](https://arxiv.org/abs/2604.20215)
+**对应论文**：Edge Universality for Inhomogeneous Random Matrices II: Markov Chain Comparison and Critical Statistics · [arXiv:2604.20215](https://arxiv.org/abs/2604.20215) · 📖 [长篇精读](../../deep_reads/jcsds2026-2604.20215.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -210,7 +210,7 @@ The first paper in this series introduced a \emph{short-to-long mixing} conditio
 
 **讲者**：Yin Xia（Fudan University）
 
-**对应论文**：Active Hypothesis Testing under Computational Budgets with Applications to GWAS and LLM · [arXiv:2512.01423](https://arxiv.org/abs/2512.01423)
+**对应论文**：Active Hypothesis Testing under Computational Budgets with Applications to GWAS and LLM · [arXiv:2512.01423](https://arxiv.org/abs/2512.01423) · 📖 [长篇精读](../../deep_reads/jcsds2026-2512.01423.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -255,7 +255,7 @@ In large-scale hypothesis testing, computing exact $p$-values or $e$-values is o
 
 **讲者**：Yajie Bao（Nankai University）
 
-**对应论文**：Shape-Adaptive Conditional Calibration for Conformal Prediction via Minimax Optimization · [arXiv:2603.23374](https://arxiv.org/abs/2603.23374)
+**对应论文**：Shape-Adaptive Conditional Calibration for Conformal Prediction via Minimax Optimization · [arXiv:2603.23374](https://arxiv.org/abs/2603.23374) · 📖 [长篇精读](../../deep_reads/jcsds2026-2603.23374.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -281,7 +281,7 @@ Achieving valid conditional coverage in conformal prediction is challenging due 
 
 **讲者**：Xin Chen（Southern University of Science and Technology）
 
-**对应论文**：Differentially private sliced inverse regression in the federated paradigm · [arXiv:2306.06324](https://arxiv.org/abs/2306.06324)
+**对应论文**：Differentially private sliced inverse regression in the federated paradigm · [arXiv:2306.06324](https://arxiv.org/abs/2306.06324) · 📖 [长篇精读](../../deep_reads/jcsds2026-2306.06324.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -302,7 +302,7 @@ Sliced inverse regression (SIR), which includes linear discriminant analysis (LD
 
 **讲者**：Zhenhua Lin（National University of Singapore）
 
-**对应论文**：Neural Wasserstein Two-Sample Tests · [arXiv:2601.21732](https://arxiv.org/abs/2601.21732)
+**对应论文**：Neural Wasserstein Two-Sample Tests · [arXiv:2601.21732](https://arxiv.org/abs/2601.21732) · 📖 [长篇精读](../../deep_reads/jcsds2026-2601.21732.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -330,7 +330,7 @@ The two-sample homogeneity testing problem is fundamental in statistics and beco
 
 **讲者**：Long Feng（The University of Hong Kong）
 
-**对应论文**：A General Framework of Brain Region Detection And Genetic Variants Selection in Imaging Genetics · [arXiv:2412.19735](https://arxiv.org/abs/2412.19735)
+**对应论文**：A General Framework of Brain Region Detection And Genetic Variants Selection in Imaging Genetics · [arXiv:2412.19735](https://arxiv.org/abs/2412.19735) · 📖 [长篇精读](../../deep_reads/jcsds2026-2412.19735.md)
 
 <details><summary>摘要（原文）</summary>
 

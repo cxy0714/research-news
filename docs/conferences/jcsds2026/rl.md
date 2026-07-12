@@ -15,7 +15,7 @@
 
 **讲者**：Chengchun Shi（London School of Economics and Political Science）
 
-**对应论文**：Kernelized Advantage Estimation: From Nonparametric Statistics to LLM Reasoning · [arXiv:2604.28005](https://arxiv.org/abs/2604.28005)
+**对应论文**：Kernelized Advantage Estimation: From Nonparametric Statistics to LLM Reasoning · [arXiv:2604.28005](https://arxiv.org/abs/2604.28005) · 📖 [长篇精读](../../deep_reads/jcsds2026-2604.28005.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -46,7 +46,7 @@ Recent advances in large language models (LLMs) have increasingly relied on rein
 
 **讲者**：Muheng Li（University of Toronto）
 
-**对应论文**：What should post-training optimize? A test-time scaling law perspective · [arXiv:2605.10716](https://arxiv.org/abs/2605.10716)
+**对应论文**：What should post-training optimize? A test-time scaling law perspective · [arXiv:2605.10716](https://arxiv.org/abs/2605.10716) · 📖 [长篇精读](../../deep_reads/jcsds2026-2605.10716.md)
 
 <details><summary>摘要（原文）</summary>
 

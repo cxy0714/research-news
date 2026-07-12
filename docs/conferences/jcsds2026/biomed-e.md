@@ -159,7 +159,7 @@
 
 **讲者**：Xinyue Li（City University of Hong Kong）
 
-**对应论文**：An Efficient Two-Dimensional Functional Mixed-Effect Model Framework for Repeatedly Measured Functional Data · [arXiv:2409.03296](https://arxiv.org/abs/2409.03296)
+**对应论文**：An Efficient Two-Dimensional Functional Mixed-Effect Model Framework for Repeatedly Measured Functional Data · [arXiv:2409.03296](https://arxiv.org/abs/2409.03296) · 📖 [长篇精读](../../deep_reads/jcsds2026-2409.03296.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -180,7 +180,7 @@ With the rapid development of wearable device technologies, accelerometers can r
 
 **讲者**：Lijun Wang（Zhejiang University）
 
-**对应论文**：False Discovery Rate Control via Data Splitting for Testing-after-Clustering · [arXiv:2410.06451](https://arxiv.org/abs/2410.06451)
+**对应论文**：False Discovery Rate Control via Data Splitting for Testing-after-Clustering · [arXiv:2410.06451](https://arxiv.org/abs/2410.06451) · 📖 [长篇精读](../../deep_reads/jcsds2026-2410.06451.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -213,7 +213,7 @@ Testing for differences in features between clusters in various applications oft
 
 **讲者**：Yu Cheng（University of Pittsburgh）
 
-**对应论文**：Generalized win fraction regression for composite survival endpoints · [arXiv:2604.04360](https://arxiv.org/abs/2604.04360)
+**对应论文**：Generalized win fraction regression for composite survival endpoints · [arXiv:2604.04360](https://arxiv.org/abs/2604.04360) · 📖 [长篇精读](../../deep_reads/jcsds2026-2604.04360.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -281,7 +281,7 @@ We propose a generalized win fraction regression framework for prioritized compo
 
 **讲者**：Zi Wang（University of Electronic Science and Technology of China）
 
-**对应论文**：Interim Analysis in Sequential Multiple Assignment Randomized Trials for Survival Outcomes · [arXiv:2504.03143](https://arxiv.org/abs/2504.03143)
+**对应论文**：Interim Analysis in Sequential Multiple Assignment Randomized Trials for Survival Outcomes · [arXiv:2504.03143](https://arxiv.org/abs/2504.03143) · 📖 [长篇精读](../../deep_reads/jcsds2026-2504.03143.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -362,7 +362,7 @@ Sequential multiple assignment randomized trials mimic the actual treatment proc
 
 **讲者**：Tianni Zhang（Xi'an Jiaotong-Liverpool University）
 
-**对应论文**：Block Empirical Likelihood Inference for Longitudinal Generalized Partially Linear Single-Index Models · [arXiv:2602.14981](https://arxiv.org/abs/2602.14981)
+**对应论文**：Block Empirical Likelihood Inference for Longitudinal Generalized Partially Linear Single-Index Models · [arXiv:2602.14981](https://arxiv.org/abs/2602.14981) · 📖 [长篇精读](../../deep_reads/jcsds2026-2602.14981.md)
 
 <details><summary>摘要（原文）</summary>
 

@@ -15,7 +15,7 @@
 
 **讲者**：Zijun Gao（University of Southern California）
 
-**对应论文**：Causal Partial Identification via Conditional Optimal Transport · [arXiv:2506.00257](https://arxiv.org/abs/2506.00257)
+**对应论文**：Causal Partial Identification via Conditional Optimal Transport · [arXiv:2506.00257](https://arxiv.org/abs/2506.00257) · 📖 [长篇精读](../../deep_reads/jcsds2026-2506.00257.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -36,7 +36,7 @@ We study the estimation of causal estimand involving the joint distribution of t
 
 **讲者**：Jinzhou Li（National University of Singapore）
 
-**对应论文**：Root cause discovery via permutations and Cholesky decomposition · [arXiv:2410.12151](https://arxiv.org/abs/2410.12151)
+**对应论文**：Root cause discovery via permutations and Cholesky decomposition · [arXiv:2410.12151](https://arxiv.org/abs/2410.12151) · 📖 [长篇精读](../../deep_reads/jcsds2026-2410.12151.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -113,7 +113,7 @@ This work is motivated by the following problem: Can we identify the disease-cau
 
 **讲者**：Zhenyu Wang（University of Michigan）
 
-**对应论文**：Information Borrowing from Partially Compatible Trajectories for Estimation of Dynamic Treatment Regimes · [arXiv:2512.10069](https://arxiv.org/abs/2512.10069)
+**对应论文**：Information Borrowing from Partially Compatible Trajectories for Estimation of Dynamic Treatment Regimes · [arXiv:2512.10069](https://arxiv.org/abs/2512.10069) · 📖 [长篇精读](../../deep_reads/jcsds2026-2512.10069.md)
 
 经检索，讲者 Zhenyu (Zach) Wang（密歇根大学，导师 Lu Wang）最可能对应的论文为 arXiv:2512.10069《Information Borrowing from Partially Compatible Trajectories for Estimation of Dynamic Treatment Regimes》。（注：本环境无法抓取 arXiv 摘要页，abstract 暂缺，以下深读基于题目、作者主页及领域方向。）
 
@@ -204,7 +204,7 @@ This work is motivated by the following problem: Can we identify the disease-cau
 
 **讲者**：Xinwen Liu（Yunnan University(Southwest United Graduate School)）
 
-**对应论文**：Partially Functional Dynamic Backdoor Diffusion-based Causal Model · [arXiv:2509.00472](https://arxiv.org/abs/2509.00472)
+**对应论文**：Partially Functional Dynamic Backdoor Diffusion-based Causal Model · [arXiv:2509.00472](https://arxiv.org/abs/2509.00472) · 📖 [长篇精读](../../deep_reads/jcsds2026-2509.00472.md)
 
 检索到对应 arXiv 论文 2509.00472（因环境限制未能抓取摘要原文，deep_read 基于标题、多个索引页题录及作者方向）。**问题**：在含时间维度与未测量混杂的观测数据中做因果效应估计与反事实/干预生成，尤其当协变量部分为函数型（随时间连续变化的曲线，partially functional）、处理与结局动态演化时，传统结构因果模型难以刻画高维分布。**核心方法**：将扩散模型 (diffusion-based generative model) 嵌入因果框架，构建“后门 (backdoor) 扩散因果模型”——利用后门准则识别可调整的混杂集，以扩散过程建模条件分布 $p(Y\mid \text{do}(A), C)$，其中 $C$ 含标量与函数型分量（partially functional），并引入动态 (dynamic) 结构处理时间演化。通过 backdoor 调整在生成过程中实现干预下的采样，从而估计动态处理效应与反事实轨迹。**与已有工作关系**：延续将扩散/生成模型用于因果推断的路线（如 Diffusion Model in Causal Inference with Unmeasured Confounders、DCM 等），创新在于把函数型数据分析 (FDA) 与动态后门调整结合进扩散框架，处理连续时间协变量。**贡献**：提出 PFD-BDCM 模型、给出识别与估计策略，并在含函数型协变量的时序因果场景验证其对复杂分布与动态效应的建模能力。
 
@@ -281,7 +281,7 @@ This work is motivated by the following problem: Can we identify the disease-cau
 
 **讲者**：Yuxin Tao（Southern University of Science and Technology）
 
-**对应论文**：Generalized Spectral Testing with Sample Splitting · [arXiv:2605.29315](https://arxiv.org/abs/2605.29315)
+**对应论文**：Generalized Spectral Testing with Sample Splitting · [arXiv:2605.29315](https://arxiv.org/abs/2605.29315) · 📖 [长篇精读](../../deep_reads/jcsds2026-2605.29315.md)
 
 <details><summary>摘要（原文）</summary>
 

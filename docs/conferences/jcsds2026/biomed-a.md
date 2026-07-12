@@ -278,7 +278,7 @@ scLAMBDA是一个深度生成学习框架，其核心思想是利用预训练的
 
 **讲者**：Wenxuan Guo（University of Chicago）
 
-**对应论文**：Gaussianized Design Optimization for Covariate Balance in Randomized Experiments · [arXiv:2502.16042](https://arxiv.org/abs/2502.16042)
+**对应论文**：Gaussianized Design Optimization for Covariate Balance in Randomized Experiments · [arXiv:2502.16042](https://arxiv.org/abs/2502.16042) · 📖 [长篇精读](../../deep_reads/jcsds2026-2502.16042.md)
 
 <details><summary>摘要（原文）</summary>
 

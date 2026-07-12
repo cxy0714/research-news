@@ -15,7 +15,7 @@
 
 **讲者**：Zhifan Li（Zhongnan University of Economics and Law）
 
-**对应论文**：High-dimensional online learning via asynchronous decomposition: Non-divergent results, dynamic regularization, and beyond · [arXiv:2603.20696](https://arxiv.org/abs/2603.20696)
+**对应论文**：High-dimensional online learning via asynchronous decomposition: Non-divergent results, dynamic regularization, and beyond · [arXiv:2603.20696](https://arxiv.org/abs/2603.20696) · 📖 [长篇精读](../../deep_reads/jcsds2026-2603.20696.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -60,7 +60,7 @@ Existing high-dimensional online learning methods often face the challenge that 
 
 **讲者**：Ding Liang（Fudan University）
 
-**对应论文**：Sampling Complexity of TD and PPO in RKHS · [arXiv:2509.24991](https://arxiv.org/abs/2509.24991)
+**对应论文**：Sampling Complexity of TD and PPO in RKHS · [arXiv:2509.24991](https://arxiv.org/abs/2509.24991) · 📖 [长篇精读](../../deep_reads/jcsds2026-2509.24991.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -85,7 +85,7 @@ We revisit Proximal Policy Optimization (PPO) from a function-space perspective.
 
 **讲者**：Falong Tan（Hunan University）
 
-**对应论文**：In-Context Learning as Nonparametric Conditional Probability Estimation: Risk Bounds and Optimality · [arXiv:2508.08673](https://arxiv.org/abs/2508.08673)
+**对应论文**：In-Context Learning as Nonparametric Conditional Probability Estimation: Risk Bounds and Optimality · [arXiv:2508.08673](https://arxiv.org/abs/2508.08673) · 📖 [长篇精读](../../deep_reads/jcsds2026-2508.08673.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -281,7 +281,7 @@ This paper investigates the expected excess risk of in-context learning (ICL) fo
 
 **讲者**：Ziwen Gao（Tsinghua University）
 
-**对应论文**：Combining pre-trained models via localized model averaging · [arXiv:2605.13421](https://arxiv.org/abs/2605.13421)
+**对应论文**：Combining pre-trained models via localized model averaging · [arXiv:2605.13421](https://arxiv.org/abs/2605.13421) · 📖 [长篇精读](../../deep_reads/jcsds2026-2605.13421.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -307,7 +307,7 @@ Many pre-trained models (PTMs) are available in modern applications. Because dif
 
 **讲者**：Yukun Liu（East China Normal University）
 
-**对应论文**：Conformal Prediction Beyond the Horizon: Distribution-Free Inference for Policy Evaluation · [arXiv:2510.26026](https://arxiv.org/abs/2510.26026)
+**对应论文**：Conformal Prediction Beyond the Horizon: Distribution-Free Inference for Policy Evaluation · [arXiv:2510.26026](https://arxiv.org/abs/2510.26026) · 📖 [长篇精读](../../deep_reads/jcsds2026-2510.26026.md)
 
 <details><summary>摘要（原文）</summary>
 
@@ -375,7 +375,7 @@ Reliable uncertainty quantification is crucial for reinforcement learning (RL) i
 
 **讲者**：Ziqi Chen（East China Normal University）
 
-**对应论文**：Conditionally Whitened Generative Models for Probabilistic Time Series Forecasting · [arXiv:2509.20928](https://arxiv.org/abs/2509.20928)
+**对应论文**：Conditionally Whitened Generative Models for Probabilistic Time Series Forecasting · [arXiv:2509.20928](https://arxiv.org/abs/2509.20928) · 📖 [长篇精读](../../deep_reads/jcsds2026-2509.20928.md)
 
 <details><summary>摘要（原文）</summary>
 
