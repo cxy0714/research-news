@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - "docs/**"
+      - "overrides/**"
       - "mkdocs.yml"
       - ".github/workflows/deploy-pages.yml"
   workflow_dispatch:
@@ -28,10 +29,17 @@ jobs:
         with:
           python-version: "3.11"
           cache: pip
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
       - name: Install MkDocs
         run: pip install mkdocs mkdocs-material
       - name: Build site
         run: mkdocs build --strict
+      - name: Build Pagefind search index
+        # Scans the built HTML in site/ and writes the sharded index +
+        # search UI bundle into site/pagefind/, deployed alongside the site.
+        run: npx -y pagefind@^1 --site site
       - uses: actions/upload-pages-artifact@v3
         with:
           path: site

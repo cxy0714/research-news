@@ -8,7 +8,6 @@ theme:
     - navigation.instant
     - navigation.tracking
     - navigation.tabs
-    - search.suggest
     - content.code.copy
   palette:
     - scheme: default
@@ -26,6 +25,7 @@ theme:
 
 nav:
   - 主页: index.md
+  - 搜索: search.md
   - 每日存档: all_daily.md
   - 精读存档: all_deep_reads.md
   - 讲座精读: all_talks.md
@@ -83,8 +83,14 @@ nav:
   - Token 消耗: token_usage.md
   - 更新日志: changelog.md
 
-plugins:
-  - search
+# Built-in lunr search is disabled: it downloads the whole corpus and builds
+# the index in-browser, which stopped scaling past a few thousand pages.
+# Search is served by Pagefind instead (sharded index built at deploy time by
+# the `pagefind` step in .github/workflows/deploy-pages.yml), surfaced on the
+# dedicated /search/ page via docs/javascripts/search-pagefind.js.
+# NOTE: keep this key present-but-empty — removing it makes MkDocs re-enable
+# the `search` plugin by default.
+plugins: []
 
 hooks:
   - mkdocs_hooks.py
@@ -92,6 +98,7 @@ hooks:
 extra_javascript:
   - javascripts/extras.js
   - javascripts/external-links.js
+  - javascripts/search-pagefind.js
   - javascripts/mathjax.js
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 
