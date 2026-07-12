@@ -303,6 +303,57 @@ def fetch_by_ids(ids: list[str], *, batch_size: int = 25) -> list[Paper]:
     return out
 
 
+# ── search by title (conference talk matching) ────────────────────────────────
+
+def _clean_query(text: str) -> str:
+    """Strip punctuation that breaks the arXiv query grammar; keep words."""
+    text = re.sub(r"[^\w\s]", " ", text)
+    return " ".join(text.split())
+
+
+def search_by_title(title: str, *, max_results: int = 8) -> list[Paper]:
+    """Search arXiv for papers whose title/abstract match `title`.
+
+    Uses the `ti:` field first (most precise); the caller scores the returned
+    candidates for similarity. Returns [] on any failure (fails open).
+    """
+    q = _clean_query(title)
+    if not q:
+        return []
+    params = {
+        "search_query": f'ti:"{q}"',
+        "sortBy": "relevance",
+        "start": 0,
+        "max_results": max_results,
+    }
+    try:
+        xml = _fetch_api(params)
+    except Exception as e:
+        log.warning("arXiv title search failed for %r: %s", title[:60], e)
+        return []
+    out: list[Paper] = []
+    try:
+        root = ET.fromstring(xml)
+    except Exception:
+        return []
+    for entry in root.findall(f"{ATOM}entry"):
+        result = _api_entry_to_paper(entry)
+        if result is not None:
+            out.append(result[0])
+    # Fall back to an all-fields search if the ti: query found nothing.
+    if not out:
+        params["search_query"] = q
+        try:
+            root = ET.fromstring(_fetch_api(params))
+            for entry in root.findall(f"{ATOM}entry"):
+                result = _api_entry_to_paper(entry)
+                if result is not None:
+                    out.append(result[0])
+        except Exception:
+            pass
+    return out
+
+
 # ── public interface ──────────────────────────────────────────────────────────
 
 def fetch_all(cfg: dict, for_date: date | None = None) -> list[Paper]:

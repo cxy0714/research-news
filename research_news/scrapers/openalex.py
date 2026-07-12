@@ -15,6 +15,7 @@ publisher-canonical source for the journals it hosts.
 from __future__ import annotations
 
 import logging
+import re
 
 import httpx
 from tenacity import retry, stop_after_attempt, wait_exponential
@@ -50,6 +51,71 @@ def parse_works_json(data: dict) -> list[tuple[str, str | None]]:
             continue
         doi = _norm_doi(w.get("doi"))
         out.append((title, doi or None))
+    return out
+
+
+def _abstract_from_inverted_index(inv: dict | None) -> str:
+    """Reconstruct plain-text abstract from OpenAlex's inverted-index format."""
+    if not inv:
+        return ""
+    positions: list[tuple[int, str]] = []
+    for word, idxs in inv.items():
+        for i in idxs:
+            positions.append((i, word))
+    positions.sort()
+    return " ".join(w for _, w in positions)
+
+
+def _arxiv_id_from_work(w: dict) -> str | None:
+    """Pull an arXiv id from any location in an OpenAlex work, if present."""
+    locs = list(w.get("locations") or [])
+    if w.get("primary_location"):
+        locs.append(w["primary_location"])
+    for loc in locs:
+        src = (loc or {}).get("source") or {}
+        pdf = (loc or {}).get("pdf_url") or ""
+        landing = (loc or {}).get("landing_page_url") or ""
+        for field in (src.get("display_name") or "", pdf, landing):
+            m = re.search(r"(\d{4}\.\d{4,6})", field or "")
+            if m and ("arxiv" in (field or "").lower() or "arxiv" in (src.get("display_name") or "").lower()):
+                return m.group(1)
+    return None
+
+
+def search_works_by_title(title: str, *, per_page: int = 8) -> list[dict]:
+    """Search OpenAlex for a title. Returns list of dicts:
+    {title, authors[list], abstract, doi, arxiv_id, url}. Fails open ([])."""
+    try:
+        data = _get_json(
+            f"{OPENALEX_BASE}/works",
+            {"search": title, "per-page": per_page,
+             "select": "id,doi,title,display_name,authorships,"
+                       "abstract_inverted_index,primary_location,locations"},
+        )
+    except Exception as e:  # noqa: BLE001
+        log.warning("OpenAlex title search failed for %r: %s", title[:60], e)
+        return []
+    out: list[dict] = []
+    for w in data.get("results", []):
+        t = (w.get("title") or w.get("display_name") or "").strip()
+        if not t:
+            continue
+        authors = [
+            (a.get("author") or {}).get("display_name", "")
+            for a in (w.get("authorships") or [])
+        ]
+        doi = _norm_doi(w.get("doi"))
+        arxiv_id = _arxiv_id_from_work(w)
+        url = f"https://arxiv.org/abs/{arxiv_id}" if arxiv_id else (
+            f"https://doi.org/{doi}" if doi else w.get("id", ""))
+        out.append({
+            "title": t,
+            "authors": [a for a in authors if a],
+            "abstract": _abstract_from_inverted_index(w.get("abstract_inverted_index")),
+            "doi": doi or None,
+            "arxiv_id": arxiv_id,
+            "url": url,
+        })
     return out
 
 
