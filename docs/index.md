@@ -17,7 +17,7 @@
 
 [→ 查看完整报告](daily/2026-07-13.md)
 
-### 精读论文（80 篇）
+### 精读论文（134 篇）
 
 - [Simultaneous Estimation of Multiple Treatment Effects from Observational Studies](deep_reads/2026-07-13-10.1080_10618600.2024.2449074.md)  
   `因果推断` · 相关性 8/10
@@ -33,6 +33,18 @@
   `因果推断` · 相关性 8/10
 - [Media Measurement and the Assisted Own Goal: Attribution, Marketing-Mix Models, and Individual-Level Incrementality](deep_reads/2026-07-13-2607.09608.md)  
   `因果推断` · 相关性 8/10
+- [Statistical Inference Based on Kernel Distribution Function EstimatorsStatistical Inference Based on Kernel Distribution Function Estimators, Rizky Reza Fauzi and Yoshihiko Maesono, Singapore: Springer Nature Singapore Pte Ltd, 2023, 103 pp., $39.99, ISBN 9789819918621.](deep_reads/2026-07-13-10.1080_00401706.2024.2374184.md)  
+  `数理统计 / 假设检验` · 相关性 7/10
+- [Block Vecchia Approximation for Scalable and Efficient Gaussian Process Computations](deep_reads/2026-07-13-10.1080_00401706.2025.2475784.md)  
+  `统计计算 / 算法` · 相关性 7/10
+- [Rerandomization Algorithms for Optimal Designs of Network A/B Tests](deep_reads/2026-07-13-10.1080_00401706.2025.2505438.md)  
+  `因果推断` · 相关性 7/10
+- [Cause and Effect Business Analytics and Data Science](deep_reads/2026-07-13-10.1080_00401706.2026.2652822.md)  
+  `因果推断` · 相关性 7/10
+- [The Effect: An Introduction to Research Design and Causality (2nd ed.)](deep_reads/2026-07-13-10.1080_00401706.2026.2652818.md)  
+  `因果推断` · 相关性 7/10
+- [Genetic Algorithm-Based Bayesian Optimal Design for Network Experiments](deep_reads/2026-07-13-10.1080_00401706.2025.2584500.md)  
+  `因果推断` · 相关性 7/10
 - [Sample Efficient Nonparametric Regression via Low-Rank Regularization](deep_reads/2026-07-13-10.1080_10618600.2024.2414891.md)  
   `非参数 / 半参数` · 相关性 7/10
 - [FAStEN: An Efficient Adaptive Method for Feature Selection and Estimation in High-Dimensional Functional Regressions](deep_reads/2026-07-13-10.1080_10618600.2024.2407464.md)  
@@ -67,6 +79,20 @@
   `非参数 / 半参数` · 相关性 7/10
 - [Geometric planted matchings in high dimensions: The power of multiple views](deep_reads/2026-07-13-2607.09026.md)  
   `高维统计 / 随机矩阵` · 相关性 7/10
+- [A Course in the Large Sample Theory of Statistical InferenceA Course in the Large Sample Theory of Statistical Inference, W. J. Hall and D. Oakes, Boca Raton, FL: Chapman and Hall, CRC Press, 2024, x + 310 pp., $115.00, ISBN 978-0429160080.](deep_reads/2026-07-13-10.1080_00401706.2024.2374182.md)  
+  `数理统计 / 假设检验` · 相关性 6/10
+- [Transfer Learning with Large-Scale Quantile Regression](deep_reads/2026-07-13-10.1080_00401706.2024.2315952.md)  
+  `高维统计 / 随机矩阵` · 相关性 6/10
+- [Moving Sum Procedure for Change Point Detection under Piecewise Linearity](deep_reads/2026-07-13-10.1080_00401706.2024.2308202.md)  
+  `数理统计 / 假设检验` · 相关性 6/10
+- [An Inference Method for Global Sensitivity Analysis](deep_reads/2026-07-13-10.1080_00401706.2024.2431113.md)  
+  `因果推断` · 相关性 6/10
+- [Robust Covariance Estimation and Explainable Outlier Detection for Matrix-Valued Data](deep_reads/2026-07-13-10.1080_00401706.2025.2475781.md)  
+  `统计计算 / 算法` · 相关性 6/10
+- [Factor Importance Ranking and Selection Using Total Indices](deep_reads/2026-07-13-10.1080_00401706.2025.2483531.md)  
+  `非参数 / 半参数` · 相关性 6/10
+- [An Adjacency-Adaptive Gaussian Process Method for Sample Efficient Response Surface Modeling and Test-Point Acquisition](deep_reads/2026-07-13-10.1080_00401706.2025.2564129.md)  
+  `统计计算 / 算法` · 相关性 6/10
 - [Quantile Regression and Homogeneity Identification of a Semiparametric Panel Data Model](deep_reads/2026-07-13-10.1080_10618600.2024.2433672.md)  
   `非参数 / 半参数` · 相关性 6/10
 - [High-Dimensional Block Diagonal Covariance Structure Detection Using Singular Vectors](deep_reads/2026-07-13-10.1080_10618600.2024.2422985.md)  
@@ -105,6 +131,12 @@
   `统计计算 / 算法` · 相关性 6/10
 - [Near-optimal node-private community estimation in polynomial-time](deep_reads/2026-07-13-2607.09441.md)  
   `统计计算 / 算法` · 相关性 6/10
+- [Active Sampling: A Machine-Learning-Assisted Framework for Finite Population Inference with Optimal Subsamples](deep_reads/2026-07-13-10.1080_00401706.2024.2374554.md)  
+  `因果推断` · 相关性 5/10
+- [Distribution-on-Scalar Single-Index Quantile Regression Model for Handling Tumor Heterogeneity](deep_reads/2026-07-13-10.1080_00401706.2024.2441686.md)  
+  `非参数 / 半参数` · 相关性 5/10
+- [Real-Time Monitoring of Dynamic Tensor Data with Longitudinal Patterns: A Tensor Graphical LASSO Approach](deep_reads/2026-07-13-10.1080_00401706.2025.2491362.md)  
+  `统计计算 / 算法` · 相关性 5/10
 - [Decentralized Learning of Quantile Regression: A Smoothing Approach](deep_reads/2026-07-13-10.1080_10618600.2024.2431060.md)  
   `统计计算 / 算法` · 相关性 5/10
 - [Scalable Estimation and Two-Sample Testing for Large Networks via Subsampling](deep_reads/2026-07-13-10.1080_10618600.2024.2432974.md)  
@@ -123,6 +155,24 @@
   `非参数 / 半参数` · 相关性 5/10
 - [Online Change-Point Detection for Functional Data](deep_reads/2026-07-13-10.1080_10618600.2025.2560625.md)  
   `数理统计 / 假设检验` · 相关性 5/10
+- [Federated Multiple Tensor-on-Tensor Regression (FedMTOT) for Multimodal Data Under Data-Sharing Constraints](deep_reads/2026-07-13-10.1080_00401706.2024.2333506.md)  
+  `统计计算 / 算法` · 相关性 4/10
+- [A Subsampling Strategy for AIC-based Model Averaging with Generalized Linear Models](deep_reads/2026-07-13-10.1080_00401706.2024.2407310.md)  
+  `统计计算 / 算法` · 相关性 4/10
+- [Scalable Methods for Multiple Time Series Comparison in Second Order Dynamics](deep_reads/2026-07-13-10.1080_00401706.2024.2388547.md)  
+  `数理统计 / 假设检验` · 相关性 4/10
+- [Convolutional Non-Homogeneous Poisson Process and its Application to Wildfire Ignition Risk Quantification for Power Delivery Networks](deep_reads/2026-07-13-10.1080_00401706.2024.2365729.md)  
+  `其他` · 相关性 4/10
+- [Drift versus Shift: Decoupling Trends and Changepoint Analysis](deep_reads/2026-07-13-10.1080_00401706.2024.2365730.md)  
+  `其他` · 相关性 4/10
+- [Partially Observable Online Nonparametric Monitoring of Spatiotemporally Correlated Data Streams](deep_reads/2026-07-13-10.1080_00401706.2025.2460633.md)  
+  `其他` · 相关性 4/10
+- [Fractional Cross-Validation for Optimizing Hyperparameters of Supervised Learning Algorithms](deep_reads/2026-07-13-10.1080_00401706.2025.2515926.md)  
+  `统计计算 / 算法` · 相关性 4/10
+- [Targeted Variance Reduction: Effective Bayesian Optimization of Black-Box Simulators with Noise Parameters](deep_reads/2026-07-13-10.1080_00401706.2025.2495298.md)  
+  `统计计算 / 算法` · 相关性 4/10
+- [Solving Bayesian Inverse Problems Using Gaussian Process Regression with Goal-Oriented Active Learning](deep_reads/2026-07-13-10.1080_00401706.2025.2561745.md)  
+  `统计计算 / 算法` · 相关性 4/10
 - [Multivariate Moment Least-Squares Variance Estimators for Reversible Markov Chains](deep_reads/2026-07-13-10.1080_10618600.2024.2407458.md)  
   `统计计算 / 算法` · 相关性 4/10
 - [Sample-Specific Learning of Lymphovascular Invasion with Heterogeneous Spatial Patterns](deep_reads/2026-07-13-10.1080_10618600.2025.2459285.md)  
@@ -143,6 +193,34 @@
   `统计计算 / 算法` · 相关性 4/10
 - [Efficient Quantization Mean Estimation for Distributed Learning](deep_reads/2026-07-13-10.1080_10618600.2025.2572324.md)  
   `统计计算 / 算法` · 相关性 4/10
+- [An Adaptive Sampling Strategy for Real-Time Anomaly Detection with Unmanned Sensing Vehicles](deep_reads/2026-07-13-10.1080_00401706.2024.2322645.md)  
+  `统计计算 / 算法` · 相关性 3/10
+- [Deep Latent Factor Model for Spatio-Temporal Forecasting](deep_reads/2026-07-13-10.1080_00401706.2024.2322661.md)  
+  `其他` · 相关性 3/10
+- [Covariate-Dependent Clustering of Undirected Networks with Brain-Imaging Data](deep_reads/2026-07-13-10.1080_00401706.2024.2321930.md)  
+  `其他` · 相关性 3/10
+- [Statistical Process Monitoring from Industry 2.0 to Industry 4.0: Insights into Research and Practice](deep_reads/2026-07-13-10.1080_00401706.2024.2327341.md)  
+  `其他` · 相关性 3/10
+- [Multi-Agent Collaborative Bayesian Optimization via Constrained Gaussian Processes](deep_reads/2026-07-13-10.1080_00401706.2024.2365732.md)  
+  `统计计算 / 算法` · 相关性 3/10
+- [Spatiotemporal Interactive Modeling of Event-Based Dynamic Networks](deep_reads/2026-07-13-10.1080_00401706.2024.2441679.md)  
+  `其他` · 相关性 3/10
+- [Strata Design for Variance Reduction in Stochastic Simulation](deep_reads/2026-07-13-10.1080_00401706.2024.2416411.md)  
+  `统计计算 / 算法` · 相关性 3/10
+- [Regression Recalibration by Learning PIT Map Values](deep_reads/2026-07-13-10.1080_00401706.2025.2464004.md)  
+  `其他` · 相关性 3/10
+- [Likelihood Inference for Possibly Nonstationary Processes via Adaptive Overdifferencing](deep_reads/2026-07-13-10.1080_00401706.2025.2453207.md)  
+  `其他` · 相关性 3/10
+- [Experimental Design and Modeling for Forward-Inverse Maps](deep_reads/2026-07-13-10.1080_00401706.2024.2413077.md)  
+  `其他` · 相关性 3/10
+- [A Dynamic Screening System for Early Detection of Multiple Interconnected Events](deep_reads/2026-07-13-10.1080_00401706.2025.2560340.md)  
+  `其他` · 相关性 3/10
+- [Optimal Experimental Designs for Process Robustness Studies](deep_reads/2026-07-13-10.1080_00401706.2025.2580633.md)  
+  `其他` · 相关性 3/10
+- [Monitoring and Diagnosis for Multi-Mode Processes with Varying Operating Parameters: A Covariate-Adjusted Mixture Bayesian Network Approach](deep_reads/2026-07-13-10.1080_00401706.2025.2573230.md)  
+  `其他` · 相关性 3/10
+- [Supervised Learning with Inter- and Intra-Dependence in Multilayer Networks with Applications in Security Systems Analysis](deep_reads/2026-07-13-10.1080_00401706.2025.2574417.md)  
+  `其他` · 相关性 3/10
 - [Distortion Corrected Kernel Density Estimator on Riemannian Manifolds](deep_reads/2026-07-13-10.1080_10618600.2024.2415543.md)  
   `非参数 / 半参数` · 相关性 3/10
 - [Simultaneous Outlier Detection and Prediction for Kriging with True Identification](deep_reads/2026-07-13-10.1080_10618600.2025.2486728.md)  
@@ -163,6 +241,32 @@
   `统计计算 / 算法` · 相关性 3/10
 - [Approximations in the Homogeneous Ising Model with Application to Scene Analysis](deep_reads/2026-07-13-10.1080_10618600.2025.2559675.md)  
   `统计计算 / 算法` · 相关性 3/10
+- [Assessing Measurement System Agreement in the Presence of Reproducibility and Repeatability](deep_reads/2026-07-13-10.1080_00401706.2023.2296465.md)  
+  `其他` · 相关性 2/10
+- [Data-Driven Pathwise Sampling Approaches for Online Anomaly Detection](deep_reads/2026-07-13-10.1080_00401706.2024.2342314.md)  
+  `其他` · 相关性 2/10
+- [Screening Designs for Continuous and Categorical Factors](deep_reads/2026-07-13-10.1080_00401706.2024.2362149.md)  
+  `其他` · 相关性 2/10
+- [Note on the Equivalence of Orthogonalizing EM and Proximal Gradient Descent](deep_reads/2026-07-13-10.1080_00401706.2024.2430204.md)  
+  `统计计算 / 算法` · 相关性 2/10
+- [Remaining Useful Life Prediction Based on Forward Intensity](deep_reads/2026-07-13-10.1080_00401706.2024.2421763.md)  
+  `其他` · 相关性 2/10
+- [Optimal Planning of Destructive Degradation Tests](deep_reads/2026-07-13-10.1080_00401706.2025.2467900.md)  
+  `其他` · 相关性 2/10
+- [Noise Resistant Control Charts for Detecting Periodicity from Correlation](deep_reads/2026-07-13-10.1080_00401706.2025.2460584.md)  
+  `数理统计 / 假设检验` · 相关性 2/10
+- [Optimal Designs for Order-of-Addition Two-Level Factorial Experiments](deep_reads/2026-07-13-10.1080_00401706.2025.2520849.md)  
+  `其他` · 相关性 2/10
+- [A Periodic Fractional Wiener Process for Remaining Useful Life Prediction of Photovoltaic Systems with Long-Range Dependence](deep_reads/2026-07-13-10.1080_00401706.2025.2539785.md)  
+  `其他` · 相关性 2/10
+- [Remaining Useful Life Prediction of Lithium-Ion Batteries Using Monotone Decomposition](deep_reads/2026-07-13-10.1080_00401706.2025.2552297.md)  
+  `其他` · 相关性 2/10
+- [Multi-Layer Sliced Design and Analysis with Application to AI Assurance](deep_reads/2026-07-13-10.1080_00401706.2025.2537033.md)  
+  `其他` · 相关性 2/10
+- [An Adaptive Sampling Strategy for Online Monitoring of Partially Observed Networks](deep_reads/2026-07-13-10.1080_00401706.2025.2580634.md)  
+  `统计计算 / 算法` · 相关性 2/10
+- [PICS: A Sequential Approach to Obtain Optimal Designs for Nonlinear Models Leveraging Closed-Form Solutions for Faster Convergence](deep_reads/2026-07-13-10.1080_00401706.2025.2573234.md)  
+  `其他` · 相关性 2/10
 - [Multi-label Random Subspace Ensemble Classification](deep_reads/2026-07-13-10.1080_10618600.2024.2421248.md)  
   `统计计算 / 算法` · 相关性 2/10
 - [Optimal Subsampling for Data Streams with Measurement Constrained Categorical Responses](deep_reads/2026-07-13-10.1080_10618600.2024.2421990.md)  
@@ -179,6 +283,10 @@
   `统计计算 / 算法` · 相关性 2/10
 - [Biplots for the Correlation Matrix](deep_reads/2026-07-13-10.1080_10618600.2025.2469757.md)  
   `统计计算 / 算法` · 相关性 1/10
+- [Thoughts on Forward-Inverse Maps](deep_reads/2026-07-13-10.1080_00401706.2025.2491366.md)  
+  `其他` · 相关性 0/10
+- [Comment: A Model-Free Method for Input-Output Space-Filling Design](deep_reads/2026-07-13-10.1080_00401706.2025.2459106.md)  
+  `其他` · 相关性 0/10
 
 ## 收藏
 
