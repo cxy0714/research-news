@@ -11,46 +11,40 @@
 - **[收藏](favorites.md)** — 登录后在各页点 ☆ 收藏的论文，自动汇总到这里（总收藏按类别分组、可切换按周；每篇可写评论，无需手动维护）。
 - **[模型测评](all_shootout.md)** — 不同 LLM 在同一批论文上的打分 / 解读对比。
 
-## 今日 · 2026-07-10
+## 今日 · 2026-07-13
 
 ### 每日 arXiv 速览
 
-[→ 查看完整报告](daily/2026-07-10.md)
+[→ 查看完整报告](daily/2026-07-13.md)
 
-### 精读论文（16 篇）
+### 精读论文（13 篇）
 
-- [Marginal Causal Effect Estimation with Continuous Instrumental Variables](deep_reads/2026-07-10-2510.14368.md)  
+- [Decision-analytical models as causal models](deep_reads/2026-07-13-2607.09397.md)  
   `因果推断` · 相关性 8/10
-- [Testing the equality of estimable parameters](deep_reads/2026-07-10-2607.07588.md)  
-  `数理统计 / 假设检验` · 相关性 8/10
-- [Robust Inference for Weighted Estimands](deep_reads/2026-07-10-2607.07524.md)  
+- [Causal Perspectives on Network Meta-Analysis](deep_reads/2026-07-13-2607.09200.md)  
   `因果推断` · 相关性 8/10
-- [Causal Inference for Case Studies in Behavioral Health](deep_reads/2026-07-10-2607.06912.md)  
-  `因果推断` · 相关性 7/10
-- [Transfer Learning for Linear Discriminant Analysis with a Shared Classification Signal](deep_reads/2026-07-10-2607.06936.md)  
+- [A Statistical Test for the Benefits of Personalizing Interventions](deep_reads/2026-07-13-2607.08951.md)  
+  `因果推断` · 相关性 8/10
+- [Misspecified regressions with mixed regressors: robust inference and causal interpretation](deep_reads/2026-07-13-2607.09536.md)  
+  `因果推断` · 相关性 8/10
+- [Media Measurement and the Assisted Own Goal: Attribution, Marketing-Mix Models, and Individual-Level Incrementality](deep_reads/2026-07-13-2607.09608.md)  
+  `因果推断` · 相关性 8/10
+- [How useful is a wrong model? Information-sharing for inference under mean misspecification in linear models](deep_reads/2026-07-13-2607.09579.md)  
+  `数理统计 / 假设检验` · 相关性 7/10
+- [High-Dimensional Interpolators Can Be Fragile: Heavy Tails and High-Dimensional Large Deviations](deep_reads/2026-07-13-2607.09547.md)  
   `高维统计 / 随机矩阵` · 相关性 7/10
-- [From Statistical to Structural Synergy: A Predictability Framework to Quantify the Effects due to High-Order Mechanisms](deep_reads/2026-07-10-2607.07286.md)  
-  `其他` · 相关性 7/10
-- [Best Subset Selection in Linear Regression: Fixed-Design Error Bounds and Insights for Random Designs](deep_reads/2026-07-10-2607.06835.md)  
-  `数理统计 / 假设检验` · 相关性 7/10
-- [The Randomized BH Procedure: A Generalized Framework Encompassing Conformal and Competition Tests](deep_reads/2026-07-10-2607.07245.md)  
-  `数理统计 / 假设检验` · 相关性 7/10
-- [Empirical Bayes Estimation of the Mean of a Function of the Latent Variable with Applications to the Treatment of Nonresponse](deep_reads/2026-07-10-2607.07516.md)  
-  `数理统计 / 假设检验` · 相关性 7/10
-- [Fast Graph-based Higher-Order Clustering Statistics on the GPU](deep_reads/2026-07-10-2607.06604.md)  
-  `天体统计` · 相关性 7/10
-- [Compensator-based inference for signal detection under unknown background: the binned data case](deep_reads/2026-07-10-2607.06939.md)  
-  `天体统计` · 相关性 6/10
-- [Adjusting for Outcome Reporting Bias in Meta-analysis: A Multiple Imputation Approach](deep_reads/2026-07-10-2607.07509.md)  
+- [The Cost of Discretization in Functional Linear Regression: Minimax Rates and Adaptation](deep_reads/2026-07-13-2607.09350.md)  
+  `非参数 / 半参数` · 相关性 7/10
+- [Geometric planted matchings in high dimensions: The power of multiple views](deep_reads/2026-07-13-2607.09026.md)  
+  `高维统计 / 随机矩阵` · 相关性 7/10
+- [SPOT-IC: Improving prediction for interval-censored data via survival probability transfer](deep_reads/2026-07-13-2607.09640.md)  
+  `其他` · 相关性 6/10
+- [Comprehensive identifiability analysis and reliable parameter estimation for an SEIR model](deep_reads/2026-07-13-2607.09137.md)  
   `流行病学` · 相关性 6/10
-- [Gaussian comparison above the median](deep_reads/2026-07-10-2607.06874.md)  
-  `数理统计 / 假设检验` · 相关性 6/10
-- [Gradient-free stochastic optimization of derivatives under strong convexity](deep_reads/2026-07-10-2607.07249.md)  
+- [Orthogonalized Design Matrices Speed-ups of Bayesian Semiparametric Regression](deep_reads/2026-07-13-2607.09013.md)  
   `统计计算 / 算法` · 相关性 6/10
-- [Minimum Norm Interpolation via The Local Theory of Banach Spaces: The Role of Gaussianity](deep_reads/2026-07-10-2607.07694.md)  
-  `高维统计 / 随机矩阵` · 相关性 6/10
-- [Geometric Information Decomposition for Weighted Empirical Measures on the Sphere](deep_reads/2026-07-10-2607.02943.md)  
-  `非参数 / 半参数` · 相关性 4/10
+- [Near-optimal node-private community estimation in polynomial-time](deep_reads/2026-07-13-2607.09441.md)  
+  `统计计算 / 算法` · 相关性 6/10
 
 ## 收藏
 
@@ -58,11 +52,11 @@
 
 ## 本周每日报告
 
+- [2026-07-10](daily/2026-07-10.md)
 - [2026-07-09](daily/2026-07-09.md)
 - [2026-07-08](daily/2026-07-08.md)
 - [2026-07-07](daily/2026-07-07.md)
 - [2026-07-06](daily/2026-07-06.md)
-- [2026-07-03](daily/2026-07-03.md)
 
 
 ---

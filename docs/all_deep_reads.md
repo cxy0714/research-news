@@ -4,6 +4,16 @@
 
 ### Daily
 
+- [Decision-analytical models as causal models](deep_reads/2026-07-13-2607.09397.md)  
+  8/10 [daily]
+- [Causal Perspectives on Network Meta-Analysis](deep_reads/2026-07-13-2607.09200.md)  
+  8/10 [daily]
+- [A Statistical Test for the Benefits of Personalizing Interventions](deep_reads/2026-07-13-2607.08951.md)  
+  8/10 [daily]
+- [Misspecified regressions with mixed regressors: robust inference and causal interpretation](deep_reads/2026-07-13-2607.09536.md)  
+  8/10 [daily]
+- [Media Measurement and the Assisted Own Goal: Attribution, Marketing-Mix Models, and Individual-Level Incrementality](deep_reads/2026-07-13-2607.09608.md)  
+  8/10 [daily]
 - [Robust Inference for Weighted Estimands](deep_reads/2026-07-10-2607.07524.md)  
   8/10 [daily]
 - [Causal Inference for Case Studies in Behavioral Health](deep_reads/2026-07-10-2607.06912.md)  
@@ -2536,6 +2546,10 @@
 
 ### Daily
 
+- [High-Dimensional Interpolators Can Be Fragile: Heavy Tails and High-Dimensional Large Deviations](deep_reads/2026-07-13-2607.09547.md)  
+  7/10 [daily]
+- [Geometric planted matchings in high dimensions: The power of multiple views](deep_reads/2026-07-13-2607.09026.md)  
+  7/10 [daily]
 - [Transfer Learning for Linear Discriminant Analysis with a Shared Classification Signal](deep_reads/2026-07-10-2607.06936.md)  
   7/10 [daily]
 - [Minimum Norm Interpolation via The Local Theory of Banach Spaces: The Role of Gaussianity](deep_reads/2026-07-10-2607.07694.md)  
@@ -3530,6 +3544,8 @@
 
 ### Daily
 
+- [The Cost of Discretization in Functional Linear Regression: Minimax Rates and Adaptation](deep_reads/2026-07-13-2607.09350.md)  
+  7/10 [daily]
 - [Parameter estimation and application in two types of uncertain single-index models](deep_reads/2026-07-09-2607.04699.md)  
   6/10 [daily]
 - [Conditional Mean Independence and Global Sensitivity Analysis using Nearest Neighbor Graphs](deep_reads/2026-07-08-2607.04692.md)  
@@ -5404,6 +5420,8 @@
 
 ### Daily
 
+- [How useful is a wrong model? Information-sharing for inference under mean misspecification in linear models](deep_reads/2026-07-13-2607.09579.md)  
+  7/10 [daily]
 - [Testing the equality of estimable parameters](deep_reads/2026-07-10-2607.07588.md)  
   8/10 [daily]
 - [Best Subset Selection in Linear Regression: Fixed-Design Error Bounds and Insights for Random Designs](deep_reads/2026-07-10-2607.06835.md)  
@@ -7053,6 +7071,10 @@
 
 ### Daily
 
+- [Orthogonalized Design Matrices Speed-ups of Bayesian Semiparametric Regression](deep_reads/2026-07-13-2607.09013.md)  
+  6/10 [daily]
+- [Near-optimal node-private community estimation in polynomial-time](deep_reads/2026-07-13-2607.09441.md)  
+  6/10 [daily]
 - [Gradient-free stochastic optimization of derivatives under strong convexity](deep_reads/2026-07-10-2607.07249.md)  
   6/10 [daily]
 - [The logistic-normal integral and the moments of the logistic-normal distribution](deep_reads/2026-07-09-2607.07889.md)  
@@ -8874,6 +8896,8 @@
 
 ### Daily
 
+- [Comprehensive identifiability analysis and reliable parameter estimation for an SEIR model](deep_reads/2026-07-13-2607.09137.md)  
+  6/10 [daily]
 - [Adjusting for Outcome Reporting Bias in Meta-analysis: A Multiple Imputation Approach](deep_reads/2026-07-10-2607.07509.md)  
   6/10 [daily]
 - [Multivariable Mendelian randomization with weak instruments: a comparison of Bayesian and frequentist methods](deep_reads/2026-06-25-2606.26638.md)  
@@ -10065,6 +10089,8 @@
 
 ### Daily
 
+- [SPOT-IC: Improving prediction for interval-censored data via survival probability transfer](deep_reads/2026-07-13-2607.09640.md)  
+  6/10 [daily]
 - [From Statistical to Structural Synergy: A Predictability Framework to Quantify the Effects due to High-Order Mechanisms](deep_reads/2026-07-10-2607.07286.md)  
   7/10 [daily]
 - [Income inequality estimation with gamma mixtures](deep_reads/2026-07-09-2607.05763.md)  
