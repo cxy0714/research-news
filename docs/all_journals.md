@@ -370,6 +370,16 @@
 - [Vol 34 Issue 10 · 2026-06-24](journals/2026-06-24-smmr-v34-i10.md)
 - [Vol 34 Issue 9 · 2026-06-24](journals/2026-06-24-smmr-v34-i9.md)
 
+## 计算 / 图形统计 (Computational)
+
+### JCGS
+
+- [Vol 35 Issue 2 · 2026-07-13](journals/2026-07-13-jcgs-v35-i2.md)
+- [Vol 35 Issue 1 · 2026-07-13](journals/2026-07-13-jcgs-v35-i1.md)
+- [Vol 34 Issue 4 · 2026-07-13](journals/2026-07-13-jcgs-v34-i4.md)
+- [Vol 34 Issue 3 · 2026-07-13](journals/2026-07-13-jcgs-v34-i3.md)
+- [Vol 34 Issue 2 · 2026-07-13](journals/2026-07-13-jcgs-v34-i2.md)
+
 ## IEEE 系列 (IEEE)
 
 ### JSAIT

@@ -353,6 +353,36 @@
 
 ### 期刊
 
+#### Journal of Computational and Graphical Statistics Vol 35 Issue 2
+
+- [Optimization-Based Sensitivity Analysis for Unmeasured Confounding Using Partial Correlations](deep_reads/2026-07-13-10.1080_10618600.2025.2573156.md)  
+  8/10 [journals]
+- [Spectrally Deconfounded Random Forests](deep_reads/2026-07-13-10.1080_10618600.2025.2569602.md)  
+  7/10 [journals]
+
+#### Journal of Computational and Graphical Statistics Vol 35 Issue 1
+
+- [Boosting Prediction with Data Missing Not at Random](deep_reads/2026-07-13-10.1080_10618600.2025.2541012.md)  
+  7/10 [journals]
+- [Analysis of Competing Risks Data with Covariates Subject to Detection Limits](deep_reads/2026-07-13-10.1080_10618600.2025.2526420.md)  
+  6/10 [journals]
+
+#### Journal of Computational and Graphical Statistics Vol 34 Issue 4
+
+- [Simultaneous Estimation of Multiple Treatment Effects from Observational Studies](deep_reads/2026-07-13-10.1080_10618600.2024.2449074.md)  
+  8/10 [journals]
+- [Sensitivity Analysis for Binary Outcome Misclassification in Randomization Tests via Integer Programming](deep_reads/2026-07-13-10.1080_10618600.2025.2461222.md)  
+  7/10 [journals]
+- [Extrapolation Before Imputation Reduces Bias When Imputing Censored Covariates](deep_reads/2026-07-13-10.1080_10618600.2024.2444323.md)  
+  7/10 [journals]
+- [An Integrated GMM Shrinkage Approach with Consistent Moment Selection from Multiple External Sources](deep_reads/2026-07-13-10.1080_10618600.2025.2476087.md)  
+  6/10 [journals]
+
+#### Journal of Computational and Graphical Statistics Vol 34 Issue 3
+
+- [Qini Curves for Multi-Armed Treatment Rules](deep_reads/2026-07-13-10.1080_10618600.2024.2418820.md)  
+  6/10 [journals]
+
 #### IEEE Transactions on Pattern Analysis and Machine Intelligence Vol 48 Issue 8
 
 - [Mechanisms Under Shifts: Interpretable Clustering With Self-Improving Heterogeneous Causal Graphs](deep_reads/2026-07-07-10.1109_tpami.2026.3683072.md)  
@@ -2623,6 +2653,23 @@
 
 ### 期刊
 
+#### Journal of Computational and Graphical Statistics Vol 35 Issue 2
+
+- [Optimal Sparse Sliced Inverse Regression via Random Projection](deep_reads/2026-07-13-10.1080_10618600.2025.2571161.md)  
+  7/10 [journals]
+- [Graph-based Square-Root Estimation for Sparse Linear Regression](deep_reads/2026-07-13-10.1080_10618600.2025.2571164.md)  
+  6/10 [journals]
+
+#### Journal of Computational and Graphical Statistics Vol 34 Issue 4
+
+- [High-Dimensional Covariate-Dependent Gaussian Graphical Models](deep_reads/2026-07-13-10.1080_10618600.2025.2475139.md)  
+  6/10 [journals]
+
+#### Journal of Computational and Graphical Statistics Vol 34 Issue 3
+
+- [High-Dimensional Block Diagonal Covariance Structure Detection Using Singular Vectors](deep_reads/2026-07-13-10.1080_10618600.2024.2422985.md)  
+  6/10 [journals]
+
 #### IEEE Transactions on Information Theory Vol 72 Issue 7
 
 - [One-Bit Phase Retrieval: Optimal Rates and Efficient Algorithms](deep_reads/2026-07-07-10.1109_tit.2026.3692592.md)  
@@ -3672,6 +3719,33 @@
   8/10 [daily]
 
 ### 期刊
+
+#### Journal of Computational and Graphical Statistics Vol 35 Issue 2
+
+- [Semiparametric Estimation for Error-Prone Partially Linear Single-Index Models](deep_reads/2026-07-13-10.1080_10618600.2025.2560626.md)  
+  6/10 [journals]
+- [Reproducing Kernel-Based Semiparametric Functional Smoothed Score Estimation with Binary Responses](deep_reads/2026-07-13-10.1080_10618600.2025.2574532.md)  
+  5/10 [journals]
+- [The Quantile Integrated Depth with Applications to Noisy Functional Data](deep_reads/2026-07-13-10.1080_10618600.2025.2569651.md)  
+  5/10 [journals]
+
+#### Journal of Computational and Graphical Statistics Vol 34 Issue 4
+
+- [Efficient Estimation of Parameters in Marginals in Semiparametric Multivariate Models](deep_reads/2026-07-13-10.1080_10618600.2024.2441988.md)  
+  7/10 [journals]
+- [Assumption-Lean Regression for Nonnegative Response via Variational Representation](deep_reads/2026-07-13-10.1080_10618600.2025.2459277.md)  
+  6/10 [journals]
+- [Fluid Correlation: A Novel Nonparametric Metric to Assess the Dynamic Association](deep_reads/2026-07-13-10.1080_10618600.2024.2444373.md)  
+  6/10 [journals]
+
+#### Journal of Computational and Graphical Statistics Vol 34 Issue 3
+
+- [Sample Efficient Nonparametric Regression via Low-Rank Regularization](deep_reads/2026-07-13-10.1080_10618600.2024.2414891.md)  
+  7/10 [journals]
+- [Quantile Regression and Homogeneity Identification of a Semiparametric Panel Data Model](deep_reads/2026-07-13-10.1080_10618600.2024.2433672.md)  
+  6/10 [journals]
+- [Distortion Corrected Kernel Density Estimator on Riemannian Manifolds](deep_reads/2026-07-13-10.1080_10618600.2024.2415543.md)  
+  3/10 [journals]
 
 #### Journal of Business & Economic Statistics Vol 42 Issue 2
 
@@ -5609,6 +5683,32 @@
 
 ### 期刊
 
+#### Journal of Computational and Graphical Statistics Vol 35 Issue 2
+
+- [Effective Permutation Tests for Differences Across Multiple High-Dimensional Correlation Matrices](deep_reads/2026-07-13-10.1080_10618600.2025.2550527.md)  
+  7/10 [journals]
+- [Online Change-Point Detection for Functional Data](deep_reads/2026-07-13-10.1080_10618600.2025.2560625.md)  
+  5/10 [journals]
+
+#### Journal of Computational and Graphical Statistics Vol 35 Issue 1
+
+- [Nonparametric Assessment of Variable Selection and Ranking Algorithms](deep_reads/2026-07-13-10.1080_10618600.2025.2547064.md)  
+  6/10 [journals]
+- [Fast Conservative Monte Carlo Confidence Sets](deep_reads/2026-07-13-10.1080_10618600.2025.2526416.md)  
+  4/10 [journals]
+- [A Bootstrap-based Method for Testing Similarity of Matched Networks](deep_reads/2026-07-13-10.1080_10618600.2025.2509588.md)  
+  4/10 [journals]
+
+#### Journal of Computational and Graphical Statistics Vol 34 Issue 4
+
+- [Multivariate Quantile-Based Permutation Tests with Application to Functional Data](deep_reads/2026-07-13-10.1080_10618600.2024.2444302.md)  
+  6/10 [journals]
+
+#### Journal of Computational and Graphical Statistics Vol 34 Issue 3
+
+- [Scalable Estimation and Two-Sample Testing for Large Networks via Subsampling](deep_reads/2026-07-13-10.1080_10618600.2024.2432974.md)  
+  5/10 [journals]
+
 #### IEEE Transactions on Information Theory Vol 72 Issue 7
 
 - [Testing Dependency of Weighted Random Graphs](deep_reads/2026-07-07-10.1109_tit.2026.3696669.md)  
@@ -7111,6 +7211,77 @@
   6/10 [daily]
 
 ### 期刊
+
+#### Journal of Computational and Graphical Statistics Vol 35 Issue 2
+
+- [Efficient Decision Trees for Tensor Regressions](deep_reads/2026-07-13-10.1080_10618600.2025.2572325.md)  
+  7/10 [journals]
+- [Conformalized Tensor Completion with Riemannian Optimization](deep_reads/2026-07-13-10.1080_10618600.2025.2554671.md)  
+  7/10 [journals]
+- [Influential Observations Detection by Random Projection in High-Dimensional Multivariate Response Linear Model](deep_reads/2026-07-13-10.1080_10618600.2025.2560623.md)  
+  6/10 [journals]
+- [Efficient Quantization Mean Estimation for Distributed Learning](deep_reads/2026-07-13-10.1080_10618600.2025.2572324.md)  
+  4/10 [journals]
+- [Online Bayesian Inference for Cox Proportional Hazards Model](deep_reads/2026-07-13-10.1080_10618600.2025.2571162.md)  
+  3/10 [journals]
+- [Approximations in the Homogeneous Ising Model with Application to Scene Analysis](deep_reads/2026-07-13-10.1080_10618600.2025.2559675.md)  
+  3/10 [journals]
+- [Designing a Data Science Simulation with ℳℰℛℐ𝒯𝒮: A Primer](deep_reads/2026-07-13-10.1080_10618600.2025.2561905.md)  
+  2/10 [journals]
+- [On Gibbs Sampling for Endpoint-Conditioned Neighbor-Dependent Sequence Evolution Models](deep_reads/2026-07-13-10.1080_10618600.2025.2560621.md)  
+  2/10 [journals]
+
+#### Journal of Computational and Graphical Statistics Vol 35 Issue 1
+
+- [Order Determination for Tensor-Valued Observations Using Data Augmentation](deep_reads/2026-07-13-10.1080_10618600.2025.2500977.md)  
+  7/10 [journals]
+- [Communication-Efficient Pilot Estimation for Non-Randomly Distributed Data in Diverging Dimensions](deep_reads/2026-07-13-10.1080_10618600.2025.2513964.md)  
+  6/10 [journals]
+- [On Optimal Tracking of Structural Changes in Time-Varying Networks](deep_reads/2026-07-13-10.1080_10618600.2025.2542381.md)  
+  5/10 [journals]
+- [Gaussian Variational Approximation for Ordinal Data with Crossed Random Effects](deep_reads/2026-07-13-10.1080_10618600.2025.2505018.md)  
+  4/10 [journals]
+- [Correspondence Analysis on Sparse Bipartite Graphs with Hyperspecialization](deep_reads/2026-07-13-10.1080_10618600.2025.2546451.md)  
+  3/10 [journals]
+- [Kernelized Discriminant Analysis for Joint Modeling of Multivariate Categorical Responses](deep_reads/2026-07-13-10.1080_10618600.2025.2526412.md)  
+  3/10 [journals]
+- [Missing Value Imputation in Relational Data Using Variational Inference](deep_reads/2026-07-13-10.1080_10618600.2025.2510494.md)  
+  3/10 [journals]
+
+#### Journal of Computational and Graphical Statistics Vol 34 Issue 4
+
+- [Nonstationary Spatial Modeling of Massive Global Satellite Data](deep_reads/2026-07-13-10.1080_10618600.2024.2441986.md)  
+  4/10 [journals]
+- [Simultaneous Outlier Detection and Prediction for Kriging with True Identification](deep_reads/2026-07-13-10.1080_10618600.2025.2486728.md)  
+  3/10 [journals]
+- [ProSpar-GP: Scalable Gaussian Process Modeling with Massive Nonstationary Datasets](deep_reads/2026-07-13-10.1080_10618600.2025.2490264.md)  
+  3/10 [journals]
+- [A Flexible Framework for Synthesizing Categorical Sequences with Application to Human Activity Patterns](deep_reads/2026-07-13-10.1080_10618600.2025.2450461.md)  
+  2/10 [journals]
+- [Biplots for the Correlation Matrix](deep_reads/2026-07-13-10.1080_10618600.2025.2469757.md)  
+  1/10 [journals]
+
+#### Journal of Computational and Graphical Statistics Vol 34 Issue 3
+
+- [Decentralized Learning of Quantile Regression: A Smoothing Approach](deep_reads/2026-07-13-10.1080_10618600.2024.2431060.md)  
+  5/10 [journals]
+- [Multi-label Random Subspace Ensemble Classification](deep_reads/2026-07-13-10.1080_10618600.2024.2421248.md)  
+  2/10 [journals]
+- [Optimal Subsampling for Data Streams with Measurement Constrained Categorical Responses](deep_reads/2026-07-13-10.1080_10618600.2024.2421990.md)  
+  2/10 [journals]
+- [Network Embedding-based Directed Community Detection with Unknown Community Number](deep_reads/2026-07-13-10.1080_10618600.2024.2409789.md)  
+  2/10 [journals]
+- [A Latent Space Model for Weighted Keyword Co-Occurrence Networks with Applications in Knowledge Discovery in Statistics](deep_reads/2026-07-13-10.1080_10618600.2024.2407465.md)  
+  2/10 [journals]
+
+#### Journal of Computational and Graphical Statistics Vol 34 Issue 2
+
+- [FAStEN: An Efficient Adaptive Method for Feature Selection and Estimation in High-Dimensional Functional Regressions](deep_reads/2026-07-13-10.1080_10618600.2024.2407464.md)  
+  7/10 [journals]
+- [Covariance Assisted Multivariate Penalized Additive Regression (CoMPAdRe)](deep_reads/2026-07-13-10.1080_10618600.2024.2407453.md)  
+  6/10 [journals]
+- [Multivariate Moment Least-Squares Variance Estimators for Reversible Markov Chains](deep_reads/2026-07-13-10.1080_10618600.2024.2407458.md)  
+  4/10 [journals]
 
 #### IEEE Transactions on Pattern Analysis and Machine Intelligence Vol 48 Issue 8
 
@@ -10149,6 +10320,32 @@
   8/10 [daily]
 
 ### 期刊
+
+#### Journal of Computational and Graphical Statistics Vol 35 Issue 1
+
+- [Community Detection with Heterogeneous Block Covariance Model](deep_reads/2026-07-13-10.1080_10618600.2025.2505725.md)  
+  7/10 [journals]
+- [Longitudinal Mixed Membership Image-on-Scalar Model](deep_reads/2026-07-13-10.1080_10618600.2025.2530757.md)  
+  5/10 [journals]
+- [Spatial Adaptive Selection using Binary Conditional Autoregressive Model with Application to Brain-Computer Interface](deep_reads/2026-07-13-10.1080_10618600.2025.2495256.md)  
+  5/10 [journals]
+- [Spatially Clustered Compositional Regression: A Nonparametric Bayesian Approach](deep_reads/2026-07-13-10.1080_10618600.2025.2500978.md)  
+  5/10 [journals]
+
+#### Journal of Computational and Graphical Statistics Vol 34 Issue 4
+
+- [Sample-Specific Learning of Lymphovascular Invasion with Heterogeneous Spatial Patterns](deep_reads/2026-07-13-10.1080_10618600.2025.2459285.md)  
+  4/10 [journals]
+- [Bayesian Regularized Regression Copula Processes for Multivariate Responses](deep_reads/2026-07-13-10.1080_10618600.2025.2458504.md)  
+  4/10 [journals]
+- [Martingale Posterior Inference for Finite Mixture Models and Clustering](deep_reads/2026-07-13-10.1080_10618600.2024.2441997.md)  
+  4/10 [journals]
+- [Bayesian Pairwise Comparison of High-Dimensional Images](deep_reads/2026-07-13-10.1080_10618600.2024.2447462.md)  
+  4/10 [journals]
+- [Clustering Time-Evolving Networks Using Temporal Exponential-Family Random Graph Models with Conditional Dyadic Independence and Dynamic Latent Blocks](deep_reads/2026-07-13-10.1080_10618600.2025.2484011.md)  
+  3/10 [journals]
+- [Multiplex Depth for Network-Valued Data and Applications](deep_reads/2026-07-13-10.1080_10618600.2025.2475137.md)  
+  3/10 [journals]
 
 #### IEEE Transactions on Pattern Analysis and Machine Intelligence Vol 48 Issue 8
 
