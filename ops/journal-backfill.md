@@ -151,3 +151,60 @@ IEEE 系列 ieee（月刊、每期大，用小步）：
 天文 astro（体量巨大，放最后、用小步）：
 - [x] (2026-07-07) `--only ApJS --n-issues 3`   ⚠
 - [x] (2026-07-07) `--only MNRAS --n-issues 2`   ⚠⚠ 每期上百篇，跑得最久
+
+## 新增 · 计算 / 图形统计组 compute（2026-07-13 加入 journals.yaml，零覆盖，首轮）
+
+> 新组，从头补。都走 Crossref，abstract 回填联网较慢属正常。先 dry-run 看量，
+> 高频/大刊（CSDA 月刊、量大）用小 N 起步。
+
+- [ ] `--only JCGS --n-issues 8`   （季刊，每期 ~30 篇）
+- [ ] `--only Technometrics --n-issues 8`   （季刊）
+- [ ] `--only "Stat. Comput." --n-issues 6`   ⚠ 双月刊、量偏大，先 dry-run
+- [ ] `--only CSDA --n-issues 3`   ⚠⚠ 月刊、每期很大，先 dry-run、用小步
+
+### 阶段四 · 现有刊再往更早翻一轮（每刊在阶段三基础上 +~6 期；去重只处理更老的新期）
+
+> 比阶段三再深一截，把已覆盖的刊往更早年份翻。单元控制在 ~1.5-2h，高频/大刊 ⚠ 用小步。
+> 万一某格太久让 daily 当天没跑成，第二天 catch-up 会自愈。
+
+概率统计 prob_stats：
+- [ ] `--only AoP --n-issues 20`
+- [ ] `--only Bernoulli --n-issues 20`
+- [ ] `--only EJS --n-issues 10`   ⚠ 电子刊、文章多
+- [ ] `--only "Statistica Sinica" --n-issues 20`
+- [ ] `--only "Scand. J. Stat." --n-issues 20`
+
+流行病 epi：
+- [ ] `--only StatMed --n-issues 6`   ⚠ 双周刊、量大
+- [ ] `--only SMMR --n-issues 14`
+- [ ] `--only AJE --n-issues 10`   ⚠ 月刊
+- [ ] `--only Epidemiology --n-issues 14`
+
+应用 / 生物统计 applied：
+- [ ] `--only AoAS --n-issues 20`
+- [ ] `--only Biometrics --n-issues 20`
+- [ ] `--only Biostatistics --n-issues 20`
+- [ ] `--only "JRSS-C" --n-issues 20`
+
+理论核心 core：
+- [ ] `--only AoS --n-issues 24`
+- [ ] `--only JASA --n-issues 24`
+- [ ] `--only JRSSB --n-issues 24`
+- [ ] `--only Biometrika --n-issues 24`
+- [ ] `--only JMLR --jmlr-n 7`
+
+经济 / 计量 econ：
+- [ ] `--only Econometrica --n-issues 24`
+- [ ] `--only "J. Econometrics" --n-issues 10`   ⚠ 出刊密、量大
+- [ ] `--only "Quant. Econ." --n-issues 20`
+- [ ] `--only JBES --n-issues 20`
+
+IEEE 系列 ieee（月刊、每期大，用小步）：
+- [ ] `--only TIT --n-issues 4`   ⚠
+- [ ] `--only TPAMI --n-issues 4`   ⚠
+- [ ] `--only TSP --n-issues 4`   ⚠
+- [ ] `--only JSAIT --n-issues 10`
+
+天文 astro（体量巨大，放最后、用小步）：
+- [ ] `--only ApJS --n-issues 4`   ⚠
+- [ ] `--only MNRAS --n-issues 3`   ⚠⚠ 每期上百篇，跑得最久
