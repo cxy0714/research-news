@@ -17,12 +17,16 @@
 
 [→ 查看完整报告](daily/2026-07-14.md)
 
-### 精读论文（36 篇）
+### 精读论文（78 篇）
 
 - [Inverse probability weighting estimation under ultrahigh-dimensional error-prone covariates and misclassified treatments](deep_reads/2026-07-14-10.1007_s11222-025-10755-y.md)  
   `因果推断` · 相关性 8/10
 - [Transfer learning for causal forests](deep_reads/2026-07-14-10.1007_s11222-026-10919-4.md)  
   `因果推断` · 相关性 8/10
+- [Universality of approximate message passing with semirandom matrices](deep_reads/2026-07-14-10.1214_23-aop1628.md)  
+  `统计计算 / 算法` · 相关性 7/10
+- [On the rightmost eigenvalue of non-Hermitian random matrices](deep_reads/2026-07-14-10.1214_23-aop1643.md)  
+  `高维统计 / 随机矩阵` · 相关性 7/10
 - [Modeling disease-specific survival in observational studies with missing cause of death: Leveraging information from clinical trial data](deep_reads/2026-07-14-10.1016_j.csda.2026.108419.md)  
   `因果推断` · 相关性 7/10
 - [Post-transfer learning statistical inference in high-dimensional regression](deep_reads/2026-07-14-10.1007_s11222-025-10738-z.md)  
@@ -73,6 +77,10 @@
   `统计计算 / 算法` · 相关性 4/10
 - [A clustered and sparse ising regression model for multivariate binary data](deep_reads/2026-07-14-10.1007_s11222-026-10888-8.md)  
   `其他` · 相关性 4/10
+- [Secular coefficients and the holomorphic multiplicative chaos](deep_reads/2026-07-14-10.1214_22-aop1616.md)  
+  `高维统计 / 随机矩阵` · 相关性 3/10
+- [Global information from local observations of the noisy voter model on a graph](deep_reads/2026-07-14-10.1214_23-aop1637.md)  
+  `其他` · 相关性 3/10
 - [BOB: Bayesian optimized bootstrap for approximate posterior sampling in Gaussian mixture models](deep_reads/2026-07-14-10.1007_s11222-025-10763-y.md)  
   `统计计算 / 算法` · 相关性 3/10
 - [A unified and efficient proximal gradient descent algorithm for penalized convoluted support vector machines](deep_reads/2026-07-14-10.1007_s11222-026-10823-x.md)  
@@ -81,10 +89,86 @@
   `统计计算 / 算法` · 相关性 3/10
 - [A Gibbs sampler for the LKJ Prior on correlation matrices](deep_reads/2026-07-14-10.1007_s11222-026-10879-9.md)  
   `统计计算 / 算法` · 相关性 3/10
+- [KPZ-type fluctuation exponents for interacting diffusions in equilibrium](deep_reads/2026-07-14-10.1214_22-aop1617.md)  
+  `其他` · 相关性 2/10
+- [TAP approach for multispecies spherical spin glasses II: The free energy of the pure models](deep_reads/2026-07-14-10.1214_22-aop1605.md)  
+  `其他` · 相关性 2/10
+- [A landscape of peaks: The intermittency islands of the stochastic heat equation with Lévy noise](deep_reads/2026-07-14-10.1214_23-aop1623.md)  
+  `其他` · 相关性 2/10
+- [The phase transition for planar Gaussian percolation models without FKG](deep_reads/2026-07-14-10.1214_23-aop1633.md)  
+  `其他` · 相关性 2/10
+- [Perturbations of parabolic equations and diffusion processes with degeneration: Boundary problems, metastability, and homogenization](deep_reads/2026-07-14-10.1214_23-aop1631.md)  
+  `其他` · 相关性 2/10
+- [Convergence and nonconvergence of scaled self-interacting random walks to Brownian motion perturbed at extrema](deep_reads/2026-07-14-10.1214_23-aop1629.md)  
+  `其他` · 相关性 2/10
+- [Decay of convolved densities via Laplace transform](deep_reads/2026-07-14-10.1214_23-aop1625.md)  
+  `数理统计 / 假设检验` · 相关性 2/10
+- [The stationary horizon and semi-infinite geodesics in the directed landscape](deep_reads/2026-07-14-10.1214_23-aop1655.md)  
+  `其他` · 相关性 2/10
+- [Stochastic homogenization with space-time ergodic divergence-free drift](deep_reads/2026-07-14-10.1214_23-aop1663.md)  
+  `其他` · 相关性 2/10
+- [Scaling limit of an adaptive contact process](deep_reads/2026-07-14-10.1214_23-aop1662.md)  
+  `其他` · 相关性 2/10
+- [The Markov property of local times of Brownian motion indexed by the Brownian tree](deep_reads/2026-07-14-10.1214_23-aop1652.md)  
+  `其他` · 相关性 2/10
+- [Long-time derivation at equilibrium of the fluctuating Boltzmann equation](deep_reads/2026-07-14-10.1214_23-aop1656.md)  
+  `其他` · 相关性 2/10
+- [On the coming down from infinity of coalescing Brownian motions](deep_reads/2026-07-14-10.1214_23-aop1640.md)  
+  `其他` · 相关性 2/10
 - [On the Observability of Copula State Space Models using a Bayesian Approach](deep_reads/2026-07-14-10.1007_s11222-026-10917-6.md)  
   `统计计算 / 算法` · 相关性 2/10
+- [Improved log-concavity for rotationally invariant measures of symmetric convex sets](deep_reads/2026-07-14-10.1214_22-aop1604.md)  
+  `其他` · 相关性 1/10
+- [Law of iterated logarithms and fractal properties of the KPZ equation](deep_reads/2026-07-14-10.1214_22-aop1603.md)  
+  `其他` · 相关性 1/10
+- [Exponential mixing for random dynamical systems and an example of Pierrehumbert](deep_reads/2026-07-14-10.1214_23-aop1627.md)  
+  `其他` · 相关性 1/10
+- [Balanced excited random walk in two dimensions](deep_reads/2026-07-14-10.1214_23-aop1622.md)  
+  `其他` · 相关性 1/10
+- [Locality of random digraphs on expanders](deep_reads/2026-07-14-10.1214_22-aop1618.md)  
+  `其他` · 相关性 1/10
+- [On strong solutions of Itô’s equations with Dσ and b in Morrey classes containing Ld](deep_reads/2026-07-14-10.1214_23-aop1630.md)  
+  `其他` · 相关性 1/10
+- [Scaling limit of the heavy tailed ballistic deposition model with p-sticking](deep_reads/2026-07-14-10.1214_23-aop1635.md)  
+  `其他` · 相关性 1/10
+- [Most transient random walks have infinitely many cut times](deep_reads/2026-07-14-10.1214_23-aop1636.md)  
+  `其他` · 相关性 1/10
+- [Stationary measures for the log-gamma polymer and KPZ equation in half-space](deep_reads/2026-07-14-10.1214_23-aop1634.md)  
+  `其他` · 相关性 1/10
+- [The critical 2d stochastic heat flow is not a Gaussian multiplicative chaos](deep_reads/2026-07-14-10.1214_23-aop1648.md)  
+  `其他` · 相关性 1/10
 - [Differential evolution variants for searching D- and A-optimal designs for nonlinear models in the bioscience](deep_reads/2026-07-14-10.1007_s11222-026-10833-9.md)  
   `统计计算 / 算法` · 相关性 1/10
+- [Isomorphisms of Poisson systems over locally compact groups](deep_reads/2026-07-14-10.1214_23-aop1642.md)  
+  `其他` · 相关性 0/10
+- [Multisource invasion percolation on the complete graph](deep_reads/2026-07-14-10.1214_23-aop1641.md)  
+  `其他` · 相关性 0/10
+- [Particle density in diffusion-limited annihilating systems](deep_reads/2026-07-14-10.1214_23-aop1653.md)  
+  `其他` · 相关性 0/10
+- [Parking on Cayley trees and frozen Erdős–Rényi](deep_reads/2026-07-14-10.1214_23-aop1632.md)  
+  `其他` · 相关性 0/10
+- [Loewner evolution driven by complex Brownian motion](deep_reads/2026-07-14-10.1214_23-aop1639.md)  
+  `其他` · 相关性 0/10
+- [On the (non)stationary density of fractional-driven stochastic differential equations](deep_reads/2026-07-14-10.1214_23-aop1638.md)  
+  `其他` · 相关性 0/10
+- [Almost sharp sharpness for Poisson Boolean percolation](deep_reads/2026-07-14-10.1214_25-aop1771.md)  
+  `其他` · 相关性 0/10
+- [Moderate deviations for the capacity of the random walk range in dimension four](deep_reads/2026-07-14-10.1214_24-aop1727.md)  
+  `其他` · 相关性 0/10
+- [Uniqueness of generalized conformal restriction measures and Malliavin–Kontsevich–Suhov measures for c∈(0,1]](deep_reads/2026-07-14-10.1214_25-aop1809.md)  
+  `其他` · 相关性 0/10
+- [Fluctuations of the Horton–Strahler number of stable Galton–Watson trees](deep_reads/2026-07-14-10.1214_25-aop1798.md)  
+  `其他` · 相关性 0/10
+- [The ⋆-vertex-reinforced jump process](deep_reads/2026-07-14-10.1214_25-aop1759.md)  
+  `其他` · 相关性 0/10
+- [Dimension of Bernoulli convolutions in Rd](deep_reads/2026-07-14-10.1214_25-aop1804.md)  
+  `其他` · 相关性 0/10
+- [Heat kernel estimates for Dirichlet forms degenerate at the boundary](deep_reads/2026-07-14-10.1214_25-aop1805.md)  
+  `其他` · 相关性 0/10
+- [Curvature and other local inequalities in Markov semigroups](deep_reads/2026-07-14-10.1214_25-aop1779.md)  
+  `其他` · 相关性 0/10
+- [Sharp convergence rates for mean field control in the region of strong regularity](deep_reads/2026-07-14-10.1214_25-aop1793.md)  
+  `其他` · 相关性 0/10
 - [Nuisance Function Tuning and Sample Splitting for Optimally Estimating a Doubly Robust Functional](deep_reads/2026-07-14-2212.14857.md)  
   `其他` · 相关性 0/10
 - [Personalizing black-box models for nonparametric regression with minimax optimality](deep_reads/2026-07-14-2601.01432.md)  

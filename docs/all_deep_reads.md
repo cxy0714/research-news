@@ -2706,6 +2706,16 @@
 - [Post-transfer learning statistical inference in high-dimensional regression](deep_reads/2026-07-14-10.1007_s11222-025-10738-z.md)  
   7/10 [journals]
 
+#### Annals of Probability Vol 51 Issue 6
+
+- [On the rightmost eigenvalue of non-Hermitian random matrices](deep_reads/2026-07-14-10.1214_23-aop1643.md)  
+  7/10 [journals]
+
+#### Annals of Probability Vol 51 Issue 4
+
+- [Secular coefficients and the holomorphic multiplicative chaos](deep_reads/2026-07-14-10.1214_22-aop1616.md)  
+  3/10 [journals]
+
 #### Technometrics Vol 66 Issue 3
 
 - [Transfer Learning with Large-Scale Quantile Regression](deep_reads/2026-07-13-10.1080_00401706.2024.2315952.md)  
@@ -5783,6 +5793,11 @@
 - [Bootstrap tests for almost goodness-of-fit](deep_reads/2026-07-14-10.1007_s11222-025-10762-z.md)  
   7/10 [journals]
 
+#### Annals of Probability Vol 51 Issue 5
+
+- [Decay of convolved densities via Laplace transform](deep_reads/2026-07-14-10.1214_23-aop1625.md)  
+  2/10 [journals]
+
 #### Technometrics Vol 67 Issue 3
 
 - [Noise Resistant Control Charts for Detecting Periodicity from Correlation](deep_reads/2026-07-13-10.1080_00401706.2025.2460584.md)  
@@ -7380,6 +7395,11 @@
 
 - [Participant-level quantile surfaces for actigraphy data](deep_reads/2026-07-14-10.1016_j.csda.2026.108387.md)  
   4/10 [journals]
+
+#### Annals of Probability Vol 51 Issue 5
+
+- [Universality of approximate message passing with semirandom matrices](deep_reads/2026-07-14-10.1214_23-aop1628.md)  
+  7/10 [journals]
 
 #### Technometrics Vol 68 Issue 2
 
@@ -10553,6 +10573,100 @@
   7/10 [journals]
 - [A clustered and sparse ising regression model for multivariate binary data](deep_reads/2026-07-14-10.1007_s11222-026-10888-8.md)  
   4/10 [journals]
+
+#### Annals of Probability Vol 54 Issue 4
+
+- [Almost sharp sharpness for Poisson Boolean percolation](deep_reads/2026-07-14-10.1214_25-aop1771.md)  
+  0/10 [journals]
+- [Moderate deviations for the capacity of the random walk range in dimension four](deep_reads/2026-07-14-10.1214_24-aop1727.md)  
+  0/10 [journals]
+- [Uniqueness of generalized conformal restriction measures and Malliavin–Kontsevich–Suhov measures for c∈(0,1]](deep_reads/2026-07-14-10.1214_25-aop1809.md)  
+  0/10 [journals]
+- [Fluctuations of the Horton–Strahler number of stable Galton–Watson trees](deep_reads/2026-07-14-10.1214_25-aop1798.md)  
+  0/10 [journals]
+- [The ⋆-vertex-reinforced jump process](deep_reads/2026-07-14-10.1214_25-aop1759.md)  
+  0/10 [journals]
+- [Dimension of Bernoulli convolutions in Rd](deep_reads/2026-07-14-10.1214_25-aop1804.md)  
+  0/10 [journals]
+- [Heat kernel estimates for Dirichlet forms degenerate at the boundary](deep_reads/2026-07-14-10.1214_25-aop1805.md)  
+  0/10 [journals]
+- [Curvature and other local inequalities in Markov semigroups](deep_reads/2026-07-14-10.1214_25-aop1779.md)  
+  0/10 [journals]
+- [Sharp convergence rates for mean field control in the region of strong regularity](deep_reads/2026-07-14-10.1214_25-aop1793.md)  
+  0/10 [journals]
+
+#### Annals of Probability Vol 52 Issue 1
+
+- [The stationary horizon and semi-infinite geodesics in the directed landscape](deep_reads/2026-07-14-10.1214_23-aop1655.md)  
+  2/10 [journals]
+- [Stochastic homogenization with space-time ergodic divergence-free drift](deep_reads/2026-07-14-10.1214_23-aop1663.md)  
+  2/10 [journals]
+- [Scaling limit of an adaptive contact process](deep_reads/2026-07-14-10.1214_23-aop1662.md)  
+  2/10 [journals]
+- [The Markov property of local times of Brownian motion indexed by the Brownian tree](deep_reads/2026-07-14-10.1214_23-aop1652.md)  
+  2/10 [journals]
+- [Long-time derivation at equilibrium of the fluctuating Boltzmann equation](deep_reads/2026-07-14-10.1214_23-aop1656.md)  
+  2/10 [journals]
+- [On the coming down from infinity of coalescing Brownian motions](deep_reads/2026-07-14-10.1214_23-aop1640.md)  
+  2/10 [journals]
+
+#### Annals of Probability Vol 51 Issue 6
+
+- [The critical 2d stochastic heat flow is not a Gaussian multiplicative chaos](deep_reads/2026-07-14-10.1214_23-aop1648.md)  
+  1/10 [journals]
+- [Isomorphisms of Poisson systems over locally compact groups](deep_reads/2026-07-14-10.1214_23-aop1642.md)  
+  0/10 [journals]
+- [Multisource invasion percolation on the complete graph](deep_reads/2026-07-14-10.1214_23-aop1641.md)  
+  0/10 [journals]
+- [Particle density in diffusion-limited annihilating systems](deep_reads/2026-07-14-10.1214_23-aop1653.md)  
+  0/10 [journals]
+- [Parking on Cayley trees and frozen Erdős–Rényi](deep_reads/2026-07-14-10.1214_23-aop1632.md)  
+  0/10 [journals]
+- [Loewner evolution driven by complex Brownian motion](deep_reads/2026-07-14-10.1214_23-aop1639.md)  
+  0/10 [journals]
+- [On the (non)stationary density of fractional-driven stochastic differential equations](deep_reads/2026-07-14-10.1214_23-aop1638.md)  
+  0/10 [journals]
+
+#### Annals of Probability Vol 51 Issue 5
+
+- [Global information from local observations of the noisy voter model on a graph](deep_reads/2026-07-14-10.1214_23-aop1637.md)  
+  3/10 [journals]
+- [The phase transition for planar Gaussian percolation models without FKG](deep_reads/2026-07-14-10.1214_23-aop1633.md)  
+  2/10 [journals]
+- [Perturbations of parabolic equations and diffusion processes with degeneration: Boundary problems, metastability, and homogenization](deep_reads/2026-07-14-10.1214_23-aop1631.md)  
+  2/10 [journals]
+- [Convergence and nonconvergence of scaled self-interacting random walks to Brownian motion perturbed at extrema](deep_reads/2026-07-14-10.1214_23-aop1629.md)  
+  2/10 [journals]
+- [On strong solutions of Itô’s equations with Dσ and b in Morrey classes containing Ld](deep_reads/2026-07-14-10.1214_23-aop1630.md)  
+  1/10 [journals]
+- [Scaling limit of the heavy tailed ballistic deposition model with p-sticking](deep_reads/2026-07-14-10.1214_23-aop1635.md)  
+  1/10 [journals]
+- [Most transient random walks have infinitely many cut times](deep_reads/2026-07-14-10.1214_23-aop1636.md)  
+  1/10 [journals]
+- [Stationary measures for the log-gamma polymer and KPZ equation in half-space](deep_reads/2026-07-14-10.1214_23-aop1634.md)  
+  1/10 [journals]
+
+#### Annals of Probability Vol 51 Issue 4
+
+- [A landscape of peaks: The intermittency islands of the stochastic heat equation with Lévy noise](deep_reads/2026-07-14-10.1214_23-aop1623.md)  
+  2/10 [journals]
+- [Exponential mixing for random dynamical systems and an example of Pierrehumbert](deep_reads/2026-07-14-10.1214_23-aop1627.md)  
+  1/10 [journals]
+- [Balanced excited random walk in two dimensions](deep_reads/2026-07-14-10.1214_23-aop1622.md)  
+  1/10 [journals]
+- [Locality of random digraphs on expanders](deep_reads/2026-07-14-10.1214_22-aop1618.md)  
+  1/10 [journals]
+
+#### Annals of Probability Vol 51 Issue 3
+
+- [KPZ-type fluctuation exponents for interacting diffusions in equilibrium](deep_reads/2026-07-14-10.1214_22-aop1617.md)  
+  2/10 [journals]
+- [TAP approach for multispecies spherical spin glasses II: The free energy of the pure models](deep_reads/2026-07-14-10.1214_22-aop1605.md)  
+  2/10 [journals]
+- [Improved log-concavity for rotationally invariant measures of symmetric convex sets](deep_reads/2026-07-14-10.1214_22-aop1604.md)  
+  1/10 [journals]
+- [Law of iterated logarithms and fractal properties of the KPZ equation](deep_reads/2026-07-14-10.1214_22-aop1603.md)  
+  1/10 [journals]
 
 #### Technometrics Vol 68 Issue 2
 

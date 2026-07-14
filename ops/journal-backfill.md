@@ -168,7 +168,7 @@ IEEE 系列 ieee（月刊、每期大，用小步）：
 > 万一某格太久让 daily 当天没跑成，第二天 catch-up 会自愈。
 
 概率统计 prob_stats：
-- [ ] `--only AoP --n-issues 20`
+- [x] (2026-07-14) `--only AoP --n-issues 20`
 - [ ] `--only Bernoulli --n-issues 20`
 - [ ] `--only EJS --n-issues 10`   ⚠ 电子刊、文章多
 - [ ] `--only "Statistica Sinica" --n-issues 20`
