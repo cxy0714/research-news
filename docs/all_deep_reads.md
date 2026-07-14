@@ -365,6 +365,11 @@
 - [Best-subset instrumental variable selection method using mixed integer optimization with applications to health-related quality of life and education–wage analyses](deep_reads/2026-07-14-10.1007_s11222-025-10760-1.md)  
   7/10 [journals]
 
+#### Computational Statistics & Data Analysis Vol 224
+
+- [Modeling disease-specific survival in observational studies with missing cause of death: Leveraging information from clinical trial data](deep_reads/2026-07-14-10.1016_j.csda.2026.108419.md)  
+  7/10 [journals]
+
 #### Technometrics Vol 68 Issue 2
 
 - [Cause and Effect Business Analytics and Data Science](deep_reads/2026-07-13-10.1080_00401706.2026.2652822.md)  
@@ -3776,6 +3781,11 @@
 #### Statistics and Computing Vol 36 Issue 2
 
 - [Reducing variance and improving bandwidth selection in density estimation via semiparametric transformations and local linear smoothing](deep_reads/2026-07-14-10.1007_s11222-026-10841-9.md)  
+  6/10 [journals]
+
+#### Computational Statistics & Data Analysis Vol 220
+
+- [Random irregular histograms](deep_reads/2026-07-14-10.1016_j.csda.2026.108367.md)  
   6/10 [journals]
 
 #### Technometrics Vol 67 Issue 4
@@ -7365,6 +7375,11 @@
   6/10 [journals]
 - [Finite mixtures of multivariate Poisson-log normal factor analyzers for clustering count data](deep_reads/2026-07-14-10.1007_s11222-025-10720-9.md)  
   6/10 [journals]
+
+#### Computational Statistics & Data Analysis Vol 222
+
+- [Participant-level quantile surfaces for actigraphy data](deep_reads/2026-07-14-10.1016_j.csda.2026.108387.md)  
+  4/10 [journals]
 
 #### Technometrics Vol 68 Issue 2
 

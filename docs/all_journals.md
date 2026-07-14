@@ -372,6 +372,14 @@
 
 ## 计算 / 图形统计 (Computational)
 
+### CSDA
+
+- [Vol 224 · 2026-07-14](journals/2026-07-14-csda-v224.md)
+- [Vol 223 · 2026-07-14](journals/2026-07-14-csda-v223.md)
+- [Vol 222 · 2026-07-14](journals/2026-07-14-csda-v222.md)
+- [Vol 221 · 2026-07-14](journals/2026-07-14-csda-v221.md)
+- [Vol 220 · 2026-07-14](journals/2026-07-14-csda-v220.md)
+
 ### JCGS
 
 - [Vol 35 Issue 2 · 2026-07-13](journals/2026-07-13-jcgs-v35-i2.md)

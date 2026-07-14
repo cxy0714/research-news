@@ -160,7 +160,7 @@ IEEE 系列 ieee（月刊、每期大，用小步）：
 - [x] (2026-07-13) `--only JCGS --n-issues 8`   （季刊，每期 ~30 篇）
 - [x] (2026-07-14) `--only Technometrics --n-issues 8`   （季刊）
 - [x] (2026-07-14) `--only "Stat. Comput." --n-issues 6`   ⚠ 双月刊、量偏大，先 dry-run
-- [ ] `--only CSDA --n-issues 3`   ⚠⚠ 月刊、每期很大，先 dry-run、用小步
+- [x] (2026-07-14) `--only CSDA --n-issues 3`   ⚠⚠ 月刊、每期很大，先 dry-run、用小步
 
 ### 阶段四 · 现有刊再往更早翻一轮（每刊在阶段三基础上 +~6 期；去重只处理更老的新期）
 
