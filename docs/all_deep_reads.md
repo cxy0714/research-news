@@ -353,6 +353,18 @@
 
 ### 期刊
 
+#### Statistics and Computing Vol 36 Issue 4
+
+- [Transfer learning for causal forests](deep_reads/2026-07-14-10.1007_s11222-026-10919-4.md)  
+  8/10 [journals]
+
+#### Statistics and Computing Vol 36 Issue 1
+
+- [Inverse probability weighting estimation under ultrahigh-dimensional error-prone covariates and misclassified treatments](deep_reads/2026-07-14-10.1007_s11222-025-10755-y.md)  
+  8/10 [journals]
+- [Best-subset instrumental variable selection method using mixed integer optimization with applications to health-related quality of life and education–wage analyses](deep_reads/2026-07-14-10.1007_s11222-025-10760-1.md)  
+  7/10 [journals]
+
 #### Technometrics Vol 68 Issue 2
 
 - [Cause and Effect Business Analytics and Data Science](deep_reads/2026-07-13-10.1080_00401706.2026.2652822.md)  
@@ -2677,6 +2689,18 @@
 
 ### 期刊
 
+#### Statistics and Computing Vol 36 Issue 4
+
+- [Robust sparse penalization under heavy-tailed noise and outliers with exponential-type loss via the LASSO](deep_reads/2026-07-14-10.1007_s11222-026-10931-8.md)  
+  6/10 [journals]
+- [Stability selection via variable decorrelation](deep_reads/2026-07-14-10.1007_s11222-026-10916-7.md)  
+  6/10 [journals]
+
+#### Statistics and Computing Vol 35 Issue 6
+
+- [Post-transfer learning statistical inference in high-dimensional regression](deep_reads/2026-07-14-10.1007_s11222-025-10738-z.md)  
+  7/10 [journals]
+
 #### Technometrics Vol 66 Issue 3
 
 - [Transfer Learning with Large-Scale Quantile Regression](deep_reads/2026-07-13-10.1080_00401706.2024.2315952.md)  
@@ -3748,6 +3772,11 @@
   8/10 [daily]
 
 ### 期刊
+
+#### Statistics and Computing Vol 36 Issue 2
+
+- [Reducing variance and improving bandwidth selection in density estimation via semiparametric transformations and local linear smoothing](deep_reads/2026-07-14-10.1007_s11222-026-10841-9.md)  
+  6/10 [journals]
 
 #### Technometrics Vol 67 Issue 4
 
@@ -5722,6 +5751,28 @@
 
 ### 期刊
 
+#### Statistics and Computing Vol 36 Issue 4
+
+- [Regularized maximum mean discrepancy for variable importance measure](deep_reads/2026-07-14-10.1007_s11222-026-10927-4.md)  
+  5/10 [journals]
+
+#### Statistics and Computing Vol 36 Issue 3
+
+- [Post-selection inference for quantifying uncertainty in changes in variance](deep_reads/2026-07-14-10.1007_s11222-026-10881-1.md)  
+  6/10 [journals]
+
+#### Statistics and Computing Vol 36 Issue 2
+
+- [Global test for covariate significance in quantile regression](deep_reads/2026-07-14-10.1007_s11222-025-10774-9.md)  
+  6/10 [journals]
+- [Bayesian stability selection and inference on selection probabilities](deep_reads/2026-07-14-10.1007_s11222-025-10820-6.md)  
+  6/10 [journals]
+
+#### Statistics and Computing Vol 36 Issue 1
+
+- [Bootstrap tests for almost goodness-of-fit](deep_reads/2026-07-14-10.1007_s11222-025-10762-z.md)  
+  7/10 [journals]
+
 #### Technometrics Vol 67 Issue 3
 
 - [Noise Resistant Control Charts for Detecting Periodicity from Correlation](deep_reads/2026-07-13-10.1080_00401706.2025.2460584.md)  
@@ -7269,6 +7320,51 @@
   6/10 [daily]
 
 ### 期刊
+
+#### Statistics and Computing Vol 36 Issue 4
+
+- [Beyond regularization: inherently sparse principal component analysis](deep_reads/2026-07-14-10.1007_s11222-026-10872-2.md)  
+  6/10 [journals]
+- [On the Observability of Copula State Space Models using a Bayesian Approach](deep_reads/2026-07-14-10.1007_s11222-026-10917-6.md)  
+  2/10 [journals]
+
+#### Statistics and Computing Vol 36 Issue 3
+
+- [Optimal estimation and uncertainty quantification for Stochastic inverse problems via variational Bayesian methods](deep_reads/2026-07-14-10.1007_s11222-026-10847-3.md)  
+  6/10 [journals]
+- [High-dimensional regularized additive matrix autoregressive model](deep_reads/2026-07-14-10.1007_s11222-026-10858-0.md)  
+  6/10 [journals]
+- [Computationally efficient likelihood-based estimation and variable selection for the Cox model with incomplete covariates](deep_reads/2026-07-14-10.1007_s11222-026-10849-1.md)  
+  6/10 [journals]
+- [Bootstrap aggregation for regression problems via generalized least squares](deep_reads/2026-07-14-10.1007_s11222-026-10893-x.md)  
+  3/10 [journals]
+- [A Gibbs sampler for the LKJ Prior on correlation matrices](deep_reads/2026-07-14-10.1007_s11222-026-10879-9.md)  
+  3/10 [journals]
+- [Differential evolution variants for searching D- and A-optimal designs for nonlinear models in the bioscience](deep_reads/2026-07-14-10.1007_s11222-026-10833-9.md)  
+  1/10 [journals]
+
+#### Statistics and Computing Vol 36 Issue 2
+
+- [Bayesian analysis of Cox-type regression model with partly linear covariate effects via reversible jump Markov chain Monte Carlo](deep_reads/2026-07-14-10.1007_s11222-025-10818-0.md)  
+  4/10 [journals]
+- [A unified and efficient proximal gradient descent algorithm for penalized convoluted support vector machines](deep_reads/2026-07-14-10.1007_s11222-026-10823-x.md)  
+  3/10 [journals]
+
+#### Statistics and Computing Vol 36 Issue 1
+
+- [Transporting higher-order quadrature rules - Quasi-Monte Carlo points and sparse grids for mixture distributions](deep_reads/2026-07-14-10.1007_s11222-025-10764-x.md)  
+  6/10 [journals]
+- [Optimal sparse phase retrieval via a quasi-Bayesian approach](deep_reads/2026-07-14-10.1007_s11222-025-10779-4.md)  
+  6/10 [journals]
+- [BOB: Bayesian optimized bootstrap for approximate posterior sampling in Gaussian mixture models](deep_reads/2026-07-14-10.1007_s11222-025-10763-y.md)  
+  3/10 [journals]
+
+#### Statistics and Computing Vol 35 Issue 6
+
+- [Zero-inflation in the multivariate poisson lognormal family](deep_reads/2026-07-14-10.1007_s11222-025-10729-0.md)  
+  6/10 [journals]
+- [Finite mixtures of multivariate Poisson-log normal factor analyzers for clustering count data](deep_reads/2026-07-14-10.1007_s11222-025-10720-9.md)  
+  6/10 [journals]
 
 #### Technometrics Vol 68 Issue 2
 
@@ -9202,6 +9298,11 @@
 
 ### 期刊
 
+#### Statistics and Computing Vol 36 Issue 1
+
+- [Model-based clustering of time-dependent observations with common structural changes](deep_reads/2026-07-14-10.1007_s11222-025-10756-x.md)  
+  6/10 [journals]
+
 #### Journal of Business & Economic Statistics Vol 41 Issue 1
 
 - [Estimating Trends in Male Earnings Volatility with the Panel Study of Income Dynamics](deep_reads/2026-07-06-10.1080_07350015.2022.2102024.md)  
@@ -10430,6 +10531,13 @@
   8/10 [daily]
 
 ### 期刊
+
+#### Statistics and Computing Vol 36 Issue 3
+
+- [Fairness via independence: a (conditional) distance covariance framework](deep_reads/2026-07-14-10.1007_s11222-026-10874-0.md)  
+  7/10 [journals]
+- [A clustered and sparse ising regression model for multivariate binary data](deep_reads/2026-07-14-10.1007_s11222-026-10888-8.md)  
+  4/10 [journals]
 
 #### Technometrics Vol 68 Issue 2
 

@@ -380,6 +380,14 @@
 - [Vol 34 Issue 3 · 2026-07-13](journals/2026-07-13-jcgs-v34-i3.md)
 - [Vol 34 Issue 2 · 2026-07-13](journals/2026-07-13-jcgs-v34-i2.md)
 
+### Stat. Comput.
+
+- [Vol 36 Issue 4 · 2026-07-14](journals/2026-07-14-stat-comput-v36-i4.md)
+- [Vol 36 Issue 3 · 2026-07-14](journals/2026-07-14-stat-comput-v36-i3.md)
+- [Vol 36 Issue 2 · 2026-07-14](journals/2026-07-14-stat-comput-v36-i2.md)
+- [Vol 36 Issue 1 · 2026-07-14](journals/2026-07-14-stat-comput-v36-i1.md)
+- [Vol 35 Issue 6 · 2026-07-14](journals/2026-07-14-stat-comput-v35-i6.md)
+
 ### Technometrics
 
 - [Vol 68 Issue 2 · 2026-07-13](journals/2026-07-13-technometrics-v68-i2.md)
