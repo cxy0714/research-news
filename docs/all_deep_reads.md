@@ -11801,6 +11801,12 @@
   6/10 [manual]
 - [Double zero-inflated spatio-temporal modeling of daily precipitation under detection thresholds](deep_reads/2026-07-07-2606.17717.md)  
   4/10 [manual]
+- [Nuisance Function Tuning and Sample Splitting for Optimally Estimating a Doubly Robust Functional](deep_reads/2026-07-14-2212.14857.md)  
+  0/10 [manual]
+- [Personalizing black-box models for nonparametric regression with minimax optimality](deep_reads/2026-07-14-2601.01432.md)  
+  0/10 [manual]
+- [Localized Debiased Machine Learning: Efficient Inference on Quantile Treatment Effects and Beyond](deep_reads/2026-07-14-1912.12945.md)  
+  0/10 [manual]
 
 
 ---
