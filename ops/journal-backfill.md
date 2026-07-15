@@ -170,7 +170,7 @@ IEEE 系列 ieee（月刊、每期大，用小步）：
 概率统计 prob_stats：
 - [x] (2026-07-14) `--only AoP --n-issues 20`
 - [x] (2026-07-15) `--only Bernoulli --n-issues 20`
-- [ ] `--only EJS --n-issues 10`   ⚠ 电子刊、文章多
+- [x] (2026-07-15) `--only EJS --n-issues 10`   ⚠ 电子刊、文章多
 - [ ] `--only "Statistica Sinica" --n-issues 20`
 - [ ] `--only "Scand. J. Stat." --n-issues 20`
 

@@ -149,12 +149,18 @@
 
 ### EJS
 
+- [Vol 20 Issue 2 · 2026-07-15](journals/2026-07-15-ejs-v20-i2.md)
+- [Vol 20 Issue 1 · 2026-07-15](journals/2026-07-15-ejs-v20-i1.md)
 - [Vol 20 Issue 1 · 2026-06-18](journals/2026-06-18-ejs-v20-i1.md)
+- [Vol 19 Issue 2 · 2026-07-15](journals/2026-07-15-ejs-v19-i2.md)
 - [Vol 19 Issue 2 · 2026-06-23](journals/2026-06-23-ejs-v19-i2.md)
 - [Vol 19 Issue 2 · 2026-06-18](journals/2026-06-18-ejs-v19-i2.md)
+- [Vol 19 Issue 1 · 2026-07-15](journals/2026-07-15-ejs-v19-i1.md)
 - [Vol 19 Issue 1 · 2026-06-23](journals/2026-06-23-ejs-v19-i1.md)
 - [Vol 19 Issue 1 · 2026-06-18](journals/2026-06-18-ejs-v19-i1.md)
+- [Vol 18 Issue 2 · 2026-07-15](journals/2026-07-15-ejs-v18-i2.md)
 - [Vol 18 Issue 2 · 2026-06-23](journals/2026-06-23-ejs-v18-i2.md)
+- [Vol 18 Issue 1 · 2026-07-15](journals/2026-07-15-ejs-v18-i1.md)
 - [Vol 18 Issue 1 · 2026-06-23](journals/2026-06-23-ejs-v18-i1.md)
 
 ### Scand. J. Stat.
