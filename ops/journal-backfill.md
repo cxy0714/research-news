@@ -190,7 +190,7 @@ IEEE 系列 ieee（月刊、每期大，用小步）：
 - [x] (2026-07-16) `--only AoS --n-issues 24`
 - [x] (2026-07-16) `--only JASA --n-issues 24`
 - [x] (2026-07-16) `--only JRSSB --n-issues 24`
-- [ ] `--only Biometrika --n-issues 24`
+- [x] (2026-07-16) `--only Biometrika --n-issues 24`
 - [ ] `--only JMLR --jmlr-n 7`
 
 经济 / 计量 econ：
