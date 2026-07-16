@@ -178,7 +178,7 @@ IEEE 系列 ieee（月刊、每期大，用小步）：
 - [x] (2026-07-15) `--only StatMed --n-issues 6`   ⚠ 双周刊、量大
 - [x] (2026-07-16) `--only SMMR --n-issues 14`
 - [x] (2026-07-16) `--only AJE --n-issues 10`   ⚠ 月刊
-- [ ] `--only Epidemiology --n-issues 14`
+- [x] (2026-07-16) `--only Epidemiology --n-issues 14`
 
 应用 / 生物统计 applied：
 - [ ] `--only AoAS --n-issues 20`
