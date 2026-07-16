@@ -182,7 +182,7 @@ IEEE 系列 ieee（月刊、每期大，用小步）：
 
 应用 / 生物统计 applied：
 - [x] (2026-07-16) `--only AoAS --n-issues 20`
-- [ ] `--only Biometrics --n-issues 20`
+- [x] (2026-07-16) `--only Biometrics --n-issues 20`
 - [ ] `--only Biostatistics --n-issues 20`
 - [ ] `--only "JRSS-C" --n-issues 20`
 
