@@ -4,6 +4,44 @@
 
 ### Daily
 
+- [Proximal Identification and Estimation in Front-Door Causal Structures with Unobserved Confounding of the Mediator](deep_reads/2026-07-15-2607.10515.md)  
+  9/10 [daily]
+- [Omitted variable bias sensitivity analysis with clustered treatment assignment](deep_reads/2026-07-15-2607.13334.md)  
+  8/10 [daily]
+- [Higher-order Spillover Effects Under Partial Interference](deep_reads/2026-07-15-2607.12855.md)  
+  8/10 [daily]
+- [Calibrated Horizon-Weighted Local Projection Designs for Markov Switchbacks](deep_reads/2026-07-15-2607.11694.md)  
+  8/10 [daily]
+- [When Screening Misleads: A Robust Mendelian Randomization Test for Reliable Causal Discovery](deep_reads/2026-07-15-2607.10755.md)  
+  8/10 [daily]
+- [Bayesian Robustness Values for Modern Causal Panel Estimators via Riesz Representations](deep_reads/2026-07-15-2607.10276.md)  
+  8/10 [daily]
+- [Causal Graphs, Markov Properties and Do-calculus for Stochastic Differential Equations](deep_reads/2026-07-15-2607.12140.md)  
+  8/10 [daily]
+- [Orthogonal Integrated Conditional Moment Tests for Treatment Effect Heterogeneity](deep_reads/2026-07-15-2607.12622.md)  
+  8/10 [daily]
+- [Local Asymptotic Power of Honest Confidence Intervals](deep_reads/2026-07-15-2607.10558.md)  
+  8/10 [daily]
+- [Verifying formulas for interventional distributions](deep_reads/2026-07-15-2607.13883.md)  
+  7/10 [daily]
+- [Average Cause-Specific Hazard: A Censoring-Invariant Measure of Event Burden Under Competing Risks](deep_reads/2026-07-15-2607.13293.md)  
+  7/10 [daily]
+- [Does a Developed Comorbidity Index Really Add Value? A Selection-Aware Bootstrap for Post-Selection Concordance](deep_reads/2026-07-15-2607.12445.md)  
+  7/10 [daily]
+- [Robust Subgroup Analysis for Heterogeneous Censored Data](deep_reads/2026-07-15-2607.11389.md)  
+  7/10 [daily]
+- [Causal Estimation of Share-Induced Engagement with Flywheel Effects](deep_reads/2026-07-15-2607.10820.md)  
+  7/10 [daily]
+- [Estimation and Inference for Latent Dual Networks Using High-Dimensional IV Screening](deep_reads/2026-07-15-2607.13862.md)  
+  7/10 [daily]
+- [Partial Identification with Multiple Nonlinear Measurements of a Latent Regressor](deep_reads/2026-07-15-2607.12219.md)  
+  7/10 [daily]
+- [Inference for Fixed Effects Estimators when Panels are Unbalanced](deep_reads/2026-07-15-2607.10246.md)  
+  7/10 [daily]
+- [Manipulation testing based on Benford's Law for discrete scores](deep_reads/2026-07-15-2607.13564.md)  
+  6/10 [daily]
+- [Network-Adjusted GMM Estimation under Network Uncertainty](deep_reads/2026-07-15-2607.10613.md)  
+  6/10 [daily]
 - [Decision-analytical models as causal models](deep_reads/2026-07-13-2607.09397.md)  
   8/10 [daily]
 - [Causal Perspectives on Network Meta-Analysis](deep_reads/2026-07-13-2607.09200.md)  
@@ -2653,6 +2691,8 @@
 
 ### Daily
 
+- [Adaptable Regularized CCA Tests for Independence of High-Dimensional Random Vectors](deep_reads/2026-07-15-2607.10500.md)  
+  7/10 [daily]
 - [High-Dimensional Interpolators Can Be Fragile: Heavy Tails and High-Dimensional Large Deviations](deep_reads/2026-07-13-2607.09547.md)  
   7/10 [daily]
 - [Geometric planted matchings in high dimensions: The power of multiple views](deep_reads/2026-07-13-2607.09026.md)  
@@ -3779,6 +3819,14 @@
 
 ### Daily
 
+- [On Rates Attainable under Random Design: A Negative Answer to a Problem of Robins](deep_reads/2026-07-15-2607.13170.md)  
+  9/10 [daily]
+- [Nonparametric estimation of the diffusion coefficient of an ergodic diffusion process on non-compact supports under Osgood's conditions](deep_reads/2026-07-15-2607.10230.md)  
+  7/10 [daily]
+- [Bandwidth-free nonparametric density estimation for grouped data](deep_reads/2026-07-15-2607.13182.md)  
+  6/10 [daily]
+- [Minimax Theory of Likelihood-Based Deep Learning for Speckle Regression](deep_reads/2026-07-15-2607.14064.md)  
+  6/10 [daily]
 - [The Cost of Discretization in Functional Linear Regression: Minimax Rates and Adaptation](deep_reads/2026-07-13-2607.09350.md)  
   7/10 [daily]
 - [Parameter estimation and application in two types of uncertain single-index models](deep_reads/2026-07-09-2607.04699.md)  
@@ -5771,6 +5819,26 @@
 
 ### Daily
 
+- [A Correlation-Free Test for High-Dimensional Elliptical Distributions](deep_reads/2026-07-15-2607.11304.md)  
+  8/10 [daily]
+- [The Benjamini--Hochberg Procedure Can Fail to Control the FDR for Correlated Two-Sided Gaussian Tests](deep_reads/2026-07-15-2607.12208.md)  
+  8/10 [daily]
+- [Hash-augmented adaptive multilevel splitting Monte Carlo algorithm for accurate estimation of two-sample permutation test p-values](deep_reads/2026-07-15-2607.12853.md)  
+  7/10 [daily]
+- [Extracting Bayesian Evidence from Frequentist p-Values](deep_reads/2026-07-15-2607.12132.md)  
+  7/10 [daily]
+- [Nonstandard likelihood-ratio limits under semidefinite rank constraints](deep_reads/2026-07-15-2607.13761.md)  
+  7/10 [daily]
+- [A unified approach for testing in Hilbert spaces on incomplete data](deep_reads/2026-07-15-2607.13209.md)  
+  7/10 [daily]
+- [MixCIT: A Kernel Based Local-Polynomial Debiased Test for Conditional Independence on Mixed-Type Data](deep_reads/2026-07-15-2607.12830.md)  
+  7/10 [daily]
+- [A uniform relative deviation inequality for VC-subgraph classes](deep_reads/2026-07-15-2607.11719.md)  
+  7/10 [daily]
+- [Nonparametric Multi Change Point Detection for Markov Chains via Adaptive Clustering](deep_reads/2026-07-15-2607.12369.md)  
+  6/10 [daily]
+- [A Frequentist Approach to Change Point Detection: Methods and Applications](deep_reads/2026-07-15-2607.13852.md)  
+  6/10 [daily]
 - [How useful is a wrong model? Information-sharing for inference under mean misspecification in linear models](deep_reads/2026-07-13-2607.09579.md)  
   7/10 [daily]
 - [Testing the equality of estimable parameters](deep_reads/2026-07-10-2607.07588.md)  
@@ -7569,6 +7637,10 @@
 
 ### Daily
 
+- [Hierarchical Bayesian inversion using the Karhunen-Loève expansion with analytical eigenpairs of the squared exponential kernel](deep_reads/2026-07-15-2607.12387.md)  
+  6/10 [daily]
+- [An Efficient Bayesian Framework for Uncertainty Quantification in Nonlinear Imaging Inverse Problems](deep_reads/2026-07-15-2607.10817.md)  
+  6/10 [daily]
 - [Orthogonalized Design Matrices Speed-ups of Bayesian Semiparametric Regression](deep_reads/2026-07-13-2607.09013.md)  
   6/10 [daily]
 - [Near-optimal node-private community estimation in polynomial-time](deep_reads/2026-07-13-2607.09441.md)  
@@ -8469,6 +8541,12 @@
 
 ### Daily
 
+- [Rigidity spectra and onset geometry of the two largest Forbush decreases of solar cycle 25 from visibility-graph curvature](deep_reads/2026-07-15-2607.13236.md)  
+  6/10 [daily]
+- [Fast(er)PM and Moving Mesh: JAX-native Geometric Multigrid Methods](deep_reads/2026-07-15-2607.10983.md)  
+  6/10 [daily]
+- [The MICADO first light imager for the ELT: the SCAO module AIT in France, from the beta flat configuration towards the flat and final configurations](deep_reads/2026-07-15-2607.12854.md)  
+  1/10 [daily]
 - [Fast Graph-based Higher-Order Clustering Statistics on the GPU](deep_reads/2026-07-10-2607.06604.md)  
   7/10 [daily]
 - [Compensator-based inference for signal detection under unknown background: the binned data case](deep_reads/2026-07-10-2607.06939.md)  
@@ -8742,6 +8820,10 @@
 
 ### Daily
 
+- [Dynamically Consistent Statistical Decisions](deep_reads/2026-07-15-2607.10519.md)  
+  7/10 [daily]
+- [Global factors for local shocks in a data-scarce environment: with an application to regional fiscal multipliers in Italy](deep_reads/2026-07-15-2607.13879.md)  
+  6/10 [daily]
 - [Properties of the Conditional Likelihood Ratio Test under Discrete Approximation](deep_reads/2026-07-08-2607.04380.md)  
   7/10 [daily]
 - [Remote Work: Driver or Deterrent of Digital Product Innovation](deep_reads/2026-07-08-2607.03718.md)  
@@ -10797,6 +10879,10 @@
 
 ### Daily
 
+- [A General U-Statistic Framework for High-Dimensional Multiple Change-Point Analysis](deep_reads/2026-07-15-2607.11256.md)  
+  9/10 [daily]
+- [Towards a Geometric Characterization of Multiverse Analysis](deep_reads/2026-07-15-2607.11345.md)  
+  6/10 [daily]
 - [SPOT-IC: Improving prediction for interval-censored data via survival probability transfer](deep_reads/2026-07-13-2607.09640.md)  
   6/10 [daily]
 - [From Statistical to Structural Synergy: A Predictability Framework to Quantify the Effects due to High-Order Mechanisms](deep_reads/2026-07-10-2607.07286.md)  

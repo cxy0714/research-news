@@ -11,3 +11,10 @@ __version__ = "0.1.0"
 from dotenv import load_dotenv as _load_dotenv
 
 _load_dotenv()
+
+# Route GFW-blocked scrapers (arXiv / OpenAlex / Crossref) through the local
+# proxy. Reads PROXY_URL from the .env just loaded above; domestic hosts (SJTU
+# gateway, *.cn) stay direct. See research_news/netenv.py.
+from .netenv import setup_proxy as _setup_proxy  # noqa: E402
+
+_setup_proxy()
