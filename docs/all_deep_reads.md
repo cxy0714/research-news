@@ -5480,6 +5480,10 @@
 
 - [Thin Sets Are Not Equally Thin: Minimax Learning of Submanifold Integrals](deep_reads/2026-06-22-2507.12673.md)  
   9/10 [manual]
+- [A simple adaptive estimator of the integrated square of a density](deep_reads/2026-07-17-0803.0847.md)  
+  8/10 [manual]
+- [On Estimation of $L_{r}$-Norms in Gaussian White Noise Models](deep_reads/2026-07-17-1710.03863.md)  
+  7/10 [manual]
 - [Geometric Information Decomposition for Weighted Empirical Measures on the Sphere](deep_reads/2026-07-10-2607.02943.md)  
   4/10 [manual]
 
@@ -7630,6 +7634,16 @@
 
 ### 其他
 
+- [On Testing for Parameters in Ising Models](deep_reads/2026-07-17-1906.00456.md)  
+  7/10 [manual]
+- [Detection Thresholds for the $β$-Model on Sparse Graphs](deep_reads/2026-07-17-1608.01801.md)  
+  7/10 [manual]
+- [Hypothesis testing for high-dimensional sparse binary regression](deep_reads/2026-07-17-1308.0764.md)  
+  7/10 [manual]
+- [Sharp Signal Detection Under Ferromagnetic Ising Models](deep_reads/2026-07-17-2110.02949.md)  
+  7/10 [manual]
+- [Global Testing Against Sparse Alternatives under Ising Models](deep_reads/2026-07-17-1611.08293.md)  
+  7/10 [manual]
 - [Second order mixed moment inequalities based on Gram matrices](deep_reads/2026-07-07-2606.21636.md)  
   4/10 [manual]
 
@@ -8820,6 +8834,8 @@
 
 ### Daily
 
+- [Time preference effects in forecasting](deep_reads/2026-07-17-2607.13759.md)  
+  6/10 [daily]
 - [Dynamically Consistent Statistical Decisions](deep_reads/2026-07-15-2607.10519.md)  
   7/10 [daily]
 - [Global factors for local shocks in a data-scarce environment: with an application to regional fiscal multipliers in Italy](deep_reads/2026-07-15-2607.13879.md)  

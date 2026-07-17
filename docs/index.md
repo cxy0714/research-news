@@ -17,6 +17,25 @@
 
 [→ 查看完整报告](daily/2026-07-17.md)
 
+### 精读论文（8 篇）
+
+- [A simple adaptive estimator of the integrated square of a density](deep_reads/2026-07-17-0803.0847.md)  
+  `非参数 / 半参数` · 相关性 8/10
+- [On Testing for Parameters in Ising Models](deep_reads/2026-07-17-1906.00456.md)  
+  `数理统计 / 假设检验` · 相关性 7/10
+- [On Estimation of $L_{r}$-Norms in Gaussian White Noise Models](deep_reads/2026-07-17-1710.03863.md)  
+  `非参数 / 半参数` · 相关性 7/10
+- [Detection Thresholds for the $β$-Model on Sparse Graphs](deep_reads/2026-07-17-1608.01801.md)  
+  `数理统计 / 假设检验` · 相关性 7/10
+- [Hypothesis testing for high-dimensional sparse binary regression](deep_reads/2026-07-17-1308.0764.md)  
+  `数理统计 / 假设检验` · 相关性 7/10
+- [Sharp Signal Detection Under Ferromagnetic Ising Models](deep_reads/2026-07-17-2110.02949.md)  
+  `数理统计 / 假设检验` · 相关性 7/10
+- [Global Testing Against Sparse Alternatives under Ising Models](deep_reads/2026-07-17-1611.08293.md)  
+  `数理统计 / 假设检验` · 相关性 7/10
+- [Time preference effects in forecasting](deep_reads/2026-07-17-2607.13759.md)  
+  `经济理论 / 应用` · 相关性 6/10
+
 ## 收藏
 
 - [→ 打开收藏](favorites.md) · 登录后在各页点 ☆ 收藏即可自动汇总
