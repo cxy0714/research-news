@@ -391,6 +391,35 @@
 
 ### 期刊
 
+#### Econometrica Vol 94 Issue 4
+
+- [Identification in Instrumental Variables Models: The Central Role of Abadie's Kappa](deep_reads/2026-07-18-10.3982_ecta23174.md)  
+  8/10 [journals]
+
+#### Econometrica Vol 91 Issue 3
+
+- [Distributional Synthetic Controls](deep_reads/2026-07-18-10.3982_ecta18260.md)  
+  9/10 [journals]
+
+#### Econometrica Vol 91 Issue 2
+
+- [When Is Parallel Trends Sensitive to Functional Form?](deep_reads/2026-07-18-10.3982_ecta19402.md)  
+  9/10 [journals]
+- [Constrained Conditional Moment Restriction Models](deep_reads/2026-07-18-10.3982_ecta13830.md)  
+  8/10 [journals]
+- [Synthetic Control as Online Linear Regression](deep_reads/2026-07-18-10.3982_ecta20720.md)  
+  7/10 [journals]
+
+#### Econometrica Vol 91 Issue 1
+
+- [Counterfactual Sensitivity and Robustness](deep_reads/2026-07-18-10.3982_ecta17232.md)  
+  8/10 [journals]
+
+#### Econometrica Vol 90 Issue 6
+
+- [Causality in Econometrics: Choice vs Chance](deep_reads/2026-07-18-10.3982_ecta21204.md)  
+  8/10 [journals]
+
 #### Electronic Journal of Statistics Vol 18 Issue 2
 
 - [Structural mean models for instrumented difference-in-differences](deep_reads/2026-07-15-10.1214_24-ejs2313.md)  
@@ -6032,6 +6061,11 @@
 
 ### 期刊
 
+#### Econometrica Vol 90 Issue 6
+
+- [Robust Empirical Bayes Confidence Intervals](deep_reads/2026-07-18-10.3982_ecta18597.md)  
+  8/10 [journals]
+
 #### Electronic Journal of Statistics Vol 19 Issue 2
 
 - [Minimax asymptotics](deep_reads/2026-07-15-10.1214_25-ejs2457.md)  
@@ -8904,6 +8938,128 @@
   6/10 [daily]
 
 ### 期刊
+
+#### Econometrica Vol 94 Issue 4
+
+- [Double Robustness of Local Projections and Some Unpleasant VARithmetic](deep_reads/2026-07-18-10.3982_ecta23345.md)  
+  8/10 [journals]
+- [Mechanism Design for Personalized Policy: A Field Experiment Incentivizing Exercise](deep_reads/2026-07-18-10.3982_ecta21926.md)  
+  7/10 [journals]
+- [Job Ladder and Wealth Dynamics in General Equilibrium](deep_reads/2026-07-18-10.3982_ecta22542.md)  
+  6/10 [journals]
+- [The Class Gap in Career Progression: Evidence From U.S. Academia](deep_reads/2026-07-18-10.3982_ecta23358.md)  
+  6/10 [journals]
+- [The Inference‐Forecast Gap in Belief Updating](deep_reads/2026-07-18-10.3982_ecta23334.md)  
+  5/10 [journals]
+- [Economic Growth and the Rise of Large Firms](deep_reads/2026-07-18-10.3982_ecta22110.md)  
+  5/10 [journals]
+- [Information Design in Common Value Auction With Moral Hazard: Application to OCS Leasing Auctions](deep_reads/2026-07-18-10.3982_ecta21839.md)  
+  4/10 [journals]
+
+#### Econometrica Vol 91 Issue 3
+
+- [The Welfare Effects of Encouraging Rural–Urban Migration](deep_reads/2026-07-18-10.3982_ecta15962.md)  
+  7/10 [journals]
+- [Equilibrium Effects of Food Labeling Policies](deep_reads/2026-07-18-10.3982_ecta19603.md)  
+  7/10 [journals]
+- [A Sieve‐SMM Estimator for Dynamic Models](deep_reads/2026-07-18-10.3982_ecta17068.md)  
+  7/10 [journals]
+- [Decomposing the Growth of Top Wealth Shares](deep_reads/2026-07-18-10.3982_ecta16755.md)  
+  6/10 [journals]
+- [Equilibrium Effects of Pay Transparency](deep_reads/2026-07-18-10.3982_ecta19788.md)  
+  5/10 [journals]
+- [Searching for Job Security and the Consequences of Job Loss](deep_reads/2026-07-18-10.3982_ecta14008.md)  
+  5/10 [journals]
+- [Pareto‐Improving Tax Reforms and the Earned Income Tax Credit](deep_reads/2026-07-18-10.3982_ecta18600.md)  
+  5/10 [journals]
+- [Financial Frictions and the Wealth Distribution](deep_reads/2026-07-18-10.3982_ecta18180.md)  
+  4/10 [journals]
+
+#### Econometrica Vol 91 Issue 2
+
+- [Network Cluster‐Robust Inference](deep_reads/2026-07-18-10.3982_ecta19816.md)  
+  6/10 [journals]
+- [Is Attention Produced Optimally? Theory and Evidence From Experiments With Bandwidth Enhancements](deep_reads/2026-07-18-10.3982_ecta20400.md)  
+  4/10 [journals]
+- [Optimal Regulation of Noncompete Contracts](deep_reads/2026-07-18-10.3982_ecta18128.md)  
+  3/10 [journals]
+- [Connecting to Power: Political Connections, Innovation, and Firm Dynamics](deep_reads/2026-07-18-10.3982_ecta18338.md)  
+  2/10 [journals]
+- [Optimal Product Design: Implications for Competition and Growth Under Declining Search Frictions](deep_reads/2026-07-18-10.3982_ecta19653.md)  
+  2/10 [journals]
+- [Factions in Nondemocracies: Theory and Evidence From the Chinese Communist Party](deep_reads/2026-07-18-10.3982_ecta19274.md)  
+  1/10 [journals]
+
+#### Econometrica Vol 91 Issue 1
+
+- [Nonparametric Estimates of Demand in the California Health Insurance Exchange](deep_reads/2026-07-18-10.3982_ecta17215.md)  
+  8/10 [journals]
+- [Invidious Comparisons: Ranking and Selection as Compound Decisions](deep_reads/2026-07-18-10.3982_ecta19304.md)  
+  7/10 [journals]
+- [Inference for Large‐Scale Linear Systems With Known Coefficients](deep_reads/2026-07-18-10.3982_ecta18979.md)  
+  7/10 [journals]
+- [Graphon Games: A Statistical Framework for Network Games and Interventions](deep_reads/2026-07-18-10.3982_ecta17564.md)  
+  6/10 [journals]
+- [Nexus Tax Laws and Economies of Density in E‐Commerce: A Study of Amazon's Fulfillment Center Network](deep_reads/2026-07-18-10.3982_ecta15265.md)  
+  5/10 [journals]
+- [Misallocation and Capital Market Integration: Evidence From India](deep_reads/2026-07-18-10.3982_ecta19039.md)  
+  4/10 [journals]
+- [The Race Between Preferences and Technology](deep_reads/2026-07-18-10.3982_ecta18580.md)  
+  3/10 [journals]
+
+#### Econometrica Vol 90 Issue 6
+
+- [Empirical Strategies in Economics: Illuminating the Path From Cause to Effect](deep_reads/2026-07-18-10.3982_ecta20640.md)  
+  8/10 [journals]
+- [Spatial Correlation Robust Inference](deep_reads/2026-07-18-10.3982_ecta19465.md)  
+  7/10 [journals]
+- [General Equilibrium Effects of Cash Transfers: Experimental Evidence From Kenya](deep_reads/2026-07-18-10.3982_ecta17945.md)  
+  6/10 [journals]
+- [Multinationals, Monopsony, and Local Development: Evidence From the United Fruit Company](deep_reads/2026-07-18-10.3982_ecta19514.md)  
+  5/10 [journals]
+- [Learning From Reviews: The Selection Effect and the Speed of Learning](deep_reads/2026-07-18-10.3982_ecta15847.md)  
+  4/10 [journals]
+- [Market Competition and Political Influence: An Integrated Approach](deep_reads/2026-07-18-10.3982_ecta19775.md)  
+  3/10 [journals]
+- [Productivity Dispersion, Between‐Firm Competition, and the Labor Share](deep_reads/2026-07-18-10.3982_ecta18612.md)  
+  3/10 [journals]
+- [Uneven Growth: Automation's Impact on Income and Wealth Inequality](deep_reads/2026-07-18-10.3982_ecta19417.md)  
+  3/10 [journals]
+- [Achieving Scale Collectively](deep_reads/2026-07-18-10.3982_ecta18773.md)  
+  2/10 [journals]
+- [A Negishi Approach to Recursive Contracts](deep_reads/2026-07-18-10.3982_ecta18310.md)  
+  2/10 [journals]
+
+#### Econometrica Vol 90 Issue 5
+
+- [Tasks, Automation, and the Rise in U.S. Wage Inequality](deep_reads/2026-07-18-10.3982_ecta19815.md)  
+  5/10 [journals]
+- [A General Framework for Robust Contracting Models](deep_reads/2026-07-18-10.3982_ecta17386.md)  
+  4/10 [journals]
+- [Gender Differences in Peer Recognition by Economists](deep_reads/2026-07-18-10.3982_ecta18027.md)  
+  4/10 [journals]
+- [(S)Cars and the Great Recession](deep_reads/2026-07-18-10.3982_ecta19037.md)  
+  4/10 [journals]
+- [Preparing for the Worst but Hoping for the Best: Robust (Bayesian) Persuasion](deep_reads/2026-07-18-10.3982_ecta19107.md)  
+  4/10 [journals]
+- [Household Leverage and the Recession](deep_reads/2026-07-18-10.3982_ecta16455.md)  
+  4/10 [journals]
+- [Rules and Commitment in Communication: An Experimental Analysis](deep_reads/2026-07-18-10.3982_ecta18585.md)  
+  3/10 [journals]
+- [Fiscal Rules and Discretion Under Limited Enforcement](deep_reads/2026-07-18-10.3982_ecta16962.md)  
+  3/10 [journals]
+- [Experimentation and Approval Mechanisms](deep_reads/2026-07-18-10.3982_ecta17021.md)  
+  3/10 [journals]
+- [Structural Rationality in Dynamic Games](deep_reads/2026-07-18-10.3982_ecta16666.md)  
+  3/10 [journals]
+- [Volatility and the Gains From Trade](deep_reads/2026-07-18-10.3982_ecta14411.md)  
+  3/10 [journals]
+- [Full Information Equivalence in Large Elections](deep_reads/2026-07-18-10.3982_ecta16376.md)  
+  3/10 [journals]
+- [Optimal Taxation of Income‐Generating Choice](deep_reads/2026-07-18-10.3982_ecta18542.md)  
+  3/10 [journals]
+- [Market Size and Spatial Growth—Evidence From Germany's Post‐War Population Expulsions](deep_reads/2026-07-18-10.3982_ecta18002.md)  
+  2/10 [journals]
 
 #### Electronic Journal of Statistics Vol 18 Issue 1
 
