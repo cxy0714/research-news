@@ -196,7 +196,7 @@ IEEE 系列 ieee（月刊、每期大，用小步）：
 经济 / 计量 econ：
 - [x] (2026-07-18) `--only Econometrica --n-issues 24`
 - [x] (2026-07-18) `--only "J. Econometrics" --n-issues 10`   ⚠ 出刊密、量大
-- [ ] `--only "Quant. Econ." --n-issues 20`
+- [x] (2026-07-18) `--only "Quant. Econ." --n-issues 20`
 - [ ] `--only JBES --n-issues 20`
 
 IEEE 系列 ieee（月刊、每期大，用小步）：

@@ -391,6 +391,29 @@
 
 ### 期刊
 
+#### Quantitative Economics Vol 13 Issue 3
+
+- [Unconditional quantile regression with high‐dimensional data](deep_reads/2026-07-18-10.3982_qe1896.md)  
+  9/10 [journals]
+- [Minimizing sensitivity to model misspecification](deep_reads/2026-07-18-10.3982_qe1930.md)  
+  8/10 [journals]
+
+#### Quantitative Economics Vol 13 Issue 1
+
+- [Testing identifying assumptions in fuzzy regression discontinuity designs](deep_reads/2026-07-18-10.3982_qe1367.md)  
+  8/10 [journals]
+- [Information theoretic approach to high‐dimensional multiplicative models: Stochastic discount factor and treatment effect](deep_reads/2026-07-18-10.3982_qe1603.md)  
+  8/10 [journals]
+- [Uncertain identification](deep_reads/2026-07-18-10.3982_qe1671.md)  
+  7/10 [journals]
+
+#### Quantitative Economics Vol 12 Issue 4
+
+- [Synthetic controls with imperfect pretreatment fit](deep_reads/2026-07-18-10.3982_qe1596.md)  
+  8/10 [journals]
+- [Panel experiments and dynamic causal effects: A finite population perspective](deep_reads/2026-07-18-10.3982_qe1744.md)  
+  8/10 [journals]
+
 #### Journal of Econometrics Vol 246 Issue 1-2
 
 - [Consistent causal inference for high-dimensional time series](deep_reads/2026-07-18-10.1016_j.jeconom.2024.105902.md)  
@@ -5569,6 +5592,11 @@
 
 ### 期刊
 
+#### Quantitative Economics Vol 13 Issue 1
+
+- [The influence function of semiparametric estimators](deep_reads/2026-07-18-10.3982_qe826.md)  
+  9/10 [journals]
+
 #### Electronic Journal of Statistics Vol 18 Issue 2
 
 - [Robust improvement of efficiency using information on covariate distribution](deep_reads/2026-07-15-10.1214_24-ejs2311.md)  
@@ -6074,6 +6102,16 @@
   8/10 [daily]
 
 ### 期刊
+
+#### Quantitative Economics Vol 14 Issue 1
+
+- [Permutation‐based tests for discontinuities in event studies](deep_reads/2026-07-18-10.3982_qe1775.md)  
+  8/10 [journals]
+
+#### Quantitative Economics Vol 13 Issue 1
+
+- [A consistent specification test for dynamic quantile models](deep_reads/2026-07-18-10.3982_qe1727.md)  
+  7/10 [journals]
 
 #### Journal of Econometrics Vol 246 Issue 1-2
 
@@ -8963,6 +9001,106 @@
 
 ### 期刊
 
+#### Quantitative Economics Vol 14 Issue 1
+
+- [Random utility and limited consideration](deep_reads/2026-07-18-10.3982_qe1861.md)  
+  7/10 [journals]
+- [Monetary policy, external instruments, and heteroskedasticity](deep_reads/2026-07-18-10.3982_qe1511.md)  
+  7/10 [journals]
+- [Full‐information estimation of heterogeneous agent models using macro and micro data](deep_reads/2026-07-18-10.3982_qe1810.md)  
+  6/10 [journals]
+- [The demographic consequences of sex‐selection technology](deep_reads/2026-07-18-10.3982_qe2088.md)  
+  6/10 [journals]
+- [Forecasting with a panel Tobit model](deep_reads/2026-07-18-10.3982_qe1505.md)  
+  5/10 [journals]
+- [Pareto extrapolation: An analytical framework for studying tail inequality](deep_reads/2026-07-18-10.3982_qe1817.md)  
+  4/10 [journals]
+
+#### Quantitative Economics Vol 13 Issue 4
+
+- [Earnings dynamics and labor market reforms: The Italian case](deep_reads/2026-07-18-10.3982_qe1865.md)  
+  5/10 [journals]
+- [Income risk inequality: Evidence from Spanish administrative records](deep_reads/2026-07-18-10.3982_qe1887.md)  
+  5/10 [journals]
+- [Earnings dynamics and its intergenerational transmission: Evidence from Norway](deep_reads/2026-07-18-10.3982_qe1849.md)  
+  5/10 [journals]
+- [Four decades of Canadian earnings inequality and dynamics across workers and firms](deep_reads/2026-07-18-10.3982_qe1846.md)  
+  5/10 [journals]
+- [Inequality and dynamics of earnings and disposable income in Denmark 1987–2016](deep_reads/2026-07-18-10.3982_qe1843.md)  
+  5/10 [journals]
+- [Inequality and earnings dynamics in France: National policies and local consequences](deep_reads/2026-07-18-10.3982_qe1876.md)  
+  5/10 [journals]
+- [Global trends in income inequality and income dynamics: New insights from GRID](deep_reads/2026-07-18-10.3982_qe2260.md)  
+  5/10 [journals]
+- [Earnings dynamics of immigrants and natives in Sweden 1985–2016](deep_reads/2026-07-18-10.3982_qe1854.md)  
+  4/10 [journals]
+- [The evolution of the earnings distribution in a volatile economy: Evidence from Argentina](deep_reads/2026-07-18-10.3982_qe1857.md)  
+  4/10 [journals]
+- [Inequality and income dynamics in Germany](deep_reads/2026-07-18-10.3982_qe1912.md)  
+  4/10 [journals]
+- [Income dynamics in the United Kingdom and the impact of the Covid‐19 recession](deep_reads/2026-07-18-10.3982_qe1872.md)  
+  4/10 [journals]
+- [Earnings inequality and dynamics in the presence of informality: The case of Brazil](deep_reads/2026-07-18-10.3982_qe1855.md)  
+  4/10 [journals]
+
+#### Quantitative Economics Vol 13 Issue 3
+
+- [A discrete choice model for partially ordered alternatives](deep_reads/2026-07-18-10.3982_qe1497.md)  
+  6/10 [journals]
+- [Consumption peer effects and utility needs in India](deep_reads/2026-07-18-10.3982_qe1760.md)  
+  6/10 [journals]
+- [Secret reserve prices by uninformed sellers](deep_reads/2026-07-18-10.3982_qe1781.md)  
+  5/10 [journals]
+- [Uncertainty measures from partially rounded probabilistic forecast surveys](deep_reads/2026-07-18-10.3982_qe1703.md)  
+  5/10 [journals]
+- [Permanent‐income inequality](deep_reads/2026-07-18-10.3982_qe1851.md)  
+  3/10 [journals]
+- [The importance of hiring frictions in business cycles](deep_reads/2026-07-18-10.3982_qe1512.md)  
+  2/10 [journals]
+
+#### Quantitative Economics Vol 13 Issue 2
+
+- [Identification in ascending auctions, with an application to digital rights management](deep_reads/2026-07-18-10.3982_qe1151.md)  
+  7/10 [journals]
+- [Market counterfactuals and the specification of multiproduct demand: A nonparametric approach](deep_reads/2026-07-18-10.3982_qe1653.md)  
+  6/10 [journals]
+- [Wandering astray: Teenagers' choices of schooling and crime](deep_reads/2026-07-18-10.3982_qe1722.md)  
+  5/10 [journals]
+- [Child work and cognitive development: Results from four low to middle income countries](deep_reads/2026-07-18-10.3982_qe1745.md)  
+  5/10 [journals]
+- [Like father, like son: Occupational choice, intergenerational persistence and misallocation](deep_reads/2026-07-18-10.3982_qe1375.md)  
+  4/10 [journals]
+- [Strategic interactions in U.S. monetary and fiscal policies](deep_reads/2026-07-18-10.3982_qe1678.md)  
+  4/10 [journals]
+- [Revealing a preference for mixtures: An experimental study of risk](deep_reads/2026-07-18-10.3982_qe1694.md)  
+  4/10 [journals]
+- [Why are open ascending auctions popular? The role of information aggregation and behavioral biases](deep_reads/2026-07-18-10.3982_qe1692.md)  
+  3/10 [journals]
+- [The development of randomization and deceptive behavior in mixed strategy games](deep_reads/2026-07-18-10.3982_qe1769.md)  
+  3/10 [journals]
+- [Social distancing and supply disruptions in a pandemic](deep_reads/2026-07-18-10.3982_qe1618.md)  
+  3/10 [journals]
+
+#### Quantitative Economics Vol 13 Issue 1
+
+- [Modeling time varying risk of natural resource assets: Implications of climate change](deep_reads/2026-07-18-10.3982_qe1597.md)  
+  2/10 [journals]
+
+#### Quantitative Economics Vol 12 Issue 4
+
+- [Imposing equilibrium restrictions in the estimation of dynamic discrete games](deep_reads/2026-07-18-10.3982_qe1735.md)  
+  6/10 [journals]
+- [A new approach to measuring economic policy shocks, with an application to conventional and unconventional monetary policy](deep_reads/2026-07-18-10.3982_qe1225.md)  
+  5/10 [journals]
+- [Regime‐dependent effects of uncertainty shocks: A structural interpretation](deep_reads/2026-07-18-10.3982_qe1298.md)  
+  5/10 [journals]
+- [Do elite colleges matter? The impact on entrepreneurship decisions and career dynamics](deep_reads/2026-07-18-10.3982_qe1587.md)  
+  4/10 [journals]
+- [A job ladder model with stochastic employment opportunities](deep_reads/2026-07-18-10.3982_qe1394.md)  
+  4/10 [journals]
+- [Neighborhood effects and housing vouchers](deep_reads/2026-07-18-10.3982_qe1664.md)  
+  3/10 [journals]
+
 #### Journal of Econometrics Vol 245 Issue 1-2
 
 - [Why are replication rates so low?](deep_reads/2026-07-18-10.1016_j.jeconom.2024.105868.md)  
@@ -11149,6 +11287,11 @@
   8/10 [daily]
 
 ### 期刊
+
+#### Quantitative Economics Vol 12 Issue 4
+
+- [Fixed‐ <i>k</i> inference for volatility](deep_reads/2026-07-18-10.3982_qe1749.md)  
+  7/10 [journals]
 
 #### Journal of Econometrics Vol 244 Issue 2
 
