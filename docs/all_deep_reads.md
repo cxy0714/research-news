@@ -391,6 +391,96 @@
 
 ### 期刊
 
+#### Journal of Business & Economic Statistics Vol 40 Issue 4
+
+- [High-Dimensional Model-Assisted Inference for Local Average Treatment Effects With Instrumental Variables](deep_reads/2026-07-19-10.1080_07350015.2021.1970575.md)  
+  9/10 [journals]
+- [A Unified Framework for Specification Tests of Continuous Treatment Effect Models](deep_reads/2026-07-19-10.1080_07350015.2021.1981915.md)  
+  8/10 [journals]
+- [Local Composite Quantile Regression for Regression Discontinuity](deep_reads/2026-07-19-10.1080_07350015.2021.1990072.md)  
+  8/10 [journals]
+- [Varying Coefficient Mediation Model and Application to Analysis of Behavioral Economics Data](deep_reads/2026-07-19-10.1080_07350015.2021.1971089.md)  
+  8/10 [journals]
+- [LATE With Missing or Mismeasured Treatment](deep_reads/2026-07-19-10.1080_07350015.2021.1970573.md)  
+  8/10 [journals]
+- [Efficient Covariate Balancing for the Local Average Treatment Effect](deep_reads/2026-07-19-10.1080_07350015.2021.1946067.md)  
+  8/10 [journals]
+- [Posterior Average Effects](deep_reads/2026-07-19-10.1080_07350015.2021.1984928.md)  
+  7/10 [journals]
+- [Multiple Testing and the Distributional Effects of Accountability Incentives in Education](deep_reads/2026-07-19-10.1080_07350015.2021.1941055.md)  
+  7/10 [journals]
+- [High-Dimensional Mixed-Frequency IV Regression](deep_reads/2026-07-19-10.1080_07350015.2021.1933501.md)  
+  7/10 [journals]
+
+#### Journal of Business & Economic Statistics Vol 40 Issue 3
+
+- [The PCDID Approach: Difference-in-Differences When Trends Are Potentially Unparallel and Stochastic](deep_reads/2026-07-19-10.1080_07350015.2021.1914636.md)  
+  8/10 [journals]
+- [Multiway Cluster Robust Double/Debiased Machine Learning](deep_reads/2026-07-19-10.1080_07350015.2021.1895815.md)  
+  8/10 [journals]
+- [Standard Synthetic Control Methods: The Case of Using All Preintervention Outcomes Together With Covariates](deep_reads/2026-07-19-10.1080_07350015.2021.1930012.md)  
+  7/10 [journals]
+- [Synthetic Control Estimation Beyond Comparative Case Studies: Does the Minimum Wage Reduce Employment?](deep_reads/2026-07-19-10.1080_07350015.2021.1927743.md)  
+  7/10 [journals]
+- [Local Polynomial Order in Regression Discontinuity Designs](deep_reads/2026-07-19-10.1080_07350015.2021.1920961.md)  
+  7/10 [journals]
+- [Transformation Models in High Dimensions](deep_reads/2026-07-19-10.1080_07350015.2021.1906259.md)  
+  7/10 [journals]
+- [Nonparametric Instrumental Regression With Right Censored Duration Outcomes](deep_reads/2026-07-19-10.1080_07350015.2021.1895814.md)  
+  7/10 [journals]
+
+#### Journal of Business & Economic Statistics Vol 40 Issue 2
+
+- [Assessing Causal Effects in a Longitudinal Observational Study With “Truncated” Outcomes Due to Unemployment and Nonignorable Missing Data](deep_reads/2026-07-19-10.1080_07350015.2020.1862672.md)  
+  8/10 [journals]
+- [Instrument Validity Tests With Causal Forests](deep_reads/2026-07-19-10.1080_07350015.2020.1847122.md)  
+  8/10 [journals]
+- [Structural Equation Model Averaging: Methodology and Application](deep_reads/2026-07-19-10.1080_07350015.2020.1870479.md)  
+  7/10 [journals]
+- [Nonignorable Missing Data, Single Index Propensity Score and Profile Synthetic Distribution Function](deep_reads/2026-07-19-10.1080_07350015.2020.1860065.md)  
+  7/10 [journals]
+- [Analyzing Subjective Well-Being Data with Misclassification](deep_reads/2026-07-19-10.1080_07350015.2020.1865169.md)  
+  6/10 [journals]
+- [Fixed-<i>k</i> Inference for Conditional Extremal Quantiles](deep_reads/2026-07-19-10.1080_07350015.2020.1870985.md)  
+  5/10 [journals]
+
+#### Journal of Business & Economic Statistics Vol 40 Issue 1
+
+- [Direct and Indirect Effects based on Changes-in-Changes](deep_reads/2026-07-19-10.1080_07350015.2020.1831929.md)  
+  8/10 [journals]
+- [Estimation of Conditional Average Treatment Effects With High-Dimensional Data](deep_reads/2026-07-19-10.1080_07350015.2020.1811102.md)  
+  8/10 [journals]
+- [Counterfactual Treatment Effects: Estimation and Inference](deep_reads/2026-07-19-10.1080_07350015.2020.1800479.md)  
+  8/10 [journals]
+- [A Nonparametric Nonclassical Measurement Error Approach to Estimating Intergenerational Mobility Elasticities](deep_reads/2026-07-19-10.1080_07350015.2020.1787176.md)  
+  8/10 [journals]
+- [Counterfactual Analysis and Inference With Nonstationary Data](deep_reads/2026-07-19-10.1080_07350015.2020.1799814.md)  
+  7/10 [journals]
+- [Semiparametric Estimation of a Censored Regression Model Subject to Nonparametric Sample Selection](deep_reads/2026-07-19-10.1080_07350015.2020.1784746.md)  
+  7/10 [journals]
+- [Treatment Versus Regime Effects of Carrots and Sticks](deep_reads/2026-07-19-10.1080_07350015.2020.1784744.md)  
+  7/10 [journals]
+- [Nonparametric Estimation and Conformal Inference of the Sufficient Forecasting With a Diverging Number of Factors](deep_reads/2026-07-19-10.1080_07350015.2020.1813589.md)  
+  6/10 [journals]
+
+#### Journal of Business & Economic Statistics Vol 39 Issue 4
+
+- [Inference in Additively Separable Models With a High-Dimensional Set of Conditioning Variables](deep_reads/2026-07-19-10.1080_07350015.2020.1753524.md)  
+  8/10 [journals]
+- [A Framework for Eliciting, Incorporating, and Disciplining Identification Beliefs in Linear Models](deep_reads/2026-07-19-10.1080_07350015.2020.1753528.md)  
+  7/10 [journals]
+- [Measuring Granger Causality in Quantiles](deep_reads/2026-07-19-10.1080_07350015.2020.1739531.md)  
+  6/10 [journals]
+- [Threshold Regression With a Threshold Boundary](deep_reads/2026-07-19-10.1080_07350015.2020.1740712.md)  
+  5/10 [journals]
+
+#### Journal of Business & Economic Statistics Vol 39 Issue 3
+
+- [A Correction for Regression Discontinuity Designs With Group-Specific Mismeasurement of the Running Variable](deep_reads/2026-07-19-10.1080_07350015.2020.1737081.md)  
+  7/10 [journals]
+- [Nonparametric Tests for Treatment Effect Heterogeneity With Duration Outcomes](deep_reads/2026-07-19-10.1080_07350015.2020.1737080.md)  
+  7/10 [journals]
+
 #### Quantitative Economics Vol 13 Issue 3
 
 - [Unconditional quantile regression with high‐dimensional data](deep_reads/2026-07-18-10.3982_qe1896.md)  
@@ -2836,6 +2926,29 @@
 
 ### 期刊
 
+#### Journal of Business & Economic Statistics Vol 40 Issue 3
+
+- [High-Dimensional Interaction Detection With False Sign Rate Control](deep_reads/2026-07-19-10.1080_07350015.2021.1917419.md)  
+  7/10 [journals]
+- [High-Dimensional Elliptical Sliced Inverse Regression in Non-Gaussian Distributions](deep_reads/2026-07-19-10.1080_07350015.2021.1910041.md)  
+  6/10 [journals]
+- [Targeting Predictors Via Partial Distance Correlation With Applications to Financial Forecasting](deep_reads/2026-07-19-10.1080_07350015.2021.1895812.md)  
+  5/10 [journals]
+
+#### Journal of Business & Economic Statistics Vol 40 Issue 1
+
+- [Large-Dimensional Factor Analysis Without Moment Constraints](deep_reads/2026-07-19-10.1080_07350015.2020.1811101.md)  
+  6/10 [journals]
+- [High-Dimensional Dynamic Covariance Matrices With Homogeneous Structure](deep_reads/2026-07-19-10.1080_07350015.2020.1779079.md)  
+  6/10 [journals]
+
+#### Journal of Business & Economic Statistics Vol 39 Issue 3
+
+- [Incorporating Graphical Structure of Predictors in Sparse Quantile Regression](deep_reads/2026-07-19-10.1080_07350015.2020.1730859.md)  
+  6/10 [journals]
+- [Dynamic Semiparametric Factor Model With Structural Breaks](deep_reads/2026-07-19-10.1080_07350015.2020.1730857.md)  
+  6/10 [journals]
+
 #### Electronic Journal of Statistics Vol 20 Issue 1
 
 - [Exact recovery in the double sparse model: Sufficient and necessary signal conditions](deep_reads/2026-06-18-10.1214_26-ejs2486.md)  
@@ -4021,6 +4134,34 @@
   8/10 [daily]
 
 ### 期刊
+
+#### Journal of Business & Economic Statistics Vol 40 Issue 4
+
+- [Semiparametric Spatial Autoregressive Panel Data Model with Fixed Effects and Time-Varying Coefficients](deep_reads/2026-07-19-10.1080_07350015.2021.1979564.md)  
+  6/10 [journals]
+
+#### Journal of Business & Economic Statistics Vol 40 Issue 2
+
+- [The Locally Gaussian Partial Correlation](deep_reads/2026-07-19-10.1080_07350015.2021.1886107.md)  
+  6/10 [journals]
+- [Network-Based Clustering for Varying Coefficient Panel Data Models](deep_reads/2026-07-19-10.1080_07350015.2020.1841648.md)  
+  6/10 [journals]
+- [Robust Estimation of Additive Boundaries With Quantile Regression and Shape Constraints](deep_reads/2026-07-19-10.1080_07350015.2020.1847123.md)  
+  5/10 [journals]
+
+#### Journal of Business & Economic Statistics Vol 40 Issue 1
+
+- [Semiparametric Tail Index Regression](deep_reads/2026-07-19-10.1080_07350015.2020.1775616.md)  
+  7/10 [journals]
+- [Homogeneity and Structure Identification in Semiparametric Factor Models](deep_reads/2026-07-19-10.1080_07350015.2020.1831516.md)  
+  6/10 [journals]
+
+#### Journal of Business & Economic Statistics Vol 39 Issue 3
+
+- [Semiparametric Estimation in Continuous-Time: Asymptotics for Integrated Volatility Functionals with Small and Large Bandwidths](deep_reads/2026-07-19-10.1080_07350015.2020.1733583.md)  
+  6/10 [journals]
+- [Nonparametric Quantile Regression Estimation With Mixed Discrete and Continuous Data](deep_reads/2026-07-19-10.1080_07350015.2020.1730856.md)  
+  6/10 [journals]
 
 #### Electronic Journal of Statistics Vol 18 Issue 2
 
@@ -6103,6 +6244,54 @@
 
 ### 期刊
 
+#### Journal of Business & Economic Statistics Vol 40 Issue 4
+
+- [Using Triples to Assess Symmetry Under Weak Dependence](deep_reads/2026-07-19-10.1080_07350015.2021.1939037.md)  
+  8/10 [journals]
+- [Efficient Estimation for Models With Nonlinear Heteroscedasticity](deep_reads/2026-07-19-10.1080_07350015.2021.1933991.md)  
+  6/10 [journals]
+
+#### Journal of Business & Economic Statistics Vol 40 Issue 3
+
+- [Quantile Correlation-based Variable Selection](deep_reads/2026-07-19-10.1080_07350015.2021.1899932.md)  
+  6/10 [journals]
+- [A Two-Step Method for Testing Many Moment Inequalities](deep_reads/2026-07-19-10.1080_07350015.2021.1897016.md)  
+  5/10 [journals]
+- [Testing for the Martingale Difference Hypothesis in Multivariate Time Series Models](deep_reads/2026-07-19-10.1080_07350015.2021.1889568.md)  
+  5/10 [journals]
+- [Comparing Predictive Accuracy in the Presence of a Loss Function Shape Parameter](deep_reads/2026-07-19-10.1080_07350015.2021.1896527.md)  
+  4/10 [journals]
+
+#### Journal of Business & Economic Statistics Vol 40 Issue 2
+
+- [Multifrequency-Band Tests for White Noise Under Heteroscedasticity](deep_reads/2026-07-19-10.1080_07350015.2020.1870478.md)  
+  5/10 [journals]
+- [Adaptive Testing for Cointegration With Nonstationary Volatility](deep_reads/2026-07-19-10.1080_07350015.2020.1867558.md)  
+  4/10 [journals]
+- [A Simple Asymptotically <i>F</i>-Distributed Portmanteau Test for Diagnostic Checking of Time Series Models With Uncorrelated Innovations](deep_reads/2026-07-19-10.1080_07350015.2020.1832505.md)  
+  4/10 [journals]
+- [Prediction of Extremal Expectile Based on Regression Models With Heteroscedastic Extremes](deep_reads/2026-07-19-10.1080_07350015.2020.1833890.md)  
+  4/10 [journals]
+- [Risk Analysis via Generalized Pareto Distributions](deep_reads/2026-07-19-10.1080_07350015.2021.1874390.md)  
+  3/10 [journals]
+
+#### Journal of Business & Economic Statistics Vol 40 Issue 1
+
+- [A Projective Approach to Conditional Independence Test for Dependent Processes](deep_reads/2026-07-19-10.1080_07350015.2020.1826952.md)  
+  7/10 [journals]
+- [Mean-Structure and Autocorrelation Consistent Covariance Matrix Estimation](deep_reads/2026-07-19-10.1080_07350015.2020.1796397.md)  
+  3/10 [journals]
+
+#### Journal of Business & Economic Statistics Vol 39 Issue 4
+
+- [Randomization Tests for Equality in Dependence Structure](deep_reads/2026-07-19-10.1080_07350015.2020.1753527.md)  
+  7/10 [journals]
+
+#### Journal of Business & Economic Statistics Vol 39 Issue 3
+
+- [An Inverse Norm Sign Test of Location Parameter for High-Dimensional Data](deep_reads/2026-07-19-10.1080_07350015.2020.1736084.md)  
+  8/10 [journals]
+
 #### Quantitative Economics Vol 14 Issue 1
 
 - [Permutation‐based tests for discontinuities in event studies](deep_reads/2026-07-18-10.3982_qe1775.md)  
@@ -7792,6 +7981,16 @@
 
 ### 期刊
 
+#### Journal of Business & Economic Statistics Vol 40 Issue 4
+
+- [Feature Screening for Massive Data Analysis by Subsampling](deep_reads/2026-07-19-10.1080_07350015.2021.1990771.md)  
+  4/10 [journals]
+
+#### Journal of Business & Economic Statistics Vol 39 Issue 3
+
+- [Fitting Vast Dimensional Time-Varying Covariance Models](deep_reads/2026-07-19-10.1080_07350015.2020.1713795.md)  
+  3/10 [journals]
+
 #### Statistics and Computing Vol 36 Issue 4
 
 - [Beyond regularization: inherently sparse principal component analysis](deep_reads/2026-07-14-10.1007_s11222-026-10872-2.md)  
@@ -9000,6 +9199,70 @@
   6/10 [daily]
 
 ### 期刊
+
+#### Journal of Business & Economic Statistics Vol 40 Issue 4
+
+- [Narrative Restrictions and Proxies](deep_reads/2026-07-19-10.1080_07350015.2022.2115496.md)  
+  7/10 [journals]
+- [Asymptotically Valid Bootstrap Inference for Proxy SVARs](deep_reads/2026-07-19-10.1080_07350015.2021.1990770.md)  
+  6/10 [journals]
+- [Inference in Games Without Equilibrium Restriction: An Application to Restaurant Competition in Opening Hours](deep_reads/2026-07-19-10.1080_07350015.2021.1981914.md)  
+  6/10 [journals]
+- [Transformed Estimation for Panel Interactive Effects Models](deep_reads/2026-07-19-10.1080_07350015.2021.1983438.md)  
+  3/10 [journals]
+
+#### Journal of Business & Economic Statistics Vol 40 Issue 3
+
+- [State-Varying Factor Models of Large Dimensions](deep_reads/2026-07-19-10.1080_07350015.2021.1927744.md)  
+  6/10 [journals]
+- [Quasi-Experimental Evaluation of Alternative Sample Selection Corrections](deep_reads/2026-07-19-10.1080_07350015.2021.1889566.md)  
+  6/10 [journals]
+- [Measuring Social Interaction Effects When Instruments Are Weak](deep_reads/2026-07-19-10.1080_07350015.2021.1895811.md)  
+  6/10 [journals]
+- [Semiparametric Quantile Models for Ascending Auctions With Asymmetric Bidders](deep_reads/2026-07-19-10.1080_07350015.2021.1895813.md)  
+  6/10 [journals]
+- [A Structural Model of Homophily and Clustering in Social Networks](deep_reads/2026-07-19-10.1080_07350015.2021.1930013.md)  
+  4/10 [journals]
+- [Practical Methods for Modeling Weak VARMA Processes: Identification, Estimation and Specification With a Macroeconomic Application](deep_reads/2026-07-19-10.1080_07350015.2021.1904960.md)  
+  3/10 [journals]
+- [Evidence of Uniform Inefficiency in Market Portfolios Based on Dominance Tests](deep_reads/2026-07-19-10.1080_07350015.2021.1888741.md)  
+  3/10 [journals]
+
+#### Journal of Business & Economic Statistics Vol 40 Issue 2
+
+- [Locally Stationary Quantile Regression for Inflation and Interest Rates](deep_reads/2026-07-19-10.1080_07350015.2021.1874389.md)  
+  4/10 [journals]
+
+#### Journal of Business & Economic Statistics Vol 40 Issue 1
+
+- [Identification of Structural Vector Autoregressions by Stochastic Volatility](deep_reads/2026-07-19-10.1080_07350015.2020.1813588.md)  
+  7/10 [journals]
+- [Latent Dirichlet Analysis of Categorical Survey Responses](deep_reads/2026-07-19-10.1080_07350015.2020.1802285.md)  
+  6/10 [journals]
+- [Leverage, Asymmetry, and Heavy Tails in the High-Dimensional Factor Stochastic Volatility Model](deep_reads/2026-07-19-10.1080_07350015.2020.1806853.md)  
+  4/10 [journals]
+- [Autoregressive Model With Spatial Dependence and Missing Data](deep_reads/2026-07-19-10.1080_07350015.2020.1766471.md)  
+  3/10 [journals]
+- [Substitution Bias in Multilateral Methods for CPI Construction](deep_reads/2026-07-19-10.1080_07350015.2020.1816176.md)  
+  2/10 [journals]
+
+#### Journal of Business & Economic Statistics Vol 39 Issue 4
+
+- [Text Selection](deep_reads/2026-07-19-10.1080_07350015.2021.1947843.md)  
+  6/10 [journals]
+- [Dynamic Bivariate Peak Over Threshold Model for Joint Tail Risk Dynamics of Financial Markets](deep_reads/2026-07-19-10.1080_07350015.2020.1737083.md)  
+  4/10 [journals]
+- [Price Dividend Ratio and Long-Run Stock Returns: A Score-Driven State Space Model](deep_reads/2026-07-19-10.1080_07350015.2020.1763805.md)  
+  3/10 [journals]
+
+#### Journal of Business & Economic Statistics Vol 39 Issue 3
+
+- [What Happens After an Investment Spike—Investment Events and Firm Performance](deep_reads/2026-07-19-10.1080_07350015.2019.1708369.md)  
+  6/10 [journals]
+- [Who is the Key Player? A Network Analysis of Juvenile Delinquency](deep_reads/2026-07-19-10.1080_07350015.2020.1737082.md)  
+  5/10 [journals]
+- [Dynamic Two Stage Modeling for Category-Level and Brand-Level Purchases Using Potential Outcome Approach With Bayes Inference](deep_reads/2026-07-19-10.1080_07350015.2019.1702047.md)  
+  5/10 [journals]
 
 #### Quantitative Economics Vol 14 Issue 1
 
@@ -11287,6 +11550,52 @@
   8/10 [daily]
 
 ### 期刊
+
+#### Journal of Business & Economic Statistics Vol 40 Issue 4
+
+- [Fast Bayesian Record Linkage With Record-Specific Disagreement Parameters](deep_reads/2026-07-19-10.1080_07350015.2021.1934478.md)  
+  6/10 [journals]
+- [A Note on Distributed Quantile Regression by Pilot Sampling and One-Step Updating](deep_reads/2026-07-19-10.1080_07350015.2021.1961789.md)  
+  5/10 [journals]
+- [Hedging With Linear Regressions and Neural Networks](deep_reads/2026-07-19-10.1080_07350015.2021.1931241.md)  
+  4/10 [journals]
+- [Collaborative Filtering With Awareness of Social Networks](deep_reads/2026-07-19-10.1080_07350015.2021.1954527.md)  
+  3/10 [journals]
+
+#### Journal of Business & Economic Statistics Vol 40 Issue 3
+
+- [Realized Quantiles<sup>*</sup>](deep_reads/2026-07-19-10.1080_07350015.2021.1929249.md)  
+  3/10 [journals]
+- [Quasi-Bayesian Inference for Production Frontiers](deep_reads/2026-07-19-10.1080_07350015.2021.1927745.md)  
+  2/10 [journals]
+
+#### Journal of Business & Economic Statistics Vol 40 Issue 2
+
+- [Model Averaging for Nonlinear Regression Models](deep_reads/2026-07-19-10.1080_07350015.2020.1870477.md)  
+  4/10 [journals]
+- [Modeling Multivariate Time Series With Copula-Linked Univariate D-Vines](deep_reads/2026-07-19-10.1080_07350015.2020.1859381.md)  
+  4/10 [journals]
+- [Nonparametric Copula Estimation for Mixed Insurance Claim Data](deep_reads/2026-07-19-10.1080_07350015.2020.1835668.md)  
+  3/10 [journals]
+- [Bayesian Approach to Lorenz Curve Using Time Series Grouped Data](deep_reads/2026-07-19-10.1080_07350015.2021.1883438.md)  
+  2/10 [journals]
+
+#### Journal of Business & Economic Statistics Vol 40 Issue 1
+
+- [Functional Linear Regression: Dependence and Error Contamination](deep_reads/2026-07-19-10.1080_07350015.2020.1832503.md)  
+  5/10 [journals]
+- [A Bayesian Quantile Time Series Model for Asset Returns](deep_reads/2026-07-19-10.1080_07350015.2020.1766470.md)  
+  3/10 [journals]
+
+#### Journal of Business & Economic Statistics Vol 39 Issue 4
+
+- [Generalized Jump Regressions for Local Moments](deep_reads/2026-07-19-10.1080_07350015.2020.1753526.md)  
+  4/10 [journals]
+
+#### Journal of Business & Economic Statistics Vol 39 Issue 3
+
+- [Bayesian Inference for Regression Copulas](deep_reads/2026-07-19-10.1080_07350015.2020.1721295.md)  
+  5/10 [journals]
 
 #### Quantitative Economics Vol 12 Issue 4
 
