@@ -304,6 +304,7 @@
 - [Vol 254 · 2026-07-06](journals/2026-07-06-j-econometrics-v254.md)
 - [Vol 254 · 2026-06-07](journals/2026-06-07-j-econometrics-v254.md)
 - [Vol 253 · 2026-07-06](journals/2026-07-06-j-econometrics-v253.md)
+- [Vol 244 Issue 2 · 2026-07-18](journals/2026-07-18-j-econometrics-v244-i2.md)
 - [2026-06-21](journals/2026-06-21-j-econometrics.md)
 - [2026-06-07](journals/2026-06-07-j-econometrics.md)
 
@@ -476,6 +477,14 @@
 
 - [2026-06-24](journals/2026-06-24-epidemiology-v37-i1S.md)
 - [2026-06-19](journals/2026-06-19-epidemiology-v37-i1S.md)
+
+### J ECONOMETRICS V245 I1 2
+
+- [2026-07-18](journals/2026-07-18-j-econometrics-v245-i1-2.md)
+
+### J ECONOMETRICS V246 I1 2
+
+- [2026-07-18](journals/2026-07-18-j-econometrics-v246-i1-2.md)
 
 ### STATMED V45 I10 12
 

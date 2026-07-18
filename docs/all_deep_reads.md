@@ -391,6 +391,20 @@
 
 ### 期刊
 
+#### Journal of Econometrics Vol 246 Issue 1-2
+
+- [Consistent causal inference for high-dimensional time series](deep_reads/2026-07-18-10.1016_j.jeconom.2024.105902.md)  
+  8/10 [journals]
+- [From LATE to ATE: A Bayesian approach](deep_reads/2026-07-18-10.1016_j.jeconom.2024.105895.md)  
+  7/10 [journals]
+
+#### Journal of Econometrics Vol 245 Issue 1-2
+
+- [Inference in cluster randomized trials with matched pairs](deep_reads/2026-07-18-10.1016_j.jeconom.2024.105873.md)  
+  7/10 [journals]
+- [Testing for strong exogeneity in Proxy-VARs](deep_reads/2026-07-18-10.1016_j.jeconom.2024.105876.md)  
+  7/10 [journals]
+
 #### Econometrica Vol 94 Issue 4
 
 - [Identification in Instrumental Variables Models: The Central Role of Abadie's Kappa](deep_reads/2026-07-18-10.3982_ecta23174.md)  
@@ -6061,6 +6075,16 @@
 
 ### 期刊
 
+#### Journal of Econometrics Vol 246 Issue 1-2
+
+- [Variable selection in high dimensional linear regressions with parameter instability](deep_reads/2026-07-18-10.1016_j.jeconom.2024.105900.md)  
+  6/10 [journals]
+
+#### Journal of Econometrics Vol 244 Issue 2
+
+- [Reprint of: Robust inference on correlation under general heterogeneity](deep_reads/2026-07-18-10.1016_j.jeconom.2024.105744.md)  
+  6/10 [journals]
+
 #### Econometrica Vol 90 Issue 6
 
 - [Robust Empirical Bayes Confidence Intervals](deep_reads/2026-07-18-10.3982_ecta18597.md)  
@@ -8939,6 +8963,16 @@
 
 ### 期刊
 
+#### Journal of Econometrics Vol 245 Issue 1-2
+
+- [Why are replication rates so low?](deep_reads/2026-07-18-10.1016_j.jeconom.2024.105868.md)  
+  3/10 [journals]
+
+#### Journal of Econometrics Vol 244 Issue 2
+
+- [Local projections vs. VARs: Lessons from thousands of DGPs](deep_reads/2026-07-18-10.1016_j.jeconom.2024.105722.md)  
+  6/10 [journals]
+
 #### Econometrica Vol 94 Issue 4
 
 - [Double Robustness of Local Projections and Some Unpleasant VARithmetic](deep_reads/2026-07-18-10.3982_ecta23345.md)  
@@ -11115,6 +11149,11 @@
   8/10 [daily]
 
 ### 期刊
+
+#### Journal of Econometrics Vol 244 Issue 2
+
+- [Scenario-based quantile connectedness of the U.S. interbank liquidity risk network](deep_reads/2026-07-18-10.1016_j.jeconom.2024.105786.md)  
+  1/10 [journals]
 
 #### Electronic Journal of Statistics Vol 19 Issue 2
 
