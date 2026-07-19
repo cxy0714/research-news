@@ -9063,6 +9063,50 @@
 
 ### 期刊
 
+#### Astrophysical Journal Supplement Series Vol 285 Issue 2
+
+- [Salvaging Defective Spectra: Deep Learning Restoration of Defective Stellar Spectra](deep_reads/2026-07-19-10.3847_1538-4365_ae7e81.md)  
+  6/10 [journals]
+- [Characterizing the Origins of the Optical Variability of Radio-quiet Active Galactic Nuclei Detected by the Swift Burst Alert Telescope](deep_reads/2026-07-19-10.3847_1538-4365_ae7a52.md)  
+  6/10 [journals]
+- [LHAASO Observations of Mrk 421 during 2021 March–2024 March: A Comprehensive Very-high-energy Catalog of Multitimescale Outbursts and Its Time-averaged Behavior](deep_reads/2026-07-19-10.3847_1538-4365_ae76cc.md)  
+  5/10 [journals]
+- [A Wide and Deep Exploration of Radio-detected Active Galactic Nuclei with Subaru HSC (WERGS). XII. Final Optical Identification of VLASS Radio Sources from the Subaru/HSC-SSP Wide Survey over 1200 deg <sup>2</sup>](deep_reads/2026-07-19-10.3847_1538-4365_ae7bff.md)  
+  3/10 [journals]
+
+#### Astrophysical Journal Supplement Series Vol 285 Issue 1
+
+- [A General Formulation of the Kinematic Dipole as a Functional of Selection and Source Properties: Beyond the Ellis–Baldwin Approximation](deep_reads/2026-06-19-10.3847_1538-4365_ae6a89.md)  
+  8/10 [journals]
+- [A Markov Chain Monte Carlo–based Hybrid Noise Inference for Continuous Wavelet Power Spectra: With Applications to Solar and Stellar Oscillatory Signals](deep_reads/2026-07-07-10.3847_1538-4365_ae7345.md)  
+  7/10 [journals]
+- [Photometric Redshift Probability Density Functions via Neural Network Classification for DESI Legacy Imaging Surveys and Pan-STARRS](deep_reads/2026-07-07-10.3847_1538-4365_ae6641.md)  
+  7/10 [journals]
+- [Mephisto: Self-improving Large Language Model–based Agents for Automated Interpretation of Multiband Galaxy Observations](deep_reads/2026-07-19-10.3847_1538-4365_ae5d3a.md)  
+  6/10 [journals]
+- [The Deep Learning–based Dual-branch Multimodal Fusion Model for Solar Flare Prediction](deep_reads/2026-07-07-10.3847_1538-4365_ae6cd5.md)  
+  6/10 [journals]
+- [The DESI Transients Survey: Legacy Classifications and Methodology](deep_reads/2026-07-07-10.3847_1538-4365_ae6509.md)  
+  6/10 [journals]
+- [The Phenomenological Classification of TESS Eclipsing Binaries](deep_reads/2026-06-19-10.3847_1538-4365_ae6eee.md)  
+  6/10 [journals]
+- [Hierarchical Cosmological Constraints through a Strong-lensing Distance Ratio](deep_reads/2026-06-19-10.3847_1538-4365_ae6782.md)  
+  6/10 [journals]
+- [An Improved HDBSCAN-based Detection and Tracking Method for Solar Active Regions in Magnetograms](deep_reads/2026-06-19-10.3847_1538-4365_ae6fb3.md)  
+  6/10 [journals]
+- [Structural and Photometric Parameter Estimation of Low-surface-brightness Galaxies Using a Deep Learning Framework](deep_reads/2026-07-19-10.3847_1538-4365_ae7b29.md)  
+  5/10 [journals]
+- [The Next Generation Virgo Cluster Survey (NGVS). XXXVI. Caught in the Act of Transformation: Morphological Decomposition and Classification of Ultracompact Dwarf Galaxies in the Virgo Cluster](deep_reads/2026-07-19-10.3847_1538-4365_ae5231.md)  
+  3/10 [journals]
+- [The FAST Hundred-deg <sup>2</sup> H <scp>I</scp> Deep (HD <sup>2</sup> ) Survey: Early Results from the Pilot Survey](deep_reads/2026-07-19-10.3847_1538-4365_ae7331.md)  
+  3/10 [journals]
+- [A Spatially Resolved H <scp>i</scp> Survey of Seyfert Galaxies: The Role of Active Galactic Nucleus Feedback in Shaping Atomic Gas Reservoirs](deep_reads/2026-07-07-10.3847_1538-4365_ae6ef1.md)  
+  3/10 [journals]
+- [GAMERA-OP: A Three-dimensional Finite-volume Magnetohydrodynamic Solver for Orthogonal Curvilinear Geometries](deep_reads/2026-07-07-10.3847_1538-4365_ae7344.md)  
+  1/10 [journals]
+- [Direct Determination of Neutron Capture Relevant to the <i>s</i> -process of <sup>127</sup> I and <sup>133</sup> Cs at the CSNS Back-n Facility](deep_reads/2026-07-07-10.3847_1538-4365_ae6f9f.md)  
+  1/10 [journals]
+
 #### Monthly Notices of the Royal Astronomical Society Vol 550 Issue 2
 
 - [Impact of antenna structure and orientation on forward-modelled global 21 cm signal recovery](deep_reads/2026-07-07-10.1093_mnras_stag1216.md)  
@@ -9074,31 +9118,6 @@
   6/10 [journals]
 - [The multiwavelength structure of post-starburst galaxies at 0.5 &amp;lt; <i>z</i> &amp;lt; 3 with <i>JWST</i> PRIMER: compact morphologies and residual disturbances](deep_reads/2026-07-07-10.1093_mnras_stag987.md)  
   6/10 [journals]
-
-#### Astrophysical Journal Supplement Series Vol 285 Issue 1
-
-- [A General Formulation of the Kinematic Dipole as a Functional of Selection and Source Properties: Beyond the Ellis–Baldwin Approximation](deep_reads/2026-06-19-10.3847_1538-4365_ae6a89.md)  
-  8/10 [journals]
-- [A Markov Chain Monte Carlo–based Hybrid Noise Inference for Continuous Wavelet Power Spectra: With Applications to Solar and Stellar Oscillatory Signals](deep_reads/2026-07-07-10.3847_1538-4365_ae7345.md)  
-  7/10 [journals]
-- [Photometric Redshift Probability Density Functions via Neural Network Classification for DESI Legacy Imaging Surveys and Pan-STARRS](deep_reads/2026-07-07-10.3847_1538-4365_ae6641.md)  
-  7/10 [journals]
-- [The Deep Learning–based Dual-branch Multimodal Fusion Model for Solar Flare Prediction](deep_reads/2026-07-07-10.3847_1538-4365_ae6cd5.md)  
-  6/10 [journals]
-- [The DESI Transients Survey: Legacy Classifications and Methodology](deep_reads/2026-07-07-10.3847_1538-4365_ae6509.md)  
-  6/10 [journals]
-- [The Phenomenological Classification of TESS Eclipsing Binaries](deep_reads/2026-06-19-10.3847_1538-4365_ae6eee.md)  
-  6/10 [journals]
-- [Hierarchical Cosmological Constraints through a Strong-lensing Distance Ratio](deep_reads/2026-06-19-10.3847_1538-4365_ae6782.md)  
-  6/10 [journals]
-- [An Improved HDBSCAN-based Detection and Tracking Method for Solar Active Regions in Magnetograms](deep_reads/2026-06-19-10.3847_1538-4365_ae6fb3.md)  
-  6/10 [journals]
-- [A Spatially Resolved H <scp>i</scp> Survey of Seyfert Galaxies: The Role of Active Galactic Nucleus Feedback in Shaping Atomic Gas Reservoirs](deep_reads/2026-07-07-10.3847_1538-4365_ae6ef1.md)  
-  3/10 [journals]
-- [GAMERA-OP: A Three-dimensional Finite-volume Magnetohydrodynamic Solver for Orthogonal Curvilinear Geometries](deep_reads/2026-07-07-10.3847_1538-4365_ae7344.md)  
-  1/10 [journals]
-- [Direct Determination of Neutron Capture Relevant to the <i>s</i> -process of <sup>127</sup> I and <sup>133</sup> Cs at the CSNS Back-n Facility](deep_reads/2026-07-07-10.3847_1538-4365_ae6f9f.md)  
-  1/10 [journals]
 
 #### Astrophysical Journal Supplement Series Vol 284 Issue 1
 
