@@ -6311,6 +6311,17 @@
 - [Large Scale Partial Correlation Screening With Uncertainty Quantification](deep_reads/2026-07-19-10.1109_tit.2025.3606207.md)  
   7/10 [journals]
 
+#### IEEE Journal on Selected Areas in Information Theory Vol 2 Issue 2
+
+- [Nonparametric Iterated-Logarithm Extensions of the Sequential Generalized Likelihood Ratio Test](deep_reads/2026-07-19-10.1109_jsait.2021.3081105.md)  
+  7/10 [journals]
+- [Sequential Change Detection by Optimal Weighted ℓ₂ Divergence](deep_reads/2026-07-19-10.1109_jsait.2021.3072960.md)  
+  6/10 [journals]
+- [Robust Change Detection via Information Projection](deep_reads/2026-07-19-10.1109_jsait.2021.3077855.md)  
+  5/10 [journals]
+- [Sequential (Quickest) Change Detection: Classical Results and New Directions](deep_reads/2026-07-19-10.1109_jsait.2021.3072962.md)  
+  4/10 [journals]
+
 #### Quantitative Economics Vol 14 Issue 1
 
 - [Permutation‐based tests for discontinuities in event studies](deep_reads/2026-07-18-10.3982_qe1775.md)  
@@ -8016,6 +8027,29 @@
   6/10 [journals]
 - [Sharp High-Probability Rates for Nonlinear SGD Under Heavy-Tailed Noise via Symmetrization](deep_reads/2026-07-19-10.1109_tit.2026.3682577.md)  
   6/10 [journals]
+
+#### IEEE Journal on Selected Areas in Information Theory Vol 2 Issue 3
+
+- [Quantization of Distributed Data for Learning](deep_reads/2026-07-19-10.1109_jsait.2021.3105359.md)  
+  2/10 [journals]
+- [Sequential Gradient Coding for Packet-Loss Networks](deep_reads/2026-07-19-10.1109_jsait.2021.3102853.md)  
+  2/10 [journals]
+- [Coded Sequential Matrix Multiplication for Straggler Mitigation](deep_reads/2026-07-19-10.1109_jsait.2021.3104970.md)  
+  1/10 [journals]
+- [Factored LT and Factored Raptor Codes for Large-Scale Distributed Matrix Multiplication](deep_reads/2026-07-19-10.1109_jsait.2021.3103822.md)  
+  1/10 [journals]
+
+#### IEEE Journal on Selected Areas in Information Theory Vol 2 Issue 2
+
+- [Asynchronous Delayed Optimization With Time-Varying Minibatches](deep_reads/2026-07-19-10.1109_jsait.2021.3079856.md)  
+  2/10 [journals]
+- [Asynchronous Decentralized Accelerated Stochastic Gradient Descent](deep_reads/2026-07-19-10.1109_jsait.2021.3080256.md)  
+  2/10 [journals]
+
+#### IEEE Journal on Selected Areas in Information Theory Vol 2 Issue 1
+
+- [Coded Computing for Secure Boolean Computations](deep_reads/2026-07-19-10.1109_jsait.2021.3055341.md)  
+  1/10 [journals]
 
 #### Statistics and Computing Vol 36 Issue 4
 
@@ -11643,6 +11677,66 @@
 - [Bounds on Maximum Hermitian Hull Dimension of MDS Codes and MDS Codes With Explicit Hermitian Hulls](deep_reads/2026-07-19-10.1109_tit.2026.3698563.md)  
   0/10 [journals]
 
+#### IEEE Journal on Selected Areas in Information Theory Vol 3 Issue 4
+
+- [Compression for Multi-Arm Bandits](deep_reads/2026-07-07-10.1109_jsait.2023.3260770.md)  
+  2/10 [journals]
+- [Neural Estimation of the Rate-Distortion Function With Applications to Operational Source Coding](deep_reads/2026-07-07-10.1109_jsait.2023.3273467.md)  
+  2/10 [journals]
+- [Information Leakage in Index Coding With Sensitive and Nonsensitive Messages](deep_reads/2026-07-19-10.1109_jsait.2022.3232126.md)  
+  1/10 [journals]
+
+#### IEEE Journal on Selected Areas in Information Theory Vol 3 Issue 2
+
+- [Peer-to-Peer Variational Federated Learning Over Arbitrary Graphs](deep_reads/2026-07-19-10.1109_jsait.2022.3189051.md)  
+  2/10 [journals]
+- [Symmetric Private Information Retrieval at the Private Information Retrieval Rate](deep_reads/2026-07-19-10.1109_jsait.2022.3188610.md)  
+  0/10 [journals]
+
+#### IEEE Journal on Selected Areas in Information Theory Vol 3 Issue 1
+
+- [Regular Sparse NOMA: Ultimate Performance in Closed Form](deep_reads/2026-07-19-10.1109_jsait.2022.3153249.md)  
+  2/10 [journals]
+- [When Does Multipath Improve Imaging Resolution?](deep_reads/2026-07-19-10.1109_jsait.2022.3160185.md)  
+  2/10 [journals]
+- [Causal Adversarial Channels With Feedback Snooping](deep_reads/2026-07-19-10.1109_jsait.2022.3158230.md)  
+  1/10 [journals]
+- [Optimality of Energy-Efficient Scheduling and Relaying for Half-Duplex Relay Networks](deep_reads/2026-07-19-10.1109_jsait.2022.3157829.md)  
+  1/10 [journals]
+
+#### IEEE Journal on Selected Areas in Information Theory Vol 2 Issue 4
+
+- [Functional Broadcast Repair of Multiple Partial Failures in Wireless Distributed Storage Systems](deep_reads/2026-07-19-10.1109_jsait.2021.3126588.md)  
+  0/10 [journals]
+- [Benefits of Edge Caching With Coded Placement for Asymmetric Networks and Shared Caches](deep_reads/2026-07-19-10.1109_jsait.2021.3127435.md)  
+  0/10 [journals]
+- [On Streaming Codes With Unequal Error Protection](deep_reads/2026-07-19-10.1109_jsait.2021.3126687.md)  
+  0/10 [journals]
+
+#### IEEE Journal on Selected Areas in Information Theory Vol 2 Issue 2
+
+- [On Finite-Time Convergence of Actor-Critic Algorithm](deep_reads/2026-07-19-10.1109_jsait.2021.3078754.md)  
+  3/10 [journals]
+- [Cautious Reinforcement Learning via Distributional Risk in the Dual Domain](deep_reads/2026-07-19-10.1109_jsait.2021.3081108.md)  
+  2/10 [journals]
+- [One for All and All for One: Distributed Learning of Fair Allocations With Multi-Player Bandits](deep_reads/2026-07-19-10.1109_jsait.2021.3073065.md)  
+  2/10 [journals]
+- [On No-Sensing Adversarial Multi-Player Multi-Armed Bandits With Collision Communications](deep_reads/2026-07-19-10.1109_jsait.2021.3076027.md)  
+  2/10 [journals]
+- [Active Learning for Classification With Abstention](deep_reads/2026-07-19-10.1109_jsait.2021.3081433.md)  
+  2/10 [journals]
+- [Universal Active Learning via Conditional Mutual Information Minimization](deep_reads/2026-07-19-10.1109_jsait.2021.3073842.md)  
+  2/10 [journals]
+- [Curiosity Killed or Incapacitated the Cat and the Asymptotically Optimal Agent](deep_reads/2026-07-19-10.1109_jsait.2021.3079722.md)  
+  1/10 [journals]
+
+#### IEEE Journal on Selected Areas in Information Theory Vol 2 Issue 1
+
+- [Shuffled Model of Federated Learning: Privacy, Accuracy and Communication Trade-Offs](deep_reads/2026-07-19-10.1109_jsait.2021.3056102.md)  
+  3/10 [journals]
+- [On Perfect Privacy](deep_reads/2026-07-19-10.1109_jsait.2021.3053432.md)  
+  2/10 [journals]
+
 #### Quantitative Economics Vol 12 Issue 4
 
 - [Fixed‐ <i>k</i> inference for volatility](deep_reads/2026-07-18-10.3982_qe1749.md)  
@@ -11984,13 +12078,6 @@
   3/10 [journals]
 - [New Sphere-Packing Bounds for Finite-Blocklength Coding Over Additive Noise Channels](deep_reads/2026-07-07-10.1109_tit.2026.3689501.md)  
   1/10 [journals]
-
-#### IEEE Journal on Selected Areas in Information Theory Vol 3 Issue 4
-
-- [Compression for Multi-Arm Bandits](deep_reads/2026-07-07-10.1109_jsait.2023.3260770.md)  
-  2/10 [journals]
-- [Neural Estimation of the Rate-Distortion Function With Applications to Operational Source Coding](deep_reads/2026-07-07-10.1109_jsait.2023.3273467.md)  
-  2/10 [journals]
 
 #### IEEE Journal on Selected Areas in Information Theory Vol 3 Issue 3
 

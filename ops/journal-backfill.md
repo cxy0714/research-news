@@ -203,7 +203,7 @@ IEEE 系列 ieee（月刊、每期大，用小步）：
 - [x] (2026-07-19) `--only TIT --n-issues 4`   ⚠
 - [x] (2026-07-19) `--only TPAMI --n-issues 4`   ⚠
 - [x] (2026-07-19) `--only TSP --n-issues 4`   ⚠
-- [ ] `--only JSAIT --n-issues 10`
+- [x] (2026-07-19) `--only JSAIT --n-issues 10`
 
 天文 astro（体量巨大，放最后、用小步）：
 - [ ] `--only ApJS --n-issues 4`   ⚠
