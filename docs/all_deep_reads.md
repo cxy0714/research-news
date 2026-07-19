@@ -9063,6 +9063,17 @@
 
 ### 期刊
 
+#### Monthly Notices of the Royal Astronomical Society Vol 550 Issue 2
+
+- [Estimating the Hubble constant with a federated unscented Kalman filter](deep_reads/2026-07-19-10.1093_mnras_stag1025.md)  
+  7/10 [journals]
+- [Impact of antenna structure and orientation on forward-modelled global 21 cm signal recovery](deep_reads/2026-07-07-10.1093_mnras_stag1216.md)  
+  7/10 [journals]
+- [How to isolate galactic bars in simulations](deep_reads/2026-07-19-10.1093_mnras_stag1246.md)  
+  2/10 [journals]
+- [GRB 230307A formed no dust or was not a binary neutron-star merger](deep_reads/2026-07-19-10.1093_mnras_stag1158.md)  
+  1/10 [journals]
+
 #### Astrophysical Journal Supplement Series Vol 285 Issue 2
 
 - [Salvaging Defective Spectra: Deep Learning Restoration of Defective Stellar Spectra](deep_reads/2026-07-19-10.3847_1538-4365_ae7e81.md)  
@@ -9106,11 +9117,6 @@
   1/10 [journals]
 - [Direct Determination of Neutron Capture Relevant to the <i>s</i> -process of <sup>127</sup> I and <sup>133</sup> Cs at the CSNS Back-n Facility](deep_reads/2026-07-07-10.3847_1538-4365_ae6f9f.md)  
   1/10 [journals]
-
-#### Monthly Notices of the Royal Astronomical Society Vol 550 Issue 2
-
-- [Impact of antenna structure and orientation on forward-modelled global 21 cm signal recovery](deep_reads/2026-07-07-10.1093_mnras_stag1216.md)  
-  7/10 [journals]
 
 #### Monthly Notices of the Royal Astronomical Society Vol 550 Issue 1
 

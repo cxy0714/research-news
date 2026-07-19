@@ -207,4 +207,4 @@ IEEE 系列 ieee（月刊、每期大，用小步）：
 
 天文 astro（体量巨大，放最后、用小步）：
 - [x] (2026-07-19) `--only ApJS --n-issues 4`   ⚠
-- [ ] `--only MNRAS --n-issues 3`   ⚠⚠ 每期上百篇，跑得最久
+- [x] (2026-07-19) `--only MNRAS --n-issues 3`   ⚠⚠ 每期上百篇，跑得最久
