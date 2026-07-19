@@ -2949,6 +2949,13 @@
 - [Dynamic Semiparametric Factor Model With Structural Breaks](deep_reads/2026-07-19-10.1080_07350015.2020.1730857.md)  
   6/10 [journals]
 
+#### IEEE Transactions on Information Theory Vol 72 Issue 8
+
+- [Asymptotic Theory of Eigenvectors for Latent Embeddings With Generalized Laplacian Matrices](deep_reads/2026-07-19-10.1109_tit.2026.3699098.md)  
+  7/10 [journals]
+- [Robust Random Graph Matching in Dense Graphs via an Approximate Message Passing Type Algorithm](deep_reads/2026-07-19-10.1109_tit.2026.3702566.md)  
+  6/10 [journals]
+
 #### Electronic Journal of Statistics Vol 20 Issue 1
 
 - [Exact recovery in the double sparse model: Sufficient and necessary signal conditions](deep_reads/2026-06-18-10.1214_26-ejs2486.md)  
@@ -6292,6 +6299,13 @@
 - [An Inverse Norm Sign Test of Location Parameter for High-Dimensional Data](deep_reads/2026-07-19-10.1080_07350015.2020.1736084.md)  
   8/10 [journals]
 
+#### IEEE Transactions on Information Theory Vol 72 Issue 8
+
+- [Central Limit Theorems for Stochastic Gradient Descent Quantile Estimators](deep_reads/2026-07-19-10.1109_tit.2026.3703510.md)  
+  8/10 [journals]
+- [Large Scale Partial Correlation Screening With Uncertainty Quantification](deep_reads/2026-07-19-10.1109_tit.2025.3606207.md)  
+  7/10 [journals]
+
 #### Quantitative Economics Vol 14 Issue 1
 
 - [Permutation‐based tests for discontinuities in event studies](deep_reads/2026-07-18-10.3982_qe1775.md)  
@@ -7990,6 +8004,13 @@
 
 - [Fitting Vast Dimensional Time-Varying Covariance Models](deep_reads/2026-07-19-10.1080_07350015.2020.1713795.md)  
   3/10 [journals]
+
+#### IEEE Transactions on Information Theory Vol 72 Issue 8
+
+- [Tighter Learning Guarantees on Digital Computers via Concentration of Measure on Finite Spaces](deep_reads/2026-07-19-10.1109_tit.2026.3693950.md)  
+  6/10 [journals]
+- [Sharp High-Probability Rates for Nonlinear SGD Under Heavy-Tailed Noise via Symmetrization](deep_reads/2026-07-19-10.1109_tit.2026.3682577.md)  
+  6/10 [journals]
 
 #### Statistics and Computing Vol 36 Issue 4
 
@@ -11596,6 +11617,15 @@
 
 - [Bayesian Inference for Regression Copulas](deep_reads/2026-07-19-10.1080_07350015.2020.1721295.md)  
   5/10 [journals]
+
+#### IEEE Transactions on Information Theory Vol 72 Issue 8
+
+- [On de Bruijn Array Codes—Part II: Pseudo-Random Array Codes](deep_reads/2026-07-19-10.1109_tit.2026.3686267.md)  
+  1/10 [journals]
+- [Quantum Locally Recoverable Codes With Asymmetric Locality](deep_reads/2026-07-19-10.1109_tit.2026.3703812.md)  
+  1/10 [journals]
+- [Bounds on Maximum Hermitian Hull Dimension of MDS Codes and MDS Codes With Explicit Hermitian Hulls](deep_reads/2026-07-19-10.1109_tit.2026.3698563.md)  
+  0/10 [journals]
 
 #### Quantitative Economics Vol 12 Issue 4
 

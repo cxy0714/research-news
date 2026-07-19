@@ -200,7 +200,7 @@ IEEE 系列 ieee（月刊、每期大，用小步）：
 - [x] (2026-07-19) `--only JBES --n-issues 20`
 
 IEEE 系列 ieee（月刊、每期大，用小步）：
-- [ ] `--only TIT --n-issues 4`   ⚠
+- [x] (2026-07-19) `--only TIT --n-issues 4`   ⚠
 - [ ] `--only TPAMI --n-issues 4`   ⚠
 - [ ] `--only TSP --n-issues 4`   ⚠
 - [ ] `--only JSAIT --n-issues 10`
