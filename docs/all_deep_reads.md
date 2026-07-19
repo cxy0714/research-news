@@ -6299,6 +6299,11 @@
 - [An Inverse Norm Sign Test of Location Parameter for High-Dimensional Data](deep_reads/2026-07-19-10.1080_07350015.2020.1736084.md)  
   8/10 [journals]
 
+#### IEEE Transactions on Pattern Analysis and Machine Intelligence Vol 48 Issue 8
+
+- [Mining Association Patterns From Neighborhood Insight](deep_reads/2026-07-19-10.1109_tpami.2026.3682740.md)  
+  6/10 [journals]
+
 #### IEEE Transactions on Information Theory Vol 72 Issue 8
 
 - [Central Limit Theorems for Stochastic Gradient Descent Quantile Estimators](deep_reads/2026-07-19-10.1109_tit.2026.3703510.md)  
