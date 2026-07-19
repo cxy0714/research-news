@@ -11623,6 +11623,17 @@
 - [Bayesian Inference for Regression Copulas](deep_reads/2026-07-19-10.1080_07350015.2020.1721295.md)  
   5/10 [journals]
 
+#### IEEE Transactions on Signal Processing Vol 74
+
+- [Byzantine Attacks in Over-the-Air Cooperative Sensing Networks: Analysis and Defense](deep_reads/2026-06-05-10.1109_tsp.2025.3646135.md)  
+  1/10 [journals]
+- [Camouflage Adversarial Attacks on Multi-Agent Reinforcement Learning Systems](deep_reads/2026-06-05-10.1109_tsp.2025.3644869.md)  
+  1/10 [journals]
+- [Mutual Coupling-Aware Channel Estimation for Holographic MIMO Systems: A Vector Factorization Design Paradigm](deep_reads/2026-07-19-10.1109_tsp.2026.3702335.md)  
+  0/10 [journals]
+- [Temperature Control for Cyber-Physical Thermal Systems over Wireless Networks: A Model-Assisted Deep Reinforcement Learning Approach](deep_reads/2026-06-05-10.1109_tsp.2026.3664289.md)  
+  0/10 [journals]
+
 #### IEEE Transactions on Information Theory Vol 72 Issue 8
 
 - [On de Bruijn Array Codes—Part II: Pseudo-Random Array Codes](deep_reads/2026-07-19-10.1109_tit.2026.3686267.md)  
@@ -12902,15 +12913,6 @@
 
 - [A general framework for investigating neurodevelopment of brain functional networks using multisite and longitudinal neuroimaging](deep_reads/2026-06-10-10.1214_25-aoas2133.md)  
   3/10 [journals]
-
-#### IEEE Transactions on Signal Processing Vol 74
-
-- [Byzantine Attacks in Over-the-Air Cooperative Sensing Networks: Analysis and Defense](deep_reads/2026-06-05-10.1109_tsp.2025.3646135.md)  
-  1/10 [journals]
-- [Camouflage Adversarial Attacks on Multi-Agent Reinforcement Learning Systems](deep_reads/2026-06-05-10.1109_tsp.2025.3644869.md)  
-  1/10 [journals]
-- [Temperature Control for Cyber-Physical Thermal Systems over Wireless Networks: A Model-Assisted Deep Reinforcement Learning Approach](deep_reads/2026-06-05-10.1109_tsp.2026.3664289.md)  
-  0/10 [journals]
 
 #### IEEE Transactions on Pattern Analysis and Machine Intelligence Vol 48 Issue 6
 
