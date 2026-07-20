@@ -4,6 +4,10 @@
 
 ### Daily
 
+- [Improving Mendelian Randomization Analysis by Instrument Borrowing from Auxiliary Outcome Traits](deep_reads/2026-07-20-2607.16086.md)  
+  8/10 [daily]
+- [Improving interpretation of latent class models for diagnostic tests by recognizing their measurands via directed acyclic graphs (DAGs)](deep_reads/2026-07-20-2607.14473.md)  
+  6/10 [daily]
 - [Proximal Identification and Estimation in Front-Door Causal Structures with Unobserved Confounding of the Mediator](deep_reads/2026-07-15-2607.10515.md)  
   9/10 [daily]
 - [Omitted variable bias sensitivity analysis with clustered treatment assignment](deep_reads/2026-07-15-2607.13334.md)  
@@ -2847,6 +2851,8 @@
 
 ### Daily
 
+- [Precise sample covariance spectral norm error -- an RDT view](deep_reads/2026-07-20-2607.14460.md)  
+  8/10 [daily]
 - [Adaptable Regularized CCA Tests for Independence of High-Dimensional Random Vectors](deep_reads/2026-07-15-2607.10500.md)  
   7/10 [daily]
 - [High-Dimensional Interpolators Can Be Fragile: Heavy Tails and High-Dimensional Large Deviations](deep_reads/2026-07-13-2607.09547.md)  
@@ -4005,6 +4011,8 @@
 
 ### Daily
 
+- [Local polynomial estimation of quantile density functions](deep_reads/2026-07-20-2607.16016.md)  
+  7/10 [daily]
 - [On Rates Attainable under Random Design: A Negative Answer to a Problem of Robins](deep_reads/2026-07-15-2607.13170.md)  
   9/10 [daily]
 - [Nonparametric estimation of the diffusion coefficient of an ergodic diffusion process on non-compact supports under Osgood's conditions](deep_reads/2026-07-15-2607.10230.md)  
@@ -6042,6 +6050,24 @@
 
 ### Daily
 
+- [No Universal Multiplicative FDR Bound for the Benjamini-Hochberg Procedure with Correlated Two-Sided Gaussian Tests](deep_reads/2026-07-20-2607.14812.md)  
+  8/10 [daily]
+- [Aggregation of Statistical Evidence under Exchangeability](deep_reads/2026-07-20-2607.15823.md)  
+  7/10 [daily]
+- [Asymptotically exact threshold for detecting anomalies in multivariate Gaussian data with application to time series](deep_reads/2026-07-20-2607.15637.md)  
+  7/10 [daily]
+- [Augmenting goodness-of-fit tests with sequentially calibrated secondary statistics](deep_reads/2026-07-20-2607.15015.md)  
+  7/10 [daily]
+- [Testing for correct model specification in copula regression models](deep_reads/2026-07-20-2607.14930.md)  
+  7/10 [daily]
+- [An Efficient Likelihood Ratio Test for Online Changepoint Detection in the Presence of Autocorrelation](deep_reads/2026-07-20-2607.16106.md)  
+  6/10 [daily]
+- [A directional Hosmer-Lemeshow goodness-of-fit test for sparse logistic regression](deep_reads/2026-07-20-2607.15454.md)  
+  6/10 [daily]
+- [Post Hoc Inference for Component Attribution in Multivariate Change-Point Detection](deep_reads/2026-07-20-2607.14814.md)  
+  6/10 [daily]
+- [Testing equivalence to binary generalized linear models with application to logistic regression](deep_reads/2026-07-20-2607.14724.md)  
+  6/10 [daily]
 - [A Correlation-Free Test for High-Dimensional Elliptical Distributions](deep_reads/2026-07-15-2607.11304.md)  
   8/10 [daily]
 - [The Benjamini--Hochberg Procedure Can Fail to Control the FDR for Correlated Two-Sided Gaussian Tests](deep_reads/2026-07-15-2607.12208.md)  
@@ -8910,6 +8936,8 @@
 
 ### Daily
 
+- [Compressing radio interferometric visibility data into a probabilistic model using sparse Gaussian processes](deep_reads/2026-07-20-2607.15860.md)  
+  6/10 [daily]
 - [Rigidity spectra and onset geometry of the two largest Forbush decreases of solar cycle 25 from visibility-graph curvature](deep_reads/2026-07-15-2607.13236.md)  
   6/10 [daily]
 - [Fast(er)PM and Moving Mesh: JAX-native Geometric Multigrid Methods](deep_reads/2026-07-15-2607.10983.md)  
@@ -9214,6 +9242,8 @@
 
 ### Daily
 
+- [Aggregation Bias in Proxy Measurement: Nighttime Lights and Local Economic Activity](deep_reads/2026-07-20-2607.14825.md)  
+  7/10 [daily]
 - [Time preference effects in forecasting](deep_reads/2026-07-17-2607.13759.md)  
   6/10 [daily]
 - [Dynamically Consistent Statistical Decisions](deep_reads/2026-07-15-2607.10519.md)  
@@ -10373,6 +10403,8 @@
 
 ### Daily
 
+- [A Complete-Data Likelihood for Epidemic Processes on Partially Observed Dynamic Networks](deep_reads/2026-07-20-2607.15179.md)  
+  6/10 [daily]
 - [Comprehensive identifiability analysis and reliable parameter estimation for an SEIR model](deep_reads/2026-07-13-2607.09137.md)  
   6/10 [daily]
 - [Adjusting for Outcome Reporting Bias in Meta-analysis: A Multiple Imputation Approach](deep_reads/2026-07-10-2607.07509.md)  
@@ -11571,6 +11603,10 @@
 
 ### Daily
 
+- [Exact Computation of Non-Gaussian Mismatch Penalties in Wiener-Hermite Cross-Correlation Identification](deep_reads/2026-07-20-2607.14699.md)  
+  8/10 [daily]
+- [Prediction-Only Distillation in Linear and Logistic Regression](deep_reads/2026-07-20-2607.15450.md)  
+  6/10 [daily]
 - [A General U-Statistic Framework for High-Dimensional Multiple Change-Point Analysis](deep_reads/2026-07-15-2607.11256.md)  
   9/10 [daily]
 - [Towards a Geometric Characterization of Multiverse Analysis](deep_reads/2026-07-15-2607.11345.md)  

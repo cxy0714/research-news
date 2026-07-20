@@ -11,30 +11,50 @@
 - **[收藏](favorites.md)** — 登录后在各页点 ☆ 收藏的论文，自动汇总到这里（总收藏按类别分组、可切换按周；每篇可写评论，无需手动维护）。
 - **[模型测评](all_shootout.md)** — 不同 LLM 在同一批论文上的打分 / 解读对比。
 
-## 今日 · 2026-07-17
+## 今日 · 2026-07-20
 
 ### 每日 arXiv 速览
 
-[→ 查看完整报告](daily/2026-07-17.md)
+[→ 查看完整报告](daily/2026-07-20.md)
 
-### 精读论文（8 篇）
+### 精读论文（18 篇）
 
-- [A simple adaptive estimator of the integrated square of a density](deep_reads/2026-07-17-0803.0847.md)  
-  `非参数 / 半参数` · 相关性 8/10
-- [On Testing for Parameters in Ising Models](deep_reads/2026-07-17-1906.00456.md)  
+- [Improving Mendelian Randomization Analysis by Instrument Borrowing from Auxiliary Outcome Traits](deep_reads/2026-07-20-2607.16086.md)  
+  `因果推断` · 相关性 8/10
+- [Exact Computation of Non-Gaussian Mismatch Penalties in Wiener-Hermite Cross-Correlation Identification](deep_reads/2026-07-20-2607.14699.md)  
+  `其他` · 相关性 8/10
+- [No Universal Multiplicative FDR Bound for the Benjamini-Hochberg Procedure with Correlated Two-Sided Gaussian Tests](deep_reads/2026-07-20-2607.14812.md)  
+  `数理统计 / 假设检验` · 相关性 8/10
+- [Precise sample covariance spectral norm error -- an RDT view](deep_reads/2026-07-20-2607.14460.md)  
+  `高维统计 / 随机矩阵` · 相关性 8/10
+- [Aggregation of Statistical Evidence under Exchangeability](deep_reads/2026-07-20-2607.15823.md)  
   `数理统计 / 假设检验` · 相关性 7/10
-- [On Estimation of $L_{r}$-Norms in Gaussian White Noise Models](deep_reads/2026-07-17-1710.03863.md)  
+- [Asymptotically exact threshold for detecting anomalies in multivariate Gaussian data with application to time series](deep_reads/2026-07-20-2607.15637.md)  
+  `数理统计 / 假设检验` · 相关性 7/10
+- [Augmenting goodness-of-fit tests with sequentially calibrated secondary statistics](deep_reads/2026-07-20-2607.15015.md)  
+  `数理统计 / 假设检验` · 相关性 7/10
+- [Local polynomial estimation of quantile density functions](deep_reads/2026-07-20-2607.16016.md)  
   `非参数 / 半参数` · 相关性 7/10
-- [Detection Thresholds for the $β$-Model on Sparse Graphs](deep_reads/2026-07-17-1608.01801.md)  
+- [Testing for correct model specification in copula regression models](deep_reads/2026-07-20-2607.14930.md)  
   `数理统计 / 假设检验` · 相关性 7/10
-- [Hypothesis testing for high-dimensional sparse binary regression](deep_reads/2026-07-17-1308.0764.md)  
-  `数理统计 / 假设检验` · 相关性 7/10
-- [Sharp Signal Detection Under Ferromagnetic Ising Models](deep_reads/2026-07-17-2110.02949.md)  
-  `数理统计 / 假设检验` · 相关性 7/10
-- [Global Testing Against Sparse Alternatives under Ising Models](deep_reads/2026-07-17-1611.08293.md)  
-  `数理统计 / 假设检验` · 相关性 7/10
-- [Time preference effects in forecasting](deep_reads/2026-07-17-2607.13759.md)  
-  `经济理论 / 应用` · 相关性 6/10
+- [Aggregation Bias in Proxy Measurement: Nighttime Lights and Local Economic Activity](deep_reads/2026-07-20-2607.14825.md)  
+  `经济理论 / 应用` · 相关性 7/10
+- [An Efficient Likelihood Ratio Test for Online Changepoint Detection in the Presence of Autocorrelation](deep_reads/2026-07-20-2607.16106.md)  
+  `数理统计 / 假设检验` · 相关性 6/10
+- [A directional Hosmer-Lemeshow goodness-of-fit test for sparse logistic regression](deep_reads/2026-07-20-2607.15454.md)  
+  `数理统计 / 假设检验` · 相关性 6/10
+- [A Complete-Data Likelihood for Epidemic Processes on Partially Observed Dynamic Networks](deep_reads/2026-07-20-2607.15179.md)  
+  `流行病学` · 相关性 6/10
+- [Post Hoc Inference for Component Attribution in Multivariate Change-Point Detection](deep_reads/2026-07-20-2607.14814.md)  
+  `数理统计 / 假设检验` · 相关性 6/10
+- [Testing equivalence to binary generalized linear models with application to logistic regression](deep_reads/2026-07-20-2607.14724.md)  
+  `数理统计 / 假设检验` · 相关性 6/10
+- [Improving interpretation of latent class models for diagnostic tests by recognizing their measurands via directed acyclic graphs (DAGs)](deep_reads/2026-07-20-2607.14473.md)  
+  `因果推断` · 相关性 6/10
+- [Prediction-Only Distillation in Linear and Logistic Regression](deep_reads/2026-07-20-2607.15450.md)  
+  `其他` · 相关性 6/10
+- [Compressing radio interferometric visibility data into a probabilistic model using sparse Gaussian processes](deep_reads/2026-07-20-2607.15860.md)  
+  `天体统计` · 相关性 6/10
 
 ## 收藏
 
@@ -42,11 +62,11 @@
 
 ## 本周每日报告
 
+- [2026-07-17](daily/2026-07-17.md)
 - [2026-07-16](daily/2026-07-16.md)
 - [2026-07-15](daily/2026-07-15.md)
 - [2026-07-14](daily/2026-07-14.md)
 - [2026-07-13](daily/2026-07-13.md)
-- [2026-07-10](daily/2026-07-10.md)
 
 
 ---
