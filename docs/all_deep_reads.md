@@ -6050,6 +6050,8 @@
 
 ### Daily
 
+- [Dimension-invariant uniform consistency of the empirical spatial distribution function and its associated spatial depth estimator](deep_reads/2026-07-21-2607.16092.md)  
+  6/10 [daily]
 - [No Universal Multiplicative FDR Bound for the Benjamini-Hochberg Procedure with Correlated Two-Sided Gaussian Tests](deep_reads/2026-07-20-2607.14812.md)  
   8/10 [daily]
 - [Aggregation of Statistical Evidence under Exchangeability](deep_reads/2026-07-20-2607.15823.md)  
@@ -8936,6 +8938,8 @@
 
 ### Daily
 
+- [Coherence differential imaging using gradient-boosted decision trees for the direct detection of exoplanets](deep_reads/2026-07-21-2607.15973.md)  
+  6/10 [daily]
 - [Compressing radio interferometric visibility data into a probabilistic model using sparse Gaussian processes](deep_reads/2026-07-20-2607.15860.md)  
   6/10 [daily]
 - [Rigidity spectra and onset geometry of the two largest Forbush decreases of solar cycle 25 from visibility-graph curvature](deep_reads/2026-07-15-2607.13236.md)  
