@@ -4,6 +4,24 @@
 
 ### Daily
 
+- [Which Effect of Race? Causal Inference without Holding All Else Equal](deep_reads/2026-07-22-2607.16371.md)  
+  8/10 [daily]
+- [The Resolution of Causal Heterogeneity](deep_reads/2026-07-22-2607.17280.md)  
+  8/10 [daily]
+- [Comparing Missing Data Methods for Estimating Average Treatment Effects Under Time-Varying Confounding: A Simulation Study](deep_reads/2026-07-22-2607.17775.md)  
+  8/10 [daily]
+- [A Variance-Based Test for Heterogeneous Treatment Effects](deep_reads/2026-07-22-2607.17451.md)  
+  8/10 [daily]
+- [Identification and Inference with Machine-Learned Instruments](deep_reads/2026-07-22-2607.17478.md)  
+  8/10 [daily]
+- [Vector Search As Nearest Neighbor Matching: RAG-based Policy Learning in Causal Inference](deep_reads/2026-07-22-2607.18225.md)  
+  8/10 [daily]
+- [Neural Networks of Outcome Weighted Learning for Individualized Treatment Rules](deep_reads/2026-07-22-2607.16407.md)  
+  7/10 [daily]
+- [Unveiling Invariant and Transferable Latent Factors Across Heterogeneous Environments via ATLAS](deep_reads/2026-07-22-2607.18209.md)  
+  7/10 [daily]
+- [When and How to Pilot: Design Rules for Two-Wave Experiments](deep_reads/2026-07-22-2607.16982.md)  
+  6/10 [daily]
 - [Improving Mendelian Randomization Analysis by Instrument Borrowing from Auxiliary Outcome Traits](deep_reads/2026-07-20-2607.16086.md)  
   8/10 [daily]
 - [Improving interpretation of latent class models for diagnostic tests by recognizing their measurands via directed acyclic graphs (DAGs)](deep_reads/2026-07-20-2607.14473.md)  
@@ -2851,6 +2869,12 @@
 
 ### Daily
 
+- [De-floored Principal Component Regression: When Rank Selection Alone Is Insufficient for Prediction](deep_reads/2026-07-22-2607.16638.md)  
+  8/10 [daily]
+- [The Value of Depth in Message Passing on Sparse Graphs: A Kesten-Stigum Dichotomy](deep_reads/2026-07-22-2607.16676.md)  
+  7/10 [daily]
+- [Fundamental Limits of Query-Based Subgraph Detection](deep_reads/2026-07-22-2607.17118.md)  
+  7/10 [daily]
 - [Precise sample covariance spectral norm error -- an RDT view](deep_reads/2026-07-20-2607.14460.md)  
   8/10 [daily]
 - [Adaptable Regularized CCA Tests for Independence of High-Dimensional Random Vectors](deep_reads/2026-07-15-2607.10500.md)  
@@ -4011,6 +4035,10 @@
 
 ### Daily
 
+- [Kernel Minimum Distance Estimation and Testing with Conditional Moment Restrictions: A Unified Framework](deep_reads/2026-07-22-2607.16605.md)  
+  8/10 [daily]
+- [How Fast Do Signatures Learn? Statistical Theory and Applications for Path Regression](deep_reads/2026-07-22-2607.17865.md)  
+  7/10 [daily]
 - [Local polynomial estimation of quantile density functions](deep_reads/2026-07-20-2607.16016.md)  
   7/10 [daily]
 - [On Rates Attainable under Random Design: A Negative Answer to a Problem of Robins](deep_reads/2026-07-15-2607.13170.md)  
@@ -6050,6 +6078,20 @@
 
 ### Daily
 
+- [Two-stage Adaptive Testing of Large-scale Mediation Hypotheses](deep_reads/2026-07-22-2607.17579.md)  
+  8/10 [daily]
+- [CRT*: Conditional Randomization Testing with Heterogeneous External and Unlabeled Data](deep_reads/2026-07-22-2607.17859.md)  
+  8/10 [daily]
+- [E-Values For Multiplicity Control In Multiverse Analysis](deep_reads/2026-07-22-2607.17596.md)  
+  7/10 [daily]
+- [Benchmarking Goodness-of-Fit and Calibration Algorithms for Logistic Regression Classifiers: A Large-Scale Simulation Study under Sparse Data](deep_reads/2026-07-22-2607.16344.md)  
+  6/10 [daily]
+- [Mirror and knockoff+ thresholds under dependence](deep_reads/2026-07-22-2607.17084.md)  
+  6/10 [daily]
+- [Matrix asymptotic calculus for plug-in maximum likelihood estimators in finite Markov chains](deep_reads/2026-07-22-2607.17161.md)  
+  6/10 [daily]
+- [A Functional Central Limit Theorem for Localized Partial Sums of Non-Stationary Time Series](deep_reads/2026-07-22-2607.17697.md)  
+  6/10 [daily]
 - [Dimension-invariant uniform consistency of the empirical spatial distribution function and its associated spatial depth estimator](deep_reads/2026-07-21-2607.16092.md)  
   6/10 [daily]
 - [No Universal Multiplicative FDR Bound for the Benjamini-Hochberg Procedure with Correlated Two-Sided Gaussian Tests](deep_reads/2026-07-20-2607.14812.md)  
@@ -7994,6 +8036,8 @@
 
 ### Daily
 
+- [Amortized Inference for Sampling Distributions Where the Bootstrap Fails](deep_reads/2026-07-22-2607.16666.md)  
+  6/10 [daily]
 - [Hierarchical Bayesian inversion using the Karhunen-Loève expansion with analytical eigenpairs of the squared exponential kernel](deep_reads/2026-07-15-2607.12387.md)  
   6/10 [daily]
 - [An Efficient Bayesian Framework for Uncertainty Quantification in Nonlinear Imaging Inverse Problems](deep_reads/2026-07-15-2607.10817.md)  
@@ -9246,6 +9290,12 @@
 
 ### Daily
 
+- [Econometrics with Pre-Trained Embeddings for Unstructured Data](deep_reads/2026-07-22-2607.17378.md)  
+  7/10 [daily]
+- [Compositional Synthetic Controls](deep_reads/2026-07-22-2607.16991.md)  
+  6/10 [daily]
+- [Engineering Social Networks: How Initial Group Assignment Shapes Student Social Interactions](deep_reads/2026-07-22-2607.17926.md)  
+  6/10 [daily]
 - [Aggregation Bias in Proxy Measurement: Nighttime Lights and Local Economic Activity](deep_reads/2026-07-20-2607.14825.md)  
   7/10 [daily]
 - [Time preference effects in forecasting](deep_reads/2026-07-17-2607.13759.md)  
@@ -11607,6 +11657,8 @@
 
 ### Daily
 
+- [Calibrating Semantic Uncertainty from Observable Language-Model Probabilities](deep_reads/2026-07-22-2607.17447.md)  
+  6/10 [daily]
 - [Exact Computation of Non-Gaussian Mismatch Penalties in Wiener-Hermite Cross-Correlation Identification](deep_reads/2026-07-20-2607.14699.md)  
   8/10 [daily]
 - [Prediction-Only Distillation in Linear and Logistic Regression](deep_reads/2026-07-20-2607.15450.md)  

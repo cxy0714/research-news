@@ -11,18 +11,66 @@
 - **[收藏](favorites.md)** — 登录后在各页点 ☆ 收藏的论文，自动汇总到这里（总收藏按类别分组、可切换按周；每篇可写评论，无需手动维护）。
 - **[模型测评](all_shootout.md)** — 不同 LLM 在同一批论文上的打分 / 解读对比。
 
-## 今日 · 2026-07-21
+## 今日 · 2026-07-22
 
 ### 每日 arXiv 速览
 
-[→ 查看完整报告](daily/2026-07-21.md)
+[→ 查看完整报告](daily/2026-07-22.md)
 
-### 精读论文（2 篇）
+### 精读论文（26 篇）
 
-- [Dimension-invariant uniform consistency of the empirical spatial distribution function and its associated spatial depth estimator](deep_reads/2026-07-21-2607.16092.md)  
+- [Which Effect of Race? Causal Inference without Holding All Else Equal](deep_reads/2026-07-22-2607.16371.md)  
+  `因果推断` · 相关性 8/10
+- [The Resolution of Causal Heterogeneity](deep_reads/2026-07-22-2607.17280.md)  
+  `因果推断` · 相关性 8/10
+- [Two-stage Adaptive Testing of Large-scale Mediation Hypotheses](deep_reads/2026-07-22-2607.17579.md)  
+  `数理统计 / 假设检验` · 相关性 8/10
+- [Comparing Missing Data Methods for Estimating Average Treatment Effects Under Time-Varying Confounding: A Simulation Study](deep_reads/2026-07-22-2607.17775.md)  
+  `因果推断` · 相关性 8/10
+- [CRT*: Conditional Randomization Testing with Heterogeneous External and Unlabeled Data](deep_reads/2026-07-22-2607.17859.md)  
+  `数理统计 / 假设检验` · 相关性 8/10
+- [De-floored Principal Component Regression: When Rank Selection Alone Is Insufficient for Prediction](deep_reads/2026-07-22-2607.16638.md)  
+  `高维统计 / 随机矩阵` · 相关性 8/10
+- [Kernel Minimum Distance Estimation and Testing with Conditional Moment Restrictions: A Unified Framework](deep_reads/2026-07-22-2607.16605.md)  
+  `非参数 / 半参数` · 相关性 8/10
+- [A Variance-Based Test for Heterogeneous Treatment Effects](deep_reads/2026-07-22-2607.17451.md)  
+  `因果推断` · 相关性 8/10
+- [Identification and Inference with Machine-Learned Instruments](deep_reads/2026-07-22-2607.17478.md)  
+  `因果推断` · 相关性 8/10
+- [Vector Search As Nearest Neighbor Matching: RAG-based Policy Learning in Causal Inference](deep_reads/2026-07-22-2607.18225.md)  
+  `因果推断` · 相关性 8/10
+- [Neural Networks of Outcome Weighted Learning for Individualized Treatment Rules](deep_reads/2026-07-22-2607.16407.md)  
+  `因果推断` · 相关性 7/10
+- [E-Values For Multiplicity Control In Multiverse Analysis](deep_reads/2026-07-22-2607.17596.md)  
+  `数理统计 / 假设检验` · 相关性 7/10
+- [The Value of Depth in Message Passing on Sparse Graphs: A Kesten-Stigum Dichotomy](deep_reads/2026-07-22-2607.16676.md)  
+  `高维统计 / 随机矩阵` · 相关性 7/10
+- [Fundamental Limits of Query-Based Subgraph Detection](deep_reads/2026-07-22-2607.17118.md)  
+  `高维统计 / 随机矩阵` · 相关性 7/10
+- [How Fast Do Signatures Learn? Statistical Theory and Applications for Path Regression](deep_reads/2026-07-22-2607.17865.md)  
+  `非参数 / 半参数` · 相关性 7/10
+- [Unveiling Invariant and Transferable Latent Factors Across Heterogeneous Environments via ATLAS](deep_reads/2026-07-22-2607.18209.md)  
+  `因果推断` · 相关性 7/10
+- [Econometrics with Pre-Trained Embeddings for Unstructured Data](deep_reads/2026-07-22-2607.17378.md)  
+  `经济理论 / 应用` · 相关性 7/10
+- [Benchmarking Goodness-of-Fit and Calibration Algorithms for Logistic Regression Classifiers: A Large-Scale Simulation Study under Sparse Data](deep_reads/2026-07-22-2607.16344.md)  
   `数理统计 / 假设检验` · 相关性 6/10
-- [Coherence differential imaging using gradient-boosted decision trees for the direct detection of exoplanets](deep_reads/2026-07-21-2607.15973.md)  
-  `天体统计` · 相关性 6/10
+- [Amortized Inference for Sampling Distributions Where the Bootstrap Fails](deep_reads/2026-07-22-2607.16666.md)  
+  `统计计算 / 算法` · 相关性 6/10
+- [Calibrating Semantic Uncertainty from Observable Language-Model Probabilities](deep_reads/2026-07-22-2607.17447.md)  
+  `其他` · 相关性 6/10
+- [Mirror and knockoff+ thresholds under dependence](deep_reads/2026-07-22-2607.17084.md)  
+  `数理统计 / 假设检验` · 相关性 6/10
+- [Matrix asymptotic calculus for plug-in maximum likelihood estimators in finite Markov chains](deep_reads/2026-07-22-2607.17161.md)  
+  `数理统计 / 假设检验` · 相关性 6/10
+- [A Functional Central Limit Theorem for Localized Partial Sums of Non-Stationary Time Series](deep_reads/2026-07-22-2607.17697.md)  
+  `数理统计 / 假设检验` · 相关性 6/10
+- [When and How to Pilot: Design Rules for Two-Wave Experiments](deep_reads/2026-07-22-2607.16982.md)  
+  `因果推断` · 相关性 6/10
+- [Compositional Synthetic Controls](deep_reads/2026-07-22-2607.16991.md)  
+  `经济理论 / 应用` · 相关性 6/10
+- [Engineering Social Networks: How Initial Group Assignment Shapes Student Social Interactions](deep_reads/2026-07-22-2607.17926.md)  
+  `经济理论 / 应用` · 相关性 6/10
 
 ## 收藏
 
@@ -30,11 +78,11 @@
 
 ## 本周每日报告
 
+- [2026-07-21](daily/2026-07-21.md)
 - [2026-07-20](daily/2026-07-20.md)
 - [2026-07-17](daily/2026-07-17.md)
 - [2026-07-16](daily/2026-07-16.md)
 - [2026-07-15](daily/2026-07-15.md)
-- [2026-07-14](daily/2026-07-14.md)
 
 
 ---
