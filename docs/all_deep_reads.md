@@ -4,6 +4,16 @@
 
 ### Daily
 
+- [SPYCE: A Doubly Robust Estimator for Trials Targeting Early Huntington Disease under Outcome-Dependent Censoring](deep_reads/2026-07-23-2607.18501.md)  
+  8/10 [daily]
+- [Adaptive Penalization and Bootstrap-Smoothed Inference for Two-Sample Mendelian Randomization with Summary Data](deep_reads/2026-07-23-2607.18503.md)  
+  8/10 [daily]
+- [Robust Signal Maximization in Spillover Experiments](deep_reads/2026-07-23-2607.18601.md)  
+  8/10 [daily]
+- [A Bayesian Approach to Causal Cure Models](deep_reads/2026-07-23-2607.19050.md)  
+  7/10 [daily]
+- [Rank-Based Estimation of U-Shaped Biomarker Risk Curves and Critical Points for Time-to-Event Outcomes](deep_reads/2026-07-23-2607.19280.md)  
+  6/10 [daily]
 - [Which Effect of Race? Causal Inference without Holding All Else Equal](deep_reads/2026-07-22-2607.16371.md)  
   8/10 [daily]
 - [The Resolution of Causal Heterogeneity](deep_reads/2026-07-22-2607.17280.md)  
@@ -4035,6 +4045,10 @@
 
 ### Daily
 
+- [Learning sufficient low-dimensional structures through conditional optimal transport](deep_reads/2026-07-23-2607.18861.md)  
+  7/10 [daily]
+- [The Influence Function of Transport-based Quantiles](deep_reads/2026-07-23-2607.19080.md)  
+  7/10 [daily]
 - [Kernel Minimum Distance Estimation and Testing with Conditional Moment Restrictions: A Unified Framework](deep_reads/2026-07-22-2607.16605.md)  
   8/10 [daily]
 - [How Fast Do Signatures Learn? Statistical Theory and Applications for Path Regression](deep_reads/2026-07-22-2607.17865.md)  
@@ -6078,6 +6092,10 @@
 
 ### Daily
 
+- [Flexible Inference for Winners with Conditional Validity](deep_reads/2026-07-23-2607.18545.md)  
+  7/10 [daily]
+- [Mutual Information second order expansion is the Pearson's chi-square statistic](deep_reads/2026-07-23-2607.18425.md)  
+  6/10 [daily]
 - [Two-stage Adaptive Testing of Large-scale Mediation Hypotheses](deep_reads/2026-07-22-2607.17579.md)  
   8/10 [daily]
 - [CRT*: Conditional Randomization Testing with Heterogeneous External and Unlabeled Data](deep_reads/2026-07-22-2607.17859.md)  
@@ -8982,6 +9000,8 @@
 
 ### Daily
 
+- [NAPTIME: A Neural-Process Framework for Rubin Alert Classification](deep_reads/2026-07-23-2607.19236.md)  
+  6/10 [daily]
 - [Coherence differential imaging using gradient-boosted decision trees for the direct detection of exoplanets](deep_reads/2026-07-21-2607.15973.md)  
   6/10 [daily]
 - [Compressing radio interferometric visibility data into a probabilistic model using sparse Gaussian processes](deep_reads/2026-07-20-2607.15860.md)  
@@ -9290,6 +9310,8 @@
 
 ### Daily
 
+- [Optimizing Regret](deep_reads/2026-07-23-2607.18866.md)  
+  6/10 [daily]
 - [Econometrics with Pre-Trained Embeddings for Unstructured Data](deep_reads/2026-07-22-2607.17378.md)  
   7/10 [daily]
 - [Compositional Synthetic Controls](deep_reads/2026-07-22-2607.16991.md)  
@@ -10457,6 +10479,8 @@
 
 ### Daily
 
+- [Using binary silver labels in electronic health records-based computable phenotyping algorithms](deep_reads/2026-07-23-2607.18431.md)  
+  6/10 [daily]
 - [A Complete-Data Likelihood for Epidemic Processes on Partially Observed Dynamic Networks](deep_reads/2026-07-20-2607.15179.md)  
   6/10 [daily]
 - [Comprehensive identifiability analysis and reliable parameter estimation for an SEIR model](deep_reads/2026-07-13-2607.09137.md)  
@@ -11657,6 +11681,8 @@
 
 ### Daily
 
+- [Identifiability, Convergence and Nonparametric Estimation of Bivariate Archimax Copulas](deep_reads/2026-07-23-2607.19087.md)  
+  7/10 [daily]
 - [Calibrating Semantic Uncertainty from Observable Language-Model Probabilities](deep_reads/2026-07-22-2607.17447.md)  
   6/10 [daily]
 - [Exact Computation of Non-Gaussian Mismatch Penalties in Wiener-Hermite Cross-Correlation Identification](deep_reads/2026-07-20-2607.14699.md)  
