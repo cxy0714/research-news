@@ -11,39 +11,29 @@
 - **[收藏](favorites.md)** — 登录后在各页点 ☆ 收藏的论文，自动汇总到这里（总收藏按类别分组、可切换按周；每篇可写评论，无需手动维护）。
 - **[模型测评](all_shootout.md)** — 不同 LLM 在同一批论文上的打分 / 解读对比。
 
-## 今日 · 2026-07-23
+## 今日 · 2026-07-24
 
 ### 每日 arXiv 速览
 
-[→ 查看完整报告](daily/2026-07-23.md)
+[→ 查看完整报告](daily/2026-07-24.md)
 
-### 精读论文（13 篇）
+### 精读论文（8 篇）
 
-- [SPYCE: A Doubly Robust Estimator for Trials Targeting Early Huntington Disease under Outcome-Dependent Censoring](deep_reads/2026-07-23-2607.18501.md)  
+- [GAUGER: Generalized Regression Adjustment via Graph-Weighted Exposure-Level Residualization for Design-Based Inference Under Interference](deep_reads/2026-07-24-2607.19627.md)  
   `因果推断` · 相关性 8/10
-- [Adaptive Penalization and Bootstrap-Smoothed Inference for Two-Sample Mendelian Randomization with Summary Data](deep_reads/2026-07-23-2607.18503.md)  
+- [A Fixed-Effects Causal Forest for Staggered Adoption, with an Application to Medicaid Expansion](deep_reads/2026-07-24-2607.19644.md)  
   `因果推断` · 相关性 8/10
-- [Robust Signal Maximization in Spillover Experiments](deep_reads/2026-07-23-2607.18601.md)  
+- [Efficient difference-in-differences estimation under partial interference with incremental propensity score policies](deep_reads/2026-07-24-2607.19925.md)  
   `因果推断` · 相关性 8/10
-- [Flexible Inference for Winners with Conditional Validity](deep_reads/2026-07-23-2607.18545.md)  
-  `数理统计 / 假设检验` · 相关性 7/10
-- [A Bayesian Approach to Causal Cure Models](deep_reads/2026-07-23-2607.19050.md)  
+- [Estimating Network Spillovers under Dense Measurement Error](deep_reads/2026-07-24-2607.19625.md)  
+  `经济理论 / 应用` · 相关性 7/10
+- [Identifying Treatment and Spillover Effects with Control-Based and Forecast-Based Counterfactuals](deep_reads/2026-07-24-2607.20156.md)  
   `因果推断` · 相关性 7/10
-- [Learning sufficient low-dimensional structures through conditional optimal transport](deep_reads/2026-07-23-2607.18861.md)  
-  `非参数 / 半参数` · 相关性 7/10
-- [The Influence Function of Transport-based Quantiles](deep_reads/2026-07-23-2607.19080.md)  
-  `非参数 / 半参数` · 相关性 7/10
-- [Identifiability, Convergence and Nonparametric Estimation of Bivariate Archimax Copulas](deep_reads/2026-07-23-2607.19087.md)  
-  `其他` · 相关性 7/10
-- [Using binary silver labels in electronic health records-based computable phenotyping algorithms](deep_reads/2026-07-23-2607.18431.md)  
-  `流行病学` · 相关性 6/10
-- [Rank-Based Estimation of U-Shaped Biomarker Risk Curves and Critical Points for Time-to-Event Outcomes](deep_reads/2026-07-23-2607.19280.md)  
-  `因果推断` · 相关性 6/10
-- [Mutual Information second order expansion is the Pearson's chi-square statistic](deep_reads/2026-07-23-2607.18425.md)  
-  `数理统计 / 假设检验` · 相关性 6/10
-- [Optimizing Regret](deep_reads/2026-07-23-2607.18866.md)  
-  `经济理论 / 应用` · 相关性 6/10
-- [NAPTIME: A Neural-Process Framework for Rubin Alert Classification](deep_reads/2026-07-23-2607.19236.md)  
+- [Microlensing Detection and Inference via Learned Bayes Factors](deep_reads/2026-07-24-2607.20260.md)  
+  `天体统计` · 相关性 7/10
+- [Mens: Nonlinear shrinkage estimation in nonparanormal models for financial applications](deep_reads/2026-07-24-2607.19825.md)  
+  `高维统计 / 随机矩阵` · 相关性 6/10
+- [Strong Gravitational Lensing Posterior Sampling in Pixel-Space Using Diffusion Models and Recurrent Inference Machines](deep_reads/2026-07-24-2607.19459.md)  
   `天体统计` · 相关性 6/10
 
 ## 收藏
@@ -52,11 +42,11 @@
 
 ## 本周每日报告
 
+- [2026-07-23](daily/2026-07-23.md)
 - [2026-07-22](daily/2026-07-22.md)
 - [2026-07-21](daily/2026-07-21.md)
 - [2026-07-20](daily/2026-07-20.md)
 - [2026-07-17](daily/2026-07-17.md)
-- [2026-07-16](daily/2026-07-16.md)
 
 
 ---

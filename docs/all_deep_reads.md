@@ -4,6 +4,14 @@
 
 ### Daily
 
+- [GAUGER: Generalized Regression Adjustment via Graph-Weighted Exposure-Level Residualization for Design-Based Inference Under Interference](deep_reads/2026-07-24-2607.19627.md)  
+  8/10 [daily]
+- [A Fixed-Effects Causal Forest for Staggered Adoption, with an Application to Medicaid Expansion](deep_reads/2026-07-24-2607.19644.md)  
+  8/10 [daily]
+- [Efficient difference-in-differences estimation under partial interference with incremental propensity score policies](deep_reads/2026-07-24-2607.19925.md)  
+  8/10 [daily]
+- [Identifying Treatment and Spillover Effects with Control-Based and Forecast-Based Counterfactuals](deep_reads/2026-07-24-2607.20156.md)  
+  7/10 [daily]
 - [SPYCE: A Doubly Robust Estimator for Trials Targeting Early Huntington Disease under Outcome-Dependent Censoring](deep_reads/2026-07-23-2607.18501.md)  
   8/10 [daily]
 - [Adaptive Penalization and Bootstrap-Smoothed Inference for Two-Sample Mendelian Randomization with Summary Data](deep_reads/2026-07-23-2607.18503.md)  
@@ -2879,6 +2887,8 @@
 
 ### Daily
 
+- [Mens: Nonlinear shrinkage estimation in nonparanormal models for financial applications](deep_reads/2026-07-24-2607.19825.md)  
+  6/10 [daily]
 - [De-floored Principal Component Regression: When Rank Selection Alone Is Insufficient for Prediction](deep_reads/2026-07-22-2607.16638.md)  
   8/10 [daily]
 - [The Value of Depth in Message Passing on Sparse Graphs: A Kesten-Stigum Dichotomy](deep_reads/2026-07-22-2607.16676.md)  
@@ -9000,6 +9010,10 @@
 
 ### Daily
 
+- [Microlensing Detection and Inference via Learned Bayes Factors](deep_reads/2026-07-24-2607.20260.md)  
+  7/10 [daily]
+- [Strong Gravitational Lensing Posterior Sampling in Pixel-Space Using Diffusion Models and Recurrent Inference Machines](deep_reads/2026-07-24-2607.19459.md)  
+  6/10 [daily]
 - [NAPTIME: A Neural-Process Framework for Rubin Alert Classification](deep_reads/2026-07-23-2607.19236.md)  
   6/10 [daily]
 - [Coherence differential imaging using gradient-boosted decision trees for the direct detection of exoplanets](deep_reads/2026-07-21-2607.15973.md)  
@@ -9310,6 +9324,8 @@
 
 ### Daily
 
+- [Estimating Network Spillovers under Dense Measurement Error](deep_reads/2026-07-24-2607.19625.md)  
+  7/10 [daily]
 - [Optimizing Regret](deep_reads/2026-07-23-2607.18866.md)  
   6/10 [daily]
 - [Econometrics with Pre-Trained Embeddings for Unstructured Data](deep_reads/2026-07-22-2607.17378.md)  
