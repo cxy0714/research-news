@@ -4,6 +4,20 @@
 
 ### Daily
 
+- [Inference on counterfactual distributions using martingale posteriors](deep_reads/2026-07-28-2607.24143.md)  
+  9/10 [daily]
+- [Causal Inference of Ordinal Outcomes: A Bayesian Solution](deep_reads/2026-07-28-2607.23372.md)  
+  8/10 [daily]
+- [Joint Model for Mediation Analysis with Causally Related Longitudinal and Recurrent Event Mediators for Survival Outcome](deep_reads/2026-07-28-2607.23894.md)  
+  8/10 [daily]
+- [Attenuated Heterogeneity in Fixed-Effects Causal Forests, and a Cross-Fitted Correction](deep_reads/2026-07-28-2607.22896.md)  
+  8/10 [daily]
+- [Anytime-Valid Confirmation of Covariate Balance for Prespecified Corrections](deep_reads/2026-07-28-2607.23157.md)  
+  7/10 [daily]
+- [A Framework for Parametric Time-Varying Treatment Effects in Multiple Intervention Stepped Wedge Design Clinical Trials in the Presence of Non-Uniform Cluster-Period Correlation Structures](deep_reads/2026-07-28-2607.22936.md)  
+  6/10 [daily]
+- [Joint Group-Based Trajectory Modeling for Paired Repeated Measures: An Application to Audiometric Phenotypes and Dietary Associations](deep_reads/2026-07-28-2607.23858.md)  
+  6/10 [daily]
 - [GAUGER: Generalized Regression Adjustment via Graph-Weighted Exposure-Level Residualization for Design-Based Inference Under Interference](deep_reads/2026-07-24-2607.19627.md)  
   8/10 [daily]
 - [A Fixed-Effects Causal Forest for Staggered Adoption, with an Application to Medicaid Expansion](deep_reads/2026-07-24-2607.19644.md)  
@@ -2887,6 +2901,18 @@
 
 ### Daily
 
+- [The Phase Transition in Online PCA Depends on $n/d\log(d)$, not $n/d$](deep_reads/2026-07-28-2607.23914.md)  
+  8/10 [daily]
+- [Diffusion Bootstrap for High-Dimensional Linear Models](deep_reads/2026-07-28-2607.24324.md)  
+  7/10 [daily]
+- [Estimation of multiple precision matrices under shared support with heterogeneous edge strengths](deep_reads/2026-07-28-2607.23577.md)  
+  7/10 [daily]
+- [Recovery of latent inner products from an anisotropic Gaussian random geometric graph](deep_reads/2026-07-28-2607.23723.md)  
+  7/10 [daily]
+- [Estimating eigenvectors and eigenspaces of covariance matrices: Optimal Bounds and Conditions for Consistency](deep_reads/2026-07-28-2607.23964.md)  
+  7/10 [daily]
+- [The Zero Pattern of a Design Matrix Drives Multiple Descent in Over-parameterized Regression](deep_reads/2026-07-28-2607.24041.md)  
+  7/10 [daily]
 - [Mens: Nonlinear shrinkage estimation in nonparanormal models for financial applications](deep_reads/2026-07-24-2607.19825.md)  
   6/10 [daily]
 - [De-floored Principal Component Regression: When Rank Selection Alone Is Insufficient for Prediction](deep_reads/2026-07-22-2607.16638.md)  
@@ -4055,6 +4081,12 @@
 
 ### Daily
 
+- [Exact Generalization Error Curves of Kernel Ridge Regression for Functional Moment Estimation](deep_reads/2026-07-28-2607.23666.md)  
+  8/10 [daily]
+- [Decorated graphons for temporal network estimation](deep_reads/2026-07-28-2607.23145.md)  
+  6/10 [daily]
+- [Local Fr\'echet Regression with Riemannian Predictors](deep_reads/2026-07-28-2607.24293.md)  
+  6/10 [daily]
 - [Learning sufficient low-dimensional structures through conditional optimal transport](deep_reads/2026-07-23-2607.18861.md)  
   7/10 [daily]
 - [The Influence Function of Transport-based Quantiles](deep_reads/2026-07-23-2607.19080.md)  
@@ -5765,6 +5797,10 @@
 
 ### Daily
 
+- [A Characterization of the Orthocomplement of the Tangent Space of Semiparametric Markov Models](deep_reads/2026-07-28-2607.23439.md)  
+  9/10 [daily]
+- [Debiased Machine Learning: Identification, Estimation, and Shape Constraints](deep_reads/2026-07-28-2607.24472.md)  
+  9/10 [daily]
 - [Stabilized Higher-Order Influence Functions: Statistical Theory of a Class of Bilinear Forms](deep_reads/2026-07-08-2607.04743.md)  
   9/10 [daily]
 - [Outcome-adapted Automatic Debiased Machine Learning](deep_reads/2026-07-07-2607.03351.md)  
@@ -6102,6 +6138,16 @@
 
 ### Daily
 
+- [Locally Robust Kernel Specification Tests for Conditional Moment Restrictions](deep_reads/2026-07-28-2607.24382.md)  
+  8/10 [daily]
+- [Monte Carlo testing: non-asymptotic guarantees without joint exchangeability](deep_reads/2026-07-28-2607.23010.md)  
+  7/10 [daily]
+- [Sharp Minimax Rates for Smooth Two-Sample Testing under Central Differential Privacy](deep_reads/2026-07-28-2607.23974.md)  
+  7/10 [daily]
+- [On the Order-Conditional Optimality of Gaffke's Bound](deep_reads/2026-07-28-2607.22971.md)  
+  6/10 [daily]
+- [Proper Bayes minimax multiple shrinkage estimation](deep_reads/2026-07-28-2607.23717.md)  
+  6/10 [daily]
 - [Flexible Inference for Winners with Conditional Validity](deep_reads/2026-07-23-2607.18545.md)  
   7/10 [daily]
 - [Mutual Information second order expansion is the Pearson's chi-square statistic](deep_reads/2026-07-23-2607.18425.md)  
@@ -8064,6 +8110,8 @@
 
 ### Daily
 
+- [Near-Oracle Robustification of Finite-Difference Stochastic Gradient Estimators via Cheap Pilot Calibration](deep_reads/2026-07-28-2607.23725.md)  
+  6/10 [daily]
 - [Amortized Inference for Sampling Distributions Where the Bootstrap Fails](deep_reads/2026-07-22-2607.16666.md)  
   6/10 [daily]
 - [Hierarchical Bayesian inversion using the Karhunen-Loève expansion with analytical eigenpairs of the squared exponential kernel](deep_reads/2026-07-15-2607.12387.md)  
@@ -9010,6 +9058,8 @@
 
 ### Daily
 
+- [Jointly Modeling Roman Coronagraph Astrometry and Photometry Improves Orbital Parameter Estimates](deep_reads/2026-07-28-2607.22754.md)  
+  6/10 [daily]
 - [Microlensing Detection and Inference via Learned Bayes Factors](deep_reads/2026-07-24-2607.20260.md)  
   7/10 [daily]
 - [Strong Gravitational Lensing Posterior Sampling in Pixel-Space Using Diffusion Models and Recurrent Inference Machines](deep_reads/2026-07-24-2607.19459.md)  
@@ -10495,6 +10545,8 @@
 
 ### Daily
 
+- [Identifiability and Information-Based Inference for Epidemic Transmission Models Under Partial Observation](deep_reads/2026-07-28-2607.23079.md)  
+  7/10 [daily]
 - [Using binary silver labels in electronic health records-based computable phenotyping algorithms](deep_reads/2026-07-23-2607.18431.md)  
   6/10 [daily]
 - [A Complete-Data Likelihood for Epidemic Processes on Partially Observed Dynamic Networks](deep_reads/2026-07-20-2607.15179.md)  
