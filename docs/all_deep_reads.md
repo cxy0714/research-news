@@ -18,6 +18,26 @@
   6/10 [daily]
 - [Joint Group-Based Trajectory Modeling for Paired Repeated Measures: An Application to Audiometric Phenotypes and Dietary Associations](deep_reads/2026-07-28-2607.23858.md)  
   6/10 [daily]
+- [Interventional Score Geometry for Causal Inference](deep_reads/2026-07-27-2607.21914.md)  
+  9/10 [daily]
+- [Identification and Robust Inference for Multiple Treatment Effects with Possibly Invalid Instruments](deep_reads/2026-07-27-2607.21481.md)  
+  9/10 [daily]
+- [Weighted Extensions of the Kolmogorov-Smirnov, Cramer-von Mises, and Anderson-Darling Tests for Assessing Covariate Balance](deep_reads/2026-07-27-2607.21782.md)  
+  8/10 [daily]
+- [Equilibrium Causal Digital Twins: Validation, Transport, and Identification Limits](deep_reads/2026-07-27-2607.21667.md)  
+  8/10 [daily]
+- [Partial Identification with Auxiliary Moment Restrictions](deep_reads/2026-07-27-2607.21807.md)  
+  8/10 [daily]
+- [Using Pre-Trends for Inference in Difference-in-Differences](deep_reads/2026-07-27-2607.21312.md)  
+  8/10 [daily]
+- [Theoretical Properties of Multivariate Random Forest in Feature Selection and its Application to Facial Morphology-Gene Detection](deep_reads/2026-07-27-2607.21880.md)  
+  7/10 [daily]
+- [Reconstruction of Enhanced Causal Omnidirectional Network (RECON)](deep_reads/2026-07-27-2607.21833.md)  
+  7/10 [daily]
+- [Longitudinal Random Forests for Sparse and Irregular Response Trajectories](deep_reads/2026-07-27-2607.21817.md)  
+  7/10 [daily]
+- [Semiparametric inference on identification sets in choice modeling](deep_reads/2026-07-27-2607.21790.md)  
+  7/10 [daily]
 - [GAUGER: Generalized Regression Adjustment via Graph-Weighted Exposure-Level Residualization for Design-Based Inference Under Interference](deep_reads/2026-07-24-2607.19627.md)  
   8/10 [daily]
 - [A Fixed-Effects Causal Forest for Staggered Adoption, with an Application to Medicaid Expansion](deep_reads/2026-07-24-2607.19644.md)  
@@ -4087,6 +4107,8 @@
   6/10 [daily]
 - [Local Fr\'echet Regression with Riemannian Predictors](deep_reads/2026-07-28-2607.24293.md)  
   6/10 [daily]
+- [Nonparametric Inference for Semigroup Blocks of Switching Diffusions](deep_reads/2026-07-27-2607.22183.md)  
+  6/10 [daily]
 - [Learning sufficient low-dimensional structures through conditional optimal transport](deep_reads/2026-07-23-2607.18861.md)  
   7/10 [daily]
 - [The Influence Function of Transport-based Quantiles](deep_reads/2026-07-23-2607.19080.md)  
@@ -5801,6 +5823,10 @@
   9/10 [daily]
 - [Debiased Machine Learning: Identification, Estimation, and Shape Constraints](deep_reads/2026-07-28-2607.24472.md)  
   9/10 [daily]
+- [Optimal use of a black-box learner in semiparametric estimation](deep_reads/2026-07-27-2607.21541.md)  
+  9/10 [daily]
+- [The V-fold jackknife for semiparametric inference: variance estimation, confidence intervals, and simultaneous confidence bands](deep_reads/2026-07-27-2607.22493.md)  
+  8/10 [daily]
 - [Stabilized Higher-Order Influence Functions: Statistical Theory of a Class of Bilinear Forms](deep_reads/2026-07-08-2607.04743.md)  
   9/10 [daily]
 - [Outcome-adapted Automatic Debiased Machine Learning](deep_reads/2026-07-07-2607.03351.md)  
@@ -6147,6 +6173,14 @@
 - [On the Order-Conditional Optimality of Gaffke's Bound](deep_reads/2026-07-28-2607.22971.md)  
   6/10 [daily]
 - [Proper Bayes minimax multiple shrinkage estimation](deep_reads/2026-07-28-2607.23717.md)  
+  6/10 [daily]
+- [Elliptical Regularized Hotelling Tests for High-Dimensional Change-Point Detection](deep_reads/2026-07-27-2607.22162.md)  
+  8/10 [daily]
+- [High-dimensional sparsity-adaptive multiple change-point detection](deep_reads/2026-07-27-2607.20928.md)  
+  7/10 [daily]
+- [Nonlinear Boosting with Multiple Testing in High-Dimensional Generalised Linear Models with Binary Responses](deep_reads/2026-07-27-2607.22440.md)  
+  7/10 [daily]
+- [Testing for functional white noise in high dimensions](deep_reads/2026-07-27-2607.20877.md)  
   6/10 [daily]
 - [Flexible Inference for Winners with Conditional Validity](deep_reads/2026-07-23-2607.18545.md)  
   7/10 [daily]
@@ -8112,6 +8146,8 @@
 
 - [Near-Oracle Robustification of Finite-Difference Stochastic Gradient Estimators via Cheap Pilot Calibration](deep_reads/2026-07-28-2607.23725.md)  
   6/10 [daily]
+- [Estimating dynamic models by matching random features](deep_reads/2026-07-27-2607.21916.md)  
+  6/10 [daily]
 - [Amortized Inference for Sampling Distributions Where the Bootstrap Fails](deep_reads/2026-07-22-2607.16666.md)  
   6/10 [daily]
 - [Hierarchical Bayesian inversion using the Karhunen-Loève expansion with analytical eigenpairs of the squared exponential kernel](deep_reads/2026-07-15-2607.12387.md)  
@@ -9060,6 +9096,14 @@
 
 - [Jointly Modeling Roman Coronagraph Astrometry and Photometry Improves Orbital Parameter Estimates](deep_reads/2026-07-28-2607.22754.md)  
   6/10 [daily]
+- [Modeling Dependence Structures in Astronomical Multi-Band Time Series Data via Multi-Output Gaussian Processes](deep_reads/2026-07-27-2607.21431.md)  
+  7/10 [daily]
+- [Fast Inference on Astronomical Time Series with Trans-Dimensional Flow Matching Posterior Estimation](deep_reads/2026-07-27-2607.21134.md)  
+  7/10 [daily]
+- [A Hierarchical Likelihood Model for Non-linear Inverse Problems under Additive and Multiplicative Noise](deep_reads/2026-07-27-2607.22330.md)  
+  6/10 [daily]
+- [GCR Spectra Reconstructed with Neutron Monitor Yield Function and Artificial Neural Networks: Comparison of Two Methods](deep_reads/2026-07-27-2607.21009.md)  
+  6/10 [daily]
 - [Microlensing Detection and Inference via Learned Bayes Factors](deep_reads/2026-07-24-2607.20260.md)  
   7/10 [daily]
 - [Strong Gravitational Lensing Posterior Sampling in Pixel-Space Using Diffusion Models and Recurrent Inference Machines](deep_reads/2026-07-24-2607.19459.md)  
@@ -9374,6 +9418,12 @@
 
 ### Daily
 
+- [Stochastic Potential Choices and Outcomes](deep_reads/2026-07-27-2607.21413.md)  
+  8/10 [daily]
+- [To what extent can long-differencing capture climate adaptation?](deep_reads/2026-07-27-2607.22028.md)  
+  7/10 [daily]
+- [Uniformly Consistent Semi-nonparametric Demand Estimation with Micro-Data](deep_reads/2026-07-27-2607.21323.md)  
+  6/10 [daily]
 - [Estimating Network Spillovers under Dense Measurement Error](deep_reads/2026-07-24-2607.19625.md)  
   7/10 [daily]
 - [Optimizing Regret](deep_reads/2026-07-23-2607.18866.md)  
