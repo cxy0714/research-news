@@ -4,6 +4,18 @@
 
 ### Daily
 
+- [The positivity assumption in causal mediation analyses? Checked!](deep_reads/2026-07-30-2607.25072.md)  
+  8/10 [daily]
+- [On the magnitude, sign and ranking of recanting-twin path-specific effects](deep_reads/2026-07-30-2607.25709.md)  
+  8/10 [daily]
+- [Causally Interpretable Meta-Mediation Analysis With Missing At Random Mediator and Outcome Data](deep_reads/2026-07-30-2607.25822.md)  
+  8/10 [daily]
+- [Spectral Truncation in Synthetic Control](deep_reads/2026-07-30-2607.25074.md)  
+  6/10 [daily]
+- [Covariate-Adaptive Sample Size Re-estimation for Population-Standardized Historical Control Designs in Single-Arm Trials](deep_reads/2026-07-30-2607.25159.md)  
+  6/10 [daily]
+- [Bias-corrected Cox regression with AI-extracted covariates via calibration summary statistics](deep_reads/2026-07-30-2607.25868.md)  
+  6/10 [daily]
 - [Inference on counterfactual distributions using martingale posteriors](deep_reads/2026-07-28-2607.24143.md)  
   9/10 [daily]
 - [Causal Inference of Ordinal Outcomes: A Bayesian Solution](deep_reads/2026-07-28-2607.23372.md)  
@@ -194,6 +206,8 @@
   7/10 [daily]
 - [Post-selection inference for network structure](deep_reads/2026-07-03-2607.00312.md)  
   7/10 [daily]
+- [Distributed Prediction under Heterogeneity with Unidentifiable Parameter](deep_reads/2026-07-01-2607.00376.md)  
+  7/10 [daily]
 - [Semiparametric Efficiency in Sequential Experiments: Characterization and Design via Average Propensity](deep_reads/2026-06-30-2606.31190.md)  
   9/10 [daily]
 - [Cross-Fitted Survey-Weighted TMLE with Design-Based Variance for Causal Machine Learning](deep_reads/2026-06-30-2606.30918.md)  
@@ -226,6 +240,16 @@
   6/10 [daily]
 - [Hierarchical Clustering As a Novel Solution to the Notorious Multicollinearity Problem in Observational Causal Inference](deep_reads/2026-06-30-2606.30992.md)  
   6/10 [daily]
+- [Generated outcomes as generated regressors: Equivalences in recursive causal estimation](deep_reads/2026-06-29-2606.29009.md)  
+  8/10 [daily]
+- [Causal Inference Using Factor Models](deep_reads/2026-06-29-2606.29691.md)  
+  8/10 [daily]
+- [Inverse Probability Weighting in a Post-Bayesian World](deep_reads/2026-06-29-2606.28685.md)  
+  7/10 [daily]
+- [Measurement Induced Confounding](deep_reads/2026-06-29-2606.28774.md)  
+  7/10 [daily]
+- [Tuning-Free Efficient Estimation for Multi-Source Data via Covariance-Aware Shrinkage](deep_reads/2026-06-29-2606.30615.md)  
+  7/10 [daily]
 - [A Toolkit for the Study of Treatment-Effect Discontinuities](deep_reads/2026-06-26-2606.28017.md)  
   8/10 [daily]
 - [A bootstrap approach to prediction-powered inference](deep_reads/2026-06-26-2606.28621.md)  
@@ -2910,8 +2934,14 @@
 
 - [Causal isotonic regression](deep_reads/2026-06-22-1810.03269.md)  
   9/10 [manual]
+- [Compound Selection Decisions: An Almost SURE Approach](deep_reads/2026-07-30-2511.11862.md)  
+  8/10 [manual]
 - [Marginal Causal Effect Estimation with Continuous Instrumental Variables](deep_reads/2026-07-10-2510.14368.md)  
   8/10 [manual]
+- [Does TabPFN Understand Causal Structures?](deep_reads/2026-07-30-2511.07236.md)  
+  7/10 [manual]
+- [Improving TabPFN's Synthetic Data Generation by Integrating Causal Structure](deep_reads/2026-07-30-2603.10254.md)  
+  7/10 [manual]
 - [Direct and Indirect Discrimination in Generalized Linear Models](deep_reads/2026-07-07-2606.23116.md)  
   7/10 [manual]
 - [Landmarking with Latent Class Mixed Models for Dynamic Prediction of Time-to-event Data with Heterogeneous Biomarker Trajectories](deep_reads/2026-07-07-2606.24678.md)  
@@ -2921,6 +2951,10 @@
 
 ### Daily
 
+- [Spectra of high-dimensional Spearman correlation matrices under scale-mixture dependence](deep_reads/2026-07-30-2607.25486.md)  
+  8/10 [daily]
+- [Transfer Learning in High-Dimensional Clustering: Minimax Thresholds and Applications in Single-Cell Data](deep_reads/2026-07-30-2607.25031.md)  
+  7/10 [daily]
 - [The Phase Transition in Online PCA Depends on $n/d\log(d)$, not $n/d$](deep_reads/2026-07-28-2607.23914.md)  
   8/10 [daily]
 - [Diffusion Bootstrap for High-Dimensional Linear Models](deep_reads/2026-07-28-2607.24324.md)  
@@ -4135,6 +4169,8 @@
   7/10 [daily]
 - [Minimax prediction in the Functional Autoregressive Model](deep_reads/2026-07-08-2607.04823.md)  
   7/10 [daily]
+- [Beyond Degree: Rooted Motif Signatures for Latent Position Identifiability in Graphon Models](deep_reads/2026-07-02-2607.01358.md)  
+  6/10 [daily]
 - [Two-stage semiparametric inference for regime-switching jump diffusions with unknown Lévy densities](deep_reads/2026-06-30-2606.31057.md)  
   7/10 [daily]
 - [Adaptive nonparametric regression from repeated measurements under common noise](deep_reads/2026-06-30-2606.30000.md)  
@@ -6164,6 +6200,10 @@
 
 ### Daily
 
+- [Testing Microbiome Community Differences in High Dimensions: A Bootstrap Approach for Compositional Data](deep_reads/2026-07-30-2607.26022.md)  
+  6/10 [daily]
+- [Omnibus Goodness-of-Fit Testing for Distributions on Stiefel Manifolds](deep_reads/2026-07-30-2607.25618.md)  
+  6/10 [daily]
 - [Locally Robust Kernel Specification Tests for Conditional Moment Restrictions](deep_reads/2026-07-28-2607.24382.md)  
   8/10 [daily]
 - [Monte Carlo testing: non-asymptotic guarantees without joint exchangeability](deep_reads/2026-07-28-2607.23010.md)  
@@ -6301,6 +6341,8 @@
 - [Universal Inference for model selection on networks](deep_reads/2026-06-30-2606.30981.md)  
   6/10 [daily]
 - [A data-dependent DKW inequality for regenerative Markov chains](deep_reads/2026-06-30-2606.30866.md)  
+  6/10 [daily]
+- [Simultaneous confidence bands for cumulative hazard via exchangeable bootstrap and box calibration](deep_reads/2026-06-29-2606.30982.md)  
   6/10 [daily]
 - [Optimal Estimators for Heavy-Tailed Mean Estimation via Convex Analysis](deep_reads/2026-06-26-2606.27899.md)  
   7/10 [daily]
@@ -8139,6 +8181,8 @@
   7/10 [manual]
 - [Second order mixed moment inequalities based on Gram matrices](deep_reads/2026-07-07-2606.21636.md)  
   4/10 [manual]
+- [Online LLM watermark detection via e-processes](deep_reads/2026-07-30-2602.14286.md)  
+  3/10 [manual]
 
 ## 统计计算 / 算法
 
@@ -9085,6 +9129,8 @@
 
 - [Structured Secant Methods to Select Smoothing Parameters For General Smooth Models](deep_reads/2026-07-07-2606.26804.md)  
   5/10 [manual]
+- [TabClustPFN: A Prior-Fitted Network for Tabular Data Clustering](deep_reads/2026-07-30-2601.21656.md)  
+  4/10 [manual]
 - [Inferential applications of the moments of the logit-normal distribution](deep_reads/2026-07-07-2606.23998.md)  
   4/10 [manual]
 - [Knowledge Cascade: Reverse Knowledge Distillation on Nonparametric Multivariate Functional Estimation](deep_reads/2026-07-07-2606.25927.md)  
@@ -9418,6 +9464,8 @@
 
 ### Daily
 
+- [From dense grids to valid inference: Accounting for regularization bias in nonparametric random coefficient models](deep_reads/2026-07-30-2607.25416.md)  
+  7/10 [daily]
 - [Stochastic Potential Choices and Outcomes](deep_reads/2026-07-27-2607.21413.md)  
   8/10 [daily]
 - [To what extent can long-differencing capture climate adaptation?](deep_reads/2026-07-27-2607.22028.md)  
@@ -9455,6 +9503,8 @@
 - [Design-Based Inference for Time-Series GMM](deep_reads/2026-06-30-2606.31685.md)  
   6/10 [daily]
 - [Second-Generation Heterogeneous Panel Data Model with Individual and Common Shocks](deep_reads/2026-06-30-2606.29063.md)  
+  6/10 [daily]
+- [Second-Generation Heterogeneous Panel Data Model with Individual and Common Shocks](deep_reads/2026-06-29-2606.29063.md)  
   6/10 [daily]
 - [Choosing What to Calibrate and What to Estimate in Structural Models](deep_reads/2026-06-25-2606.25688.md)  
   7/10 [daily]
@@ -11835,6 +11885,8 @@
   6/10 [daily]
 - [Structural functional identifiability and model discovery in differential equation models](deep_reads/2026-06-30-2606.30289.md)  
   6/10 [daily]
+- [Multi-Source Transfer Learning of Sparse Single-Index Models](deep_reads/2026-06-29-2606.29658.md)  
+  7/10 [daily]
 - [On the optimal prediction of extreme events](deep_reads/2026-06-25-2606.26270.md)  
   7/10 [daily]
 - [Finite-sample bounds for regularized optimal transport](deep_reads/2026-06-25-2606.25947.md)  
@@ -13396,6 +13448,8 @@
 
 - [Distributed Statistical Inference for Massive Data](deep_reads/2026-07-07-1805.11214.md)  
   8/10 [manual]
+- [TabPFN: One Model to Rule Them All?](deep_reads/2026-07-30-2505.20003.md)  
+  6/10 [manual]
 - [A Tutorial on Bregman Projection in Statistics](deep_reads/2026-07-07-2606.21714.md)  
   6/10 [manual]
 - [Double zero-inflated spatio-temporal modeling of daily precipitation under detection thresholds](deep_reads/2026-07-07-2606.17717.md)  
