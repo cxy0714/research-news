@@ -16,13 +16,47 @@ from pathlib import Path
 from pypdf import PdfReader
 
 from . import citations
-from .llm.prompts import DEEP_READ_ASTRO_SYSTEM, DEEP_READ_SYSTEM, TOPIC_LABELS_ZH
+from .llm.prompts import (
+    DEEP_READ_ASTRO_SYSTEM,
+    DEEP_READ_GENERAL_SYSTEM,
+    DEEP_READ_SYSTEM,
+    TOPIC_LABELS_ZH,
+)
 from .llm.sjtu_client import SJTUClient
 from .models import Paper
 from .scrapers import affiliations as affil
 from .scrapers import references as refs
 
 log = logging.getLogger(__name__)
+
+
+def _popsci_venues() -> set[str]:
+    """Full journal names in journals.yaml groups flagged ``gateway_popsci: true``.
+
+    Papers from these venues are read with the popular-science deep-read prompt
+    (DEEP_READ_GENERAL_SYSTEM) instead of the rigorous research prompt. Derived
+    from config so adding a popsci journal is a YAML-only change. Cached after
+    first read. Returns an empty set if the config is missing/unreadable (e.g.
+    the daily arxiv pipeline, which has no journal venues anyway)."""
+    global _POPSCI_VENUES_CACHE
+    if _POPSCI_VENUES_CACHE is not None:
+        return _POPSCI_VENUES_CACHE
+    venues: set[str] = set()
+    try:
+        import yaml
+        cfg = yaml.safe_load(Path("config/journals.yaml").read_text(encoding="utf-8"))
+        for gcfg in (cfg.get("groups") or {}).values():
+            if gcfg.get("gateway_popsci"):
+                for j in gcfg.get("journals", []):
+                    if j.get("full"):
+                        venues.add(j["full"])
+    except Exception as e:  # noqa: BLE001
+        log.debug("could not load popsci venues from journals.yaml: %s", e)
+    _POPSCI_VENUES_CACHE = venues
+    return venues
+
+
+_POPSCI_VENUES_CACHE: set[str] | None = None
 
 DEEP_READS_DIR = Path("docs/deep_reads")
 DEEP_READS_INDEX_PATH = Path("data/deep_reads_index.json")
@@ -137,12 +171,17 @@ def deep_read_paper(
         + (f"{refs_block}\n" if refs_block else "")
         + f"## Full text\n{pdf_text}\n"
     )
-    # Astrostat papers need a different deep-read style: the researcher lacks
-    # astronomy background, so the notes must teach the physical concepts
-    # before getting into the methodology.
-    system_prompt = (
-        DEEP_READ_ASTRO_SYSTEM if paper.topic == "astrostats" else DEEP_READ_SYSTEM
-    )
+    # Pick the deep-read style:
+    #   - popsci venues (Nature/Science/... — groups flagged gateway_popsci):
+    #     cross-disciplinary popular-science read, regardless of topic;
+    #   - astrostat papers: astronomy-teaching read (researcher lacks astro bg);
+    #   - everything else: the rigorous problem-finding read.
+    if (paper.venue or "") in _popsci_venues():
+        system_prompt = DEEP_READ_GENERAL_SYSTEM
+    elif paper.topic == "astrostats":
+        system_prompt = DEEP_READ_ASTRO_SYSTEM
+    else:
+        system_prompt = DEEP_READ_SYSTEM
     try:
         result = client.chat(
             [

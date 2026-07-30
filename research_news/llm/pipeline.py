@@ -75,6 +75,9 @@ def score_papers(
             {
                 "id": p.paper_id,
                 "title": p.title,
+                # Venue lets the scorer apply the general-science gateway rubric
+                # to multidisciplinary flagships (Nature/Science/PNAS/...).
+                "venue": p.venue or p.source,
                 "abstract": p.abstract[:600],   # shorter → fewer tokens
                 "categories": p.categories,
             }
