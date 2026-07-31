@@ -225,7 +225,7 @@ general 组：
 - [x] (2026-07-31) `--only "Nat. Methods" --n-issues 2`   （~24 篇/期）
 
 broad 组：
-- [ ] `--only NMI --n-issues 2`   （~16 篇/期）
+- [x] (2026-07-31) `--only NMI --n-issues 2`   （~16 篇/期）
 - [ ] `--only "Sci. Adv." --n-issues 1`   ⚠ 单期就大（~67，曾 77 篇）
 - [ ] `--only "Nat. Commun." --n-issues 1`   ⚠⚠ 滚动刊、单位量大（~51 篇），务必小步起
 

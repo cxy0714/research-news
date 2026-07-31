@@ -17,7 +17,7 @@
 
 [→ 查看完整报告](daily/2026-07-31.md)
 
-### 精读论文（76 篇）
+### 精读论文（82 篇）
 
 - [Evaluating the role of pretraining dataset size and diversity on single-cell foundation model performance](deep_reads/2026-07-31-10.1038_s41592-026-03120-y.md)  
   `其他` · 相关性 7/10
@@ -95,6 +95,12 @@
   `其他` · 相关性 5/10
 - [The global demand and potential public health impact of oral antiviral treatment stockpile for influenza pandemics](deep_reads/2026-07-31-10.1073_pnas.2524161123.md)  
   `流行病学` · 相关性 5/10
+- [Capable language models can outgrow the benefits of collaboration](deep_reads/2026-07-31-10.1038_s42256-026-01268-y.md)  
+  `其他` · 相关性 4/10
+- [Neural sampling from cognitive maps enables goal-directed imagination and planning](deep_reads/2026-07-31-10.1038_s42256-026-01254-4.md)  
+  `其他` · 相关性 4/10
+- [An agentic artificially intelligent X-ray scientist](deep_reads/2026-07-31-10.1038_s42256-026-01261-5.md)  
+  `天体统计` · 相关性 4/10
 - [Neuropixels Opto: combining high-resolution electrophysiology and optogenetics](deep_reads/2026-07-31-10.1038_s41592-026-03076-z.md)  
   `其他` · 相关性 4/10
 - [3D pathology-guided microdissection](deep_reads/2026-07-31-10.1038_s41592-026-03141-7.md)  
@@ -125,6 +131,8 @@
   `其他` · 相关性 3/10
 - [Heat tolerance decreases and cold tolerance increases with elevation for a species-rich insect family on a tropical volcano](deep_reads/2026-07-31-10.1073_pnas.2533455123.md)  
   `其他` · 相关性 3/10
+- [A dexterous soft hand exoskeleton restores intentional grasping in individuals with severe hand impairment](deep_reads/2026-07-31-10.1038_s42256-026-01263-3.md)  
+  `其他` · 相关性 2/10
 - [OrthoFinder: improved phylogenetic orthology inference with enhanced accuracy and scalability](deep_reads/2026-07-31-10.1038_s41592-026-03126-6.md)  
   `其他` · 相关性 2/10
 - [Accelerating <i>Campylobacter</i> zoonosis in the Anthropocene](deep_reads/2026-07-31-10.1073_pnas.2609969123.md)  
@@ -159,6 +167,10 @@
   `其他` · 相关性 1/10
 - [Weight-four parity checks in a spin-shuttling architecture](deep_reads/2026-07-31-10.1038_s41586-026-10766-3.md)  
   `其他` · 相关性 1/10
+- [Conditional Monge Gap enables generalizable single-cell perturbation modelling](deep_reads/2026-07-31-10.1038_s42256-026-01242-8.md)  
+  `其他` · 相关性 0/10
+- [Plagiarism of ideas in the age of generative artificial intelligence](deep_reads/2026-07-31-10.1038_s42256-026-01247-3.md)  
+  `其他` · 相关性 0/10
 - [A posttranslational modification of fimbriae drives pathogenicity in <i> <i>Klebsiella pneumoniae</i> </i>](deep_reads/2026-07-31-10.1073_pnas.2611142123.md)  
   `其他` · 相关性 0/10
 - [Proteolytic activation of c-MYC facilitated by DOT1L](deep_reads/2026-07-31-10.1073_pnas.2525603123.md)  

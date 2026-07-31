@@ -9346,6 +9346,11 @@
 
 ### 期刊
 
+#### Nature Machine Intelligence Vol 8 Issue 7
+
+- [An agentic artificially intelligent X-ray scientist](deep_reads/2026-07-31-10.1038_s42256-026-01261-5.md)  
+  4/10 [journals]
+
 #### Monthly Notices of the Royal Astronomical Society Vol 550 Issue 2
 
 - [Estimating the Hubble constant with a federated unscented Kalman filter](deep_reads/2026-07-19-10.1093_mnras_stag1025.md)  
@@ -12098,6 +12103,22 @@
 
 - [Neuropixels Opto: combining high-resolution electrophysiology and optogenetics](deep_reads/2026-07-31-10.1038_s41592-026-03076-z.md)  
   4/10 [journals]
+
+#### Nature Machine Intelligence Vol 8 Issue 7
+
+- [Capable language models can outgrow the benefits of collaboration](deep_reads/2026-07-31-10.1038_s42256-026-01268-y.md)  
+  4/10 [journals]
+- [Neural sampling from cognitive maps enables goal-directed imagination and planning](deep_reads/2026-07-31-10.1038_s42256-026-01254-4.md)  
+  4/10 [journals]
+- [A dexterous soft hand exoskeleton restores intentional grasping in individuals with severe hand impairment](deep_reads/2026-07-31-10.1038_s42256-026-01263-3.md)  
+  2/10 [journals]
+
+#### Nature Machine Intelligence Vol 8 Issue 6
+
+- [Conditional Monge Gap enables generalizable single-cell perturbation modelling](deep_reads/2026-07-31-10.1038_s42256-026-01242-8.md)  
+  0/10 [journals]
+- [Plagiarism of ideas in the age of generative artificial intelligence](deep_reads/2026-07-31-10.1038_s42256-026-01247-3.md)  
+  0/10 [journals]
 
 #### Nature Vol 655 Issue 8125
 

@@ -474,6 +474,13 @@
 - [Vol 393 Issue 6810 · 2026-07-31](journals/2026-07-31-science-v393-i6810.md)
 - [Vol 393 Issue 6809 · 2026-07-31](journals/2026-07-31-science-v393-i6809.md)
 
+## 广覆盖开放刊 (Broad-Scope)
+
+### NMI
+
+- [Vol 8 Issue 7 · 2026-07-31](journals/2026-07-31-nmi-v8-i7.md)
+- [Vol 8 Issue 6 · 2026-07-31](journals/2026-07-31-nmi-v8-i6.md)
+
 ## IEEE 系列 (IEEE)
 
 ### JSAIT
