@@ -17,8 +17,12 @@
 
 [→ 查看完整报告](daily/2026-07-31.md)
 
-### 精读论文（64 篇）
+### 精读论文（76 篇）
 
+- [Evaluating the role of pretraining dataset size and diversity on single-cell foundation model performance](deep_reads/2026-07-31-10.1038_s41592-026-03120-y.md)  
+  `其他` · 相关性 7/10
+- [A scalable approach to investigating sequence-to-function predictions from personal genomes](deep_reads/2026-07-31-10.1038_s41592-026-03124-8.md)  
+  `其他` · 相关性 7/10
 - [A demographic theory of similarity-biased social learning](deep_reads/2026-07-31-10.1073_pnas.2606741123.md)  
   `其他` · 相关性 7/10
 - [Epigenetic and 3D genome reprogramming during the aging of the human hippocampus](deep_reads/2026-07-31-10.1126_science.adt8307.md)  
@@ -41,6 +45,12 @@
   `数理统计 / 假设检验` · 相关性 7/10
 - [Optimizing the extraction of information from redshift probability distribution functions](deep_reads/2026-07-31-2607.26822.md)  
   `天体统计` · 相关性 7/10
+- [A comprehensive benchmark of sequence-based subcellular localization predictors for human proteins](deep_reads/2026-07-31-10.1038_s41592-026-03142-6.md)  
+  `其他` · 相关性 6/10
+- [A generalizable Hi-C foundation model for chromatin architecture, single-cell and multiomics analysis across species](deep_reads/2026-07-31-10.1038_s41592-026-03097-8.md)  
+  `其他` · 相关性 6/10
+- [Brightness demixing for simultaneous multi-target imaging in 3D single-molecule localization microscopy](deep_reads/2026-07-31-10.1038_s41592-026-03118-6.md)  
+  `其他` · 相关性 6/10
 - [Dynamic principles of concentration buffering through liquid–liquid phase separation](deep_reads/2026-07-31-10.1073_pnas.2526810123.md)  
   `其他` · 相关性 6/10
 - [Susceptibility and regulation of biomolecular condensates by solutes](deep_reads/2026-07-31-10.1073_pnas.2604434123.md)  
@@ -79,16 +89,28 @@
   `经济理论 / 应用` · 相关性 6/10
 - [A Simple Robust Procedure in Instrumental Variables Regression](deep_reads/2026-07-31-2607.26960.md)  
   `因果推断` · 相关性 6/10
+- [A cloud-based miniscope for neurosurveillance of brain health and disease in freely behaving animals](deep_reads/2026-07-31-10.1038_s41592-026-03111-z.md)  
+  `其他` · 相关性 5/10
 - [Developmental changes in memory structure and precision alter the use of retrieved episodes during decisions for reward](deep_reads/2026-07-31-10.1073_pnas.2525494123.md)  
   `其他` · 相关性 5/10
 - [The global demand and potential public health impact of oral antiviral treatment stockpile for influenza pandemics](deep_reads/2026-07-31-10.1073_pnas.2524161123.md)  
   `流行病学` · 相关性 5/10
+- [Neuropixels Opto: combining high-resolution electrophysiology and optogenetics](deep_reads/2026-07-31-10.1038_s41592-026-03076-z.md)  
+  `其他` · 相关性 4/10
+- [3D pathology-guided microdissection](deep_reads/2026-07-31-10.1038_s41592-026-03141-7.md)  
+  `其他` · 相关性 4/10
+- [Chromatix: a differentiable, GPU-accelerated wave-optics library](deep_reads/2026-07-31-10.1038_s41592-026-03121-x.md)  
+  `统计计算 / 算法` · 相关性 4/10
 - [Dose-dependent sensitivity of human three-dimensional chromatin to a heart disease–linked transcription factor](deep_reads/2026-07-31-10.1126_science.adv5434.md)  
   `其他` · 相关性 4/10
 - [Human body single-cell atlas of three-dimensional genome organization and DNA methylation](deep_reads/2026-07-31-10.1126_science.adx0673.md)  
   `其他` · 相关性 4/10
 - [Spectral Gap for the Binary Fixed-Margin Swap Chain](deep_reads/2026-07-31-2606.22636.md)  
   `统计计算 / 算法` · 相关性 4/10
+- [EasyGrid: a versatile platform for automated cryo-EM sample preparation and quality control](deep_reads/2026-07-31-10.1038_s41592-026-03127-5.md)  
+  `其他` · 相关性 3/10
+- [A human induced pluripotent stem cell model for the holistic study of epithelial-to-mesenchymal transitions](deep_reads/2026-07-31-10.1038_s41592-026-03096-9.md)  
+  `其他` · 相关性 3/10
 - [Global threat exposure of islands in a changing world](deep_reads/2026-07-31-10.1073_pnas.2534106123.md)  
   `其他` · 相关性 3/10
 - [A wearable patch for continuous levodopa monitoring in sweat: Towards exertion and power-free pharmacodynamic assessment in Parkinson’s disease](deep_reads/2026-07-31-10.1073_pnas.2610453123.md)  
@@ -103,6 +125,8 @@
   `其他` · 相关性 3/10
 - [Heat tolerance decreases and cold tolerance increases with elevation for a species-rich insect family on a tropical volcano](deep_reads/2026-07-31-10.1073_pnas.2533455123.md)  
   `其他` · 相关性 3/10
+- [OrthoFinder: improved phylogenetic orthology inference with enhanced accuracy and scalability](deep_reads/2026-07-31-10.1038_s41592-026-03126-6.md)  
+  `其他` · 相关性 2/10
 - [Accelerating <i>Campylobacter</i> zoonosis in the Anthropocene](deep_reads/2026-07-31-10.1073_pnas.2609969123.md)  
   `其他` · 相关性 2/10
 - [Cryoelectron tomography reveals an age-related decline in mitoribosomes that contributes to T cell dysfunction in older individuals](deep_reads/2026-07-31-10.1073_pnas.2608102123.md)  

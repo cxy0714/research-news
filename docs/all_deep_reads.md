@@ -8261,6 +8261,11 @@
 
 ### 期刊
 
+#### Nature Methods Vol 23 Issue 7
+
+- [Chromatix: a differentiable, GPU-accelerated wave-optics library](deep_reads/2026-07-31-10.1038_s41592-026-03121-x.md)  
+  4/10 [journals]
+
 #### Journal of Business & Economic Statistics Vol 40 Issue 4
 
 - [Feature Screening for Massive Data Analysis by Subsampling](deep_reads/2026-07-19-10.1080_07350015.2021.1990771.md)  
@@ -12065,6 +12070,34 @@
   0/10 [journals]
 - [Abrupt transition to irreversible damage in the overdrafted Sacramento Valley aquifer system](deep_reads/2026-07-31-10.1073_pnas.2526041123.md)  
   0/10 [journals]
+
+#### Nature Methods Vol 23 Issue 7
+
+- [Evaluating the role of pretraining dataset size and diversity on single-cell foundation model performance](deep_reads/2026-07-31-10.1038_s41592-026-03120-y.md)  
+  7/10 [journals]
+- [A scalable approach to investigating sequence-to-function predictions from personal genomes](deep_reads/2026-07-31-10.1038_s41592-026-03124-8.md)  
+  7/10 [journals]
+- [A comprehensive benchmark of sequence-based subcellular localization predictors for human proteins](deep_reads/2026-07-31-10.1038_s41592-026-03142-6.md)  
+  6/10 [journals]
+- [A generalizable Hi-C foundation model for chromatin architecture, single-cell and multiomics analysis across species](deep_reads/2026-07-31-10.1038_s41592-026-03097-8.md)  
+  6/10 [journals]
+- [Brightness demixing for simultaneous multi-target imaging in 3D single-molecule localization microscopy](deep_reads/2026-07-31-10.1038_s41592-026-03118-6.md)  
+  6/10 [journals]
+- [A cloud-based miniscope for neurosurveillance of brain health and disease in freely behaving animals](deep_reads/2026-07-31-10.1038_s41592-026-03111-z.md)  
+  5/10 [journals]
+- [3D pathology-guided microdissection](deep_reads/2026-07-31-10.1038_s41592-026-03141-7.md)  
+  4/10 [journals]
+- [EasyGrid: a versatile platform for automated cryo-EM sample preparation and quality control](deep_reads/2026-07-31-10.1038_s41592-026-03127-5.md)  
+  3/10 [journals]
+- [A human induced pluripotent stem cell model for the holistic study of epithelial-to-mesenchymal transitions](deep_reads/2026-07-31-10.1038_s41592-026-03096-9.md)  
+  3/10 [journals]
+- [OrthoFinder: improved phylogenetic orthology inference with enhanced accuracy and scalability](deep_reads/2026-07-31-10.1038_s41592-026-03126-6.md)  
+  2/10 [journals]
+
+#### Nature Methods Vol 23 Issue 6
+
+- [Neuropixels Opto: combining high-resolution electrophysiology and optogenetics](deep_reads/2026-07-31-10.1038_s41592-026-03076-z.md)  
+  4/10 [journals]
 
 #### Nature Vol 655 Issue 8125
 

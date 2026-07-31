@@ -455,6 +455,11 @@
 
 ## 通用科学主刊 (General Science)
 
+### Nat. Methods
+
+- [Vol 23 Issue 7 · 2026-07-31](journals/2026-07-31-nat-methods-v23-i7.md)
+- [Vol 23 Issue 6 · 2026-07-31](journals/2026-07-31-nat-methods-v23-i6.md)
+
 ### Nature
 
 - [Vol 655 Issue 8125 · 2026-07-31](journals/2026-07-31-nature-v655-i8125.md)
