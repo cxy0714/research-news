@@ -476,6 +476,10 @@
 
 ## 广覆盖开放刊 (Broad-Scope)
 
+### Nat. Commun.
+
+- [Vol 17 Issue 1 · 2026-07-31](journals/2026-07-31-nat-commun-v17-i1.md)
+
 ### NMI
 
 - [Vol 8 Issue 7 · 2026-07-31](journals/2026-07-31-nmi-v8-i7.md)

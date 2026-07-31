@@ -17,8 +17,10 @@
 
 [→ 查看完整报告](daily/2026-07-31.md)
 
-### 精读论文（108 篇）
+### 精读论文（110 篇）
 
+- [Global trade responses to shark finning regulations](deep_reads/2026-07-31-10.1038_s41467-026-75625-1.md)  
+  `流行病学` · 相关性 7/10
 - [Evaluating the role of pretraining dataset size and diversity on single-cell foundation model performance](deep_reads/2026-07-31-10.1038_s41592-026-03120-y.md)  
   `其他` · 相关性 7/10
 - [A scalable approach to investigating sequence-to-function predictions from personal genomes](deep_reads/2026-07-31-10.1038_s41592-026-03124-8.md)  
@@ -89,6 +91,8 @@
   `经济理论 / 应用` · 相关性 6/10
 - [A Simple Robust Procedure in Instrumental Variables Regression](deep_reads/2026-07-31-2607.26960.md)  
   `因果推断` · 相关性 6/10
+- [Cerebrospinal fluid biomarkers reveal transdiagnostic synaptic dysfunction across major psychiatric disorders](deep_reads/2026-07-31-10.1038_s41467-026-76187-y.md)  
+  `其他` · 相关性 5/10
 - [A cloud-based miniscope for neurosurveillance of brain health and disease in freely behaving animals](deep_reads/2026-07-31-10.1038_s41592-026-03111-z.md)  
   `其他` · 相关性 5/10
 - [Developmental changes in memory structure and precision alter the use of retrieved episodes during decisions for reward](deep_reads/2026-07-31-10.1073_pnas.2525494123.md)  

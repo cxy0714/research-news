@@ -10733,6 +10733,11 @@
 - [The global demand and potential public health impact of oral antiviral treatment stockpile for influenza pandemics](deep_reads/2026-07-31-10.1073_pnas.2524161123.md)  
   5/10 [journals]
 
+#### Nature Communications Vol 17 Issue 1
+
+- [Global trade responses to shark finning regulations](deep_reads/2026-07-31-10.1038_s41467-026-75625-1.md)  
+  7/10 [journals]
+
 #### Statistics and Computing Vol 36 Issue 1
 
 - [Model-based clustering of time-dependent observations with common structural changes](deep_reads/2026-07-14-10.1007_s11222-025-10756-x.md)  
@@ -12177,6 +12182,11 @@
   0/10 [journals]
 - [Plagiarism of ideas in the age of generative artificial intelligence](deep_reads/2026-07-31-10.1038_s42256-026-01247-3.md)  
   0/10 [journals]
+
+#### Nature Communications Vol 17 Issue 1
+
+- [Cerebrospinal fluid biomarkers reveal transdiagnostic synaptic dysfunction across major psychiatric disorders](deep_reads/2026-07-31-10.1038_s41467-026-76187-y.md)  
+  5/10 [journals]
 
 #### Nature Vol 655 Issue 8125
 
