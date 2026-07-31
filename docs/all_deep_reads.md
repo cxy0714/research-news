@@ -11958,6 +11958,38 @@
 
 ### 期刊
 
+#### Science Vol 393 Issue 6810
+
+- [Atlas of lysosomal aging reveals a metabolite signature shared with lysosomal storage disorders](deep_reads/2026-07-31-10.1126_science.ady0832.md)  
+  7/10 [journals]
+- [Spatiotemporal multiomics uncover tumor ecosystem dynamics during metastatic colonization](deep_reads/2026-07-31-10.1126_science.adz7928.md)  
+  7/10 [journals]
+- [Rigor is not readiness: The PERL framework for evidence-based policy](deep_reads/2026-07-31-10.1126_science.aef3529.md)  
+  6/10 [journals]
+
+#### Science Vol 393 Issue 6809
+
+- [Epigenetic and 3D genome reprogramming during the aging of the human hippocampus](deep_reads/2026-07-31-10.1126_science.adt8307.md)  
+  7/10 [journals]
+- [Single-cell multiomics and chromatin structure reveal gene-regulatory dynamics in heart failure](deep_reads/2026-07-31-10.1126_science.ady6893.md)  
+  7/10 [journals]
+- [The global biogeography of passerine songs](deep_reads/2026-07-31-10.1126_science.aee6239.md)  
+  6/10 [journals]
+- [Climate scientists sharpen tools for linking global warming to extreme weather](deep_reads/2026-07-31-10.1126_science.aek8030.md)  
+  6/10 [journals]
+- [Dose-dependent sensitivity of human three-dimensional chromatin to a heart disease–linked transcription factor](deep_reads/2026-07-31-10.1126_science.adv5434.md)  
+  4/10 [journals]
+- [Human body single-cell atlas of three-dimensional genome organization and DNA methylation](deep_reads/2026-07-31-10.1126_science.adx0673.md)  
+  4/10 [journals]
+- [Crush-resistant air sacs allow insect larvae to exploit aquatic habitats at extreme depth](deep_reads/2026-07-31-10.1126_science.aed0667.md)  
+  2/10 [journals]
+- [Birdsong diversity across the world](deep_reads/2026-07-31-10.1126_science.aej0087.md)  
+  2/10 [journals]
+- [Step geometry–guided growth of rhombohedral graphene](deep_reads/2026-07-31-10.1126_science.aed9202.md)  
+  1/10 [journals]
+- [Dynamic asymmetric strain imprinted into substrates by an oxide thin film](deep_reads/2026-07-31-10.1126_science.adt9347.md)  
+  1/10 [journals]
+
 #### Nature Vol 655 Issue 8125
 
 - [Weight-four parity checks in a spin-shuttling architecture](deep_reads/2026-07-31-10.1038_s41586-026-10766-3.md)  

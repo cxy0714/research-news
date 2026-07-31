@@ -17,8 +17,16 @@
 
 [→ 查看完整报告](daily/2026-07-31.md)
 
-### 精读论文（19 篇）
+### 精读论文（32 篇）
 
+- [Epigenetic and 3D genome reprogramming during the aging of the human hippocampus](deep_reads/2026-07-31-10.1126_science.adt8307.md)  
+  `其他` · 相关性 7/10
+- [Single-cell multiomics and chromatin structure reveal gene-regulatory dynamics in heart failure](deep_reads/2026-07-31-10.1126_science.ady6893.md)  
+  `其他` · 相关性 7/10
+- [Atlas of lysosomal aging reveals a metabolite signature shared with lysosomal storage disorders](deep_reads/2026-07-31-10.1126_science.ady0832.md)  
+  `其他` · 相关性 7/10
+- [Spatiotemporal multiomics uncover tumor ecosystem dynamics during metastatic colonization](deep_reads/2026-07-31-10.1126_science.adz7928.md)  
+  `其他` · 相关性 7/10
 - [The Confounder Trap: Treatment-Encoding Representations in Causal Inference with Text](deep_reads/2026-07-31-2607.26309.md)  
   `因果推断` · 相关性 7/10
 - [Uniform Convergence of Generalized Conditional Fr\'echet Means with Applications to Weighted Fr\'echet Aggregation and Exceedance Set Estimation](deep_reads/2026-07-31-2607.26837.md)  
@@ -31,6 +39,12 @@
   `数理统计 / 假设检验` · 相关性 7/10
 - [Optimizing the extraction of information from redshift probability distribution functions](deep_reads/2026-07-31-2607.26822.md)  
   `天体统计` · 相关性 7/10
+- [The global biogeography of passerine songs](deep_reads/2026-07-31-10.1126_science.aee6239.md)  
+  `其他` · 相关性 6/10
+- [Climate scientists sharpen tools for linking global warming to extreme weather](deep_reads/2026-07-31-10.1126_science.aek8030.md)  
+  `其他` · 相关性 6/10
+- [Rigor is not readiness: The PERL framework for evidence-based policy](deep_reads/2026-07-31-10.1126_science.aef3529.md)  
+  `其他` · 相关性 6/10
 - [Transforming variables to central normality](deep_reads/2026-07-31-2005.07946.md)  
   `统计计算 / 算法` · 相关性 6/10
 - [Studying Competing Events with Federated Cumulative Incidence Curves](deep_reads/2026-07-31-2607.26287.md)  
@@ -51,10 +65,22 @@
   `经济理论 / 应用` · 相关性 6/10
 - [A Simple Robust Procedure in Instrumental Variables Regression](deep_reads/2026-07-31-2607.26960.md)  
   `因果推断` · 相关性 6/10
+- [Dose-dependent sensitivity of human three-dimensional chromatin to a heart disease–linked transcription factor](deep_reads/2026-07-31-10.1126_science.adv5434.md)  
+  `其他` · 相关性 4/10
+- [Human body single-cell atlas of three-dimensional genome organization and DNA methylation](deep_reads/2026-07-31-10.1126_science.adx0673.md)  
+  `其他` · 相关性 4/10
 - [Spectral Gap for the Binary Fixed-Margin Swap Chain](deep_reads/2026-07-31-2606.22636.md)  
   `统计计算 / 算法` · 相关性 4/10
+- [Crush-resistant air sacs allow insect larvae to exploit aquatic habitats at extreme depth](deep_reads/2026-07-31-10.1126_science.aed0667.md)  
+  `其他` · 相关性 2/10
+- [Birdsong diversity across the world](deep_reads/2026-07-31-10.1126_science.aej0087.md)  
+  `其他` · 相关性 2/10
 - [Kimi K3: Open Frontier Intelligence](deep_reads/2026-07-31-2607.24653.md)  
   `其他` · 相关性 2/10
+- [Step geometry–guided growth of rhombohedral graphene](deep_reads/2026-07-31-10.1126_science.aed9202.md)  
+  `其他` · 相关性 1/10
+- [Dynamic asymmetric strain imprinted into substrates by an oxide thin film](deep_reads/2026-07-31-10.1126_science.adt9347.md)  
+  `其他` · 相关性 1/10
 - [Weight-four parity checks in a spin-shuttling architecture](deep_reads/2026-07-31-10.1038_s41586-026-10766-3.md)  
   `其他` · 相关性 1/10
 
