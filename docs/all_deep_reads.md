@@ -11958,6 +11958,11 @@
 
 ### 期刊
 
+#### Nature Vol 655 Issue 8125
+
+- [Weight-four parity checks in a spin-shuttling architecture](deep_reads/2026-07-31-10.1038_s41586-026-10766-3.md)  
+  1/10 [journals]
+
 #### Journal of Business & Economic Statistics Vol 40 Issue 4
 
 - [Fast Bayesian Record Linkage With Record-Specific Disagreement Parameters](deep_reads/2026-07-19-10.1080_07350015.2021.1934478.md)  

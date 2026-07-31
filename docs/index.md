@@ -17,7 +17,7 @@
 
 [→ 查看完整报告](daily/2026-07-31.md)
 
-### 精读论文（18 篇）
+### 精读论文（19 篇）
 
 - [The Confounder Trap: Treatment-Encoding Representations in Causal Inference with Text](deep_reads/2026-07-31-2607.26309.md)  
   `因果推断` · 相关性 7/10
@@ -55,6 +55,8 @@
   `统计计算 / 算法` · 相关性 4/10
 - [Kimi K3: Open Frontier Intelligence](deep_reads/2026-07-31-2607.24653.md)  
   `其他` · 相关性 2/10
+- [Weight-four parity checks in a spin-shuttling architecture](deep_reads/2026-07-31-10.1038_s41586-026-10766-3.md)  
+  `其他` · 相关性 1/10
 
 ## 收藏
 

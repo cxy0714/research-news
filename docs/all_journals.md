@@ -453,6 +453,12 @@
 - [Vol 66 Issue 4 · 2026-07-13](journals/2026-07-13-technometrics-v66-i4.md)
 - [Vol 66 Issue 3 · 2026-07-13](journals/2026-07-13-technometrics-v66-i3.md)
 
+## 通用科学主刊 (General Science)
+
+### Nature
+
+- [Vol 655 Issue 8125 · 2026-07-31](journals/2026-07-31-nature-v655-i8125.md)
+
 ## IEEE 系列 (IEEE)
 
 ### JSAIT

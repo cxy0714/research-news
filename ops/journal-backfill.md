@@ -219,7 +219,7 @@ IEEE 系列 ieee（月刊、每期大，用小步）：
 ### 试水轮（每刊 1-2 期，验证全新科普 prompt）
 
 general 组：
-- [ ] `--only Nature --n-issues 2`   ⚠ 主刊每期研究论文少（~15，波动大）
+- [x] (2026-07-31) `--only Nature --n-issues 2`   ⚠ 主刊每期研究论文少（~15，波动大）
 - [ ] `--only Science --n-issues 2`   （~37 篇/期）
 - [ ] `--only PNAS --n-issues 2`   ⚠ 单期波动大（曾 105 篇/期）
 - [ ] `--only "Nat. Methods" --n-issues 2`   （~24 篇/期）
