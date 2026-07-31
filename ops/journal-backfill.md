@@ -235,7 +235,7 @@ broad 组：
 > 换算依据（每期均值）：Science≈6、PNAS≈5、Nat.Methods≈10、NMI≈15、Sci.Adv≈4、Nat.Commun≈5、Nature≈16。
 
 general 组：
-- [ ] `--only Nature --n-issues 8`   ⚠ 先跑 8，看量再往 16 加（凑 240 篇）
+- [x] (2026-08-01) `--only Nature --n-issues 8`   ⚠ 先跑 8，看量再往 16 加（凑 240 篇）
 - [ ] `--only Science --n-issues 6`
 - [ ] `--only PNAS --n-issues 5`   ⚠ 单期大，超 130 篇就拆成 3+2
 - [ ] `--only "Nat. Methods" --n-issues 10`

@@ -17,8 +17,10 @@
 
 [→ 查看完整报告](daily/2026-07-31.md)
 
-### 精读论文（110 篇）
+### 精读论文（118 篇）
 
+- [Regression to the mean can explain saturation of geomagnetic storms](deep_reads/2026-07-31-10.1038_s41586-026-10757-4.md)  
+  `天体统计` · 相关性 7/10
 - [Global trade responses to shark finning regulations](deep_reads/2026-07-31-10.1038_s41467-026-75625-1.md)  
   `流行病学` · 相关性 7/10
 - [Evaluating the role of pretraining dataset size and diversity on single-cell foundation model performance](deep_reads/2026-07-31-10.1038_s41592-026-03120-y.md)  
@@ -47,6 +49,12 @@
   `数理统计 / 假设检验` · 相关性 7/10
 - [Optimizing the extraction of information from redshift probability distribution functions](deep_reads/2026-07-31-2607.26822.md)  
   `天体统计` · 相关性 7/10
+- [Rising dust pollution across Europe in a changing climate](deep_reads/2026-07-31-10.1038_s41586-026-10743-w.md)  
+  `其他` · 相关性 6/10
+- [Highly fragmented European wetlands with uneven restoration needs](deep_reads/2026-07-31-10.1038_s41586-026-10760-9.md)  
+  `其他` · 相关性 6/10
+- [Non-Gaussian statistics of the order parameter across a phase transition](deep_reads/2026-07-31-10.1038_s41586-026-10811-1.md)  
+  `其他` · 相关性 6/10
 - [A comprehensive benchmark of sequence-based subcellular localization predictors for human proteins](deep_reads/2026-07-31-10.1038_s41592-026-03142-6.md)  
   `其他` · 相关性 6/10
 - [A generalizable Hi-C foundation model for chromatin architecture, single-cell and multiomics analysis across species](deep_reads/2026-07-31-10.1038_s41592-026-03097-8.md)  
@@ -135,6 +143,8 @@
   `其他` · 相关性 3/10
 - [Heat tolerance decreases and cold tolerance increases with elevation for a species-rich insect family on a tropical volcano](deep_reads/2026-07-31-10.1073_pnas.2533455123.md)  
   `其他` · 相关性 3/10
+- [Metabolite glues as a means of purine sensing and chemotherapeutic response](deep_reads/2026-07-31-10.1038_s41586-026-10790-3.md)  
+  `其他` · 相关性 2/10
 - [A dexterous soft hand exoskeleton restores intentional grasping in individuals with severe hand impairment](deep_reads/2026-07-31-10.1038_s42256-026-01263-3.md)  
   `其他` · 相关性 2/10
 - [OrthoFinder: improved phylogenetic orthology inference with enhanced accuracy and scalability](deep_reads/2026-07-31-10.1038_s41592-026-03126-6.md)  
@@ -155,6 +165,12 @@
   `其他` · 相关性 2/10
 - [Kimi K3: Open Frontier Intelligence](deep_reads/2026-07-31-2607.24653.md)  
   `其他` · 相关性 2/10
+- [Catalyst-free, microdroplet-mediated waste plastic conversion to diacids](deep_reads/2026-07-31-10.1038_s41586-026-10746-7.md)  
+  `其他` · 相关性 1/10
+- [Magnetic character of the low-energy enhancement in 70Zn](deep_reads/2026-07-31-10.1038_s41586-026-10758-3.md)  
+  `其他` · 相关性 1/10
+- [Graphene oxide-polydopamine membranes with controlled interlayer spacing](deep_reads/2026-07-31-10.1038_s41586-026-10765-4.md)  
+  `其他` · 相关性 1/10
 - [Nature’s antivenom: Combinations of conserved rattlesnake serum metalloproteinase inhibitors block the lethal action of viper venoms](deep_reads/2026-07-31-10.1073_pnas.2612168123.md)  
   `其他` · 相关性 1/10
 - [Effective mass of a migrating interface](deep_reads/2026-07-31-10.1073_pnas.2608055123.md)  

@@ -463,6 +463,8 @@
 ### Nature
 
 - [Vol 655 Issue 8125 · 2026-07-31](journals/2026-07-31-nature-v655-i8125.md)
+- [Vol 655 Issue 8124 · 2026-07-31](journals/2026-07-31-nature-v655-i8124.md)
+- [Vol 655 Issue 8123 · 2026-07-31](journals/2026-07-31-nature-v655-i8123.md)
 
 ### PNAS
 

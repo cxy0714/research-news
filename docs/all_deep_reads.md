@@ -9356,6 +9356,11 @@
 - [An agentic artificially intelligent X-ray scientist](deep_reads/2026-07-31-10.1038_s42256-026-01261-5.md)  
   4/10 [journals]
 
+#### Nature Vol 655 Issue 8125
+
+- [Regression to the mean can explain saturation of geomagnetic storms](deep_reads/2026-07-31-10.1038_s41586-026-10757-4.md)  
+  7/10 [journals]
+
 #### Monthly Notices of the Royal Astronomical Society Vol 550 Issue 2
 
 - [Estimating the Hubble constant with a federated unscented Kalman filter](deep_reads/2026-07-19-10.1093_mnras_stag1025.md)  
@@ -12190,8 +12195,28 @@
 
 #### Nature Vol 655 Issue 8125
 
+- [Non-Gaussian statistics of the order parameter across a phase transition](deep_reads/2026-07-31-10.1038_s41586-026-10811-1.md)  
+  6/10 [journals]
+- [Metabolite glues as a means of purine sensing and chemotherapeutic response](deep_reads/2026-07-31-10.1038_s41586-026-10790-3.md)  
+  2/10 [journals]
+- [Graphene oxide-polydopamine membranes with controlled interlayer spacing](deep_reads/2026-07-31-10.1038_s41586-026-10765-4.md)  
+  1/10 [journals]
 - [Weight-four parity checks in a spin-shuttling architecture](deep_reads/2026-07-31-10.1038_s41586-026-10766-3.md)  
   1/10 [journals]
+
+#### Nature Vol 655 Issue 8124
+
+- [Highly fragmented European wetlands with uneven restoration needs](deep_reads/2026-07-31-10.1038_s41586-026-10760-9.md)  
+  6/10 [journals]
+- [Catalyst-free, microdroplet-mediated waste plastic conversion to diacids](deep_reads/2026-07-31-10.1038_s41586-026-10746-7.md)  
+  1/10 [journals]
+- [Magnetic character of the low-energy enhancement in 70Zn](deep_reads/2026-07-31-10.1038_s41586-026-10758-3.md)  
+  1/10 [journals]
+
+#### Nature Vol 655 Issue 8123
+
+- [Rising dust pollution across Europe in a changing climate](deep_reads/2026-07-31-10.1038_s41586-026-10743-w.md)  
+  6/10 [journals]
 
 #### Journal of Business & Economic Statistics Vol 40 Issue 4
 
