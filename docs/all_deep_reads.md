@@ -9587,6 +9587,11 @@
 
 ### 期刊
 
+#### Proceedings of the National Academy of Sciences Vol 123 Issue 31
+
+- [Can stimulating ownership increase fertility: Evidence from housing interventions in China](deep_reads/2026-07-31-10.1073_pnas.2602426123.md)  
+  6/10 [journals]
+
 #### Journal of Business & Economic Statistics Vol 40 Issue 4
 
 - [Narrative Restrictions and Proxies](deep_reads/2026-07-19-10.1080_07350015.2022.2115496.md)  
@@ -10707,6 +10712,11 @@
   7/10 [daily]
 
 ### 期刊
+
+#### Proceedings of the National Academy of Sciences Vol 123 Issue 31
+
+- [The global demand and potential public health impact of oral antiviral treatment stockpile for influenza pandemics](deep_reads/2026-07-31-10.1073_pnas.2524161123.md)  
+  5/10 [journals]
 
 #### Statistics and Computing Vol 36 Issue 1
 
@@ -11989,6 +11999,72 @@
   1/10 [journals]
 - [Dynamic asymmetric strain imprinted into substrates by an oxide thin film](deep_reads/2026-07-31-10.1126_science.adt9347.md)  
   1/10 [journals]
+
+#### Proceedings of the National Academy of Sciences Vol 123 Issue 32
+
+- [Global threat exposure of islands in a changing world](deep_reads/2026-07-31-10.1073_pnas.2534106123.md)  
+  3/10 [journals]
+- [A wearable patch for continuous levodopa monitoring in sweat: Towards exertion and power-free pharmacodynamic assessment in Parkinson’s disease](deep_reads/2026-07-31-10.1073_pnas.2610453123.md)  
+  3/10 [journals]
+- [Accelerating <i>Campylobacter</i> zoonosis in the Anthropocene](deep_reads/2026-07-31-10.1073_pnas.2609969123.md)  
+  2/10 [journals]
+- [Nature’s antivenom: Combinations of conserved rattlesnake serum metalloproteinase inhibitors block the lethal action of viper venoms](deep_reads/2026-07-31-10.1073_pnas.2612168123.md)  
+  1/10 [journals]
+
+#### Proceedings of the National Academy of Sciences Vol 123 Issue 31
+
+- [A demographic theory of similarity-biased social learning](deep_reads/2026-07-31-10.1073_pnas.2606741123.md)  
+  7/10 [journals]
+- [Dynamic principles of concentration buffering through liquid–liquid phase separation](deep_reads/2026-07-31-10.1073_pnas.2526810123.md)  
+  6/10 [journals]
+- [Susceptibility and regulation of biomolecular condensates by solutes](deep_reads/2026-07-31-10.1073_pnas.2604434123.md)  
+  6/10 [journals]
+- [Sediment accumulation rate predicts the temporal resolution of marine fossil assemblages](deep_reads/2026-07-31-10.1073_pnas.2615368123.md)  
+  6/10 [journals]
+- [Long-horizon associative learning as a unifying framework for statistical learning across scales](deep_reads/2026-07-31-10.1073_pnas.2513423123.md)  
+  6/10 [journals]
+- [Parenthood decisions in uncertain times: Experimental evidence from four countries](deep_reads/2026-07-31-10.1073_pnas.2601690123.md)  
+  6/10 [journals]
+- [Developmental changes in memory structure and precision alter the use of retrieved episodes during decisions for reward](deep_reads/2026-07-31-10.1073_pnas.2525494123.md)  
+  5/10 [journals]
+- [Comparative archaeology reveals recurrent but nondeterministic pathways through complexification](deep_reads/2026-07-31-10.1073_pnas.2610959123.md)  
+  3/10 [journals]
+- [Adaptive molecular convergence is pervasive across deep time and largely decoupled from phenotypic convergence](deep_reads/2026-07-31-10.1073_pnas.2616248123.md)  
+  3/10 [journals]
+- [Discovery of a phenazine–thiol conjugase from sparse data using genome-informed machine learning](deep_reads/2026-07-31-10.1073_pnas.2607571123.md)  
+  3/10 [journals]
+- [Climate warming and atmospheric deposition jointly accelerate the Antarctic Peninsula atmosphere–glacier–land–ocean mercury loop](deep_reads/2026-07-31-10.1073_pnas.2613472123.md)  
+  3/10 [journals]
+- [Heat tolerance decreases and cold tolerance increases with elevation for a species-rich insect family on a tropical volcano](deep_reads/2026-07-31-10.1073_pnas.2533455123.md)  
+  3/10 [journals]
+- [Cryoelectron tomography reveals an age-related decline in mitoribosomes that contributes to T cell dysfunction in older individuals](deep_reads/2026-07-31-10.1073_pnas.2608102123.md)  
+  2/10 [journals]
+- [Mitochondrial pearling is controlled by the inner membrane and mediates segregation of the luminal content and membrane scission](deep_reads/2026-07-31-10.1073_pnas.2602775123.md)  
+  2/10 [journals]
+- [Psychological inoculation against climate doom](deep_reads/2026-07-31-10.1073_pnas.2609074123.md)  
+  2/10 [journals]
+- [The cortical scene processing network emerges in infancy, prior to independent navigation experience](deep_reads/2026-07-31-10.1073_pnas.2513126123.md)  
+  2/10 [journals]
+- [Effective mass of a migrating interface](deep_reads/2026-07-31-10.1073_pnas.2608055123.md)  
+  1/10 [journals]
+- [An antibody–drug conjugate active against antibiotic-resistant <i> <i>Neisseria</i> gonorrhoeae </i>](deep_reads/2026-07-31-10.1073_pnas.2534217123.md)  
+  1/10 [journals]
+- [Hypermutability of integrated sequences of viral origin in a chlorarachniophyte](deep_reads/2026-07-31-10.1073_pnas.2612999123.md)  
+  1/10 [journals]
+- [Anterior and posterior retrosplenial cortex employ distinct strategies for egocentric–allocentric transformation in spatial coding](deep_reads/2026-07-31-10.1073_pnas.2600565123.md)  
+  1/10 [journals]
+- [A posttranslational modification of fimbriae drives pathogenicity in <i> <i>Klebsiella pneumoniae</i> </i>](deep_reads/2026-07-31-10.1073_pnas.2611142123.md)  
+  0/10 [journals]
+- [Proteolytic activation of c-MYC facilitated by DOT1L](deep_reads/2026-07-31-10.1073_pnas.2525603123.md)  
+  0/10 [journals]
+- [Rapid microbial production of long-lived dissolved organic carbon in the global ocean](deep_reads/2026-07-31-10.1073_pnas.2601044123.md)  
+  0/10 [journals]
+- [The free-living wellspring of symbiotic nitrogen fixation in <i>Bradyrhizobium</i>](deep_reads/2026-07-31-10.1073_pnas.2604918123.md)  
+  0/10 [journals]
+- [Dual control of PIP2 drives germline/soma segregation in <i>Drosophila</i>](deep_reads/2026-07-31-10.1073_pnas.2604429123.md)  
+  0/10 [journals]
+- [Abrupt transition to irreversible damage in the overdrafted Sacramento Valley aquifer system](deep_reads/2026-07-31-10.1073_pnas.2526041123.md)  
+  0/10 [journals]
 
 #### Nature Vol 655 Issue 8125
 
