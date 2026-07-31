@@ -6491,6 +6491,11 @@
 
 ### 期刊
 
+#### Science Vol 393 Issue 6807
+
+- [A statistical test for the benefits of personalizing interventions](deep_reads/2026-08-01-10.1126_science.aeb9506.md)  
+  8/10 [journals]
+
 #### Journal of Business & Economic Statistics Vol 40 Issue 4
 
 - [Using Triples to Assess Symmetry Under Weak Dependence](deep_reads/2026-07-19-10.1080_07350015.2021.1939037.md)  
@@ -9346,6 +9351,11 @@
 
 ### 期刊
 
+#### Science Vol 393 Issue 6806
+
+- [Rubin telescope begins a 10-year movie of the cosmos](deep_reads/2026-08-01-10.1126_science.aek1833.md)  
+  6/10 [journals]
+
 #### Science Advances Vol 12 Issue 31
 
 - [Stardust as nucleation seeds for the earliest solids in the Solar System](deep_reads/2026-07-31-10.1126_sciadv.ady2311.md)  
@@ -9606,6 +9616,11 @@
   6/10 [daily]
 
 ### 期刊
+
+#### Science Vol 393 Issue 6806
+
+- [WWII and the evolution of US federal research funding](deep_reads/2026-08-01-10.1126_science.aej2321.md)  
+  2/10 [journals]
 
 #### Proceedings of the National Academy of Sciences Vol 123 Issue 31
 
@@ -11993,6 +12008,144 @@
 
 ### 期刊
 
+#### Science Vol 393 Issue 6809
+
+- [Single-cell multiomics connects 3D genome and transcriptome alterations in Alzheimer’s disease](deep_reads/2026-08-01-10.1126_science.adz1652.md)  
+  7/10 [journals]
+- [The rise and fall of language diversity through the Holocene](deep_reads/2026-08-01-10.1126_science.adx4343.md)  
+  7/10 [journals]
+- [Epigenetic and 3D genome reprogramming during the aging of the human hippocampus](deep_reads/2026-07-31-10.1126_science.adt8307.md)  
+  7/10 [journals]
+- [Single-cell multiomics and chromatin structure reveal gene-regulatory dynamics in heart failure](deep_reads/2026-07-31-10.1126_science.ady6893.md)  
+  7/10 [journals]
+- [The global biogeography of passerine songs](deep_reads/2026-07-31-10.1126_science.aee6239.md)  
+  6/10 [journals]
+- [Climate scientists sharpen tools for linking global warming to extreme weather](deep_reads/2026-07-31-10.1126_science.aek8030.md)  
+  6/10 [journals]
+- [A 3D genome atlas of human tonsil and the role of loop extrusion in B cell somatic hypermutation](deep_reads/2026-08-01-10.1126_science.adw4243.md)  
+  5/10 [journals]
+- [Dose-dependent sensitivity of human three-dimensional chromatin to a heart disease–linked transcription factor](deep_reads/2026-07-31-10.1126_science.adv5434.md)  
+  4/10 [journals]
+- [Human body single-cell atlas of three-dimensional genome organization and DNA methylation](deep_reads/2026-07-31-10.1126_science.adx0673.md)  
+  4/10 [journals]
+- [Crush-resistant air sacs allow insect larvae to exploit aquatic habitats at extreme depth](deep_reads/2026-07-31-10.1126_science.aed0667.md)  
+  2/10 [journals]
+- [Birdsong diversity across the world](deep_reads/2026-07-31-10.1126_science.aej0087.md)  
+  2/10 [journals]
+- [Step geometry–guided growth of rhombohedral graphene](deep_reads/2026-07-31-10.1126_science.aed9202.md)  
+  1/10 [journals]
+- [Dynamic asymmetric strain imprinted into substrates by an oxide thin film](deep_reads/2026-07-31-10.1126_science.adt9347.md)  
+  1/10 [journals]
+
+#### Science Vol 393 Issue 6808
+
+- [Tracing the origins of St Helena’s liberated Africans](deep_reads/2026-08-01-10.1126_science.aeb3661.md)  
+  7/10 [journals]
+- [Cross-cohort analysis of expression and splicing quantitative trait loci in TOPMed](deep_reads/2026-08-01-10.1126_science.adx2989.md)  
+  7/10 [journals]
+- [Parallel independent voltage computing along dendrites of CA3 pyramidal neurons](deep_reads/2026-08-01-10.1126_science.aeh9302.md)  
+  7/10 [journals]
+- [Drying of the Aral Sea reshapes the anthropogenic carbon inventory of Central Asia](deep_reads/2026-08-01-10.1126_science.aeb2344.md)  
+  7/10 [journals]
+- [Advancing science by designing for surprise](deep_reads/2026-08-01-10.1126_science.aej4257.md)  
+  6/10 [journals]
+- [AI in scientific publishing: Slower, worse, and more expensive](deep_reads/2026-08-01-10.1126_science.aek5570.md)  
+  6/10 [journals]
+- [A transcriptional biosensor reveals mechanisms of α-ketoglutarate signaling to chromatin](deep_reads/2026-08-01-10.1126_science.adx8675.md)  
+  6/10 [journals]
+- [Cyclic sealing and drainage on an oceanic transform fault](deep_reads/2026-08-01-10.1126_science.aed5665.md)  
+  6/10 [journals]
+- [The rise and fall of the Amazon Soy Moratorium](deep_reads/2026-08-01-10.1126_science.aeg5368.md)  
+  5/10 [journals]
+- [Regaining your voice](deep_reads/2026-08-01-10.1126_science.aeh4797.md)  
+  5/10 [journals]
+- [The Therabot will see you now](deep_reads/2026-08-01-10.1126_science.aeh4808.md)  
+  5/10 [journals]
+- [Restored clearance of senescent neutrophils by tissue-resident macrophages limits organ aging](deep_reads/2026-08-01-10.1126_science.aea3075.md)  
+  4/10 [journals]
+- [Structure and evolution-guided design of minimal RNA-guided nucleases](deep_reads/2026-08-01-10.1126_science.aed6123.md)  
+  3/10 [journals]
+- [Bringing radioactive molecules to the table](deep_reads/2026-08-01-10.1126_science.aej2688.md)  
+  3/10 [journals]
+- [Robust single-electron memory with quantum states manipulation](deep_reads/2026-08-01-10.1126_science.aeg6638.md)  
+  2/10 [journals]
+- [Direct interaction of Vδ7 TCRs with IL17RA drives the differentiation of T <sub>H</sub> 1-like γδT cells](deep_reads/2026-08-01-10.1126_science.adx9264.md)  
+  2/10 [journals]
+- [Dendritic cells control tertiary lymphoid structure development and maintenance in cancer](deep_reads/2026-08-01-10.1126_science.ady1678.md)  
+  2/10 [journals]
+- [Tidying up aging organs](deep_reads/2026-08-01-10.1126_science.aei9816.md)  
+  1/10 [journals]
+- [Performance trade-offs define a fundamental dental dichotomy in mammals](deep_reads/2026-08-01-10.1126_science.aee3453.md)  
+  1/10 [journals]
+
+#### Science Vol 393 Issue 6807
+
+- [The origin, history, and resistance architecture of an invasive urban malaria mosquito in Africa](deep_reads/2026-08-01-10.1126_science.adx6925.md)  
+  6/10 [journals]
+- [Laser phase plate improves structure determination of small proteins by cryo-EM](deep_reads/2026-08-01-10.1126_science.aeh0665.md)  
+  5/10 [journals]
+- [Bridging data gaps to support the Global Plastics Treaty](deep_reads/2026-08-01-10.1126_science.aea6562.md)  
+  5/10 [journals]
+- [C1q and immunoglobulins mediate activity-dependent synapse loss in the adult brain](deep_reads/2026-08-01-10.1126_science.adv1219.md)  
+  3/10 [journals]
+- [Does AI work for us, or do we work for AI? <b>The Reverse Centaur’s Guide to Life After AI</b> <i>Cory Doctorow</i> MCD, 2026. 240 pp.](deep_reads/2026-08-01-10.1126_science.aei9754.md)  
+  3/10 [journals]
+- [The CARM1 epigenetic enzyme inhibits cross-presenting dendritic cell function in cancer immunity](deep_reads/2026-08-01-10.1126_science.aea1200.md)  
+  3/10 [journals]
+- [Long-range extended chains arising from polymerization-driven spontaneous assembly](deep_reads/2026-08-01-10.1126_science.aef1777.md)  
+  3/10 [journals]
+- [Degron-independent recruitment of KAT2A expands the target space of CRBN molecular glues](deep_reads/2026-08-01-10.1126_science.aef5391.md)  
+  3/10 [journals]
+- [Relativistic collapse of the classical triple bond in the CBi <sup>−</sup> molecular ion](deep_reads/2026-08-01-10.1126_science.aei1285.md)  
+  2/10 [journals]
+- [Transient assembly of precision-tuned platinum-skin intermetallic catalysts for fuel cells](deep_reads/2026-08-01-10.1126_science.aeg2036.md)  
+  2/10 [journals]
+- [The hidden logic of emotion](deep_reads/2026-08-01-10.1126_science.aeh1665.md)  
+  1/10 [journals]
+- [Adaptation across an extreme elevational gradient in Andean leaf-eared mice, the world’s highest-dwelling mammal](deep_reads/2026-08-01-10.1126_science.aec8347.md)  
+  1/10 [journals]
+- [Leaping out of the water: Aerial-aquatic locomotion with flapping wings](deep_reads/2026-08-01-10.1126_science.aeb6744.md)  
+  1/10 [journals]
+- [Neural circuits for valence updating in social memory](deep_reads/2026-08-01-10.1126_science.adx8231.md)  
+  1/10 [journals]
+- [Indium-free perovskite/silicon tandem solar cells with tin oxide recombination layer and electrodes](deep_reads/2026-08-01-10.1126_science.aef5355.md)  
+  1/10 [journals]
+
+#### Science Vol 393 Issue 6806
+
+- [TranscriptFormer: A generative cell atlas across 1.5 billion years of evolution](deep_reads/2026-08-01-10.1126_science.aec8514.md)  
+  7/10 [journals]
+- [Computing in a memory with physics](deep_reads/2026-08-01-10.1126_science.aei8090.md)  
+  6/10 [journals]
+- [A Hormone Cell Atlas maps the human endocrine system at cellular resolution](deep_reads/2026-08-01-10.1126_science.aeb2672.md)  
+  6/10 [journals]
+- [Fruit flies actively restart their circadian clock by proactively shaping their environment](deep_reads/2026-08-01-10.1126_science.adw2239.md)  
+  6/10 [journals]
+- [Zonated mechanosensing by PIEZO1 controls liver regeneration](deep_reads/2026-08-01-10.1126_science.aef0825.md)  
+  5/10 [journals]
+- [Patterning human kidney organoids with synthetic Wnt-secreting organizers](deep_reads/2026-08-01-10.1126_science.adu9122.md)  
+  5/10 [journals]
+- [Surface immune signaling unlocks NLR activation through mRNA alternative splicing](deep_reads/2026-08-01-10.1126_science.adx9929.md)  
+  4/10 [journals]
+- [Height does not impair the hydraulic system of the tallest tropical Dipterocarp trees](deep_reads/2026-08-01-10.1126_science.aea9013.md)  
+  4/10 [journals]
+- [A sub–10-millisecond neural dynamical system based on phase-change memristors](deep_reads/2026-08-01-10.1126_science.aee6277.md)  
+  2/10 [journals]
+- [Alternating atomic-dipole layers and switching dynamics in Al <sub>1-x</sub> Sc <sub>x</sub> N ferroelectrics](deep_reads/2026-08-01-10.1126_science.aee9639.md)  
+  1/10 [journals]
+- [The invisible hand](deep_reads/2026-08-01-10.1126_science.aej2364.md)  
+  1/10 [journals]
+- [Observation of quantum vortex core fractionalization and skyrmion formation in a superconductor](deep_reads/2026-08-01-10.1126_science.ads0189.md)  
+  1/10 [journals]
+- [From Edison’s Invention Factory to the new architecture of innovation](deep_reads/2026-08-01-10.1126_science.aei5415.md)  
+  1/10 [journals]
+- [Johns Hopkins University and the American research enterprise](deep_reads/2026-08-01-10.1126_science.aej0512.md)  
+  0/10 [journals]
+- [The mechanics of liver regeneration](deep_reads/2026-08-01-10.1126_science.aei7784.md)  
+  0/10 [journals]
+- [ILC2s regulate a fibroblast progenitor niche in the pancreas](deep_reads/2026-08-01-10.1126_science.aea5113.md)  
+  0/10 [journals]
+
 #### Science Advances Vol 12 Issue 31
 
 - [Structural and mechanistic basis for the heterotetrameric benzaldehyde synthase from petunia](deep_reads/2026-07-31-10.1126_sciadv.aec7733.md)  
@@ -12054,29 +12207,6 @@
   7/10 [journals]
 - [Rigor is not readiness: The PERL framework for evidence-based policy](deep_reads/2026-07-31-10.1126_science.aef3529.md)  
   6/10 [journals]
-
-#### Science Vol 393 Issue 6809
-
-- [Epigenetic and 3D genome reprogramming during the aging of the human hippocampus](deep_reads/2026-07-31-10.1126_science.adt8307.md)  
-  7/10 [journals]
-- [Single-cell multiomics and chromatin structure reveal gene-regulatory dynamics in heart failure](deep_reads/2026-07-31-10.1126_science.ady6893.md)  
-  7/10 [journals]
-- [The global biogeography of passerine songs](deep_reads/2026-07-31-10.1126_science.aee6239.md)  
-  6/10 [journals]
-- [Climate scientists sharpen tools for linking global warming to extreme weather](deep_reads/2026-07-31-10.1126_science.aek8030.md)  
-  6/10 [journals]
-- [Dose-dependent sensitivity of human three-dimensional chromatin to a heart disease–linked transcription factor](deep_reads/2026-07-31-10.1126_science.adv5434.md)  
-  4/10 [journals]
-- [Human body single-cell atlas of three-dimensional genome organization and DNA methylation](deep_reads/2026-07-31-10.1126_science.adx0673.md)  
-  4/10 [journals]
-- [Crush-resistant air sacs allow insect larvae to exploit aquatic habitats at extreme depth](deep_reads/2026-07-31-10.1126_science.aed0667.md)  
-  2/10 [journals]
-- [Birdsong diversity across the world](deep_reads/2026-07-31-10.1126_science.aej0087.md)  
-  2/10 [journals]
-- [Step geometry–guided growth of rhombohedral graphene](deep_reads/2026-07-31-10.1126_science.aed9202.md)  
-  1/10 [journals]
-- [Dynamic asymmetric strain imprinted into substrates by an oxide thin film](deep_reads/2026-07-31-10.1126_science.adt9347.md)  
-  1/10 [journals]
 
 #### Proceedings of the National Academy of Sciences Vol 123 Issue 32
 
