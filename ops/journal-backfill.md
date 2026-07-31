@@ -208,3 +208,39 @@ IEEE 系列 ieee（月刊、每期大，用小步）：
 天文 astro（体量巨大，放最后、用小步）：
 - [x] (2026-07-19) `--only ApJS --n-issues 4`   ⚠
 - [x] (2026-07-19) `--only MNRAS --n-issues 3`   ⚠⚠ 每期上百篇，跑得最久
+
+## 新增 · 通用科学两组 general + broad（2026-07-30 加入 journals.yaml，走科普通道，零覆盖）
+
+> 综合刊，每期几乎全是非统计文章、噪声大，但每篇都要 LLM 打分——**目标先每刊约 240 篇**。
+> loop 是全自动跑（不会先 dry-run），所以每格 N 已按「每期均值」压到 ~130 篇以内，避免压到
+> 次日 daily。先跑下面这一轮**试水**（每刊 ~1-2 期，合计约 410 篇），看科普打分 + 科普深读
+> 的质量与噪声，满意后再进「加深到 240 篇」那几行。滚动刊 Sci.Adv./Nat.Commun. 从小步起。
+
+### 试水轮（每刊 1-2 期，验证全新科普 prompt）
+
+general 组：
+- [ ] `--only Nature --n-issues 2`   ⚠ 主刊每期研究论文少（~15，波动大）
+- [ ] `--only Science --n-issues 2`   （~37 篇/期）
+- [ ] `--only PNAS --n-issues 2`   ⚠ 单期波动大（曾 105 篇/期）
+- [ ] `--only "Nat. Methods" --n-issues 2`   （~24 篇/期）
+
+broad 组：
+- [ ] `--only NMI --n-issues 2`   （~16 篇/期）
+- [ ] `--only "Sci. Adv." --n-issues 1`   ⚠ 单期就大（~67，曾 77 篇）
+- [ ] `--only "Nat. Commun." --n-issues 1`   ⚠⚠ 滚动刊、单位量大（~51 篇），务必小步起
+
+### 加深到 ~240 篇/刊（试水满意后再放开；去重让重跑只处理更老的新期）
+
+> 用比试水更大的 N，凑到每刊约 240 篇。大刊拆成小步、别让单格超 ~130 篇。
+> 换算依据（每期均值）：Science≈6、PNAS≈5、Nat.Methods≈10、NMI≈15、Sci.Adv≈4、Nat.Commun≈5、Nature≈16。
+
+general 组：
+- [ ] `--only Nature --n-issues 8`   ⚠ 先跑 8，看量再往 16 加（凑 240 篇）
+- [ ] `--only Science --n-issues 6`
+- [ ] `--only PNAS --n-issues 5`   ⚠ 单期大，超 130 篇就拆成 3+2
+- [ ] `--only "Nat. Methods" --n-issues 10`
+
+broad 组：
+- [ ] `--only NMI --n-issues 15`
+- [ ] `--only "Sci. Adv." --n-issues 4`   ⚠ 每期大，必要时 2+2
+- [ ] `--only "Nat. Commun." --n-issues 5`   ⚠ 滚动刊，2+3 分两步更稳

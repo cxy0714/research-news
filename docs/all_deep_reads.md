@@ -4,6 +4,12 @@
 
 ### Daily
 
+- [The Confounder Trap: Treatment-Encoding Representations in Causal Inference with Text](deep_reads/2026-07-31-2607.26309.md)  
+  7/10 [daily]
+- [Studying Competing Events with Federated Cumulative Incidence Curves](deep_reads/2026-07-31-2607.26287.md)  
+  6/10 [daily]
+- [A Simple Robust Procedure in Instrumental Variables Regression](deep_reads/2026-07-31-2607.26960.md)  
+  6/10 [daily]
 - [The positivity assumption in causal mediation analyses? Checked!](deep_reads/2026-07-30-2607.25072.md)  
   8/10 [daily]
 - [On the magnitude, sign and ranking of recanting-twin path-specific effects](deep_reads/2026-07-30-2607.25709.md)  
@@ -4135,6 +4141,10 @@
 
 ### Daily
 
+- [Uniform Convergence of Generalized Conditional Fr\'echet Means with Applications to Weighted Fr\'echet Aggregation and Exceedance Set Estimation](deep_reads/2026-07-31-2607.26837.md)  
+  7/10 [daily]
+- [Semiparametric Prediction with Efficient Interval Length under a Right-Censored Covariate](deep_reads/2026-07-31-2607.26982.md)  
+  7/10 [daily]
 - [Exact Generalization Error Curves of Kernel Ridge Regression for Functional Moment Estimation](deep_reads/2026-07-28-2607.23666.md)  
   8/10 [daily]
 - [Decorated graphons for temporal network estimation](deep_reads/2026-07-28-2607.23145.md)  
@@ -6200,6 +6210,16 @@
 
 ### Daily
 
+- [Specification Testing for Dyadic Regression Models](deep_reads/2026-07-31-2607.26366.md)  
+  7/10 [daily]
+- [An association measure for mixed-type variables](deep_reads/2026-07-31-2607.26508.md)  
+  6/10 [daily]
+- [Robust Interpolated Quantile Estimators: Asymptotic Theory and Efficiency](deep_reads/2026-07-31-2607.26714.md)  
+  6/10 [daily]
+- [A Lower Bound on the Sliced Wasserstein Comparison Constant for Translated Measures](deep_reads/2026-07-31-2607.26399.md)  
+  6/10 [daily]
+- [Hub Neighbor-Degree Diagnostics for Sparse Random Graphs](deep_reads/2026-07-31-2607.26624.md)  
+  6/10 [daily]
 - [Testing Microbiome Community Differences in High Dimensions: A Bootstrap Approach for Compositional Data](deep_reads/2026-07-30-2607.26022.md)  
   6/10 [daily]
 - [Omnibus Goodness-of-Fit Testing for Distributions on Stiefel Manifolds](deep_reads/2026-07-30-2607.25618.md)  
@@ -8188,6 +8208,8 @@
 
 ### Daily
 
+- [Denoising growth complexity: Data geometry and certified schedules for diffusion sampling](deep_reads/2026-07-31-2607.26285.md)  
+  7/10 [daily]
 - [Near-Oracle Robustification of Finite-Difference Stochastic Gradient Estimators via Cheap Pilot Calibration](deep_reads/2026-07-28-2607.23725.md)  
   6/10 [daily]
 - [Estimating dynamic models by matching random features](deep_reads/2026-07-27-2607.21916.md)  
@@ -9127,8 +9149,12 @@
 
 ### 其他
 
+- [Transforming variables to central normality](deep_reads/2026-07-31-2005.07946.md)  
+  6/10 [manual]
 - [Structured Secant Methods to Select Smoothing Parameters For General Smooth Models](deep_reads/2026-07-07-2606.26804.md)  
   5/10 [manual]
+- [Spectral Gap for the Binary Fixed-Margin Swap Chain](deep_reads/2026-07-31-2606.22636.md)  
+  4/10 [manual]
 - [TabClustPFN: A Prior-Fitted Network for Tabular Data Clustering](deep_reads/2026-07-30-2601.21656.md)  
   4/10 [manual]
 - [Inferential applications of the moments of the logit-normal distribution](deep_reads/2026-07-07-2606.23998.md)  
@@ -9140,6 +9166,8 @@
 
 ### Daily
 
+- [Optimizing the extraction of information from redshift probability distribution functions](deep_reads/2026-07-31-2607.26822.md)  
+  7/10 [daily]
 - [Jointly Modeling Roman Coronagraph Astrometry and Photometry Improves Orbital Parameter Estimates](deep_reads/2026-07-28-2607.22754.md)  
   6/10 [daily]
 - [Modeling Dependence Structures in Astronomical Multi-Band Time Series Data via Multi-Output Gaussian Processes](deep_reads/2026-07-27-2607.21431.md)  
@@ -9464,6 +9492,8 @@
 
 ### Daily
 
+- [The Innate Economic Preferences of Language Models](deep_reads/2026-07-31-2607.26288.md)  
+  6/10 [daily]
 - [From dense grids to valid inference: Accounting for regularization bias in nonparametric random coefficient models](deep_reads/2026-07-30-2607.25416.md)  
   7/10 [daily]
 - [Stochastic Potential Choices and Outcomes](deep_reads/2026-07-27-2607.21413.md)  
@@ -10645,6 +10675,8 @@
 
 ### Daily
 
+- [Recovering the Target Hazard Ratio Under Nonproportional Hazards Induced by an Omitted Covariate: Simulation-based Approach](deep_reads/2026-07-31-2607.27026.md)  
+  6/10 [daily]
 - [Identifiability and Information-Based Inference for Epidemic Transmission Models Under Partial Observation](deep_reads/2026-07-28-2607.23079.md)  
   7/10 [daily]
 - [Using binary silver labels in electronic health records-based computable phenotyping algorithms](deep_reads/2026-07-23-2607.18431.md)  
@@ -11849,6 +11881,8 @@
 
 ### Daily
 
+- [Conditional copula representations and extremal bounds for multivariate statistical functionals](deep_reads/2026-07-31-2607.26256.md)  
+  6/10 [daily]
 - [Identifiability, Convergence and Nonparametric Estimation of Bivariate Archimax Copulas](deep_reads/2026-07-23-2607.19087.md)  
   7/10 [daily]
 - [Calibrating Semantic Uncertainty from Observable Language-Model Probabilities](deep_reads/2026-07-22-2607.17447.md)  
@@ -13454,6 +13488,8 @@
   6/10 [manual]
 - [Double zero-inflated spatio-temporal modeling of daily precipitation under detection thresholds](deep_reads/2026-07-07-2606.17717.md)  
   4/10 [manual]
+- [Kimi K3: Open Frontier Intelligence](deep_reads/2026-07-31-2607.24653.md)  
+  2/10 [manual]
 - [Nuisance Function Tuning and Sample Splitting for Optimally Estimating a Doubly Robust Functional](deep_reads/2026-07-14-2212.14857.md)  
   0/10 [manual]
 - [Personalizing black-box models for nonparametric regression with minimax optimality](deep_reads/2026-07-14-2601.01432.md)  

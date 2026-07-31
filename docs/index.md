@@ -11,48 +11,50 @@
 - **[收藏](favorites.md)** — 登录后在各页点 ☆ 收藏的论文，自动汇总到这里（总收藏按类别分组、可切换按周；每篇可写评论，无需手动维护）。
 - **[模型测评](all_shootout.md)** — 不同 LLM 在同一批论文上的打分 / 解读对比。
 
-## 今日 · 2026-07-30
+## 今日 · 2026-07-31
 
 ### 每日 arXiv 速览
 
-[→ 查看完整报告](daily/2026-07-30.md)
+[→ 查看完整报告](daily/2026-07-31.md)
 
-### 精读论文（17 篇）
+### 精读论文（18 篇）
 
-- [Compound Selection Decisions: An Almost SURE Approach](deep_reads/2026-07-30-2511.11862.md)  
-  `因果推断` · 相关性 8/10
-- [The positivity assumption in causal mediation analyses? Checked!](deep_reads/2026-07-30-2607.25072.md)  
-  `因果推断` · 相关性 8/10
-- [On the magnitude, sign and ranking of recanting-twin path-specific effects](deep_reads/2026-07-30-2607.25709.md)  
-  `因果推断` · 相关性 8/10
-- [Causally Interpretable Meta-Mediation Analysis With Missing At Random Mediator and Outcome Data](deep_reads/2026-07-30-2607.25822.md)  
-  `因果推断` · 相关性 8/10
-- [Spectra of high-dimensional Spearman correlation matrices under scale-mixture dependence](deep_reads/2026-07-30-2607.25486.md)  
-  `高维统计 / 随机矩阵` · 相关性 8/10
-- [Does TabPFN Understand Causal Structures?](deep_reads/2026-07-30-2511.07236.md)  
+- [The Confounder Trap: Treatment-Encoding Representations in Causal Inference with Text](deep_reads/2026-07-31-2607.26309.md)  
   `因果推断` · 相关性 7/10
-- [Improving TabPFN's Synthetic Data Generation by Integrating Causal Structure](deep_reads/2026-07-30-2603.10254.md)  
-  `因果推断` · 相关性 7/10
-- [Transfer Learning in High-Dimensional Clustering: Minimax Thresholds and Applications in Single-Cell Data](deep_reads/2026-07-30-2607.25031.md)  
-  `高维统计 / 随机矩阵` · 相关性 7/10
-- [From dense grids to valid inference: Accounting for regularization bias in nonparametric random coefficient models](deep_reads/2026-07-30-2607.25416.md)  
-  `经济理论 / 应用` · 相关性 7/10
-- [TabPFN: One Model to Rule Them All?](deep_reads/2026-07-30-2505.20003.md)  
+- [Uniform Convergence of Generalized Conditional Fr\'echet Means with Applications to Weighted Fr\'echet Aggregation and Exceedance Set Estimation](deep_reads/2026-07-31-2607.26837.md)  
+  `非参数 / 半参数` · 相关性 7/10
+- [Semiparametric Prediction with Efficient Interval Length under a Right-Censored Covariate](deep_reads/2026-07-31-2607.26982.md)  
+  `非参数 / 半参数` · 相关性 7/10
+- [Denoising growth complexity: Data geometry and certified schedules for diffusion sampling](deep_reads/2026-07-31-2607.26285.md)  
+  `统计计算 / 算法` · 相关性 7/10
+- [Specification Testing for Dyadic Regression Models](deep_reads/2026-07-31-2607.26366.md)  
+  `数理统计 / 假设检验` · 相关性 7/10
+- [Optimizing the extraction of information from redshift probability distribution functions](deep_reads/2026-07-31-2607.26822.md)  
+  `天体统计` · 相关性 7/10
+- [Transforming variables to central normality](deep_reads/2026-07-31-2005.07946.md)  
+  `统计计算 / 算法` · 相关性 6/10
+- [Studying Competing Events with Federated Cumulative Incidence Curves](deep_reads/2026-07-31-2607.26287.md)  
+  `因果推断` · 相关性 6/10
+- [An association measure for mixed-type variables](deep_reads/2026-07-31-2607.26508.md)  
+  `数理统计 / 假设检验` · 相关性 6/10
+- [Robust Interpolated Quantile Estimators: Asymptotic Theory and Efficiency](deep_reads/2026-07-31-2607.26714.md)  
+  `数理统计 / 假设检验` · 相关性 6/10
+- [Recovering the Target Hazard Ratio Under Nonproportional Hazards Induced by an Omitted Covariate: Simulation-based Approach](deep_reads/2026-07-31-2607.27026.md)  
+  `流行病学` · 相关性 6/10
+- [Conditional copula representations and extremal bounds for multivariate statistical functionals](deep_reads/2026-07-31-2607.26256.md)  
   `其他` · 相关性 6/10
-- [Spectral Truncation in Synthetic Control](deep_reads/2026-07-30-2607.25074.md)  
-  `因果推断` · 相关性 6/10
-- [Covariate-Adaptive Sample Size Re-estimation for Population-Standardized Historical Control Designs in Single-Arm Trials](deep_reads/2026-07-30-2607.25159.md)  
-  `因果推断` · 相关性 6/10
-- [Bias-corrected Cox regression with AI-extracted covariates via calibration summary statistics](deep_reads/2026-07-30-2607.25868.md)  
-  `因果推断` · 相关性 6/10
-- [Testing Microbiome Community Differences in High Dimensions: A Bootstrap Approach for Compositional Data](deep_reads/2026-07-30-2607.26022.md)  
+- [A Lower Bound on the Sliced Wasserstein Comparison Constant for Translated Measures](deep_reads/2026-07-31-2607.26399.md)  
   `数理统计 / 假设检验` · 相关性 6/10
-- [Omnibus Goodness-of-Fit Testing for Distributions on Stiefel Manifolds](deep_reads/2026-07-30-2607.25618.md)  
+- [Hub Neighbor-Degree Diagnostics for Sparse Random Graphs](deep_reads/2026-07-31-2607.26624.md)  
   `数理统计 / 假设检验` · 相关性 6/10
-- [TabClustPFN: A Prior-Fitted Network for Tabular Data Clustering](deep_reads/2026-07-30-2601.21656.md)  
+- [The Innate Economic Preferences of Language Models](deep_reads/2026-07-31-2607.26288.md)  
+  `经济理论 / 应用` · 相关性 6/10
+- [A Simple Robust Procedure in Instrumental Variables Regression](deep_reads/2026-07-31-2607.26960.md)  
+  `因果推断` · 相关性 6/10
+- [Spectral Gap for the Binary Fixed-Margin Swap Chain](deep_reads/2026-07-31-2606.22636.md)  
   `统计计算 / 算法` · 相关性 4/10
-- [Online LLM watermark detection via e-processes](deep_reads/2026-07-30-2602.14286.md)  
-  `数理统计 / 假设检验` · 相关性 3/10
+- [Kimi K3: Open Frontier Intelligence](deep_reads/2026-07-31-2607.24653.md)  
+  `其他` · 相关性 2/10
 
 ## 收藏
 
@@ -60,11 +62,11 @@
 
 ## 本周每日报告
 
+- [2026-07-30](daily/2026-07-30.md)
 - [2026-07-29](daily/2026-07-29.md)
 - [2026-07-28](daily/2026-07-28.md)
 - [2026-07-27](daily/2026-07-27.md)
 - [2026-07-24](daily/2026-07-24.md)
-- [2026-07-23](daily/2026-07-23.md)
 
 
 ---
