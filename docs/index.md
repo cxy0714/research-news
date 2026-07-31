@@ -17,7 +17,7 @@
 
 [→ 查看完整报告](daily/2026-07-31.md)
 
-### 精读论文（82 篇）
+### 精读论文（108 篇）
 
 - [Evaluating the role of pretraining dataset size and diversity on single-cell foundation model performance](deep_reads/2026-07-31-10.1038_s41592-026-03120-y.md)  
   `其他` · 相关性 7/10
@@ -167,6 +167,58 @@
   `其他` · 相关性 1/10
 - [Weight-four parity checks in a spin-shuttling architecture](deep_reads/2026-07-31-10.1038_s41586-026-10766-3.md)  
   `其他` · 相关性 1/10
+- [Structural and mechanistic basis for the heterotetrameric benzaldehyde synthase from petunia](deep_reads/2026-07-31-10.1126_sciadv.aec7733.md)  
+  `其他` · 相关性 0/10
+- [Unveiling cascading lag effects of wetland methane emissions: Evidence from Lake Chad in Africa](deep_reads/2026-07-31-10.1126_sciadv.adx9866.md)  
+  `其他` · 相关性 0/10
+- [Contrasting slab decarbonation patterns control deep carbon cycling efficiency in hot vs. cold subduction zones](deep_reads/2026-07-31-10.1126_sciadv.aee3217.md)  
+  `其他` · 相关性 0/10
+- [Shared striatal neurons exhibit context-specific dynamics for internally and externally driven actions](deep_reads/2026-07-31-10.1126_sciadv.aed9386.md)  
+  `其他` · 相关性 0/10
+- [Lipidomic profiling reveals age-dependent changes in plasma membrane lipids that affect neural stem cell aging](deep_reads/2026-07-31-10.1126_sciadv.aeh9771.md)  
+  `其他` · 相关性 0/10
+- [Vulnerability to high temperature shapes global warming impacts on rice yield](deep_reads/2026-07-31-10.1126_sciadv.aed9226.md)  
+  `其他` · 相关性 0/10
+- [Astrocyte redox imbalance underlies prelimbic neuronal hypoactivity and maladaptive affective behaviors in epilepsy](deep_reads/2026-07-31-10.1126_sciadv.aef6777.md)  
+  `其他` · 相关性 0/10
+- [Ion-electron coupling–enabled mechanical ion transistor with ultralow subthreshold swing](deep_reads/2026-07-31-10.1126_sciadv.aed9096.md)  
+  `其他` · 相关性 0/10
+- [Direct single-molecule visualization of Hsp90-mediated relief of an Hsp70-folding block](deep_reads/2026-07-31-10.1126_sciadv.aeg5464.md)  
+  `其他` · 相关性 0/10
+- [A comprehensive map of missense trafficking variants in rhodopsin and their response to pharmacologic correction](deep_reads/2026-07-31-10.1126_sciadv.aef3518.md)  
+  `其他` · 相关性 0/10
+- [Discovery of a multicomponent alloy forged by the Hiroshima atomic blast](deep_reads/2026-07-31-10.1126_sciadv.aeg8299.md)  
+  `其他` · 相关性 0/10
+- [COQ8 chaperones coenzyme Q lipid intermediates through ATP-driven structural gating](deep_reads/2026-07-31-10.1126_sciadv.aeg1124.md)  
+  `其他` · 相关性 0/10
+- [PBRM1-dependent PBAF targeting is required for EMT and metastasis in breast cancer](deep_reads/2026-07-31-10.1126_sciadv.aed8038.md)  
+  `其他` · 相关性 0/10
+- [Musculoskeletal actuators with programmable morphology and tunable dynamics](deep_reads/2026-07-31-10.1126_sciadv.aeg4524.md)  
+  `其他` · 相关性 0/10
+- [Observation of mirror-odd and mirror-even spin texture in ultrathin epitaxially strained RuO <sub>2</sub> films](deep_reads/2026-07-31-10.1126_sciadv.aec2917.md)  
+  `其他` · 相关性 0/10
+- [Diffraction-quality, ultraflexible protein single crystals engineered with DNA](deep_reads/2026-07-31-10.1126_sciadv.aeh2948.md)  
+  `其他` · 相关性 0/10
+- [Faster-and-tighter nitrogen cycle supports mature forest productivity under elevated CO <sub>2</sub>](deep_reads/2026-07-31-10.1126_sciadv.aed2732.md)  
+  `其他` · 相关性 0/10
+- [Altered G <sub>i</sub> signaling in enteroendocrine K cells in vivo causes pronounced changes in glucose homeostasis](deep_reads/2026-07-31-10.1126_sciadv.aeb9805.md)  
+  `其他` · 相关性 0/10
+- [Untrustworthy sources on Facebook and Instagram in 2020: Concentrated exposure but no attitudinal effects](deep_reads/2026-07-31-10.1126_sciadv.adz6502.md)  
+  `其他` · 相关性 0/10
+- [Determining the molecular and physiological actions of subtype-selective nanobodies of GABA <sub>A</sub> receptors](deep_reads/2026-07-31-10.1126_sciadv.aeg3548.md)  
+  `其他` · 相关性 0/10
+- [IoT-enabled wireless neural implant for chronic, programmable neuropharmacology and optogenetics](deep_reads/2026-07-31-10.1126_sciadv.aee8648.md)  
+  `其他` · 相关性 0/10
+- [Operando state monitoring of diversified lithium-ion batteries via laser-excited ultrasonic sensing with transformer networks](deep_reads/2026-07-31-10.1126_sciadv.aec5358.md)  
+  `其他` · 相关性 0/10
+- [Genome-wide analyses of an avian herpesvirus identify 10 loci associated with tumorigenicity and vaccine escape](deep_reads/2026-07-31-10.1126_sciadv.aee9024.md)  
+  `其他` · 相关性 0/10
+- [Optical maneuvering of dandelion-inspired fliers with vortex-enabled stability](deep_reads/2026-07-31-10.1126_sciadv.aee8014.md)  
+  `其他` · 相关性 0/10
+- [Reconstitution of actomyosin networks in cell-sized liposomes dissects distinct mechanisms of membrane blebbing and symmetry breaking](deep_reads/2026-07-31-10.1126_sciadv.aed8818.md)  
+  `其他` · 相关性 0/10
+- [Stardust as nucleation seeds for the earliest solids in the Solar System](deep_reads/2026-07-31-10.1126_sciadv.ady2311.md)  
+  `天体统计` · 相关性 0/10
 - [Conditional Monge Gap enables generalizable single-cell perturbation modelling](deep_reads/2026-07-31-10.1038_s42256-026-01242-8.md)  
   `其他` · 相关性 0/10
 - [Plagiarism of ideas in the age of generative artificial intelligence](deep_reads/2026-07-31-10.1038_s42256-026-01247-3.md)  

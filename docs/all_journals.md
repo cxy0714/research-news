@@ -481,6 +481,10 @@
 - [Vol 8 Issue 7 · 2026-07-31](journals/2026-07-31-nmi-v8-i7.md)
 - [Vol 8 Issue 6 · 2026-07-31](journals/2026-07-31-nmi-v8-i6.md)
 
+### Sci. Adv.
+
+- [Vol 12 Issue 31 · 2026-07-31](journals/2026-07-31-sci-adv-v12-i31.md)
+
 ## IEEE 系列 (IEEE)
 
 ### JSAIT

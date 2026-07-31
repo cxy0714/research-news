@@ -9346,6 +9346,11 @@
 
 ### 期刊
 
+#### Science Advances Vol 12 Issue 31
+
+- [Stardust as nucleation seeds for the earliest solids in the Solar System](deep_reads/2026-07-31-10.1126_sciadv.ady2311.md)  
+  0/10 [journals]
+
 #### Nature Machine Intelligence Vol 8 Issue 7
 
 - [An agentic artificially intelligent X-ray scientist](deep_reads/2026-07-31-10.1038_s42256-026-01261-5.md)  
@@ -11977,6 +11982,59 @@
   8/10 [daily]
 
 ### 期刊
+
+#### Science Advances Vol 12 Issue 31
+
+- [Structural and mechanistic basis for the heterotetrameric benzaldehyde synthase from petunia](deep_reads/2026-07-31-10.1126_sciadv.aec7733.md)  
+  0/10 [journals]
+- [Unveiling cascading lag effects of wetland methane emissions: Evidence from Lake Chad in Africa](deep_reads/2026-07-31-10.1126_sciadv.adx9866.md)  
+  0/10 [journals]
+- [Contrasting slab decarbonation patterns control deep carbon cycling efficiency in hot vs. cold subduction zones](deep_reads/2026-07-31-10.1126_sciadv.aee3217.md)  
+  0/10 [journals]
+- [Shared striatal neurons exhibit context-specific dynamics for internally and externally driven actions](deep_reads/2026-07-31-10.1126_sciadv.aed9386.md)  
+  0/10 [journals]
+- [Lipidomic profiling reveals age-dependent changes in plasma membrane lipids that affect neural stem cell aging](deep_reads/2026-07-31-10.1126_sciadv.aeh9771.md)  
+  0/10 [journals]
+- [Vulnerability to high temperature shapes global warming impacts on rice yield](deep_reads/2026-07-31-10.1126_sciadv.aed9226.md)  
+  0/10 [journals]
+- [Astrocyte redox imbalance underlies prelimbic neuronal hypoactivity and maladaptive affective behaviors in epilepsy](deep_reads/2026-07-31-10.1126_sciadv.aef6777.md)  
+  0/10 [journals]
+- [Ion-electron coupling–enabled mechanical ion transistor with ultralow subthreshold swing](deep_reads/2026-07-31-10.1126_sciadv.aed9096.md)  
+  0/10 [journals]
+- [Direct single-molecule visualization of Hsp90-mediated relief of an Hsp70-folding block](deep_reads/2026-07-31-10.1126_sciadv.aeg5464.md)  
+  0/10 [journals]
+- [A comprehensive map of missense trafficking variants in rhodopsin and their response to pharmacologic correction](deep_reads/2026-07-31-10.1126_sciadv.aef3518.md)  
+  0/10 [journals]
+- [Discovery of a multicomponent alloy forged by the Hiroshima atomic blast](deep_reads/2026-07-31-10.1126_sciadv.aeg8299.md)  
+  0/10 [journals]
+- [COQ8 chaperones coenzyme Q lipid intermediates through ATP-driven structural gating](deep_reads/2026-07-31-10.1126_sciadv.aeg1124.md)  
+  0/10 [journals]
+- [PBRM1-dependent PBAF targeting is required for EMT and metastasis in breast cancer](deep_reads/2026-07-31-10.1126_sciadv.aed8038.md)  
+  0/10 [journals]
+- [Musculoskeletal actuators with programmable morphology and tunable dynamics](deep_reads/2026-07-31-10.1126_sciadv.aeg4524.md)  
+  0/10 [journals]
+- [Observation of mirror-odd and mirror-even spin texture in ultrathin epitaxially strained RuO <sub>2</sub> films](deep_reads/2026-07-31-10.1126_sciadv.aec2917.md)  
+  0/10 [journals]
+- [Diffraction-quality, ultraflexible protein single crystals engineered with DNA](deep_reads/2026-07-31-10.1126_sciadv.aeh2948.md)  
+  0/10 [journals]
+- [Faster-and-tighter nitrogen cycle supports mature forest productivity under elevated CO <sub>2</sub>](deep_reads/2026-07-31-10.1126_sciadv.aed2732.md)  
+  0/10 [journals]
+- [Altered G <sub>i</sub> signaling in enteroendocrine K cells in vivo causes pronounced changes in glucose homeostasis](deep_reads/2026-07-31-10.1126_sciadv.aeb9805.md)  
+  0/10 [journals]
+- [Untrustworthy sources on Facebook and Instagram in 2020: Concentrated exposure but no attitudinal effects](deep_reads/2026-07-31-10.1126_sciadv.adz6502.md)  
+  0/10 [journals]
+- [Determining the molecular and physiological actions of subtype-selective nanobodies of GABA <sub>A</sub> receptors](deep_reads/2026-07-31-10.1126_sciadv.aeg3548.md)  
+  0/10 [journals]
+- [IoT-enabled wireless neural implant for chronic, programmable neuropharmacology and optogenetics](deep_reads/2026-07-31-10.1126_sciadv.aee8648.md)  
+  0/10 [journals]
+- [Operando state monitoring of diversified lithium-ion batteries via laser-excited ultrasonic sensing with transformer networks](deep_reads/2026-07-31-10.1126_sciadv.aec5358.md)  
+  0/10 [journals]
+- [Genome-wide analyses of an avian herpesvirus identify 10 loci associated with tumorigenicity and vaccine escape](deep_reads/2026-07-31-10.1126_sciadv.aee9024.md)  
+  0/10 [journals]
+- [Optical maneuvering of dandelion-inspired fliers with vortex-enabled stability](deep_reads/2026-07-31-10.1126_sciadv.aee8014.md)  
+  0/10 [journals]
+- [Reconstitution of actomyosin networks in cell-sized liposomes dissects distinct mechanisms of membrane blebbing and symmetry breaking](deep_reads/2026-07-31-10.1126_sciadv.aed8818.md)  
+  0/10 [journals]
 
 #### Science Vol 393 Issue 6810
 
