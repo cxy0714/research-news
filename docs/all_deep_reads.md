@@ -8276,6 +8276,11 @@
 - [Jaxley: differentiable simulation enables large-scale training of detailed biophysical models of neural dynamics](deep_reads/2026-08-01-10.1038_s41592-025-02895-w.md)  
   7/10 [journals]
 
+#### Nature Machine Intelligence Vol 7 Issue 10
+
+- [Sampling-enabled scalable manifold learning unveils the discriminative cluster structure of high-dimensional data](deep_reads/2026-08-01-10.1038_s42256-025-01112-9.md)  
+  6/10 [journals]
+
 #### Nature Methods Vol 23 Issue 7
 
 - [Chromatix: a differentiable, GPU-accelerated wave-optics library](deep_reads/2026-07-31-10.1038_s41592-026-03121-x.md)  
@@ -12549,6 +12554,145 @@
 - [Uncovering hidden protein modifications with native top-down mass spectrometry](deep_reads/2026-08-01-10.1038_s41592-025-02846-5.md)  
   0/10 [journals]
 - [Single-cell multi-omic detection of DNA methylation and histone modifications reconstructs the dynamics of epigenomic maintenance](deep_reads/2026-08-01-10.1038_s41592-025-02847-4.md)  
+  0/10 [journals]
+
+#### Nature Machine Intelligence Vol 8 Issue 5
+
+- [Deep neural operator for free boundary problems](deep_reads/2026-08-01-10.1038_s42256-026-01233-9.md)  
+  4/10 [journals]
+- [Immunotherapy drug target identification using machine learning and patient-derived tumour explant validation](deep_reads/2026-08-01-10.1038_s42256-026-01201-3.md)  
+  4/10 [journals]
+- [A generative artificial intelligence approach for peptide antibiotic optimization](deep_reads/2026-08-01-10.1038_s42256-026-01237-5.md)  
+  4/10 [journals]
+
+#### Nature Machine Intelligence Vol 8 Issue 4
+
+- [Competing Biases underlie Overconfidence and Underconfidence in LLMs](deep_reads/2026-08-01-10.1038_s42256-026-01217-9.md)  
+  5/10 [journals]
+- [Brain-inspired warm-up training with random noise for uncertainty calibration](deep_reads/2026-08-01-10.1038_s42256-026-01215-x.md)  
+  5/10 [journals]
+- [A multimodal large language model for materials science](deep_reads/2026-08-01-10.1038_s42256-026-01214-y.md)  
+  4/10 [journals]
+
+#### Nature Machine Intelligence Vol 8 Issue 3
+
+- [Computational framework to predict and shape human–machine interactions in closed-loop, co-adaptive neural interfaces](deep_reads/2026-08-01-10.1038_s42256-026-01194-z.md)  
+  3/10 [journals]
+- [Predicting and interpreting cell-type-specific drug responses in the small-data regime using inductive priors](deep_reads/2026-08-01-10.1038_s42256-026-01202-2.md)  
+  3/10 [journals]
+- [A robot operating system framework for using large language models in embodied AI](deep_reads/2026-08-01-10.1038_s42256-026-01186-z.md)  
+  3/10 [journals]
+- [Conditional diffusion with locality-aware modal alignment for generating diverse protein conformational ensembles](deep_reads/2026-08-01-10.1038_s42256-026-01198-9.md)  
+  3/10 [journals]
+
+#### Nature Machine Intelligence Vol 8 Issue 2
+
+- [Cardiac health assessment across scenarios and devices using a multimodal foundation model pretrained on data from 1.7 million individuals](deep_reads/2026-08-01-10.1038_s42256-026-01180-5.md)  
+  0/10 [journals]
+- [Synthetic X‑ray‑driven tracking and control of miniature medical devices](deep_reads/2026-08-01-10.1038_s42256-026-01190-3.md)  
+  0/10 [journals]
+- [Parallel hierarchical encoding of linguistic representations in the human auditory cortex and recurrent automatic speech recognition systems](deep_reads/2026-08-01-10.1038_s42256-026-01185-0.md)  
+  0/10 [journals]
+- [A flaw in using pretrained protein language models in protein–protein interaction inference models](deep_reads/2026-08-01-10.1038_s42256-025-01176-7.md)  
+  0/10 [journals]
+- [Reusability Report: Evaluating the performance of a meta-learning foundation model on predicting the antibacterial activity of natural products](deep_reads/2026-08-01-10.1038_s42256-026-01187-y.md)  
+  0/10 [journals]
+
+#### Nature Machine Intelligence Vol 8 Issue 1
+
+- [Harnessing the power of single-cell large language models with parameter-efficient fine-tuning using scPEFT](deep_reads/2026-08-01-10.1038_s42256-025-01170-z.md)  
+  2/10 [journals]
+- [Benchmarking large language models on safety risks in scientific laboratories](deep_reads/2026-08-01-10.1038_s42256-025-01152-1.md)  
+  1/10 [journals]
+
+#### Nature Machine Intelligence Vol 7 Issue 9
+
+- [Error-controlled non-additive interaction discovery in machine learning models](deep_reads/2026-08-01-10.1038_s42256-025-01086-8.md)  
+  6/10 [journals]
+- [Efficient protein structure generation with sparse denoising models](deep_reads/2026-08-01-10.1038_s42256-025-01100-z.md)  
+  3/10 [journals]
+- [Modelling neural coding in the auditory midbrain with high resolution and accuracy](deep_reads/2026-08-01-10.1038_s42256-025-01104-9.md)  
+  2/10 [journals]
+- [Conditional generation of real antigen-specific T cell receptor sequences](deep_reads/2026-08-01-10.1038_s42256-025-01096-6.md)  
+  2/10 [journals]
+- [Brain–computer interface control with artificial intelligence copilots](deep_reads/2026-08-01-10.1038_s42256-025-01090-y.md)  
+  2/10 [journals]
+- [Author Correction: A framework to evaluate machine learning crystal stability predictions](deep_reads/2026-08-01-10.1038_s42256-025-01117-4.md)  
+  0/10 [journals]
+
+#### Nature Machine Intelligence Vol 7 Issue 8
+
+- [Histopathology-based protein multiplex generation using deep learning](deep_reads/2026-08-01-10.1038_s42256-025-01074-y.md)  
+  5/10 [journals]
+- [High-level visual representations in the human brain are aligned with large language models](deep_reads/2026-08-01-10.1038_s42256-025-01072-0.md)  
+  4/10 [journals]
+- [Towards generalizable and interpretable three-dimensional tracking with inverse neural rendering](deep_reads/2026-08-01-10.1038_s42256-025-01083-x.md)  
+  4/10 [journals]
+
+#### Nature Machine Intelligence Vol 7 Issue 7
+
+- [Integrating multimodal cancer data using deep latent variable path modelling](deep_reads/2026-08-01-10.1038_s42256-025-01052-4.md)  
+  5/10 [journals]
+- [Unifying multi-sample network inference from prior knowledge and omics data with CORNETO](deep_reads/2026-08-01-10.1038_s42256-025-01069-9.md)  
+  4/10 [journals]
+- [Bioinspired trajectory modulation for effective slip control in robot manipulation](deep_reads/2026-08-01-10.1038_s42256-025-01062-2.md)  
+  1/10 [journals]
+- [Designing metamaterials with programmable nonlinear responses and geometric constraints in graph space](deep_reads/2026-08-01-10.1038_s42256-025-01067-x.md)  
+  1/10 [journals]
+- [Model-based reinforcement learning for ultrasound-driven autonomous microrobots](deep_reads/2026-08-01-10.1038_s42256-025-01054-2.md)  
+  1/10 [journals]
+
+#### Nature Machine Intelligence Vol 7 Issue 6
+
+- [Robust virtual staining of landmark organelles with Cytoland](deep_reads/2026-08-01-10.1038_s42256-025-01046-2.md)  
+  4/10 [journals]
+- [Next-generation phenotyping of inherited retinal diseases from multimodal imaging with Eye2Gene](deep_reads/2026-08-01-10.1038_s42256-025-01040-8.md)  
+  4/10 [journals]
+- [Generalized biological foundation model with unified nucleic acid and protein language](deep_reads/2026-08-01-10.1038_s42256-025-01044-4.md)  
+  3/10 [journals]
+- [A process-centric manipulation taxonomy for the organization, classification and synthesis of tactile robot skills](deep_reads/2026-08-01-10.1038_s42256-025-01045-3.md)  
+  1/10 [journals]
+
+#### Nature Machine Intelligence Vol 7 Issue 5
+
+- [Advancing molecular machine learning representations with stereoelectronics-infused molecular graphs](deep_reads/2026-08-01-10.1038_s42256-025-01031-9.md)  
+  6/10 [journals]
+- [A personalized time-resolved 3D mesh generative model for unveiling normal heart dynamics](deep_reads/2026-08-01-10.1038_s42256-025-01035-5.md)  
+  6/10 [journals]
+- [Sparse and transferable three-dimensional dynamic vascular reconstruction for instantaneous diagnosis](deep_reads/2026-08-01-10.1038_s42256-025-01025-7.md)  
+  6/10 [journals]
+- [Generating 3D small binding molecules using shape-conditioned diffusion models with guidance](deep_reads/2026-08-01-10.1038_s42256-025-01030-w.md)  
+  5/10 [journals]
+
+#### Nature Machine Intelligence Vol 7 Issue 12
+
+- [Multimodal out-of-distribution individual uncertainty quantification enhances binding affinity prediction for polypharmacology](deep_reads/2026-08-01-10.1038_s42256-025-01151-2.md)  
+  5/10 [journals]
+- [A psychometric framework for evaluating and shaping personality traits in large language models](deep_reads/2026-08-01-10.1038_s42256-025-01115-6.md)  
+  4/10 [journals]
+- [A multimodal cell-free RNA language model for liquid biopsy applications](deep_reads/2026-08-01-10.1038_s42256-025-01148-x.md)  
+  4/10 [journals]
+- [Actor–critic networks with analogue memristors mimicking reward-based learning](deep_reads/2026-08-01-10.1038_s42256-025-01149-w.md)  
+  2/10 [journals]
+
+#### Nature Machine Intelligence Vol 7 Issue 11
+
+- [Convolutional architectures are cortex-aligned de novo](deep_reads/2026-08-01-10.1038_s42256-025-01142-3.md)  
+  0/10 [journals]
+- [Densing law of LLMs](deep_reads/2026-08-01-10.1038_s42256-025-01137-0.md)  
+  0/10 [journals]
+
+#### Nature Machine Intelligence Vol 7 Issue 10
+
+- [Tailored structured peptide design with a key-cutting machine approach](deep_reads/2026-08-01-10.1038_s42256-025-01119-2.md)  
+  0/10 [journals]
+- [Resolving data bias improves generalization in binding affinity prediction](deep_reads/2026-08-01-10.1038_s42256-025-01124-5.md)  
+  0/10 [journals]
+- [Single-unit activations confer inductive biases for emergent circuit solutions to cognitive tasks](deep_reads/2026-08-01-10.1038_s42256-025-01127-2.md)  
+  0/10 [journals]
+- [Predicting the conformational flexibility of antibody and T cell receptor complementarity-determining regions](deep_reads/2026-08-01-10.1038_s42256-025-01131-6.md)  
+  0/10 [journals]
+- [Flow matching for accelerated simulation of atomic transport in crystalline materials](deep_reads/2026-08-01-10.1038_s42256-025-01125-4.md)  
   0/10 [journals]
 
 #### Science Advances Vol 12 Issue 31

@@ -503,6 +503,19 @@
 
 - [Vol 8 Issue 7 · 2026-07-31](journals/2026-07-31-nmi-v8-i7.md)
 - [Vol 8 Issue 6 · 2026-07-31](journals/2026-07-31-nmi-v8-i6.md)
+- [Vol 8 Issue 5 · 2026-08-01](journals/2026-08-01-nmi-v8-i5.md)
+- [Vol 8 Issue 4 · 2026-08-01](journals/2026-08-01-nmi-v8-i4.md)
+- [Vol 8 Issue 3 · 2026-08-01](journals/2026-08-01-nmi-v8-i3.md)
+- [Vol 8 Issue 2 · 2026-08-01](journals/2026-08-01-nmi-v8-i2.md)
+- [Vol 8 Issue 1 · 2026-08-01](journals/2026-08-01-nmi-v8-i1.md)
+- [Vol 7 Issue 12 · 2026-08-01](journals/2026-08-01-nmi-v7-i12.md)
+- [Vol 7 Issue 11 · 2026-08-01](journals/2026-08-01-nmi-v7-i11.md)
+- [Vol 7 Issue 10 · 2026-08-01](journals/2026-08-01-nmi-v7-i10.md)
+- [Vol 7 Issue 9 · 2026-08-01](journals/2026-08-01-nmi-v7-i9.md)
+- [Vol 7 Issue 8 · 2026-08-01](journals/2026-08-01-nmi-v7-i8.md)
+- [Vol 7 Issue 7 · 2026-08-01](journals/2026-08-01-nmi-v7-i7.md)
+- [Vol 7 Issue 6 · 2026-08-01](journals/2026-08-01-nmi-v7-i6.md)
+- [Vol 7 Issue 5 · 2026-08-01](journals/2026-08-01-nmi-v7-i5.md)
 
 ### Sci. Adv.
 
