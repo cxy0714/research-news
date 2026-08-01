@@ -468,8 +468,11 @@
 
 ### PNAS
 
+- [Vol 123 Issue 32 · 2026-08-01](journals/2026-08-01-pnas-v123-i32.md)
 - [Vol 123 Issue 32 · 2026-07-31](journals/2026-07-31-pnas-v123-i32.md)
+- [Vol 123 Issue 31 · 2026-08-01](journals/2026-08-01-pnas-v123-i31.md)
 - [Vol 123 Issue 31 · 2026-07-31](journals/2026-07-31-pnas-v123-i31.md)
+- [Vol 123 Issue 30 · 2026-08-01](journals/2026-08-01-pnas-v123-i30.md)
 
 ### Science
 

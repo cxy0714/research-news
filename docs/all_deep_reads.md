@@ -495,6 +495,11 @@
 
 ### 期刊
 
+#### Proceedings of the National Academy of Sciences Vol 123 Issue 30
+
+- [Measuring disparate impact in human and machine decisions](deep_reads/2026-08-01-10.1073_pnas.2509765122.md)  
+  7/10 [journals]
+
 #### Journal of Business & Economic Statistics Vol 40 Issue 4
 
 - [High-Dimensional Model-Assisted Inference for Local Average Treatment Effects With Instrumental Variables](deep_reads/2026-07-19-10.1080_07350015.2021.1970575.md)  
@@ -9624,6 +9629,12 @@
 
 #### Proceedings of the National Academy of Sciences Vol 123 Issue 31
 
+- [ICE arrests, 2015–2026: Variation in targeting, method, and geography](deep_reads/2026-08-01-10.1073_pnas.2618096123.md)  
+  7/10 [journals]
+- [Social dynamics of AI adoption in parents’ educational decisions](deep_reads/2026-08-01-10.1073_pnas.2533193123.md)  
+  6/10 [journals]
+- [Christopher A. Sims (1942–2026): Paradigm-shifting macroeconomist and econometrician](deep_reads/2026-08-01-10.1073_pnas.2622611123.md)  
+  6/10 [journals]
 - [Can stimulating ownership increase fertility: Evidence from housing interventions in China](deep_reads/2026-07-31-10.1073_pnas.2602426123.md)  
   6/10 [journals]
 
@@ -10750,8 +10761,15 @@
 
 #### Proceedings of the National Academy of Sciences Vol 123 Issue 31
 
+- [Dietary DNA in municipal wastewater reveals signatures of wealth, immigration, and coastal proximity](deep_reads/2026-08-01-10.1073_pnas.2530704123.md)  
+  7/10 [journals]
 - [The global demand and potential public health impact of oral antiviral treatment stockpile for influenza pandemics](deep_reads/2026-07-31-10.1073_pnas.2524161123.md)  
   5/10 [journals]
+
+#### Proceedings of the National Academy of Sciences Vol 123 Issue 30
+
+- [When children shape their families: Evocative effects analysis of 40,000 trios from the Norwegian Mother, Father and Child Cohort Study](deep_reads/2026-08-01-10.1073_pnas.2532642123.md)  
+  6/10 [journals]
 
 #### Nature Communications Vol 17 Issue 1
 
@@ -12146,6 +12164,177 @@
 - [ILC2s regulate a fibroblast progenitor niche in the pancreas](deep_reads/2026-08-01-10.1126_science.aea5113.md)  
   0/10 [journals]
 
+#### Proceedings of the National Academy of Sciences Vol 123 Issue 32
+
+- [Global threat exposure of islands in a changing world](deep_reads/2026-07-31-10.1073_pnas.2534106123.md)  
+  3/10 [journals]
+- [A wearable patch for continuous levodopa monitoring in sweat: Towards exertion and power-free pharmacodynamic assessment in Parkinson’s disease](deep_reads/2026-07-31-10.1073_pnas.2610453123.md)  
+  3/10 [journals]
+- [Energy prioritization and neurometabolic scaling in a social insect brain](deep_reads/2026-08-01-10.1073_pnas.2605431123.md)  
+  2/10 [journals]
+- [Digestion-resistant proteins support the healthy metabolite profiles associated with plant-based diets](deep_reads/2026-08-01-10.1073_pnas.2605226123.md)  
+  2/10 [journals]
+- [Accelerating <i>Campylobacter</i> zoonosis in the Anthropocene](deep_reads/2026-07-31-10.1073_pnas.2609969123.md)  
+  2/10 [journals]
+- [Nature’s antivenom: Combinations of conserved rattlesnake serum metalloproteinase inhibitors block the lethal action of viper venoms](deep_reads/2026-07-31-10.1073_pnas.2612168123.md)  
+  1/10 [journals]
+
+#### Proceedings of the National Academy of Sciences Vol 123 Issue 31
+
+- [A demographic theory of similarity-biased social learning](deep_reads/2026-07-31-10.1073_pnas.2606741123.md)  
+  7/10 [journals]
+- [Dynamic principles of concentration buffering through liquid–liquid phase separation](deep_reads/2026-07-31-10.1073_pnas.2526810123.md)  
+  6/10 [journals]
+- [Susceptibility and regulation of biomolecular condensates by solutes](deep_reads/2026-07-31-10.1073_pnas.2604434123.md)  
+  6/10 [journals]
+- [Sediment accumulation rate predicts the temporal resolution of marine fossil assemblages](deep_reads/2026-07-31-10.1073_pnas.2615368123.md)  
+  6/10 [journals]
+- [Long-horizon associative learning as a unifying framework for statistical learning across scales](deep_reads/2026-07-31-10.1073_pnas.2513423123.md)  
+  6/10 [journals]
+- [Parenthood decisions in uncertain times: Experimental evidence from four countries](deep_reads/2026-07-31-10.1073_pnas.2601690123.md)  
+  6/10 [journals]
+- [Developmental changes in memory structure and precision alter the use of retrieved episodes during decisions for reward](deep_reads/2026-07-31-10.1073_pnas.2525494123.md)  
+  5/10 [journals]
+- [Source limitation drives slow compositional recovery in tropical secondary forests](deep_reads/2026-08-01-10.1073_pnas.2510678123.md)  
+  3/10 [journals]
+- [Comparative archaeology reveals recurrent but nondeterministic pathways through complexification](deep_reads/2026-07-31-10.1073_pnas.2610959123.md)  
+  3/10 [journals]
+- [Adaptive molecular convergence is pervasive across deep time and largely decoupled from phenotypic convergence](deep_reads/2026-07-31-10.1073_pnas.2616248123.md)  
+  3/10 [journals]
+- [Discovery of a phenazine–thiol conjugase from sparse data using genome-informed machine learning](deep_reads/2026-07-31-10.1073_pnas.2607571123.md)  
+  3/10 [journals]
+- [Climate warming and atmospheric deposition jointly accelerate the Antarctic Peninsula atmosphere–glacier–land–ocean mercury loop](deep_reads/2026-07-31-10.1073_pnas.2613472123.md)  
+  3/10 [journals]
+- [Heat tolerance decreases and cold tolerance increases with elevation for a species-rich insect family on a tropical volcano](deep_reads/2026-07-31-10.1073_pnas.2533455123.md)  
+  3/10 [journals]
+- [Sprint-like cardiac dynamics support repeated acrobatic lunges in foraging rorqual whales](deep_reads/2026-08-01-10.1073_pnas.2613082123.md)  
+  2/10 [journals]
+- [Cryoelectron tomography reveals an age-related decline in mitoribosomes that contributes to T cell dysfunction in older individuals](deep_reads/2026-07-31-10.1073_pnas.2608102123.md)  
+  2/10 [journals]
+- [Mitochondrial pearling is controlled by the inner membrane and mediates segregation of the luminal content and membrane scission](deep_reads/2026-07-31-10.1073_pnas.2602775123.md)  
+  2/10 [journals]
+- [Psychological inoculation against climate doom](deep_reads/2026-07-31-10.1073_pnas.2609074123.md)  
+  2/10 [journals]
+- [The cortical scene processing network emerges in infancy, prior to independent navigation experience](deep_reads/2026-07-31-10.1073_pnas.2513126123.md)  
+  2/10 [journals]
+- [Insights into hominin body size, locomotion, and behavior from Early Pleistocene trackways in northern Kenya](deep_reads/2026-08-01-10.1073_pnas.2530996123.md)  
+  1/10 [journals]
+- [Palindrome in the sequence of the ribosomal peptidyl transferase center suggests a protoribosome emergence scheme](deep_reads/2026-08-01-10.1073_pnas.2512179123.md)  
+  1/10 [journals]
+- [Methionine oxidation alters both helical assembly and disordered contacts in human TDP-43 C-terminal domain phase separation](deep_reads/2026-08-01-10.1073_pnas.2537431123.md)  
+  1/10 [journals]
+- [Effective mass of a migrating interface](deep_reads/2026-07-31-10.1073_pnas.2608055123.md)  
+  1/10 [journals]
+- [An antibody–drug conjugate active against antibiotic-resistant <i> <i>Neisseria</i> gonorrhoeae </i>](deep_reads/2026-07-31-10.1073_pnas.2534217123.md)  
+  1/10 [journals]
+- [Hypermutability of integrated sequences of viral origin in a chlorarachniophyte](deep_reads/2026-07-31-10.1073_pnas.2612999123.md)  
+  1/10 [journals]
+- [Anterior and posterior retrosplenial cortex employ distinct strategies for egocentric–allocentric transformation in spatial coding](deep_reads/2026-07-31-10.1073_pnas.2600565123.md)  
+  1/10 [journals]
+- [A posttranslational modification of fimbriae drives pathogenicity in <i> <i>Klebsiella pneumoniae</i> </i>](deep_reads/2026-07-31-10.1073_pnas.2611142123.md)  
+  0/10 [journals]
+- [Proteolytic activation of c-MYC facilitated by DOT1L](deep_reads/2026-07-31-10.1073_pnas.2525603123.md)  
+  0/10 [journals]
+- [Rapid microbial production of long-lived dissolved organic carbon in the global ocean](deep_reads/2026-07-31-10.1073_pnas.2601044123.md)  
+  0/10 [journals]
+- [The free-living wellspring of symbiotic nitrogen fixation in <i>Bradyrhizobium</i>](deep_reads/2026-07-31-10.1073_pnas.2604918123.md)  
+  0/10 [journals]
+- [Dual control of PIP2 drives germline/soma segregation in <i>Drosophila</i>](deep_reads/2026-07-31-10.1073_pnas.2604429123.md)  
+  0/10 [journals]
+- [Abrupt transition to irreversible damage in the overdrafted Sacramento Valley aquifer system](deep_reads/2026-07-31-10.1073_pnas.2526041123.md)  
+  0/10 [journals]
+
+#### Proceedings of the National Academy of Sciences Vol 123 Issue 30
+
+- [A unified machine-learning framework for ab initio multiscale modeling of liquids](deep_reads/2026-08-01-10.1073_pnas.2610049123.md)  
+  7/10 [journals]
+- [The social-class gap in negotiation: Lower-class individuals negotiate less and face more backlash](deep_reads/2026-08-01-10.1073_pnas.2602128123.md)  
+  7/10 [journals]
+- [Measurement accuracy in mechanobiology: A unifying statistical framework for testing cellular forces](deep_reads/2026-08-01-10.1073_pnas.2512440123.md)  
+  7/10 [journals]
+- [Children’s books about scientists convey demotivating messages](deep_reads/2026-08-01-10.1073_pnas.2612021123.md)  
+  7/10 [journals]
+- [Continuity and change in US legal tradition: Evidence from judicial citation communities](deep_reads/2026-08-01-10.1073_pnas.2509763123.md)  
+  7/10 [journals]
+- [Context-aware multimodal AI navigates hidden pathways in five centuries of art evolution](deep_reads/2026-08-01-10.1073_pnas.2517969123.md)  
+  6/10 [journals]
+- [Hazard curvature makes within-host variability costly for survival](deep_reads/2026-08-01-10.1073_pnas.2610568123.md)  
+  6/10 [journals]
+- [Deciphering the mechanism of protein aggregation and effects of inhibitors using single-molecule mass photometry](deep_reads/2026-08-01-10.1073_pnas.2536600123.md)  
+  6/10 [journals]
+- [Cell division sets a universal flow geometry in cell layers](deep_reads/2026-08-01-10.1073_pnas.2532420123.md)  
+  6/10 [journals]
+- [Classification models for KCNQ1 variants distinguish functional and trafficking effects to enhance pathogenicity interpretation](deep_reads/2026-08-01-10.1073_pnas.2537217123.md)  
+  6/10 [journals]
+- [Observed rapid adjustment of the atmospheric boundary layer to submesoscale sea surface temperature fronts](deep_reads/2026-08-01-10.1073_pnas.2605662123.md)  
+  6/10 [journals]
+- [A minimal wake–vortex model explains formation flight of flapping birds](deep_reads/2026-08-01-10.1073_pnas.2606668123.md)  
+  6/10 [journals]
+- [Statutory construction and interpretation for AI](deep_reads/2026-08-01-10.1073_pnas.2509766123.md)  
+  6/10 [journals]
+- [Quantitative guiding of developmental cell fate patterns using a dynamical landscape model](deep_reads/2026-08-01-10.1073_pnas.2521973123.md)  
+  6/10 [journals]
+- [There is no free benchmark: An institutional view of legal AI benchmarking](deep_reads/2026-08-01-10.1073_pnas.2509757122.md)  
+  5/10 [journals]
+- [Resolving weak moments in canted antiferromagnets via time-domain terahertz emission spectroscopy](deep_reads/2026-08-01-10.1073_pnas.2603194123.md)  
+  3/10 [journals]
+- [Cortical gray matter myelin cuts energy cost of spike propagation without increasing conduction velocity](deep_reads/2026-08-01-10.1073_pnas.2536534123.md)  
+  3/10 [journals]
+- [Single-cell atlas of the mouse ovary reveals molecular drivers of aging and senescence during the estropausal transition](deep_reads/2026-08-01-10.1073_pnas.2600323123.md)  
+  3/10 [journals]
+- [Continuity in geometric intuition between humans and monkeys](deep_reads/2026-08-01-10.1073_pnas.2532934123.md)  
+  3/10 [journals]
+- [Mechanostereochemical modulation of polymer mechanical properties](deep_reads/2026-08-01-10.1073_pnas.2607437123.md)  
+  2/10 [journals]
+- [Antimalarial cytoskeletal targeting with broad apicomplexan activity](deep_reads/2026-08-01-10.1073_pnas.2608709123.md)  
+  2/10 [journals]
+- [VAMP7-dependent mitochondria–lysosome contacts contribute to glial mitochondrial dynamics and dopaminergic neuron survival](deep_reads/2026-08-01-10.1073_pnas.2603069123.md)  
+  2/10 [journals]
+- [Sentinel plants enable quantitative monitoring of bioavailable nitrate in soils and microbial environments](deep_reads/2026-08-01-10.1073_pnas.2609666123.md)  
+  2/10 [journals]
+- [Why shear adhesion is not monotonically enhanced by stiffening](deep_reads/2026-08-01-10.1073_pnas.2610914123.md)  
+  2/10 [journals]
+- [Matrix effects reshape organic aerosol volatility and atmospheric persistence](deep_reads/2026-08-01-10.1073_pnas.2614944123.md)  
+  1/10 [journals]
+- [Long-range magnetoelectricity in type-II multiferroic NiI <sub>2</sub>](deep_reads/2026-08-01-10.1073_pnas.2530708123.md)  
+  1/10 [journals]
+- [Parabrachial <i>Ntsr1</i> neurons modulate food intake and anxiety through a projection to the ventromedial hypothalamus](deep_reads/2026-08-01-10.1073_pnas.2605466123.md)  
+  1/10 [journals]
+- [Mechanisms of von Willebrand factor activation driving no reflow in ischemic stroke](deep_reads/2026-08-01-10.1073_pnas.2610397123.md)  
+  1/10 [journals]
+- [High-coverage ancient genomes reveal divergent population histories and prehistoric starch-related genetic variation in Japan](deep_reads/2026-08-01-10.1073_pnas.2606162123.md)  
+  0/10 [journals]
+- [Stabilization of recurrent neural networks through divisive normalization](deep_reads/2026-08-01-10.1073_pnas.2601841123.md)  
+  0/10 [journals]
+- [Equilibrium and stability of coupled nonlinear energy-storing components](deep_reads/2026-08-01-10.1073_pnas.2608042123.md)  
+  0/10 [journals]
+- [PIP4K attenuates PIP5K lipid kinase activity by disrupting membrane-mediated dimerization](deep_reads/2026-08-01-10.1073_pnas.2529784123.md)  
+  0/10 [journals]
+- [Blm10 and PI31 comprise a failsafe mechanism for proteasome inhibition](deep_reads/2026-08-01-10.1073_pnas.2611708123.md)  
+  0/10 [journals]
+- [Electro-nuclear quantum phase transition in TmVO <sub>4</sub>](deep_reads/2026-08-01-10.1073_pnas.2530567123.md)  
+  0/10 [journals]
+- [Oncogenic Gα signaling requires AP-3-dependent recruitment to the endolysosomal compartment](deep_reads/2026-08-01-10.1073_pnas.2615774123.md)  
+  0/10 [journals]
+- [Richard D. Alba 1942–2025: Distinguished scholar of ethnicity and immigrant assimilation and cherished mentor and friend](deep_reads/2026-08-01-10.1073_pnas.2622612123.md)  
+  0/10 [journals]
+- [Cryo-EM reveals that <i>Escherichia coli</i> tRNA-transglycosylase can bind and act upon two tRNAs](deep_reads/2026-08-01-10.1073_pnas.2601895123.md)  
+  0/10 [journals]
+- [The ARHGAP32 isoform PX-RICS is specifically targeted to inhibitory synapses by binding to gephyrin](deep_reads/2026-08-01-10.1073_pnas.2601488123.md)  
+  0/10 [journals]
+- [Integrated thermal and phytoremediation of agricultural soils impacted by PFAS](deep_reads/2026-08-01-10.1073_pnas.2600786123.md)  
+  0/10 [journals]
+- [FGFR2 is an oncogenic driver critical for successful human gammaherpesvirus latent infection and oncogenesis](deep_reads/2026-08-01-10.1073_pnas.2602413123.md)  
+  0/10 [journals]
+- [The unique Efg1 fungal virulence regulon in the catheterized bladder environment](deep_reads/2026-08-01-10.1073_pnas.2533309123.md)  
+  0/10 [journals]
+- [Identification of a conserved gene family with an essential role in <i>Leishmania</i> parasite–insect vector adhesion](deep_reads/2026-08-01-10.1073_pnas.2603653123.md)  
+  0/10 [journals]
+- [A dual self-regulatory platform for programmable biosynthesis of L-lysine-derived alkaloids](deep_reads/2026-08-01-10.1073_pnas.2612082123.md)  
+  0/10 [journals]
+- [Ligand regulation and function of preformed EGFR dimers](deep_reads/2026-08-01-10.1073_pnas.2602436123.md)  
+  0/10 [journals]
+
 #### Science Advances Vol 12 Issue 31
 
 - [Structural and mechanistic basis for the heterotetrameric benzaldehyde synthase from petunia](deep_reads/2026-07-31-10.1126_sciadv.aec7733.md)  
@@ -12207,72 +12396,6 @@
   7/10 [journals]
 - [Rigor is not readiness: The PERL framework for evidence-based policy](deep_reads/2026-07-31-10.1126_science.aef3529.md)  
   6/10 [journals]
-
-#### Proceedings of the National Academy of Sciences Vol 123 Issue 32
-
-- [Global threat exposure of islands in a changing world](deep_reads/2026-07-31-10.1073_pnas.2534106123.md)  
-  3/10 [journals]
-- [A wearable patch for continuous levodopa monitoring in sweat: Towards exertion and power-free pharmacodynamic assessment in Parkinson’s disease](deep_reads/2026-07-31-10.1073_pnas.2610453123.md)  
-  3/10 [journals]
-- [Accelerating <i>Campylobacter</i> zoonosis in the Anthropocene](deep_reads/2026-07-31-10.1073_pnas.2609969123.md)  
-  2/10 [journals]
-- [Nature’s antivenom: Combinations of conserved rattlesnake serum metalloproteinase inhibitors block the lethal action of viper venoms](deep_reads/2026-07-31-10.1073_pnas.2612168123.md)  
-  1/10 [journals]
-
-#### Proceedings of the National Academy of Sciences Vol 123 Issue 31
-
-- [A demographic theory of similarity-biased social learning](deep_reads/2026-07-31-10.1073_pnas.2606741123.md)  
-  7/10 [journals]
-- [Dynamic principles of concentration buffering through liquid–liquid phase separation](deep_reads/2026-07-31-10.1073_pnas.2526810123.md)  
-  6/10 [journals]
-- [Susceptibility and regulation of biomolecular condensates by solutes](deep_reads/2026-07-31-10.1073_pnas.2604434123.md)  
-  6/10 [journals]
-- [Sediment accumulation rate predicts the temporal resolution of marine fossil assemblages](deep_reads/2026-07-31-10.1073_pnas.2615368123.md)  
-  6/10 [journals]
-- [Long-horizon associative learning as a unifying framework for statistical learning across scales](deep_reads/2026-07-31-10.1073_pnas.2513423123.md)  
-  6/10 [journals]
-- [Parenthood decisions in uncertain times: Experimental evidence from four countries](deep_reads/2026-07-31-10.1073_pnas.2601690123.md)  
-  6/10 [journals]
-- [Developmental changes in memory structure and precision alter the use of retrieved episodes during decisions for reward](deep_reads/2026-07-31-10.1073_pnas.2525494123.md)  
-  5/10 [journals]
-- [Comparative archaeology reveals recurrent but nondeterministic pathways through complexification](deep_reads/2026-07-31-10.1073_pnas.2610959123.md)  
-  3/10 [journals]
-- [Adaptive molecular convergence is pervasive across deep time and largely decoupled from phenotypic convergence](deep_reads/2026-07-31-10.1073_pnas.2616248123.md)  
-  3/10 [journals]
-- [Discovery of a phenazine–thiol conjugase from sparse data using genome-informed machine learning](deep_reads/2026-07-31-10.1073_pnas.2607571123.md)  
-  3/10 [journals]
-- [Climate warming and atmospheric deposition jointly accelerate the Antarctic Peninsula atmosphere–glacier–land–ocean mercury loop](deep_reads/2026-07-31-10.1073_pnas.2613472123.md)  
-  3/10 [journals]
-- [Heat tolerance decreases and cold tolerance increases with elevation for a species-rich insect family on a tropical volcano](deep_reads/2026-07-31-10.1073_pnas.2533455123.md)  
-  3/10 [journals]
-- [Cryoelectron tomography reveals an age-related decline in mitoribosomes that contributes to T cell dysfunction in older individuals](deep_reads/2026-07-31-10.1073_pnas.2608102123.md)  
-  2/10 [journals]
-- [Mitochondrial pearling is controlled by the inner membrane and mediates segregation of the luminal content and membrane scission](deep_reads/2026-07-31-10.1073_pnas.2602775123.md)  
-  2/10 [journals]
-- [Psychological inoculation against climate doom](deep_reads/2026-07-31-10.1073_pnas.2609074123.md)  
-  2/10 [journals]
-- [The cortical scene processing network emerges in infancy, prior to independent navigation experience](deep_reads/2026-07-31-10.1073_pnas.2513126123.md)  
-  2/10 [journals]
-- [Effective mass of a migrating interface](deep_reads/2026-07-31-10.1073_pnas.2608055123.md)  
-  1/10 [journals]
-- [An antibody–drug conjugate active against antibiotic-resistant <i> <i>Neisseria</i> gonorrhoeae </i>](deep_reads/2026-07-31-10.1073_pnas.2534217123.md)  
-  1/10 [journals]
-- [Hypermutability of integrated sequences of viral origin in a chlorarachniophyte](deep_reads/2026-07-31-10.1073_pnas.2612999123.md)  
-  1/10 [journals]
-- [Anterior and posterior retrosplenial cortex employ distinct strategies for egocentric–allocentric transformation in spatial coding](deep_reads/2026-07-31-10.1073_pnas.2600565123.md)  
-  1/10 [journals]
-- [A posttranslational modification of fimbriae drives pathogenicity in <i> <i>Klebsiella pneumoniae</i> </i>](deep_reads/2026-07-31-10.1073_pnas.2611142123.md)  
-  0/10 [journals]
-- [Proteolytic activation of c-MYC facilitated by DOT1L](deep_reads/2026-07-31-10.1073_pnas.2525603123.md)  
-  0/10 [journals]
-- [Rapid microbial production of long-lived dissolved organic carbon in the global ocean](deep_reads/2026-07-31-10.1073_pnas.2601044123.md)  
-  0/10 [journals]
-- [The free-living wellspring of symbiotic nitrogen fixation in <i>Bradyrhizobium</i>](deep_reads/2026-07-31-10.1073_pnas.2604918123.md)  
-  0/10 [journals]
-- [Dual control of PIP2 drives germline/soma segregation in <i>Drosophila</i>](deep_reads/2026-07-31-10.1073_pnas.2604429123.md)  
-  0/10 [journals]
-- [Abrupt transition to irreversible damage in the overdrafted Sacramento Valley aquifer system](deep_reads/2026-07-31-10.1073_pnas.2526041123.md)  
-  0/10 [journals]
 
 #### Nature Methods Vol 23 Issue 7
 
