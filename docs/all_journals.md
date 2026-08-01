@@ -519,7 +519,9 @@
 
 ### Sci. Adv.
 
+- [Vol 12 Issue 31 · 2026-08-01](journals/2026-08-01-sci-adv-v12-i31.md)
 - [Vol 12 Issue 31 · 2026-07-31](journals/2026-07-31-sci-adv-v12-i31.md)
+- [Vol 12 Issue 30 · 2026-08-01](journals/2026-08-01-sci-adv-v12-i30.md)
 
 ## IEEE 系列 (IEEE)
 

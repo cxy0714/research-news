@@ -9366,15 +9366,22 @@
 
 ### 期刊
 
+#### Science Advances Vol 12 Issue 31
+
+- [Sub-annual resolution evidence for limited impact of the 74-ka Toba eruption on eastern African climate](deep_reads/2026-08-01-10.1126_sciadv.adv6851.md)  
+  6/10 [journals]
+- [Stardust as nucleation seeds for the earliest solids in the Solar System](deep_reads/2026-07-31-10.1126_sciadv.ady2311.md)  
+  0/10 [journals]
+
+#### Science Advances Vol 12 Issue 30
+
+- [The bombardment history on the lunar farside revealed by <sup>40</sup> Ar/ <sup>39</sup> Ar geochronology of Chang’e-6 impact melt rocks](deep_reads/2026-08-01-10.1126_sciadv.aee8718.md)  
+  0/10 [journals]
+
 #### Science Vol 393 Issue 6806
 
 - [Rubin telescope begins a 10-year movie of the cosmos](deep_reads/2026-08-01-10.1126_science.aek1833.md)  
   6/10 [journals]
-
-#### Science Advances Vol 12 Issue 31
-
-- [Stardust as nucleation seeds for the earliest solids in the Solar System](deep_reads/2026-07-31-10.1126_sciadv.ady2311.md)  
-  0/10 [journals]
 
 #### Nature Machine Intelligence Vol 8 Issue 7
 
@@ -12036,6 +12043,118 @@
 
 ### 期刊
 
+#### Science Advances Vol 12 Issue 31
+
+- [Human-inspired time-series health evaluation with an adaptive multimodal electronic skin](deep_reads/2026-08-01-10.1126_sciadv.aeg5606.md)  
+  6/10 [journals]
+- [Satellite observations reveal underestimation of CO <sub>2</sub> emissions in Africa and the Middle East](deep_reads/2026-08-01-10.1126_sciadv.aee1447.md)  
+  6/10 [journals]
+- [Structural and mechanistic basis for the heterotetrameric benzaldehyde synthase from petunia](deep_reads/2026-07-31-10.1126_sciadv.aec7733.md)  
+  0/10 [journals]
+- [Unveiling cascading lag effects of wetland methane emissions: Evidence from Lake Chad in Africa](deep_reads/2026-07-31-10.1126_sciadv.adx9866.md)  
+  0/10 [journals]
+- [Contrasting slab decarbonation patterns control deep carbon cycling efficiency in hot vs. cold subduction zones](deep_reads/2026-07-31-10.1126_sciadv.aee3217.md)  
+  0/10 [journals]
+- [Shared striatal neurons exhibit context-specific dynamics for internally and externally driven actions](deep_reads/2026-07-31-10.1126_sciadv.aed9386.md)  
+  0/10 [journals]
+- [Lipidomic profiling reveals age-dependent changes in plasma membrane lipids that affect neural stem cell aging](deep_reads/2026-07-31-10.1126_sciadv.aeh9771.md)  
+  0/10 [journals]
+- [Vulnerability to high temperature shapes global warming impacts on rice yield](deep_reads/2026-07-31-10.1126_sciadv.aed9226.md)  
+  0/10 [journals]
+- [Astrocyte redox imbalance underlies prelimbic neuronal hypoactivity and maladaptive affective behaviors in epilepsy](deep_reads/2026-07-31-10.1126_sciadv.aef6777.md)  
+  0/10 [journals]
+- [Ion-electron coupling–enabled mechanical ion transistor with ultralow subthreshold swing](deep_reads/2026-07-31-10.1126_sciadv.aed9096.md)  
+  0/10 [journals]
+- [Direct single-molecule visualization of Hsp90-mediated relief of an Hsp70-folding block](deep_reads/2026-07-31-10.1126_sciadv.aeg5464.md)  
+  0/10 [journals]
+- [A comprehensive map of missense trafficking variants in rhodopsin and their response to pharmacologic correction](deep_reads/2026-07-31-10.1126_sciadv.aef3518.md)  
+  0/10 [journals]
+- [Discovery of a multicomponent alloy forged by the Hiroshima atomic blast](deep_reads/2026-07-31-10.1126_sciadv.aeg8299.md)  
+  0/10 [journals]
+- [COQ8 chaperones coenzyme Q lipid intermediates through ATP-driven structural gating](deep_reads/2026-07-31-10.1126_sciadv.aeg1124.md)  
+  0/10 [journals]
+- [PBRM1-dependent PBAF targeting is required for EMT and metastasis in breast cancer](deep_reads/2026-07-31-10.1126_sciadv.aed8038.md)  
+  0/10 [journals]
+- [Musculoskeletal actuators with programmable morphology and tunable dynamics](deep_reads/2026-07-31-10.1126_sciadv.aeg4524.md)  
+  0/10 [journals]
+- [Observation of mirror-odd and mirror-even spin texture in ultrathin epitaxially strained RuO <sub>2</sub> films](deep_reads/2026-07-31-10.1126_sciadv.aec2917.md)  
+  0/10 [journals]
+- [Diffraction-quality, ultraflexible protein single crystals engineered with DNA](deep_reads/2026-07-31-10.1126_sciadv.aeh2948.md)  
+  0/10 [journals]
+- [Faster-and-tighter nitrogen cycle supports mature forest productivity under elevated CO <sub>2</sub>](deep_reads/2026-07-31-10.1126_sciadv.aed2732.md)  
+  0/10 [journals]
+- [Altered G <sub>i</sub> signaling in enteroendocrine K cells in vivo causes pronounced changes in glucose homeostasis](deep_reads/2026-07-31-10.1126_sciadv.aeb9805.md)  
+  0/10 [journals]
+- [Untrustworthy sources on Facebook and Instagram in 2020: Concentrated exposure but no attitudinal effects](deep_reads/2026-07-31-10.1126_sciadv.adz6502.md)  
+  0/10 [journals]
+- [Determining the molecular and physiological actions of subtype-selective nanobodies of GABA <sub>A</sub> receptors](deep_reads/2026-07-31-10.1126_sciadv.aeg3548.md)  
+  0/10 [journals]
+- [IoT-enabled wireless neural implant for chronic, programmable neuropharmacology and optogenetics](deep_reads/2026-07-31-10.1126_sciadv.aee8648.md)  
+  0/10 [journals]
+- [Operando state monitoring of diversified lithium-ion batteries via laser-excited ultrasonic sensing with transformer networks](deep_reads/2026-07-31-10.1126_sciadv.aec5358.md)  
+  0/10 [journals]
+- [Genome-wide analyses of an avian herpesvirus identify 10 loci associated with tumorigenicity and vaccine escape](deep_reads/2026-07-31-10.1126_sciadv.aee9024.md)  
+  0/10 [journals]
+- [Optical maneuvering of dandelion-inspired fliers with vortex-enabled stability](deep_reads/2026-07-31-10.1126_sciadv.aee8014.md)  
+  0/10 [journals]
+- [Reconstitution of actomyosin networks in cell-sized liposomes dissects distinct mechanisms of membrane blebbing and symmetry breaking](deep_reads/2026-07-31-10.1126_sciadv.aed8818.md)  
+  0/10 [journals]
+
+#### Science Advances Vol 12 Issue 30
+
+- [Westerly induced precipitation increase drives near-surface ground ice gain on the Tibetan Plateau despite warming](deep_reads/2026-08-01-10.1126_sciadv.aed1105.md)  
+  7/10 [journals]
+- [Genomic structural variation rescues a classic biological invader from a population bottleneck](deep_reads/2026-08-01-10.1126_sciadv.aed3656.md)  
+  7/10 [journals]
+- [HiC2Self: Self-supervised denoising for bulk and single-cell Hi-C contact maps](deep_reads/2026-08-01-10.1126_sciadv.adu8060.md)  
+  7/10 [journals]
+- [Interpretable dynamic quantitative vascular morphometry features using SHAP for anti-angiogenic therapy response prediction](deep_reads/2026-08-01-10.1126_sciadv.aeb3543.md)  
+  6/10 [journals]
+- [High-precision time-domain parallelism photonic computing](deep_reads/2026-08-01-10.1126_sciadv.aef7533.md)  
+  6/10 [journals]
+- [Holocene ocean-atmosphere coupling and Mediterranean sensitivity to Atlantic circulation: Lessons from the Late Bronze Age collapse](deep_reads/2026-08-01-10.1126_sciadv.aed5439.md)  
+  6/10 [journals]
+- [Spatially resolved fetal and maternal cell contributions to severe preeclampsia across gestation](deep_reads/2026-08-01-10.1126_sciadv.aed8964.md)  
+  4/10 [journals]
+- [Single-cell chromatin state transitions during epigenetic memory formation](deep_reads/2026-08-01-10.1126_sciadv.aeb0060.md)  
+  4/10 [journals]
+- [From cracks to informed circularity: Mechanics-guided decisions via high-throughput in situ failure analysis of recycled plastics](deep_reads/2026-08-01-10.1126_sciadv.aeh0456.md)  
+  3/10 [journals]
+- [Single-cell analysis of the epigenome and 3D chromatin architecture in the human retina](deep_reads/2026-08-01-10.1126_sciadv.adv9162.md)  
+  3/10 [journals]
+- [Yersiniabactin-producing adherent-invasive <i>Escherichia coli</i> exploit host glycolysis to drive macrophage HIF-1α stabilization](deep_reads/2026-08-01-10.1126_sciadv.aeb7972.md)  
+  2/10 [journals]
+- [LPA/LPAR signaling drives temporomandibular disorders–like pain through regulating the expression and sensitization of PIEZO2](deep_reads/2026-08-01-10.1126_sciadv.aed1854.md)  
+  2/10 [journals]
+- [Above-twofold quantum super-resolution microscopy enabled by multiple idler passes with entangled biphotons](deep_reads/2026-08-01-10.1126_sciadv.aea9457.md)  
+  1/10 [journals]
+- [Unheralded high MHC class II polymorphism in the abundant Atlantic herring resolved by long-read sequencing](deep_reads/2026-08-01-10.1126_sciadv.aea2862.md)  
+  1/10 [journals]
+- [mTOR signaling contributes to system-driven rhythmic gene expression in mouse liver](deep_reads/2026-08-01-10.1126_sciadv.aec0131.md)  
+  1/10 [journals]
+- [Van der Waals template–encoded soft epitaxy of tellurium enabled by atomic layer deposition](deep_reads/2026-08-01-10.1126_sciadv.aef1430.md)  
+  1/10 [journals]
+- [A viral protein diverts the endocytic VPS9a-Rab5 pathway to promote virus infection in plants](deep_reads/2026-08-01-10.1126_sciadv.aeg2304.md)  
+  1/10 [journals]
+- [Strain-specific epistasis shapes fitness landscapes of APOBEC3G antagonism by HIV-1 Vif proteins](deep_reads/2026-08-01-10.1126_sciadv.aed4872.md)  
+  1/10 [journals]
+- [Eukaryotic-like microtubules and dynamic instability of Asgard archaeal tubulins](deep_reads/2026-08-01-10.1126_sciadv.aeh1082.md)  
+  0/10 [journals]
+- [Physics-constrained learning framework for trustworthy microrobot navigation autonomy](deep_reads/2026-08-01-10.1126_sciadv.aef7326.md)  
+  0/10 [journals]
+- [A genetically encoded sensor of ionic stress links cellular proton dynamics to sleep](deep_reads/2026-08-01-10.1126_sciadv.aef3219.md)  
+  0/10 [journals]
+- [Silkworm cultivation predating the Silk Road in southern Central Asia (2000 BCE)](deep_reads/2026-08-01-10.1126_sciadv.aec8738.md)  
+  0/10 [journals]
+- [Ancient genomes from Ladakh reveal 2800-year-old admixture between Tibetans and South Asians](deep_reads/2026-08-01-10.1126_sciadv.aeb3636.md)  
+  0/10 [journals]
+- [Molecular mechanism of CtBP1-S/BARS–driven membrane fission and its cellular control by metabolic ligands](deep_reads/2026-08-01-10.1126_sciadv.aee0624.md)  
+  0/10 [journals]
+- [A conserved phospho-switch controls receptor kinase SDS2 activation and homeostasis in rice immunity](deep_reads/2026-08-01-10.1126_sciadv.aed5028.md)  
+  0/10 [journals]
+- [Collective climbing of colloidal swarms on the vertical wall](deep_reads/2026-08-01-10.1126_sciadv.aed9832.md)  
+  0/10 [journals]
+
 #### Science Vol 393 Issue 6809
 
 - [Single-cell multiomics connects 3D genome and transcriptome alterations in Alzheimer’s disease](deep_reads/2026-08-01-10.1126_science.adz1652.md)  
@@ -12693,59 +12812,6 @@
 - [Predicting the conformational flexibility of antibody and T cell receptor complementarity-determining regions](deep_reads/2026-08-01-10.1038_s42256-025-01131-6.md)  
   0/10 [journals]
 - [Flow matching for accelerated simulation of atomic transport in crystalline materials](deep_reads/2026-08-01-10.1038_s42256-025-01125-4.md)  
-  0/10 [journals]
-
-#### Science Advances Vol 12 Issue 31
-
-- [Structural and mechanistic basis for the heterotetrameric benzaldehyde synthase from petunia](deep_reads/2026-07-31-10.1126_sciadv.aec7733.md)  
-  0/10 [journals]
-- [Unveiling cascading lag effects of wetland methane emissions: Evidence from Lake Chad in Africa](deep_reads/2026-07-31-10.1126_sciadv.adx9866.md)  
-  0/10 [journals]
-- [Contrasting slab decarbonation patterns control deep carbon cycling efficiency in hot vs. cold subduction zones](deep_reads/2026-07-31-10.1126_sciadv.aee3217.md)  
-  0/10 [journals]
-- [Shared striatal neurons exhibit context-specific dynamics for internally and externally driven actions](deep_reads/2026-07-31-10.1126_sciadv.aed9386.md)  
-  0/10 [journals]
-- [Lipidomic profiling reveals age-dependent changes in plasma membrane lipids that affect neural stem cell aging](deep_reads/2026-07-31-10.1126_sciadv.aeh9771.md)  
-  0/10 [journals]
-- [Vulnerability to high temperature shapes global warming impacts on rice yield](deep_reads/2026-07-31-10.1126_sciadv.aed9226.md)  
-  0/10 [journals]
-- [Astrocyte redox imbalance underlies prelimbic neuronal hypoactivity and maladaptive affective behaviors in epilepsy](deep_reads/2026-07-31-10.1126_sciadv.aef6777.md)  
-  0/10 [journals]
-- [Ion-electron coupling–enabled mechanical ion transistor with ultralow subthreshold swing](deep_reads/2026-07-31-10.1126_sciadv.aed9096.md)  
-  0/10 [journals]
-- [Direct single-molecule visualization of Hsp90-mediated relief of an Hsp70-folding block](deep_reads/2026-07-31-10.1126_sciadv.aeg5464.md)  
-  0/10 [journals]
-- [A comprehensive map of missense trafficking variants in rhodopsin and their response to pharmacologic correction](deep_reads/2026-07-31-10.1126_sciadv.aef3518.md)  
-  0/10 [journals]
-- [Discovery of a multicomponent alloy forged by the Hiroshima atomic blast](deep_reads/2026-07-31-10.1126_sciadv.aeg8299.md)  
-  0/10 [journals]
-- [COQ8 chaperones coenzyme Q lipid intermediates through ATP-driven structural gating](deep_reads/2026-07-31-10.1126_sciadv.aeg1124.md)  
-  0/10 [journals]
-- [PBRM1-dependent PBAF targeting is required for EMT and metastasis in breast cancer](deep_reads/2026-07-31-10.1126_sciadv.aed8038.md)  
-  0/10 [journals]
-- [Musculoskeletal actuators with programmable morphology and tunable dynamics](deep_reads/2026-07-31-10.1126_sciadv.aeg4524.md)  
-  0/10 [journals]
-- [Observation of mirror-odd and mirror-even spin texture in ultrathin epitaxially strained RuO <sub>2</sub> films](deep_reads/2026-07-31-10.1126_sciadv.aec2917.md)  
-  0/10 [journals]
-- [Diffraction-quality, ultraflexible protein single crystals engineered with DNA](deep_reads/2026-07-31-10.1126_sciadv.aeh2948.md)  
-  0/10 [journals]
-- [Faster-and-tighter nitrogen cycle supports mature forest productivity under elevated CO <sub>2</sub>](deep_reads/2026-07-31-10.1126_sciadv.aed2732.md)  
-  0/10 [journals]
-- [Altered G <sub>i</sub> signaling in enteroendocrine K cells in vivo causes pronounced changes in glucose homeostasis](deep_reads/2026-07-31-10.1126_sciadv.aeb9805.md)  
-  0/10 [journals]
-- [Untrustworthy sources on Facebook and Instagram in 2020: Concentrated exposure but no attitudinal effects](deep_reads/2026-07-31-10.1126_sciadv.adz6502.md)  
-  0/10 [journals]
-- [Determining the molecular and physiological actions of subtype-selective nanobodies of GABA <sub>A</sub> receptors](deep_reads/2026-07-31-10.1126_sciadv.aeg3548.md)  
-  0/10 [journals]
-- [IoT-enabled wireless neural implant for chronic, programmable neuropharmacology and optogenetics](deep_reads/2026-07-31-10.1126_sciadv.aee8648.md)  
-  0/10 [journals]
-- [Operando state monitoring of diversified lithium-ion batteries via laser-excited ultrasonic sensing with transformer networks](deep_reads/2026-07-31-10.1126_sciadv.aec5358.md)  
-  0/10 [journals]
-- [Genome-wide analyses of an avian herpesvirus identify 10 loci associated with tumorigenicity and vaccine escape](deep_reads/2026-07-31-10.1126_sciadv.aee9024.md)  
-  0/10 [journals]
-- [Optical maneuvering of dandelion-inspired fliers with vortex-enabled stability](deep_reads/2026-07-31-10.1126_sciadv.aee8014.md)  
-  0/10 [journals]
-- [Reconstitution of actomyosin networks in cell-sized liposomes dissects distinct mechanisms of membrane blebbing and symmetry breaking](deep_reads/2026-07-31-10.1126_sciadv.aed8818.md)  
   0/10 [journals]
 
 #### Science Vol 393 Issue 6810
