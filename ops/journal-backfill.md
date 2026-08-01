@@ -243,4 +243,4 @@ general 组：
 broad 组：
 - [x] (2026-08-01) `--only NMI --n-issues 15`
 - [x] (2026-08-01) `--only "Sci. Adv." --n-issues 4`   ⚠ 每期大，必要时 2+2
-- [ ] `--only "Nat. Commun." --n-issues 5`   ⚠ 滚动刊，2+3 分两步更稳
+- [x] (2026-08-01) `--only "Nat. Commun." --n-issues 5`   ⚠ 滚动刊，2+3 分两步更稳

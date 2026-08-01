@@ -10792,6 +10792,8 @@
 
 - [Global trade responses to shark finning regulations](deep_reads/2026-07-31-10.1038_s41467-026-75625-1.md)  
   7/10 [journals]
+- [The genetics of fibromyalgia and its relationships to psychiatric and medical traits](deep_reads/2026-08-01-10.1038_s41467-026-75256-6.md)  
+  6/10 [journals]
 
 #### Statistics and Computing Vol 36 Issue 1
 
@@ -12814,6 +12816,35 @@
 - [Flow matching for accelerated simulation of atomic transport in crystalline materials](deep_reads/2026-08-01-10.1038_s42256-025-01125-4.md)  
   0/10 [journals]
 
+#### Nature Communications Vol 17 Issue 1
+
+- [Decadal sink-source shifts of forest aboveground carbon since 1988](deep_reads/2026-08-01-10.1038_s41467-026-76093-3.md)  
+  7/10 [journals]
+- [Rapid and quantitative measurement of bacteriophage infectivity via fully automated droplet digital PCR](deep_reads/2026-08-01-10.1038_s41467-026-75746-7.md)  
+  6/10 [journals]
+- [Coastal flooding at predictable hours](deep_reads/2026-08-01-10.1038_s41467-026-75710-5.md)  
+  5/10 [journals]
+- [Cerebrospinal fluid biomarkers reveal transdiagnostic synaptic dysfunction across major psychiatric disorders](deep_reads/2026-07-31-10.1038_s41467-026-76187-y.md)  
+  5/10 [journals]
+- [Nonlinear reversal of photoexcitation on the attosecond time scale improves ultrafast X-ray diffraction images](deep_reads/2026-08-01-10.1038_s41467-026-75969-8.md)  
+  2/10 [journals]
+- [Apparatus for quantum-mixture research in microgravity](deep_reads/2026-08-01-10.1038_s41467-026-75968-9.md)  
+  2/10 [journals]
+- [Inhaled LTI-03 for idiopathic pulmonary fibrosis: a randomized dose escalation study](deep_reads/2026-08-01-10.1038_s41467-026-75291-3.md)  
+  1/10 [journals]
+- [Chiral diffraction from aperiodic monotile structure](deep_reads/2026-08-01-10.1038_s41467-026-75023-7.md)  
+  1/10 [journals]
+- [Golgi organization regulates stem cell function in the small intestine](deep_reads/2026-08-01-10.1038_s41467-026-75679-1.md)  
+  1/10 [journals]
+- [A tetranuclear nickel hydride cluster capable of reversible activation of aromatic and aliphatic C–H bonds](deep_reads/2026-08-01-10.1038_s41467-026-76006-4.md)  
+  1/10 [journals]
+- [A distinct CAR-T cell phenotype mediates therapeutic response at limited doses](deep_reads/2026-08-01-10.1038_s41467-026-76068-4.md)  
+  0/10 [journals]
+- [Exciton thermal radiation from macroscale membranes composed of chirality-sorted carbon nanotubes and its control](deep_reads/2026-08-01-10.1038_s41467-026-75711-4.md)  
+  0/10 [journals]
+- [Single-photon detection in few-layer NbSe2 superconducting nanowires](deep_reads/2026-08-01-10.1038_s41467-026-75646-w.md)  
+  0/10 [journals]
+
 #### Science Vol 393 Issue 6810
 
 - [Atlas of lysosomal aging reveals a metabolite signature shared with lysosomal storage disorders](deep_reads/2026-07-31-10.1126_science.ady0832.md)  
@@ -12861,11 +12892,6 @@
   0/10 [journals]
 - [Plagiarism of ideas in the age of generative artificial intelligence](deep_reads/2026-07-31-10.1038_s42256-026-01247-3.md)  
   0/10 [journals]
-
-#### Nature Communications Vol 17 Issue 1
-
-- [Cerebrospinal fluid biomarkers reveal transdiagnostic synaptic dysfunction across major psychiatric disorders](deep_reads/2026-07-31-10.1038_s41467-026-76187-y.md)  
-  5/10 [journals]
 
 #### Nature Vol 655 Issue 8125
 
