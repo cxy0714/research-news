@@ -238,7 +238,7 @@ general 组：
 - [x] (2026-08-01) `--only Nature --n-issues 8`   ⚠ 先跑 8，看量再往 16 加（凑 240 篇）
 - [x] (2026-08-01) `--only Science --n-issues 6`
 - [x] (2026-08-01) `--only PNAS --n-issues 5`   ⚠ 单期大，超 130 篇就拆成 3+2
-- [ ] `--only "Nat. Methods" --n-issues 10`
+- [x] (2026-08-01) `--only "Nat. Methods" --n-issues 10`
 
 broad 组：
 - [ ] `--only NMI --n-issues 15`

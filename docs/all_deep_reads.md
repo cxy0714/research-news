@@ -8271,6 +8271,11 @@
 
 ### 期刊
 
+#### Nature Methods Vol 22 Issue 12
+
+- [Jaxley: differentiable simulation enables large-scale training of detailed biophysical models of neural dynamics](deep_reads/2026-08-01-10.1038_s41592-025-02895-w.md)  
+  7/10 [journals]
+
 #### Nature Methods Vol 23 Issue 7
 
 - [Chromatix: a differentiable, GPU-accelerated wave-optics library](deep_reads/2026-07-31-10.1038_s41592-026-03121-x.md)  
@@ -12335,6 +12340,217 @@
 - [Ligand regulation and function of preformed EGFR dimers](deep_reads/2026-08-01-10.1073_pnas.2602436123.md)  
   0/10 [journals]
 
+#### Nature Methods Vol 23 Issue 6
+
+- [From possibility to precision in macromolecular ensemble prediction](deep_reads/2026-08-01-10.1038_s41592-026-03084-z.md)  
+  7/10 [journals]
+- [Resolving sensitivity, specificity and signal contamination in Xenium spatial transcriptomics](deep_reads/2026-08-01-10.1038_s41592-026-03089-8.md)  
+  7/10 [journals]
+- [Decoding sequence determinants of gene expression in diverse cellular and disease states](deep_reads/2026-08-01-10.1038_s41592-026-03102-0.md)  
+  6/10 [journals]
+- [Unraveling lncRNA diversity at a single cell resolution and in a spatial context across different cancer types](deep_reads/2026-08-01-10.1038_s41592-026-03071-4.md)  
+  6/10 [journals]
+- [FILM: mapping organellar metabolism by mid-infrared photothermal-modulated fluorescence](deep_reads/2026-08-01-10.1038_s41592-026-03090-1.md)  
+  6/10 [journals]
+- [eSIG-Net: an interaction language model that decodes the protein code of single mutations](deep_reads/2026-08-01-10.1038_s41592-026-03086-x.md)  
+  6/10 [journals]
+- [Multiplexed perturbation enables scalable pooled screens](deep_reads/2026-08-01-10.1038_s41592-026-03095-w.md)  
+  5/10 [journals]
+- [StringTie3 improves total RNA-seq assembly by resolving nascent and mature transcripts](deep_reads/2026-08-01-10.1038_s41592-026-03080-3.md)  
+  5/10 [journals]
+- [Subcellular chemical mapping using correlated cryogenic electron and mass spectrometry imaging](deep_reads/2026-08-01-10.1038_s41592-026-03109-7.md)  
+  4/10 [journals]
+- [A multimodal adaptive optical microscope for in vivo imaging from molecules to organisms](deep_reads/2026-08-01-10.1038_s41592-026-03066-1.md)  
+  4/10 [journals]
+- [Recommendations and considerations for hydroxyl radical protein footprinting–mass spectrometry](deep_reads/2026-08-01-10.1038_s41592-026-03083-0.md)  
+  4/10 [journals]
+- [Neuropixels Opto: combining high-resolution electrophysiology and optogenetics](deep_reads/2026-07-31-10.1038_s41592-026-03076-z.md)  
+  4/10 [journals]
+
+#### Nature Methods Vol 23 Issue 5
+
+- [Direct RNA sequencing and signal alignment reveal RNA structure ensembles in a eukaryotic cell](deep_reads/2026-08-01-10.1038_s41592-026-03069-y.md)  
+  7/10 [journals]
+- [CREsted: modeling genomic and synthetic cell-type-specific enhancers across tissues and species](deep_reads/2026-08-01-10.1038_s41592-026-03057-2.md)  
+  7/10 [journals]
+- [$${\bf{Micro}}{{\mathbb{S}}}{\bf{plit}}$$: semantic unmixing of fluorescent microscopy data](deep_reads/2026-08-01-10.1038_s41592-026-03082-1.md)  
+  6/10 [journals]
+- [Adaptive optical correction for in vivo two-photon fluorescence microscopy with neural fields](deep_reads/2026-08-01-10.1038_s41592-026-03053-6.md)  
+  6/10 [journals]
+- [PinkyCaMP: an mScarlet-based calcium sensor with enhanced brightness, photostability and multiplexing capabilities](deep_reads/2026-08-01-10.1038_s41592-026-03065-2.md)  
+  2/10 [journals]
+- [A series of spontaneously blinking dyes for super-resolution microscopy](deep_reads/2026-08-01-10.1038_s41592-026-03062-5.md)  
+  2/10 [journals]
+
+#### Nature Methods Vol 23 Issue 4
+
+- [Toward a unified framework for determining conformational ensembles of disordered proteins](deep_reads/2026-08-01-10.1038_s41592-026-03003-2.md)  
+  7/10 [journals]
+- [Quantifying uncertainty in protein representations across models and tasks](deep_reads/2026-08-01-10.1038_s41592-026-03028-7.md)  
+  6/10 [journals]
+- [3d-OT: a deep geometry-aware framework for heterogeneous slices alignment of spatial multi-omics](deep_reads/2026-08-01-10.1038_s41592-026-03034-9.md)  
+  6/10 [journals]
+- [Integration of alternative fragmentation techniques into standard LC-MS workflows using a single deep learning model enhances proteome coverage](deep_reads/2026-08-01-10.1038_s41592-026-03042-9.md)  
+  6/10 [journals]
+- [LazySlide: accessible and interoperable whole-slide image analysis](deep_reads/2026-08-01-10.1038_s41592-026-03044-7.md)  
+  6/10 [journals]
+- [Helixer: ab initio prediction of primary eukaryotic gene models combining deep learning and a hidden Markov model](deep_reads/2026-08-01-10.1038_s41592-025-02939-1.md)  
+  6/10 [journals]
+- [AlphaFold as a prior: experimental structure determination conditioned on a pretrained neural network](deep_reads/2026-08-01-10.1038_s41592-026-03047-4.md)  
+  5/10 [journals]
+- [Compressing the collective knowledge of ESM into a single protein language model](deep_reads/2026-08-01-10.1038_s41592-026-03050-9.md)  
+  5/10 [journals]
+- [Isotonic and minimally invasive optical clearing media for live cell imaging ex vivo and in vivo](deep_reads/2026-08-01-10.1038_s41592-026-03023-y.md)  
+  3/10 [journals]
+- [Differentiation of sphingomyelin and cholesterol by hyperspectral mid-infrared detection of single-bond vibrational modes in the fingerprint region](deep_reads/2026-08-01-10.1038_s41592-026-03025-w.md)  
+  2/10 [journals]
+- [Tunable hydrogel-based micropillar arrays for myelination studies](deep_reads/2026-08-01-10.1038_s41592-026-03048-3.md)  
+  1/10 [journals]
+
+#### Nature Methods Vol 23 Issue 3
+
+- [Rate variation and recurrent sequence errors in pandemic-scale phylogenetics](deep_reads/2026-08-01-10.1038_s41592-025-02932-8.md)  
+  7/10 [journals]
+- [MaAsLin 3: refining and extending generalized multivariable linear models for meta-omic association discovery](deep_reads/2026-08-01-10.1038_s41592-025-02923-9.md)  
+  7/10 [journals]
+- [Inferring cell differentiation maps from lineage tracing data](deep_reads/2026-08-01-10.1038_s41592-025-02903-z.md)  
+  7/10 [journals]
+- [STORIES: learning cell fate landscapes from spatial transcriptomics using optimal transport](deep_reads/2026-08-01-10.1038_s41592-025-02855-4.md)  
+  7/10 [journals]
+- [DECODE: deep learning-based common deconvolution framework for various omics data](deep_reads/2026-08-01-10.1038_s41592-026-03007-y.md)  
+  6/10 [journals]
+- [Addressing pandemic-wide systematic errors in the SARS-CoV-2 phylogeny](deep_reads/2026-08-01-10.1038_s41592-025-02947-1.md)  
+  6/10 [journals]
+- [Deep-coverage single-cell metabolomics enabled by ion mobility-resolved mass cytometry](deep_reads/2026-08-01-10.1038_s41592-025-02970-2.md)  
+  6/10 [journals]
+- [Inferring cancer type-specific patterns of metastatic spread using Metient](deep_reads/2026-08-01-10.1038_s41592-025-02924-8.md)  
+  6/10 [journals]
+- [High-throughput phenomics of global ant biodiversity](deep_reads/2026-08-01-10.1038_s41592-026-03005-0.md)  
+  5/10 [journals]
+- [AF2BIND: predicting small-molecule binding sites using the pair representation of AlphaFold2](deep_reads/2026-08-01-10.1038_s41592-026-03011-2.md)  
+  4/10 [journals]
+- [Next-generation multicolor indicators for in vivo imaging of norepinephrine](deep_reads/2026-08-01-10.1038_s41592-026-03006-z.md)  
+  2/10 [journals]
+- [Author Correction: Single-cell multi-omic detection of DNA methylation and histone modifications reconstructs the dynamics of epigenomic maintenance](deep_reads/2026-08-01-10.1038_s41592-026-03031-y.md)  
+  0/10 [journals]
+
+#### Nature Methods Vol 23 Issue 2
+
+- [Pertpy: an end-to-end framework for perturbation analysis](deep_reads/2026-08-01-10.1038_s41592-025-02909-7.md)  
+  7/10 [journals]
+- [cellSTAAR: incorporating single-cell-sequencing-based functional data to boost power in rare variant association testing of noncoding regions](deep_reads/2026-08-01-10.1038_s41592-025-02919-5.md)  
+  7/10 [journals]
+- [Computational strategies for cross-species knowledge transfer](deep_reads/2026-08-01-10.1038_s41592-025-02931-9.md)  
+  7/10 [journals]
+- [Cell context-dependent in silico organelle localization in label-free microscopy images](deep_reads/2026-08-01-10.1038_s41592-025-02960-4.md)  
+  6/10 [journals]
+- [Systematic scRNA-seq screens profile neural organoid response to morphogens](deep_reads/2026-08-01-10.1038_s41592-025-02927-5.md)  
+  5/10 [journals]
+- [Glutamate indicators with increased sensitivity and tailored deactivation rates](deep_reads/2026-08-01-10.1038_s41592-025-02965-z.md)  
+  2/10 [journals]
+
+#### Nature Methods Vol 23 Issue 1
+
+- [Latent space-based network analysis for brain–behavior linking in neuroimaging](deep_reads/2026-08-01-10.1038_s41592-025-02896-9.md)  
+  8/10 [journals]
+- [Methods to analyze cell migration data: fundamentals and practical guidelines](deep_reads/2026-08-01-10.1038_s41592-025-02935-5.md)  
+  7/10 [journals]
+- [Assessment of computational methods in predicting TCR–epitope binding recognition](deep_reads/2026-08-01-10.1038_s41592-025-02910-0.md)  
+  7/10 [journals]
+- [ImmunoMatch learns and predicts cognate pairing of heavy and light immunoglobulin chains](deep_reads/2026-08-01-10.1038_s41592-025-02913-x.md)  
+  7/10 [journals]
+- [Squidiff: predicting cellular development and responses to perturbations using a diffusion model](deep_reads/2026-08-01-10.1038_s41592-025-02877-y.md)  
+  7/10 [journals]
+- [C-COMPASS: a user-friendly neural network tool profiles cell compartments at protein and lipid levels](deep_reads/2026-08-01-10.1038_s41592-025-02880-3.md)  
+  6/10 [journals]
+- [Deep Imputation for Skeleton data (DISK) for behavioral science](deep_reads/2026-08-01-10.1038_s41592-025-02893-y.md)  
+  6/10 [journals]
+- [TIRTL-seq: deep, quantitative and affordable paired TCR repertoire sequencing](deep_reads/2026-08-01-10.1038_s41592-025-02907-9.md)  
+  6/10 [journals]
+- [SmartEM: machine learning-guided electron microscopy](deep_reads/2026-08-01-10.1038_s41592-025-02929-3.md)  
+  5/10 [journals]
+- [DynamicAtlas: a morphodynamic atlas for Drosophila development](deep_reads/2026-08-01-10.1038_s41592-025-02897-8.md)  
+  4/10 [journals]
+- [Selecting the optimal cell migration assay: fundamentals and practical guidelines](deep_reads/2026-08-01-10.1038_s41592-025-02890-1.md)  
+  4/10 [journals]
+- [Parallel stopped-flow interrogation of diverse biological systems at the single-molecule scale](deep_reads/2026-08-01-10.1038_s41592-025-02944-4.md)  
+  3/10 [journals]
+- [Atom-level enzyme active site scaffolding using RFdiffusion2](deep_reads/2026-08-01-10.1038_s41592-025-02975-x.md)  
+  2/10 [journals]
+- [CaBLAM: a high-contrast bioluminescent Ca2+ indicator derived from an engineered Oplophorus gracilirostris luciferase](deep_reads/2026-08-01-10.1038_s41592-025-02972-0.md)  
+  2/10 [journals]
+- [ExoSloNano: multimodal nanogold labels for identification of macromolecules in live cells and cryo-electron tomograms](deep_reads/2026-08-01-10.1038_s41592-025-02928-4.md)  
+  2/10 [journals]
+- [A highly photostable monomeric red fluorescent protein for dual-color 3D STED and time-lapse 3D SIM imaging](deep_reads/2026-08-01-10.1038_s41592-025-02962-2.md)  
+  2/10 [journals]
+
+#### Nature Methods Vol 22 Issue 12
+
+- [CellSAM: a foundation model for cell segmentation](deep_reads/2026-08-01-10.1038_s41592-025-02879-w.md)  
+  6/10 [journals]
+- [Nicheformer: a foundation model for single-cell and spatial omics](deep_reads/2026-08-01-10.1038_s41592-025-02814-z.md)  
+  6/10 [journals]
+- [High-resolution imaging mass cytometry to map subcellular structures](deep_reads/2026-08-01-10.1038_s41592-025-02889-8.md)  
+  6/10 [journals]
+- [Nondestructive X-ray tomography of brain tissue ultrastructure](deep_reads/2026-08-01-10.1038_s41592-025-02891-0.md)  
+  5/10 [journals]
+- [FX-Cell: a method for single-cell RNA sequencing on difficult-to-digest and cryopreserved plant samples](deep_reads/2026-08-01-10.1038_s41592-025-02900-2.md)  
+  2/10 [journals]
+- [Light-induced extracellular vesicle and particle adsorption](deep_reads/2026-08-01-10.1038_s41592-025-02914-w.md)  
+  2/10 [journals]
+- [Multiplexed ultrasound imaging of gene expression](deep_reads/2026-08-01-10.1038_s41592-025-02825-w.md)  
+  2/10 [journals]
+- [Author Correction: Single-cell multi-omic detection of DNA methylation and histone modifications reconstructs the dynamics of epigenomic maintenance](deep_reads/2026-08-01-10.1038_s41592-025-02979-7.md)  
+  0/10 [journals]
+
+#### Nature Methods Vol 22 Issue 11
+
+- [Deep generative modeling of sample-level heterogeneity in single-cell genomics](deep_reads/2026-08-01-10.1038_s41592-025-02808-x.md)  
+  7/10 [journals]
+- [Cell tracking with accurate error prediction](deep_reads/2026-08-01-10.1038_s41592-025-02845-6.md)  
+  7/10 [journals]
+- [PHLOWER leverages single-cell multimodal data to infer complex, multi-branching cell differentiation trajectories](deep_reads/2026-08-01-10.1038_s41592-025-02870-5.md)  
+  6/10 [journals]
+- [Multitask benchmarking of single-cell multimodal omics integration methods](deep_reads/2026-08-01-10.1038_s41592-025-02856-3.md)  
+  6/10 [journals]
+- [Monod: model-based discovery and integration through fitting stochastic transcriptional dynamics to single-cell sequencing data](deep_reads/2026-08-01-10.1038_s41592-025-02832-x.md)  
+  5/10 [journals]
+- [Universal consensus 3D segmentation of cells from 2D segmented stacks](deep_reads/2026-08-01-10.1038_s41592-025-02887-w.md)  
+  5/10 [journals]
+- [Improved reconstruction of single-cell developmental potential with CytoTRACE 2](deep_reads/2026-08-01-10.1038_s41592-025-02857-2.md)  
+  5/10 [journals]
+- [scooby: modeling multimodal genomic profiles from DNA sequence at single-cell resolution](deep_reads/2026-08-01-10.1038_s41592-025-02854-5.md)  
+  5/10 [journals]
+- [CELLECT: contrastive embedding learning for large-scale efficient cell tracking](deep_reads/2026-08-01-10.1038_s41592-025-02886-x.md)  
+  5/10 [journals]
+- [nELISA: a high-throughput, high-plex platform enables quantitative profiling of the inflammatory secretome](deep_reads/2026-08-01-10.1038_s41592-025-02861-6.md)  
+  4/10 [journals]
+- [Annotating the genome at single-nucleotide resolution with DNA foundation models](deep_reads/2026-08-01-10.1038_s41592-025-02881-2.md)  
+  4/10 [journals]
+- [A portable poison exon for small-molecule control of mammalian gene expression](deep_reads/2026-08-01-10.1038_s41592-025-02860-7.md)  
+  1/10 [journals]
+
+#### Nature Methods Vol 22 Issue 10
+
+- [Automated classification of cellular expression in multiplexed imaging data with Nimbus](deep_reads/2026-08-01-10.1038_s41592-025-02826-9.md)  
+  0/10 [journals]
+- [All-at-once RNA folding with 3D motif prediction framed by evolutionary information](deep_reads/2026-08-01-10.1038_s41592-025-02833-w.md)  
+  0/10 [journals]
+- [Foundation model for efficient biological discovery in single-molecule time traces](deep_reads/2026-08-01-10.1038_s41592-025-02839-4.md)  
+  0/10 [journals]
+- [Giotto Suite: a multiscale and technology-agnostic spatial multiomics analysis ecosystem](deep_reads/2026-08-01-10.1038_s41592-025-02817-w.md)  
+  0/10 [journals]
+- [HippoMaps: multiscale cartography of human hippocampal organization](deep_reads/2026-08-01-10.1038_s41592-025-02783-3.md)  
+  0/10 [journals]
+- [Fourier-based three-dimensional multistage transformer for aberration correction in multicellular specimens](deep_reads/2026-08-01-10.1038_s41592-025-02844-7.md)  
+  0/10 [journals]
+- [Highly multiplexed 3D profiling of cell states and immune niches in human tumors](deep_reads/2026-08-01-10.1038_s41592-025-02824-x.md)  
+  0/10 [journals]
+- [Uncovering hidden protein modifications with native top-down mass spectrometry](deep_reads/2026-08-01-10.1038_s41592-025-02846-5.md)  
+  0/10 [journals]
+- [Single-cell multi-omic detection of DNA methylation and histone modifications reconstructs the dynamics of epigenomic maintenance](deep_reads/2026-08-01-10.1038_s41592-025-02847-4.md)  
+  0/10 [journals]
+
 #### Science Advances Vol 12 Issue 31
 
 - [Structural and mechanistic basis for the heterotetrameric benzaldehyde synthase from petunia](deep_reads/2026-07-31-10.1126_sciadv.aec7733.md)  
@@ -12419,11 +12635,6 @@
   3/10 [journals]
 - [OrthoFinder: improved phylogenetic orthology inference with enhanced accuracy and scalability](deep_reads/2026-07-31-10.1038_s41592-026-03126-6.md)  
   2/10 [journals]
-
-#### Nature Methods Vol 23 Issue 6
-
-- [Neuropixels Opto: combining high-resolution electrophysiology and optogenetics](deep_reads/2026-07-31-10.1038_s41592-026-03076-z.md)  
-  4/10 [journals]
 
 #### Nature Machine Intelligence Vol 8 Issue 7
 

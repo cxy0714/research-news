@@ -457,8 +457,18 @@
 
 ### Nat. Methods
 
+- [Vol 23 Issue 7 · 2026-08-01](journals/2026-08-01-nat-methods-v23-i7.md)
 - [Vol 23 Issue 7 · 2026-07-31](journals/2026-07-31-nat-methods-v23-i7.md)
+- [Vol 23 Issue 6 · 2026-08-01](journals/2026-08-01-nat-methods-v23-i6.md)
 - [Vol 23 Issue 6 · 2026-07-31](journals/2026-07-31-nat-methods-v23-i6.md)
+- [Vol 23 Issue 5 · 2026-08-01](journals/2026-08-01-nat-methods-v23-i5.md)
+- [Vol 23 Issue 4 · 2026-08-01](journals/2026-08-01-nat-methods-v23-i4.md)
+- [Vol 23 Issue 3 · 2026-08-01](journals/2026-08-01-nat-methods-v23-i3.md)
+- [Vol 23 Issue 2 · 2026-08-01](journals/2026-08-01-nat-methods-v23-i2.md)
+- [Vol 23 Issue 1 · 2026-08-01](journals/2026-08-01-nat-methods-v23-i1.md)
+- [Vol 22 Issue 12 · 2026-08-01](journals/2026-08-01-nat-methods-v22-i12.md)
+- [Vol 22 Issue 11 · 2026-08-01](journals/2026-08-01-nat-methods-v22-i11.md)
+- [Vol 22 Issue 10 · 2026-08-01](journals/2026-08-01-nat-methods-v22-i10.md)
 
 ### Nature
 
