@@ -147,6 +147,7 @@ def _process_issue(
     issn: str | None = None,
     check_completeness: bool = True,
     completeness_source: str = "openalex",
+    th_deepread_popsci: float | None = None,
 ) -> Path:
     """Score → summarize → render → deep-read one issue's papers, then return the
     rendered journal page path.
@@ -219,6 +220,7 @@ def _process_issue(
     deep_read_papers = select_deep_read_papers(
         issue_papers, issue_papers, th_deepread,
         client=client, interests_yaml=interests_text, model=model,
+        th_deepread_popsci=th_deepread_popsci,
     )
     if deep_read_papers and not skip_pdf:
         log.info("[%s v%s i%s] %d deep-read papers (PDF + report)",
@@ -323,6 +325,7 @@ def run(only: list[str] | None = None, dry_run: bool = False,
     import yaml as _yaml
     _icfg = _yaml.safe_load(interests_text)
     th_deepread = float(_icfg.get("score_threshold_deepread", 6))
+    th_deepread_popsci = float(_icfg.get("score_threshold_deepread_popsci", 3))
 
     today = date.today()
 
@@ -349,6 +352,7 @@ def run(only: list[str] | None = None, dry_run: bool = False,
             th_deepread=th_deepread, skip_pdf=skip_pdf,
             retry_broken=retry_broken, is_loaded=bool(load_papers),
             issn=full_to_issn.get(venue), check_completeness=check_completeness,
+            th_deepread_popsci=th_deepread_popsci,
         )
         out_paths.append(out)
 
@@ -556,8 +560,9 @@ def rerun(*, only: list[str] | None = None, only_group: list[str] | None = None,
     load_dotenv()
     interests_text = Path("config/interests.yaml").read_text(encoding="utf-8")
     import yaml as _yaml
-    th_deepread = float((_yaml.safe_load(interests_text) or {}).get(
-        "score_threshold_deepread", 6))
+    _rcfg = _yaml.safe_load(interests_text) or {}
+    th_deepread = float(_rcfg.get("score_threshold_deepread", 6))
+    th_deepread_popsci = float(_rcfg.get("score_threshold_deepread_popsci", 3))
 
     targets = _resolve_rerun_targets(only=only, only_group=only_group,
                                      recent=recent, issue=issue)
@@ -617,6 +622,7 @@ def rerun(*, only: list[str] | None = None, only_group: list[str] | None = None,
             when=t.when, client=client, interests_text=interests_text,
             model=model, th_deepread=th_deepread, skip_pdf=skip_pdf,
             issn=t.issn, check_completeness=check_completeness,
+            th_deepread_popsci=th_deepread_popsci,
         )
         if out.resolve() != t.path.resolve():
             log.warning("rerun: wrote %s but target was %s (slug mismatch?)",

@@ -207,12 +207,17 @@ def select_deep_read_papers(
     client: SJTUClient,
     interests_yaml: str,
     model: str | None = None,
+    th_deepread_popsci: float | None = None,
 ) -> list[Paper]:
     """Choose which papers get a deep read.
 
     Union of two rules:
       1. score >= th_deepread, for ALL topics (the gate is loose on purpose —
-         scoring only sees the abstract);
+         scoring only sees the abstract). Papers from popsci venues (groups
+         flagged gateway_popsci in journals.yaml) use the lower
+         ``th_deepread_popsci`` gate instead, since they are read for
+         cross-disciplinary breadth and the gateway rubric scores most of them
+         low even when they are worthwhile reading;
       2. an author at a whitelisted institution (config/institutions.yaml,
          US News top-50) — green-lit regardless of score.
 
@@ -220,6 +225,13 @@ def select_deep_read_papers(
     digest threshold) are summarized here so the deep read has topic + context.
     """
     from .llm.pipeline import summarize_paper  # local import avoids import cycle
+
+    popsci = _popsci_venues()
+
+    def _gate(p: Paper) -> float:
+        if th_deepread_popsci is not None and (p.venue or "") in popsci:
+            return th_deepread_popsci
+        return th_deepread
 
     selected: list[Paper] = []
     seen: set[str] = set()
@@ -230,7 +242,7 @@ def select_deep_read_papers(
             selected.append(p)
 
     for p in digest_papers:
-        if (p.score or 0) >= th_deepread:
+        if (p.score or 0) >= _gate(p):
             _add(p)
 
     if affil.greenlight_enabled():
