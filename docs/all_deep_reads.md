@@ -4,6 +4,36 @@
 
 ### Daily
 
+- [Longitudinal Adaptive Experimental Design for Learning Multiple Target Estimands with Semiparametric Efficient Inference](deep_reads/2026-08-03-2607.29421.md)  
+  9/10 [daily]
+- [A Novel Approach to Instrumental Variable Estimation: TEAM-IV](deep_reads/2026-08-03-2607.28289.md)  
+  9/10 [daily]
+- [Mediation Analysis with Multiple Mediators Subject to Missing Not at Random](deep_reads/2026-08-03-2607.27669.md)  
+  9/10 [daily]
+- [Bayesian fusion forests for heterogeneous treatment effects on survival from randomised and real-world data](deep_reads/2026-08-03-2607.29295.md)  
+  8/10 [daily]
+- [Bayesian Mediation Analysis for Individualized Treatment Rules](deep_reads/2026-08-03-2607.28804.md)  
+  8/10 [daily]
+- [How should we select test-negative controls? A causal perspective in the era of multiplex respiratory testing](deep_reads/2026-08-03-2607.28792.md)  
+  8/10 [daily]
+- [On regression with estimated covariates and conditional effects given the propensity score](deep_reads/2026-08-03-2607.27685.md)  
+  8/10 [daily]
+- [Doubly Robust Estimators of Quantile Treatment Effects With Semiparametric Cumulative Probability Models](deep_reads/2026-08-03-2607.27633.md)  
+  8/10 [daily]
+- [Robust Instrumental Variables: Sharp Rates and Inference under Adversarial Contamination](deep_reads/2026-08-03-2607.29532.md)  
+  8/10 [daily]
+- [Linear Estimation of Structural and Causal Effects for Nonseparable Panel Data](deep_reads/2026-08-03-2607.28291.md)  
+  8/10 [daily]
+- [Marginal generalized raking with parametric working models](deep_reads/2026-08-03-2607.29629.md)  
+  7/10 [daily]
+- [A Mathematical Framework for Topological Causal Data Analysis](deep_reads/2026-08-03-2607.28161.md)  
+  7/10 [daily]
+- [Evaluating Algorithm-Assisted Human Decision-Making Over Repeated Algorithm Exposure: Recommendations for Effect Estimands and Experimental Design](deep_reads/2026-08-03-2607.27701.md)  
+  7/10 [daily]
+- [Asymptotic emergence of statistically supported false causal interpretation under unmeasured confounding](deep_reads/2026-08-03-2607.27593.md)  
+  7/10 [daily]
+- [Towards Best Practices for Covariate Adjustment in Regulatory Trials: From Fixed to Data-Adaptive Approaches](deep_reads/2026-08-03-2607.27542.md)  
+  7/10 [daily]
 - [The Confounder Trap: Treatment-Encoding Representations in Causal Inference with Text](deep_reads/2026-07-31-2607.26309.md)  
   7/10 [daily]
 - [Studying Competing Events with Federated Cumulative Incidence Curves](deep_reads/2026-07-31-2607.26287.md)  
@@ -2962,6 +2992,10 @@
 
 ### Daily
 
+- [Joint parameters estimation in cubic tensor model](deep_reads/2026-08-03-2607.29619.md)  
+  6/10 [daily]
+- [Asymptotic Minimax Estimation under Global-Local Priors](deep_reads/2026-08-03-2607.29498.md)  
+  6/10 [daily]
 - [Spectra of high-dimensional Spearman correlation matrices under scale-mixture dependence](deep_reads/2026-07-30-2607.25486.md)  
   8/10 [daily]
 - [Transfer Learning in High-Dimensional Clustering: Minimax Thresholds and Applications in Single-Cell Data](deep_reads/2026-07-30-2607.25031.md)  
@@ -4146,6 +4180,10 @@
 
 ### Daily
 
+- [Distance Profile Embedding for Independence and Conditional Independence Testing of Random Objects](deep_reads/2026-08-03-2607.28981.md)  
+  7/10 [daily]
+- [Seeing the Forest for the Trees: The Gaussian Process Limit of BART](deep_reads/2026-08-03-2607.28844.md)  
+  7/10 [daily]
 - [Uniform Convergence of Generalized Conditional Fr\'echet Means with Applications to Weighted Fr\'echet Aggregation and Exceedance Set Estimation](deep_reads/2026-07-31-2607.26837.md)  
   7/10 [daily]
 - [Semiparametric Prediction with Efficient Interval Length under a Right-Censored Covariate](deep_reads/2026-07-31-2607.26982.md)  
@@ -5870,6 +5908,8 @@
 
 ### Daily
 
+- [The Debiased Score Test: Hunt-and-test for Semiparametric Hypotheses](deep_reads/2026-08-03-2607.28861.md)  
+  8/10 [daily]
 - [A Characterization of the Orthocomplement of the Tangent Space of Semiparametric Markov Models](deep_reads/2026-07-28-2607.23439.md)  
   9/10 [daily]
 - [Debiased Machine Learning: Identification, Estimation, and Shape Constraints](deep_reads/2026-07-28-2607.24472.md)  
@@ -6215,6 +6255,10 @@
 
 ### Daily
 
+- [Adversarially robust multiple testing in high dimensions](deep_reads/2026-08-03-2607.29507.md)  
+  7/10 [daily]
+- [Non-partitioned e-detectors for nonparametric sequential change detection](deep_reads/2026-08-03-2607.28322.md)  
+  6/10 [daily]
 - [Specification Testing for Dyadic Regression Models](deep_reads/2026-07-31-2607.26366.md)  
   7/10 [daily]
 - [An association measure for mixed-type variables](deep_reads/2026-07-31-2607.26508.md)  
@@ -9191,6 +9235,8 @@
 
 ### Daily
 
+- [Statistical treatment of searches for counterparts of positionally-uncertain astrophysical sources: from flux upper limits to detection](deep_reads/2026-08-03-2607.28473.md)  
+  7/10 [daily]
 - [Optimizing the extraction of information from redshift probability distribution functions](deep_reads/2026-07-31-2607.26822.md)  
   7/10 [daily]
 - [Jointly Modeling Roman Coronagraph Astrometry and Photometry Improves Orbital Parameter Estimates](deep_reads/2026-07-28-2607.22754.md)  
@@ -9544,6 +9590,10 @@
 
 ### Daily
 
+- [Producing Policy Recommendations: from Statistical Decision Theory to Empirical Practice](deep_reads/2026-08-03-2607.29281.md)  
+  7/10 [daily]
+- [Nonfundamentalness or missing information ? Evidence from causal-noncausal VARs in macro-finance](deep_reads/2026-08-03-2607.28131.md)  
+  6/10 [daily]
 - [The Innate Economic Preferences of Language Models](deep_reads/2026-07-31-2607.26288.md)  
   6/10 [daily]
 - [From dense grids to valid inference: Accounting for regularization bias in nonparametric random coefficient models](deep_reads/2026-07-30-2607.25416.md)  

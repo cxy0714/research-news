@@ -11,250 +11,64 @@
 - **[收藏](favorites.md)** — 登录后在各页点 ☆ 收藏的论文，自动汇总到这里（总收藏按类别分组、可切换按周；每篇可写评论，无需手动维护）。
 - **[模型测评](all_shootout.md)** — 不同 LLM 在同一批论文上的打分 / 解读对比。
 
-## 今日 · 2026-07-31
+## 今日 · 2026-08-03
 
 ### 每日 arXiv 速览
 
-[→ 查看完整报告](daily/2026-07-31.md)
+[→ 查看完整报告](daily/2026-08-03.md)
 
-### 精读论文（118 篇）
+### 精读论文（25 篇）
 
-- [Regression to the mean can explain saturation of geomagnetic storms](deep_reads/2026-07-31-10.1038_s41586-026-10757-4.md)  
-  `天体统计` · 相关性 7/10
-- [Global trade responses to shark finning regulations](deep_reads/2026-07-31-10.1038_s41467-026-75625-1.md)  
-  `流行病学` · 相关性 7/10
-- [Evaluating the role of pretraining dataset size and diversity on single-cell foundation model performance](deep_reads/2026-07-31-10.1038_s41592-026-03120-y.md)  
-  `其他` · 相关性 7/10
-- [A scalable approach to investigating sequence-to-function predictions from personal genomes](deep_reads/2026-07-31-10.1038_s41592-026-03124-8.md)  
-  `其他` · 相关性 7/10
-- [A demographic theory of similarity-biased social learning](deep_reads/2026-07-31-10.1073_pnas.2606741123.md)  
-  `其他` · 相关性 7/10
-- [Epigenetic and 3D genome reprogramming during the aging of the human hippocampus](deep_reads/2026-07-31-10.1126_science.adt8307.md)  
-  `其他` · 相关性 7/10
-- [Single-cell multiomics and chromatin structure reveal gene-regulatory dynamics in heart failure](deep_reads/2026-07-31-10.1126_science.ady6893.md)  
-  `其他` · 相关性 7/10
-- [Atlas of lysosomal aging reveals a metabolite signature shared with lysosomal storage disorders](deep_reads/2026-07-31-10.1126_science.ady0832.md)  
-  `其他` · 相关性 7/10
-- [Spatiotemporal multiomics uncover tumor ecosystem dynamics during metastatic colonization](deep_reads/2026-07-31-10.1126_science.adz7928.md)  
-  `其他` · 相关性 7/10
-- [The Confounder Trap: Treatment-Encoding Representations in Causal Inference with Text](deep_reads/2026-07-31-2607.26309.md)  
+- [Longitudinal Adaptive Experimental Design for Learning Multiple Target Estimands with Semiparametric Efficient Inference](deep_reads/2026-08-03-2607.29421.md)  
+  `因果推断` · 相关性 9/10
+- [A Novel Approach to Instrumental Variable Estimation: TEAM-IV](deep_reads/2026-08-03-2607.28289.md)  
+  `因果推断` · 相关性 9/10
+- [Mediation Analysis with Multiple Mediators Subject to Missing Not at Random](deep_reads/2026-08-03-2607.27669.md)  
+  `因果推断` · 相关性 9/10
+- [Bayesian fusion forests for heterogeneous treatment effects on survival from randomised and real-world data](deep_reads/2026-08-03-2607.29295.md)  
+  `因果推断` · 相关性 8/10
+- [The Debiased Score Test: Hunt-and-test for Semiparametric Hypotheses](deep_reads/2026-08-03-2607.28861.md)  
+  `效率理论 / Debiased ML` · 相关性 8/10
+- [Bayesian Mediation Analysis for Individualized Treatment Rules](deep_reads/2026-08-03-2607.28804.md)  
+  `因果推断` · 相关性 8/10
+- [How should we select test-negative controls? A causal perspective in the era of multiplex respiratory testing](deep_reads/2026-08-03-2607.28792.md)  
+  `因果推断` · 相关性 8/10
+- [On regression with estimated covariates and conditional effects given the propensity score](deep_reads/2026-08-03-2607.27685.md)  
+  `因果推断` · 相关性 8/10
+- [Doubly Robust Estimators of Quantile Treatment Effects With Semiparametric Cumulative Probability Models](deep_reads/2026-08-03-2607.27633.md)  
+  `因果推断` · 相关性 8/10
+- [Robust Instrumental Variables: Sharp Rates and Inference under Adversarial Contamination](deep_reads/2026-08-03-2607.29532.md)  
+  `因果推断` · 相关性 8/10
+- [Linear Estimation of Structural and Causal Effects for Nonseparable Panel Data](deep_reads/2026-08-03-2607.28291.md)  
+  `因果推断` · 相关性 8/10
+- [Marginal generalized raking with parametric working models](deep_reads/2026-08-03-2607.29629.md)  
   `因果推断` · 相关性 7/10
-- [Uniform Convergence of Generalized Conditional Fr\'echet Means with Applications to Weighted Fr\'echet Aggregation and Exceedance Set Estimation](deep_reads/2026-07-31-2607.26837.md)  
+- [Distance Profile Embedding for Independence and Conditional Independence Testing of Random Objects](deep_reads/2026-08-03-2607.28981.md)  
   `非参数 / 半参数` · 相关性 7/10
-- [Semiparametric Prediction with Efficient Interval Length under a Right-Censored Covariate](deep_reads/2026-07-31-2607.26982.md)  
-  `非参数 / 半参数` · 相关性 7/10
-- [Denoising growth complexity: Data geometry and certified schedules for diffusion sampling](deep_reads/2026-07-31-2607.26285.md)  
-  `统计计算 / 算法` · 相关性 7/10
-- [Specification Testing for Dyadic Regression Models](deep_reads/2026-07-31-2607.26366.md)  
+- [A Mathematical Framework for Topological Causal Data Analysis](deep_reads/2026-08-03-2607.28161.md)  
+  `因果推断` · 相关性 7/10
+- [Evaluating Algorithm-Assisted Human Decision-Making Over Repeated Algorithm Exposure: Recommendations for Effect Estimands and Experimental Design](deep_reads/2026-08-03-2607.27701.md)  
+  `因果推断` · 相关性 7/10
+- [Asymptotic emergence of statistically supported false causal interpretation under unmeasured confounding](deep_reads/2026-08-03-2607.27593.md)  
+  `因果推断` · 相关性 7/10
+- [Towards Best Practices for Covariate Adjustment in Regulatory Trials: From Fixed to Data-Adaptive Approaches](deep_reads/2026-08-03-2607.27542.md)  
+  `因果推断` · 相关性 7/10
+- [Adversarially robust multiple testing in high dimensions](deep_reads/2026-08-03-2607.29507.md)  
   `数理统计 / 假设检验` · 相关性 7/10
-- [Optimizing the extraction of information from redshift probability distribution functions](deep_reads/2026-07-31-2607.26822.md)  
+- [Seeing the Forest for the Trees: The Gaussian Process Limit of BART](deep_reads/2026-08-03-2607.28844.md)  
+  `非参数 / 半参数` · 相关性 7/10
+- [Producing Policy Recommendations: from Statistical Decision Theory to Empirical Practice](deep_reads/2026-08-03-2607.29281.md)  
+  `经济理论 / 应用` · 相关性 7/10
+- [Statistical treatment of searches for counterparts of positionally-uncertain astrophysical sources: from flux upper limits to detection](deep_reads/2026-08-03-2607.28473.md)  
   `天体统计` · 相关性 7/10
-- [Rising dust pollution across Europe in a changing climate](deep_reads/2026-07-31-10.1038_s41586-026-10743-w.md)  
-  `其他` · 相关性 6/10
-- [Highly fragmented European wetlands with uneven restoration needs](deep_reads/2026-07-31-10.1038_s41586-026-10760-9.md)  
-  `其他` · 相关性 6/10
-- [Non-Gaussian statistics of the order parameter across a phase transition](deep_reads/2026-07-31-10.1038_s41586-026-10811-1.md)  
-  `其他` · 相关性 6/10
-- [A comprehensive benchmark of sequence-based subcellular localization predictors for human proteins](deep_reads/2026-07-31-10.1038_s41592-026-03142-6.md)  
-  `其他` · 相关性 6/10
-- [A generalizable Hi-C foundation model for chromatin architecture, single-cell and multiomics analysis across species](deep_reads/2026-07-31-10.1038_s41592-026-03097-8.md)  
-  `其他` · 相关性 6/10
-- [Brightness demixing for simultaneous multi-target imaging in 3D single-molecule localization microscopy](deep_reads/2026-07-31-10.1038_s41592-026-03118-6.md)  
-  `其他` · 相关性 6/10
-- [Dynamic principles of concentration buffering through liquid–liquid phase separation](deep_reads/2026-07-31-10.1073_pnas.2526810123.md)  
-  `其他` · 相关性 6/10
-- [Susceptibility and regulation of biomolecular condensates by solutes](deep_reads/2026-07-31-10.1073_pnas.2604434123.md)  
-  `其他` · 相关性 6/10
-- [Sediment accumulation rate predicts the temporal resolution of marine fossil assemblages](deep_reads/2026-07-31-10.1073_pnas.2615368123.md)  
-  `其他` · 相关性 6/10
-- [Long-horizon associative learning as a unifying framework for statistical learning across scales](deep_reads/2026-07-31-10.1073_pnas.2513423123.md)  
-  `其他` · 相关性 6/10
-- [Parenthood decisions in uncertain times: Experimental evidence from four countries](deep_reads/2026-07-31-10.1073_pnas.2601690123.md)  
-  `其他` · 相关性 6/10
-- [Can stimulating ownership increase fertility: Evidence from housing interventions in China](deep_reads/2026-07-31-10.1073_pnas.2602426123.md)  
+- [Non-partitioned e-detectors for nonparametric sequential change detection](deep_reads/2026-08-03-2607.28322.md)  
+  `数理统计 / 假设检验` · 相关性 6/10
+- [Joint parameters estimation in cubic tensor model](deep_reads/2026-08-03-2607.29619.md)  
+  `高维统计 / 随机矩阵` · 相关性 6/10
+- [Asymptotic Minimax Estimation under Global-Local Priors](deep_reads/2026-08-03-2607.29498.md)  
+  `高维统计 / 随机矩阵` · 相关性 6/10
+- [Nonfundamentalness or missing information ? Evidence from causal-noncausal VARs in macro-finance](deep_reads/2026-08-03-2607.28131.md)  
   `经济理论 / 应用` · 相关性 6/10
-- [The global biogeography of passerine songs](deep_reads/2026-07-31-10.1126_science.aee6239.md)  
-  `其他` · 相关性 6/10
-- [Climate scientists sharpen tools for linking global warming to extreme weather](deep_reads/2026-07-31-10.1126_science.aek8030.md)  
-  `其他` · 相关性 6/10
-- [Rigor is not readiness: The PERL framework for evidence-based policy](deep_reads/2026-07-31-10.1126_science.aef3529.md)  
-  `其他` · 相关性 6/10
-- [Transforming variables to central normality](deep_reads/2026-07-31-2005.07946.md)  
-  `统计计算 / 算法` · 相关性 6/10
-- [Studying Competing Events with Federated Cumulative Incidence Curves](deep_reads/2026-07-31-2607.26287.md)  
-  `因果推断` · 相关性 6/10
-- [An association measure for mixed-type variables](deep_reads/2026-07-31-2607.26508.md)  
-  `数理统计 / 假设检验` · 相关性 6/10
-- [Robust Interpolated Quantile Estimators: Asymptotic Theory and Efficiency](deep_reads/2026-07-31-2607.26714.md)  
-  `数理统计 / 假设检验` · 相关性 6/10
-- [Recovering the Target Hazard Ratio Under Nonproportional Hazards Induced by an Omitted Covariate: Simulation-based Approach](deep_reads/2026-07-31-2607.27026.md)  
-  `流行病学` · 相关性 6/10
-- [Conditional copula representations and extremal bounds for multivariate statistical functionals](deep_reads/2026-07-31-2607.26256.md)  
-  `其他` · 相关性 6/10
-- [A Lower Bound on the Sliced Wasserstein Comparison Constant for Translated Measures](deep_reads/2026-07-31-2607.26399.md)  
-  `数理统计 / 假设检验` · 相关性 6/10
-- [Hub Neighbor-Degree Diagnostics for Sparse Random Graphs](deep_reads/2026-07-31-2607.26624.md)  
-  `数理统计 / 假设检验` · 相关性 6/10
-- [The Innate Economic Preferences of Language Models](deep_reads/2026-07-31-2607.26288.md)  
-  `经济理论 / 应用` · 相关性 6/10
-- [A Simple Robust Procedure in Instrumental Variables Regression](deep_reads/2026-07-31-2607.26960.md)  
-  `因果推断` · 相关性 6/10
-- [Cerebrospinal fluid biomarkers reveal transdiagnostic synaptic dysfunction across major psychiatric disorders](deep_reads/2026-07-31-10.1038_s41467-026-76187-y.md)  
-  `其他` · 相关性 5/10
-- [A cloud-based miniscope for neurosurveillance of brain health and disease in freely behaving animals](deep_reads/2026-07-31-10.1038_s41592-026-03111-z.md)  
-  `其他` · 相关性 5/10
-- [Developmental changes in memory structure and precision alter the use of retrieved episodes during decisions for reward](deep_reads/2026-07-31-10.1073_pnas.2525494123.md)  
-  `其他` · 相关性 5/10
-- [The global demand and potential public health impact of oral antiviral treatment stockpile for influenza pandemics](deep_reads/2026-07-31-10.1073_pnas.2524161123.md)  
-  `流行病学` · 相关性 5/10
-- [Capable language models can outgrow the benefits of collaboration](deep_reads/2026-07-31-10.1038_s42256-026-01268-y.md)  
-  `其他` · 相关性 4/10
-- [Neural sampling from cognitive maps enables goal-directed imagination and planning](deep_reads/2026-07-31-10.1038_s42256-026-01254-4.md)  
-  `其他` · 相关性 4/10
-- [An agentic artificially intelligent X-ray scientist](deep_reads/2026-07-31-10.1038_s42256-026-01261-5.md)  
-  `天体统计` · 相关性 4/10
-- [Neuropixels Opto: combining high-resolution electrophysiology and optogenetics](deep_reads/2026-07-31-10.1038_s41592-026-03076-z.md)  
-  `其他` · 相关性 4/10
-- [3D pathology-guided microdissection](deep_reads/2026-07-31-10.1038_s41592-026-03141-7.md)  
-  `其他` · 相关性 4/10
-- [Chromatix: a differentiable, GPU-accelerated wave-optics library](deep_reads/2026-07-31-10.1038_s41592-026-03121-x.md)  
-  `统计计算 / 算法` · 相关性 4/10
-- [Dose-dependent sensitivity of human three-dimensional chromatin to a heart disease–linked transcription factor](deep_reads/2026-07-31-10.1126_science.adv5434.md)  
-  `其他` · 相关性 4/10
-- [Human body single-cell atlas of three-dimensional genome organization and DNA methylation](deep_reads/2026-07-31-10.1126_science.adx0673.md)  
-  `其他` · 相关性 4/10
-- [Spectral Gap for the Binary Fixed-Margin Swap Chain](deep_reads/2026-07-31-2606.22636.md)  
-  `统计计算 / 算法` · 相关性 4/10
-- [EasyGrid: a versatile platform for automated cryo-EM sample preparation and quality control](deep_reads/2026-07-31-10.1038_s41592-026-03127-5.md)  
-  `其他` · 相关性 3/10
-- [A human induced pluripotent stem cell model for the holistic study of epithelial-to-mesenchymal transitions](deep_reads/2026-07-31-10.1038_s41592-026-03096-9.md)  
-  `其他` · 相关性 3/10
-- [Global threat exposure of islands in a changing world](deep_reads/2026-07-31-10.1073_pnas.2534106123.md)  
-  `其他` · 相关性 3/10
-- [A wearable patch for continuous levodopa monitoring in sweat: Towards exertion and power-free pharmacodynamic assessment in Parkinson’s disease](deep_reads/2026-07-31-10.1073_pnas.2610453123.md)  
-  `其他` · 相关性 3/10
-- [Comparative archaeology reveals recurrent but nondeterministic pathways through complexification](deep_reads/2026-07-31-10.1073_pnas.2610959123.md)  
-  `其他` · 相关性 3/10
-- [Adaptive molecular convergence is pervasive across deep time and largely decoupled from phenotypic convergence](deep_reads/2026-07-31-10.1073_pnas.2616248123.md)  
-  `其他` · 相关性 3/10
-- [Discovery of a phenazine–thiol conjugase from sparse data using genome-informed machine learning](deep_reads/2026-07-31-10.1073_pnas.2607571123.md)  
-  `其他` · 相关性 3/10
-- [Climate warming and atmospheric deposition jointly accelerate the Antarctic Peninsula atmosphere–glacier–land–ocean mercury loop](deep_reads/2026-07-31-10.1073_pnas.2613472123.md)  
-  `其他` · 相关性 3/10
-- [Heat tolerance decreases and cold tolerance increases with elevation for a species-rich insect family on a tropical volcano](deep_reads/2026-07-31-10.1073_pnas.2533455123.md)  
-  `其他` · 相关性 3/10
-- [Metabolite glues as a means of purine sensing and chemotherapeutic response](deep_reads/2026-07-31-10.1038_s41586-026-10790-3.md)  
-  `其他` · 相关性 2/10
-- [A dexterous soft hand exoskeleton restores intentional grasping in individuals with severe hand impairment](deep_reads/2026-07-31-10.1038_s42256-026-01263-3.md)  
-  `其他` · 相关性 2/10
-- [OrthoFinder: improved phylogenetic orthology inference with enhanced accuracy and scalability](deep_reads/2026-07-31-10.1038_s41592-026-03126-6.md)  
-  `其他` · 相关性 2/10
-- [Accelerating <i>Campylobacter</i> zoonosis in the Anthropocene](deep_reads/2026-07-31-10.1073_pnas.2609969123.md)  
-  `其他` · 相关性 2/10
-- [Cryoelectron tomography reveals an age-related decline in mitoribosomes that contributes to T cell dysfunction in older individuals](deep_reads/2026-07-31-10.1073_pnas.2608102123.md)  
-  `其他` · 相关性 2/10
-- [Mitochondrial pearling is controlled by the inner membrane and mediates segregation of the luminal content and membrane scission](deep_reads/2026-07-31-10.1073_pnas.2602775123.md)  
-  `其他` · 相关性 2/10
-- [Psychological inoculation against climate doom](deep_reads/2026-07-31-10.1073_pnas.2609074123.md)  
-  `其他` · 相关性 2/10
-- [The cortical scene processing network emerges in infancy, prior to independent navigation experience](deep_reads/2026-07-31-10.1073_pnas.2513126123.md)  
-  `其他` · 相关性 2/10
-- [Crush-resistant air sacs allow insect larvae to exploit aquatic habitats at extreme depth](deep_reads/2026-07-31-10.1126_science.aed0667.md)  
-  `其他` · 相关性 2/10
-- [Birdsong diversity across the world](deep_reads/2026-07-31-10.1126_science.aej0087.md)  
-  `其他` · 相关性 2/10
-- [Kimi K3: Open Frontier Intelligence](deep_reads/2026-07-31-2607.24653.md)  
-  `其他` · 相关性 2/10
-- [Catalyst-free, microdroplet-mediated waste plastic conversion to diacids](deep_reads/2026-07-31-10.1038_s41586-026-10746-7.md)  
-  `其他` · 相关性 1/10
-- [Magnetic character of the low-energy enhancement in 70Zn](deep_reads/2026-07-31-10.1038_s41586-026-10758-3.md)  
-  `其他` · 相关性 1/10
-- [Graphene oxide-polydopamine membranes with controlled interlayer spacing](deep_reads/2026-07-31-10.1038_s41586-026-10765-4.md)  
-  `其他` · 相关性 1/10
-- [Nature’s antivenom: Combinations of conserved rattlesnake serum metalloproteinase inhibitors block the lethal action of viper venoms](deep_reads/2026-07-31-10.1073_pnas.2612168123.md)  
-  `其他` · 相关性 1/10
-- [Effective mass of a migrating interface](deep_reads/2026-07-31-10.1073_pnas.2608055123.md)  
-  `其他` · 相关性 1/10
-- [An antibody–drug conjugate active against antibiotic-resistant <i> <i>Neisseria</i> gonorrhoeae </i>](deep_reads/2026-07-31-10.1073_pnas.2534217123.md)  
-  `其他` · 相关性 1/10
-- [Hypermutability of integrated sequences of viral origin in a chlorarachniophyte](deep_reads/2026-07-31-10.1073_pnas.2612999123.md)  
-  `其他` · 相关性 1/10
-- [Anterior and posterior retrosplenial cortex employ distinct strategies for egocentric–allocentric transformation in spatial coding](deep_reads/2026-07-31-10.1073_pnas.2600565123.md)  
-  `其他` · 相关性 1/10
-- [Step geometry–guided growth of rhombohedral graphene](deep_reads/2026-07-31-10.1126_science.aed9202.md)  
-  `其他` · 相关性 1/10
-- [Dynamic asymmetric strain imprinted into substrates by an oxide thin film](deep_reads/2026-07-31-10.1126_science.adt9347.md)  
-  `其他` · 相关性 1/10
-- [Weight-four parity checks in a spin-shuttling architecture](deep_reads/2026-07-31-10.1038_s41586-026-10766-3.md)  
-  `其他` · 相关性 1/10
-- [Structural and mechanistic basis for the heterotetrameric benzaldehyde synthase from petunia](deep_reads/2026-07-31-10.1126_sciadv.aec7733.md)  
-  `其他` · 相关性 0/10
-- [Unveiling cascading lag effects of wetland methane emissions: Evidence from Lake Chad in Africa](deep_reads/2026-07-31-10.1126_sciadv.adx9866.md)  
-  `其他` · 相关性 0/10
-- [Contrasting slab decarbonation patterns control deep carbon cycling efficiency in hot vs. cold subduction zones](deep_reads/2026-07-31-10.1126_sciadv.aee3217.md)  
-  `其他` · 相关性 0/10
-- [Shared striatal neurons exhibit context-specific dynamics for internally and externally driven actions](deep_reads/2026-07-31-10.1126_sciadv.aed9386.md)  
-  `其他` · 相关性 0/10
-- [Lipidomic profiling reveals age-dependent changes in plasma membrane lipids that affect neural stem cell aging](deep_reads/2026-07-31-10.1126_sciadv.aeh9771.md)  
-  `其他` · 相关性 0/10
-- [Vulnerability to high temperature shapes global warming impacts on rice yield](deep_reads/2026-07-31-10.1126_sciadv.aed9226.md)  
-  `其他` · 相关性 0/10
-- [Astrocyte redox imbalance underlies prelimbic neuronal hypoactivity and maladaptive affective behaviors in epilepsy](deep_reads/2026-07-31-10.1126_sciadv.aef6777.md)  
-  `其他` · 相关性 0/10
-- [Ion-electron coupling–enabled mechanical ion transistor with ultralow subthreshold swing](deep_reads/2026-07-31-10.1126_sciadv.aed9096.md)  
-  `其他` · 相关性 0/10
-- [Direct single-molecule visualization of Hsp90-mediated relief of an Hsp70-folding block](deep_reads/2026-07-31-10.1126_sciadv.aeg5464.md)  
-  `其他` · 相关性 0/10
-- [A comprehensive map of missense trafficking variants in rhodopsin and their response to pharmacologic correction](deep_reads/2026-07-31-10.1126_sciadv.aef3518.md)  
-  `其他` · 相关性 0/10
-- [Discovery of a multicomponent alloy forged by the Hiroshima atomic blast](deep_reads/2026-07-31-10.1126_sciadv.aeg8299.md)  
-  `其他` · 相关性 0/10
-- [COQ8 chaperones coenzyme Q lipid intermediates through ATP-driven structural gating](deep_reads/2026-07-31-10.1126_sciadv.aeg1124.md)  
-  `其他` · 相关性 0/10
-- [PBRM1-dependent PBAF targeting is required for EMT and metastasis in breast cancer](deep_reads/2026-07-31-10.1126_sciadv.aed8038.md)  
-  `其他` · 相关性 0/10
-- [Musculoskeletal actuators with programmable morphology and tunable dynamics](deep_reads/2026-07-31-10.1126_sciadv.aeg4524.md)  
-  `其他` · 相关性 0/10
-- [Observation of mirror-odd and mirror-even spin texture in ultrathin epitaxially strained RuO <sub>2</sub> films](deep_reads/2026-07-31-10.1126_sciadv.aec2917.md)  
-  `其他` · 相关性 0/10
-- [Diffraction-quality, ultraflexible protein single crystals engineered with DNA](deep_reads/2026-07-31-10.1126_sciadv.aeh2948.md)  
-  `其他` · 相关性 0/10
-- [Faster-and-tighter nitrogen cycle supports mature forest productivity under elevated CO <sub>2</sub>](deep_reads/2026-07-31-10.1126_sciadv.aed2732.md)  
-  `其他` · 相关性 0/10
-- [Altered G <sub>i</sub> signaling in enteroendocrine K cells in vivo causes pronounced changes in glucose homeostasis](deep_reads/2026-07-31-10.1126_sciadv.aeb9805.md)  
-  `其他` · 相关性 0/10
-- [Untrustworthy sources on Facebook and Instagram in 2020: Concentrated exposure but no attitudinal effects](deep_reads/2026-07-31-10.1126_sciadv.adz6502.md)  
-  `其他` · 相关性 0/10
-- [Determining the molecular and physiological actions of subtype-selective nanobodies of GABA <sub>A</sub> receptors](deep_reads/2026-07-31-10.1126_sciadv.aeg3548.md)  
-  `其他` · 相关性 0/10
-- [IoT-enabled wireless neural implant for chronic, programmable neuropharmacology and optogenetics](deep_reads/2026-07-31-10.1126_sciadv.aee8648.md)  
-  `其他` · 相关性 0/10
-- [Operando state monitoring of diversified lithium-ion batteries via laser-excited ultrasonic sensing with transformer networks](deep_reads/2026-07-31-10.1126_sciadv.aec5358.md)  
-  `其他` · 相关性 0/10
-- [Genome-wide analyses of an avian herpesvirus identify 10 loci associated with tumorigenicity and vaccine escape](deep_reads/2026-07-31-10.1126_sciadv.aee9024.md)  
-  `其他` · 相关性 0/10
-- [Optical maneuvering of dandelion-inspired fliers with vortex-enabled stability](deep_reads/2026-07-31-10.1126_sciadv.aee8014.md)  
-  `其他` · 相关性 0/10
-- [Reconstitution of actomyosin networks in cell-sized liposomes dissects distinct mechanisms of membrane blebbing and symmetry breaking](deep_reads/2026-07-31-10.1126_sciadv.aed8818.md)  
-  `其他` · 相关性 0/10
-- [Stardust as nucleation seeds for the earliest solids in the Solar System](deep_reads/2026-07-31-10.1126_sciadv.ady2311.md)  
-  `天体统计` · 相关性 0/10
-- [Conditional Monge Gap enables generalizable single-cell perturbation modelling](deep_reads/2026-07-31-10.1038_s42256-026-01242-8.md)  
-  `其他` · 相关性 0/10
-- [Plagiarism of ideas in the age of generative artificial intelligence](deep_reads/2026-07-31-10.1038_s42256-026-01247-3.md)  
-  `其他` · 相关性 0/10
-- [A posttranslational modification of fimbriae drives pathogenicity in <i> <i>Klebsiella pneumoniae</i> </i>](deep_reads/2026-07-31-10.1073_pnas.2611142123.md)  
-  `其他` · 相关性 0/10
-- [Proteolytic activation of c-MYC facilitated by DOT1L](deep_reads/2026-07-31-10.1073_pnas.2525603123.md)  
-  `其他` · 相关性 0/10
-- [Rapid microbial production of long-lived dissolved organic carbon in the global ocean](deep_reads/2026-07-31-10.1073_pnas.2601044123.md)  
-  `其他` · 相关性 0/10
-- [The free-living wellspring of symbiotic nitrogen fixation in <i>Bradyrhizobium</i>](deep_reads/2026-07-31-10.1073_pnas.2604918123.md)  
-  `其他` · 相关性 0/10
-- [Dual control of PIP2 drives germline/soma segregation in <i>Drosophila</i>](deep_reads/2026-07-31-10.1073_pnas.2604429123.md)  
-  `其他` · 相关性 0/10
-- [Abrupt transition to irreversible damage in the overdrafted Sacramento Valley aquifer system](deep_reads/2026-07-31-10.1073_pnas.2526041123.md)  
-  `其他` · 相关性 0/10
 
 ## 收藏
 
@@ -262,11 +76,11 @@
 
 ## 本周每日报告
 
+- [2026-07-31](daily/2026-07-31.md)
 - [2026-07-30](daily/2026-07-30.md)
 - [2026-07-29](daily/2026-07-29.md)
 - [2026-07-28](daily/2026-07-28.md)
 - [2026-07-27](daily/2026-07-27.md)
-- [2026-07-24](daily/2026-07-24.md)
 
 
 ---
