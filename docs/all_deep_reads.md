@@ -4180,6 +4180,8 @@
 
 ### Daily
 
+- [Differentially Private Nonparametric Modal Learning with Applications to Regression and Clustering](deep_reads/2026-08-04-2607.29675.md)  
+  6/10 [daily]
 - [Distance Profile Embedding for Independence and Conditional Independence Testing of Random Objects](deep_reads/2026-08-03-2607.28981.md)  
   7/10 [daily]
 - [Seeing the Forest for the Trees: The Gaussian Process Limit of BART](deep_reads/2026-08-03-2607.28844.md)  
@@ -9590,6 +9592,8 @@
 
 ### Daily
 
+- [Microstructural Foundations of Rough Noise](deep_reads/2026-08-04-2607.29442.md)  
+  6/10 [daily]
 - [Producing Policy Recommendations: from Statistical Decision Theory to Empirical Practice](deep_reads/2026-08-03-2607.29281.md)  
   7/10 [daily]
 - [Nonfundamentalness or missing information ? Evidence from causal-noncausal VARs in macro-finance](deep_reads/2026-08-03-2607.28131.md)  
