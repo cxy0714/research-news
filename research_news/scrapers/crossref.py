@@ -183,17 +183,36 @@ def fetch_latest_issue(issn: str, journal_name: str, *,
         targets = set(issue_keys[:n_issues])
         log.info("  taking issues: %s", sorted(targets, reverse=True))
         keep = []
+        no_issue: list[dict] = []
         for it in items:
             v = it.get("volume")
             i = it.get("issue") or it.get("journal-issue", {}).get("issue")
             try:
-                if v and i and (
-                    int(re.sub(r"[^0-9]", "", v)),
-                    int(re.sub(r"[^0-9]", "", i))
-                ) in targets:
-                    keep.append(it)
+                vi = (int(re.sub(r"[^0-9]", "", v)),
+                      int(re.sub(r"[^0-9]", "", i))) if v and i else None
             except ValueError:
                 continue
+            if vi is None:
+                # Online-first / ahead-of-print: no volume+issue assigned yet.
+                # Multidisciplinary flagships (Nature, Nat. Commun., ...) publish
+                # most of their articles this way for weeks before they land in a
+                # numbered issue — dropping them silently loses the bulk of the
+                # journal. Keep the newest batch (items come sorted by published
+                # desc), scaled to n_issues by the same per-issue estimate the
+                # rolling-publication branch uses.
+                no_issue.append(it)
+            elif vi in targets:
+                keep.append(it)
+        if no_issue:
+            # Estimate per-issue size from the keyed items we actually matched,
+            # so the online-first cap tracks the journal's real issue size;
+            # fall back to 15/issue when we can't estimate.
+            per_issue = (len(keep) / max(1, len(targets))) if keep else 15
+            cap = max(15 * n_issues, round(per_issue * n_issues))
+            kept_of = no_issue[:cap]
+            log.info("  keeping %d/%d online-first (no issue#) items, cap=%d",
+                     len(kept_of), len(no_issue), cap)
+            keep.extend(kept_of)
     else:
         cap = 15 * n_issues
         log.info("  no (vol, issue) keys found, taking %d most recent", cap)

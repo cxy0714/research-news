@@ -244,3 +244,14 @@ broad 组：
 - [x] (2026-08-01) `--only NMI --n-issues 15`
 - [x] (2026-08-01) `--only "Sci. Adv." --n-issues 4`   ⚠ 每期大，必要时 2+2
 - [x] (2026-08-01) `--only "Nat. Commun." --n-issues 5`   ⚠ 滚动刊，2+3 分两步更稳
+
+### 修复 online-first 丢弃后重跑（2026-08-04）
+
+> **背景**：修复前 `fetch_latest_issue` 只要发现带期号文章就走「按期号匹配」，把**无期号的
+> online-first 文章全丢了**。Nature（144/200 无期号）、Nat. Commun.（168/200）因此严重漏抓
+> （Nature 只入库 9 篇）。已修：按期号匹配时额外保留最新 online-first 一批。去重让重跑**只补
+> 之前漏掉的文章**、不重复已入库的。其他刊（Science/PNAS/Sci.Adv./NMI）本就几乎无 online-first，
+> 不受影响、无需重跑。
+- [ ] `--only Nature --n-issues 8`   ⚠ 修复后每期含大量 online-first，dry-run 估 ~280 篇
+- [ ] `--only "Nat. Commun." --n-issues 5`   ⚠⚠ 滚动刊、online-first 极多，dry-run 估 ~168 篇
+- [ ] `--only "Nat. Methods" --n-issues 6`   （online-first 34/200，中等，补一轮）
