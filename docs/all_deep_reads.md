@@ -9468,6 +9468,16 @@
 
 ### 期刊
 
+#### Nature Communications Vol 17 Issue 1
+
+- [On the relevance of serial cyclone clustering for Arctic sea ice](deep_reads/2026-08-05-10.1038_s41467-026-76245-5.md)  
+  4/10 [journals]
+
+#### Nature Communications
+
+- [Plasma wave observations from Juno spacecraft at the Jovian bow shock](deep_reads/2026-08-05-10.1038_s41467-026-76223-x.md)  
+  1/10 [journals]
+
 #### Science Advances Vol 12 Issue 31
 
 - [Sub-annual resolution evidence for limited impact of the 74-ka Toba eruption on eastern African climate](deep_reads/2026-08-01-10.1126_sciadv.adv6851.md)  
@@ -10897,6 +10907,30 @@
 
 ### 期刊
 
+#### Nature Communications Vol 17 Issue 1
+
+- [Global trade responses to shark finning regulations](deep_reads/2026-07-31-10.1038_s41467-026-75625-1.md)  
+  7/10 [journals]
+- [The genetics of fibromyalgia and its relationships to psychiatric and medical traits](deep_reads/2026-08-01-10.1038_s41467-026-75256-6.md)  
+  6/10 [journals]
+- [Farming practices exert selection pressures on the resistome of natural populations of house mice](deep_reads/2026-08-05-10.1038_s41467-026-76403-9.md)  
+  5/10 [journals]
+
+#### Nature Communications
+
+- [Early life sugar rationing and ageing related diseases, biological ageing and mortality](deep_reads/2026-08-05-10.1038_s41467-026-76257-1.md)  
+  7/10 [journals]
+- [Longitudinal dynamics of the maternal gut virome associate with metabolic features of preterm birth](deep_reads/2026-08-05-10.1038_s41467-026-76220-0.md)  
+  6/10 [journals]
+- [Public responses about air quality in the world’s ten most populous countries](deep_reads/2026-08-05-10.1038_s41467-026-75908-7.md)  
+  6/10 [journals]
+- [Genome-wide DNA methylation analysis revealed epigenetic mechanism underlying end-stage renal disease](deep_reads/2026-08-05-10.1038_s41467-026-76153-8.md)  
+  5/10 [journals]
+- [The roles of pre-season immunity, age, viral shedding, and community exposures in shaping influenza household transmission dynamics](deep_reads/2026-08-05-10.1038_s41467-026-76037-x.md)  
+  4/10 [journals]
+- [Microbiome features associated with persistent intestinal carriages of Escherichia coli ST131 in a Southeast Asian cohort study](deep_reads/2026-08-05-10.1038_s41467-026-75524-5.md)  
+  2/10 [journals]
+
 #### Nature
 
 - [The past and future impact of climate change on childhood malaria in Africa](deep_reads/2026-08-05-10.1038_s41586-026-10840-w.md)  
@@ -10912,13 +10946,6 @@
 #### Proceedings of the National Academy of Sciences Vol 123 Issue 30
 
 - [When children shape their families: Evocative effects analysis of 40,000 trios from the Norwegian Mother, Father and Child Cohort Study](deep_reads/2026-08-01-10.1073_pnas.2532642123.md)  
-  6/10 [journals]
-
-#### Nature Communications Vol 17 Issue 1
-
-- [Global trade responses to shark finning regulations](deep_reads/2026-07-31-10.1038_s41467-026-75625-1.md)  
-  7/10 [journals]
-- [The genetics of fibromyalgia and its relationships to psychiatric and medical traits](deep_reads/2026-08-01-10.1038_s41467-026-75256-6.md)  
   6/10 [journals]
 
 #### Statistics and Computing Vol 36 Issue 1
@@ -12175,6 +12202,144 @@
 
 ### 期刊
 
+#### Nature Communications Vol 17 Issue 1
+
+- [Transitions between persistent climate–carbon regimes coincide with elevated Phanerozoic biosphere vulnerability](deep_reads/2026-08-05-10.1038_s41467-026-75655-9.md)  
+  7/10 [journals]
+- [Decadal sink-source shifts of forest aboveground carbon since 1988](deep_reads/2026-08-01-10.1038_s41467-026-76093-3.md)  
+  7/10 [journals]
+- [Artificial neural manifolds](deep_reads/2026-08-05-10.1038_s41467-026-75979-6.md)  
+  6/10 [journals]
+- [A foundation model for sleep-based risk stratification and clinical outcomes](deep_reads/2026-08-05-10.1038_s41467-026-75326-9.md)  
+  6/10 [journals]
+- [Rapid and quantitative measurement of bacteriophage infectivity via fully automated droplet digital PCR](deep_reads/2026-08-01-10.1038_s41467-026-75746-7.md)  
+  6/10 [journals]
+- [Multi-omics integration unravels four molecular subgroups of corticotroph pituitary neuroendocrine tumours with distinct clinicopathological features](deep_reads/2026-08-05-10.1038_s41467-026-76292-y.md)  
+  5/10 [journals]
+- [A game-theoretic attack-defense framework for the study of network resilience](deep_reads/2026-08-05-10.1038_s41467-026-75293-1.md)  
+  5/10 [journals]
+- [Coastal flooding at predictable hours](deep_reads/2026-08-01-10.1038_s41467-026-75710-5.md)  
+  5/10 [journals]
+- [Cerebrospinal fluid biomarkers reveal transdiagnostic synaptic dysfunction across major psychiatric disorders](deep_reads/2026-07-31-10.1038_s41467-026-76187-y.md)  
+  5/10 [journals]
+- [Systematic evaluation of PASEF acquisition strategies in complex metaproteomes](deep_reads/2026-08-05-10.1038_s41467-026-75845-5.md)  
+  4/10 [journals]
+- [Identification of carnivory in the flowering plant Saxifraga via multidisciplinary evidence](deep_reads/2026-08-05-10.1038_s41467-026-75288-y.md)  
+  3/10 [journals]
+- [Quantifying environmental co-benefits of nitrogen-based crop restructuring and its implications on India’s interstate trade network](deep_reads/2026-08-05-10.1038_s41467-026-75905-w.md)  
+  3/10 [journals]
+- [Breeding for beneficial microbial associations](deep_reads/2026-08-05-10.1038_s41467-026-76260-6.md)  
+  3/10 [journals]
+- [Uncovering ectopic GC-like niches for tumor reactive lymphocyte priming in lung adenocarcinoma using Stereo-XCR-seq](deep_reads/2026-08-05-10.1038_s41467-026-75405-x.md)  
+  2/10 [journals]
+- [Nonlinear reversal of photoexcitation on the attosecond time scale improves ultrafast X-ray diffraction images](deep_reads/2026-08-01-10.1038_s41467-026-75969-8.md)  
+  2/10 [journals]
+- [Apparatus for quantum-mixture research in microgravity](deep_reads/2026-08-01-10.1038_s41467-026-75968-9.md)  
+  2/10 [journals]
+- [Inhaled LTI-03 for idiopathic pulmonary fibrosis: a randomized dose escalation study](deep_reads/2026-08-01-10.1038_s41467-026-75291-3.md)  
+  1/10 [journals]
+- [Chiral diffraction from aperiodic monotile structure](deep_reads/2026-08-01-10.1038_s41467-026-75023-7.md)  
+  1/10 [journals]
+- [Golgi organization regulates stem cell function in the small intestine](deep_reads/2026-08-01-10.1038_s41467-026-75679-1.md)  
+  1/10 [journals]
+- [A tetranuclear nickel hydride cluster capable of reversible activation of aromatic and aliphatic C–H bonds](deep_reads/2026-08-01-10.1038_s41467-026-76006-4.md)  
+  1/10 [journals]
+- [Author Correction: GGCX promotes Eurasian avian-like H1N1 swine influenza virus adaption to interspecies receptor binding](deep_reads/2026-08-05-10.1038_s41467-026-76172-5.md)  
+  0/10 [journals]
+- [Retraction Note: An autocatalytic multicomponent DNAzyme nanomachine for tumor-specific photothermal therapy sensitization in pancreatic cancer](deep_reads/2026-08-05-10.1038_s41467-026-75939-0.md)  
+  0/10 [journals]
+- [A distinct CAR-T cell phenotype mediates therapeutic response at limited doses](deep_reads/2026-08-01-10.1038_s41467-026-76068-4.md)  
+  0/10 [journals]
+- [Exciton thermal radiation from macroscale membranes composed of chirality-sorted carbon nanotubes and its control](deep_reads/2026-08-01-10.1038_s41467-026-75711-4.md)  
+  0/10 [journals]
+- [Single-photon detection in few-layer NbSe2 superconducting nanowires](deep_reads/2026-08-01-10.1038_s41467-026-75646-w.md)  
+  0/10 [journals]
+
+#### Nature Communications
+
+- [Large language models decode narrative pathology reports to define clinically relevant subtypes in IgA nephropathy](deep_reads/2026-08-05-10.1038_s41467-026-76326-5.md)  
+  7/10 [journals]
+- [Coupled air–sea interactions drove and sustained the 2013–2016 North Pacific marine heatwave](deep_reads/2026-08-05-10.1038_s41467-026-76096-0.md)  
+  6/10 [journals]
+- [Rank-guided learning accelerates automated enzyme engineering](deep_reads/2026-08-05-10.1038_s41467-026-76264-2.md)  
+  6/10 [journals]
+- [Deep learning prediction of left atrial structure and function from 12-lead electrocardiograms](deep_reads/2026-08-05-10.1038_s41467-026-76155-6.md)  
+  6/10 [journals]
+- [Foraging models explain human exploration in uncertain tasks](deep_reads/2026-08-05-10.1038_s41467-026-75773-4.md)  
+  6/10 [journals]
+- [Regime shifts of AMOC-sea surface temperature relationship](deep_reads/2026-08-05-10.1038_s41467-026-76149-4.md)  
+  5/10 [journals]
+- [High-quality pure shift NMR spectra by deep learning using multi-spectral input and joint loss functions](deep_reads/2026-08-05-10.1038_s41467-026-76276-y.md)  
+  5/10 [journals]
+- [Deep-learning-enabled multi-omics analyses for prediction of future metastasis in cancer](deep_reads/2026-08-05-10.1038_s41467-026-76277-x.md)  
+  5/10 [journals]
+- [Unify learns cellular evolution with universal multimodal embeddings](deep_reads/2026-08-05-10.1038_s41467-026-76230-y.md)  
+  5/10 [journals]
+- [Polymorphism can extensively reshape the genome-wide crossover landscape in Arabidopsis thaliana](deep_reads/2026-08-05-10.1038_s41467-026-76213-z.md)  
+  4/10 [journals]
+- [A machine learning framework for predicting and modulating condition-dependent protein phase separation](deep_reads/2026-08-05-10.1038_s41467-026-76248-2.md)  
+  4/10 [journals]
+- [Hydrological regimes and drainage systems of aerial rivers across South America](deep_reads/2026-08-05-10.1038_s41467-026-76303-y.md)  
+  3/10 [journals]
+- [Global vulnerability assessment of mobile telecommunications infrastructure to climate hazards using crowdsourced open data](deep_reads/2026-08-05-10.1038_s41467-026-76197-w.md)  
+  3/10 [journals]
+- [Effective graph resistance as cumulative heat dissipation](deep_reads/2026-08-05-10.1038_s41467-026-75760-9.md)  
+  3/10 [journals]
+- [Where the river turns old: urbanized deltas imprint a fossil signature on black carbon exported to the ocean](deep_reads/2026-08-05-10.1038_s41467-026-76202-2.md)  
+  3/10 [journals]
+- [All-Optically Controlled Memristive Reservoir Computing Capable of Bipolar and Parallel Coding](deep_reads/2026-08-05-10.1038_s41467-026-76258-0.md)  
+  3/10 [journals]
+- [Integrated single-cell multi-omics characterization reveals lipid-associated macrophage-mediated immunosuppression in neoadjuvant immunotherapy of hepatocellular carcinoma](deep_reads/2026-08-05-10.1038_s41467-026-75949-y.md)  
+  3/10 [journals]
+- [Accurate, transferable, and verifiable machine-learned interatomic potentials for layered materials](deep_reads/2026-08-05-10.1038_s41467-026-74482-2.md)  
+  3/10 [journals]
+- [Ribo-ITP enables identification of translons from limited input samples](deep_reads/2026-08-05-10.1038_s41467-026-75571-y.md)  
+  3/10 [journals]
+- [Northward expansion of high-stature vegetation reveals net surface-cooling feedbacks in the majority of Canadian Boreal-Tundra ecozones](deep_reads/2026-08-05-10.1038_s41467-026-75957-y.md)  
+  3/10 [journals]
+- [A manufacturability-informed topology framework for AI-guided design of fibrous network materials](deep_reads/2026-08-05-10.1038_s41467-026-76045-x.md)  
+  3/10 [journals]
+- [LINE-1 insertion intermediates recombine with one another or with DNA breaks to form genome rearrangements](deep_reads/2026-08-05-10.1038_s41467-026-76308-7.md)  
+  2/10 [journals]
+- [High-throughput engineering of bispecific antibodies to enhance macrophage-mediated cytotoxicity of B-cell lymphoma](deep_reads/2026-08-05-10.1038_s41467-026-76180-5.md)  
+  2/10 [journals]
+- [Spinal-inspired artificial tactile interneuron with high-order burst spiking for intelligent edge interfaces](deep_reads/2026-08-05-10.1038_s41467-026-76185-0.md)  
+  2/10 [journals]
+- [A pathogenic CD8⁺ TRM–chemokine axis orchestrates liver fibrosis and provides circulating biomarkers during chronic Clonorchis sinensis infection](deep_reads/2026-08-05-10.1038_s41467-026-76175-2.md)  
+  2/10 [journals]
+- [Cell-type specific early perception of nine phytohormones revealed by single-nucleus transcriptomics in Arabidopsis](deep_reads/2026-08-05-10.1038_s41467-026-76284-y.md)  
+  2/10 [journals]
+- [Human-specific sequence features in HTT exon 1 promote toxic misprocessing via splicing factor SRSF7](deep_reads/2026-08-05-10.1038_s41467-026-76208-w.md)  
+  2/10 [journals]
+- [The role of the 2’-OH group in phase separation and percolation transitions of RNA](deep_reads/2026-08-05-10.1038_s41467-026-75961-2.md)  
+  2/10 [journals]
+- [Molecular mechanism of pore formation by Plasmodium Perforin-like Protein 2](deep_reads/2026-08-05-10.1038_s41467-026-76236-6.md)  
+  2/10 [journals]
+- [All-small-molecule Hydrogels for Safe and Efficient Photoprotection](deep_reads/2026-08-05-10.1038_s41467-026-75884-y.md)  
+  1/10 [journals]
+- [Corisin induces proteostasis stress to drive epithelial injury and pulmonary fibrosis](deep_reads/2026-08-05-10.1038_s41467-026-76162-7.md)  
+  1/10 [journals]
+- [De novo L-(+)-tartaric acid biosynthesis in multi-modular engineered yeasts](deep_reads/2026-08-05-10.1038_s41467-026-76119-w.md)  
+  1/10 [journals]
+- [Antibiotic development and a path to access in India](deep_reads/2026-08-05-10.1038_s41467-026-76186-z.md)  
+  1/10 [journals]
+- [Engineering viral protease-operated nanobodies for programmable and orthogonal control of protein function](deep_reads/2026-08-05-10.1038_s41467-026-76122-1.md)  
+  1/10 [journals]
+- [Skeletal restructuring of oxetanes through photoinduced oxygen deletion](deep_reads/2026-08-05-10.1038_s41467-026-76238-4.md)  
+  1/10 [journals]
+- [Divergent concerted and stepwise cycloadditions via enantioselective cross-conjugated iminium-ion catalysis](deep_reads/2026-08-05-10.1038_s41467-026-76222-y.md)  
+  0/10 [journals]
+- [Coupled electrosynthesis of formamide with ~100% carbon and nitrogen selectivity via matching cathode‒anode local pH](deep_reads/2026-08-05-10.1038_s41467-026-76027-z.md)  
+  0/10 [journals]
+- [Non-enzymatic hepatic ABHD6 interacts with Akt-FoxO1 axis to regulate metabolic health](deep_reads/2026-08-05-10.1038_s41467-026-76237-5.md)  
+  0/10 [journals]
+- [Dynamic balance of CRISPR-Cas immunity and resistance plasmid anti-immunity mediated by a bifunctional protein AcrIE10](deep_reads/2026-08-05-10.1038_s41467-026-76353-2.md)  
+  0/10 [journals]
+- [Moisture-induced surface degradation mechanism of argyrodite Li6PS5Cl under dry-room conditions](deep_reads/2026-08-05-10.1038_s41467-026-75537-0.md)  
+  0/10 [journals]
+- [Screening of amphipathic helices identifies features linked to inner nuclear membrane properties](deep_reads/2026-08-05-10.1038_s41467-026-75561-0.md)  
+  0/10 [journals]
+
 #### Nature
 
 - [A Bayesian framework for longitudinal EHR and genetic discovery](deep_reads/2026-08-05-10.1038_s41586-026-10780-5.md)  
@@ -13009,35 +13174,6 @@
 - [Predicting the conformational flexibility of antibody and T cell receptor complementarity-determining regions](deep_reads/2026-08-01-10.1038_s42256-025-01131-6.md)  
   0/10 [journals]
 - [Flow matching for accelerated simulation of atomic transport in crystalline materials](deep_reads/2026-08-01-10.1038_s42256-025-01125-4.md)  
-  0/10 [journals]
-
-#### Nature Communications Vol 17 Issue 1
-
-- [Decadal sink-source shifts of forest aboveground carbon since 1988](deep_reads/2026-08-01-10.1038_s41467-026-76093-3.md)  
-  7/10 [journals]
-- [Rapid and quantitative measurement of bacteriophage infectivity via fully automated droplet digital PCR](deep_reads/2026-08-01-10.1038_s41467-026-75746-7.md)  
-  6/10 [journals]
-- [Coastal flooding at predictable hours](deep_reads/2026-08-01-10.1038_s41467-026-75710-5.md)  
-  5/10 [journals]
-- [Cerebrospinal fluid biomarkers reveal transdiagnostic synaptic dysfunction across major psychiatric disorders](deep_reads/2026-07-31-10.1038_s41467-026-76187-y.md)  
-  5/10 [journals]
-- [Nonlinear reversal of photoexcitation on the attosecond time scale improves ultrafast X-ray diffraction images](deep_reads/2026-08-01-10.1038_s41467-026-75969-8.md)  
-  2/10 [journals]
-- [Apparatus for quantum-mixture research in microgravity](deep_reads/2026-08-01-10.1038_s41467-026-75968-9.md)  
-  2/10 [journals]
-- [Inhaled LTI-03 for idiopathic pulmonary fibrosis: a randomized dose escalation study](deep_reads/2026-08-01-10.1038_s41467-026-75291-3.md)  
-  1/10 [journals]
-- [Chiral diffraction from aperiodic monotile structure](deep_reads/2026-08-01-10.1038_s41467-026-75023-7.md)  
-  1/10 [journals]
-- [Golgi organization regulates stem cell function in the small intestine](deep_reads/2026-08-01-10.1038_s41467-026-75679-1.md)  
-  1/10 [journals]
-- [A tetranuclear nickel hydride cluster capable of reversible activation of aromatic and aliphatic C–H bonds](deep_reads/2026-08-01-10.1038_s41467-026-76006-4.md)  
-  1/10 [journals]
-- [A distinct CAR-T cell phenotype mediates therapeutic response at limited doses](deep_reads/2026-08-01-10.1038_s41467-026-76068-4.md)  
-  0/10 [journals]
-- [Exciton thermal radiation from macroscale membranes composed of chirality-sorted carbon nanotubes and its control](deep_reads/2026-08-01-10.1038_s41467-026-75711-4.md)  
-  0/10 [journals]
-- [Single-photon detection in few-layer NbSe2 superconducting nanowires](deep_reads/2026-08-01-10.1038_s41467-026-75646-w.md)  
   0/10 [journals]
 
 #### Science Vol 393 Issue 6810
