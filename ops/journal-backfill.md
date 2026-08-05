@@ -254,4 +254,4 @@ broad 组：
 > 不受影响、无需重跑。
 - [x] (2026-08-05) `--only Nature --n-issues 8`   ⚠ 修复后每期含大量 online-first，dry-run 估 ~280 篇
 - [x] (2026-08-05) `--only "Nat. Commun." --n-issues 5`   ⚠⚠ 滚动刊、online-first 极多，dry-run 估 ~168 篇
-- [ ] `--only "Nat. Methods" --n-issues 6`   （online-first 34/200，中等，补一轮）
+- [x] (2026-08-06) `--only "Nat. Methods" --n-issues 6`   （online-first 34/200，中等，补一轮）

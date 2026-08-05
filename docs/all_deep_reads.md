@@ -12202,6 +12202,35 @@
 
 ### 期刊
 
+#### Nature Methods
+
+- [Open and sustainable AI: challenges, opportunities and the road ahead in the life sciences](deep_reads/2026-08-05-10.1038_s41592-026-03037-6.md)  
+  6/10 [journals]
+- [NicheTrans: spatial-aware cross-omics translation](deep_reads/2026-08-05-10.1038_s41592-026-03153-3.md)  
+  5/10 [journals]
+- [Spike inference from calcium imaging data acquired with GCaMP8 indicators](deep_reads/2026-08-05-10.1038_s41592-026-03183-x.md)  
+  4/10 [journals]
+- [Simultaneous single-cell calcium imaging of neuronal population activity and brain-wide BOLD fMRI](deep_reads/2026-08-05-10.1038_s41592-026-03154-2.md)  
+  4/10 [journals]
+- [ClairS: a deep-learning method for long-read tumor–normal pair somatic small variant calling](deep_reads/2026-08-05-10.1038_s41592-026-03152-4.md)  
+  4/10 [journals]
+- [Integration of imaging-based and sequencing-based spatial omics mapping on the same tissue section via DBiTplus](deep_reads/2026-08-05-10.1038_s41592-025-02948-0.md)  
+  4/10 [journals]
+- [CellTune: an integrative software for accurate cell classification in spatial proteomics](deep_reads/2026-08-05-10.1038_s41592-026-03162-2.md)  
+  3/10 [journals]
+- [SpaMTP: integrative statistical analysis and visualization of spatial metabolomics and transcriptomics data](deep_reads/2026-08-05-10.1038_s41592-026-03140-8.md)  
+  3/10 [journals]
+- [Spatialproteomics: an interoperable toolbox for analyzing highly multiplexed fluorescence image data](deep_reads/2026-08-05-10.1038_s41592-026-03155-1.md)  
+  3/10 [journals]
+- [Efficient evidence-based genome annotation with EviAnn](deep_reads/2026-08-05-10.1038_s41592-026-03156-0.md)  
+  3/10 [journals]
+- [Siibra: a software tool suite for realizing a Multilevel Human Brain Atlas from complex data resources](deep_reads/2026-08-05-10.1038_s41592-026-03159-x.md)  
+  2/10 [journals]
+- [Light-activated tetanus neurotoxin for conditional proteolysis and inducible synaptic inhibition in vivo](deep_reads/2026-08-05-10.1038_s41592-026-03176-w.md)  
+  0/10 [journals]
+- [Design and optimization of a kinase-controlled allosteric switch](deep_reads/2026-08-05-10.1038_s41592-026-03163-1.md)  
+  0/10 [journals]
+
 #### Nature Communications Vol 17 Issue 1
 
 - [Transitions between persistent climate–carbon regimes coincide with elevated Phanerozoic biosphere vulnerability](deep_reads/2026-08-05-10.1038_s41467-026-75655-9.md)  

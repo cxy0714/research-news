@@ -17,7 +17,7 @@
 
 [→ 查看完整报告](daily/2026-08-05.md)
 
-### 精读论文（128 篇）
+### 精读论文（141 篇）
 
 - [Debiased inference for proximal dose-response function](deep_reads/2026-08-05-2608.00404.md)  
   `因果推断` · 相关性 9/10
@@ -69,6 +69,8 @@
   `因果推断` · 相关性 7/10
 - [Foundation Models for Astrophysics](deep_reads/2026-08-05-2608.02573.md)  
   `天体统计` · 相关性 7/10
+- [Open and sustainable AI: challenges, opportunities and the road ahead in the life sciences](deep_reads/2026-08-05-10.1038_s41592-026-03037-6.md)  
+  `其他` · 相关性 6/10
 - [Coupled air–sea interactions drove and sustained the 2013–2016 North Pacific marine heatwave](deep_reads/2026-08-05-10.1038_s41467-026-76096-0.md)  
   `其他` · 相关性 6/10
 - [Rank-guided learning accelerates automated enzyme engineering](deep_reads/2026-08-05-10.1038_s41467-026-76264-2.md)  
@@ -119,6 +121,8 @@
   `天体统计` · 相关性 6/10
 - [SDSS-V Local Volume Mapper (LVM): Dithered Data Cube Reconstruction with 3dcubegen](deep_reads/2026-08-05-2608.02597.md)  
   `天体统计` · 相关性 6/10
+- [NicheTrans: spatial-aware cross-omics translation](deep_reads/2026-08-05-10.1038_s41592-026-03153-3.md)  
+  `其他` · 相关性 5/10
 - [Regime shifts of AMOC-sea surface temperature relationship](deep_reads/2026-08-05-10.1038_s41467-026-76149-4.md)  
   `其他` · 相关性 5/10
 - [Genome-wide DNA methylation analysis revealed epigenetic mechanism underlying end-stage renal disease](deep_reads/2026-08-05-10.1038_s41467-026-76153-8.md)  
@@ -137,6 +141,14 @@
   `其他` · 相关性 5/10
 - [An encyclopedia of human enhancer–gene regulatory interactions](deep_reads/2026-08-05-10.1038_s41586-026-10781-4.md)  
   `其他` · 相关性 5/10
+- [Spike inference from calcium imaging data acquired with GCaMP8 indicators](deep_reads/2026-08-05-10.1038_s41592-026-03183-x.md)  
+  `其他` · 相关性 4/10
+- [Simultaneous single-cell calcium imaging of neuronal population activity and brain-wide BOLD fMRI](deep_reads/2026-08-05-10.1038_s41592-026-03154-2.md)  
+  `其他` · 相关性 4/10
+- [ClairS: a deep-learning method for long-read tumor–normal pair somatic small variant calling](deep_reads/2026-08-05-10.1038_s41592-026-03152-4.md)  
+  `其他` · 相关性 4/10
+- [Integration of imaging-based and sequencing-based spatial omics mapping on the same tissue section via DBiTplus](deep_reads/2026-08-05-10.1038_s41592-025-02948-0.md)  
+  `其他` · 相关性 4/10
 - [Polymorphism can extensively reshape the genome-wide crossover landscape in Arabidopsis thaliana](deep_reads/2026-08-05-10.1038_s41467-026-76213-z.md)  
   `其他` · 相关性 4/10
 - [A machine learning framework for predicting and modulating condition-dependent protein phase separation](deep_reads/2026-08-05-10.1038_s41467-026-76248-2.md)  
@@ -151,6 +163,14 @@
   `其他` · 相关性 4/10
 - [Improvements in educational opportunities go hand in hand with innovation](deep_reads/2026-08-05-10.1038_d41586-026-02016-3.md)  
   `其他` · 相关性 4/10
+- [CellTune: an integrative software for accurate cell classification in spatial proteomics](deep_reads/2026-08-05-10.1038_s41592-026-03162-2.md)  
+  `其他` · 相关性 3/10
+- [SpaMTP: integrative statistical analysis and visualization of spatial metabolomics and transcriptomics data](deep_reads/2026-08-05-10.1038_s41592-026-03140-8.md)  
+  `其他` · 相关性 3/10
+- [Spatialproteomics: an interoperable toolbox for analyzing highly multiplexed fluorescence image data](deep_reads/2026-08-05-10.1038_s41592-026-03155-1.md)  
+  `其他` · 相关性 3/10
+- [Efficient evidence-based genome annotation with EviAnn](deep_reads/2026-08-05-10.1038_s41592-026-03156-0.md)  
+  `其他` · 相关性 3/10
 - [Hydrological regimes and drainage systems of aerial rivers across South America](deep_reads/2026-08-05-10.1038_s41467-026-76303-y.md)  
   `其他` · 相关性 3/10
 - [Global vulnerability assessment of mobile telecommunications infrastructure to climate hazards using crowdsourced open data](deep_reads/2026-08-05-10.1038_s41467-026-76197-w.md)  
@@ -191,6 +211,8 @@
   `其他` · 相关性 3/10
 - [Food systems transformation would reshape global agriculture](deep_reads/2026-08-05-10.1038_s41586-026-10775-2.md)  
   `其他` · 相关性 3/10
+- [Siibra: a software tool suite for realizing a Multilevel Human Brain Atlas from complex data resources](deep_reads/2026-08-05-10.1038_s41592-026-03159-x.md)  
+  `其他` · 相关性 2/10
 - [LINE-1 insertion intermediates recombine with one another or with DNA breaks to form genome rearrangements](deep_reads/2026-08-05-10.1038_s41467-026-76308-7.md)  
   `其他` · 相关性 2/10
 - [High-throughput engineering of bispecific antibodies to enhance macrophage-mediated cytotoxicity of B-cell lymphoma](deep_reads/2026-08-05-10.1038_s41467-026-76180-5.md)  
@@ -253,6 +275,10 @@
   `其他` · 相关性 1/10
 - [An ATPγS recycling strategy for practical biocatalytic thiophosphorylation](deep_reads/2026-08-05-10.1038_s41586-026-10895-9.md)  
   `其他` · 相关性 1/10
+- [Light-activated tetanus neurotoxin for conditional proteolysis and inducible synaptic inhibition in vivo](deep_reads/2026-08-05-10.1038_s41592-026-03176-w.md)  
+  `其他` · 相关性 0/10
+- [Design and optimization of a kinase-controlled allosteric switch](deep_reads/2026-08-05-10.1038_s41592-026-03163-1.md)  
+  `其他` · 相关性 0/10
 - [Divergent concerted and stepwise cycloadditions via enantioselective cross-conjugated iminium-ion catalysis](deep_reads/2026-08-05-10.1038_s41467-026-76222-y.md)  
   `其他` · 相关性 0/10
 - [Coupled electrosynthesis of formamide with ~100% carbon and nitrogen selectivity via matching cathode‒anode local pH](deep_reads/2026-08-05-10.1038_s41467-026-76027-z.md)  
