@@ -4,6 +4,22 @@
 
 ### Daily
 
+- [Calibrated Bayesian Inference for Stochastic Intervention Effects](deep_reads/2026-08-06-2608.02924.md)  
+  8/10 [daily]
+- [As Good as it Gets: Bounds for Oracle Time-Varying Treatment Strategies](deep_reads/2026-08-06-2608.03133.md)  
+  8/10 [daily]
+- [Identification and Information after Nuisance Projection](deep_reads/2026-08-06-2608.03847.md)  
+  8/10 [daily]
+- [Difference-in-differences with "bad controls"](deep_reads/2026-08-06-2608.03881.md)  
+  8/10 [daily]
+- [Generalized propensity score weighting for functional causal inference framework](deep_reads/2026-08-06-2608.03200.md)  
+  7/10 [daily]
+- [Evaluating Treatment Effects using Group Testing with Retesting of Positive Groups](deep_reads/2026-08-06-2608.03224.md)  
+  7/10 [daily]
+- [Beyond Predicting Responses: Conformal Inference for Latent Distributional Parameters](deep_reads/2026-08-06-2608.03607.md)  
+  7/10 [daily]
+- [When Predictions Become Regressors: A Split-Sample Correction for Biases in Downstream Inference](deep_reads/2026-08-06-2608.02909.md)  
+  7/10 [daily]
 - [Debiased inference for proximal dose-response function](deep_reads/2026-08-05-2608.00404.md)  
   9/10 [daily]
 - [Cluster on the Subject, Not the Record: Confidence Intervals and Simultaneous Bands for Additive-Hazards Sequential Trial Emulation](deep_reads/2026-08-05-2608.01429.md)  
@@ -3022,6 +3038,10 @@
 
 ### Daily
 
+- [Reduced-rank Generalized Bilinear Models](deep_reads/2026-08-06-2608.03832.md)  
+  6/10 [daily]
+- [Spectral clustering of network time series via the sample covariance matrix](deep_reads/2026-08-06-2608.02922.md)  
+  6/10 [daily]
 - [Method of Moments Estimation of High-Dimensional Covariance Using a Parametric Model](deep_reads/2026-08-05-2608.01590.md)  
   7/10 [daily]
 - [On the Log Determinant of Sample Correlation Matrices under Gaussianity](deep_reads/2026-08-05-2608.00565.md)  
@@ -4214,6 +4234,8 @@
 
 ### Daily
 
+- [Survival Isotonic Distributional Regression](deep_reads/2026-08-06-2608.02914.md)  
+  7/10 [daily]
 - [Regularized-Likelihood Deconvolution with Posterior-Density Reconstruction](deep_reads/2026-08-05-2608.00240.md)  
   7/10 [daily]
 - [Empirical optimal transport potentials: fast rates and a functional central limit theorem](deep_reads/2026-08-05-2608.00649.md)  
@@ -6295,6 +6317,10 @@
 
 ### Daily
 
+- [Confidence Horizons](deep_reads/2026-08-06-2608.03889.md)  
+  7/10 [daily]
+- [Weighted k-Sample Kolmogorov-Smirnov, Cramer-von Mises, and Anderson-Darling Tests for Assessing Covariate Balance](deep_reads/2026-08-06-2608.02929.md)  
+  6/10 [daily]
 - [Adaptive Confidence Sets for Binary Regression without Design Smoothness](deep_reads/2026-08-05-2608.01309.md)  
   7/10 [daily]
 - [Beyond Modern Asymptotics for Log-Likelihood Ratios in Logistic Regression](deep_reads/2026-08-05-2608.02507.md)  
@@ -9656,6 +9682,8 @@
 
 ### Daily
 
+- [A fully nonlinear structural vector autoregressive model identified via independent innovation analysis](deep_reads/2026-08-06-2608.03486.md)  
+  6/10 [daily]
 - [High-Dimensional Panel Data Models with Interactive Fixed Effects: Beyond the Linear Case](deep_reads/2026-08-05-2608.02055.md)  
   9/10 [daily]
 - [Measurement Error and Peer Effects in Networks](deep_reads/2026-08-05-2608.00336.md)  
@@ -12121,6 +12149,10 @@
 
 ### Daily
 
+- [Conformal confidence intervals with an application to small area estimation](deep_reads/2026-08-06-2608.02766.md)  
+  6/10 [daily]
+- [A New Look at Gaussian Mixtures in the Presence of Missing-at-Random Responses and Covariates](deep_reads/2026-08-06-2608.03757.md)  
+  6/10 [daily]
 - [Higher-order U-centering: ANOVA residualization and fast unbiased estimation](deep_reads/2026-08-05-2608.01364.md)  
   9/10 [daily]
 - [Random Inverse Problems with Structural and Probabilistic Ambiguities](deep_reads/2026-08-05-2608.01439.md)  
