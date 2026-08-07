@@ -11,45 +11,37 @@
 - **[收藏](favorites.md)** — 登录后在各页点 ☆ 收藏的论文，自动汇总到这里（总收藏按类别分组、可切换按周；每篇可写评论，无需手动维护）。
 - **[模型测评](all_shootout.md)** — 不同 LLM 在同一批论文上的打分 / 解读对比。
 
-## 今日 · 2026-08-06
+## 今日 · 2026-08-07
 
 ### 每日 arXiv 速览
 
-[→ 查看完整报告](daily/2026-08-06.md)
+[→ 查看完整报告](daily/2026-08-07.md)
 
-### 精读论文（16 篇）
+### 精读论文（12 篇）
 
-- [Calibrated Bayesian Inference for Stochastic Intervention Effects](deep_reads/2026-08-06-2608.02924.md)  
+- [Regression-Based Proximal Reconciliation of Conflicting Trials with Unmeasured Effect Modifiers](deep_reads/2026-08-07-2608.04202.md)  
   `因果推断` · 相关性 8/10
-- [As Good as it Gets: Bounds for Oracle Time-Varying Treatment Strategies](deep_reads/2026-08-06-2608.03133.md)  
+- [Best for which estimand? A known-truth benchmark of longitudinal-matching and target-trial-emulation methods for time-varying treatments](deep_reads/2026-08-07-2608.04414.md)  
   `因果推断` · 相关性 8/10
-- [Identification and Information after Nuisance Projection](deep_reads/2026-08-06-2608.03847.md)  
+- [A Design-Based Minimax Theory for Network Experiments](deep_reads/2026-08-07-2608.04909.md)  
   `因果推断` · 相关性 8/10
-- [Difference-in-differences with "bad controls"](deep_reads/2026-08-06-2608.03881.md)  
-  `因果推断` · 相关性 8/10
-- [Generalized propensity score weighting for functional causal inference framework](deep_reads/2026-08-06-2608.03200.md)  
-  `因果推断` · 相关性 7/10
-- [Evaluating Treatment Effects using Group Testing with Retesting of Positive Groups](deep_reads/2026-08-06-2608.03224.md)  
-  `因果推断` · 相关性 7/10
-- [Beyond Predicting Responses: Conformal Inference for Latent Distributional Parameters](deep_reads/2026-08-06-2608.03607.md)  
-  `因果推断` · 相关性 7/10
-- [Confidence Horizons](deep_reads/2026-08-06-2608.03889.md)  
-  `数理统计 / 假设检验` · 相关性 7/10
-- [Survival Isotonic Distributional Regression](deep_reads/2026-08-06-2608.02914.md)  
+- [Semiparametric robust mixture of experts based on nonparametric maximum likelihood](deep_reads/2026-08-07-2608.04561.md)  
   `非参数 / 半参数` · 相关性 7/10
-- [When Predictions Become Regressors: A Split-Sample Correction for Biases in Downstream Inference](deep_reads/2026-08-06-2608.02909.md)  
+- [Nonparametric Goodness-of-fit Testing under Covariate Shift](deep_reads/2026-08-07-2608.04860.md)  
+  `数理统计 / 假设检验` · 相关性 7/10
+- [Inverse probability weighting for auxiliary variable dependent sampling in observational studies of Long COVID](deep_reads/2026-08-07-2608.04918.md)  
+  `流行病学` · 相关性 7/10
+- [Micro-randomized Trials with Categorical Treatments and Binary Proximal Outcome: Causal Effect Estimation and Sample Size Calculation](deep_reads/2026-08-07-2608.05135.md)  
   `因果推断` · 相关性 7/10
-- [Conformal confidence intervals with an application to small area estimation](deep_reads/2026-08-06-2608.02766.md)  
-  `其他` · 相关性 6/10
-- [Weighted k-Sample Kolmogorov-Smirnov, Cramer-von Mises, and Anderson-Darling Tests for Assessing Covariate Balance](deep_reads/2026-08-06-2608.02929.md)  
-  `数理统计 / 假设检验` · 相关性 6/10
-- [A New Look at Gaussian Mixtures in the Presence of Missing-at-Random Responses and Covariates](deep_reads/2026-08-06-2608.03757.md)  
-  `其他` · 相关性 6/10
-- [Reduced-rank Generalized Bilinear Models](deep_reads/2026-08-06-2608.03832.md)  
-  `高维统计 / 随机矩阵` · 相关性 6/10
-- [Spectral clustering of network time series via the sample covariance matrix](deep_reads/2026-08-06-2608.02922.md)  
-  `高维统计 / 随机矩阵` · 相关性 6/10
-- [A fully nonlinear structural vector autoregressive model identified via independent innovation analysis](deep_reads/2026-08-06-2608.03486.md)  
+- [Debiasing the Lasso under Weaker Tail Assumptions](deep_reads/2026-08-07-2608.04800.md)  
+  `高维统计 / 随机矩阵` · 相关性 7/10
+- [Algorithm-Driven SVARs: Navigating the Wilderness of Big Data](deep_reads/2026-08-07-2608.05017.md)  
+  `经济理论 / 应用` · 相关性 7/10
+- [Optimal minimization of an unknown function in a nonparametric multivariate regression model thanks to a dimension reduction approach](deep_reads/2026-08-07-2608.04566.md)  
+  `非参数 / 半参数` · 相关性 6/10
+- [Exact Inference in Fixed-Effect Regressions with Concentrated Identifying Variation](deep_reads/2026-08-07-2608.04839.md)  
+  `因果推断` · 相关性 6/10
+- [A Pairwise Differencing Distribution Regression Approach for Network Models](deep_reads/2026-08-07-2608.04983.md)  
   `经济理论 / 应用` · 相关性 6/10
 
 ## 收藏
@@ -58,11 +50,11 @@
 
 ## 本周每日报告
 
+- [2026-08-06](daily/2026-08-06.md)
 - [2026-08-05](daily/2026-08-05.md)
 - [2026-08-04](daily/2026-08-04.md)
 - [2026-08-03](daily/2026-08-03.md)
 - [2026-07-31](daily/2026-07-31.md)
-- [2026-07-30](daily/2026-07-30.md)
 
 
 ---

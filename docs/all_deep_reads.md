@@ -4,6 +4,16 @@
 
 ### Daily
 
+- [Regression-Based Proximal Reconciliation of Conflicting Trials with Unmeasured Effect Modifiers](deep_reads/2026-08-07-2608.04202.md)  
+  8/10 [daily]
+- [Best for which estimand? A known-truth benchmark of longitudinal-matching and target-trial-emulation methods for time-varying treatments](deep_reads/2026-08-07-2608.04414.md)  
+  8/10 [daily]
+- [A Design-Based Minimax Theory for Network Experiments](deep_reads/2026-08-07-2608.04909.md)  
+  8/10 [daily]
+- [Micro-randomized Trials with Categorical Treatments and Binary Proximal Outcome: Causal Effect Estimation and Sample Size Calculation](deep_reads/2026-08-07-2608.05135.md)  
+  7/10 [daily]
+- [Exact Inference in Fixed-Effect Regressions with Concentrated Identifying Variation](deep_reads/2026-08-07-2608.04839.md)  
+  6/10 [daily]
 - [Calibrated Bayesian Inference for Stochastic Intervention Effects](deep_reads/2026-08-06-2608.02924.md)  
   8/10 [daily]
 - [As Good as it Gets: Bounds for Oracle Time-Varying Treatment Strategies](deep_reads/2026-08-06-2608.03133.md)  
@@ -3038,6 +3048,8 @@
 
 ### Daily
 
+- [Debiasing the Lasso under Weaker Tail Assumptions](deep_reads/2026-08-07-2608.04800.md)  
+  7/10 [daily]
 - [Reduced-rank Generalized Bilinear Models](deep_reads/2026-08-06-2608.03832.md)  
   6/10 [daily]
 - [Spectral clustering of network time series via the sample covariance matrix](deep_reads/2026-08-06-2608.02922.md)  
@@ -4234,6 +4246,10 @@
 
 ### Daily
 
+- [Semiparametric robust mixture of experts based on nonparametric maximum likelihood](deep_reads/2026-08-07-2608.04561.md)  
+  7/10 [daily]
+- [Optimal minimization of an unknown function in a nonparametric multivariate regression model thanks to a dimension reduction approach](deep_reads/2026-08-07-2608.04566.md)  
+  6/10 [daily]
 - [Survival Isotonic Distributional Regression](deep_reads/2026-08-06-2608.02914.md)  
   7/10 [daily]
 - [Regularized-Likelihood Deconvolution with Posterior-Density Reconstruction](deep_reads/2026-08-05-2608.00240.md)  
@@ -6317,6 +6333,8 @@
 
 ### Daily
 
+- [Nonparametric Goodness-of-fit Testing under Covariate Shift](deep_reads/2026-08-07-2608.04860.md)  
+  7/10 [daily]
 - [Confidence Horizons](deep_reads/2026-08-06-2608.03889.md)  
   7/10 [daily]
 - [Weighted k-Sample Kolmogorov-Smirnov, Cramer-von Mises, and Anderson-Darling Tests for Assessing Covariate Balance](deep_reads/2026-08-06-2608.02929.md)  
@@ -9682,6 +9700,10 @@
 
 ### Daily
 
+- [Algorithm-Driven SVARs: Navigating the Wilderness of Big Data](deep_reads/2026-08-07-2608.05017.md)  
+  7/10 [daily]
+- [A Pairwise Differencing Distribution Regression Approach for Network Models](deep_reads/2026-08-07-2608.04983.md)  
+  6/10 [daily]
 - [A fully nonlinear structural vector autoregressive model identified via independent innovation analysis](deep_reads/2026-08-06-2608.03486.md)  
   6/10 [daily]
 - [High-Dimensional Panel Data Models with Interactive Fixed Effects: Beyond the Linear Case](deep_reads/2026-08-05-2608.02055.md)  
@@ -10902,6 +10924,8 @@
 
 ### Daily
 
+- [Inverse probability weighting for auxiliary variable dependent sampling in observational studies of Long COVID](deep_reads/2026-08-07-2608.04918.md)  
+  7/10 [daily]
 - [Recovering the Target Hazard Ratio Under Nonproportional Hazards Induced by an Omitted Covariate: Simulation-based Approach](deep_reads/2026-07-31-2607.27026.md)  
   6/10 [daily]
 - [Identifiability and Information-Based Inference for Epidemic Transmission Models Under Partial Observation](deep_reads/2026-07-28-2607.23079.md)  
