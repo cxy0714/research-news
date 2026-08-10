@@ -4,6 +4,10 @@
 
 ### Daily
 
+- [Fixed-Effect Saturation Is Not Weak Identification: Certifying Inference under Measurement Error](deep_reads/2026-08-10-2608.06053.md)  
+  7/10 [daily]
+- [Estimating and Testing Kinks in Panel Data Models](deep_reads/2026-08-10-2608.07162.md)  
+  6/10 [daily]
 - [Regression-Based Proximal Reconciliation of Conflicting Trials with Unmeasured Effect Modifiers](deep_reads/2026-08-07-2608.04202.md)  
   8/10 [daily]
 - [Best for which estimand? A known-truth benchmark of longitudinal-matching and target-trial-emulation methods for time-varying treatments](deep_reads/2026-08-07-2608.04414.md)  
@@ -9329,6 +9333,8 @@
 
 ### Daily
 
+- [A space of inference spaces in the space sciences - Parametric Bayesian inference in astronomy, cosmology and particle physics](deep_reads/2026-08-10-2608.06078.md)  
+  6/10 [daily]
 - [Foundation Models for Astrophysics](deep_reads/2026-08-05-2608.02573.md)  
   7/10 [daily]
 - [Towards optimal photometric calibration of digital astronomical plates with deep learning](deep_reads/2026-08-05-2608.01391.md)  
