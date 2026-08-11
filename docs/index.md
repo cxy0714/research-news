@@ -11,19 +11,29 @@
 - **[收藏](favorites.md)** — 登录后在各页点 ☆ 收藏的论文，自动汇总到这里（总收藏按类别分组、可切换按周；每篇可写评论，无需手动维护）。
 - **[模型测评](all_shootout.md)** — 不同 LLM 在同一批论文上的打分 / 解读对比。
 
-## 今日 · 2026-08-10
+## 今日 · 2026-08-11
 
 ### 每日 arXiv 速览
 
-[→ 查看完整报告](daily/2026-08-10.md)
+[→ 查看完整报告](daily/2026-08-11.md)
 
-### 精读论文（3 篇）
+### 精读论文（8 篇）
 
-- [Fixed-Effect Saturation Is Not Weak Identification: Certifying Inference under Measurement Error](deep_reads/2026-08-10-2608.06053.md)  
+- [Mixed Gaussian Projections for Two-Sample Testing of Functional Data](deep_reads/2026-08-11-2608.06542.md)  
+  `数理统计 / 假设检验` · 相关性 7/10
+- [A Novel Tool for Evaluating Effect Modification in Older Adults with ADRD Using Medicare Claims](deep_reads/2026-08-11-2608.06654.md)  
   `因果推断` · 相关性 7/10
-- [Estimating and Testing Kinks in Panel Data Models](deep_reads/2026-08-10-2608.07162.md)  
-  `因果推断` · 相关性 6/10
-- [A space of inference spaces in the space sciences - Parametric Bayesian inference in astronomy, cosmology and particle physics](deep_reads/2026-08-10-2608.06078.md)  
+- [Bridging Balancing Weights and Augmentation in Covariate-adjusted Analyses with Time-to-Event Endpoints: Theory and Practical Recommendations](deep_reads/2026-08-11-2608.06774.md)  
+  `因果推断` · 相关性 7/10
+- [High-dimensional ridgeless least squares interpolation under spiked covariance structures](deep_reads/2026-08-11-2608.07281.md)  
+  `高维统计 / 随机矩阵` · 相关性 7/10
+- [Spectral Dependence of Convex Regularization: Fundamental Limits under Right-Rotationally Invariant Designs](deep_reads/2026-08-11-2608.07432.md)  
+  `高维统计 / 随机矩阵` · 相关性 7/10
+- [An Entropy-based Coefficient of Determination with Adjustment of Optimization Bias](deep_reads/2026-08-11-2608.06624.md)  
+  `数理统计 / 假设检验` · 相关性 6/10
+- [Bootstrap validity in Bayesian semi-parametric models](deep_reads/2026-08-11-2608.06670.md)  
+  `非参数 / 半参数` · 相关性 6/10
+- [Telemetry is a Sensor: Opportunistic Wavefront Estimation for the James Webb Space Telescope](deep_reads/2026-08-11-2608.07357.md)  
   `天体统计` · 相关性 6/10
 
 ## 收藏
@@ -32,11 +42,11 @@
 
 ## 本周每日报告
 
+- [2026-08-10](daily/2026-08-10.md)
 - [2026-08-07](daily/2026-08-07.md)
 - [2026-08-06](daily/2026-08-06.md)
 - [2026-08-05](daily/2026-08-05.md)
 - [2026-08-04](daily/2026-08-04.md)
-- [2026-08-03](daily/2026-08-03.md)
 
 
 ---

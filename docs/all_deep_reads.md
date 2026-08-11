@@ -4,6 +4,10 @@
 
 ### Daily
 
+- [A Novel Tool for Evaluating Effect Modification in Older Adults with ADRD Using Medicare Claims](deep_reads/2026-08-11-2608.06654.md)  
+  7/10 [daily]
+- [Bridging Balancing Weights and Augmentation in Covariate-adjusted Analyses with Time-to-Event Endpoints: Theory and Practical Recommendations](deep_reads/2026-08-11-2608.06774.md)  
+  7/10 [daily]
 - [Fixed-Effect Saturation Is Not Weak Identification: Certifying Inference under Measurement Error](deep_reads/2026-08-10-2608.06053.md)  
   7/10 [daily]
 - [Estimating and Testing Kinks in Panel Data Models](deep_reads/2026-08-10-2608.07162.md)  
@@ -3052,6 +3056,10 @@
 
 ### Daily
 
+- [High-dimensional ridgeless least squares interpolation under spiked covariance structures](deep_reads/2026-08-11-2608.07281.md)  
+  7/10 [daily]
+- [Spectral Dependence of Convex Regularization: Fundamental Limits under Right-Rotationally Invariant Designs](deep_reads/2026-08-11-2608.07432.md)  
+  7/10 [daily]
 - [Debiasing the Lasso under Weaker Tail Assumptions](deep_reads/2026-08-07-2608.04800.md)  
   7/10 [daily]
 - [Reduced-rank Generalized Bilinear Models](deep_reads/2026-08-06-2608.03832.md)  
@@ -4250,6 +4258,8 @@
 
 ### Daily
 
+- [Bootstrap validity in Bayesian semi-parametric models](deep_reads/2026-08-11-2608.06670.md)  
+  6/10 [daily]
 - [Semiparametric robust mixture of experts based on nonparametric maximum likelihood](deep_reads/2026-08-07-2608.04561.md)  
   7/10 [daily]
 - [Optimal minimization of an unknown function in a nonparametric multivariate regression model thanks to a dimension reduction approach](deep_reads/2026-08-07-2608.04566.md)  
@@ -6337,6 +6347,10 @@
 
 ### Daily
 
+- [Mixed Gaussian Projections for Two-Sample Testing of Functional Data](deep_reads/2026-08-11-2608.06542.md)  
+  7/10 [daily]
+- [An Entropy-based Coefficient of Determination with Adjustment of Optimization Bias](deep_reads/2026-08-11-2608.06624.md)  
+  6/10 [daily]
 - [Nonparametric Goodness-of-fit Testing under Covariate Shift](deep_reads/2026-08-07-2608.04860.md)  
   7/10 [daily]
 - [Confidence Horizons](deep_reads/2026-08-06-2608.03889.md)  
@@ -9333,6 +9347,8 @@
 
 ### Daily
 
+- [Telemetry is a Sensor: Opportunistic Wavefront Estimation for the James Webb Space Telescope](deep_reads/2026-08-11-2608.07357.md)  
+  6/10 [daily]
 - [A space of inference spaces in the space sciences - Parametric Bayesian inference in astronomy, cosmology and particle physics](deep_reads/2026-08-10-2608.06078.md)  
   6/10 [daily]
 - [Foundation Models for Astrophysics](deep_reads/2026-08-05-2608.02573.md)  
