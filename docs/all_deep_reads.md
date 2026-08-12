@@ -4,6 +4,28 @@
 
 ### Daily
 
+- [Bias-robust causal inference for panel data](deep_reads/2026-08-12-2608.09837.md)  
+  9/10 [daily]
+- [Proximal Individualized Functional Treatment Regimes](deep_reads/2026-08-12-2608.07832.md)  
+  8/10 [daily]
+- [Selecting among Missingness Models for Sequential Outcomes with Nonignorable Nonresponse](deep_reads/2026-08-12-2608.09026.md)  
+  8/10 [daily]
+- [Estimating the Average Treatment Effect under Limited Overlap via Polynomial Approximation and Extrapolation](deep_reads/2026-08-12-2608.09329.md)  
+  8/10 [daily]
+- [Local conformal prediction for individual causal effects](deep_reads/2026-08-12-2608.09612.md)  
+  8/10 [daily]
+- [On inferential equivalence classes of causal models](deep_reads/2026-08-12-2608.08327.md)  
+  8/10 [daily]
+- [Partial Homogeneity in Staggered Difference-in-Differences](deep_reads/2026-08-12-2608.08047.md)  
+  8/10 [daily]
+- [Optimal Experimental Design and Estimation when Potential Outcomes are Bounded](deep_reads/2026-08-12-2608.09812.md)  
+  8/10 [daily]
+- [Debiased Machine Learning for Partially Linear Accelerated Failure Time Models](deep_reads/2026-08-12-2608.07841.md)  
+  7/10 [daily]
+- [Asymptotics for Treatment Choice with Partial Identification](deep_reads/2026-08-12-2608.09027.md)  
+  7/10 [daily]
+- [Clustering Informed Inverse Probability Weighting Strategies for Causal Effect Estimation in Observational Studies](deep_reads/2026-08-12-2608.09839.md)  
+  6/10 [daily]
 - [A Novel Tool for Evaluating Effect Modification in Older Adults with ADRD Using Medicare Claims](deep_reads/2026-08-11-2608.06654.md)  
   7/10 [daily]
 - [Bridging Balancing Weights and Augmentation in Covariate-adjusted Analyses with Time-to-Event Endpoints: Theory and Practical Recommendations](deep_reads/2026-08-11-2608.06774.md)  
@@ -3056,6 +3078,12 @@
 
 ### Daily
 
+- [Limiting eigen-structure of spiked sample covariance matrices under missing observations](deep_reads/2026-08-12-2608.09135.md)  
+  8/10 [daily]
+- [Lasso Universality Under Linearly Dependent Covariates in the Sparse Regime](deep_reads/2026-08-12-2608.08390.md)  
+  7/10 [daily]
+- [Ultra-high-dimensional spot support screening in continuous-time regression](deep_reads/2026-08-12-2608.08582.md)  
+  6/10 [daily]
 - [High-dimensional ridgeless least squares interpolation under spiked covariance structures](deep_reads/2026-08-11-2608.07281.md)  
   7/10 [daily]
 - [Spectral Dependence of Convex Regularization: Fundamental Limits under Right-Rotationally Invariant Designs](deep_reads/2026-08-11-2608.07432.md)  
@@ -4258,6 +4286,12 @@
 
 ### Daily
 
+- [Nonparametric quantile inference using Dirichlet processes](deep_reads/2026-08-12-2608.08355.md)  
+  7/10 [daily]
+- [Estimating conditional expectation](deep_reads/2026-08-12-2608.09561.md)  
+  7/10 [daily]
+- [Pointwise convergence of purely random partition estimators: from random trees to prototype rules](deep_reads/2026-08-12-2608.08360.md)  
+  6/10 [daily]
 - [Bootstrap validity in Bayesian semi-parametric models](deep_reads/2026-08-11-2608.06670.md)  
   6/10 [daily]
 - [Semiparametric robust mixture of experts based on nonparametric maximum likelihood](deep_reads/2026-08-07-2608.04561.md)  
@@ -6347,6 +6381,18 @@
 
 ### Daily
 
+- [Sparse departures from independence in two-way tables: a heteroscedasticity profile and detection boundary, an adaptive higher-criticism gate, and an assumption-lean exact anchor](deep_reads/2026-08-12-2608.07979.md)  
+  8/10 [daily]
+- [Factor-Adjusted Location Tests for High-Dimensional Time Series](deep_reads/2026-08-12-2608.08483.md)  
+  7/10 [daily]
+- [A Modified Dependence Measure Related to Chatterjee's Rank Correlation: Theoretical Properties and Asymptotic Analysis](deep_reads/2026-08-12-2608.07844.md)  
+  7/10 [daily]
+- [On the optimality of antithetic randomization for cross-validation](deep_reads/2026-08-12-2608.08089.md)  
+  7/10 [daily]
+- [Independence Is Not Always Consistently Testable](deep_reads/2026-08-12-2608.07860.md)  
+  6/10 [daily]
+- [Dynamic $e$-closure for online hypotheses with any-time-valid evidence: closure principles and projective mergers](deep_reads/2026-08-12-2608.09927.md)  
+  6/10 [daily]
 - [Mixed Gaussian Projections for Two-Sample Testing of Functional Data](deep_reads/2026-08-11-2608.06542.md)  
   7/10 [daily]
 - [An Entropy-based Coefficient of Determination with Adjustment of Optimization Bias](deep_reads/2026-08-11-2608.06624.md)  
@@ -8374,6 +8420,8 @@
 
 ### Daily
 
+- [Exact Conditional Distributions of Chi-Square-Family Statistics for Two-Way Contingency Tables, by Cell-Separable Dynamic Programming](deep_reads/2026-08-12-2608.08576.md)  
+  7/10 [daily]
 - [Denoising growth complexity: Data geometry and certified schedules for diffusion sampling](deep_reads/2026-07-31-2607.26285.md)  
   7/10 [daily]
 - [Near-Oracle Robustification of Finite-Difference Stochastic Gradient Estimators via Cheap Pilot Calibration](deep_reads/2026-07-28-2607.23725.md)  
@@ -9347,6 +9395,8 @@
 
 ### Daily
 
+- [Foreground Subtraction with a Tensor-Based Oriented Singular Value Decomposition Method for HI Experiments](deep_reads/2026-08-12-2608.09129.md)  
+  6/10 [daily]
 - [Telemetry is a Sensor: Opportunistic Wavefront Estimation for the James Webb Space Telescope](deep_reads/2026-08-11-2608.07357.md)  
   6/10 [daily]
 - [A space of inference spaces in the space sciences - Parametric Bayesian inference in astronomy, cosmology and particle physics](deep_reads/2026-08-10-2608.06078.md)  
@@ -9722,6 +9772,12 @@
 
 ### Daily
 
+- [Stationary Errors and Quantile Regression in Short Panels](deep_reads/2026-08-12-2608.08750.md)  
+  7/10 [daily]
+- [Generalized AKM: Flexible Controls and Interactions in Wage Decompositions](deep_reads/2026-08-12-2608.09686.md)  
+  7/10 [daily]
+- [Asymmetries in Peer Effects](deep_reads/2026-08-12-2608.09219.md)  
+  6/10 [daily]
 - [Algorithm-Driven SVARs: Navigating the Wilderness of Big Data](deep_reads/2026-08-07-2608.05017.md)  
   7/10 [daily]
 - [A Pairwise Differencing Distribution Regression Approach for Network Models](deep_reads/2026-08-07-2608.04983.md)  
@@ -12195,6 +12251,8 @@
 
 ### Daily
 
+- [Partial Differential Equation Barriers to Identifiability in Infinite Mixture Models](deep_reads/2026-08-12-2608.08597.md)  
+  7/10 [daily]
 - [Conformal confidence intervals with an application to small area estimation](deep_reads/2026-08-06-2608.02766.md)  
   6/10 [daily]
 - [A New Look at Gaussian Mixtures in the Presence of Missing-at-Random Responses and Covariates](deep_reads/2026-08-06-2608.03757.md)  
