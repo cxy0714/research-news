@@ -4,6 +4,10 @@
 
 ### Daily
 
+- [Semi-supervised Concordance Learning for Optimal Individual Treatment Regimes](deep_reads/2026-08-14-2608.13945.md)  
+  7/10 [daily]
+- [Handling covariate shift by model averaging](deep_reads/2026-08-14-2608.14025.md)  
+  6/10 [daily]
 - [COMPACT: Spectral Adjustment Scores from a Complete and Irreducible Causal Criterion](deep_reads/2026-08-13-2608.10305.md)  
   9/10 [daily]
 - [Causal Mediation Analysis with a Time-Dependent Mediator, Time-Dependent Confounders and a Time-to-Event Outcome: Revisiting the Difference Method](deep_reads/2026-08-13-2608.13094.md)  
@@ -3110,6 +3114,8 @@
 
 ### Daily
 
+- [Change Point Detection and Localization in High-Dimensional Time Series](deep_reads/2026-08-14-2608.14344.md)  
+  7/10 [daily]
 - [Sharp proper estimation of fixed-component Gaussian location mixtures in polynomial time](deep_reads/2026-08-13-2608.12701.md)  
   9/10 [daily]
 - [Spectral phase transitions in Gaussian multi-index models](deep_reads/2026-08-13-2608.12183.md)  
@@ -4324,6 +4330,8 @@
 
 ### Daily
 
+- [A semiparametric approach for the estimation of covariate-adjusted area under the receiver operating characteristic curve](deep_reads/2026-08-14-2608.13859.md)  
+  7/10 [daily]
 - [Semiparametric efficient estimation of the Cox regression coefficient when there can be ties](deep_reads/2026-08-13-2608.11399.md)  
   9/10 [daily]
 - [Asymptotics of Nonparametric Estimation under General Non-monotone MAR Missingness: A Nonparametric Maximum Likelihood Approach](deep_reads/2026-08-13-2608.10113.md)  
@@ -6433,6 +6441,8 @@
 
 ### Daily
 
+- [Change-Point Detection for Heterogeneous High-Dimensional Functional Time Series](deep_reads/2026-08-14-2608.13880.md)  
+  6/10 [daily]
 - [Testing Sign Agreement](deep_reads/2026-08-13-2608.10294.md)  
   8/10 [daily]
 - [Optimal Inference with Black-box Predictions](deep_reads/2026-08-13-2608.10155.md)  
@@ -8482,6 +8492,12 @@
 
 ### Daily
 
+- [Tensor Covariance Estimation via Kronecker-Structured Sparse Inverse Cholesky](deep_reads/2026-08-14-2608.14887.md)  
+  7/10 [daily]
+- [FastJM: An R Package for Efficient Implementation of Semiparametric Joint Models for Longitudinal and Survival Data](deep_reads/2026-08-14-2608.14127.md)  
+  7/10 [daily]
+- [Scalable likelihood-based inference for limited dependent variable models](deep_reads/2026-08-14-2608.13851.md)  
+  7/10 [daily]
 - [Exact Conditional Distributions of Chi-Square-Family Statistics for Two-Way Contingency Tables, by Cell-Separable Dynamic Programming](deep_reads/2026-08-12-2608.08576.md)  
   7/10 [daily]
 - [Denoising growth complexity: Data geometry and certified schedules for diffusion sampling](deep_reads/2026-07-31-2607.26285.md)  
@@ -9846,6 +9862,10 @@
 
 ### Daily
 
+- [A Unified Bayesian Model for Voter Turnout Estimation: Combining Surveys, Aggregate Data, and Selection Correction](deep_reads/2026-08-14-2608.14062.md)  
+  6/10 [daily]
+- [Limited-Information Estimation of Heterogeneous Agent Models](deep_reads/2026-08-14-2608.13953.md)  
+  6/10 [daily]
 - [Stationary Errors and Quantile Regression in Short Panels](deep_reads/2026-08-12-2608.08750.md)  
   7/10 [daily]
 - [Generalized AKM: Flexible Controls and Interactions in Wage Decompositions](deep_reads/2026-08-12-2608.09686.md)  
@@ -12325,6 +12345,8 @@
 
 ### Daily
 
+- [Generation-Powered Inference for Distribution-Valued Outcomes](deep_reads/2026-08-14-2608.14542.md)  
+  5/10 [daily]
 - [Bandable Cumulant Tensors: Optimal Estimation and Applications in Non-Gaussian Data Modeling](deep_reads/2026-08-13-2608.10161.md)  
   9/10 [daily]
 - [Resampling simplicial depth](deep_reads/2026-08-13-2608.11131.md)  
