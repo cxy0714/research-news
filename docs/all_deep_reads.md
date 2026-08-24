@@ -4,6 +4,38 @@
 
 ### Daily
 
+- [COMPACT: Spectral Adjustment Scores from a Complete and Irreducible Causal Criterion](deep_reads/2026-08-13-2608.10305.md)  
+  9/10 [daily]
+- [Causal Mediation Analysis with a Time-Dependent Mediator, Time-Dependent Confounders and a Time-to-Event Outcome: Revisiting the Difference Method](deep_reads/2026-08-13-2608.13094.md)  
+  8/10 [daily]
+- [Win-Ratio Regression for Prioritized Composite Outcomes in Observational Studies: Doubly Robust and Efficient Estimation with Future-Score Correction](deep_reads/2026-08-13-2608.10728.md)  
+  8/10 [daily]
+- [Sharp Minimax Theory for Randomized Experiments](deep_reads/2026-08-13-2608.13822.md)  
+  8/10 [daily]
+- [Learning about Treatment Effects in Panels under Unknown Interference](deep_reads/2026-08-13-2608.13466.md)  
+  8/10 [daily]
+- [Causal Mediation Analysis for Network Data with Graph Neural Network](deep_reads/2026-08-13-2608.13274.md)  
+  7/10 [daily]
+- [Inverse Confounding Analysis: An Exact Method for Quantifying the Significance of Confounding](deep_reads/2026-08-13-2608.11991.md)  
+  7/10 [daily]
+- [Causal inference for group-contaminated structured outcomes: observable quotients, lossless reduction and exact randomization inference](deep_reads/2026-08-13-2608.11954.md)  
+  7/10 [daily]
+- [Expert-Guided g-computation with Large Language Models for Estimating Causal Effects on Timings: Applications to Hospital Quality Improvement](deep_reads/2026-08-13-2608.10339.md)  
+  7/10 [daily]
+- [Cohen's f or Mean Standardized Differences? Assessing Covariate Balance with Multivalued Treatments](deep_reads/2026-08-13-2608.10266.md)  
+  7/10 [daily]
+- [Coarsening Latent-Class Probabilities: Directional Distortion and Coverage Loss](deep_reads/2026-08-13-2608.11784.md)  
+  7/10 [daily]
+- [Graph-Laplacian Variance Estimators for Finely Stratified Experiments](deep_reads/2026-08-13-2608.10177.md)  
+  7/10 [daily]
+- [Theoretical Properties of Covariate-Adaptive Randomization with a Diverging Number of Covariates](deep_reads/2026-08-13-2608.13442.md)  
+  6/10 [daily]
+- [Chance-constrained selection of sequential intervention strategies from counterfactual estimates](deep_reads/2026-08-13-2608.13209.md)  
+  6/10 [daily]
+- [Design-Based Prediction-Powered Inference for Spatial Data](deep_reads/2026-08-13-2608.10356.md)  
+  6/10 [daily]
+- [Measuring the Arrow of Time: Identification, Estimation, and Inference for Directional Structure in Multivariate Time Series](deep_reads/2026-08-13-2608.13431.md)  
+  6/10 [daily]
 - [Bias-robust causal inference for panel data](deep_reads/2026-08-12-2608.09837.md)  
   9/10 [daily]
 - [Proximal Individualized Functional Treatment Regimes](deep_reads/2026-08-12-2608.07832.md)  
@@ -3078,6 +3110,12 @@
 
 ### Daily
 
+- [Sharp proper estimation of fixed-component Gaussian location mixtures in polynomial time](deep_reads/2026-08-13-2608.12701.md)  
+  9/10 [daily]
+- [Spectral phase transitions in Gaussian multi-index models](deep_reads/2026-08-13-2608.12183.md)  
+  7/10 [daily]
+- [Tensor-normal maximum likelihood estimation at the operator-norm sample threshold](deep_reads/2026-08-13-2608.10488.md)  
+  7/10 [daily]
 - [Limiting eigen-structure of spiked sample covariance matrices under missing observations](deep_reads/2026-08-12-2608.09135.md)  
   8/10 [daily]
 - [Lasso Universality Under Linearly Dependent Covariates in the Sparse Regime](deep_reads/2026-08-12-2608.08390.md)  
@@ -4286,6 +4324,20 @@
 
 ### Daily
 
+- [Semiparametric efficient estimation of the Cox regression coefficient when there can be ties](deep_reads/2026-08-13-2608.11399.md)  
+  9/10 [daily]
+- [Asymptotics of Nonparametric Estimation under General Non-monotone MAR Missingness: A Nonparametric Maximum Likelihood Approach](deep_reads/2026-08-13-2608.10113.md)  
+  8/10 [daily]
+- [Posterior contraction rates in Sobolev norms and Bayesian derivative estimation for infinite-dimensional exponential families](deep_reads/2026-08-13-2608.11130.md)  
+  8/10 [daily]
+- [Bias Reduction for Local Polynomial Derivative Estimation](deep_reads/2026-08-13-2608.13672.md)  
+  7/10 [daily]
+- [Density Estimation on Compact Manifolds under Intrinsic Spectral Block Variation](deep_reads/2026-08-13-2608.12637.md)  
+  7/10 [daily]
+- [Retrospective Statistical Inference](deep_reads/2026-08-13-2608.13439.md)  
+  6/10 [daily]
+- [Estimation of distribution functions, their jumps and interval probabilities under measurement error](deep_reads/2026-08-13-2608.13152.md)  
+  6/10 [daily]
 - [Nonparametric quantile inference using Dirichlet processes](deep_reads/2026-08-12-2608.08355.md)  
   7/10 [daily]
 - [Estimating conditional expectation](deep_reads/2026-08-12-2608.09561.md)  
@@ -6381,6 +6433,16 @@
 
 ### Daily
 
+- [Testing Sign Agreement](deep_reads/2026-08-13-2608.10294.md)  
+  8/10 [daily]
+- [Optimal Inference with Black-box Predictions](deep_reads/2026-08-13-2608.10155.md)  
+  7/10 [daily]
+- [Detection coherence of tests](deep_reads/2026-08-13-2608.11177.md)  
+  6/10 [daily]
+- [Recursive Multiple Change Point Detection of Nonstationary Time Series: Instability Tests, Estimation and Confidence Intervals](deep_reads/2026-08-13-2608.13352.md)  
+  6/10 [daily]
+- [Goodness-of-Fit Tests and Calibration Machine-Learning Algorithms for Logistic Regression with Sparse Data](deep_reads/2026-08-13-2608.11140.md)  
+  6/10 [daily]
 - [Sparse departures from independence in two-way tables: a heteroscedasticity profile and detection boundary, an adaptive higher-criticism gate, and an assumption-lean exact anchor](deep_reads/2026-08-12-2608.07979.md)  
   8/10 [daily]
 - [Factor-Adjusted Location Tests for High-Dimensional Time Series](deep_reads/2026-08-12-2608.08483.md)  
@@ -9395,6 +9457,18 @@
 
 ### Daily
 
+- [Don't Cut Corners: How Training Outside the Prior Makes Simulation-Based Inference More Robust](deep_reads/2026-08-13-2608.12470.md)  
+  6/10 [daily]
+- [Eclipses by Artificial Satellites to Measure the Angular Sizes of Stars](deep_reads/2026-08-13-2608.11161.md)  
+  6/10 [daily]
+- [Full-Covariance Bayesian Inference of Stochastic Gravitational Wave Backgrounds with Time-Domain Simulations for Taiji-like Missions](deep_reads/2026-08-13-2608.11276.md)  
+  6/10 [daily]
+- [Tabular foundation models for the estimation of probabilistic quasar photometric redshifts in S-PLUS](deep_reads/2026-08-13-2608.10280.md)  
+  6/10 [daily]
+- [Which is the best day of the week to submit to arXiv:astro-ph?](deep_reads/2026-08-13-2608.11268.md)  
+  6/10 [daily]
+- [Early Exploration of the Scientific Discovery Space for the Habitable Worlds Observatory](deep_reads/2026-08-13-2608.11294.md)  
+  5/10 [daily]
 - [Foreground Subtraction with a Tensor-Based Oriented Singular Value Decomposition Method for HI Experiments](deep_reads/2026-08-12-2608.09129.md)  
   6/10 [daily]
 - [Telemetry is a Sensor: Opportunistic Wavefront Estimation for the James Webb Space Telescope](deep_reads/2026-08-11-2608.07357.md)  
@@ -12251,6 +12325,18 @@
 
 ### Daily
 
+- [Bandable Cumulant Tensors: Optimal Estimation and Applications in Non-Gaussian Data Modeling](deep_reads/2026-08-13-2608.10161.md)  
+  9/10 [daily]
+- [Resampling simplicial depth](deep_reads/2026-08-13-2608.11131.md)  
+  8/10 [daily]
+- [Nonprobability Samples for Small Area Estimation: A Review and Comparative Simulation Study](deep_reads/2026-08-13-2608.13673.md)  
+  7/10 [daily]
+- [Duality and Error for Predictively Oriented Inference](deep_reads/2026-08-13-2608.10592.md)  
+  6/10 [daily]
+- [Adaptable Fingerprinting with Nonlinear Shrinkage for Climate Change Detection and Attribution under Variance Heterogeneity](deep_reads/2026-08-13-2608.12496.md)  
+  6/10 [daily]
+- [A statistical theory of graph regularization for RNA velocity near developmental bifurcations](deep_reads/2026-08-13-2608.11670.md)  
+  6/10 [daily]
 - [Partial Differential Equation Barriers to Identifiability in Infinite Mixture Models](deep_reads/2026-08-12-2608.08597.md)  
   7/10 [daily]
 - [Conformal confidence intervals with an application to small area estimation](deep_reads/2026-08-06-2608.02766.md)  
