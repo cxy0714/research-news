@@ -4,6 +4,34 @@
 
 ### Daily
 
+- [Transporting Trial Evidence Under Posterior Drift and Possible Hidden Confounding](deep_reads/2026-08-18-2608.17999.md)  
+  9/10 [daily]
+- [How Many Samples Are Needed to Determine Causal Direction? Sharp Minimax Bounds for Bivariate LiNGAM](deep_reads/2026-08-18-2608.15840.md)  
+  9/10 [daily]
+- [Optimal Control Variates for Survey Sampling and Causal Inference](deep_reads/2026-08-18-2608.15333.md)  
+  9/10 [daily]
+- [Causal Mediation Analysis for an Interrupted Time Series: Stabilized Mediator Weighting with an Application to a Vehicle Emissions Policy](deep_reads/2026-08-18-2608.18326.md)  
+  8/10 [daily]
+- [Debiased Inference for AI-Generated Data without Gold-Standard Labels: Identification via Multiple Imperfect Measurements](deep_reads/2026-08-18-2608.18294.md)  
+  8/10 [daily]
+- [Mixed-effects Outcome-Adaptive Lasso for Propensity Score Estimation under Partial Interference](deep_reads/2026-08-18-2608.16365.md)  
+  8/10 [daily]
+- [Doubly robust estimation of while-alive estimands in individually-randomized and cluster-randomized trials](deep_reads/2026-08-18-2608.15969.md)  
+  8/10 [daily]
+- [Energy Balancing Weights for Mediation Analysis](deep_reads/2026-08-18-2608.15497.md)  
+  8/10 [daily]
+- [Identifying Model Quality Effects on User Engagement: A Within-Version Causal Estimator with Synthetic Data Validation](deep_reads/2026-08-18-2608.17187.md)  
+  7/10 [daily]
+- [Randomization inference for treatment effects on survival outcomes](deep_reads/2026-08-18-2608.16529.md)  
+  7/10 [daily]
+- [Causal mediation analysis for zero-inflated longitudinal data in the presence of treatment non-compliance and multiple mediators](deep_reads/2026-08-18-2608.15775.md)  
+  7/10 [daily]
+- [GFCM: A Tail-Sensitive Mixed-Type Conditional Independence Test for Causal Discovery](deep_reads/2026-08-18-2608.15332.md)  
+  7/10 [daily]
+- [Toward Efficient Estimation of Regional Treatment Effects in Multi-Regional Clinical Trials](deep_reads/2026-08-18-2608.15450.md)  
+  6/10 [daily]
+- [Outcome Modeling in Design-Based Inference for Spatial Settings](deep_reads/2026-08-18-2608.15439.md)  
+  6/10 [daily]
 - [Semi-supervised Concordance Learning for Optimal Individual Treatment Regimes](deep_reads/2026-08-14-2608.13945.md)  
   7/10 [daily]
 - [Handling covariate shift by model averaging](deep_reads/2026-08-14-2608.14025.md)  
@@ -3114,6 +3142,12 @@
 
 ### Daily
 
+- [Minimax Optimal Estimator and Improved Error Rate for the MLE in Logistic Regression with Gaussian Design](deep_reads/2026-08-18-2608.17260.md)  
+  8/10 [daily]
+- [Empirical Bayes linear regression in high dimensions: Method of moments and sub-linear sample complexity](deep_reads/2026-08-18-2608.16771.md)  
+  7/10 [daily]
+- [Generalized Linear Models for Extremes: Estimation and Inference in High Dimensions](deep_reads/2026-08-18-2608.16137.md)  
+  6/10 [daily]
 - [Change Point Detection and Localization in High-Dimensional Time Series](deep_reads/2026-08-14-2608.14344.md)  
   7/10 [daily]
 - [Sharp proper estimation of fixed-component Gaussian location mixtures in polynomial time](deep_reads/2026-08-13-2608.12701.md)  
@@ -8492,6 +8526,8 @@
 
 ### Daily
 
+- [Hamiltonian dynamics for sampling on discrete spaces](deep_reads/2026-08-18-2608.17961.md)  
+  5/10 [daily]
 - [Tensor Covariance Estimation via Kronecker-Structured Sparse Inverse Cholesky](deep_reads/2026-08-14-2608.14887.md)  
   7/10 [daily]
 - [FastJM: An R Package for Efficient Implementation of Semiparametric Joint Models for Longitudinal and Survival Data](deep_reads/2026-08-14-2608.14127.md)  
@@ -9473,6 +9509,10 @@
 
 ### Daily
 
+- [Galaxy Morphology Classification: Uncertainty Modeling and Out of Distribution Detection](deep_reads/2026-08-18-2608.16654.md)  
+  6/10 [daily]
+- [Stress-Testing DANTE under Detector Domain Shift: a Representation-Coherent Reanalysis of LIGO O4a](deep_reads/2026-08-18-2608.15166.md)  
+  6/10 [daily]
 - [Don't Cut Corners: How Training Outside the Prior Makes Simulation-Based Inference More Robust](deep_reads/2026-08-13-2608.12470.md)  
   6/10 [daily]
 - [Eclipses by Artificial Satellites to Measure the Angular Sizes of Stars](deep_reads/2026-08-13-2608.11161.md)  
@@ -9862,6 +9902,10 @@
 
 ### Daily
 
+- [Estimation and Inference for Peer Effects under Conditional Random Assignment](deep_reads/2026-08-18-2608.16468.md)  
+  8/10 [daily]
+- [Quantile restrictions, revealed rankings, and the limits of multinomial choice](deep_reads/2026-08-18-2608.16708.md)  
+  7/10 [daily]
 - [A Unified Bayesian Model for Voter Turnout Estimation: Combining Surveys, Aggregate Data, and Selection Correction](deep_reads/2026-08-14-2608.14062.md)  
   6/10 [daily]
 - [Limited-Information Estimation of Heterogeneous Agent Models](deep_reads/2026-08-14-2608.13953.md)  
@@ -11096,6 +11140,8 @@
 
 ### Daily
 
+- [Bayesian epidemic alignment for causal evaluation of seasonal infectious-disease interventions](deep_reads/2026-08-18-2608.16537.md)  
+  7/10 [daily]
 - [Inverse probability weighting for auxiliary variable dependent sampling in observational studies of Long COVID](deep_reads/2026-08-07-2608.04918.md)  
   7/10 [daily]
 - [Recovering the Target Hazard Ratio Under Nonproportional Hazards Induced by an Omitted Covariate: Simulation-based Approach](deep_reads/2026-07-31-2607.27026.md)  
@@ -12345,6 +12391,8 @@
 
 ### Daily
 
+- [Biophysics-informed deep operator learning for inverse problems with application to electrophysiological source reconstruction](deep_reads/2026-08-18-2608.16871.md)  
+  6/10 [daily]
 - [Generation-Powered Inference for Distribution-Valued Outcomes](deep_reads/2026-08-14-2608.14542.md)  
   5/10 [daily]
 - [Bandable Cumulant Tensors: Optimal Estimation and Applications in Non-Gaussian Data Modeling](deep_reads/2026-08-13-2608.10161.md)  
