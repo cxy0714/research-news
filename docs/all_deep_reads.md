@@ -4,6 +4,14 @@
 
 ### Daily
 
+- [From Cumulative Weights to Marginal Density Ratios: Per-Protocol Estimation in Sequential Target Trial Emulation](deep_reads/2026-08-21-2608.20976.md)  
+  8/10 [daily]
+- [Heterogeneous Effects of Continuous Treatments via Conditional Modified Treatment Policies](deep_reads/2026-08-21-2608.20744.md)  
+  8/10 [daily]
+- [Candidate Set Size and Voting Behavior: A Front-Door Approach to Causal Moderation](deep_reads/2026-08-21-2608.20779.md)  
+  8/10 [daily]
+- [Public Signals, Concealed Choices: Dynamic Measurement without Behavioral Identification](deep_reads/2026-08-21-2608.21077.md)  
+  6/10 [daily]
 - [Partial Identification Learning with Categorical Treatments for Individualized Treatment Rules](deep_reads/2026-08-20-2608.19853.md)  
   9/10 [daily]
 - [Causal Survival Forests with Negative Controls](deep_reads/2026-08-20-2608.19749.md)  
@@ -6521,6 +6529,14 @@
 
 ### Daily
 
+- [Outlier Impact: Detection by Consequences](deep_reads/2026-08-21-2608.21557.md)  
+  7/10 [daily]
+- [Further Results on Controlling the False Discovery Rate in Two-Sided Gaussian Mean Testing](deep_reads/2026-08-21-2608.21267.md)  
+  7/10 [daily]
+- [A Multiscale Ball Test for Conditional Mean Independence](deep_reads/2026-08-21-2608.20727.md)  
+  7/10 [daily]
+- [The exact Spearman rho-footrule region via optimal transport with applications to finite rankings, mixability, and Chatterjee's rank correlation](deep_reads/2026-08-21-2608.20176.md)  
+  6/10 [daily]
 - [Fast high-dimensional mean testing via logistic regression](deep_reads/2026-08-20-2608.20286.md)  
   8/10 [daily]
 - [Large Sample Properties of Higher Order Markov Models](deep_reads/2026-08-20-2608.20321.md)  
