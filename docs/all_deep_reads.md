@@ -4,6 +4,22 @@
 
 ### Daily
 
+- [A Causal Inference Approach for Evaluating Diagnostic Tests and AI-Enabled Medical Devices: From Effect Modification to Information-Augmented Decision-Making](deep_reads/2026-08-19-2608.19501.md)  
+  8/10 [daily]
+- [Causal Generalization of Continuous Treatment Effects under Covariate Shift](deep_reads/2026-08-19-2608.19383.md)  
+  8/10 [daily]
+- [Difference-in-Differences Models in the Presence of Time-Varying Mediators](deep_reads/2026-08-19-2608.18375.md)  
+  8/10 [daily]
+- [Shape-Preserving Covariate Adjustment via Empirical Likelihood in Randomized Experiment](deep_reads/2026-08-19-2608.19423.md)  
+  7/10 [daily]
+- [Centroid-Referenced Mahalanobis Matching (CRM): A Scalable, Representation-Based Framework for Causal Inference in Large Observational Studies](deep_reads/2026-08-19-2608.18417.md)  
+  7/10 [daily]
+- [The Limits of Experimental Design: Covariate Balance Beyond Low Dimension](deep_reads/2026-08-19-2608.18057.md)  
+  7/10 [daily]
+- [Trading Scope for Credibility in Difference-in-Differences](deep_reads/2026-08-19-2608.16867.md)  
+  7/10 [daily]
+- [Don't Drop the Singletons: Efficient Inference for Pairwise Experiments with Independent Attrition](deep_reads/2026-08-19-2608.18973.md)  
+  6/10 [daily]
 - [Transporting Trial Evidence Under Posterior Drift and Possible Hidden Confounding](deep_reads/2026-08-18-2608.17999.md)  
   9/10 [daily]
 - [How Many Samples Are Needed to Determine Causal Direction? Sharp Minimax Bounds for Bivariate LiNGAM](deep_reads/2026-08-18-2608.15840.md)  
@@ -3142,6 +3158,12 @@
 
 ### Daily
 
+- [Multiplier Bootstrap and Edge Phase Transitions of High-Dimensional Covariance Matrices](deep_reads/2026-08-19-2608.15053.md)  
+  8/10 [daily]
+- [Distributed Online Estimation of Spiked Eigenvalues with Adaptive Weighting under Persistent Aspect Ratio Heterogeneity](deep_reads/2026-08-19-2608.19045.md)  
+  7/10 [daily]
+- [A Central Limit Theorem for Regularized M-Estimators](deep_reads/2026-08-19-2608.15034.md)  
+  7/10 [daily]
 - [Minimax Optimal Estimator and Improved Error Rate for the MLE in Logistic Regression with Gaussian Design](deep_reads/2026-08-18-2608.17260.md)  
   8/10 [daily]
 - [Empirical Bayes linear regression in high dimensions: Method of moments and sub-linear sample complexity](deep_reads/2026-08-18-2608.16771.md)  
@@ -4364,6 +4386,8 @@
 
 ### Daily
 
+- [On the minimax-rate optimality of approximate Bayesian computation in nonparametric problems](deep_reads/2026-08-19-2608.15648.md)  
+  8/10 [daily]
 - [A semiparametric approach for the estimation of covariate-adjusted area under the receiver operating characteristic curve](deep_reads/2026-08-14-2608.13859.md)  
   7/10 [daily]
 - [Semiparametric efficient estimation of the Cox regression coefficient when there can be ties](deep_reads/2026-08-13-2608.11399.md)  
@@ -6475,6 +6499,8 @@
 
 ### Daily
 
+- [Model-based bootstrap inference for Cox models after Lasso selection](deep_reads/2026-08-19-2608.18893.md)  
+  6/10 [daily]
 - [Change-Point Detection for Heterogeneous High-Dimensional Functional Time Series](deep_reads/2026-08-14-2608.13880.md)  
   6/10 [daily]
 - [Testing Sign Agreement](deep_reads/2026-08-13-2608.10294.md)  
@@ -8526,6 +8552,8 @@
 
 ### Daily
 
+- [Algorithms for adaptive and heteroskedastic linear regression at the computational threshold](deep_reads/2026-08-19-2608.18402.md)  
+  8/10 [daily]
 - [Hamiltonian dynamics for sampling on discrete spaces](deep_reads/2026-08-18-2608.17961.md)  
   5/10 [daily]
 - [Tensor Covariance Estimation via Kronecker-Structured Sparse Inverse Cholesky](deep_reads/2026-08-14-2608.14887.md)  
@@ -9509,6 +9537,8 @@
 
 ### Daily
 
+- [Microlensify: a Transformer Based Machine Learning Classifier for Microlensing Events Trained on TESS Light Curves](deep_reads/2026-08-19-2608.19419.md)  
+  6/10 [daily]
 - [Galaxy Morphology Classification: Uncertainty Modeling and Out of Distribution Detection](deep_reads/2026-08-18-2608.16654.md)  
   6/10 [daily]
 - [Stress-Testing DANTE under Detector Domain Shift: a Representation-Coherent Reanalysis of LIGO O4a](deep_reads/2026-08-18-2608.15166.md)  
@@ -12391,6 +12421,12 @@
 
 ### Daily
 
+- [Limit Theory for U-Statistics under Clustered and Weakly Dependent Data](deep_reads/2026-08-19-2608.18443.md)  
+  9/10 [daily]
+- [Recovering Nonlinear Functions of Latent Variables: A Plausible-Value Neural Network Framework](deep_reads/2026-08-19-2608.19282.md)  
+  6/10 [daily]
+- [A Composite Divergence Approach to Robust Multivariate Estimation under Cellwise and Casewise Contamination](deep_reads/2026-08-19-2608.18914.md)  
+  6/10 [daily]
 - [Biophysics-informed deep operator learning for inverse problems with application to electrophysiological source reconstruction](deep_reads/2026-08-18-2608.16871.md)  
   6/10 [daily]
 - [Generation-Powered Inference for Distribution-Valued Outcomes](deep_reads/2026-08-14-2608.14542.md)  
