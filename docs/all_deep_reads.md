@@ -4,6 +4,28 @@
 
 ### Daily
 
+- [Partial Identification Learning with Categorical Treatments for Individualized Treatment Rules](deep_reads/2026-08-20-2608.19853.md)  
+  9/10 [daily]
+- [Causal Survival Forests with Negative Controls](deep_reads/2026-08-20-2608.19749.md)  
+  9/10 [daily]
+- [Targeted Deep Survival Contrasts: Valid Inference for Treatment-Specific Survival Benefit with Neural Networks](deep_reads/2026-08-20-2608.20598.md)  
+  8/10 [daily]
+- [Multi-Method Causal Evidence Synthesis: Ranking Candidate Drivers by Convergent Cross-Method Evidence from Observational Data](deep_reads/2026-08-20-2608.20187.md)  
+  8/10 [daily]
+- [Testing the Validity of Instrumental Variable Sets in Causal Additive Models with Non-Constant Effects](deep_reads/2026-08-20-2608.19771.md)  
+  8/10 [daily]
+- [Martingale R-learner: Estimating Time-varying Heterogeneous Treatment Effects for Time-to-event Outcomes](deep_reads/2026-08-20-2608.19596.md)  
+  8/10 [daily]
+- [Let Time Tell: Identification and Gaussian Process Estimation for Interrupted Time Series](deep_reads/2026-08-20-2608.20610.md)  
+  7/10 [daily]
+- [Counterfactual Optimization of Policy Interventions: Lexical Ordering and Leapfrogging](deep_reads/2026-08-20-2608.20505.md)  
+  7/10 [daily]
+- [Causal inference via propensity scores for case-control studies](deep_reads/2026-08-20-2608.20080.md)  
+  7/10 [daily]
+- [Self-Normalizing Denominators in Rational Causal Estimation](deep_reads/2026-08-20-2608.20223.md)  
+  7/10 [daily]
+- [A Privacy Budgeting Framework for Online Experimentation](deep_reads/2026-08-20-2608.19944.md)  
+  7/10 [daily]
 - [A Causal Inference Approach for Evaluating Diagnostic Tests and AI-Enabled Medical Devices: From Effect Modification to Information-Augmented Decision-Making](deep_reads/2026-08-19-2608.19501.md)  
   8/10 [daily]
 - [Causal Generalization of Continuous Treatment Effects under Covariate Shift](deep_reads/2026-08-19-2608.19383.md)  
@@ -6499,6 +6521,10 @@
 
 ### Daily
 
+- [Fast high-dimensional mean testing via logistic regression](deep_reads/2026-08-20-2608.20286.md)  
+  8/10 [daily]
+- [Large Sample Properties of Higher Order Markov Models](deep_reads/2026-08-20-2608.20321.md)  
+  7/10 [daily]
 - [Model-based bootstrap inference for Cox models after Lasso selection](deep_reads/2026-08-19-2608.18893.md)  
   6/10 [daily]
 - [Change-Point Detection for Heterogeneous High-Dimensional Functional Time Series](deep_reads/2026-08-14-2608.13880.md)  
@@ -8552,6 +8578,8 @@
 
 ### Daily
 
+- [Information-Computation Inversion in Pseudo-Marginal MCMC](deep_reads/2026-08-20-2608.19718.md)  
+  6/10 [daily]
 - [Algorithms for adaptive and heteroskedastic linear regression at the computational threshold](deep_reads/2026-08-19-2608.18402.md)  
   8/10 [daily]
 - [Hamiltonian dynamics for sampling on discrete spaces](deep_reads/2026-08-18-2608.17961.md)  
@@ -9537,6 +9565,8 @@
 
 ### Daily
 
+- [Towards independent event horizon imaging of the supermassive black holes in M87 and the Milky Way](deep_reads/2026-08-20-2608.19675.md)  
+  6/10 [daily]
 - [Microlensify: a Transformer Based Machine Learning Classifier for Microlensing Events Trained on TESS Light Curves](deep_reads/2026-08-19-2608.19419.md)  
   6/10 [daily]
 - [Galaxy Morphology Classification: Uncertainty Modeling and Out of Distribution Detection](deep_reads/2026-08-18-2608.16654.md)  
@@ -11170,6 +11200,8 @@
 
 ### Daily
 
+- [GENIE: Generative Neural Inference for Epidemics](deep_reads/2026-08-20-2608.20253.md)  
+  6/10 [daily]
 - [Bayesian epidemic alignment for causal evaluation of seasonal infectious-disease interventions](deep_reads/2026-08-18-2608.16537.md)  
   7/10 [daily]
 - [Inverse probability weighting for auxiliary variable dependent sampling in observational studies of Long COVID](deep_reads/2026-08-07-2608.04918.md)  
@@ -12421,6 +12453,8 @@
 
 ### Daily
 
+- [Trustworthy Decisions in Reliability Set Estimation under Insufficient Model Information](deep_reads/2026-08-20-2608.19815.md)  
+  6/10 [daily]
 - [Limit Theory for U-Statistics under Clustered and Weakly Dependent Data](deep_reads/2026-08-19-2608.18443.md)  
   9/10 [daily]
 - [Recovering Nonlinear Functions of Latent Variables: A Plausible-Value Neural Network Framework](deep_reads/2026-08-19-2608.19282.md)  
