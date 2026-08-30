@@ -4,6 +4,24 @@
 
 ### Daily
 
+- [Partial Identification Learning with Categorical Treatments for Individualized Treatment Rules](deep_reads/2026-08-24-2608.19853.md)  
+  9/10 [daily]
+- [Targeted Deep Survival Contrasts: Valid Inference for Treatment-Specific Survival Benefit with Neural Networks](deep_reads/2026-08-24-2608.20598.md)  
+  9/10 [daily]
+- [Heterogeneous Effects of Continuous Treatments via Conditional Modified Treatment Policies](deep_reads/2026-08-24-2608.20744.md)  
+  9/10 [daily]
+- [Let Time Tell: Identification and Gaussian Process Estimation for Interrupted Time Series](deep_reads/2026-08-24-2608.20610.md)  
+  8/10 [daily]
+- [From Cumulative Weights to Marginal Density Ratios: Per-Protocol Estimation in Sequential Target Trial Emulation](deep_reads/2026-08-24-2608.20976.md)  
+  8/10 [daily]
+- [Randomization tests for model specification in causal inference under network interference](deep_reads/2026-08-24-2608.22890.md)  
+  8/10 [daily]
+- [Identification and Inference for Causal Effects in Extremes under General Conditions](deep_reads/2026-08-24-2608.22957.md)  
+  8/10 [daily]
+- [Transporting Randomized Trial Effects to Real-World Populations via Riesz-Calibrated Optimal Transport](deep_reads/2026-08-24-2608.23453.md)  
+  8/10 [daily]
+- [Optimal Variance Reduction in Randomized Experiments](deep_reads/2026-08-24-2608.23615.md)  
+  8/10 [daily]
 - [From Cumulative Weights to Marginal Density Ratios: Per-Protocol Estimation in Sequential Target Trial Emulation](deep_reads/2026-08-21-2608.20976.md)  
   8/10 [daily]
 - [Heterogeneous Effects of Continuous Treatments via Conditional Modified Treatment Policies](deep_reads/2026-08-21-2608.20744.md)  
@@ -6529,6 +6547,8 @@
 
 ### Daily
 
+- [Fast high-dimensional mean testing via logistic regression](deep_reads/2026-08-24-2608.20286.md)  
+  8/10 [daily]
 - [Outlier Impact: Detection by Consequences](deep_reads/2026-08-21-2608.21557.md)  
   7/10 [daily]
 - [Further Results on Controlling the False Discovery Rate in Two-Sided Gaussian Mean Testing](deep_reads/2026-08-21-2608.21267.md)  
