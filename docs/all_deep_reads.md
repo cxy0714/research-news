@@ -4,6 +4,26 @@
 
 ### Daily
 
+- [Graph-based causal variance decompositions: When "variance explained" means causation](deep_reads/2026-08-31-2608.27140.md)  
+  9/10 [daily]
+- [Analyzing Within-Subject Experiments: Identification, Testing, and Sensitivity](deep_reads/2026-08-31-2608.26606.md)  
+  8/10 [daily]
+- [Nonparametric Identification of Two-Way Unobserved Heterogeneity](deep_reads/2026-08-31-2608.27155.md)  
+  8/10 [daily]
+- [Response Propensity Estimation and Cross-Fitting](deep_reads/2026-08-31-2608.28324.md)  
+  7/10 [daily]
+- [Combining covariate adjustment with information from secondary endpoints to improve precision in randomized trials](deep_reads/2026-08-31-2608.27289.md)  
+  7/10 [daily]
+- [On efficiency gains via augmenting a tiny sample with a massive auxiliary sample](deep_reads/2026-08-31-2608.26610.md)  
+  7/10 [daily]
+- [Power and Sample Size Calculations for Hybrid Controlled Trials](deep_reads/2026-08-31-2608.26475.md)  
+  7/10 [daily]
+- [Learning a Size-Weight Frontier for Synthetic-Augmented Inference](deep_reads/2026-08-31-2608.28576.md)  
+  6/10 [daily]
+- [Activity-Conditioned Residual Association from Aggregated Relational Data](deep_reads/2026-08-31-2608.27599.md)  
+  6/10 [daily]
+- [A Unified Adaptive Enrichment Design for Power Enhancement](deep_reads/2026-08-31-2608.26558.md)  
+  6/10 [daily]
 - [Graph-based causal variance decompositions: When "variance explained" means causation](deep_reads/2026-08-28-2608.27140.md)  
   9/10 [daily]
 - [Toward a Semiparametric Efficiency Theory under Equality Constraints in Nested Markov Models](deep_reads/2026-08-28-2608.24602.md)  
@@ -3353,10 +3373,16 @@
 
 - [Causal isotonic regression](deep_reads/2026-06-22-1810.03269.md)  
   9/10 [manual]
+- [Stochastic interventions, sensitivity analysis, and optimal transport](deep_reads/2026-08-31-2411.14285.md)  
+  8/10 [manual]
+- [Incremental effects for continuous exposures](deep_reads/2026-08-31-2409.11967.md)  
+  8/10 [manual]
 - [Compound Selection Decisions: An Almost SURE Approach](deep_reads/2026-07-30-2511.11862.md)  
   8/10 [manual]
 - [Marginal Causal Effect Estimation with Continuous Instrumental Variables](deep_reads/2026-07-10-2510.14368.md)  
   8/10 [manual]
+- [Causal mediation analysis for stochastic interventions](deep_reads/2026-08-31-1901.02776.md)  
+  7/10 [manual]
 - [Does TabPFN Understand Causal Structures?](deep_reads/2026-07-30-2511.07236.md)  
   7/10 [manual]
 - [Improving TabPFN's Synthetic Data Generation by Integrating Causal Structure](deep_reads/2026-07-30-2603.10254.md)  
@@ -3370,6 +3396,8 @@
 
 ### Daily
 
+- [Inference for High-Dimensional Network Data](deep_reads/2026-08-31-2608.26522.md)  
+  8/10 [daily]
 - [Inference for High-Dimensional Network Data](deep_reads/2026-08-28-2608.26522.md)  
   8/10 [daily]
 - [On the privacy cost for dependent Gaussian data: spectral density estimation under local differential privacy](deep_reads/2026-08-28-2608.24847.md)  
@@ -4618,6 +4646,10 @@
 
 ### Daily
 
+- [How far can symmetry help? Phase transitions and symmetry selection in sparse functional data analysis](deep_reads/2026-08-31-2608.27055.md)  
+  8/10 [daily]
+- [Generalized Splines and Gaussian Processes](deep_reads/2026-08-31-2608.28446.md)  
+  6/10 [daily]
 - [Nonparametric Identification of Two-Way Unobserved Heterogeneity](deep_reads/2026-08-28-2608.27155.md)  
   8/10 [daily]
 - [Functional linear regression from sparse to dense designs: a pooling-ridge method and minimax optimality](deep_reads/2026-08-28-2608.25468.md)  
@@ -6409,6 +6441,8 @@
   8/10 [manual]
 - [On Estimation of $L_{r}$-Norms in Gaussian White Noise Models](deep_reads/2026-07-17-1710.03863.md)  
   7/10 [manual]
+- [Nonparametric estimation of scalar diffusions based on low frequency data](deep_reads/2026-08-31-math_0503680.md)  
+  6/10 [manual]
 - [Geometric Information Decomposition for Weighted Empirical Measures on the Sphere](deep_reads/2026-07-10-2607.02943.md)  
   4/10 [manual]
 
@@ -6765,6 +6799,16 @@
 
 ### Daily
 
+- [Evidence, Calibration, and Stability: A Triadic Framework for Hypothesis Testing Under Model Uncertainty](deep_reads/2026-08-31-2608.27320.md)  
+  8/10 [daily]
+- [Exact two-sided p-values in natural exponential families: coincidence, non-uniqueness, and sample-size stability](deep_reads/2026-08-31-2608.28221.md)  
+  7/10 [daily]
+- [Conformal Prediction Through the Lens of Hypothesis Testing: Universality, Impossibility, and Optimality](deep_reads/2026-08-31-2608.27310.md)  
+  7/10 [daily]
+- [SCAN: Sequentially Detecting Change-points via Adaptive Nonparametric Inference](deep_reads/2026-08-31-2608.28110.md)  
+  6/10 [daily]
+- [Connecting Riemannian Geometry and Statistical Inference for Correlation Matrices](deep_reads/2026-08-31-2608.27209.md)  
+  6/10 [daily]
 - [Robust Nonparametric Testing for Structural Changes in Multivariate Volatility via Multiple Quantiles](deep_reads/2026-08-28-2608.25310.md)  
   8/10 [daily]
 - [Evidence, Calibration, and Stability: A Triadic Framework for Hypothesis Testing Under Model Uncertainty](deep_reads/2026-08-28-2608.27320.md)  
@@ -8926,6 +8970,8 @@
 
 ### Daily
 
+- [Personalized Federated Learning for Tensor Regression](deep_reads/2026-08-31-2608.27191.md)  
+  6/10 [daily]
 - [When a neural surrogate cannot accelerate a solver: runtime share, closed-loop drift, and the economics of uncertainty gating in a stiff coupled simulation](deep_reads/2026-08-26-2608.23075.md)  
   6/10 [daily]
 - [When a neural surrogate cannot accelerate a solver: runtime share, closed-loop drift, and the economics of uncertainty gating in a stiff coupled simulation](deep_reads/2026-08-25-2608.23075.md)  
@@ -9900,6 +9946,8 @@
 
 ### 其他
 
+- [Global polynomial-time estimation in statistical nonlinear inverse problems via generalized stability](deep_reads/2026-08-31-2601.09007.md)  
+  9/10 [manual]
 - [Transforming variables to central normality](deep_reads/2026-07-31-2005.07946.md)  
   6/10 [manual]
 - [Structured Secant Methods to Select Smoothing Parameters For General Smooth Models](deep_reads/2026-07-07-2606.26804.md)  
@@ -10348,6 +10396,8 @@
 
 ### Daily
 
+- [Causal Non-causal State Space Models and the Modelling of Financial Bubbles](deep_reads/2026-08-31-2608.28115.md)  
+  7/10 [daily]
 - [Dynamic Discrete Choice and Inverse Reinforcement Learning: Inferring Preferences and Beliefs From Human Behavior](deep_reads/2026-08-28-2608.24362.md)  
   6/10 [daily]
 - [Estimation of Random-Coefficient Dynamic Panel Data Models with a Fixed T](deep_reads/2026-08-28-2608.23988.md)  
@@ -12863,6 +12913,8 @@
 
 ### Daily
 
+- [Posterior Consistency for Recovering Initial States in Nonlinear Subdiffusion Equations](deep_reads/2026-08-31-2608.26536.md)  
+  6/10 [daily]
 - [Berry--Esseen bounds and bootstrap approximations for the Hilbert-space norm of $U$-statistics](deep_reads/2026-08-28-2608.25463.md)  
   9/10 [daily]
 - [Posterior consistency for subdiffusion inverse problems](deep_reads/2026-08-28-2608.26536.md)  

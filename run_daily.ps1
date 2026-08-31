@@ -7,6 +7,13 @@
 # One-time setup (easiest): from the repo root in PowerShell, run
 #   .\scripts\register-task.ps1
 # or set it up by hand — see the steps at the bottom of this file / the README.
+#
+# -Force passes --force through to daily.py, for the rare re-run that must
+# replace an already-rendered report (e.g. the first run only got part of the
+# categories because arXiv 429'd). It OVERWRITES today's page — back it up first.
+param(
+    [switch]$Force
+)
 
 Set-Location -LiteralPath $PSScriptRoot
 $today = Get-Date -Format "yyyy-MM-dd"
@@ -43,7 +50,12 @@ try {
     # merged via the web/agent). Best-effort.
     git pull --rebase --autostash
 
-    python -m research_news.daily
+    if ($Force) {
+        Write-Host "[$(Get-Date -Format o)] -Force: regenerating today's report from scratch"
+        python -m research_news.daily --force
+    } else {
+        python -m research_news.daily
+    }
 
     # Fix any garbled / truncated summaries in today's report.
     python -m research_news.rerun --date $today
