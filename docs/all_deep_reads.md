@@ -4,6 +4,170 @@
 
 ### Daily
 
+- [Graph-based causal variance decompositions: When "variance explained" means causation](deep_reads/2026-08-28-2608.27140.md)  
+  9/10 [daily]
+- [Toward a Semiparametric Efficiency Theory under Equality Constraints in Nested Markov Models](deep_reads/2026-08-28-2608.24602.md)  
+  9/10 [daily]
+- [Analyzing Within-Subject Experiments: Identification, Testing, and Sensitivity](deep_reads/2026-08-28-2608.26606.md)  
+  8/10 [daily]
+- [The Symmetric Pair Matching Design: A Self-Controlled Method with Automatic Adjustment for Time Effects](deep_reads/2026-08-28-2608.25979.md)  
+  8/10 [daily]
+- [Orthogonal double residual learning for optimal individualized treatment rules](deep_reads/2026-08-28-2608.24085.md)  
+  8/10 [daily]
+- [Causal Effects of Modified Treatment Policies under Positivity Violations: A Partial Identification Approach](deep_reads/2026-08-28-2608.23971.md)  
+  8/10 [daily]
+- [Transporting Randomized Trial Effects to Real-World Populations via Riesz-Calibrated Optimal Transport](deep_reads/2026-08-28-2608.23453.md)  
+  8/10 [daily]
+- [Randomization tests for model specification in causal inference under network interference](deep_reads/2026-08-28-2608.22890.md)  
+  8/10 [daily]
+- [Endogenous Selection and Spillovers: Bayesian Inference for Policy-Relevant Causal Effects](deep_reads/2026-08-28-2608.25720.md)  
+  8/10 [daily]
+- [Testing selection on observables in parametric models with refreshment samples](deep_reads/2026-08-28-2608.23508.md)  
+  8/10 [daily]
+- [Double/Debiased Machine Learning for Functional-Form-Robust Spatial Autoregression](deep_reads/2026-08-28-2608.22706.md)  
+  8/10 [daily]
+- [Combining covariate adjustment with information from secondary endpoints to improve precision in randomized trials](deep_reads/2026-08-28-2608.27289.md)  
+  7/10 [daily]
+- [On efficiency gains via augmenting a tiny sample with a massive auxiliary sample](deep_reads/2026-08-28-2608.26610.md)  
+  7/10 [daily]
+- [Power and Sample Size Calculations for Hybrid Controlled Trials](deep_reads/2026-08-28-2608.26475.md)  
+  7/10 [daily]
+- [Marginal Structural Models for Electricity Demand under Treatment-Confounder Feedback: A Continuous-Treatment Outcome-Adaptive and Fused LASSO Approach](deep_reads/2026-08-28-2608.26411.md)  
+  7/10 [daily]
+- [Evaluating the effects of policy interventions subject to early adoption: A case study of prescription drug monitoring programs and opioid dispensing](deep_reads/2026-08-28-2608.23472.md)  
+  7/10 [daily]
+- [Identification and Inference for Causal Effects in Extremes under General Conditions](deep_reads/2026-08-28-2608.22957.md)  
+  7/10 [daily]
+- [Nonparametric Bayesian Inference for Partially Identified Discrete Response Models](deep_reads/2026-08-28-2608.25814.md)  
+  7/10 [daily]
+- [A Unified Adaptive Enrichment Design for Power Enhancement](deep_reads/2026-08-28-2608.26558.md)  
+  6/10 [daily]
+- [Causal Effects of Modified Treatment Policies under Positivity Violations: A Partial Identification Approach](deep_reads/2026-08-27-2608.23971.md)  
+  9/10 [daily]
+- [Testing selection on observables in parametric models with refreshment samples](deep_reads/2026-08-27-2608.23508.md)  
+  9/10 [daily]
+- [Graph-based causal variance decompositions: When "variance explained" means causation](deep_reads/2026-08-27-2608.27140.md)  
+  8/10 [daily]
+- [Analyzing Within-Subject Experiments: Identification, Testing, and Sensitivity](deep_reads/2026-08-27-2608.26606.md)  
+  8/10 [daily]
+- [The Symmetric Pair Matching Design: A Self-Controlled Method with Automatic Adjustment for Time Effects](deep_reads/2026-08-27-2608.25979.md)  
+  8/10 [daily]
+- [Toward a Semiparametric Efficiency Theory under Equality Constraints in Nested Markov Models](deep_reads/2026-08-27-2608.24602.md)  
+  8/10 [daily]
+- [Orthogonal double residual learning for optimal individualized treatment rules](deep_reads/2026-08-27-2608.24085.md)  
+  8/10 [daily]
+- [Transporting Randomized Trial Effects to Real-World Populations via Riesz-Calibrated Optimal Transport](deep_reads/2026-08-27-2608.23453.md)  
+  8/10 [daily]
+- [Identification and Inference for Causal Effects in Extremes under General Conditions](deep_reads/2026-08-27-2608.22957.md)  
+  8/10 [daily]
+- [Randomization tests for model specification in causal inference under network interference](deep_reads/2026-08-27-2608.22890.md)  
+  8/10 [daily]
+- [Endogenous Selection and Spillovers: Bayesian Inference for Policy-Relevant Causal Effects](deep_reads/2026-08-27-2608.25720.md)  
+  8/10 [daily]
+- [Closed-form estimation and uniform inference in additively separable triangular models with a nonseparable first stage](deep_reads/2026-08-27-2608.22605.md)  
+  8/10 [daily]
+- [Combining covariate adjustment with information from secondary endpoints to improve precision in randomized trials](deep_reads/2026-08-27-2608.27289.md)  
+  7/10 [daily]
+- [Power and Sample Size Calculations for Hybrid Controlled Trials](deep_reads/2026-08-27-2608.26475.md)  
+  7/10 [daily]
+- [Marginal Structural Models for Electricity Demand under Treatment-Confounder Feedback: A Continuous-Treatment Outcome-Adaptive and Fused LASSO Approach](deep_reads/2026-08-27-2608.26411.md)  
+  7/10 [daily]
+- [Evaluating the effects of policy interventions subject to early adoption: A case study of prescription drug monitoring programs and opioid dispensing](deep_reads/2026-08-27-2608.23472.md)  
+  7/10 [daily]
+- [Estimating Pathway Treatment Effects in the Presence of Intermediate Events with Multi-State Data](deep_reads/2026-08-27-2608.22608.md)  
+  7/10 [daily]
+- [Optimal Experimental Design for Network Experiments under Interference](deep_reads/2026-08-27-2608.22570.md)  
+  7/10 [daily]
+- [Nonparametric Identification of Two-Way Unobserved Heterogeneity](deep_reads/2026-08-27-2608.27155.md)  
+  7/10 [daily]
+- [Nonparametric Bayesian Inference for Partially Identified Discrete Response Models](deep_reads/2026-08-27-2608.25814.md)  
+  7/10 [daily]
+- [Double/Debiased Machine Learning for Functional-Form-Robust Spatial Autoregression](deep_reads/2026-08-27-2608.22706.md)  
+  7/10 [daily]
+- [Uniform Inference on Quantile Effects under Network Interference](deep_reads/2026-08-27-2608.22286.md)  
+  7/10 [daily]
+- [A Unified Adaptive Enrichment Design for Power Enhancement](deep_reads/2026-08-27-2608.26558.md)  
+  6/10 [daily]
+- [Evaluating the effects of policy interventions subject to early adoption: A case study of prescription drug monitoring programs and opioid dispensing](deep_reads/2026-08-26-2608.23472.md)  
+  9/10 [daily]
+- [Endogenous Selection and Spillovers: Bayesian Inference for Policy-Relevant Causal Effects](deep_reads/2026-08-26-2608.25720.md)  
+  9/10 [daily]
+- [Causal Effects of Modified Treatment Policies under Positivity Violations: A Partial Identification Approach](deep_reads/2026-08-26-2608.23971.md)  
+  8/10 [daily]
+- [Transporting Randomized Trial Effects to Real-World Populations via Riesz-Calibrated Optimal Transport](deep_reads/2026-08-26-2608.23453.md)  
+  8/10 [daily]
+- [Estimating Pathway Treatment Effects in the Presence of Intermediate Events with Multi-State Data](deep_reads/2026-08-26-2608.22608.md)  
+  8/10 [daily]
+- [Optimal Variance Reduction in Randomized Experiments](deep_reads/2026-08-26-2608.23615.md)  
+  8/10 [daily]
+- [Nonparametric Bayesian Inference for Partially Identified Discrete Response Models](deep_reads/2026-08-26-2608.25814.md)  
+  8/10 [daily]
+- [Double/Debiased Machine Learning for Functional-Form-Robust Spatial Autoregression](deep_reads/2026-08-26-2608.22706.md)  
+  8/10 [daily]
+- [Closed-form estimation and uniform inference in additively separable triangular models with a nonseparable first stage](deep_reads/2026-08-26-2608.22605.md)  
+  8/10 [daily]
+- [Marginal Structural Models for Electricity Demand under Treatment-Confounder Feedback: A Continuous-Treatment Outcome-Adaptive and Fused LASSO Approach](deep_reads/2026-08-26-2608.26411.md)  
+  7/10 [daily]
+- [The Symmetric Pair Matching Design: A Self-Controlled Method with Automatic Adjustment for Time Effects](deep_reads/2026-08-26-2608.25979.md)  
+  7/10 [daily]
+- [Identification and Inference for Causal Effects in Extremes under General Conditions](deep_reads/2026-08-26-2608.22957.md)  
+  7/10 [daily]
+- [Randomization tests for model specification in causal inference under network interference](deep_reads/2026-08-26-2608.22890.md)  
+  7/10 [daily]
+- [Optimal Experimental Design for Network Experiments under Interference](deep_reads/2026-08-26-2608.22570.md)  
+  7/10 [daily]
+- [Separating Time-Varying Network Composition from Predictive Dependence under Noisy Network Measurement](deep_reads/2026-08-26-2608.23625.md)  
+  7/10 [daily]
+- [Barycentric Fused Gromov-Wasserstein Balancing for Causal Inference under Multiple Treatments](deep_reads/2026-08-26-2608.22024.md)  
+  7/10 [daily]
+- [Testing selection on observables in parametric models with refreshment samples](deep_reads/2026-08-26-2608.23508.md)  
+  7/10 [daily]
+- [Uniform Inference on Quantile Effects under Network Interference](deep_reads/2026-08-26-2608.22286.md)  
+  7/10 [daily]
+- [Candidate Set Size and Voting Behavior: A Front-Door Approach to Causal Moderation](deep_reads/2026-08-25-2608.20779.md)  
+  9/10 [daily]
+- [Toward a Semiparametric Efficiency Theory under Equality Constraints in Nested Markov Models](deep_reads/2026-08-25-2608.24602.md)  
+  8/10 [daily]
+- [Causal Effects of Modified Treatment Policies under Positivity Violations: A Partial Identification Approach](deep_reads/2026-08-25-2608.23971.md)  
+  8/10 [daily]
+- [Evaluating the effects of policy interventions subject to early adoption: A case study of prescription drug monitoring programs and opioid dispensing](deep_reads/2026-08-25-2608.23472.md)  
+  8/10 [daily]
+- [Transporting Randomized Trial Effects to Real-World Populations via Riesz-Calibrated Optimal Transport](deep_reads/2026-08-25-2608.23453.md)  
+  8/10 [daily]
+- [Estimating Pathway Treatment Effects in the Presence of Intermediate Events with Multi-State Data](deep_reads/2026-08-25-2608.22608.md)  
+  8/10 [daily]
+- [Barycentric Fused Gromov-Wasserstein Balancing for Causal Inference under Multiple Treatments](deep_reads/2026-08-25-2608.22024.md)  
+  8/10 [daily]
+- [Optimal Variance Reduction in Randomized Experiments](deep_reads/2026-08-25-2608.23615.md)  
+  8/10 [daily]
+- [From Cumulative Weights to Marginal Density Ratios: Per-Protocol Estimation in Sequential Target Trial Emulation](deep_reads/2026-08-25-2608.20976.md)  
+  8/10 [daily]
+- [Heterogeneous Effects of Continuous Treatments via Conditional Modified Treatment Policies](deep_reads/2026-08-25-2608.20744.md)  
+  8/10 [daily]
+- [Testing selection on observables in parametric models with refreshment samples](deep_reads/2026-08-25-2608.23508.md)  
+  8/10 [daily]
+- [Uniform Inference on Quantile Effects under Network Interference](deep_reads/2026-08-25-2608.22286.md)  
+  8/10 [daily]
+- [Orthogonal double residual learning for optimal individualized treatment rules](deep_reads/2026-08-25-2608.24085.md)  
+  7/10 [daily]
+- [Identification and Inference for Causal Effects in Extremes under General Conditions](deep_reads/2026-08-25-2608.22957.md)  
+  7/10 [daily]
+- [Randomization tests for model specification in causal inference under network interference](deep_reads/2026-08-25-2608.22890.md)  
+  7/10 [daily]
+- [Separating Time-Varying Network Composition from Predictive Dependence under Noisy Network Measurement](deep_reads/2026-08-25-2608.23625.md)  
+  7/10 [daily]
+- [Estimating the True Effect Size Distribution with SIMEX](deep_reads/2026-08-25-2608.23612.md)  
+  7/10 [daily]
+- [Double/Debiased Machine Learning for Functional-Form-Robust Spatial Autoregression](deep_reads/2026-08-25-2608.22706.md)  
+  7/10 [daily]
+- [Closed-form estimation and uniform inference in additively separable triangular models with a nonseparable first stage](deep_reads/2026-08-25-2608.22605.md)  
+  7/10 [daily]
+- [CUPED on Steroids: Multivariate Covariate Adjustment for Switchback Experiments](deep_reads/2026-08-25-2608.24038.md)  
+  6/10 [daily]
+- [Optimal Experimental Design for Network Experiments under Interference](deep_reads/2026-08-25-2608.22570.md)  
+  6/10 [daily]
+- [Repairing Locally Misspecified GMM: An Empirical Bayes Approach](deep_reads/2026-08-25-2608.23925.md)  
+  6/10 [daily]
 - [Partial Identification Learning with Categorical Treatments for Individualized Treatment Rules](deep_reads/2026-08-24-2608.19853.md)  
   9/10 [daily]
 - [Targeted Deep Survival Contrasts: Valid Inference for Treatment-Specific Survival Benefit with Neural Networks](deep_reads/2026-08-24-2608.20598.md)  
@@ -3206,6 +3370,26 @@
 
 ### Daily
 
+- [Inference for High-Dimensional Network Data](deep_reads/2026-08-28-2608.26522.md)  
+  8/10 [daily]
+- [On the privacy cost for dependent Gaussian data: spectral density estimation under local differential privacy](deep_reads/2026-08-28-2608.24847.md)  
+  6/10 [daily]
+- [On the privacy cost for dependent Gaussian data: spectral density estimation under local differential privacy](deep_reads/2026-08-27-2608.24847.md)  
+  7/10 [daily]
+- [Inference for High-Dimensional Network Data](deep_reads/2026-08-27-2608.26522.md)  
+  7/10 [daily]
+- [Personalized Federated Learning for Tensor Regression](deep_reads/2026-08-27-2608.27191.md)  
+  6/10 [daily]
+- [Regularized High-Dimensional Additive Tensor Autoregressive Model](deep_reads/2026-08-27-2608.26366.md)  
+  6/10 [daily]
+- [Spectral stability of empirical metric-measure Laplacians](deep_reads/2026-08-27-2608.23150.md)  
+  6/10 [daily]
+- [On the privacy cost for dependent Gaussian data: spectral density estimation under local differential privacy](deep_reads/2026-08-26-2608.24847.md)  
+  7/10 [daily]
+- [Regularized High-Dimensional Additive Tensor Autoregressive Model](deep_reads/2026-08-26-2608.26366.md)  
+  5/10 [daily]
+- [On the privacy cost for dependent Gaussian data: spectral density estimation under local differential privacy](deep_reads/2026-08-25-2608.24847.md)  
+  6/10 [daily]
 - [Multiplier Bootstrap and Edge Phase Transitions of High-Dimensional Covariance Matrices](deep_reads/2026-08-19-2608.15053.md)  
   8/10 [daily]
 - [Distributed Online Estimation of Spiked Eigenvalues with Adaptive Weighting under Persistent Aspect Ratio Heterogeneity](deep_reads/2026-08-19-2608.19045.md)  
@@ -4434,6 +4618,38 @@
 
 ### Daily
 
+- [Nonparametric Identification of Two-Way Unobserved Heterogeneity](deep_reads/2026-08-28-2608.27155.md)  
+  8/10 [daily]
+- [Functional linear regression from sparse to dense designs: a pooling-ridge method and minimax optimality](deep_reads/2026-08-28-2608.25468.md)  
+  7/10 [daily]
+- [How far can symmetry help? Phase transitions and symmetry selection in sparse functional data analysis](deep_reads/2026-08-28-2608.27055.md)  
+  7/10 [daily]
+- [Spectral stability of empirical metric-measure Laplacians](deep_reads/2026-08-28-2608.23150.md)  
+  7/10 [daily]
+- [Statistical Properties of Nonparametric MLE under Laplace Noise](deep_reads/2026-08-28-2608.25997.md)  
+  6/10 [daily]
+- [Maximum effective dimension and information gain](deep_reads/2026-08-28-2608.24450.md)  
+  6/10 [daily]
+- [How far can symmetry help? Phase transitions and symmetry selection in sparse functional data analysis](deep_reads/2026-08-27-2608.27055.md)  
+  8/10 [daily]
+- [Functional linear regression from sparse to dense designs: a pooling-ridge method and minimax optimality](deep_reads/2026-08-27-2608.25468.md)  
+  7/10 [daily]
+- [Statistical Properties of Nonparametric MLE under Laplace Noise](deep_reads/2026-08-27-2608.25997.md)  
+  7/10 [daily]
+- [Maximum effective dimension and information gain](deep_reads/2026-08-27-2608.24450.md)  
+  6/10 [daily]
+- [Non-asymptotic Analysis of Matérn Regression: The Roles of Target and Kernel Lengthscales](deep_reads/2026-08-27-2608.22553.md)  
+  6/10 [daily]
+- [Functional linear regression from sparse to dense designs: a pooling-ridge method and minimax optimality](deep_reads/2026-08-26-2608.25468.md)  
+  7/10 [daily]
+- [Non-asymptotic Analysis of Matérn Regression: The Roles of Target and Kernel Lengthscales](deep_reads/2026-08-26-2608.22553.md)  
+  7/10 [daily]
+- [Statistical Properties of Nonparametric MLE under Laplace Noise](deep_reads/2026-08-26-2608.25997.md)  
+  6/10 [daily]
+- [Maximum effective dimension and information gain](deep_reads/2026-08-25-2608.24450.md)  
+  7/10 [daily]
+- [Non-asymptotic Analysis of Matérn Regression: The Roles of Target and Kernel Lengthscales](deep_reads/2026-08-25-2608.22553.md)  
+  7/10 [daily]
 - [On the minimax-rate optimality of approximate Bayesian computation in nonparametric problems](deep_reads/2026-08-19-2608.15648.md)  
   8/10 [daily]
 - [A semiparametric approach for the estimation of covariate-adjusted area under the receiver operating characteristic curve](deep_reads/2026-08-14-2608.13859.md)  
@@ -6200,6 +6416,8 @@
 
 ### Daily
 
+- [On efficiency gains via augmenting a tiny sample with a massive auxiliary sample](deep_reads/2026-08-27-2608.26610.md)  
+  7/10 [daily]
 - [The Debiased Score Test: Hunt-and-test for Semiparametric Hypotheses](deep_reads/2026-08-03-2607.28861.md)  
   8/10 [daily]
 - [A Characterization of the Orthocomplement of the Tangent Space of Semiparametric Markov Models](deep_reads/2026-07-28-2607.23439.md)  
@@ -6547,6 +6765,100 @@
 
 ### Daily
 
+- [Robust Nonparametric Testing for Structural Changes in Multivariate Volatility via Multiple Quantiles](deep_reads/2026-08-28-2608.25310.md)  
+  8/10 [daily]
+- [Evidence, Calibration, and Stability: A Triadic Framework for Hypothesis Testing Under Model Uncertainty](deep_reads/2026-08-28-2608.27320.md)  
+  7/10 [daily]
+- [Online detection of distributional changes for time series in metric spaces](deep_reads/2026-08-28-2608.26422.md)  
+  7/10 [daily]
+- [Random Invariance Testing on Quadratic Form Statistics with Application to Autocorrelation](deep_reads/2026-08-28-2608.25918.md)  
+  7/10 [daily]
+- [Conformal Prediction Through the Lens of Hypothesis Testing: Universality, Impossibility, and Optimality](deep_reads/2026-08-28-2608.27310.md)  
+  7/10 [daily]
+- [Uncertainty quantification for expectation-calibrated predictions](deep_reads/2026-08-28-2608.26703.md)  
+  6/10 [daily]
+- [Wild Bootstrap and Efron's Bootstrap for Debiased Cox Regression](deep_reads/2026-08-28-2608.24230.md)  
+  6/10 [daily]
+- [Approximating the null distribution of generalized distance covariance](deep_reads/2026-08-28-2608.23793.md)  
+  6/10 [daily]
+- [Classification testing: A new framework for drawing qualitative conclusions from quantitative estimates](deep_reads/2026-08-28-2608.23315.md)  
+  6/10 [daily]
+- [Asymptotics for Model Selection in Probabilistic Principal Component Analysis](deep_reads/2026-08-28-2608.23513.md)  
+  6/10 [daily]
+- [How Replicable Are Statistically Significant Findings?](deep_reads/2026-08-28-2608.23257.md)  
+  6/10 [daily]
+- [Robust Nonparametric Testing for Structural Changes in Multivariate Volatility via Multiple Quantiles](deep_reads/2026-08-27-2608.25310.md)  
+  8/10 [daily]
+- [Evidence, Calibration, and Stability: A Triadic Framework for Hypothesis Testing Under Model Uncertainty](deep_reads/2026-08-27-2608.27320.md)  
+  7/10 [daily]
+- [Online detection of distributional changes for time series in metric spaces](deep_reads/2026-08-27-2608.26422.md)  
+  7/10 [daily]
+- [Random Invariance Testing on Quadratic Form Statistics with Application to Autocorrelation](deep_reads/2026-08-27-2608.25918.md)  
+  7/10 [daily]
+- [Classification testing: A new framework for drawing qualitative conclusions from quantitative estimates](deep_reads/2026-08-27-2608.23315.md)  
+  7/10 [daily]
+- [Asymptotics for Model Selection in Probabilistic Principal Component Analysis](deep_reads/2026-08-27-2608.23513.md)  
+  7/10 [daily]
+- [Uncertainty quantification for expectation-calibrated predictions](deep_reads/2026-08-27-2608.26703.md)  
+  6/10 [daily]
+- [Wild Bootstrap and Efron's Bootstrap for Debiased Cox Regression](deep_reads/2026-08-27-2608.24230.md)  
+  6/10 [daily]
+- [Approximating the null distribution of generalized distance covariance](deep_reads/2026-08-27-2608.23793.md)  
+  6/10 [daily]
+- [Conformal Prediction Through the Lens of Hypothesis Testing: Universality, Impossibility, and Optimality](deep_reads/2026-08-27-2608.27310.md)  
+  6/10 [daily]
+- [Dimension comparison for Student's statistic under symmetric unimodality](deep_reads/2026-08-27-2608.26421.md)  
+  6/10 [daily]
+- [Testing for Stable Intervals in Non-Stationary Time Series](deep_reads/2026-08-27-2608.24194.md)  
+  6/10 [daily]
+- [Robust Scale Estimation in Additive Noise via Weighted Order Statistics](deep_reads/2026-08-27-2608.22165.md)  
+  6/10 [daily]
+- [How Replicable Are Statistically Significant Findings?](deep_reads/2026-08-27-2608.23257.md)  
+  6/10 [daily]
+- [Robust Nonparametric Testing for Structural Changes in Multivariate Volatility via Multiple Quantiles](deep_reads/2026-08-26-2608.25310.md)  
+  8/10 [daily]
+- [Online detection of distributional changes for time series in metric spaces](deep_reads/2026-08-26-2608.26422.md)  
+  7/10 [daily]
+- [Approximating the null distribution of generalized distance covariance](deep_reads/2026-08-26-2608.23793.md)  
+  7/10 [daily]
+- [Gaussian-efficient testing by betting on the mean of bounded data](deep_reads/2026-08-26-2608.21694.md)  
+  7/10 [daily]
+- [Robust Scale Estimation in Additive Noise via Weighted Order Statistics](deep_reads/2026-08-26-2608.22165.md)  
+  7/10 [daily]
+- [Random Invariance Testing on Quadratic Form Statistics with Application to Autocorrelation](deep_reads/2026-08-26-2608.25918.md)  
+  6/10 [daily]
+- [Exact grid-free confidence-region computation from dependent p-value functions under arbitrary dependence](deep_reads/2026-08-26-2608.22265.md)  
+  6/10 [daily]
+- [Dimension comparison for Student's statistic under symmetric unimodality](deep_reads/2026-08-26-2608.26421.md)  
+  6/10 [daily]
+- [Testing for Stable Intervals in Non-Stationary Time Series](deep_reads/2026-08-26-2608.24194.md)  
+  6/10 [daily]
+- [Asymptotics for Model Selection in Probabilistic Principal Component Analysis](deep_reads/2026-08-26-2608.23513.md)  
+  6/10 [daily]
+- [Uniformly Valid Inference Under Interactive and High-Dimensional Constraints](deep_reads/2026-08-26-2608.22002.md)  
+  6/10 [daily]
+- [Approximating the null distribution of generalized distance covariance](deep_reads/2026-08-25-2608.23793.md)  
+  7/10 [daily]
+- [Gaussian-efficient testing by betting on the mean of bounded data](deep_reads/2026-08-25-2608.21694.md)  
+  7/10 [daily]
+- [Outlier Impact: Detection by Consequences](deep_reads/2026-08-25-2608.21557.md)  
+  7/10 [daily]
+- [Further Results on Controlling the False Discovery Rate in Two-Sided Gaussian Mean Testing](deep_reads/2026-08-25-2608.21267.md)  
+  7/10 [daily]
+- [A Multiscale Ball Test for Conditional Mean Independence](deep_reads/2026-08-25-2608.20727.md)  
+  7/10 [daily]
+- [Asymptotics for Model Selection in Probabilistic Principal Component Analysis](deep_reads/2026-08-25-2608.23513.md)  
+  7/10 [daily]
+- [Classification testing: A new framework for drawing qualitative conclusions from quantitative estimates](deep_reads/2026-08-25-2608.23315.md)  
+  6/10 [daily]
+- [Exact grid-free confidence-region computation from dependent p-value functions under arbitrary dependence](deep_reads/2026-08-25-2608.22265.md)  
+  6/10 [daily]
+- [Testing for Stable Intervals in Non-Stationary Time Series](deep_reads/2026-08-25-2608.24194.md)  
+  6/10 [daily]
+- [Robust Scale Estimation in Additive Noise via Weighted Order Statistics](deep_reads/2026-08-25-2608.22165.md)  
+  6/10 [daily]
+- [Uniformly Valid Inference Under Interactive and High-Dimensional Constraints](deep_reads/2026-08-25-2608.22002.md)  
+  6/10 [daily]
 - [Fast high-dimensional mean testing via logistic regression](deep_reads/2026-08-24-2608.20286.md)  
   8/10 [daily]
 - [Outlier Impact: Detection by Consequences](deep_reads/2026-08-21-2608.21557.md)  
@@ -8614,6 +8926,10 @@
 
 ### Daily
 
+- [When a neural surrogate cannot accelerate a solver: runtime share, closed-loop drift, and the economics of uncertainty gating in a stiff coupled simulation](deep_reads/2026-08-26-2608.23075.md)  
+  6/10 [daily]
+- [When a neural surrogate cannot accelerate a solver: runtime share, closed-loop drift, and the economics of uncertainty gating in a stiff coupled simulation](deep_reads/2026-08-25-2608.23075.md)  
+  6/10 [daily]
 - [Information-Computation Inversion in Pseudo-Marginal MCMC](deep_reads/2026-08-20-2608.19718.md)  
   6/10 [daily]
 - [Algorithms for adaptive and heteroskedastic linear regression at the computational threshold](deep_reads/2026-08-19-2608.18402.md)  
@@ -9601,6 +9917,40 @@
 
 ### Daily
 
+- [Optimal transport regularized dynamic radio interferometric reconstruction](deep_reads/2026-08-28-2608.27192.md)  
+  7/10 [daily]
+- [Strong Lensing Cosmology with Population-level Calibrated Neural Ratio Estimation](deep_reads/2026-08-28-2608.23534.md)  
+  6/10 [daily]
+- [Spatially Scanned STIS Spectra of the Exoplanet Host Star 55 Cnc](deep_reads/2026-08-28-2608.25184.md)  
+  2/10 [daily]
+- [The MegaWave Radio Surveyor](deep_reads/2026-08-28-2608.26322.md)  
+  1/10 [daily]
+- [Optimal transport regularized dynamic radio interferometric reconstruction](deep_reads/2026-08-27-2608.27192.md)  
+  6/10 [daily]
+- [Strong Lensing Cosmology with Population-level Calibrated Neural Ratio Estimation](deep_reads/2026-08-27-2608.23534.md)  
+  6/10 [daily]
+- [The MegaWave Radio Surveyor](deep_reads/2026-08-27-2608.26322.md)  
+  3/10 [daily]
+- [Spatially Scanned STIS Spectra of the Exoplanet Host Star 55 Cnc](deep_reads/2026-08-27-2608.25184.md)  
+  2/10 [daily]
+- [Strong Lensing Cosmology with Population-level Calibrated Neural Ratio Estimation](deep_reads/2026-08-26-2608.23534.md)  
+  7/10 [daily]
+- [Spatially Scanned STIS Spectra of the Exoplanet Host Star 55 Cnc](deep_reads/2026-08-26-2608.25184.md)  
+  2/10 [daily]
+- [The MegaWave Radio Surveyor](deep_reads/2026-08-26-2608.26322.md)  
+  1/10 [daily]
+- [Strong Lensing Cosmology with Population-level Calibrated Neural Ratio Estimation](deep_reads/2026-08-25-2608.23534.md)  
+  7/10 [daily]
+- [Amplifying the imaging power of digital sky surveys with space telescopes data and generative AI](deep_reads/2026-08-25-2608.20666.md)  
+  6/10 [daily]
+- [Variational Bayesian Inference for the Spectral Structure of LISA Noise](deep_reads/2026-08-25-2608.22245.md)  
+  6/10 [daily]
+- [NestyNet. III. Symbolic Regression from Analytic Neural Surrogates](deep_reads/2026-08-25-2608.21051.md)  
+  6/10 [daily]
+- [Radio Galaxies detection and characterization using deep learning techniques](deep_reads/2026-08-25-2608.21474.md)  
+  6/10 [daily]
+- [Spatially Scanned STIS Spectra of the Exoplanet Host Star 55 Cnc](deep_reads/2026-08-25-2608.25184.md)  
+  1/10 [daily]
 - [Towards independent event horizon imaging of the supermassive black holes in M87 and the Milky Way](deep_reads/2026-08-20-2608.19675.md)  
   6/10 [daily]
 - [Microlensify: a Transformer Based Machine Learning Classifier for Microlensing Events Trained on TESS Light Curves](deep_reads/2026-08-19-2608.19419.md)  
@@ -9998,6 +10348,30 @@
 
 ### Daily
 
+- [Dynamic Discrete Choice and Inverse Reinforcement Learning: Inferring Preferences and Beliefs From Human Behavior](deep_reads/2026-08-28-2608.24362.md)  
+  6/10 [daily]
+- [Estimation of Random-Coefficient Dynamic Panel Data Models with a Fixed T](deep_reads/2026-08-28-2608.23988.md)  
+  6/10 [daily]
+- [Systematic Bias in Green Patent Classification: Silent Green and False Green](deep_reads/2026-08-28-2608.23420.md)  
+  1/10 [daily]
+- [Estimation of Random-Coefficient Dynamic Panel Data Models with a Fixed T](deep_reads/2026-08-27-2608.23988.md)  
+  7/10 [daily]
+- [Dynamic Discrete Choice and Inverse Reinforcement Learning: Inferring Preferences and Beliefs From Human Behavior](deep_reads/2026-08-27-2608.24362.md)  
+  6/10 [daily]
+- [Repairing Locally Misspecified GMM: An Empirical Bayes Approach](deep_reads/2026-08-27-2608.23925.md)  
+  6/10 [daily]
+- [Systematic Bias in Green Patent Classification: Silent Green and False Green](deep_reads/2026-08-27-2608.23420.md)  
+  1/10 [daily]
+- [Dynamic Discrete Choice and Inverse Reinforcement Learning: Inferring Preferences and Beliefs From Human Behavior](deep_reads/2026-08-26-2608.24362.md)  
+  6/10 [daily]
+- [Estimation of Random-Coefficient Dynamic Panel Data Models with a Fixed T](deep_reads/2026-08-26-2608.23988.md)  
+  6/10 [daily]
+- [Systematic Bias in Green Patent Classification: Silent Green and False Green](deep_reads/2026-08-26-2608.23420.md)  
+  2/10 [daily]
+- [Dynamic Discrete Choice and Inverse Reinforcement Learning: Inferring Preferences and Beliefs From Human Behavior](deep_reads/2026-08-25-2608.24362.md)  
+  7/10 [daily]
+- [Estimation of Random-Coefficient Dynamic Panel Data Models with a Fixed T](deep_reads/2026-08-25-2608.23988.md)  
+  7/10 [daily]
 - [Estimation and Inference for Peer Effects under Conditional Random Assignment](deep_reads/2026-08-18-2608.16468.md)  
   8/10 [daily]
 - [Quantile restrictions, revealed rankings, and the limits of multinomial choice](deep_reads/2026-08-18-2608.16708.md)  
@@ -12489,6 +12863,20 @@
 
 ### Daily
 
+- [Berry--Esseen bounds and bootstrap approximations for the Hilbert-space norm of $U$-statistics](deep_reads/2026-08-28-2608.25463.md)  
+  9/10 [daily]
+- [Posterior consistency for subdiffusion inverse problems](deep_reads/2026-08-28-2608.26536.md)  
+  8/10 [daily]
+- [Berry--Esseen bounds and bootstrap approximations for the Hilbert-space norm of $U$-statistics](deep_reads/2026-08-27-2608.25463.md)  
+  9/10 [daily]
+- [Posterior consistency for subdiffusion inverse problems](deep_reads/2026-08-27-2608.26536.md)  
+  7/10 [daily]
+- [Berry--Esseen bounds and bootstrap approximations for the Hilbert-space norm of $U$-statistics](deep_reads/2026-08-26-2608.25463.md)  
+  9/10 [daily]
+- [Spectral stability of empirical metric-measure Laplacians](deep_reads/2026-08-25-2608.23150.md)  
+  6/10 [daily]
+- [Systematic Bias in Green Patent Classification: Silent Green and False Green](deep_reads/2026-08-25-2608.23420.md)  
+  2/10 [daily]
 - [Trustworthy Decisions in Reliability Set Estimation under Insufficient Model Information](deep_reads/2026-08-20-2608.19815.md)  
   6/10 [daily]
 - [Limit Theory for U-Statistics under Clustered and Weakly Dependent Data](deep_reads/2026-08-19-2608.18443.md)  
