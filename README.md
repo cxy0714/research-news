@@ -679,7 +679,47 @@ GitHub Action（`.github/workflows/publish-favorites.yml`）：读私密 Gist �
 **一次性配置**：仓库 Settings → Secrets and variables → Actions → 新建
 secret `GIST_TOKEN`，填一个 classic PAT（勾 `gist` + `public_repo`；用 PAT 推送
 快照才能触发部署 workflow）。可选 variable `RN_GIST_ID` 固定 gist id，
-不填则按描述 / 文件名自动发现。
+不填则按描述 / 文件名自动发现。**有效期建议直接选 `No expiration`** —— 原因见下。
+
+### ⚠️ GIST_TOKEN 过期（周期性故障）
+
+**这是本项目已知的周期性故障，且症状极具误导性。** classic PAT 默认只有 **90 天**，
+到期后 `GIST_TOKEN` 失效，会**同时**打挂两条链路：
+
+| 链路 | 表现 |
+| --- | --- |
+| `publish-favorites` workflow（公开收藏快照） | 在 **`actions/checkout` 这一步**就失败（该步用同一个 PAT 拉代码），报错完全看不出跟 token 有关；你会收到 Actions 失败邮件 |
+| 本机 `run_daily` 的 `manual_requests`（网页手动录入队列 / 收藏自动补读） | **静默跳过**——因为它设计上 fail-open，绝不阻断日跑。旧版只留一行含糊的 `could not read state gist` warning，很容易几周都没人发现 |
+
+**首次发生**：2026-08-30（PAT 于 2026-06-01 前后签发，90 天后到期）。
+CI run #90（8/30 05:38）还成功，#91（8/31 05:52）失败。
+
+**一分钟确诊**：
+
+```bash
+python -m research_news.gist_state    # 打印 token 状态 / 过期日 / scopes；token 已死则退出码 1
+```
+
+返回 `401 Bad credentials` 就是 token 过期（注意：**这跟代理/网络无关**——
+`WinError 10061` 那类才是本机代理问题，见「每日抓取失败」一节）。
+
+**修复**（两处都要改，漏一处另一条链路继续哑）：
+
+1. https://github.com/settings/tokens → Generate new token **(classic)**，
+   勾 `gist` + `public_repo`，**Expiration 选 `No expiration`**；
+2. 仓库 Settings → Secrets and variables → Actions → 更新 secret `GIST_TOKEN`；
+3. 本机 `.env` 里的 `GIST_TOKEN=` 也换成新值；
+4. 验证：`python -m research_news.gist_state`，再手动触发一次
+   publish-favorites workflow（Actions → Run workflow）。
+
+**已加的防护**（这样下次不会再被同一个坑绊住）：
+
+- workflow 第一步 `Verify GIST_TOKEN` 在 checkout **之前**校验 token，过期时
+  直接 `::error::` 报出根因和修复步骤，失败邮件里一眼可见；
+- 同一步在**距到期 ≤14 天**时自动开（或追评）一个提醒 issue，让你在挂掉之前就收到邮件；
+- `gist_state.GistAuthError` 把 auth 失败与网络故障分开：`manual_requests` 用
+  **ERROR** 级别记录根因（仍 fail-open 不阻断日跑），`publish_favorites` 直接非零退出；
+- `manual_requests` 每次跑都会顺带做一次到期预警。
 
 ## Shootout（评估工具）
 
