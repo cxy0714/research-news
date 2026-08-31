@@ -7,6 +7,11 @@ name: Publish favorites snapshot
 # Requires a repo secret GIST_TOKEN: a classic PAT with scopes `gist` and
 # `public_repo` (the repo is public). Optional repo variable RN_GIST_ID pins
 # the gist id; otherwise it is discovered by description / filename.
+#
+# RECURRING FAILURE: a classic PAT expires (90 days by default) and this job
+# then fails at *checkout* — an error that says nothing about the real cause.
+# The "Verify GIST_TOKEN" step below runs first so the failure email leads with
+# the diagnosis, and it opens an issue while the token still has time left.
 
 on:
   schedule:
@@ -15,15 +20,84 @@ on:
 
 permissions:
   contents: read
+  issues: write            # expiry pre-warning opens/updates a reminder issue
 
 concurrency:
   group: publish-favorites
   cancel-in-progress: true
 
+env:
+  # Days before expiry to start warning (matches gist_state.WARN_WITHIN_DAYS).
+  WARN_WITHIN_DAYS: 14
+
 jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
+      # Runs before checkout (which uses the same PAT) so an expired token is
+      # reported as an expired token, not as a confusing git auth failure.
+      - name: Verify GIST_TOKEN
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GIST_TOKEN: ${{ secrets.GIST_TOKEN }}
+          REPO: ${{ github.repository }}
+        run: |
+          if [ -z "$GIST_TOKEN" ]; then
+            echo "::error::仓库 secret GIST_TOKEN 未配置。"
+            exit 1
+          fi
+          code=$(curl -sS -o /tmp/user.json -w '%{http_code}' \
+            -H "Authorization: Bearer $GIST_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            https://api.github.com/user)
+          if [ "$code" = "401" ] || [ "$code" = "403" ]; then
+            echo "::error::GIST_TOKEN 无效或已过期（GitHub 返回 $code）。去 https://github.com/settings/tokens 重签 classic PAT（勾 gist + public_repo，有效期建议 No expiration），然后更新仓库 secret GIST_TOKEN 与本机 .env。"
+            exit 1
+          fi
+          if [ "$code" != "200" ]; then
+            echo "::error::GitHub API 返回 $code，无法校验 GIST_TOKEN。"
+            exit 1
+          fi
+
+          # Classic PATs with an expiry report it in this header; absent means
+          # "No expiration" (or a fine-grained PAT).
+          exp=$(curl -sSI -H "Authorization: Bearer $GIST_TOKEN" \
+            https://api.github.com/user \
+            | tr -d '\r' \
+            | awk -F': ' 'tolower($1)=="github-authentication-token-expiration"{print $2}')
+          if [ -z "$exp" ]; then
+            echo "GIST_TOKEN 有效，无过期时间。"
+            exit 0
+          fi
+          exp_day=$(echo "$exp" | cut -d' ' -f1)
+          # Only do date math on a real YYYY-MM-DD; an unparseable header would
+          # otherwise silently become "0 days left" and open a bogus issue.
+          if ! echo "$exp_day" | grep -qE '^[0-9]{4}-[0-9]{2}-[0-9]{2}$'; then
+            echo "::warning::无法解析 GIST_TOKEN 过期时间（原始值：'$exp'），跳过到期预警。"
+            exit 0
+          fi
+          left=$(( ( $(date -u -d "$exp_day" +%s) - $(date -u +%s) ) / 86400 ))
+          echo "GIST_TOKEN 有效，$exp_day 过期（还剩 $left 天）。"
+          if [ "$left" -le "$WARN_WITHIN_DAYS" ]; then
+            echo "::warning::GIST_TOKEN 将在 $left 天后（$exp_day）过期。"
+            title="GIST_TOKEN 将于 $exp_day 过期，请重签"
+            # printf (not a heredoc) so nothing here has to sit at column 0 and
+            # fight this step's YAML block indentation.
+            printf '%s\n\n%s\n\n%s\n' \
+              "公开收藏快照（publish-favorites）与本机手动录入队列（manual_requests）共用同一个 classic PAT \`GIST_TOKEN\`，它将在 **$exp_day**（还剩 $left 天）过期。过期后两条链路会**同时静默失效**。" \
+              "重签步骤：https://github.com/settings/tokens → 新建 classic PAT（勾 \`gist\` + \`public_repo\`，有效期建议 **No expiration**）→ 更新仓库 secret \`GIST_TOKEN\` **和** 本机 \`.env\` 的 \`GIST_TOKEN\`。" \
+              "自检：\`python -m research_news.gist_state\`" \
+              > /tmp/gist_token_body.md
+            # One open reminder issue at a time; refresh it instead of piling up.
+            existing=$(gh issue list --repo "$REPO" --state open \
+              --search "GIST_TOKEN in:title" --json number --jq '.[0].number')
+            if [ -n "$existing" ]; then
+              gh issue comment "$existing" --repo "$REPO" --body-file /tmp/gist_token_body.md
+            else
+              gh issue create --repo "$REPO" --title "$title" --body-file /tmp/gist_token_body.md
+            fi
+          fi
+
       - uses: actions/checkout@v4
         with:
           # Use the PAT so the snapshot commit triggers deploy-pages.yml.

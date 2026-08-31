@@ -90,10 +90,22 @@ def main() -> int:
         print("GIST_TOKEN not set — nothing to publish.", file=sys.stderr)
         return 1
 
-    state, gist_id = gist_state.fetch_state()
+    try:
+        state, gist_id = gist_state.fetch_state()
+    except gist_state.GistAuthError as e:
+        # The recurring failure mode: the classic PAT expired. Say so plainly so
+        # the Actions failure email points straight at the fix.
+        print(f"ERROR: {e}", file=sys.stderr)
+        return 1
     if not gist_id:
         print("No state gist found on this account.", file=sys.stderr)
         return 1
+
+    health = gist_state.token_health()
+    if health["ok"] and health["days_left"] is not None \
+            and health["days_left"] <= gist_state.WARN_WITHIN_DAYS:
+        print(f"::warning::GIST_TOKEN 将在 {health['days_left']} 天后"
+              f"（{health['expires'][:10]}）过期，请尽快重签。")
 
     public = build_public(state, _load_highlights())
     _write_atomic(OUT_PATH, json.dumps(public, ensure_ascii=False, indent=2))

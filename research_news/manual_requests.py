@@ -455,12 +455,21 @@ def run(*, date_str: str | None = None, dry_run: bool = False,
 
     try:
         state, gist_id = gist_state.fetch_state()
+    except gist_state.GistAuthError as e:
+        # Loud: an expired PAT silently kills the manual queue for weeks. Not a
+        # crash though — the daily commit must still go through.
+        log.error("跳过手动录入队列：%s", e)
+        return 0
     except Exception as e:  # noqa: BLE001 — never break the daily pipeline
         log.warning("could not read state gist: %s", e)
         return 0
     if not gist_id:
         log.info("no state gist found — skipping manual deep-read queue.")
         return 0
+
+    # Pre-warn while there's still time to rotate: a classic PAT dies at 90 days
+    # and takes both this step and publish-favorites with it.
+    gist_state.warn_if_expiring(log)
 
     # Auto-deep-read favorites that have no deep read yet (capped per run so a
     # large backlog drains over several days instead of one giant run). Toggle /
