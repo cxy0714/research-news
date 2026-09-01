@@ -6794,6 +6794,8 @@
 
 - [Doubly-robust inference and optimality in structure-agnostic models with smoothness](deep_reads/2026-06-19-2405.08525.md)  
   9/10 [manual]
+- [Towards a Unified Theory for Semiparametric Data Fusion with Individual-Level Data](deep_reads/2026-09-01-2409.09973.md)  
+  8/10 [manual]
 
 ## 数理统计 / 假设检验
 
