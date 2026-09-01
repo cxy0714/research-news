@@ -16,7 +16,27 @@
 
 ## [Unreleased]
 
-（暂无未发布改动。）
+### Added
+
+- **手动录入支持免费 / 开放获取期刊**：粘一条期刊文章链接或 DOI，次日精读就直接读**期刊自己的
+  全文 PDF**，不再要求存在 arXiv 预印本。新模块 `research_news/oa_pdf.py` 三层解析：落地页的
+  `citation_*` 元标签（绝大多数出版社都发，所以「很多免费刊」不需要逐个登记）→ 少量 host 规则
+  （落地页被反爬 / 是 JS 应用的站点）→ OpenAlex 的 OA 位置（`work_oa_info`）。每个候选都要**下回来
+  验 `%PDF` 魔数**，付费墙页 / 反爬页永远不会被当成 PDF 存下来。
+
+### Changed
+
+- 取全文时**代理与直连都试**：arXiv / OpenAlex 一类要走本机代理（GFW），而认校园 IP 的出版社
+  经代理会被弹反爬页（Project MUSE 就是），所以先按环境代理试、失败再直连。反爬页本身是
+  `text/html`，因此判据是「这页有没有 citation 元数据」，不是「有没有拿到 HTML」。
+- 期刊论文（DOI）过去一律没有 PDF、精读只喂摘要；`highlights.download_pdf` 现在会回落到 OA
+  解析器，免费刊因此拿到真全文。`OA_PDF=0` 可关掉这层回落。
+
+### Fixed
+
+- **JMLR 精读一直只读到摘要**：`highlights._pdf_url` 拼的是 `/papers/v27/<stem>.pdf`（404），
+  真实路径是 `/papers/volume27/<stem>/<stem>.pdf`。
+- `oa_pdf.fetch_pdf` 只重试传输错误，不重试「响应不是 PDF」（重试也不会变成 PDF）。
 
 ---
 

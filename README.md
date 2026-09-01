@@ -463,11 +463,65 @@ python -m research_news.completeness --journal AoS --issue v54-i1 --toc-pdf cont
 - `docs/all_journals.md` / `docs/all_deep_reads.md` — 自动更新的期刊和精读存档页
 - 高相关论文 PDF 落 `data/highlights/<topic>/`（arxiv / JMLR 可下；付费期刊只记 manifest）
 
-## 跨篇综合 / 选题引擎
+## 选题提案引擎
 
-把同一子方向近期的**期刊**精读放在一起，归纳只在跨篇层面才看得见的信号：反复出现的开放
-问题（被 ≥2 篇独立论文点名）、论文之间的张力、以及能接上武器库的迁移空位。**LLM 只做
-挖掘与归纳，不打分不排名**，每条都点名来源论文，供你自己判断选题。
+把攒下来的精读语料 + 收藏变成**可上手的选题提案**。每条提案给：能投出去的标题、点名数学
+对象的 claim、先打哪个最简特例、哪几篇论文**独立**点名了这个 gap（附它们的原话）、接武器库
+的哪一件、什么会杀死它、以及第一周的具体动作。
+
+**LLM 不打分、不排名、不替你判断值不值得做**——排序用的全是可数的事实（几篇独立论文点名、
+其中几篇是你收藏的）。站点页面：`选题提案`（`docs/all_synthesis.md`）。
+
+```powershell
+# 看候选池 + 战线规模，不调 LLM
+python -m research_news.proposals --dry-run
+
+# 第一次用：先把语料聚成「研究战线」，落到 config/fronts.yaml（可手改）
+python -m research_news.proposals --build-fronts
+
+# 生成提案 + 渲染页面
+python -m research_news.proposals
+
+# 只做某一条战线
+python -m research_news.proposals --front efficiency_dml_higher_order_influence_functions
+```
+
+**候选池**：每篇论文取最新那次精读，`score >= 8` **或**已收藏。收藏**不受分数门槛限制**——
+手挑的论文比任何 LLM 分数都更能说明你想做什么，而且科普/天文类的打分 rubric 本来就故意压低分。
+
+**四段式**：
+
+1. **战线划定**（LLM，每个 topic 桶一次）：只让**种子论文**（收藏 or `score >= 9`）参与划分，
+   产出中文标签 + 一句话范围 + 英文匹配关键词，写进 `config/fronts.yaml`。这个文件是**生成后
+   可手改**的：改 `keywords` 就能调整哪些论文进这条战线，删掉一条就是不要它。重跑
+   `--build-fronts` 会覆盖手改。
+2. **论文归属**（纯确定性，无 LLM）：全池按关键词/技术标签子串匹配进战线，允许一篇进多条
+   （两样本 IV 的论文同时属于数据融合和 IV，硬分单一战线会把最好的跨战线论文藏起来）。
+   扫到超过 10% 池子的战线会**自动收紧**到「至少命中 2 个关键词」——`influence function`
+   一个词就能命中 7.7% 的池子，命中一个词就算的战线是 topic 桶而不是战线。
+3. **去重 + 择优**：战线是按 topic 桶各自独立聚的，同一条战线常被从几个角度重复发现
+   （「双稳健效率」和「半参数效率/影响函数」曾共享 73% 的论文）。论文集合 Jaccard ≥ 0.5 的
+   直接丢掉一条。然后按 **主兴趣优先 → 武器库覆盖面（命中几个不同的兴趣领域）→ 收藏数**
+   取前 N 条（`--max-fronts`，默认 14）。用「覆盖面分档」而不是原始命中数，是因为战线范围是
+   中文、关键词是英文，同一个领域常有好几个近义写法，按命中数排等于奖励话多的那条。
+4. **提案生成 + 渲染**（LLM，每战线一次）：每战线最多 30 篇（收藏优先），每篇喂标题 + 出处 +
+   ★收藏标记 + 你的笔记 + 从精读笔记里**确定性切出**的 gap 段落。
+
+**为什么没有「先抽取成 JSON」那一步**：精读笔记里的开放问题本来就带扎根引文
+（`扎根点：Remark 5`、`作者明确说"仍为开放问题"`）。按表头前缀切出五段（方向瓶颈 / 作者
+framing / 被引张力 / 结论比证明窄 / 开放问题），实测 600 篇抽样只留 **17% 的字符**、开放问题
+覆盖 **83%**，且引文原样保留。旧的「每篇一次 LLM 抽成 JSON」要 1300+ 次调用，还把引文丢了。
+
+全部参数：`--build-fronts` `--front` `--min-score`（默认 8）`--since` `--min-papers`（默认 6）
+`--max-papers`（默认 30）`--max-fronts`（默认 14，0 = 不限）`--model` `--dry-run`。
+输出 `docs/proposals/<战线>.md` + 总览 `docs/all_synthesis.md` + `data/proposals.json`。
+不接定时流水线（语料增长慢，手动/按周跑就够）。
+
+### 旧版：跨篇综合
+
+把同一子方向近期的**期刊**精读放一起，归纳反复出现的开放问题、张力、迁移空位。产物停在
+「诊断」层面（没到可上手的提案），已被上面的提案引擎取代，但仍可跑，旧页面
+`docs/synthesis/*.md` 全部保留、从提案总览页底部可达。
 
 ```powershell
 # 先看各 topic 的论文数（不调 LLM）
@@ -502,8 +556,12 @@ python -m research_news.synthesize --group core --topic causal_inference  # 再�
 
 两段式：先把每篇精读抽成结构化的「问题种子」（limitation / future work / 张力 / 迁移线索）
 存进 `data/open_problems.jsonl`（缺的才抽，可累积），再按 topic 综合。输出
-`docs/synthesis/<日期>-<范围>-<topic>.md`，并刷新存档页 `docs/all_synthesis.md`（站点导航
-「选题综合」）。不同范围（如 `all` / `core` / `AoS-JASA`）各自独立成页、不互相覆盖。
+`docs/synthesis/<日期>-<范围>-<topic>.md`。不同范围（如 `all` / `core` / `AoS-JASA`）各自
+独立成页、不互相覆盖。注意存档页 `docs/all_synthesis.md` 现在归提案引擎所有，跑
+`synthesize` 会把它覆盖回旧版综合索引——要恢复就重跑一次 `python -m research_news.proposals`。
+
+> `data/open_problems.jsonl` 曾被一次 merge 塞进冲突标记，而两个 loader 都静默跳过解析失败的
+> 行，于是「语料少了一半」这件事无声无息地过了三个月。现在遇到冲突标记会直接报 ERROR。
 
 ## 讲座精读管道
 
@@ -646,19 +704,52 @@ Token（classic）。Token 只存在你本机浏览器的 localStorage，首次�
 - 精读完成后，收藏页的录入列表与收藏条目会自动显示 **🔍 精读** 链接
   （前端从 `deep_reads_index.json` 回填，无需把链接写回 Gist）。
 
-**非 arXiv 论文也支持**：直接粘 **标题 / 整条引用 / DOI**（不必是 arXiv）。这类「lookup」
-条目同样默认收藏 + 进队列（gist 里 `kind:"lookup"`）。`manual_requests` 处理时：用 LLM 从
-引用里抽出**干净标题**，再调期刊管道现成的 `crossref._arxiv_search_match` 按标题去 arXiv
-**找预印本**——找到就解析出 arXiv id、照常精读；找不到就**只保留为书签收藏**（题目 + DOI/链接，
-不精读）。结果写进 `docs/data/manual_resolved.json`（像 `favorites_public.json` 一样**提交进仓库**，
-作为只读回传给浏览器的通道，也充当去重记录）；前端据此显示每条状态（排队中 / 已精读 / 未找到预印本），
-并把找到预印本的书签链到精读页。"找不到预印本"的会每 `NO_PREPRINT_RETRY_DAYS`(7) 天复查一次。
+**非 arXiv 论文也支持**：粘 **期刊文章链接 / DOI / 标题 / 整条引用** 都行。这类「lookup」条目
+同样默认收藏 + 进队列（gist 里 `kind:"lookup"`）。`manual_requests` 按两条路处理，先后顺序是：
+
+1. **给了链接或 DOI → 直接取期刊全文**（`research_news/oa_pdf.py`）。免费 / 开放获取的刊
+   （Observational Studies、JMLR、PMLR、PLOS、eLife、Nature Communications、bioRxiv…）就此
+   **不再需要有 arXiv 预印本**：解析器从落地页拿到标题 / 作者 / 期刊 / DOI 和 PDF 链接，下载
+   全文后照常打分 → 首过摘要 → 精读（`source="oa"`，`paper_id` 用 DOI，没 DOI 就用
+   `oa:<host>-<末段>` 这样的稳定 slug）。顺带还会按标题找一次 arXiv 预印本——不是为了正文，
+   而是精读的**参考文献是按 arXiv id 抓的**，有这个链接 OA 论文才能拿到同样的引文综述段。
+2. **只给了标题 → 找预印本**（老路，未变）：LLM 从引用里抽出干净标题，再调
+   `crossref._arxiv_search_match` 去 arXiv 搜；找到就照常精读，找不到就**只保留为书签收藏**。
+
+结果写进 `docs/data/manual_resolved.json`（像 `favorites_public.json` 一样**提交进仓库**，作为
+只读回传给浏览器的通道，也充当去重记录）。状态：`oa_pdf`（已取到期刊全文）/ `resolved`（找到预印本）
+/ `deep_read`（精读页已生成，带 `doc_path`）/ `no_pdf`、`no_preprint`（两条路都没结果，只当书签）。
+前端据此显示每条状态并把已精读的链到精读页；没结果的每 `NO_PREPRINT_RETRY_DAYS`(7) 天复查一次
+（OA 副本和预印本都可能后来才出现）。
 
 **收藏即补读**：你在日报里看到一篇没精读的论文，点 **☆ 收藏**，下次定时任务就会自动给它**补一份精读**
 ——无需再去录入框。机制是把「收藏里还没精读的 arXiv 论文」当成一个隐式队列（`favorite_deepread_ids`），
 按收藏时间新→旧补读。为了避免一次性把历史收藏全精读（烧 token / 拖长日跑），每次**限量**补几篇
 （`MANUAL_FAV_LIMIT`，默认 10），剩下的后续几天慢慢补完（日志里会写还剩多少）。整体可用
 `AUTO_DEEPREAD_FAVORITES=0` 关掉。已带精读链接的收藏、非 arXiv 书签（`q:` lookup）会跳过。
+
+**不想等定时任务 / 想先试一条链接**：`--url` 直接读，不经 gist（可重复给多条）：
+
+```bash
+python -m research_news.manual_requests --url https://muse.jhu.edu/pub/56/article/999750/pdf
+python -m research_news.manual_requests --url 10.1371/journal.pone.0289195 --url 2405.08525
+python -m research_news.manual_requests --dry-run --url <链接>   # 只看识别结果，不调 LLM
+```
+
+这条路不写 `manual_resolved.json`（没有队列条目要回传），产物就是精读页 + 索引 + 当天的
+「✍️ 手动录入」章节；没配 `GIST_TOKEN` 也能用，适合验证解析器。
+
+**怎么判断一篇「能不能免费拿到」**：不靠白名单，靠**下回来验字节**——每个候选 PDF 链接都真的下载，
+开头不是 `%PDF` 魔数（付费墙页、Cloudflare 反爬页、404）就丢弃并换下一个候选。所以解析器里那张
+host 规则表**只列落地页不可用的少数站点**（Project Euclid 挂了 Incapsula、JS 应用等），其余期刊
+靠 `citation_pdf_url` 元标签自动生效，加新刊通常**不用改代码**。
+
+取全文时**代理和直连都会试**：arXiv / OpenAlex 那类必须走本机代理（见「每日抓取失败」一节），而
+认校园 IP 的出版社经代理反而会被弹反爬页（Project MUSE 实测如此），所以先按环境代理试、失败再直连。
+副作用是：这一步跑在**你本机**（`run_daily.*`，不是 CI），学校已订阅的刊也会顺带下到全文。
+
+同一套解析器也接进了 `highlights.download_pdf`：期刊论文（DOI）过去一律没 PDF、精读只喂摘要，
+现在免费刊能拿到真全文。想省掉这层回落（每篇多一次落地页请求）设 `OA_PDF=0`。
 
 去重：arXiv 条目里 `paper_id` 已在精读索引中的直接跳过；lookup 条目按 `manual_resolved.json`
 的状态跳过；收藏补读也排除已精读 / 已在队列的，所以重复跑既便宜又不会精读两遍。**本机需要

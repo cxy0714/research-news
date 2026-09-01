@@ -46,6 +46,11 @@ class Paper:
     issue: str | None = None
     # Set when we download the PDF for high-relevance papers:
     pdf_path: str | None = None
+    # Explicit full-text PDF URL, when the source-based guess in
+    # `highlights._pdf_url` can't derive one — e.g. an open-access journal paper
+    # resolved from a pasted link by `oa_pdf.resolve`. Takes priority over the
+    # per-source guess.
+    pdf_url: str | None = None
     # Number of cited works (with abstracts) attached to the deep-read prompt.
     # Recorded per deep read as reference data for tuning the prompt later.
     n_references: int | None = None

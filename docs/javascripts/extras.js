@@ -285,9 +285,11 @@
     document.dispatchEvent(new CustomEvent("rn:favchange"));
   }
 
-  // Non-arXiv request: a title / citation / DOI. The next daily run tries to
-  // find an arXiv preprint by title (LLM extracts the title, then an arXiv
-  // search); found → deep-read, not found → kept as a bookmark. Key starts "q:".
+  // Non-arXiv request: a journal link, a DOI, or a title / citation. The next
+  // daily run resolves it — a link or DOI goes to the open-access resolver first
+  // (publisher PDF via citation meta tags / host rules / OpenAlex), anything left
+  // is searched on arXiv by title. Nothing downloadable → kept as a bookmark.
+  // Key starts "q:".
   function lookupKey(text) {
     const slug = (text || "").toLowerCase()
       .replace(/[^\w]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 60);
@@ -297,12 +299,18 @@
     const m = (text || "").match(/10\.\d{4,9}\/[^\s"<>]+/);
     return m ? m[0].replace(/[.,;)]+$/, "") : "";
   }
+  function extractUrl(text) {
+    const m = (text || "").match(/https?:\/\/[^\s"'<>)\]]+/);
+    return m ? m[0].replace(/[.,;)\]]+$/, "") : "";
+  }
   function queueLookup(rawText) {
     const text = (rawText || "").trim();
     if (text.length < 8) return false;     // too short to be a title
     const key = lookupKey(text);
     const doi = extractDoi(text);
-    const url = doi ? "https://doi.org/" + doi : "";
+    // Keep the pasted link itself: it is what the open-access resolver works
+    // from (its landing page carries the title / authors / PDF link).
+    const url = extractUrl(text) || (doi ? "https://doi.org/" + doi : "");
     if (!state.queue[key]) {
       state.queue[key] = {
         kind: "lookup", query: text, doi: doi, url: url,
@@ -447,7 +455,8 @@
   }
 
   // Resolution map for non-arXiv lookups, written by research_news.manual_requests:
-  //   { "q:<slug>": { status: "deep_read"|"no_preprint", arxiv_id, deep_read, title } }
+  //   { "q:<slug>": { status: "deep_read"|"oa_pdf"|"no_pdf"|"no_preprint",
+  //                   paper_id, arxiv_id, pdf_url, deep_read, title } }
   function loadResolved() {
     if (_resolvedCache) return Promise.resolve(_resolvedCache);
     return fetch(siteRoot() + "data/manual_resolved.json", { cache: "no-cache" })
@@ -801,7 +810,7 @@
 
     host.innerHTML =
       '<div class="rn-q-form">' +
-      '<textarea id="rn-q-in" rows="2" placeholder="粘贴 arXiv 链接 / 编号，或非 arXiv 论文的标题 / DOI（可多条，每行一篇）&#10;例如 https://arxiv.org/abs/2405.08525&#10;或 On polynomial chaos expansion via gradient-enhanced l1-minimization"></textarea>' +
+      '<textarea id="rn-q-in" rows="3" placeholder="粘贴 arXiv 链接 / 编号，或期刊文章链接 / DOI / 标题（可多条，每行一篇）&#10;例如 https://arxiv.org/abs/2405.08525&#10;或 https://muse.jhu.edu/pub/56/article/999750/pdf （免费刊直接读期刊全文）&#10;或 On polynomial chaos expansion via gradient-enhanced l1-minimization"></textarea>' +
       '<button id="rn-q-add" type="button">加入收藏并排队精读</button>' +
       '<div class="rn-q-msg" id="rn-q-msg"></div>' +
       '</div>' +
@@ -816,7 +825,7 @@
       // arXiv ids anywhere in the text → queued as arXiv (full treatment).
       const arxiv = parseArxivIds(text);
       arxiv.forEach((f) => queuePaper(f));
-      // Lines with NO arXiv id are non-arXiv lookups (title / citation / DOI).
+      // Lines with NO arXiv id are lookups (journal link / DOI / title).
       let nLookup = 0;
       text.split(/\r?\n/).forEach((line) => {
         line = line.trim();
@@ -824,15 +833,16 @@
         if (queueLookup(line)) nLookup++;
       });
       if (!arxiv.length && !nLookup) {
-        msg.textContent = "没识别出 arXiv 编号或论文标题，请检查输入。";
+        msg.textContent = "没识别出 arXiv 编号、期刊链接或论文标题，请检查输入。";
         return;
       }
       inp.value = "";
       const bits = [];
       if (arxiv.length) bits.push(arxiv.length + " 篇 arXiv");
-      if (nLookup) bits.push(nLookup + " 篇非 arXiv（待查预印本）");
+      if (nLookup) bits.push(nLookup + " 篇非 arXiv（待取全文）");
       msg.textContent = "已加入 " + bits.join(" + ") + "（默认收藏）。" +
-        "下次定时任务会处理：arXiv 直接精读；非 arXiv 先按标题找预印本，找到就精读。";
+        "下次定时任务会处理：arXiv 直接精读；给了期刊链接 / DOI 的先抓期刊全文 PDF，" +
+        "只给标题的按标题找预印本。";
       renderRequestBox();
     }
     add.addEventListener("click", submit);
@@ -863,13 +873,17 @@
           const r = resolved[key];
           if (r && r.status === "deep_read") {
             done = true;
-            status = '<span class="rn-q-done">✅ 找到预印本 · 已精读</span> · <a href="' +
+            const via = r.pdf_url ? "期刊全文" : "找到预印本";
+            status = '<span class="rn-q-done">✅ ' + via + ' · 已精读</span> · <a href="' +
               resolvedDeepReadHref(r) + '">🔍 精读</a>';
-          } else if (r && r.status === "no_preprint") {
+          } else if (r && r.status === "oa_pdf") {
+            // PDF found and read this run; the index link appears next run.
+            status = '<span class="rn-q-wait">📄 已取到期刊全文 · 精读生成中</span>';
+          } else if (r && (r.status === "no_preprint" || r.status === "no_pdf")) {
             done = true;   // settled — it stays as a bookmark, no remove button
-            status = '<span class="rn-q-none">📕 未找到 arXiv 预印本（已书签收藏）</span>';
+            status = '<span class="rn-q-none">📕 拿不到可下载全文（已书签收藏）</span>';
           } else {
-            status = '<span class="rn-q-wait">⏳ 排队中（下次定时任务找预印本）</span>';
+            status = '<span class="rn-q-wait">⏳ 排队中（下次定时任务找全文）</span>';
           }
         } else {
           const dr = byId.get(q.paper_id || key);

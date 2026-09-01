@@ -1,12 +1,14 @@
 """Offline tests for the manual deep-read queue (no network / LLM).
 
 Covers: arXiv id normalization + id_list fetch (parsing a canned Atom feed),
-reading the gist queue (arXiv + non-arXiv lookups), resolving lookups to a
-preprint by title, and the idempotent injection of the '✍️ 手动录入' section.
+reading the gist queue (arXiv + non-arXiv lookups), resolving a lookup to an
+open-access publisher PDF or to a preprint by title, and the idempotent injection
+of the '✍️ 手动录入' section.
 """
 from __future__ import annotations
 
 from datetime import date
+from pathlib import Path
 
 from research_news import manual_requests as mr
 from research_news.models import Paper
@@ -150,6 +152,122 @@ def test_resolve_lookups_finds_preprint_or_bookmarks(monkeypatch):
     to_read2 = mr._resolve_lookups(lookups, resolved, client=_EchoClient(),
                                    run_date="2026-06-19", model="m")
     assert to_read2 == {"1506.00343"}   # q:a re-added from cache; q:b skipped
+
+
+# ── open-access resolution (journal link / DOI → publisher PDF) ───────────────
+
+def test_queue_entries_recovers_url_and_doi_from_query():
+    # An older entry that stored the pasted link only as query text still becomes
+    # an open-access candidate.
+    state = {"queue": {"q:muse": {
+        "kind": "lookup",
+        "query": "https://muse.jhu.edu/pub/56/article/999750/pdf",
+    }}}
+    e = mr.queue_entries(state)[0]
+    assert e["url"] == "https://muse.jhu.edu/pub/56/article/999750/pdf"
+    assert e["doi"] == ""
+
+    state2 = {"queue": {"q:doi": {"kind": "lookup",
+                                  "query": "see doi:10.1214/25-AOS2537 for details"}}}
+    assert mr.queue_entries(state2)[0]["doi"] == "10.1214/25-AOS2537"
+
+
+def _fake_src(**kw):
+    from research_news.oa_pdf import PdfSource
+    base = dict(landing_url="https://muse.jhu.edu/article/999750",
+                pdf_candidates=["https://muse.jhu.edu/article/999750/pdf"],
+                doi="", title="Beyond No Unmeasured Confounding",
+                authors=["Gary C. N. Hettinger"], venue="Observational Studies",
+                published="2026-08-27", volume="12", issue="2",
+                abstract="An abstract long enough to be useful for scoring.")
+    base.update(kw)
+    return PdfSource(**base)
+
+
+def test_resolve_oa_builds_paper_and_records_status(tmp_path, monkeypatch):
+    monkeypatch.setattr(mr, "OA_CACHE_DIR", tmp_path)
+    monkeypatch.setattr(mr.oa_pdf, "resolve", lambda t, doi="": _fake_src())
+
+    def fake_download(src, dest):
+        dest.write_bytes(b"%PDF-1.7\n" + b"x" * 4000)
+        return dest
+    monkeypatch.setattr(mr.oa_pdf, "download", fake_download)
+
+    lookups = [{"key": "q:muse", "kind": "lookup", "query": "https://muse.jhu.edu/article/999750",
+                "url": "https://muse.jhu.edu/article/999750", "doi": ""}]
+    resolved = {}
+    papers = mr._resolve_oa(lookups, resolved, run_date="2026-09-01")
+
+    assert len(papers) == 1
+    p = papers[0]
+    assert p.source == "oa"
+    assert p.paper_id == "oa:muse.jhu.edu-article-999750"
+    assert p.title == "Beyond No Unmeasured Confounding"
+    assert p.venue == "Observational Studies"
+    assert (p.volume, p.issue) == ("12", "2")
+    assert p.pdf_url == "https://muse.jhu.edu/article/999750/pdf"
+    assert p.pdf_path and Path(p.pdf_path).exists()
+    assert resolved["q:muse"]["status"] == "oa_pdf"
+    assert resolved["q:muse"]["paper_id"] == p.paper_id
+
+
+def test_resolve_oa_uses_doi_as_paper_id(tmp_path, monkeypatch):
+    monkeypatch.setattr(mr, "OA_CACHE_DIR", tmp_path)
+    monkeypatch.setattr(mr.oa_pdf, "resolve",
+                        lambda t, doi="": _fake_src(doi="10.1353/OBS.2026.A999750"))
+    monkeypatch.setattr(mr.oa_pdf, "download",
+                        lambda src, dest: (dest.write_bytes(b"%PDF-1.7" + b"x" * 4000), dest)[1])
+    resolved = {}
+    papers = mr._resolve_oa(
+        [{"key": "q:a", "kind": "lookup", "query": "x", "url": "https://x/a", "doi": ""}],
+        resolved, run_date="2026-09-01")
+    assert papers[0].paper_id == "10.1353/obs.2026.a999750"
+
+
+def test_resolve_oa_marks_no_pdf_and_respects_retry_window(tmp_path, monkeypatch):
+    monkeypatch.setattr(mr, "OA_CACHE_DIR", tmp_path)
+    monkeypatch.setattr(mr.oa_pdf, "resolve", lambda t, doi="": _fake_src())
+    monkeypatch.setattr(mr.oa_pdf, "download", lambda src, dest: None)  # paywalled
+
+    lookups = [{"key": "q:a", "kind": "lookup", "query": "x",
+                "url": "https://paywalled.example/a", "doi": ""}]
+    resolved = {}
+    assert mr._resolve_oa(lookups, resolved, run_date=date.today().isoformat()) == []
+    assert resolved["q:a"]["status"] == "no_pdf"
+
+    # Re-run the same day: not re-fetched (the retry window hasn't elapsed).
+    def boom(*a, **k):
+        raise AssertionError("re-resolved a recently-checked lookup")
+    monkeypatch.setattr(mr.oa_pdf, "resolve", boom)
+    assert mr._resolve_oa(lookups, resolved, run_date=date.today().isoformat()) == []
+
+
+def test_resolve_oa_skips_entries_without_link():
+    def boom(*a, **k):
+        raise AssertionError("tried to resolve a bare title")
+    resolved = {}
+    # No url / doi → the arXiv title search owns this one.
+    assert mr._resolve_oa(
+        [{"key": "q:t", "kind": "lookup", "query": "A bare paper title", "url": "", "doi": ""}],
+        resolved, run_date="2026-09-01") == []
+    assert resolved == {}
+
+
+def test_finalize_resolved_links_oa_paper_by_paper_id(monkeypatch):
+    monkeypatch.setattr(mr, "load_index", lambda: [
+        {"paper_id": "oa:muse.jhu.edu-article-999750", "date": "2026-09-01",
+         "doc_path": "deep_reads/2026-09-01-oa_muse.jhu.edu-article-999750.md",
+         "title": "Beyond No Unmeasured Confounding"},
+    ])
+    resolved = {"q:muse": {"status": "oa_pdf",
+                           "paper_id": "oa:muse.jhu.edu-article-999750",
+                           "title": "raw pasted text"},
+                "q:none": {"status": "no_pdf", "title": "nothing found"}}
+    mr._finalize_resolved(resolved)
+    assert resolved["q:muse"]["status"] == "deep_read"
+    assert resolved["q:muse"]["deep_read"].startswith("deep_reads/2026-09-01-oa_")
+    assert resolved["q:muse"]["title"] == "Beyond No Unmeasured Confounding"
+    assert resolved["q:none"]["status"] == "no_pdf"    # untouched
 
 
 def test_finalize_resolved_marks_deep_read(monkeypatch):

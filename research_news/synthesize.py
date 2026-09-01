@@ -270,11 +270,18 @@ def _update_index(new_entries: list[dict]) -> None:
 
 
 def _write_archive(entries: list[dict]) -> None:
-    """Refresh docs/all_synthesis.md (linked from the site nav)."""
+    """Refresh the cross-paper-synthesis index page.
+
+    Writes docs/synthesis/index.md, NOT docs/all_synthesis.md — that page now
+    belongs to the proposal engine (research_news/proposals.py), which links
+    here from its footer. Writing to all_synthesis.md would clobber it.
+    """
     lines = [
-        "# 选题综合\n",
+        "# 跨篇综合（旧版选题引擎）\n",
         "跨篇综合：把同一子方向近期的期刊精读放一起，归纳**反复出现的开放问题、"
         "张力与迁移空位**。不打分、不排名，每条点名来源论文，供你自己判断选题。\n",
+        "> 这是**旧版**选题引擎，产物停在诊断层面。现在的[选题提案](../all_synthesis.md)"
+        "会直接给出可上手的提案（含最小内核、扎根证据、第一周动作）。本页保留备查。\n",
     ]
     cur_date = None
     for e in entries:
@@ -289,9 +296,10 @@ def _write_archive(entries: list[dict]) -> None:
         scope_tag = f" · {scope}" if scope and scope != "全部期刊" else ""
         lines.append(
             f"- [{e.get('topic_label', e['topic'])}（{e.get('n_papers','?')} 篇）{scope_tag}]"
-            f"(synthesis/{stem}.md)"
+            f"({stem}.md)"
         )
-    (DOCS_DIR / "all_synthesis.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
+    SYNTHESIS_DIR.mkdir(parents=True, exist_ok=True)
+    (SYNTHESIS_DIR / "index.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
 def run(

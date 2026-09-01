@@ -119,6 +119,45 @@ def search_works_by_title(title: str, *, per_page: int = 8) -> list[dict]:
     return out
 
 
+def work_oa_info(doi: str) -> dict:
+    """Open-access PDF locations + metadata for one DOI.
+
+    OpenAlex records every location a work is hosted at (publisher, PMC,
+    institutional repositories, arXiv) with a ``pdf_url`` where it knows one.
+    Used by ``research_news.oa_pdf`` as the catch-all layer when a landing page
+    doesn't advertise its own PDF. Returns
+    ``{pdf_urls, title, authors, venue, published, abstract, arxiv_id}`` —
+    ``pdf_urls`` best-first, ``{}`` on any failure (fails open)."""
+    try:
+        w = _get_json(
+            f"{OPENALEX_BASE}/works/doi:{_norm_doi(doi)}",
+            {"select": "id,doi,title,display_name,authorships,publication_date,"
+                       "abstract_inverted_index,primary_location,best_oa_location,"
+                       "locations,biblio"},
+        )
+    except Exception as e:  # noqa: BLE001
+        log.info("OpenAlex OA lookup failed for %s: %s", doi, e)
+        return {}
+    pdfs: list[str] = []
+    for loc in [w.get("best_oa_location")] + list(w.get("locations") or []) \
+            + [w.get("primary_location")]:
+        url = ((loc or {}).get("pdf_url") or "").strip()
+        if url and url not in pdfs:
+            pdfs.append(url)
+    src = (w.get("primary_location") or {}).get("source") or {}
+    return {
+        "pdf_urls": pdfs,
+        "title": (w.get("title") or w.get("display_name") or "").strip(),
+        "authors": [(a.get("author") or {}).get("display_name", "")
+                    for a in (w.get("authorships") or [])
+                    if (a.get("author") or {}).get("display_name")],
+        "venue": (src.get("display_name") or "").strip(),
+        "published": w.get("publication_date"),
+        "abstract": _abstract_from_inverted_index(w.get("abstract_inverted_index")),
+        "arxiv_id": _arxiv_id_from_work(w) or "",
+    }
+
+
 def fetch_issue_works(issn: str, vol: int, iss: int | None = None,
                       *, max_pages: int = 6) -> list[tuple[str, str | None]]:
     """All works in a journal issue, as (title, doi) pairs, via cursor paging."""

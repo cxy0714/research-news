@@ -14,13 +14,12 @@ from __future__ import annotations
 
 import json
 import logging
+import os
 import re
 from datetime import date
 from pathlib import Path
 
-import httpx
-from tenacity import retry, stop_after_attempt, wait_exponential
-
+from . import oa_pdf
 from .models import Paper
 
 log = logging.getLogger(__name__)
@@ -34,62 +33,80 @@ def _slug(s: str) -> str:
 
 
 def _pdf_url(paper: Paper) -> str | None:
-    """Best-guess PDF URL by source."""
+    """Best-guess PDF URL by source (None when this source has no derivable one)."""
+    if paper.pdf_url:
+        return paper.pdf_url            # explicitly resolved (see oa_pdf.resolve)
     if paper.source == "arxiv":
         return f"https://arxiv.org/pdf/{paper.paper_id}"
     if paper.source == "jmlr":
-        # paper_id looks like "jmlr:v27/<stem>"; the PDF is at the same v27/<stem>.pdf
-        m = re.match(r"jmlr:(v\d+)/(.+)$", paper.paper_id)
+        # paper_id is "jmlr:v27/<stem>"; the PDF lives at
+        # /papers/volume27/<stem>/<stem>.pdf (NOT /papers/v27/<stem>.pdf — that
+        # path 404s, which is why JMLR deep reads used to see only the abstract).
+        m = re.match(r"jmlr:v(\d+)/(.+)$", paper.paper_id)
         if m:
-            return f"https://www.jmlr.org/papers/{m.group(1)}/{m.group(2)}.pdf"
-    if paper.source == "crossref" or (paper.url and "doi.org" in paper.url):
-        # No reliable open PDF for paywalled DOIs; skip rather than fail noisily.
-        return None
+            vol, stem = m.group(1), m.group(2)
+            return f"https://www.jmlr.org/papers/volume{vol}/{stem}/{stem}.pdf"
     return None
 
 
-@retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=2, min=2, max=15))
-def _download(url: str, dest: Path) -> None:
-    with httpx.Client(timeout=120, follow_redirects=True,
-                      headers={"User-Agent": "research-news/0.1"}) as c:
-        with c.stream("GET", url) as r:
-            r.raise_for_status()
-            with dest.open("wb") as f:
-                for chunk in r.iter_bytes(chunk_size=64 * 1024):
-                    f.write(chunk)
+# Try the open-access resolver (oa_pdf) for papers whose source gives no PDF URL
+# — journal DOIs, mostly. Set OA_PDF=0 to skip it (saves a landing-page fetch per
+# paper). Fails open either way: no PDF just means the deep read reads the abstract.
+_OA_FALLBACK = os.environ.get("OA_PDF", "1").strip().lower() not in ("0", "false", "no")
 
 
 def download_pdf(paper: Paper, base_dir: Path = HIGHLIGHTS_DIR) -> Path | None:
     """Download the paper's PDF into base_dir/<topic>/<slug>.pdf.
 
-    Returns the local path (whether freshly downloaded or already present),
-    or None if no PDF URL is available for this source.
+    Resolution order: an already-downloaded local file → the per-source URL guess
+    (:func:`_pdf_url`) → the open-access resolver (landing-page meta tags / host
+    rules / OpenAlex OA locations), which is what lets free journals be read in
+    full rather than from their abstract alone.
+
+    Returns the local path (freshly downloaded or already present), or None when
+    no candidate yields a real PDF.
     """
-    url = _pdf_url(paper)
-    if not url:
-        log.info("no PDF source for %s (source=%s) — skipping", paper.paper_id, paper.source)
-        return None
     topic = paper.topic or "other"
     folder = base_dir / _slug(topic)
-    folder.mkdir(parents=True, exist_ok=True)
     dest = folder / f"{_slug(paper.paper_id)}.pdf"
-    if dest.exists() and dest.stat().st_size > 1024:
-        log.info("PDF already present: %s", dest)
-        paper.pdf_path = str(dest)
-        return dest
-    try:
+
+    # Already on disk — either from an earlier run or fetched by the caller.
+    for cached in (Path(paper.pdf_path) if paper.pdf_path else None, dest):
+        if cached and cached.exists() and cached.stat().st_size > 1024:
+            log.info("PDF already present: %s", cached)
+            paper.pdf_path = str(cached)
+            return cached
+
+    folder.mkdir(parents=True, exist_ok=True)
+    url = _pdf_url(paper)
+    if url:
         log.info("downloading PDF for %s → %s", paper.paper_id, dest)
-        _download(url, dest)
-        paper.pdf_path = str(dest)
-        return dest
-    except Exception as e:
-        log.warning("PDF download failed for %s (%s): %s", paper.paper_id, url, e)
-        if dest.exists():
-            try:
-                dest.unlink()
-            except OSError:
-                pass
+        if oa_pdf.fetch_pdf(url, dest):
+            paper.pdf_path = str(dest)
+            return dest
+        log.warning("PDF download failed for %s (%s)", paper.paper_id, url)
+
+    if not _OA_FALLBACK or not paper.url:
+        if not url:
+            log.info("no PDF source for %s (source=%s) — skipping",
+                     paper.paper_id, paper.source)
         return None
+
+    # Open-access fallback: resolve the landing page / DOI to a real PDF.
+    doi = paper.paper_id if paper.paper_id.startswith("10.") else ""
+    try:
+        src = oa_pdf.resolve(paper.arxiv_url or paper.url, doi=doi)
+    except Exception as e:  # noqa: BLE001 — never break the pipeline
+        log.warning("OA resolve failed for %s: %s", paper.paper_id, e)
+        return None
+    if not src:
+        log.info("no open PDF for %s (%s)", paper.paper_id, paper.url)
+        return None
+    got = oa_pdf.download(src, dest)
+    if got:
+        paper.pdf_url = src.pdf_url
+        paper.pdf_path = str(got)
+    return got
 
 
 def _to_manifest_entry(paper: Paper, run_date: date) -> dict:

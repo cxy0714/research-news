@@ -63,11 +63,31 @@ def parse_extraction(raw: str) -> dict | None:
     return norm
 
 
+_CONFLICT_PREFIXES = ("<<<<<<<", "=======", ">>>>>>>")
+
+
+def _warn_if_conflicted(path: Path, text: str) -> None:
+    """Shout if a merge left conflict markers in the JSONL.
+
+    Both loaders skip unparseable lines, so a conflicted file degrades
+    silently into "half the corpus is missing" — which is exactly how this
+    file sat broken for three months. Make it loud instead.
+    """
+    if any(line.startswith(_CONFLICT_PREFIXES) for line in text.splitlines()):
+        log.error(
+            "%s contains git conflict markers — rows are being silently "
+            "dropped. Resolve the conflict (union by paper_id) before relying "
+            "on this file.", path,
+        )
+
+
 def load_done_ids(path: Path = OPEN_PROBLEMS_FILE) -> set[str]:
     if not path.exists():
         return set()
+    text = path.read_text(encoding="utf-8")
+    _warn_if_conflicted(path, text)
     ids: set[str] = set()
-    for line in path.read_text(encoding="utf-8").splitlines():
+    for line in text.splitlines():
         line = line.strip()
         if not line:
             continue
@@ -83,7 +103,9 @@ def load_rows(path: Path = OPEN_PROBLEMS_FILE) -> dict[str, dict]:
     out: dict[str, dict] = {}
     if not path.exists():
         return out
-    for line in path.read_text(encoding="utf-8").splitlines():
+    text = path.read_text(encoding="utf-8")
+    _warn_if_conflicted(path, text)
+    for line in text.splitlines():
         line = line.strip()
         if not line:
             continue
