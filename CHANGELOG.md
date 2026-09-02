@@ -18,6 +18,19 @@
 
 ### Added
 
+- **选题提案引擎 `research_news/proposals.py`**：把攒下来的精读语料 + 收藏变成**可上手的提案**
+  ——能投出去的标题、点名数学对象的 claim、先打哪个最简特例、哪几篇论文**独立**点名了这个 gap
+  （附原话）、接武器库的哪一件、什么会杀死它、第一周做什么。候选池是「每篇取最新一次精读，
+  `score >= 8` **或**已收藏」（收藏不受分数门槛限制：手挑比任何 LLM 分数都更能说明想做什么，
+  且科普 / 天文 rubric 本来就压低分）。四段式：①**战线划定**（LLM，每 topic 桶一次，只让收藏
+  或 `score >= 9` 的种子论文参与）产出中文标签 + 范围 + 英文关键词，落 `config/fronts.yaml`
+  ——**生成后可手改**，改 `keywords` 即调整成员、删一条即弃用，重跑 `--build-fronts` 覆盖；
+  ②**论文归属**（纯确定性、无 LLM）按关键词 / 技术标签子串匹配，允许一篇进多条战线；
+  ③**去重 + 择优**，论文集合 Jaccard ≥ 0.5 丢一条，再按「主兴趣 → 武器库覆盖面分档 → 收藏数」
+  取前 N（`--max-fronts` 默认 14）；④**提案生成 + 渲染**（LLM，每战线一次，最多 30 篇、收藏优先）。
+  站点页 `选题提案`（`docs/all_synthesis.md`）+ `docs/proposals/<战线>.md` + `data/proposals.json`。
+  不接定时流水线（语料增长慢，手动 / 按周跑即可）。**LLM 只生成，不打分不排名**，排序键全是
+  可审计的计数。
 - **手动录入支持免费 / 开放获取期刊**：粘一条期刊文章链接或 DOI，次日精读就直接读**期刊自己的
   全文 PDF**，不再要求存在 arXiv 预印本。新模块 `research_news/oa_pdf.py` 三层解析：落地页的
   `citation_*` 元标签（绝大多数出版社都发，所以「很多免费刊」不需要逐个登记）→ 少量 host 规则
@@ -26,6 +39,19 @@
 
 ### Changed
 
+- **不再「先用 LLM 把每篇抽成 JSON」**：精读笔记里的开放问题本来就带扎根引文（`扎根点：Remark 5`），
+  所以改成按表头**前缀**（不是精确标题——格式漂移过四个月，`四、开放问题` 有 4 个变体）确定性切出
+  五段（方向瓶颈 / 作者 framing / 被引张力 / 结论比证明窄 / 开放问题）。600 篇抽样实测：只留
+  **17% 字符**、开放问题覆盖 **83%**、引文原样保留。旧路子要 1300+ 次 LLM 调用，还把引文丢了。
+- **战线扫到 >10% 池子就自动收紧**到「命中 ≥2 个关键词」：`influence function` 单个词就能命中
+  7.7% 的池子，那种战线是 topic 桶不是战线。择优用「覆盖面分档」而非原始命中数——战线范围是中文、
+  关键词是英文，同一领域有多个近义写法，按命中数排等于奖励话多的那条。
+- **精读笔记里的旁注不得当证据**：55% 的 gap 切片含「您 / 研究者 / 武器库」字样，那是上一次精读时
+  LLM 自己写的建议，不是论文内容。引用它会变成循环论证（LLM 拿 LLM 的建议证明 gap 是真的）。
+  现在切片时给这些行打标记、prompt 里明令禁止引用，并有 `n_commentary_leak` 自动审计写进日志。
+- 旧的**跨篇综合** `synthesize` 仍可跑、`docs/synthesis/*.md` 全部保留（从提案总览页底部可达），
+  但存档页 `docs/all_synthesis.md` 现归提案引擎所有——跑 `synthesize` 会把它覆盖回旧版索引，
+  重跑一次 `proposals` 即恢复。
 - 取全文时**代理与直连都试**：arXiv / OpenAlex 一类要走本机代理（GFW），而认校园 IP 的出版社
   经代理会被弹反爬页（Project MUSE 就是），所以先按环境代理试、失败再直连。反爬页本身是
   `text/html`，因此判据是「这页有没有 citation 元数据」，不是「有没有拿到 HTML」。
@@ -37,6 +63,70 @@
 - **JMLR 精读一直只读到摘要**：`highlights._pdf_url` 拼的是 `/papers/v27/<stem>.pdf`（404），
   真实路径是 `/papers/volume27/<stem>/<stem>.pdf`。
 - `oa_pdf.fetch_pdf` 只重试传输错误，不重试「响应不是 PDF」（重试也不会变成 PDF）。
+- **`data/open_problems.jsonl` 被一次 merge 塞进冲突标记，静默腐蚀了三个月**：两个 loader 都
+  「跳过解析失败的行」，于是冲突标记 + 被拼接的记录直接变成「语料少了一半」，而且不报任何错。
+  `extract_problems` 现在读文件时检测 `<<<<<<<` / `=======` / `>>>>>>>` 并打 ERROR，要求按
+  `paper_id` union 解决后再用。
+
+---
+
+## [0.11] — 2026-08-31
+
+一届会议的全量深读、站内搜索换引擎、综合刊走科普通道，以及两个「无声失败」的根治
+（Nature 只抓到 9 篇、GIST_TOKEN 到期打挂两条流水线）。
+
+### Added
+- **JCSDS 2026 全量会议深读流水线**：把第四届统计与数据科学联合会议（163 分会场 / 703 场报告）
+  做成结构化清单 + 可浏览专题页 + 逐场深读。新模块 `research_news/conf/`：`match.py` 给
+  （题目, 讲者）同时查 OpenAlex 与 arXiv，按标题相似度（token Jaccard 0.6 + SequenceMatcher 0.4）
+  加讲者姓氏重合打分，过 `CONF_MATCH_THRESHOLD`（0.60）才算命中——**没查到就诚实标注「未检索到
+  公开论文」，绝不编造**；`read.py` 有 arXiv 全文就喂全文、否则喂摘要；`run.py` 编排
+  （`--group` / `--sessions` / `--all` / `--skip-done` / `--no-pdf`）。一轮跑完 647 场 / 158 分会场，
+  `scripts/jcsds_*.py` 生成链输出 43 个专题页 + 总览 + 刷新 nav。各专题命中率 20–45%（中文本土 /
+  环境统计题目多无预印本，属正常）。
+- **会议报告的长篇精读**：对「命中且有 arXiv id」的 189 篇唯一论文改走日常管道
+  `deep_read_paper()`——全文 24 万字、抓参考文献、四段结构，比内联短精读丰富得多，输出
+  `docs/deep_reads/jcsds2026-<arxiv>.md` 并回填专题页的「📖 长篇精读」链接。**关键坑**：SJTU 端
+  100k tokens/min 硬限、单篇 prompt ≈96k token，并发必触发 429，所以脚本内建 `TokenGate`
+  （60s 滚动窗口每分钟只放行一篇），跑时须 `SJTU_TIMEOUT=600`。按「非 stub 页已存在」断点续跑。
+- **通用科学期刊走科普通道**：新增 `general`（Nature / Science / PNAS / Nature Methods）与
+  `broad`（Nature Machine Intelligence / Science Advances / Nature Communications）两组，打
+  `gateway_popsci: true` 标志。这些综合刊绝大多数文章在统计学之外，要的是「开阔眼界式科普为主、
+  联系统计为辅」，不做牵强的方法迁移。落点全是 config-driven（加新科普刊只改 yaml）：
+  `interests.yaml` 加 `general science` gateway rubric、新 `DEEP_READ_GENERAL_SYSTEM` prompt、
+  打分 payload 加 `venue`。**按 venue 而非 topic 切换**——一篇 Nature 的因果文也走科普 prompt。
+- 期刊新增 **compute 组**（JCGS / Technometrics / Stat. Comput. / CSDA）+ 第四阶段回补队列。
+- `run_daily.ps1 -Force`：把 `--force` 透传给 `daily.py`，用于「今天只跑出一部分类目（arXiv 429）
+  必须整页重跑」的情况。会**覆盖**当天页面。
+- **GIST_TOKEN 到期预警**：`gist_state.token_health()` / `warn_if_expiring()` 读 GitHub 返回的
+  过期日期，剩 ≤14 天就告警；CI 里到期前开 / 更新一个提醒 issue。
+
+### Changed
+- **站内搜索换 Pagefind**：内置 Material/lunr 会把全站正文打包成一个索引下载到浏览器再现场建索引，
+  语料涨到 4700+ 页（102MB，其中精读 80MB）后「初始化搜索引擎」要卡好几秒。Pagefind 改为构建后
+  扫 `site/` 生成切片索引，浏览器按查询只取几十 KB 分片、入口约 174B。Extended 版自带 CJK 分词，
+  顺带改善中文搜索。新增独立搜索页 `docs/search.md`，`data-pagefind-body` 把索引限定到正文
+  （排除导航 / 侧栏 / TOC 噪音）；构建链加 Node 20 + pagefind 步骤。
+- **代理开关集中进 `research_news/netenv.py`**：arXiv / OpenAlex / Crossref 在校园网直连会
+  `SSL: UNEXPECTED_EOF_WHILE_READING` / TLS 握手超时，现在按标准代理环境变量统一导出（httpx 与
+  urllib 都自动遵守，**调用处一行不改**），国内 LLM 网关与 `*.cn` 留在 `NO_PROXY` 走直连。
+  `PROXY_URL=` 置空即整体关掉，`NO_PROXY_EXTRA` 可追加直连 host。
+
+### Fixed
+- **Nature 只抓到 9 篇论文（无声丢掉大半个期刊）**：`crossref.fetch_latest_issue` 只要存在带期号的
+  期，就把所有没有 volume+issue 的文章全部丢掉。可综合刊大多数文章先以 online-first 发布、要几周后
+  才编进期号，于是主体内容被静默丢弃。现在带期号的分支也保留最新的 online-first 条目，按 `n_issues`
+  比例设上限；传统期刊（全带期号、无 online-first）行为不变。Nature 在 `n_issues=2` 下从 12 篇涨到 42 篇。
+- **GIST_TOKEN 过期（周期性故障）打挂两条流水线且症状完全误导**：classic PAT 默认 90 天到期，
+  一死就同时带走夜间收藏快照 workflow 与本机手动录入队列——而且 workflow 是**在 checkout 阶段**失败
+  （用同一个 PAT），报错跟 token 毫无关系。现在 401/403 单独抛 `GistAuthError` 并带上「去哪重签、
+  勾哪些 scope、要同时改仓库 secret 和本机 `.env`」；`publish_favorites` 直接以此退出，
+  `manual_requests` 打 ERROR 但不中断当天提交；workflow 把「Verify GIST_TOKEN」放在 checkout **之前**，
+  失败邮件因此直指病根。配 `tests/test_gist_token.py` 覆盖。
+- 收藏快照 CI 装不齐依赖：`research_news/__init__.py` 现在会 import python-dotenv，而 workflow 只装了
+  httpx，于是夜间任务 `ModuleNotFoundError: No module named 'dotenv'`。改成 `pip install -e .`。
+- 收藏快照 CI 又被代理默认值坑：runner 上没有本机 Clash，`netenv` 的 `127.0.0.1:7897` 连不通，
+  显式设 `PROXY_URL=""` 关掉这层。
 
 ---
 

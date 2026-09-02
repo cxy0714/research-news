@@ -4,6 +4,24 @@
 
 ### Daily
 
+- [Nonparametric Efficient Estimation of Dynamic Treatment Regimes with Competing Risks](deep_reads/2026-09-02-2608.28797.md)  
+  8/10 [daily]
+- [Saturation in G: simple & robust causal inference in cluster randomized trials with informative cluster sizes](deep_reads/2026-09-02-2608.28943.md)  
+  8/10 [daily]
+- [A Unified Approach to Interpretable Causal Root Cause Attribution](deep_reads/2026-09-02-2608.29735.md)  
+  8/10 [daily]
+- [Max-Stable Survival Copulas under Dependent Censoring: Sharp Identification and Efficient Inference](deep_reads/2026-09-02-2608.28867.md)  
+  8/10 [daily]
+- [Orthogonal Validation-Augmented Cox Regression with Internally Validated Failure Indicators Cross-Fitted Estimation, Risk-Set Linearization, and Validation Design](deep_reads/2026-09-02-2608.28839.md)  
+  7/10 [daily]
+- [Prognosis-equivalent mapping of clinical measurements via survival analysis](deep_reads/2026-09-02-2608.29614.md)  
+  7/10 [daily]
+- [Causal inference with staggered entries and effects that change over calendar time](deep_reads/2026-09-02-2608.30099.md)  
+  7/10 [daily]
+- [Power and sample size calculations for causal mediation analysis with a binary mediator in randomized trials](deep_reads/2026-09-02-2608.30412.md)  
+  7/10 [daily]
+- [Worst-Case Win Ratios Under Partially Specified Outcome Hierarchies](deep_reads/2026-09-02-2608.29857.md)  
+  6/10 [daily]
 - [Graph-based causal variance decompositions: When "variance explained" means causation](deep_reads/2026-08-31-2608.27140.md)  
   9/10 [daily]
 - [Analyzing Within-Subject Experiments: Identification, Testing, and Sensitivity](deep_reads/2026-08-31-2608.26606.md)  
@@ -3396,6 +3414,8 @@
 
 ### Daily
 
+- [Compact and Infinite-Order Error Analysis for Null-Space SVD Estimation](deep_reads/2026-09-02-2608.30374.md)  
+  6/10 [daily]
 - [Inference for High-Dimensional Network Data](deep_reads/2026-08-31-2608.26522.md)  
   8/10 [daily]
 - [Inference for High-Dimensional Network Data](deep_reads/2026-08-28-2608.26522.md)  
@@ -6801,6 +6821,14 @@
 
 ### Daily
 
+- [Distribution-free testing of linear type](deep_reads/2026-09-02-2608.30074.md)  
+  7/10 [daily]
+- [Cubic-Root Gaussian Approximation under Unrestricted Covariance](deep_reads/2026-09-02-2608.30221.md)  
+  7/10 [daily]
+- [Marginal Coordinate Test for Fr\'echet Regression with Random Objects](deep_reads/2026-09-02-2608.30644.md)  
+  6/10 [daily]
+- [Bergsma--Dassios Sign Covariance Characterises Independence for Arbitrary Real-Valued Bivariate Laws](deep_reads/2026-09-02-2608.30331.md)  
+  6/10 [daily]
 - [Evidence, Calibration, and Stability: A Triadic Framework for Hypothesis Testing Under Model Uncertainty](deep_reads/2026-08-31-2608.27320.md)  
   8/10 [daily]
 - [Exact two-sided p-values in natural exponential families: coincidence, non-uniqueness, and sample-size stability](deep_reads/2026-08-31-2608.28221.md)  
@@ -9967,6 +9995,8 @@
 
 ### Daily
 
+- [Beyond $X_\mathrm{max}$ : Reconstructing Air Shower Profiles with Information Field Theory with SKA-Low](deep_reads/2026-09-02-2608.30887.md)  
+  6/10 [daily]
 - [Optimal transport regularized dynamic radio interferometric reconstruction](deep_reads/2026-08-28-2608.27192.md)  
   7/10 [daily]
 - [Strong Lensing Cosmology with Population-level Calibrated Neural Ratio Estimation](deep_reads/2026-08-28-2608.23534.md)  
@@ -10394,10 +10424,19 @@
 - [Neural posterior estimation with autoregressive tiling for detecting objects in astronomical images](deep_reads/2026-06-10-10.1214_25-aoas2125.md)  
   7/10 [journals]
 
+### 其他
+
+- [Toward a realistic test of black-hole movie correlations as a probe of extreme lensing](deep_reads/2026-09-02-2608.27637.md)  
+  3/10 [manual]
+
 ## 经济理论 / 应用
 
 ### Daily
 
+- [Moments of Random Coefficients in Short Panels](deep_reads/2026-09-02-2608.31085.md)  
+  7/10 [daily]
+- [When Can We Work in Embedding Space? What Text Embeddings Preserve](deep_reads/2026-09-02-2608.31059.md)  
+  6/10 [daily]
 - [Causal Non-causal State Space Models and the Modelling of Financial Bubbles](deep_reads/2026-08-31-2608.28115.md)  
   7/10 [daily]
 - [Dynamic Discrete Choice and Inverse Reinforcement Learning: Inferring Preferences and Beliefs From Human Behavior](deep_reads/2026-08-28-2608.24362.md)  
