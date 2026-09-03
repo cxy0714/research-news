@@ -4,6 +4,10 @@
 
 ### Daily
 
+- [Which Policy Works, and Where? Estimation and Inference for State-Level Treatment Effects in Difference-in-Differences](deep_reads/2026-09-03-2609.01467.md)  
+  8/10 [daily]
+- [Manipulation Testing in Boundary Discontinuity Designs](deep_reads/2026-09-03-2609.00350.md)  
+  7/10 [daily]
 - [Nonparametric Efficient Estimation of Dynamic Treatment Regimes with Competing Risks](deep_reads/2026-09-02-2608.28797.md)  
   8/10 [daily]
 - [Saturation in G: simple & robust causal inference in cluster randomized trials with informative cluster sizes](deep_reads/2026-09-02-2608.28943.md)  
@@ -3414,6 +3418,8 @@
 
 ### Daily
 
+- [Robust dimension-free estimation of simple random tensors: optimal guarantees under heavy tails and adversarial contamination](deep_reads/2026-09-03-2609.00675.md)  
+  8/10 [daily]
 - [Compact and Infinite-Order Error Analysis for Null-Space SVD Estimation](deep_reads/2026-09-02-2608.30374.md)  
   6/10 [daily]
 - [Inference for High-Dimensional Network Data](deep_reads/2026-08-31-2608.26522.md)  
@@ -4666,6 +4672,10 @@
 
 ### Daily
 
+- [Nonparametric inference for density-dependent McKean--Vlasov diffusions](deep_reads/2026-09-03-2609.01166.md)  
+  6/10 [daily]
+- [Weighted persistence intensity regression](deep_reads/2026-09-03-2609.01387.md)  
+  6/10 [daily]
 - [How far can symmetry help? Phase transitions and symmetry selection in sparse functional data analysis](deep_reads/2026-08-31-2608.27055.md)  
   8/10 [daily]
 - [Generalized Splines and Gaussian Processes](deep_reads/2026-08-31-2608.28446.md)  
@@ -6821,6 +6831,8 @@
 
 ### Daily
 
+- [Genetic association testing with multivariate survival phenotypes under interval censoring](deep_reads/2026-09-03-2609.00456.md)  
+  7/10 [daily]
 - [Distribution-free testing of linear type](deep_reads/2026-09-02-2608.30074.md)  
   7/10 [daily]
 - [Cubic-Root Gaussian Approximation under Unrestricted Covariance](deep_reads/2026-09-02-2608.30221.md)  
@@ -9995,6 +10007,8 @@
 
 ### Daily
 
+- [$\texttt{BilbyFlow}$: user-friendly neural posterior estimation for gravitational-wave astronomy](deep_reads/2026-09-03-2609.00766.md)  
+  6/10 [daily]
 - [Beyond $X_\mathrm{max}$ : Reconstructing Air Shower Profiles with Information Field Theory with SKA-Low](deep_reads/2026-09-02-2608.30887.md)  
   6/10 [daily]
 - [Optimal transport regularized dynamic radio interferometric reconstruction](deep_reads/2026-08-28-2608.27192.md)  
@@ -10433,6 +10447,8 @@
 
 ### Daily
 
+- [Was Stalin Necessary? Counterfactual Evidence on Soviet Growth](deep_reads/2026-09-03-2609.00418.md)  
+  7/10 [daily]
 - [Moments of Random Coefficients in Short Panels](deep_reads/2026-09-02-2608.31085.md)  
   7/10 [daily]
 - [When Can We Work in Embedding Space? What Text Embeddings Preserve](deep_reads/2026-09-02-2608.31059.md)  
