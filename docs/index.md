@@ -11,30 +11,48 @@
 - **[收藏](favorites.md)** — 登录后在各页点 ☆ 收藏的论文，自动汇总到这里（总收藏按类别分组、可切换按周；每篇可写评论，无需手动维护）。
 - **[模型测评](all_shootout.md)** — 不同 LLM 在同一批论文上的打分 / 解读对比。
 
-## 今日 · 2026-09-03
+## 今日 · 2026-09-04
 
 ### 每日 arXiv 速览
 
-[→ 查看完整报告](daily/2026-09-03.md)
+[→ 查看完整报告](daily/2026-09-04.md)
 
-### 精读论文（8 篇）
+### 精读论文（17 篇）
 
-- [Robust dimension-free estimation of simple random tensors: optimal guarantees under heavy tails and adversarial contamination](deep_reads/2026-09-03-2609.00675.md)  
-  `高维统计 / 随机矩阵` · 相关性 8/10
-- [Which Policy Works, and Where? Estimation and Inference for State-Level Treatment Effects in Difference-in-Differences](deep_reads/2026-09-03-2609.01467.md)  
+- [Spectral Analysis of Gram Matrices with Missing at Random Observations: Convergence, Central Limit Theorems, and Applications in Statistical Inference](deep_reads/2026-09-04-2609.02024.md)  
+  `高维统计 / 随机矩阵` · 相关性 9/10
+- [On the discretization of the object space in inverse problems with application to cryo-electron microscopy](deep_reads/2026-09-04-2609.01688.md)  
+  `其他` · 相关性 8/10
+- [COSTA: Covariance-Optimized Design and Causal Inference under Network-Temporal Interference](deep_reads/2026-09-04-2609.02032.md)  
   `因果推断` · 相关性 8/10
-- [Genetic association testing with multivariate survival phenotypes under interval censoring](deep_reads/2026-09-03-2609.00456.md)  
-  `数理统计 / 假设检验` · 相关性 7/10
-- [Manipulation Testing in Boundary Discontinuity Designs](deep_reads/2026-09-03-2609.00350.md)  
+- [Off-policy causal estimation in networks](deep_reads/2026-09-04-2609.02756.md)  
+  `因果推断` · 相关性 8/10
+- [Headline Estimation with Multiple Research Designs](deep_reads/2026-09-04-2609.01943.md)  
+  `因果推断` · 相关性 8/10
+- [Simple Covariate Adjustment for Many Estimands Using Stable Balancing Weights](deep_reads/2026-09-04-2609.01638.md)  
   `因果推断` · 相关性 7/10
-- [Was Stalin Necessary? Counterfactual Evidence on Soviet Growth](deep_reads/2026-09-03-2609.00418.md)  
-  `经济理论 / 应用` · 相关性 7/10
-- [Nonparametric inference for density-dependent McKean--Vlasov diffusions](deep_reads/2026-09-03-2609.01166.md)  
-  `非参数 / 半参数` · 相关性 6/10
-- [Weighted persistence intensity regression](deep_reads/2026-09-03-2609.01387.md)  
-  `非参数 / 半参数` · 相关性 6/10
-- [$\texttt{BilbyFlow}$: user-friendly neural posterior estimation for gravitational-wave astronomy](deep_reads/2026-09-03-2609.00766.md)  
+- [Tests of graph homogeneity, subgraph counts, and quasirandomness](deep_reads/2026-09-04-2609.02214.md)  
+  `数理统计 / 假设检验` · 相关性 7/10
+- [Robust Variance Estimation in Linear Regression: A Projection-Geometry Perspective](deep_reads/2026-09-04-2609.01804.md)  
+  `数理统计 / 假设检验` · 相关性 7/10
+- [Robust Bayesian Inference for Unnormalized Models with Mixed-Domain Data](deep_reads/2026-09-04-2609.01783.md)  
+  `统计计算 / 算法` · 相关性 6/10
+- [Uncertainty Quantification of State Variables Trajectories in the Context of Inverse Problems: An Approach from Bayesian Inference and FDA](deep_reads/2026-09-04-2609.01919.md)  
+  `其他` · 相关性 6/10
+- [Testing for trends in online experiments](deep_reads/2026-09-04-2609.01973.md)  
+  `因果推断` · 相关性 6/10
+- [Detecting Early and Late Divergences in Survival Curves Using Nonparametric Effect Measures](deep_reads/2026-09-04-2609.02596.md)  
+  `数理统计 / 假设检验` · 相关性 6/10
+- [Non-Invariance in Nested Prediction Models under Selective Predictor Availability](deep_reads/2026-09-04-2609.02836.md)  
+  `因果推断` · 相关性 6/10
+- [Probability-Maximizing Change Detection: Finite-Window Optimality](deep_reads/2026-09-04-2609.02570.md)  
+  `数理统计 / 假设检验` · 相关性 6/10
+- [Estimation risk in conditional expectiles](deep_reads/2026-09-04-2609.02673.md)  
+  `经济理论 / 应用` · 相关性 6/10
+- [Amortized Opacity Marginalization Improves C/O Interval Calibration for Brown-Dwarf Retrievals](deep_reads/2026-09-04-2609.01665.md)  
   `天体统计` · 相关性 6/10
+- [LPG Subsidy Reform, Energy Compensation, and Social Risk in Bolivia: A Machine-Learning Agent-Based Microsimulation](deep_reads/2026-09-04-2609.00414.md)  
+  `经济理论 / 应用` · 相关性 1/10
 
 ## 收藏
 
@@ -42,11 +60,11 @@
 
 ## 本周每日报告
 
+- [2026-09-03](daily/2026-09-03.md)
 - [2026-09-02](daily/2026-09-02.md)
 - [2026-09-01](daily/2026-09-01.md)
 - [2026-08-31](daily/2026-08-31.md)
 - [2026-08-28](daily/2026-08-28.md)
-- [2026-08-27](daily/2026-08-27.md)
 
 
 ---

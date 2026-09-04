@@ -4,6 +4,18 @@
 
 ### Daily
 
+- [COSTA: Covariance-Optimized Design and Causal Inference under Network-Temporal Interference](deep_reads/2026-09-04-2609.02032.md)  
+  8/10 [daily]
+- [Off-policy causal estimation in networks](deep_reads/2026-09-04-2609.02756.md)  
+  8/10 [daily]
+- [Headline Estimation with Multiple Research Designs](deep_reads/2026-09-04-2609.01943.md)  
+  8/10 [daily]
+- [Simple Covariate Adjustment for Many Estimands Using Stable Balancing Weights](deep_reads/2026-09-04-2609.01638.md)  
+  7/10 [daily]
+- [Testing for trends in online experiments](deep_reads/2026-09-04-2609.01973.md)  
+  6/10 [daily]
+- [Non-Invariance in Nested Prediction Models under Selective Predictor Availability](deep_reads/2026-09-04-2609.02836.md)  
+  6/10 [daily]
 - [Which Policy Works, and Where? Estimation and Inference for State-Level Treatment Effects in Difference-in-Differences](deep_reads/2026-09-03-2609.01467.md)  
   8/10 [daily]
 - [Manipulation Testing in Boundary Discontinuity Designs](deep_reads/2026-09-03-2609.00350.md)  
@@ -3418,6 +3430,8 @@
 
 ### Daily
 
+- [Spectral Analysis of Gram Matrices with Missing at Random Observations: Convergence, Central Limit Theorems, and Applications in Statistical Inference](deep_reads/2026-09-04-2609.02024.md)  
+  9/10 [daily]
 - [Robust dimension-free estimation of simple random tensors: optimal guarantees under heavy tails and adversarial contamination](deep_reads/2026-09-03-2609.00675.md)  
   8/10 [daily]
 - [Compact and Infinite-Order Error Analysis for Null-Space SVD Estimation](deep_reads/2026-09-02-2608.30374.md)  
@@ -6831,6 +6845,14 @@
 
 ### Daily
 
+- [Tests of graph homogeneity, subgraph counts, and quasirandomness](deep_reads/2026-09-04-2609.02214.md)  
+  7/10 [daily]
+- [Robust Variance Estimation in Linear Regression: A Projection-Geometry Perspective](deep_reads/2026-09-04-2609.01804.md)  
+  7/10 [daily]
+- [Detecting Early and Late Divergences in Survival Curves Using Nonparametric Effect Measures](deep_reads/2026-09-04-2609.02596.md)  
+  6/10 [daily]
+- [Probability-Maximizing Change Detection: Finite-Window Optimality](deep_reads/2026-09-04-2609.02570.md)  
+  6/10 [daily]
 - [Genetic association testing with multivariate survival phenotypes under interval censoring](deep_reads/2026-09-03-2609.00456.md)  
   7/10 [daily]
 - [Distribution-free testing of linear type](deep_reads/2026-09-02-2608.30074.md)  
@@ -9012,6 +9034,8 @@
 
 ### Daily
 
+- [Robust Bayesian Inference for Unnormalized Models with Mixed-Domain Data](deep_reads/2026-09-04-2609.01783.md)  
+  6/10 [daily]
 - [Personalized Federated Learning for Tensor Regression](deep_reads/2026-08-31-2608.27191.md)  
   6/10 [daily]
 - [When a neural surrogate cannot accelerate a solver: runtime share, closed-loop drift, and the economics of uncertainty gating in a stiff coupled simulation](deep_reads/2026-08-26-2608.23075.md)  
@@ -10007,6 +10031,8 @@
 
 ### Daily
 
+- [Amortized Opacity Marginalization Improves C/O Interval Calibration for Brown-Dwarf Retrievals](deep_reads/2026-09-04-2609.01665.md)  
+  6/10 [daily]
 - [$\texttt{BilbyFlow}$: user-friendly neural posterior estimation for gravitational-wave astronomy](deep_reads/2026-09-03-2609.00766.md)  
   6/10 [daily]
 - [Beyond $X_\mathrm{max}$ : Reconstructing Air Shower Profiles with Information Field Theory with SKA-Low](deep_reads/2026-09-02-2608.30887.md)  
@@ -10447,6 +10473,8 @@
 
 ### Daily
 
+- [Estimation risk in conditional expectiles](deep_reads/2026-09-04-2609.02673.md)  
+  6/10 [daily]
 - [Was Stalin Necessary? Counterfactual Evidence on Soviet Growth](deep_reads/2026-09-03-2609.00418.md)  
   7/10 [daily]
 - [Moments of Random Coefficients in Short Panels](deep_reads/2026-09-02-2608.31085.md)  
@@ -11713,6 +11741,11 @@
 - [Marginal Reputation](deep_reads/2026-06-07-10.3982_ecta23782.md)  
   1/10 [journals]
 
+### 其他
+
+- [LPG Subsidy Reform, Energy Compensation, and Social Risk in Bolivia: A Machine-Learning Agent-Based Microsimulation](deep_reads/2026-09-04-2609.00414.md)  
+  1/10 [manual]
+
 ## 流行病学
 
 ### Daily
@@ -12970,6 +13003,10 @@
 
 ### Daily
 
+- [On the discretization of the object space in inverse problems with application to cryo-electron microscopy](deep_reads/2026-09-04-2609.01688.md)  
+  8/10 [daily]
+- [Uncertainty Quantification of State Variables Trajectories in the Context of Inverse Problems: An Approach from Bayesian Inference and FDA](deep_reads/2026-09-04-2609.01919.md)  
+  6/10 [daily]
 - [Posterior Consistency for Recovering Initial States in Nonlinear Subdiffusion Equations](deep_reads/2026-08-31-2608.26536.md)  
   6/10 [daily]
 - [Berry--Esseen bounds and bootstrap approximations for the Hilbert-space norm of $U$-statistics](deep_reads/2026-08-28-2608.25463.md)  
