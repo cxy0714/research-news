@@ -4,6 +4,10 @@
 
 ### Daily
 
+- [Identification and Estimation of Intergenerational Income Mobility Measures](deep_reads/2026-09-07-2609.04994.md)  
+  8/10 [daily]
+- [Symmetries and Causality: Causal Effect Identification Beyond IID Data](deep_reads/2026-09-07-2609.03697.md)  
+  7/10 [daily]
 - [COSTA: Covariance-Optimized Design and Causal Inference under Network-Temporal Interference](deep_reads/2026-09-04-2609.02032.md)  
   8/10 [daily]
 - [Off-policy causal estimation in networks](deep_reads/2026-09-04-2609.02756.md)  
@@ -4686,6 +4690,8 @@
 
 ### Daily
 
+- [Bernstein--von Mises theorems for Bayesian probabilistic numerics](deep_reads/2026-09-07-2609.04124.md)  
+  7/10 [daily]
 - [Nonparametric inference for density-dependent McKean--Vlasov diffusions](deep_reads/2026-09-03-2609.01166.md)  
   6/10 [daily]
 - [Weighted persistence intensity regression](deep_reads/2026-09-03-2609.01387.md)  
@@ -6845,6 +6851,12 @@
 
 ### Daily
 
+- [Testing Equality of Distributions via Repeatedly Integrated Quantile Metrics Under Weak Moment Conditions](deep_reads/2026-09-07-2609.04935.md)  
+  7/10 [daily]
+- [Uniform Gaussian Approximation for The Quasi-Likelihood Estimator for a Weakly Dependent Nonlinear Time Series Models](deep_reads/2026-09-07-2609.04613.md)  
+  7/10 [daily]
+- [Simultaneous Change-Point Inference for High-Dimensional Functional Time Series](deep_reads/2026-09-07-2609.05077.md)  
+  6/10 [daily]
 - [Tests of graph homogeneity, subgraph counts, and quasirandomness](deep_reads/2026-09-04-2609.02214.md)  
   7/10 [daily]
 - [Robust Variance Estimation in Linear Regression: A Projection-Geometry Perspective](deep_reads/2026-09-04-2609.01804.md)  
@@ -9034,6 +9046,8 @@
 
 ### Daily
 
+- [Subsampled Pseudo-posteriors for Scalable Bayesian Moment-condition Inference](deep_reads/2026-09-07-2609.05308.md)  
+  7/10 [daily]
 - [Robust Bayesian Inference for Unnormalized Models with Mixed-Domain Data](deep_reads/2026-09-04-2609.01783.md)  
   6/10 [daily]
 - [Personalized Federated Learning for Tensor Regression](deep_reads/2026-08-31-2608.27191.md)  
@@ -13003,6 +13017,10 @@
 
 ### Daily
 
+- [Faster Learning under Relaxed Local Differential Privacy](deep_reads/2026-09-07-2609.05034.md)  
+  6/10 [daily]
+- [Optimal Stratified Allocation for Rare-Event Onset Forecasting in Dependent Sequences](deep_reads/2026-09-07-2609.04420.md)  
+  6/10 [daily]
 - [On the discretization of the object space in inverse problems with application to cryo-electron microscopy](deep_reads/2026-09-04-2609.01688.md)  
   8/10 [daily]
 - [Uncertainty Quantification of State Variables Trajectories in the Context of Inverse Problems: An Approach from Bayesian Inference and FDA](deep_reads/2026-09-04-2609.01919.md)  
