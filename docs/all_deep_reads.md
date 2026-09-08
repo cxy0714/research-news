@@ -4,6 +4,10 @@
 
 ### Daily
 
+- [Treatment persistence drives estimator performance in longitudinal causal inference based on observational data: A simulation study](deep_reads/2026-09-08-2609.04940.md)  
+  8/10 [daily]
+- [Does p-Hacking Mitigate or Exacerbate the Effects of Publication Bias?](deep_reads/2026-09-08-2609.05372.md)  
+  7/10 [daily]
 - [Identification and Estimation of Intergenerational Income Mobility Measures](deep_reads/2026-09-07-2609.04994.md)  
   8/10 [daily]
 - [Symmetries and Causality: Causal Effect Identification Beyond IID Data](deep_reads/2026-09-07-2609.03697.md)  
@@ -3434,6 +3438,10 @@
 
 ### Daily
 
+- [On tail-robust autocovariance matrix estimation for high-dimensional and potentially nonstationary time series](deep_reads/2026-09-08-2609.04418.md)  
+  7/10 [daily]
+- [Joint Distributions of Minimum and Maximum Angles on High-Dimensional Spheres](deep_reads/2026-09-08-2609.05330.md)  
+  7/10 [daily]
 - [Spectral Analysis of Gram Matrices with Missing at Random Observations: Convergence, Central Limit Theorems, and Applications in Statistical Inference](deep_reads/2026-09-04-2609.02024.md)  
   9/10 [daily]
 - [Robust dimension-free estimation of simple random tensors: optimal guarantees under heavy tails and adversarial contamination](deep_reads/2026-09-03-2609.00675.md)  
@@ -6851,6 +6859,10 @@
 
 ### Daily
 
+- [Finite-sample nonparametric mean tests: Leave-one-out duality and asymptotic optimality](deep_reads/2026-09-08-2609.05360.md)  
+  8/10 [daily]
+- [Goodness-of-fit testing for the Pareto type-I distribution based on a mean residual life characterization](deep_reads/2026-09-08-2609.04933.md)  
+  7/10 [daily]
 - [Testing Equality of Distributions via Repeatedly Integrated Quantile Metrics Under Weak Moment Conditions](deep_reads/2026-09-07-2609.04935.md)  
   7/10 [daily]
 - [Uniform Gaussian Approximation for The Quasi-Likelihood Estimator for a Weakly Dependent Nonlinear Time Series Models](deep_reads/2026-09-07-2609.04613.md)  

@@ -11,32 +11,26 @@
 - **[收藏](favorites.md)** — 登录后在各页点 ☆ 收藏的论文，自动汇总到这里（总收藏按类别分组、可切换按周；每篇可写评论，无需手动维护）。
 - **[模型测评](all_shootout.md)** — 不同 LLM 在同一批论文上的打分 / 解读对比。
 
-## 今日 · 2026-09-07
+## 今日 · 2026-09-08
 
 ### 每日 arXiv 速览
 
-[→ 查看完整报告](daily/2026-09-07.md)
+[→ 查看完整报告](daily/2026-09-08.md)
 
-### 精读论文（9 篇）
+### 精读论文（6 篇）
 
-- [Identification and Estimation of Intergenerational Income Mobility Measures](deep_reads/2026-09-07-2609.04994.md)  
+- [Treatment persistence drives estimator performance in longitudinal causal inference based on observational data: A simulation study](deep_reads/2026-09-08-2609.04940.md)  
   `因果推断` · 相关性 8/10
-- [Subsampled Pseudo-posteriors for Scalable Bayesian Moment-condition Inference](deep_reads/2026-09-07-2609.05308.md)  
-  `统计计算 / 算法` · 相关性 7/10
-- [Testing Equality of Distributions via Repeatedly Integrated Quantile Metrics Under Weak Moment Conditions](deep_reads/2026-09-07-2609.04935.md)  
+- [Finite-sample nonparametric mean tests: Leave-one-out duality and asymptotic optimality](deep_reads/2026-09-08-2609.05360.md)  
+  `数理统计 / 假设检验` · 相关性 8/10
+- [On tail-robust autocovariance matrix estimation for high-dimensional and potentially nonstationary time series](deep_reads/2026-09-08-2609.04418.md)  
+  `高维统计 / 随机矩阵` · 相关性 7/10
+- [Goodness-of-fit testing for the Pareto type-I distribution based on a mean residual life characterization](deep_reads/2026-09-08-2609.04933.md)  
   `数理统计 / 假设检验` · 相关性 7/10
-- [Uniform Gaussian Approximation for The Quasi-Likelihood Estimator for a Weakly Dependent Nonlinear Time Series Models](deep_reads/2026-09-07-2609.04613.md)  
-  `数理统计 / 假设检验` · 相关性 7/10
-- [Bernstein--von Mises theorems for Bayesian probabilistic numerics](deep_reads/2026-09-07-2609.04124.md)  
-  `非参数 / 半参数` · 相关性 7/10
-- [Symmetries and Causality: Causal Effect Identification Beyond IID Data](deep_reads/2026-09-07-2609.03697.md)  
+- [Joint Distributions of Minimum and Maximum Angles on High-Dimensional Spheres](deep_reads/2026-09-08-2609.05330.md)  
+  `高维统计 / 随机矩阵` · 相关性 7/10
+- [Does p-Hacking Mitigate or Exacerbate the Effects of Publication Bias?](deep_reads/2026-09-08-2609.05372.md)  
   `因果推断` · 相关性 7/10
-- [Simultaneous Change-Point Inference for High-Dimensional Functional Time Series](deep_reads/2026-09-07-2609.05077.md)  
-  `数理统计 / 假设检验` · 相关性 6/10
-- [Faster Learning under Relaxed Local Differential Privacy](deep_reads/2026-09-07-2609.05034.md)  
-  `其他` · 相关性 6/10
-- [Optimal Stratified Allocation for Rare-Event Onset Forecasting in Dependent Sequences](deep_reads/2026-09-07-2609.04420.md)  
-  `其他` · 相关性 6/10
 
 ## 收藏
 
@@ -44,11 +38,11 @@
 
 ## 本周每日报告
 
+- [2026-09-07](daily/2026-09-07.md)
 - [2026-09-04](daily/2026-09-04.md)
 - [2026-09-03](daily/2026-09-03.md)
 - [2026-09-02](daily/2026-09-02.md)
 - [2026-09-01](daily/2026-09-01.md)
-- [2026-08-31](daily/2026-08-31.md)
 
 
 ---
