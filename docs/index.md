@@ -11,26 +11,32 @@
 - **[收藏](favorites.md)** — 登录后在各页点 ☆ 收藏的论文，自动汇总到这里（总收藏按类别分组、可切换按周；每篇可写评论，无需手动维护）。
 - **[模型测评](all_shootout.md)** — 不同 LLM 在同一批论文上的打分 / 解读对比。
 
-## 今日 · 2026-09-08
+## 今日 · 2026-09-09
 
 ### 每日 arXiv 速览
 
-[→ 查看完整报告](daily/2026-09-08.md)
+[→ 查看完整报告](daily/2026-09-09.md)
 
-### 精读论文（6 篇）
+### 精读论文（9 篇）
 
-- [Treatment persistence drives estimator performance in longitudinal causal inference based on observational data: A simulation study](deep_reads/2026-09-08-2609.04940.md)  
+- [Unified theory of classical and quantum semiparametric efficiency](deep_reads/2026-09-09-2607.21524.md)  
+  `效率理论 / Debiased ML` · 相关性 9/10
+- [Inverting the Fisher information operator in non-linear models](deep_reads/2026-09-09-2601.13254.md)  
+  `非参数 / 半参数` · 相关性 8/10
+- [Causal DAG Identification for Count Data via Poisson Thinning Structural Equation Models](deep_reads/2026-09-09-2609.06098.md)  
   `因果推断` · 相关性 8/10
-- [Finite-sample nonparametric mean tests: Leave-one-out duality and asymptotic optimality](deep_reads/2026-09-08-2609.05360.md)  
-  `数理统计 / 假设检验` · 相关性 8/10
-- [On tail-robust autocovariance matrix estimation for high-dimensional and potentially nonstationary time series](deep_reads/2026-09-08-2609.04418.md)  
-  `高维统计 / 随机矩阵` · 相关性 7/10
-- [Goodness-of-fit testing for the Pareto type-I distribution based on a mean residual life characterization](deep_reads/2026-09-08-2609.04933.md)  
+- [Sharp Causal Bounds for Dynamic Treatment Regimes](deep_reads/2026-09-09-2609.06397.md)  
+  `因果推断` · 相关性 8/10
+- [The Bergsma--Dassios sign-covariance conjecture: a tie-symmetrised decomposition](deep_reads/2026-09-09-2609.06529.md)  
   `数理统计 / 假设检验` · 相关性 7/10
-- [Joint Distributions of Minimum and Maximum Angles on High-Dimensional Spheres](deep_reads/2026-09-08-2609.05330.md)  
-  `高维统计 / 随机矩阵` · 相关性 7/10
-- [Does p-Hacking Mitigate or Exacerbate the Effects of Publication Bias?](deep_reads/2026-09-08-2609.05372.md)  
-  `因果推断` · 相关性 7/10
+- [On statistical inference for non-linear dynamical systems evolving in their global attractor](deep_reads/2026-09-09-2606.06018.md)  
+  `非参数 / 半参数` · 相关性 6/10
+- [Statistical guarantees for continuous-time policy evaluation: blessing of ellipticity and new tradeoffs](deep_reads/2026-09-09-2502.04297.md)  
+  `因果推断` · 相关性 6/10
+- [Revisiting dependence in multiple testing: empirical distribution approaches for FDP control](deep_reads/2026-09-09-2609.06509.md)  
+  `数理统计 / 假设检验` · 相关性 6/10
+- [DustRover: A Python Package for Modelling Dust Extinction Curves (Phase I)](deep_reads/2026-09-09-2609.06401.md)  
+  `天体统计` · 相关性 6/10
 
 ## 收藏
 
@@ -38,11 +44,11 @@
 
 ## 本周每日报告
 
+- [2026-09-08](daily/2026-09-08.md)
 - [2026-09-07](daily/2026-09-07.md)
 - [2026-09-04](daily/2026-09-04.md)
 - [2026-09-03](daily/2026-09-03.md)
 - [2026-09-02](daily/2026-09-02.md)
-- [2026-09-01](daily/2026-09-01.md)
 
 
 ---

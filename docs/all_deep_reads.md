@@ -4,6 +4,10 @@
 
 ### Daily
 
+- [Causal DAG Identification for Count Data via Poisson Thinning Structural Equation Models](deep_reads/2026-09-09-2609.06098.md)  
+  8/10 [daily]
+- [Sharp Causal Bounds for Dynamic Treatment Regimes](deep_reads/2026-09-09-2609.06397.md)  
+  8/10 [daily]
 - [Treatment persistence drives estimator performance in longitudinal causal inference based on observational data: A simulation study](deep_reads/2026-09-08-2609.04940.md)  
   8/10 [daily]
 - [Does p-Hacking Mitigate or Exacerbate the Effects of Publication Bias?](deep_reads/2026-09-08-2609.05372.md)  
@@ -3431,6 +3435,8 @@
   7/10 [manual]
 - [Direct and Indirect Discrimination in Generalized Linear Models](deep_reads/2026-07-07-2606.23116.md)  
   7/10 [manual]
+- [Statistical guarantees for continuous-time policy evaluation: blessing of ellipticity and new tradeoffs](deep_reads/2026-09-09-2502.04297.md)  
+  6/10 [manual]
 - [Landmarking with Latent Class Mixed Models for Dynamic Prediction of Time-to-event Data with Heterogeneous Biomarker Trajectories](deep_reads/2026-07-07-2606.24678.md)  
   5/10 [manual]
 
@@ -6495,10 +6501,14 @@
 
 - [Thin Sets Are Not Equally Thin: Minimax Learning of Submanifold Integrals](deep_reads/2026-06-22-2507.12673.md)  
   9/10 [manual]
+- [Inverting the Fisher information operator in non-linear models](deep_reads/2026-09-09-2601.13254.md)  
+  8/10 [manual]
 - [A simple adaptive estimator of the integrated square of a density](deep_reads/2026-07-17-0803.0847.md)  
   8/10 [manual]
 - [On Estimation of $L_{r}$-Norms in Gaussian White Noise Models](deep_reads/2026-07-17-1710.03863.md)  
   7/10 [manual]
+- [On statistical inference for non-linear dynamical systems evolving in their global attractor](deep_reads/2026-09-09-2606.06018.md)  
+  6/10 [manual]
 - [Nonparametric estimation of scalar diffusions based on low frequency data](deep_reads/2026-08-31-math_0503680.md)  
   6/10 [manual]
 - [Geometric Information Decomposition for Weighted Empirical Measures on the Sphere](deep_reads/2026-07-10-2607.02943.md)  
@@ -6850,6 +6860,8 @@
 
 ### 其他
 
+- [Unified theory of classical and quantum semiparametric efficiency](deep_reads/2026-09-09-2607.21524.md)  
+  9/10 [manual]
 - [Doubly-robust inference and optimality in structure-agnostic models with smoothness](deep_reads/2026-06-19-2405.08525.md)  
   9/10 [manual]
 - [Towards a Unified Theory for Semiparametric Data Fusion with Individual-Level Data](deep_reads/2026-09-01-2409.09973.md)  
@@ -6859,6 +6871,10 @@
 
 ### Daily
 
+- [The Bergsma--Dassios sign-covariance conjecture: a tie-symmetrised decomposition](deep_reads/2026-09-09-2609.06529.md)  
+  7/10 [daily]
+- [Revisiting dependence in multiple testing: empirical distribution approaches for FDP control](deep_reads/2026-09-09-2609.06509.md)  
+  6/10 [daily]
 - [Finite-sample nonparametric mean tests: Leave-one-out duality and asymptotic optimality](deep_reads/2026-09-08-2609.05360.md)  
   8/10 [daily]
 - [Goodness-of-fit testing for the Pareto type-I distribution based on a mean residual life characterization](deep_reads/2026-09-08-2609.04933.md)  
@@ -10057,6 +10073,8 @@
 
 ### Daily
 
+- [DustRover: A Python Package for Modelling Dust Extinction Curves (Phase I)](deep_reads/2026-09-09-2609.06401.md)  
+  6/10 [daily]
 - [Amortized Opacity Marginalization Improves C/O Interval Calibration for Brown-Dwarf Retrievals](deep_reads/2026-09-04-2609.01665.md)  
   6/10 [daily]
 - [$\texttt{BilbyFlow}$: user-friendly neural posterior estimation for gravitational-wave astronomy](deep_reads/2026-09-03-2609.00766.md)  
