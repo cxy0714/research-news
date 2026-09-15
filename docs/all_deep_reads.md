@@ -4,6 +4,18 @@
 
 ### Daily
 
+- [Feedback-Aware Tuning of Recursive Q-Learning](deep_reads/2026-09-15-2609.12716.md)  
+  7/10 [daily]
+- [Design-Assisted Regression](deep_reads/2026-09-15-2609.12886.md)  
+  7/10 [daily]
+- [Semiparametric Bayesian structure learning of nonparanormal directed acyclic graphs with local--global shrinkage](deep_reads/2026-09-15-2609.13007.md)  
+  7/10 [daily]
+- [Identification via Distributional Shifts without Exclusion Restrictions](deep_reads/2026-09-15-2609.13026.md)  
+  7/10 [daily]
+- [The Anatomy and Boundary of Adaptation under Temporal Tabular Shift](deep_reads/2026-09-15-2609.12136.md)  
+  6/10 [daily]
+- [Representation Multiplicity in Causal Forests](deep_reads/2026-09-15-2609.12406.md)  
+  6/10 [daily]
 - [Optimal Covariate Adjustment beyond the Average Treatment Effect: Treated-Population and Overlap-Weighted Estimands](deep_reads/2026-09-10-2609.11222.md)  
   9/10 [daily]
 - [Retrospective Causal Attribution under Case-Control Sampling](deep_reads/2026-09-10-2609.07721.md)  
@@ -4758,6 +4770,8 @@
 
 ### Daily
 
+- [Nonparametric Estimation of Event-Free Survival for Data with Left-Truncated Death and Intermittently Assessed Nonfatal Events](deep_reads/2026-09-15-2609.12082.md)  
+  6/10 [daily]
 - [Sieve Estimation of Optimal Transport Maps from Paired Data in Gaussian Spaces](deep_reads/2026-09-10-2609.09089.md)  
   7/10 [daily]
 - [Improved Variance Estimation in Homoskedastic Nonparametric Random-Design Regression via a Two-Scale Approach](deep_reads/2026-09-10-2609.08783.md)  
@@ -6584,6 +6598,10 @@
 
 ### Daily
 
+- [Efficiency Optimality without Pathwise Differentiability: A Variational Theory for Marginal-Integral Functionals](deep_reads/2026-09-15-2609.12707.md)  
+  9/10 [daily]
+- [PDE-constrained inverse problems at the $\sqrt{n}$ rate via debiased physics-informed neural networks](deep_reads/2026-09-15-2609.12301.md)  
+  8/10 [daily]
 - [On efficiency gains via augmenting a tiny sample with a massive auxiliary sample](deep_reads/2026-08-27-2608.26610.md)  
   7/10 [daily]
 - [The Debiased Score Test: Hunt-and-test for Semiparametric Hypotheses](deep_reads/2026-08-03-2607.28861.md)  
@@ -6937,6 +6955,12 @@
 
 ### Daily
 
+- [A Sharp Signal-to-Noise Threshold for Quasi-Maximum Likelihood Breakpoint Estimation](deep_reads/2026-09-15-2609.12271.md)  
+  7/10 [daily]
+- [A class of nonparametric homogeneity tests on the circle](deep_reads/2026-09-15-2609.13019.md)  
+  7/10 [daily]
+- [A Ranking Approach for Measuring Calibration](deep_reads/2026-09-15-2609.13100.md)  
+  6/10 [daily]
 - [Random Projection Tests via Cauchy Combination for Two-Sample Mean](deep_reads/2026-09-10-2609.11624.md)  
   7/10 [daily]
 - [Cursive: The Trace from the Curse of Dimensionality](deep_reads/2026-09-10-2609.08610.md)  
@@ -9150,6 +9174,8 @@
 
 ### Daily
 
+- [Tight Sampling Complexity with stochastic gradient oracles in Fixed Dimensions](deep_reads/2026-09-15-2609.12590.md)  
+  6/10 [daily]
 - [Tensor network representations of discrete maximum entropy distributions via mean polytopes](deep_reads/2026-09-10-2609.07184.md)  
   7/10 [daily]
 - [Almost Sharp Equivalence between Approximate Message Passing and Low-Degree Polynomials](deep_reads/2026-09-10-2609.06988.md)  
@@ -10155,6 +10181,8 @@
 
 ### Daily
 
+- [XMST: An Extended Minimum Spanning Tree Framework with Objective Fracture-Scale Selection](deep_reads/2026-09-15-2609.12943.md)  
+  6/10 [daily]
 - [More than half of recent astronomy papers are written with language-model assistance](deep_reads/2026-09-10-2609.10664.md)  
   7/10 [daily]
 - [A Missing Tool for Calculating Auto/Cross-correlation Function under Nonuniform Sampling Observations](deep_reads/2026-09-10-2609.08604.md)  
@@ -11896,6 +11924,8 @@
 
 ### Daily
 
+- [Dynamic Amplification of Risk-Estimate Bias Through Differential Detection: A Markov Model for History-Based Covariates](deep_reads/2026-09-15-2609.12376.md)  
+  7/10 [daily]
 - [Kalman Filtering and Smoothing for Improving Precision in Horvitz--Thompson Estimation of Infectious Disease Prevalence](deep_reads/2026-09-10-2609.09325.md)  
   6/10 [daily]
 - [GENIE: Generative Neural Inference for Epidemics](deep_reads/2026-08-20-2608.20253.md)  
@@ -13151,6 +13181,8 @@
 
 ### Daily
 
+- [Nonparanormal Bayesian Learning of Directed Acyclic Graphs under Gamma and Inverse-Gamma Innovation Priors: Closed-Form Scores and Informed Sampling](deep_reads/2026-09-15-2609.13008.md)  
+  7/10 [daily]
 - [Beyond Tweedie's Formula: Conditional Score Modeling for Empirical Bayes Inference](deep_reads/2026-09-10-2609.11136.md)  
   8/10 [daily]
 - [Nonparametric framework for the definition, adaptive detection and probabilistic interpretation of outliers](deep_reads/2026-09-10-2609.08494.md)  
