@@ -61,6 +61,15 @@ def test_force_bypasses_the_guard(tmp_path, monkeypatch):
         daily.run(for_date=date(2026, 6, 17), force=True)
 
 
+def test_replace_bypasses_the_guard(tmp_path, monkeypatch):
+    monkeypatch.setattr(daily, "DOCS_DIR", tmp_path)
+    (tmp_path / "2026-06-17.md").write_text(_REAL, encoding="utf-8")
+    _stub_config(monkeypatch)
+
+    with pytest.raises(AssertionError, match="past the re-run guard"):
+        daily.run(for_date=date(2026, 6, 17), replace=True)
+
+
 def test_missing_report_proceeds(tmp_path, monkeypatch):
     monkeypatch.setattr(daily, "DOCS_DIR", tmp_path)     # empty dir → no report
     _stub_config(monkeypatch)

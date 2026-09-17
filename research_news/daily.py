@@ -72,7 +72,8 @@ def _parse_thresholds(interests_text: str) -> tuple[float, float, float]:
 
 
 def run(dry_run: bool = False, for_date: date | None = None,
-        force: bool = False) -> Path:
+        force: bool = False, skip_deep_reads: bool = False,
+        replace: bool = False) -> Path:
     load_dotenv()
     sources_cfg, interests_text = _load_config()
     th_show, th_highlight, th_deepread = _parse_thresholds(interests_text)
@@ -86,7 +87,7 @@ def run(dry_run: bool = False, for_date: date | None = None,
     # good page with an almost-empty one. Refuse to clobber a *non-empty* report
     # unless --force. An *empty* one (e.g. the arXiv RSS was lagging at 09:10) is
     # left re-runnable, so a later run recovers it once the papers are available.
-    if out_path.exists() and not force and not dry_run:
+    if out_path.exists() and not force and not replace and not dry_run:
         if "相关性" in out_path.read_text(encoding="utf-8", errors="ignore"):
             log.warning(
                 "daily report %s already exists — skipping render so a re-run "
@@ -178,10 +179,14 @@ def run(dry_run: bool = False, for_date: date | None = None,
 
     # Deep-read candidates: score >= th_deepread (6) for ALL topics, plus any
     # paper with a top-50-institution author (green-lit regardless of score).
-    deep_read_papers = select_deep_read_papers(
-        all_scored, digest, th_deepread,
-        client=client, interests_yaml=interests_text, model=DEEP_READ_MODEL,
-    )
+    deep_read_papers: list[Paper] = []
+    if skip_deep_reads:
+        log.warning("skipping deep reads for this run (requested by CLI)")
+    else:
+        deep_read_papers = select_deep_read_papers(
+            all_scored, digest, th_deepread,
+            client=client, interests_yaml=interests_text, model=DEEP_READ_MODEL,
+        )
 
     # Persist high-relevance papers: download PDFs, deep-read, then update index.
     # update_index() is called last so the homepage includes today's deep reads.
@@ -194,7 +199,10 @@ def run(dry_run: bool = False, for_date: date | None = None,
         )
 
     update_index()
-    mark_seen(digest, seen)
+    # Every scored paper has already appeared on the page (digest or the
+    # below-the-fold list), so all of them must be marked seen. Marking only the
+    # digest caused low-scoring papers to recur in later API/RSS windows.
+    mark_seen(all_scored, seen)
     save_seen(seen)
 
     # Retroactively fill institutions on recent pages: papers that were too new
@@ -265,6 +273,18 @@ def main() -> None:
              "dedup so the re-render is complete). Without this, an existing "
              "report is left untouched to avoid clobbering it on a re-run.",
     )
+    ap.add_argument(
+        "--skip-deep-reads",
+        action="store_true",
+        help="finish the daily report without PDF/deep-read generation; useful "
+             "when the long-context model is unavailable (backfill later)",
+    )
+    ap.add_argument(
+        "--replace",
+        action="store_true",
+        help="overwrite an existing report while still honoring the seen-set; "
+             "unlike --force, previously seen papers remain filtered",
+    )
     args = ap.parse_args()
 
     for_date: date | None = None
@@ -273,7 +293,13 @@ def main() -> None:
     elif args.lookback_days > 0:
         for_date = date.today() - timedelta(days=args.lookback_days)
 
-    run(dry_run=args.dry_run, for_date=for_date, force=args.force)
+    run(
+        dry_run=args.dry_run,
+        for_date=for_date,
+        force=args.force,
+        skip_deep_reads=args.skip_deep_reads,
+        replace=args.replace,
+    )
 
 
 if __name__ == "__main__":

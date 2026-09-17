@@ -24,11 +24,16 @@ def save_seen(ids: set[str]) -> None:
 
 def filter_new(papers: list[Paper], seen: set[str]) -> list[Paper]:
     out = []
+    known = set(seen)
     for p in papers:
         key = f"{p.source}:{p.paper_id}"
-        if key in seen:
+        if key in known:
             continue
         out.append(p)
+        # A paper can be returned by multiple configured arXiv categories in
+        # the same fetch. Treat the first occurrence as queued so it is scored
+        # and rendered only once even before the persistent seen-set is saved.
+        known.add(key)
     return out
 
 

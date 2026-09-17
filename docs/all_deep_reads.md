@@ -4,6 +4,8 @@
 
 ### Daily
 
+- [Doubly valid and doubly sharp sensitivity analysis to unobserved confounding for survival outcomes](deep_reads/2026-09-16-2609.18713.md)\
+  9/10 [daily]
 - [Feedback-Aware Tuning of Recursive Q-Learning](deep_reads/2026-09-15-2609.12716.md)  
   7/10 [daily]
 - [Design-Assisted Regression](deep_reads/2026-09-15-2609.12886.md)  

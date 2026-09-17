@@ -172,12 +172,15 @@ def _fetch_api(params: dict) -> str:
 def _date_window(for_date: date) -> tuple[str, str]:
     """Return the submittedDate window for papers announced on `for_date`.
 
-    Reaches back 4 days so a Monday run still covers the weekend (Friday-afternoon
-    submissions are announced Monday). The pipeline's dedup (seen_papers.json)
-    filters the older papers this wider window also pulls in, so processing days
-    in order still gives each date only its new papers.
+    A Monday run reaches back to Friday so it still covers weekend submissions.
+    On other weekdays the window starts on the requested date; using the old
+    unconditional four-day lookback made historical/catch-up runs re-score and
+    re-label earlier days' below-threshold papers as belonging to the target day.
     """
-    start = datetime(for_date.year, for_date.month, for_date.day, 0, 0, tzinfo=timezone.utc) - timedelta(days=4)
+    lookback_days = 3 if for_date.weekday() == 0 else 0
+    start = datetime(
+        for_date.year, for_date.month, for_date.day, 0, 0, tzinfo=timezone.utc
+    ) - timedelta(days=lookback_days)
     end   = datetime(for_date.year, for_date.month, for_date.day, 23, 59, tzinfo=timezone.utc)
     fmt = "%Y%m%d%H%M"
     return start.strftime(fmt), end.strftime(fmt)
