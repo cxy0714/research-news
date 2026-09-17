@@ -17,6 +17,25 @@
 
 [→ 查看完整报告](daily/2026-09-17.md)
 
+### 精读论文（8 篇）
+
+- [Efficient estimation and the cost of complete-case coarsening under monotone sequential MAR](deep_reads/2026-09-17-2609.17778.md)  
+  `因果推断` · 相关性 8/10
+- [When AI Generates Covariates: Causal Typing and Estimand Drift in Sequential Experiments](deep_reads/2026-09-17-2609.17772.md)  
+  `因果推断` · 相关性 7/10
+- [Information Set Emulation: Causal Certificates for AI Derived EHR Features](deep_reads/2026-09-17-2609.17777.md)  
+  `因果推断` · 相关性 7/10
+- [Double Descent in High-dimensional Linear Discriminant Analysis](deep_reads/2026-09-17-2609.19061.md)  
+  `高维统计 / 随机矩阵` · 相关性 7/10
+- [Cross Validation for the log Gaussian Cox Process](deep_reads/2026-09-17-2609.17908.md)  
+  `其他` · 相关性 6/10
+- [Regularized Estimation of Spatial Patterns](deep_reads/2026-09-17-2609.18951.md)  
+  `统计计算 / 算法` · 相关性 6/10
+- [Calibrated Predictive Distributions from Sample-Based Generators](deep_reads/2026-09-17-2609.19035.md)  
+  `数理统计 / 假设检验` · 相关性 6/10
+- [Graph neural networks for exoplanet atmospheres](deep_reads/2026-09-17-2609.17894.md)  
+  `天体统计` · 相关性 6/10
+
 ## 收藏
 
 - [→ 打开收藏](favorites.md) · 登录后在各页点 ☆ 收藏即可自动汇总
