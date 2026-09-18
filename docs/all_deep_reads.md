@@ -6611,6 +6611,8 @@
 
 - [Thin Sets Are Not Equally Thin: Minimax Learning of Submanifold Integrals](deep_reads/2026-06-22-2507.12673.md)  
   9/10 [manual]
+- [Estimation of smooth functionals of covariance operators: jackknife bias reduction and bounds in terms of effective rank](deep_reads/2026-09-18-2205.10280.md)  
+  8/10 [manual]
 - [Inverting the Fisher information operator in non-linear models](deep_reads/2026-09-09-2601.13254.md)  
   8/10 [manual]
 - [A simple adaptive estimator of the integrated square of a density](deep_reads/2026-07-17-0803.0847.md)  
