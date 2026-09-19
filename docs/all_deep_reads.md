@@ -7157,6 +7157,8 @@
   7/10 [daily]
 - [Model-based bootstrap inference for Cox models after Lasso selection](deep_reads/2026-08-19-2608.18893.md)  
   6/10 [daily]
+- [GFCM: A Tail-Sensitive Mixed-Type Conditional Independence Test for Causal Discovery](deep_reads/2026-08-17-2608.15332.md)  
+  7/10 [daily]
 - [Change-Point Detection for Heterogeneous High-Dimensional Functional Time Series](deep_reads/2026-08-14-2608.13880.md)  
   6/10 [daily]
 - [Testing Sign Agreement](deep_reads/2026-08-13-2608.10294.md)  

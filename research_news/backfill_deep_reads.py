@@ -34,6 +34,7 @@ Usage::
 from __future__ import annotations
 
 import argparse
+import json
 import logging
 import os
 import re
@@ -246,13 +247,45 @@ def stub_papers(
     authors), patched with the index metadata (topic / score / title) so the
     regenerated page keeps its header."""
     papers: list[Paper] = []
+    # Manually queued papers are not scored into llm_scores.jsonl, so their
+    # failed pages cannot be reconstructed from the score log.  The highlights
+    # manifest is the durable source for those papers (it also points at the
+    # downloaded PDF); use it as a fallback, and enrich arXiv entries with the
+    # abstract when available.
+    highlights: dict[str, dict] = {}
+    manifest = Path("data/highlights.json")
+    if manifest.exists():
+        try:
+            rows = json.loads(manifest.read_text(encoding="utf-8"))
+            highlights = {r.get("paper_id"): r for r in rows
+                          if isinstance(r, dict) and r.get("paper_id")}
+        except (OSError, json.JSONDecodeError):
+            pass
     for e in entries:
         rows = score_index.get(e["paper_id"])
-        if not rows:
-            log.warning("stub %s (%s): not in score log — cannot rebuild, skipping",
-                        e["paper_id"], run_date)
-            continue
-        p = _paper_from_row(_pick_row(rows, run_date))
+        if rows:
+            p = _paper_from_row(_pick_row(rows, run_date))
+        else:
+            h = highlights.get(e["paper_id"])
+            if not h:
+                log.warning("stub %s (%s): not in score/highlights log — skipping",
+                            e["paper_id"], run_date)
+                continue
+            p = Paper(
+                source=h.get("source") or "arxiv",
+                paper_id=e["paper_id"],
+                title=h.get("title") or e.get("title") or "",
+                authors=list(h.get("authors") or []),
+                abstract="",
+                url=h.get("url") or "",
+                categories=list(h.get("categories") or []),
+                published=h.get("published"),
+            )
+            p.summary_zh = h.get("summary_zh")
+            p.why_relevant = h.get("why_relevant")
+            p.key_techniques = list(h.get("key_techniques") or [])
+            p.novelty_flag = h.get("novelty_flag")
+            p.pdf_path = h.get("pdf_path")
         p.topic = p.topic or e.get("topic")
         if e.get("score") is not None:
             p.score = float(e["score"])

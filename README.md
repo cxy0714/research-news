@@ -171,14 +171,14 @@ python -m research_news.backfill_deep_reads --retry-stubs --dry-run
 
 ### 自动化：每天跑完顺手恢复（cron + 锁）
 
-`run_daily.sh` 已是「日跑 → 修乱码摘要 → **恢复当天失败的精读** → **手动录入队列精读** →
+`run_daily.sh` 已是「日跑 → 修乱码摘要 → **手动录入队列精读** → **恢复当天失败的精读** →
 `git add -A` 提交推送」一条龙，并在最前面加了互斥锁（`flock`）：
 
 ```bash
 python -m research_news.daily
 python -m research_news.rerun --date "$(date -I)"
-python -m research_news.backfill_deep_reads --retry-stubs --date "$(date -I)"   # ← 恢复 stub
 python -m research_news.manual_requests --date "$(date -I)"                      # ← 网页录入的精读队列
+python -m research_news.backfill_deep_reads --retry-stubs --date "$(date -I)"   # ← 恢复 stub（含手动队列失败）
 git add -A && git commit -m "daily report $(date -I)" && git push
 ```
 
