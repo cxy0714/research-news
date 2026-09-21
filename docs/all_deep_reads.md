@@ -4,6 +4,10 @@
 
 ### Daily
 
+- [Estimating heterogeneous treatment effects from randomised trials: a comparison of the risk modelling and treatment effect modelling approaches](deep_reads/2026-09-21-2609.21526.md)  
+  8/10 [daily]
+- [Summary Indices in Treatment Effect Estimation](deep_reads/2026-09-21-2609.21393.md)  
+  8/10 [daily]
 - [Efficient estimation and the cost of complete-case coarsening under monotone sequential MAR](deep_reads/2026-09-17-2609.17778.md)  
   8/10 [daily]
 - [When AI Generates Covariates: Causal Typing and Estimand Drift in Sequential Experiments](deep_reads/2026-09-17-2609.17772.md)  
@@ -3507,6 +3511,10 @@
   8/10 [manual]
 - [Marginal Causal Effect Estimation with Continuous Instrumental Variables](deep_reads/2026-07-10-2510.14368.md)  
   8/10 [manual]
+- [Adjusting for Many Covariates in Randomized Clinical Trials with GLMs: Bias Reduction by Jackknife and Practical Guidance](deep_reads/2026-09-21-2609.13736.md)  
+  7/10 [manual]
+- [A decorrelation method for general regression adjustment in randomized experiments](deep_reads/2026-09-21-2311.10076.md)  
+  7/10 [manual]
 - [Causal mediation analysis for stochastic interventions](deep_reads/2026-08-31-1901.02776.md)  
   7/10 [manual]
 - [Does TabPFN Understand Causal Structures?](deep_reads/2026-07-30-2511.07236.md)  
@@ -4798,6 +4806,8 @@
 
 ### Daily
 
+- [Robust Dual-Regularized Variable Selection under Outlier Contamination](deep_reads/2026-09-21-2609.21342.md)  
+  7/10 [daily]
 - [Minimax optimality for sequential gradient-free minimization of smooth functions and their derivatives](deep_reads/2026-09-16-2609.18678.md)  
   7/10 [daily]
 - [Nonparametric Estimation of Event-Free Survival for Data with Left-Truncated Death and Intermittently Assessed Nonfatal Events](deep_reads/2026-09-15-2609.12082.md)  
@@ -6987,6 +6997,10 @@
 
 ### Daily
 
+- [Testing Conditional Stochastic Dominance via Copula Derivatives](deep_reads/2026-09-21-2609.21622.md)  
+  7/10 [daily]
+- [Asymptotic Anytime-Valid Quantile Inference under Local Differential Privacy](deep_reads/2026-09-21-2609.21338.md)  
+  6/10 [daily]
 - [Calibrated Predictive Distributions from Sample-Based Generators](deep_reads/2026-09-17-2609.19035.md)  
   6/10 [daily]
 - [A Sharp Signal-to-Noise Threshold for Quasi-Maximum Likelihood Breakpoint Estimation](deep_reads/2026-09-15-2609.12271.md)  
@@ -10221,6 +10235,8 @@
 
 ### Daily
 
+- [Bayesian classification of astronomical spectra with class uncertainties](deep_reads/2026-09-21-2609.21694.md)  
+  7/10 [daily]
 - [Graph neural networks for exoplanet atmospheres](deep_reads/2026-09-17-2609.17894.md)  
   6/10 [daily]
 - [XMST: An Extended Minimum Spanning Tree Framework with Objective Fracture-Scale Selection](deep_reads/2026-09-15-2609.12943.md)  
@@ -13223,6 +13239,10 @@
 
 ### Daily
 
+- [A Partial Fay-Herriot model for Small Area Estimation: Estimating district-level consumption in Mozambique](deep_reads/2026-09-21-2609.21701.md)  
+  6/10 [daily]
+- [Parameter estimation for graphon-interacting particle systems from discrete observations](deep_reads/2026-09-21-2609.21710.md)  
+  6/10 [daily]
 - [Cross Validation for the log Gaussian Cox Process](deep_reads/2026-09-17-2609.17908.md)  
   6/10 [daily]
 - [Nonparanormal Bayesian Learning of Directed Acyclic Graphs under Gamma and Inverse-Gamma Innovation Priors: Closed-Form Scores and Informed Sampling](deep_reads/2026-09-15-2609.13008.md)  
