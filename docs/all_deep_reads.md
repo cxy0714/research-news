@@ -6997,6 +6997,8 @@
 
 ### Daily
 
+- [RKHS-Based Inference for Nonlinear Granger Causality via Conditional Centering](deep_reads/2026-09-22-2609.22007.md)  
+  7/10 [daily]
 - [Testing Conditional Stochastic Dominance via Copula Derivatives](deep_reads/2026-09-21-2609.21622.md)  
   7/10 [daily]
 - [Asymptotic Anytime-Valid Quantile Inference under Local Differential Privacy](deep_reads/2026-09-21-2609.21338.md)  
@@ -13239,6 +13241,8 @@
 
 ### Daily
 
+- [Schedule optimization for tau-leaping in masked discrete diffusion](deep_reads/2026-09-22-2609.21960.md)  
+  6/10 [daily]
 - [A Partial Fay-Herriot model for Small Area Estimation: Estimating district-level consumption in Mozambique](deep_reads/2026-09-21-2609.21701.md)  
   6/10 [daily]
 - [Parameter estimation for graphon-interacting particle systems from discrete observations](deep_reads/2026-09-21-2609.21710.md)  
