@@ -4,6 +4,22 @@
 
 ### Daily
 
+- [Heterogeneous survivor average causal effects beyond monotonicity: Applications to a clinical trial evaluating mechanical ventilation strategies](deep_reads/2026-09-23-2609.23211.md)  
+  8/10 [daily]
+- [Unbiased Treatment Effect Estimation under Network Interference via Neighborhood-Excluded Cross-Fitting](deep_reads/2026-09-23-2609.23284.md)  
+  8/10 [daily]
+- [Doubly robust target inference for generalized linear regression with completely missing covariates](deep_reads/2026-09-23-2609.24086.md)  
+  8/10 [daily]
+- [Causal inference in two-sided randomization designs: factorial regression, two-way clustering, and covariate adjustment](deep_reads/2026-09-23-2609.22761.md)  
+  8/10 [daily]
+- [tteICE: An R Package for Estimating Treatment Effects on Time-to-Event Outcomes with Intercurrent Events in Two-Arm Trials](deep_reads/2026-09-23-2609.23473.md)  
+  7/10 [daily]
+- [Distributional Balancing with Machine Learning for Clinical Trial Augmentation Using Real-World Data](deep_reads/2026-09-23-2609.23524.md)  
+  7/10 [daily]
+- [Proxy-Adjusted Causal Discovery from Targeted Interventions](deep_reads/2026-09-23-2609.23897.md)  
+  7/10 [daily]
+- [When bad adjustment looks good: what goes wrong in Plasmode 0.1.0 simulations](deep_reads/2026-09-23-2609.24053.md)  
+  6/10 [daily]
 - [Estimating heterogeneous treatment effects from randomised trials: a comparison of the risk modelling and treatment effect modelling approaches](deep_reads/2026-09-21-2609.21526.md)  
   8/10 [daily]
 - [Summary Indices in Treatment Effect Estimation](deep_reads/2026-09-21-2609.21393.md)  
@@ -3532,6 +3548,12 @@
 
 ### Daily
 
+- [Streaming PCA: averaging from a geometric perspective](deep_reads/2026-09-23-2609.23332.md)  
+  6/10 [daily]
+- [Structured Screen-and-Select for Ultra-High-Dimensional Variable Selection](deep_reads/2026-09-23-2609.24945.md)  
+  6/10 [daily]
+- [Exact Sign Recovery for PCA Connectivity Analysis in Mixture Models](deep_reads/2026-09-23-2609.23468.md)  
+  6/10 [daily]
 - [Double Descent in High-dimensional Linear Discriminant Analysis](deep_reads/2026-09-17-2609.19061.md)  
   7/10 [daily]
 - [Spike Estimation from Heteroscedastic Noise via Random Splitting](deep_reads/2026-09-10-2609.11169.md)  
@@ -4806,6 +4828,14 @@
 
 ### Daily
 
+- [Inference for sparsely sampled Gauss-Markov processes under outcome-dependent dropout](deep_reads/2026-09-23-2609.23617.md)  
+  7/10 [daily]
+- [Almost-sure uniqueness of the Gaussian location NPMLE](deep_reads/2026-09-23-2609.23903.md)  
+  7/10 [daily]
+- [Nonparametric Estimation of the Diffusion-Interaction Function in Particle Systems](deep_reads/2026-09-23-2609.24374.md)  
+  7/10 [daily]
+- [Quantifying Long-Range Dependence in Object-Valued Time Series](deep_reads/2026-09-23-2609.24153.md)  
+  6/10 [daily]
 - [Robust Dual-Regularized Variable Selection under Outlier Contamination](deep_reads/2026-09-21-2609.21342.md)  
   7/10 [daily]
 - [Minimax optimality for sequential gradient-free minimization of smooth functions and their derivatives](deep_reads/2026-09-16-2609.18678.md)  
@@ -6627,6 +6657,8 @@
   8/10 [manual]
 - [A simple adaptive estimator of the integrated square of a density](deep_reads/2026-07-17-0803.0847.md)  
   8/10 [manual]
+- [Assumption-lean inference for generalised linear model parameters](deep_reads/2026-09-23-2006.08402.md)  
+  7/10 [manual]
 - [On Estimation of $L_{r}$-Norms in Gaussian White Noise Models](deep_reads/2026-07-17-1710.03863.md)  
   7/10 [manual]
 - [On statistical inference for non-linear dynamical systems evolving in their global attractor](deep_reads/2026-09-09-2606.06018.md)  
@@ -6640,6 +6672,8 @@
 
 ### Daily
 
+- [On the convolution theorem for directionally pathwise differentiable functionals](deep_reads/2026-09-23-2609.23545.md)  
+  9/10 [daily]
 - [Efficiency Optimality without Pathwise Differentiability: A Variational Theory for Marginal-Integral Functionals](deep_reads/2026-09-15-2609.12707.md)  
   9/10 [daily]
 - [PDE-constrained inverse problems at the $\sqrt{n}$ rate via debiased physics-informed neural networks](deep_reads/2026-09-15-2609.12301.md)  
@@ -6997,6 +7031,18 @@
 
 ### Daily
 
+- [Conditional Independence Is Not (Quite) Pointwise Testable](deep_reads/2026-09-23-2609.24221.md)  
+  8/10 [daily]
+- [Consistent Order Selection under Non-Identifiability and Dependence](deep_reads/2026-09-23-2609.23220.md)  
+  7/10 [daily]
+- [Model-free and Distributionally Robust Feature Screening with False Discovery Control for High-Dimensional Heterogeneous Data](deep_reads/2026-09-23-2609.23635.md)  
+  7/10 [daily]
+- [Conformalized Quantile Regression and Minimax Limits of Fixed-Score Calibration under Known Covariate Shift](deep_reads/2026-09-23-2609.24929.md)  
+  7/10 [daily]
+- [Uniform Inference for Parameters Identified by Conditional Quantile Restrictions](deep_reads/2026-09-23-2609.23303.md)  
+  7/10 [daily]
+- [A Three-Way Testing Framework for Quantifying Epistemic Calibration Uncertainty in SBI](deep_reads/2026-09-23-2609.24419.md)  
+  6/10 [daily]
 - [RKHS-Based Inference for Nonlinear Granger Causality via Conditional Centering](deep_reads/2026-09-22-2609.22007.md)  
   7/10 [daily]
 - [Testing Conditional Stochastic Dominance via Copula Derivatives](deep_reads/2026-09-21-2609.21622.md)  
@@ -9217,6 +9263,8 @@
   7/10 [manual]
 - [Global Testing Against Sparse Alternatives under Ising Models](deep_reads/2026-07-17-1611.08293.md)  
   7/10 [manual]
+- [Beyond the Oracle Property: Adaptive LASSO in Cointegrating Regressions with Local-to-Unity Regressors](deep_reads/2026-10-02-2510.07204.md)  
+  4/10 [manual]
 - [Second order mixed moment inequalities based on Gram matrices](deep_reads/2026-07-07-2606.21636.md)  
   4/10 [manual]
 - [Online LLM watermark detection via e-processes](deep_reads/2026-07-30-2602.14286.md)  
@@ -9226,6 +9274,8 @@
 
 ### Daily
 
+- [Tensor Completion using Subspace Information](deep_reads/2026-09-23-2609.24501.md)  
+  7/10 [daily]
 - [Regularized Estimation of Spatial Patterns](deep_reads/2026-09-17-2609.18951.md)  
   6/10 [daily]
 - [Tensor-BEKK: Conditional Covariance Modeling and Inference for Tensor-Valued Time Series](deep_reads/2026-09-16-2609.18157.md)  
@@ -10237,6 +10287,12 @@
 
 ### Daily
 
+- [Scale-Vector Alignment: A Scale-Aware Framework for Spatially Resolved Morphological Similarity in Astronomical Images](deep_reads/2026-09-23-2609.24304.md)  
+  6/10 [daily]
+- [Fast and accurate astronomical source deblending with Density-Peak Clustering](deep_reads/2026-09-23-2609.24318.md)  
+  6/10 [daily]
+- [Natural coordinates for constrained correlation functions: Partial autocorrelations and the geometry of positive power spectra](deep_reads/2026-09-23-2609.24500.md)  
+  6/10 [daily]
 - [Bayesian classification of astronomical spectra with class uncertainties](deep_reads/2026-09-21-2609.21694.md)  
   7/10 [daily]
 - [Graph neural networks for exoplanet atmospheres](deep_reads/2026-09-17-2609.17894.md)  
@@ -10705,6 +10761,8 @@
 
 ### Daily
 
+- [A Stochastic Nested Fixed Point Algorithm for Large-Scale BLP Estimation](deep_reads/2026-09-23-2609.23998.md)  
+  6/10 [daily]
 - [Beyond Aggregate VARs: A Bayesian Benchmark for HANK Models](deep_reads/2026-09-10-2609.06827.md)  
   6/10 [daily]
 - [Estimation risk in conditional expectiles](deep_reads/2026-09-04-2609.02673.md)  

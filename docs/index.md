@@ -11,30 +11,20 @@
 - **[收藏](favorites.md)** — 登录后在各页点 ☆ 收藏的论文，自动汇总到这里（总收藏按类别分组、可切换按周；每篇可写评论，无需手动维护）。
 - **[模型测评](all_shootout.md)** — 不同 LLM 在同一批论文上的打分 / 解读对比。
 
-## 今日 · 2026-09-22
+## 今日 · 2026-10-02
 
 ### 每日 arXiv 速览
 
-[→ 查看完整报告](daily/2026-09-22.md)
+[→ 查看完整报告](daily/2026-10-02.md)
 
-### 精读论文（2 篇）
+### 精读论文（1 篇）
 
-- [RKHS-Based Inference for Nonlinear Granger Causality via Conditional Centering](deep_reads/2026-09-22-2609.22007.md)  
-  `数理统计 / 假设检验` · 相关性 7/10
-- [Schedule optimization for tau-leaping in masked discrete diffusion](deep_reads/2026-09-22-2609.21960.md)  
-  `其他` · 相关性 6/10
+- [Beyond the Oracle Property: Adaptive LASSO in Cointegrating Regressions with Local-to-Unity Regressors](deep_reads/2026-10-02-2510.07204.md)  
+  `数理统计 / 假设检验` · 相关性 4/10
 
 ## 收藏
 
 - [→ 打开收藏](favorites.md) · 登录后在各页点 ☆ 收藏即可自动汇总
-
-## 本周每日报告
-
-- [2026-09-21](daily/2026-09-21.md)
-- [2026-09-18](daily/2026-09-18.md)
-- [2026-09-17](daily/2026-09-17.md)
-- [2026-09-16](daily/2026-09-16.md)
-- [2026-09-15](daily/2026-09-15.md)
 
 
 ---
