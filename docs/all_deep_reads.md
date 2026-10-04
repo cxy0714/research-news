@@ -94,6 +94,10 @@
   7/10 [daily]
 - [Summary-powered prediction under distribution shift](deep_reads/2026-09-25-2609.30908.md)  
   6/10 [daily]
+- [Risk-Averse Welfare Maximization via Marginal Treatment Effects](deep_reads/2026-09-24-2609.30617.md)  
+  8/10 [daily]
+- [When Do Surrogate Metrics Work? A Finite-Sample Comparison Under Realistic Failure Modes](deep_reads/2026-09-24-2609.30528.md)  
+  7/10 [daily]
 - [Heterogeneous survivor average causal effects beyond monotonicity: Applications to a clinical trial evaluating mechanical ventilation strategies](deep_reads/2026-09-23-2609.23211.md)  
   8/10 [daily]
 - [Unbiased Treatment Effect Estimation under Network Interference via Neighborhood-Excluded Cross-Fitting](deep_reads/2026-09-23-2609.23284.md)  
@@ -4954,6 +4958,8 @@
   6/10 [daily]
 - [Wilcoxon Random Forests for Robust Distributional Prediction](deep_reads/2026-09-25-2609.31931.md)  
   6/10 [daily]
+- [Choosing the penalty in nonparametric regression: short and long-range dependence](deep_reads/2026-09-24-2609.29231.md)  
+  7/10 [daily]
 - [Inference for sparsely sampled Gauss-Markov processes under outcome-dependent dropout](deep_reads/2026-09-23-2609.23617.md)  
   7/10 [daily]
 - [Almost-sure uniqueness of the Gaussian location NPMLE](deep_reads/2026-09-23-2609.23903.md)  
@@ -7234,6 +7240,8 @@
 - [Large and Moderate Deviations for Conservative Tail-Index Estimation](deep_reads/2026-09-25-2609.31127.md)  
   6/10 [daily]
 - [Bootstrap Inference for Dynamic Panel Data Models with Common Correlated Effects](deep_reads/2026-09-25-2609.31442.md)  
+  6/10 [daily]
+- [FDR-Controlled Variable Selection for Generalized Linear Models and Cox Regression with Virtual Dummies](deep_reads/2026-09-24-2609.29335.md)  
   6/10 [daily]
 - [Conditional Independence Is Not (Quite) Pointwise Testable](deep_reads/2026-09-23-2609.24221.md)  
   8/10 [daily]
@@ -13558,6 +13566,8 @@
 - [Adaptive LASSO Penalized Minimum Density Power Divergence Estimation through Least Squares Approximation: Application to Bone Mineral Density Data from the SWAN Study](deep_reads/2026-09-28-2609.34266.md)  
   6/10 [daily]
 - [Identifying the Predictable Drift of a Semimartingale from Marginal Laws](deep_reads/2026-09-28-2609.33372.md)  
+  6/10 [daily]
+- [A Proxy-likelihood Estimator for Multivariate Extremes Models with Intractable Likelihoods](deep_reads/2026-09-24-2609.30244.md)  
   6/10 [daily]
 - [Schedule optimization for tau-leaping in masked discrete diffusion](deep_reads/2026-09-22-2609.21960.md)  
   6/10 [daily]
