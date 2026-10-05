@@ -11,16 +11,20 @@
 - **[收藏](favorites.md)** — 登录后在各页点 ☆ 收藏的论文，自动汇总到这里（总收藏按类别分组、可切换按周；每篇可写评论，无需手动维护）。
 - **[模型测评](all_shootout.md)** — 不同 LLM 在同一批论文上的打分 / 解读对比。
 
-## 今日 · 2026-10-02
+## 今日 · 2026-10-05
 
 ### 每日 arXiv 速览
 
-[→ 查看完整报告](daily/2026-10-02.md)
+[→ 查看完整报告](daily/2026-10-05.md)
 
-### 精读论文（1 篇）
+### 精读论文（3 篇）
 
-- [Beyond the Oracle Property: Adaptive LASSO in Cointegrating Regressions with Local-to-Unity Regressors](deep_reads/2026-10-02-2510.07204.md)  
-  `数理统计 / 假设检验` · 相关性 4/10
+- [Spatial Functional $k$-Nearest-Neighbour Regression under Polynomial Dependence](deep_reads/2026-10-05-2610.02921.md)  
+  `非参数 / 半参数` · 相关性 6/10
+- [Characterizing Identifiability in Boolean Factor Models](deep_reads/2026-10-05-2610.02682.md)  
+  `其他` · 相关性 6/10
+- [High-Dimensional Regularization of the Spatial Sign Covariance Matrix for Robust Shape Estimation](deep_reads/2026-10-05-2610.02633.md)  
+  `高维统计 / 随机矩阵` · 相关性 6/10
 
 ## 收藏
 
@@ -28,11 +32,11 @@
 
 ## 本周每日报告
 
+- [2026-10-02](daily/2026-10-02.md)
 - [2026-10-01](daily/2026-10-01.md)
 - [2026-09-30](daily/2026-09-30.md)
 - [2026-09-29](daily/2026-09-29.md)
 - [2026-09-28](daily/2026-09-28.md)
-- [2026-09-25](daily/2026-09-25.md)
 
 
 ---

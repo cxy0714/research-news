@@ -3642,6 +3642,8 @@
 
 ### Daily
 
+- [High-Dimensional Regularization of the Spatial Sign Covariance Matrix for Robust Shape Estimation](deep_reads/2026-10-05-2610.02633.md)  
+  6/10 [daily]
 - [Testing and segmentation of joint and individual components in integrative multi-source factor models](deep_reads/2026-10-01-2610.01313.md)  
   6/10 [daily]
 - [Two-sample tests for principal eigenvalues and eigenvectors in high-dimensional elliptical factor models](deep_reads/2026-09-29-2609.37906.md)  
@@ -4932,6 +4934,8 @@
 
 ### Daily
 
+- [Spatial Functional $k$-Nearest-Neighbour Regression under Polynomial Dependence](deep_reads/2026-10-05-2610.02921.md)  
+  6/10 [daily]
 - [Generalized Engression Models](deep_reads/2026-10-01-2610.01823.md)  
   7/10 [daily]
 - [Polylogarithmic Sparsity of Randomly Reweighted NPMLEs for Gaussian Mixtures](deep_reads/2026-10-01-2610.01088.md)  
@@ -13555,6 +13559,8 @@
 
 ### Daily
 
+- [Characterizing Identifiability in Boolean Factor Models](deep_reads/2026-10-05-2610.02682.md)  
+  6/10 [daily]
 - [Sample complexity bounds for categorical Markov random fields via Discrete Diffusions](deep_reads/2026-10-01-2610.02128.md)  
   6/10 [daily]
 - [Learning Global Sensitivity Indices from Observational Data: A Metamodel-Based Approach](deep_reads/2026-09-30-2609.40342.md)  
