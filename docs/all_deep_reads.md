@@ -4,6 +4,8 @@
 
 ### Daily
 
+- [Randomization inference on cell effects under absorbing treatment onset](deep_reads/2026-10-06-2610.02556.md)  
+  7/10 [daily]
 - [Pragmatic DML with AI-Learned Representations](deep_reads/2026-10-01-2610.01935.md)  
   9/10 [daily]
 - [Identifying Panel Conditioning with Refreshment Samples: Sharp Bounds and Design Assumptions](deep_reads/2026-10-01-2610.01654.md)  
@@ -4934,6 +4936,8 @@
 
 ### Daily
 
+- [Bayesian Operator Learning: Posterior Existence and Convergence of Point Estimates for Gaussian Priors](deep_reads/2026-10-06-2610.03666.md)  
+  6/10 [daily]
 - [Spatial Functional $k$-Nearest-Neighbour Regression under Polynomial Dependence](deep_reads/2026-10-05-2610.02921.md)  
   6/10 [daily]
 - [Generalized Engression Models](deep_reads/2026-10-01-2610.01823.md)  
@@ -7185,6 +7189,12 @@
 
 ### Daily
 
+- [Does a mortality schedule need a Makeham term? Calibrating the likelihood-ratio test](deep_reads/2026-10-06-2610.03685.md)  
+  7/10 [daily]
+- [Goodness-of-Fit Testing for Groupwise Spherical Error Structures](deep_reads/2026-10-06-2610.03469.md)  
+  7/10 [daily]
+- [Bias-Corrected Estimators for Joint Entropy, Conditional Entropy, and Mutual Information in the Discrete Bivariate Case: Theory and an Application to Motor Insurance](deep_reads/2026-10-06-2610.02558.md)  
+  6/10 [daily]
 - [Testing Procedures for Strict Pleiotropy in Genetic Association Studies](deep_reads/2026-10-01-2610.00962.md)  
   6/10 [daily]
 - [A Three-Stage PCA Procedure for Sequentially Arriving High-Dimensional Data](deep_reads/2026-09-30-2609.38681.md)  
@@ -10515,6 +10525,10 @@
 
 ### Daily
 
+- [A Missing Latent, Not a Missing Simulator: Radius-Augmented Inference for Real JWST Retrieval](deep_reads/2026-10-06-2610.02245.md)  
+  7/10 [daily]
+- [Learning Approximate Isometric Embeddings for Efficient Template Placement](deep_reads/2026-10-06-2610.02448.md)  
+  6/10 [daily]
 - [Bayesian Image Reconstruction with Spatially Variant PSFs in X-ray Astronomy](deep_reads/2026-10-01-2610.02062.md)  
   6/10 [daily]
 - [Two bits about lossy compression: On the limits of compression in cosmology](deep_reads/2026-09-30-2609.40239.md)  
@@ -11011,6 +11025,8 @@
 
 ### Daily
 
+- [Expected Utility Regret Rule: Minimax and Bayes Optimal Portfolio Choice](deep_reads/2026-10-06-2610.02290.md)  
+  6/10 [daily]
 - [Certified Alpha Capacity: Statistical Evidence, Economic Lifetime, and Arbitrage under Decay](deep_reads/2026-10-01-2610.01115.md)  
   6/10 [daily]
 - [The Anatomy of Commodity Risk: Micro, Market, and Economy-Wide Sources](deep_reads/2026-09-30-2610.00581.md)  
