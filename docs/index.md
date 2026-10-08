@@ -11,29 +11,53 @@
 - **[收藏](favorites.md)** — 登录后在各页点 ☆ 收藏的论文，自动汇总到这里（总收藏按类别分组、可切换按周；每篇可写评论，无需手动维护）。
 - **[模型测评](all_shootout.md)** — 不同 LLM 在同一批论文上的打分 / 解读对比。
 
-## 今日 · 2026-10-06
+## 今日 · 2026-10-08
 
 ### 每日 arXiv 速览
 
-[→ 查看完整报告](daily/2026-10-06.md)
+[→ 查看完整报告](daily/2026-10-08.md)
 
-### 精读论文（8 篇）
+### 精读论文（20 篇）
 
-- [Randomization inference on cell effects under absorbing treatment onset](deep_reads/2026-10-06-2610.02556.md)  
+- [Debiased Machine Learning for Count Data: a Partially Linear Poisson Model Based on Neural Networks](deep_reads/2026-10-08-2610.07500.md)  
+  `效率理论 / Debiased ML` · 相关性 8/10
+- [Collaborative representations for targeted causal inference under outcome selection](deep_reads/2026-10-08-2610.08073.md)  
+  `因果推断` · 相关性 8/10
+- [Optimal Linear Functional Estimation for Proportionally High-Dimensional Linear Models](deep_reads/2026-10-08-2610.06875.md)  
+  `高维统计 / 随机矩阵` · 相关性 8/10
+- [Network Experiments with Edge Treatments and Node Outcomes](deep_reads/2026-10-08-2610.07363.md)  
+  `因果推断` · 相关性 8/10
+- [Comment: Performance of Double-Robust Estimators When ``Inverse Probability'' Weights Are Highly Variable](deep_reads/2026-10-08-0804.2965.md)  
   `因果推断` · 相关性 7/10
-- [Does a mortality schedule need a Makeham term? Calibrating the likelihood-ratio test](deep_reads/2026-10-06-2610.03685.md)  
-  `数理统计 / 假设检验` · 相关性 7/10
-- [Goodness-of-Fit Testing for Groupwise Spherical Error Structures](deep_reads/2026-10-06-2610.03469.md)  
-  `数理统计 / 假设检验` · 相关性 7/10
-- [A Missing Latent, Not a Missing Simulator: Radius-Augmented Inference for Real JWST Retrieval](deep_reads/2026-10-06-2610.02245.md)  
-  `天体统计` · 相关性 7/10
-- [Bias-Corrected Estimators for Joint Entropy, Conditional Entropy, and Mutual Information in the Discrete Bivariate Case: Theory and an Application to Motor Insurance](deep_reads/2026-10-06-2610.02558.md)  
+- [Large-scale linear hypothesis testing for high-dimensional online M-estimation](deep_reads/2026-10-08-2610.07418.md)  
+  `高维统计 / 随机矩阵` · 相关性 7/10
+- [Scope-Restricted Backtracking Counterfactuals](deep_reads/2026-10-08-2610.08017.md)  
+  `因果推断` · 相关性 7/10
+- [When does conformal calibration need censoring weights? Cause-of-failure prediction sets under competing risks](deep_reads/2026-10-08-2610.08602.md)  
+  `因果推断` · 相关性 7/10
+- [Prediction-powered inference for time series across space](deep_reads/2026-10-08-2610.08715.md)  
+  `因果推断` · 相关性 7/10
+- [Posterior Consistency under dependent errors in non-linear inverse problems with applications to time evolution equations](deep_reads/2026-10-08-2610.07240.md)  
+  `非参数 / 半参数` · 相关性 7/10
+- [Minimax Operator Learning for Holomorphic Maps between Hilbert Spaces](deep_reads/2026-10-08-2610.07295.md)  
+  `非参数 / 半参数` · 相关性 7/10
+- [Spectral Recovery of Point Clouds from Noisy Geometric Graphs](deep_reads/2026-10-08-2610.08634.md)  
+  `高维统计 / 随机矩阵` · 相关性 7/10
+- [Measuring Gift Card Program Incrementality via Causal Data Fusion](deep_reads/2026-10-08-2610.08558.md)  
+  `因果推断` · 相关性 7/10
+- [Design-Driven Inference for Online Experiments: Jointly Optimal Evidence Collection, Testing, and Estimation](deep_reads/2026-10-08-2610.07831.md)  
   `数理统计 / 假设检验` · 相关性 6/10
-- [Bayesian Operator Learning: Posterior Existence and Convergence of Point Estimates for Gaussian Priors](deep_reads/2026-10-06-2610.03666.md)  
-  `非参数 / 半参数` · 相关性 6/10
-- [Expected Utility Regret Rule: Minimax and Bayes Optimal Portfolio Choice](deep_reads/2026-10-06-2610.02290.md)  
+- [Fridge: focused fine-tuning of ridge regression for personalize predictions](deep_reads/2026-10-08-2610.08481.md)  
+  `其他` · 相关性 6/10
+- [Exact Calibration and Sharp Risk Geometry for Volume-Sampled Ridge Regression](deep_reads/2026-10-08-2610.07721.md)  
+  `统计计算 / 算法` · 相关性 6/10
+- [Asymptotic Null Distributions of Moran's $I$ and Assortativity in Large Networks](deep_reads/2026-10-08-2610.08711.md)  
+  `数理统计 / 假设检验` · 相关性 6/10
+- [The Noise Is the Signal: Correlated Sampling Error Is Rank-Informative for Proxy Metric Selection](deep_reads/2026-10-08-2610.08194.md)  
   `经济理论 / 应用` · 相关性 6/10
-- [Learning Approximate Isometric Embeddings for Efficient Template Placement](deep_reads/2026-10-06-2610.02448.md)  
+- [Armillary: A Label-Free Coordinate System for Stellar Spectra](deep_reads/2026-10-08-2610.07112.md)  
+  `天体统计` · 相关性 6/10
+- [Optimal Photon Counting with Fast, Low Noise Astronomical Imagers](deep_reads/2026-10-08-2610.07137.md)  
   `天体统计` · 相关性 6/10
 
 ## 收藏
@@ -42,11 +66,11 @@
 
 ## 本周每日报告
 
+- [2026-10-07](daily/2026-10-07.md)
+- [2026-10-06](daily/2026-10-06.md)
 - [2026-10-05](daily/2026-10-05.md)
 - [2026-10-02](daily/2026-10-02.md)
 - [2026-10-01](daily/2026-10-01.md)
-- [2026-09-30](daily/2026-09-30.md)
-- [2026-09-29](daily/2026-09-29.md)
 
 
 ---

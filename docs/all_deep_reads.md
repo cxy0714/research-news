@@ -4,6 +4,48 @@
 
 ### Daily
 
+- [Collaborative representations for targeted causal inference under outcome selection](deep_reads/2026-10-08-2610.08073.md)  
+  8/10 [daily]
+- [Network Experiments with Edge Treatments and Node Outcomes](deep_reads/2026-10-08-2610.07363.md)  
+  8/10 [daily]
+- [Scope-Restricted Backtracking Counterfactuals](deep_reads/2026-10-08-2610.08017.md)  
+  7/10 [daily]
+- [When does conformal calibration need censoring weights? Cause-of-failure prediction sets under competing risks](deep_reads/2026-10-08-2610.08602.md)  
+  7/10 [daily]
+- [Prediction-powered inference for time series across space](deep_reads/2026-10-08-2610.08715.md)  
+  7/10 [daily]
+- [Measuring Gift Card Program Incrementality via Causal Data Fusion](deep_reads/2026-10-08-2610.08558.md)  
+  7/10 [daily]
+- [Co-Supervised Tree Synthesis for Interpretable Subgroup Identification and Honest Treatment Effect Inference in Randomized Trials](deep_reads/2026-10-07-2610.03927.md)  
+  8/10 [daily]
+- [Network-Constrained Matching and Randomization-Based Inference for Causal Effects](deep_reads/2026-10-07-2610.04102.md)  
+  8/10 [daily]
+- [What does two-sample Mendelian randomization estimate when the exposure-outcome relationship is nonlinear?](deep_reads/2026-10-07-2610.05134.md)  
+  8/10 [daily]
+- [Matched Triple-Differences: A Framework for Covariate Adjustment](deep_reads/2026-10-07-2610.04223.md)  
+  8/10 [daily]
+- [Same Predictions, Different Harms: Causal Auditing of Patient World Models](deep_reads/2026-10-07-2610.05198.md)  
+  7/10 [daily]
+- [Direct Learning of Treatment-Benefit Rankings for Restricted Mean Survival Time in Randomized Trials with Censoring](deep_reads/2026-10-07-2610.05522.md)  
+  7/10 [daily]
+- [Synthetic Control under Out-of-Span Common Shocks: Diagnosis, Exposure Balance and Correction](deep_reads/2026-10-07-2610.05535.md)  
+  7/10 [daily]
+- [Causal Lag Structure Discovery in Confounded Time Series via Orthogonalized Adaptive Estimation](deep_reads/2026-10-07-2610.05618.md)  
+  7/10 [daily]
+- [Instrumental Variable Analysis in Underrepresented Subpopulations Powered by Knowledge Transfer](deep_reads/2026-10-07-2610.05680.md)  
+  7/10 [daily]
+- [DAG-CLIP: A DAG Learning Framework in the Presence of Latent Variables](deep_reads/2026-10-07-2610.06086.md)  
+  7/10 [daily]
+- [Calculating the Expected Value of Sample Information for Observational Studies affected by Confounding](deep_reads/2026-10-07-2610.06377.md)  
+  7/10 [daily]
+- [Partial Identification under Imperfect Measurement: A Distributionally Robust Approach](deep_reads/2026-10-07-2610.04146.md)  
+  7/10 [daily]
+- [Bootstrap Inference with a Randomly Assigned Regressor: Covariance Filtering and the Limits of Marginal Resampling](deep_reads/2026-10-07-2610.04217.md)  
+  7/10 [daily]
+- [Noisy Matrix Completion under Informative Missingness](deep_reads/2026-10-07-2610.04859.md)  
+  6/10 [daily]
+- [An Averaging Alternative to Pre-Trend Testing](deep_reads/2026-10-07-2610.05705.md)  
+  6/10 [daily]
 - [Randomization inference on cell effects under absorbing treatment onset](deep_reads/2026-10-06-2610.02556.md)  
   7/10 [daily]
 - [Pragmatic DML with AI-Learned Representations](deep_reads/2026-10-01-2610.01935.md)  
@@ -3623,6 +3665,8 @@
   8/10 [manual]
 - [Marginal Causal Effect Estimation with Continuous Instrumental Variables](deep_reads/2026-07-10-2510.14368.md)  
   8/10 [manual]
+- [Comment: Performance of Double-Robust Estimators When ``Inverse Probability'' Weights Are Highly Variable](deep_reads/2026-10-08-0804.2965.md)  
+  7/10 [manual]
 - [Adjusting for Many Covariates in Randomized Clinical Trials with GLMs: Bias Reduction by Jackknife and Practical Guidance](deep_reads/2026-09-21-2609.13736.md)  
   7/10 [manual]
 - [A decorrelation method for general regression adjustment in randomized experiments](deep_reads/2026-09-21-2311.10076.md)  
@@ -3644,6 +3688,18 @@
 
 ### Daily
 
+- [Optimal Linear Functional Estimation for Proportionally High-Dimensional Linear Models](deep_reads/2026-10-08-2610.06875.md)  
+  8/10 [daily]
+- [Large-scale linear hypothesis testing for high-dimensional online M-estimation](deep_reads/2026-10-08-2610.07418.md)  
+  7/10 [daily]
+- [Spectral Recovery of Point Clouds from Noisy Geometric Graphs](deep_reads/2026-10-08-2610.08634.md)  
+  7/10 [daily]
+- [Minimax and Adaptive Transfer Learning for Sparse Canonical Correlation Analysis](deep_reads/2026-10-07-2610.05735.md)  
+  8/10 [daily]
+- [Cauchy-Combined Hettmansperger-Randles Location Tests in High Dimensions](deep_reads/2026-10-07-2610.04251.md)  
+  7/10 [daily]
+- [Network inference for SDEs with diverging dimension under small noise](deep_reads/2026-10-07-2610.04847.md)  
+  7/10 [daily]
 - [High-Dimensional Regularization of the Spatial Sign Covariance Matrix for Robust Shape Estimation](deep_reads/2026-10-05-2610.02633.md)  
   6/10 [daily]
 - [Testing and segmentation of joint and individual components in integrative multi-source factor models](deep_reads/2026-10-01-2610.01313.md)  
@@ -4936,6 +4992,18 @@
 
 ### Daily
 
+- [Posterior Consistency under dependent errors in non-linear inverse problems with applications to time evolution equations](deep_reads/2026-10-08-2610.07240.md)  
+  7/10 [daily]
+- [Minimax Operator Learning for Holomorphic Maps between Hilbert Spaces](deep_reads/2026-10-08-2610.07295.md)  
+  7/10 [daily]
+- [Minimax estimation of the expected conditional covariance under bounds on the covariate density](deep_reads/2026-10-07-2610.05006.md)  
+  8/10 [daily]
+- [Minimax Rates for Learning Smooth Populations of Parameters](deep_reads/2026-10-07-2610.04135.md)  
+  7/10 [daily]
+- [Measuring the roughness of a signal](deep_reads/2026-10-07-2610.05457.md)  
+  7/10 [daily]
+- [Semi-Supervised Kernel Ridge Fr\'echet Regression](deep_reads/2026-10-07-2610.05388.md)  
+  6/10 [daily]
 - [Bayesian Operator Learning: Posterior Existence and Convergence of Point Estimates for Gaussian Priors](deep_reads/2026-10-06-2610.03666.md)  
   6/10 [daily]
 - [Spatial Functional $k$-Nearest-Neighbour Regression under Polynomial Dependence](deep_reads/2026-10-05-2610.02921.md)  
@@ -6812,6 +6880,8 @@
 
 ### Daily
 
+- [Debiased Machine Learning for Count Data: a Partially Linear Poisson Model Based on Neural Networks](deep_reads/2026-10-08-2610.07500.md)  
+  8/10 [daily]
 - [Adaptive inference for functionals of M-estimands](deep_reads/2026-09-30-2609.39274.md)  
   7/10 [daily]
 - [Invariant Measures as Estimators: Second-Order Stochastic Expansions and Bias Reduction](deep_reads/2026-09-30-2609.39355.md)  
@@ -7189,6 +7259,22 @@
 
 ### Daily
 
+- [Design-Driven Inference for Online Experiments: Jointly Optimal Evidence Collection, Testing, and Estimation](deep_reads/2026-10-08-2610.07831.md)  
+  6/10 [daily]
+- [Asymptotic Null Distributions of Moran's $I$ and Assortativity in Large Networks](deep_reads/2026-10-08-2610.08711.md)  
+  6/10 [daily]
+- [Power enhancement via cross-fit variance estimation: Applications to specification, overidentification, and many-restriction testing](deep_reads/2026-10-07-2610.06119.md)  
+  8/10 [daily]
+- [Cauchy-Aggregated Ridge Tests for High-Dimensional Factor Pricing Models](deep_reads/2026-10-07-2610.06112.md)  
+  7/10 [daily]
+- [Score-based confidence intervals for variance-covariance parameters in linear mixed models](deep_reads/2026-10-07-2610.04181.md)  
+  6/10 [daily]
+- [Mean squared error reduction of (plug-in) look-ahead estimators for Markov chains](deep_reads/2026-10-07-2610.04069.md)  
+  6/10 [daily]
+- [Consistency of penalized maximum likelihood estimation for multidimensional change-in-velocity detection](deep_reads/2026-10-07-2610.04191.md)  
+  6/10 [daily]
+- [Optimal Community Recovery by Spectrally Initialized Variational EM in General Stochastic Block Models](deep_reads/2026-10-07-2610.04376.md)  
+  6/10 [daily]
 - [Does a mortality schedule need a Makeham term? Calibrating the likelihood-ratio test](deep_reads/2026-10-06-2610.03685.md)  
   7/10 [daily]
 - [Goodness-of-Fit Testing for Groupwise Spherical Error Structures](deep_reads/2026-10-06-2610.03469.md)  
@@ -9500,6 +9586,8 @@
 
 ### Daily
 
+- [Exact Calibration and Sharp Risk Geometry for Volume-Sampled Ridge Regression](deep_reads/2026-10-08-2610.07721.md)  
+  6/10 [daily]
 - [Markov chain Monte Carlo for predictively oriented posteriors](deep_reads/2026-10-01-2610.01818.md)  
   6/10 [daily]
 - [Amortized ratio-estimation importance sampling and localized simulation-based calibration for intractable likelihoods](deep_reads/2026-09-30-2609.39712.md)  
@@ -10525,6 +10613,14 @@
 
 ### Daily
 
+- [Armillary: A Label-Free Coordinate System for Stellar Spectra](deep_reads/2026-10-08-2610.07112.md)  
+  6/10 [daily]
+- [Optimal Photon Counting with Fast, Low Noise Astronomical Imagers](deep_reads/2026-10-08-2610.07137.md)  
+  6/10 [daily]
+- [Tracing the evolution of galaxy environments with manifold learning](deep_reads/2026-10-07-2610.03850.md)  
+  7/10 [daily]
+- [Not just a phase: detecting nanohertz gravitational waves from phase alone](deep_reads/2026-10-07-2610.06178.md)  
+  6/10 [daily]
 - [A Missing Latent, Not a Missing Simulator: Radius-Augmented Inference for Real JWST Retrieval](deep_reads/2026-10-06-2610.02245.md)  
   7/10 [daily]
 - [Learning Approximate Isometric Embeddings for Efficient Template Placement](deep_reads/2026-10-06-2610.02448.md)  
@@ -11025,6 +11121,10 @@
 
 ### Daily
 
+- [The Noise Is the Signal: Correlated Sampling Error Is Rank-Informative for Proxy Metric Selection](deep_reads/2026-10-08-2610.08194.md)  
+  6/10 [daily]
+- [Impulse Response Inference for Matrix Autoregressions](deep_reads/2026-10-07-2610.05405.md)  
+  6/10 [daily]
 - [Expected Utility Regret Rule: Minimax and Bayes Optimal Portfolio Choice](deep_reads/2026-10-06-2610.02290.md)  
   6/10 [daily]
 - [Certified Alpha Capacity: Statistical Evidence, Economic Lifetime, and Arbitrage under Decay](deep_reads/2026-10-01-2610.01115.md)  
@@ -13575,6 +13675,12 @@
 
 ### Daily
 
+- [Fridge: focused fine-tuning of ridge regression for personalize predictions](deep_reads/2026-10-08-2610.08481.md)  
+  6/10 [daily]
+- [Community Detection from Aggregated Relational Data: Identifiability and Spectral Recovery](deep_reads/2026-10-07-2610.03937.md)  
+  6/10 [daily]
+- [Poisson Autoregression on a Large Network with a Stochastic Block Model Structure](deep_reads/2026-10-07-2610.05365.md)  
+  6/10 [daily]
 - [Characterizing Identifiability in Boolean Factor Models](deep_reads/2026-10-05-2610.02682.md)  
   6/10 [daily]
 - [Sample complexity bounds for categorical Markov random fields via Discrete Diffusions](deep_reads/2026-10-01-2610.02128.md)  
