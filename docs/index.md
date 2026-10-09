@@ -11,54 +11,58 @@
 - **[收藏](favorites.md)** — 登录后在各页点 ☆ 收藏的论文，自动汇总到这里（总收藏按类别分组、可切换按周；每篇可写评论，无需手动维护）。
 - **[模型测评](all_shootout.md)** — 不同 LLM 在同一批论文上的打分 / 解读对比。
 
-## 今日 · 2026-10-08
+## 今日 · 2026-10-09
 
 ### 每日 arXiv 速览
 
-[→ 查看完整报告](daily/2026-10-08.md)
+[→ 查看完整报告](daily/2026-10-09.md)
 
-### 精读论文（20 篇）
+### 精读论文（22 篇）
 
-- [Debiased Machine Learning for Count Data: a Partially Linear Poisson Model Based on Neural Networks](deep_reads/2026-10-08-2610.07500.md)  
-  `效率理论 / Debiased ML` · 相关性 8/10
-- [Collaborative representations for targeted causal inference under outcome selection](deep_reads/2026-10-08-2610.08073.md)  
+- [Longitudinal causal inference under informative missingness using the self-censoring model](deep_reads/2026-10-09-2610.09234.md)  
   `因果推断` · 相关性 8/10
-- [Optimal Linear Functional Estimation for Proportionally High-Dimensional Linear Models](deep_reads/2026-10-08-2610.06875.md)  
+- [Cluster-Robust Prediction-Powered Inference](deep_reads/2026-10-09-2610.09601.md)  
+  `因果推断` · 相关性 8/10
+- [Beyond Source-Level Transfer: Sample-Level Learning for High-Dimensional Quantile Regression](deep_reads/2026-10-09-2610.09722.md)  
   `高维统计 / 随机矩阵` · 相关性 8/10
-- [Network Experiments with Edge Treatments and Node Outcomes](deep_reads/2026-10-08-2610.07363.md)  
+- [Policy Learning with Weak Signals](deep_reads/2026-10-09-2610.10167.md)  
   `因果推断` · 相关性 8/10
-- [Comment: Performance of Double-Robust Estimators When ``Inverse Probability'' Weights Are Highly Variable](deep_reads/2026-10-08-0804.2965.md)  
+- [Score-Based Methods for Selecting Direct Causes in Reweighted Distributions](deep_reads/2026-10-09-2610.09100.md)  
   `因果推断` · 相关性 7/10
-- [Large-scale linear hypothesis testing for high-dimensional online M-estimation](deep_reads/2026-10-08-2610.07418.md)  
-  `高维统计 / 随机矩阵` · 相关性 7/10
-- [Scope-Restricted Backtracking Counterfactuals](deep_reads/2026-10-08-2610.08017.md)  
+- [Sequential resetting procedures and false discovery rate](deep_reads/2026-10-09-2610.09339.md)  
+  `数理统计 / 假设检验` · 相关性 7/10
+- [The Lambert Penalty: Logarithmic Shrinkage for Sparse Regression](deep_reads/2026-10-09-2610.09627.md)  
+  `数理统计 / 假设检验` · 相关性 7/10
+- [Sharp Partial Identification for Survival Model Comparison Without Target Outcomes](deep_reads/2026-10-09-2610.09658.md)  
   `因果推断` · 相关性 7/10
-- [When does conformal calibration need censoring weights? Cause-of-failure prediction sets under competing risks](deep_reads/2026-10-08-2610.08602.md)  
+- [Statistical Inference for Continuous Action Bandits](deep_reads/2026-10-09-2610.09801.md)  
   `因果推断` · 相关性 7/10
-- [Prediction-powered inference for time series across space](deep_reads/2026-10-08-2610.08715.md)  
+- [The Adaptive Lasso with Weighted IPW Factor and KRR Penalty Function](deep_reads/2026-10-09-2610.08805.md)  
   `因果推断` · 相关性 7/10
-- [Posterior Consistency under dependent errors in non-linear inverse problems with applications to time evolution equations](deep_reads/2026-10-08-2610.07240.md)  
-  `非参数 / 半参数` · 相关性 7/10
-- [Minimax Operator Learning for Holomorphic Maps between Hilbert Spaces](deep_reads/2026-10-08-2610.07295.md)  
-  `非参数 / 半参数` · 相关性 7/10
-- [Spectral Recovery of Point Clouds from Noisy Geometric Graphs](deep_reads/2026-10-08-2610.08634.md)  
-  `高维统计 / 随机矩阵` · 相关性 7/10
-- [Measuring Gift Card Program Incrementality via Causal Data Fusion](deep_reads/2026-10-08-2610.08558.md)  
-  `因果推断` · 相关性 7/10
-- [Design-Driven Inference for Online Experiments: Jointly Optimal Evidence Collection, Testing, and Estimation](deep_reads/2026-10-08-2610.07831.md)  
+- [Local asymptotic normality for spectral-tail likelihoods under fixed-domain sampling](deep_reads/2026-10-09-2610.09105.md)  
+  `数理统计 / 假设检验` · 相关性 7/10
+- [Sketched Calibration for Conformal Prediction under Covariate Shift](deep_reads/2026-10-09-2610.09208.md)  
   `数理统计 / 假设检验` · 相关性 6/10
-- [Fridge: focused fine-tuning of ridge regression for personalize predictions](deep_reads/2026-10-08-2610.08481.md)  
+- [Reusing Statistical Guarantees Under Change: Selection Costs and Event Ownership](deep_reads/2026-10-09-2610.09391.md)  
+  `数理统计 / 假设检验` · 相关性 6/10
+- [Manifold Fitting by Successive Tangent-Space Projection](deep_reads/2026-10-09-2610.09423.md)  
+  `非参数 / 半参数` · 相关性 6/10
+- [Finite-Rank Logistic Gaussian Processes with Exact Likelihood for Conditional Density Estimation](deep_reads/2026-10-09-2610.09452.md)  
+  `非参数 / 半参数` · 相关性 6/10
+- [When Can You Ship on Evals Alone? Trial-Level Surrogacy for Offline Evaluation of LLM Systems](deep_reads/2026-10-09-2610.10142.md)  
+  `因果推断` · 相关性 6/10
+- [Adaptively Combining Randomized and External Control Data Using a Mixture Prior in the Presence of Heterogeneity](deep_reads/2026-10-09-2610.10293.md)  
+  `因果推断` · 相关性 6/10
+- [Graph-monotone entrywise guarantees for MLE and Rank Centrality on general comparison graphs](deep_reads/2026-10-09-2610.09030.md)  
   `其他` · 相关性 6/10
-- [Exact Calibration and Sharp Risk Geometry for Volume-Sampled Ridge Regression](deep_reads/2026-10-08-2610.07721.md)  
-  `统计计算 / 算法` · 相关性 6/10
-- [Asymptotic Null Distributions of Moran's $I$ and Assortativity in Large Networks](deep_reads/2026-10-08-2610.08711.md)  
+- [Sharp and Adaptive Cluster Recovery in Slowly Mixing Gaussian Hidden Markov Models](deep_reads/2026-10-09-2610.09123.md)  
   `数理统计 / 假设检验` · 相关性 6/10
-- [The Noise Is the Signal: Correlated Sampling Error Is Rank-Informative for Proxy Metric Selection](deep_reads/2026-10-08-2610.08194.md)  
-  `经济理论 / 应用` · 相关性 6/10
-- [Armillary: A Label-Free Coordinate System for Stellar Spectra](deep_reads/2026-10-08-2610.07112.md)  
-  `天体统计` · 相关性 6/10
-- [Optimal Photon Counting with Fast, Low Noise Astronomical Imagers](deep_reads/2026-10-08-2610.07137.md)  
-  `天体统计` · 相关性 6/10
+- [Tightness and Error Exponents of SDP with Logarithmically Many Communities](deep_reads/2026-10-09-2610.09303.md)  
+  `高维统计 / 随机矩阵` · 相关性 6/10
+- [The Silhouette Operator: Identifiability of Low-Rank Measures from One-Dimensional Projections](deep_reads/2026-10-09-2610.09687.md)  
+  `非参数 / 半参数` · 相关性 6/10
+- [Drift Estimation for a Multi-Dimensional L\'evy-Driven Stochastic Differential Equation Using Deep Neural Networks](deep_reads/2026-10-09-2610.09813.md)  
+  `非参数 / 半参数` · 相关性 6/10
 
 ## 收藏
 
@@ -66,11 +70,11 @@
 
 ## 本周每日报告
 
+- [2026-10-08](daily/2026-10-08.md)
 - [2026-10-07](daily/2026-10-07.md)
 - [2026-10-06](daily/2026-10-06.md)
 - [2026-10-05](daily/2026-10-05.md)
 - [2026-10-02](daily/2026-10-02.md)
-- [2026-10-01](daily/2026-10-01.md)
 
 
 ---

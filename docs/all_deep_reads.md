@@ -4,6 +4,24 @@
 
 ### Daily
 
+- [Longitudinal causal inference under informative missingness using the self-censoring model](deep_reads/2026-10-09-2610.09234.md)  
+  8/10 [daily]
+- [Cluster-Robust Prediction-Powered Inference](deep_reads/2026-10-09-2610.09601.md)  
+  8/10 [daily]
+- [Policy Learning with Weak Signals](deep_reads/2026-10-09-2610.10167.md)  
+  8/10 [daily]
+- [Score-Based Methods for Selecting Direct Causes in Reweighted Distributions](deep_reads/2026-10-09-2610.09100.md)  
+  7/10 [daily]
+- [Sharp Partial Identification for Survival Model Comparison Without Target Outcomes](deep_reads/2026-10-09-2610.09658.md)  
+  7/10 [daily]
+- [Statistical Inference for Continuous Action Bandits](deep_reads/2026-10-09-2610.09801.md)  
+  7/10 [daily]
+- [The Adaptive Lasso with Weighted IPW Factor and KRR Penalty Function](deep_reads/2026-10-09-2610.08805.md)  
+  7/10 [daily]
+- [When Can You Ship on Evals Alone? Trial-Level Surrogacy for Offline Evaluation of LLM Systems](deep_reads/2026-10-09-2610.10142.md)  
+  6/10 [daily]
+- [Adaptively Combining Randomized and External Control Data Using a Mixture Prior in the Presence of Heterogeneity](deep_reads/2026-10-09-2610.10293.md)  
+  6/10 [daily]
 - [Collaborative representations for targeted causal inference under outcome selection](deep_reads/2026-10-08-2610.08073.md)  
   8/10 [daily]
 - [Network Experiments with Edge Treatments and Node Outcomes](deep_reads/2026-10-08-2610.07363.md)  
@@ -3688,6 +3706,10 @@
 
 ### Daily
 
+- [Beyond Source-Level Transfer: Sample-Level Learning for High-Dimensional Quantile Regression](deep_reads/2026-10-09-2610.09722.md)  
+  8/10 [daily]
+- [Tightness and Error Exponents of SDP with Logarithmically Many Communities](deep_reads/2026-10-09-2610.09303.md)  
+  6/10 [daily]
 - [Optimal Linear Functional Estimation for Proportionally High-Dimensional Linear Models](deep_reads/2026-10-08-2610.06875.md)  
   8/10 [daily]
 - [Large-scale linear hypothesis testing for high-dimensional online M-estimation](deep_reads/2026-10-08-2610.07418.md)  
@@ -4992,6 +5014,14 @@
 
 ### Daily
 
+- [Manifold Fitting by Successive Tangent-Space Projection](deep_reads/2026-10-09-2610.09423.md)  
+  6/10 [daily]
+- [Finite-Rank Logistic Gaussian Processes with Exact Likelihood for Conditional Density Estimation](deep_reads/2026-10-09-2610.09452.md)  
+  6/10 [daily]
+- [The Silhouette Operator: Identifiability of Low-Rank Measures from One-Dimensional Projections](deep_reads/2026-10-09-2610.09687.md)  
+  6/10 [daily]
+- [Drift Estimation for a Multi-Dimensional L\'evy-Driven Stochastic Differential Equation Using Deep Neural Networks](deep_reads/2026-10-09-2610.09813.md)  
+  6/10 [daily]
 - [Posterior Consistency under dependent errors in non-linear inverse problems with applications to time evolution equations](deep_reads/2026-10-08-2610.07240.md)  
   7/10 [daily]
 - [Minimax Operator Learning for Holomorphic Maps between Hilbert Spaces](deep_reads/2026-10-08-2610.07295.md)  
@@ -7259,6 +7289,18 @@
 
 ### Daily
 
+- [Sequential resetting procedures and false discovery rate](deep_reads/2026-10-09-2610.09339.md)  
+  7/10 [daily]
+- [The Lambert Penalty: Logarithmic Shrinkage for Sparse Regression](deep_reads/2026-10-09-2610.09627.md)  
+  7/10 [daily]
+- [Local asymptotic normality for spectral-tail likelihoods under fixed-domain sampling](deep_reads/2026-10-09-2610.09105.md)  
+  7/10 [daily]
+- [Sketched Calibration for Conformal Prediction under Covariate Shift](deep_reads/2026-10-09-2610.09208.md)  
+  6/10 [daily]
+- [Reusing Statistical Guarantees Under Change: Selection Costs and Event Ownership](deep_reads/2026-10-09-2610.09391.md)  
+  6/10 [daily]
+- [Sharp and Adaptive Cluster Recovery in Slowly Mixing Gaussian Hidden Markov Models](deep_reads/2026-10-09-2610.09123.md)  
+  6/10 [daily]
 - [Design-Driven Inference for Online Experiments: Jointly Optimal Evidence Collection, Testing, and Estimation](deep_reads/2026-10-08-2610.07831.md)  
   6/10 [daily]
 - [Asymptotic Null Distributions of Moran's $I$ and Assortativity in Large Networks](deep_reads/2026-10-08-2610.08711.md)  
@@ -13675,6 +13717,8 @@
 
 ### Daily
 
+- [Graph-monotone entrywise guarantees for MLE and Rank Centrality on general comparison graphs](deep_reads/2026-10-09-2610.09030.md)  
+  6/10 [daily]
 - [Fridge: focused fine-tuning of ridge regression for personalize predictions](deep_reads/2026-10-08-2610.08481.md)  
   6/10 [daily]
 - [Community Detection from Aggregated Relational Data: Identifiability and Spectral Recovery](deep_reads/2026-10-07-2610.03937.md)  
