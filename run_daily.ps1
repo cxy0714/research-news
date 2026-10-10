@@ -73,24 +73,54 @@ finally {
     $mutex.ReleaseMutex()
     $mutex.Dispose()
     # Close the transcript BEFORE git stages it, so the file isn't locked and the
-    # committed logs\run-<date>.log is complete through the pipeline steps.
+    # committed logs\run-<date>.log is complete through the pipeline steps. The
+    # commit/push below therefore cannot use the transcript — it collects its own
+    # output in $pushLog and appends it to the same file afterwards.
     Stop-Transcript -ErrorAction SilentlyContinue | Out-Null
 }
 
 # Commit + push everything (docs/ + data/ + logs/) if anything changed.
+#
+# The push output is captured and appended to logs\run-<date>-<host>.log instead
+# of only going to the console. A push that failed all 4 attempts used to leave
+# NO trace anywhere (the transcript was already closed before this block), so a
+# stale site was indistinguishable from "nothing changed today". The tail is
+# appended after `git add -A`, so it lands in the next run's commit.
+$pushLog = New-Object System.Collections.Generic.List[string]
+$pushLog.Add("")
+$pushLog.Add("**********************")
+$pushLog.Add("git commit/push: $(Get-Date -Format o)")
 if (git status --porcelain) {
     git add -A
     git commit -m "daily report $today"
+    $pushed = $false
     for ($i = 1; $i -le 4; $i++) {
-        git push
-        if ($LASTEXITCODE -eq 0) { break }
+        git push 2>&1 | Tee-Object -Variable pushOut | Out-Host
+        $pushExit = $LASTEXITCODE
+        $pushLog.Add("--- push attempt $i (exit=$pushExit) ---")
+        $pushOut | ForEach-Object { $pushLog.Add("$_") }
+        if ($pushExit -eq 0) { $pushed = $true; break }
         # Push failed. Most often the remote moved on (another machine, or a
         # web/agent merge) → a plain retry won't fix a non-fast-forward; rebase
         # onto it, then retry (the backoff also rides out a transient network blip).
         Start-Sleep -Seconds ([math]::Pow(2, $i))
-        git pull --rebase --autostash
+        git pull --rebase --autostash 2>&1 | Tee-Object -Variable pullOut | Out-Host
+        $pullExit = $LASTEXITCODE
+        $pushLog.Add("--- pull --rebase --autostash attempt $i (exit=$pullExit) ---")
+        $pullOut | ForEach-Object { $pushLog.Add("$_") }
     }
+    if ($pushed) {
+        $pushLog.Add("push OK, HEAD = $(git rev-parse --short HEAD)")
+    } else {
+        $msg = "!!! PUSH FAILED after 4 attempts: $(git rev-parse --short HEAD) is STILL LOCAL-ONLY and GitHub Pages will NOT update."
+        $pushLog.Add($msg)
+        Write-Host $msg
+    }
+} else {
+    $pushLog.Add("nothing to commit")
 }
+$pushLog.Add("**********************")
+Add-Content -LiteralPath "logs\run-$today-$hostTag.log" -Value $pushLog.ToArray() -Encoding UTF8
 
 # ── Task Scheduler setup (manual alternative to register-task.ps1) ────────────
 #   1. Task Scheduler -> Create Task (not Basic Task)
