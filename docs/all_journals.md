@@ -400,10 +400,12 @@
 
 ### MNRAS
 
+- [Vol 552 Issue 3 · 2026-10-12](journals/2026-10-12-mnras-v552-i3.md)
 - [Vol 550 Issue 2 · 2026-07-19](journals/2026-07-19-mnras-v550-i2.md)
 - [Vol 550 Issue 2 · 2026-07-07](journals/2026-07-07-mnras-v550-i2.md)
 - [Vol 550 Issue 1 · 2026-07-07](journals/2026-07-07-mnras-v550-i1.md)
 - [Vol 549 Issue 4 · 2026-06-19](journals/2026-06-19-mnras-v549-i4.md)
+- [2026-10-12](journals/2026-10-12-mnras.md)
 
 ## 流行病学 (Epidemiology)
 

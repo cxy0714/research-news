@@ -11919,6 +11919,36 @@
 
 ### 期刊
 
+#### Monthly Notices of the Royal Astronomical Society Vol 552 Issue 3
+
+- [Constraining inhomogeneities in SNe, FBOTs, and other high-energy transients from unresolved radio observations](deep_reads/2026-10-12-10.1093_mnras_stag1795.md)  
+  6/10 [journals]
+- [Life in the cosmic neighbourhood: galactic habitable zones in the <scp>eagle</scp> simulations](deep_reads/2026-10-12-10.1093_mnras_stag1750.md)  
+  5/10 [journals]
+
+#### Monthly Notices of the Royal Astronomical Society
+
+- [New determination of Jupiter’s vertical cloud and haze structure using dual viewing angle MUSE/VLT observations](deep_reads/2026-10-12-10.1093_mnras_stag1936.md)  
+  5/10 [journals]
+- [MIGHTEE-H <scp>i</scp> : Environmental effects of cosmic filaments on extragalactic H <scp>i</scp> detections in the COSMOS and XMM-LSS fields](deep_reads/2026-10-12-10.1093_mnras_stag1916.md)  
+  5/10 [journals]
+- [Column-Density Estimation from the Equivalent Widths of Absorption Doublets](deep_reads/2026-10-12-10.1093_mnras_stag1921.md)  
+  5/10 [journals]
+- [Early onset of the hot circumgalactic medium around Milky Way galaxies](deep_reads/2026-10-12-10.1093_mnras_stag1931.md)  
+  4/10 [journals]
+- [From protogalaxy through thick and thin: Why did the Milky Way evolve in three kinematic phases?](deep_reads/2026-10-12-10.1093_mnras_stag1902.md)  
+  4/10 [journals]
+- [Towards a coupled activity-fallback model for comets I) 67P/Churyumov-Gerasimenko’s water activity from a microphysics model with dynamic dust-depth](deep_reads/2026-10-12-10.1093_mnras_stag1930.md)  
+  4/10 [journals]
+- [Disentangling the assembly of the central and diffuse stellar components in galaxy clusters through dynamical friction and tidal stripping](deep_reads/2026-10-12-10.1093_mnras_stag1912.md)  
+  4/10 [journals]
+- [The differences in the Narrow Line Region of nearby QSOs 1 and QSOs 2: II - Signatures of kinetic feedback](deep_reads/2026-10-12-10.1093_mnras_stag1898.md)  
+  4/10 [journals]
+- [The Thousand-Pulsar-Array programme on MeerKAT – XX. Co-existing interacting periodicities and polarization modulation in PSR J1901−0906](deep_reads/2026-10-12-10.1093_mnras_stag1935.md)  
+  3/10 [journals]
+- [The First Multi-Messenger Nova: External Shocks, TeV Photons, and Neutrinos in the Next Eruption of T CrB](deep_reads/2026-10-12-10.1093_mnras_stag1929.md)  
+  3/10 [journals]
+
 #### Journal of the American Statistical Association
 
 - [Statistical methods for partitioning ribbon and globally-distributed flux using data from the Interstellar Boundary Explorer](deep_reads/2026-10-10-10.1080_01621459.2026.2738231.md)  
