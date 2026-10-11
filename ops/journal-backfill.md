@@ -119,7 +119,7 @@ IEEE 系列 ieee（月刊、每期很大，全部先 dry-run、用小 N）：
 - [x] (2026-10-12) `--only Econometrica --n-issues 2`
 - [x] (2026-10-12) `--only "J. Econometrics" --n-issues 2`   ⚠ 出刊密
 - [x] (2026-10-12) `--only "Quant. Econ." --n-issues 2`
-- [ ] `--only JBES --n-issues 2`
+- [x] (2026-10-12) `--only JBES --n-issues 2`
 
 天文 astro：
 - [ ] `--only MNRAS --n-issues 1`   ⚠⚠ 每期上百篇
