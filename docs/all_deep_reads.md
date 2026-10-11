@@ -1225,6 +1225,22 @@
 
 ### 期刊
 
+#### Journal of Econometrics Vol 258
+
+- [Treatment evaluation at the intensive and extensive margins](deep_reads/2026-10-12-10.1016_j.jeconom.2026.106344.md)  
+  8/10 [journals]
+- [Measurement error and peer effects in networks](deep_reads/2026-10-12-10.1016_j.jeconom.2026.106339.md)  
+  7/10 [journals]
+- [Panel threshold regression with unobserved individual-specific threshold effects](deep_reads/2026-10-12-10.1016_j.jeconom.2026.106337.md)  
+  6/10 [journals]
+
+#### Journal of Econometrics Vol 257
+
+- [Identification-robust inference for the LATE with high-dimensional covariates](deep_reads/2026-10-12-10.1016_j.jeconom.2026.106302.md)  
+  8/10 [journals]
+- [Estimation and inference on average treatment effect in percentage points under heterogeneity](deep_reads/2026-10-12-10.1016_j.jeconom.2026.106303.md)  
+  7/10 [journals]
+
 #### Econometrica Vol 94 Issue 5
 
 - [Causal Inference With Noisy Covariates: Heteroscedastic Measurement Error and Differential Privacy](deep_reads/2026-10-12-10.3982_ecta23897.md)  
@@ -4190,6 +4206,13 @@
   8/10 [daily]
 
 ### 期刊
+
+#### Journal of Econometrics Vol 258
+
+- [Robust estimation and inference for high-dimensional panel data models](deep_reads/2026-10-12-10.1016_j.jeconom.2026.106342.md)  
+  7/10 [journals]
+- [Spatio-temporal autoregressions for high dimensional matrix-valued time series](deep_reads/2026-10-12-10.1016_j.jeconom.2026.106319.md)  
+  6/10 [journals]
 
 #### Statistica Sinica
 
@@ -8484,6 +8507,25 @@
 
 ### 期刊
 
+#### Journal of Econometrics Vol 258
+
+- [High dimensional alpha test for linear factor pricing model with Lq-norm](deep_reads/2026-10-12-10.1016_j.jeconom.2026.106336.md)  
+  7/10 [journals]
+
+#### Journal of Econometrics Vol 257
+
+- [A goodness-of-fit test for sparse networks](deep_reads/2026-07-06-10.1016_j.jeconom.2026.106276.md)  
+  7/10 [journals]
+- [Testing coefficient stability in spatial regression](deep_reads/2026-10-12-10.1016_j.jeconom.2026.106309.md)  
+  6/10 [journals]
+- [Testing for underpowered literatures](deep_reads/2026-10-12-10.1016_j.jeconom.2026.106312.md)  
+  6/10 [journals]
+
+#### Journal of Econometrics
+
+- [Coordinated testing for identification failure and correct model specification](deep_reads/2026-10-12-10.1016_j.jeconom.2026.106338.md)  
+  7/10 [journals]
+
 #### Statistica Sinica
 
 - [Center-Outward Ranks and Signs for Testing Conditional Quantile Independence](deep_reads/2026-06-23-10.5705_ss.202024.0266.md)  
@@ -9081,11 +9123,6 @@
 
 - [Bootstrap inference under cross‐sectional dependence](deep_reads/2026-07-06-10.3982_qe1626.md)  
   6/10 [journals]
-
-#### Journal of Econometrics Vol 257
-
-- [A goodness-of-fit test for sparse networks](deep_reads/2026-07-06-10.1016_j.jeconom.2026.106276.md)  
-  7/10 [journals]
 
 #### Journal of Econometrics Vol 254
 
@@ -10490,6 +10527,11 @@
   6/10 [daily]
 
 ### 期刊
+
+#### Journal of Econometrics Vol 258
+
+- [Iterative distributed multinomial regression](deep_reads/2026-10-12-10.1016_j.jeconom.2026.106334.md)  
+  6/10 [journals]
 
 #### Statistica Sinica
 
@@ -12215,6 +12257,11 @@
   6/10 [daily]
 
 ### 期刊
+
+#### Journal of Econometrics Vol 258
+
+- [Clustering with potential multidimensionality: Inference and practice](deep_reads/2026-10-12-10.1016_j.jeconom.2026.106321.md)  
+  7/10 [journals]
 
 #### Econometrica Vol 94 Issue 5
 
@@ -14812,6 +14859,13 @@
   8/10 [daily]
 
 ### 期刊
+
+#### Journal of Econometrics Vol 258
+
+- [Normal approximation for U-statistics with cross-sectional dependence](deep_reads/2026-10-12-10.1016_j.jeconom.2026.106325.md)  
+  8/10 [journals]
+- [Nonparametric identification of first-price auction with unobserved competition: A density discontinuity framework](deep_reads/2026-10-12-10.1016_j.jeconom.2026.106345.md)  
+  6/10 [journals]
 
 #### Scandinavian Journal of Statistics Vol 53 Issue 3
 

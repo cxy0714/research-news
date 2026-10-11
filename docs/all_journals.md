@@ -322,6 +322,8 @@
 
 ### J. Econometrics
 
+- [Vol 258 · 2026-10-12](journals/2026-10-12-j-econometrics-v258.md)
+- [Vol 257 · 2026-10-12](journals/2026-10-12-j-econometrics-v257.md)
 - [Vol 257 · 2026-07-06](journals/2026-07-06-j-econometrics-v257.md)
 - [Vol 256 · 2026-07-06](journals/2026-07-06-j-econometrics-v256.md)
 - [Vol 256 · 2026-06-21](journals/2026-06-21-j-econometrics-v256.md)
@@ -331,6 +333,7 @@
 - [Vol 254 · 2026-06-07](journals/2026-06-07-j-econometrics-v254.md)
 - [Vol 253 · 2026-07-06](journals/2026-07-06-j-econometrics-v253.md)
 - [Vol 244 Issue 2 · 2026-07-18](journals/2026-07-18-j-econometrics-v244-i2.md)
+- [2026-10-12](journals/2026-10-12-j-econometrics.md)
 - [2026-06-21](journals/2026-06-21-j-econometrics.md)
 - [2026-06-07](journals/2026-06-07-j-econometrics.md)
 
