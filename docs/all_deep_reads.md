@@ -10570,6 +10570,11 @@
 
 ### 期刊
 
+#### Monthly Notices of the Royal Astronomical Society Vol 552 Issue 3
+
+- [Fast and furious: long-term orbit integrations with collocation integrator Lobbie](deep_reads/2026-10-12-10.1093_mnras_stag1811.md)  
+  3/10 [journals]
+
 #### Journal of Econometrics Vol 258
 
 - [Iterative distributed multinomial regression](deep_reads/2026-10-12-10.1016_j.jeconom.2026.106334.md)  
@@ -11928,12 +11933,28 @@
 
 #### Monthly Notices of the Royal Astronomical Society
 
+- [Cosmological constraining power of the redshifts, heights, and angular clustering of weak gravitational lensing peaks](deep_reads/2026-10-12-10.1093_mnras_stag1905.md)  
+  6/10 [journals]
+- [Shortening the Baseline: Characterising Type Ia Supernovae Using Δ <i>m</i> 10( <i>X</i> )](deep_reads/2026-10-12-10.1093_mnras_stag1907.md)  
+  6/10 [journals]
+- [Scatter, bias, and chaos of satellite orbits in triaxial dark matter haloes](deep_reads/2026-10-12-10.1093_mnras_stag1919.md)  
+  5/10 [journals]
+- [Breaking the Blend: A multi-tracer kinematic decomposition method for IFS data applied to disentangling the AGN outflow and circumnuclear ring in NGC 5728 with JWST](deep_reads/2026-10-12-10.1093_mnras_stag1917.md)  
+  5/10 [journals]
+- [Signatures of photospheric convection throughout the solar atmosphere: the EVE Sun-as-a-star mHz continuum](deep_reads/2026-10-12-10.1093_mnras_stag1903.md)  
+  5/10 [journals]
+- [The Rogue One: A Dark Matter-Dominated Dwarf in the Trail of Dark Matter-Deficient Galaxies](deep_reads/2026-10-12-10.1093_mnras_stag1895.md)  
+  5/10 [journals]
 - [New determination of Jupiter’s vertical cloud and haze structure using dual viewing angle MUSE/VLT observations](deep_reads/2026-10-12-10.1093_mnras_stag1936.md)  
   5/10 [journals]
 - [MIGHTEE-H <scp>i</scp> : Environmental effects of cosmic filaments on extragalactic H <scp>i</scp> detections in the COSMOS and XMM-LSS fields](deep_reads/2026-10-12-10.1093_mnras_stag1916.md)  
   5/10 [journals]
 - [Column-Density Estimation from the Equivalent Widths of Absorption Doublets](deep_reads/2026-10-12-10.1093_mnras_stag1921.md)  
   5/10 [journals]
+- [Investigating anomalous microwave emission near G107.2+5.20 in Ku-band with the Green Bank Telescope](deep_reads/2026-10-12-10.1093_mnras_stag1922.md)  
+  4/10 [journals]
+- [Investigating the star formation histories of galaxies from Cosmic Dawn to the Epoch of Reionization with the Santa Cruz SAM](deep_reads/2026-10-12-10.1093_mnras_stag1913.md)  
+  4/10 [journals]
 - [Early onset of the hot circumgalactic medium around Milky Way galaxies](deep_reads/2026-10-12-10.1093_mnras_stag1931.md)  
   4/10 [journals]
 - [From protogalaxy through thick and thin: Why did the Milky Way evolve in three kinematic phases?](deep_reads/2026-10-12-10.1093_mnras_stag1902.md)  
@@ -11944,6 +11965,10 @@
   4/10 [journals]
 - [The differences in the Narrow Line Region of nearby QSOs 1 and QSOs 2: II - Signatures of kinetic feedback](deep_reads/2026-10-12-10.1093_mnras_stag1898.md)  
   4/10 [journals]
+- [Disc-mediated angular momentum transport resolves the mass-gain problem in rotating binaries](deep_reads/2026-10-12-10.1093_mnras_stag1908.md)  
+  3/10 [journals]
+- [Cold Stream Penetration of Virial Shocks: Fragmentation, Coagulation, and Disruption in the Hot Circumgalactic Medium](deep_reads/2026-10-12-10.1093_mnras_stag1914.md)  
+  3/10 [journals]
 - [The Thousand-Pulsar-Array programme on MeerKAT – XX. Co-existing interacting periodicities and polarization modulation in PSR J1901−0906](deep_reads/2026-10-12-10.1093_mnras_stag1935.md)  
   3/10 [journals]
 - [The First Multi-Messenger Nova: External Shocks, TeV Photons, and Neutrinos in the Next Eruption of T CrB](deep_reads/2026-10-12-10.1093_mnras_stag1929.md)  
