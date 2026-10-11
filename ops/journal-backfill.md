@@ -116,7 +116,7 @@ IEEE 系列 ieee（月刊、每期很大，全部先 dry-run、用小 N）：
 > 超过 3 小时上限而被跳过。
 
 经济 / 计量 econ：
-- [ ] `--only Econometrica --n-issues 2`
+- [x] (2026-10-12) `--only Econometrica --n-issues 2`
 - [ ] `--only "J. Econometrics" --n-issues 2`   ⚠ 出刊密
 - [ ] `--only "Quant. Econ." --n-issues 2`
 - [ ] `--only JBES --n-issues 2`

@@ -4,6 +4,8 @@
 
 ### AoS
 
+- [Vol 54 Issue 5 · 2026-10-10](journals/2026-10-10-aos-v54-i5.md)
+- [Vol 54 Issue 4 · 2026-10-10](journals/2026-10-10-aos-v54-i4.md)
 - [Vol 54 Issue 3 · 2026-07-04](journals/2026-07-04-aos-v54-i3.md)
 - [Vol 54 Issue 2 · 2026-06-20](journals/2026-06-20-aos-v54-i2.md)
 - [Vol 54 Issue 2 · 2026-05-26](journals/2026-05-26-aos-v54-i2.md)
@@ -29,6 +31,8 @@
 
 ### Biometrika
 
+- [Vol 113 Issue 4 · 2026-10-10](journals/2026-10-10-biometrika-v113-i4.md)
+- [Vol 113 Issue 3 · 2026-10-10](journals/2026-10-10-biometrika-v113-i3.md)
 - [Vol 113 Issue 2 · 2026-06-20](journals/2026-06-20-biometrika-v113-i2.md)
 - [Vol 113 Issue 2 · 2026-05-26](journals/2026-05-26-biometrika-v113-i2.md)
 - [Vol 113 Issue 1 · 2026-05-26](journals/2026-05-26-biometrika-v113-i1.md)
@@ -48,6 +52,7 @@
 - [Vol 108 Issue 4 · 2026-07-06](journals/2026-07-06-biometrika-v108-i4.md)
 - [Vol 108 Issue 3 · 2026-07-06](journals/2026-07-06-biometrika-v108-i3.md)
 - [Vol 108 Issue 2 · 2026-07-06](journals/2026-07-06-biometrika-v108-i2.md)
+- [2026-10-10](journals/2026-10-10-biometrika.md)
 
 ### JASA
 
@@ -63,14 +68,17 @@
 - [Vol 119 Issue 547 · 2026-07-05](journals/2026-07-05-jasa-v119-i547.md)
 - [Vol 119 Issue 546 · 2026-07-05](journals/2026-07-05-jasa-v119-i546.md)
 - [Vol 119 Issue 545 · 2026-07-05](journals/2026-07-05-jasa-v119-i545.md)
+- [2026-10-10](journals/2026-10-10-jasa.md)
 - [2026-05-26](journals/2026-05-26-jasa.md)
 
 ### JMLR
 
+- [2026-10-10](journals/2026-10-10-jmlr.md)
 - [2026-05-26](journals/2026-05-26-jmlr.md)
 
 ### JRSSB
 
+- [Vol 88 Issue 4 · 2026-10-10](journals/2026-10-10-jrssb-v88-i4.md)
 - [Vol 88 Issue 2 · 2026-05-26](journals/2026-05-26-jrssb-v88-i2.md)
 - [Vol 88 Issue 1 · 2026-05-26](journals/2026-05-26-jrssb-v88-i1.md)
 - [Vol 87 Issue 5 · 2026-06-20](journals/2026-06-20-jrssb-v87-i5.md)
@@ -92,11 +100,13 @@
 - [Vol 85 Issue 2 · 2026-07-05](journals/2026-07-05-jrssb-v85-i2.md)
 - [Vol 85 Issue 1 · 2026-07-05](journals/2026-07-05-jrssb-v85-i1.md)
 - [Vol 84 Issue 5 · 2026-07-05](journals/2026-07-05-jrssb-v84-i5.md)
+- [2026-10-10](journals/2026-10-10-jrssb.md)
 
 ## 概率统计 (Prob-Stats)
 
 ### AoP
 
+- [Vol 54 Issue 5 · 2026-10-10](journals/2026-10-10-aop-v54-i5.md)
 - [Vol 54 Issue 4 · 2026-07-14](journals/2026-07-14-aop-v54-i4.md)
 - [Vol 54 Issue 3 · 2026-06-18](journals/2026-06-18-aop-v54-i3.md)
 - [Vol 54 Issue 2 · 2026-06-18](journals/2026-06-18-aop-v54-i2.md)
@@ -120,6 +130,8 @@
 
 ### Bernoulli
 
+- [Vol 32 Issue 4 · 2026-10-10](journals/2026-10-10-bernoulli-v32-i4.md)
+- [Vol 32 Issue 3 · 2026-10-10](journals/2026-10-10-bernoulli-v32-i3.md)
 - [Vol 32 Issue 3 · 2026-06-18](journals/2026-06-18-bernoulli-v32-i3.md)
 - [Vol 32 Issue 2 · 2026-06-18](journals/2026-06-18-bernoulli-v32-i2.md)
 - [Vol 32 Issue 1 · 2026-06-18](journals/2026-06-18-bernoulli-v32-i1.md)
@@ -149,7 +161,9 @@
 
 ### EJS
 
+- [Vol 20 Issue 2 · 2026-10-10](journals/2026-10-10-ejs-v20-i2.md)
 - [Vol 20 Issue 2 · 2026-07-15](journals/2026-07-15-ejs-v20-i2.md)
+- [Vol 20 Issue 1 · 2026-10-10](journals/2026-10-10-ejs-v20-i1.md)
 - [Vol 20 Issue 1 · 2026-07-15](journals/2026-07-15-ejs-v20-i1.md)
 - [Vol 20 Issue 1 · 2026-06-18](journals/2026-06-18-ejs-v20-i1.md)
 - [Vol 19 Issue 2 · 2026-07-15](journals/2026-07-15-ejs-v19-i2.md)
@@ -165,6 +179,7 @@
 
 ### Scand. J. Stat.
 
+- [Vol 53 Issue 3 · 2026-10-10](journals/2026-10-10-scand-j-stat-v53-i3.md)
 - [Vol 53 Issue 2 · 2026-06-19](journals/2026-06-19-scand-j-stat-v53-i2.md)
 - [Vol 53 Issue 1 · 2026-06-19](journals/2026-06-19-scand-j-stat-v53-i1.md)
 - [Vol 52 Issue 4 · 2026-06-19](journals/2026-06-19-scand-j-stat-v52-i4.md)
@@ -179,9 +194,11 @@
 - [Vol 50 Issue 3 · 2026-06-23](journals/2026-06-23-scand-j-stat-v50-i3.md)
 - [Vol 50 Issue 2 · 2026-06-23](journals/2026-06-23-scand-j-stat-v50-i2.md)
 - [Vol 50 Issue 1 · 2026-06-23](journals/2026-06-23-scand-j-stat-v50-i1.md)
+- [2026-10-10](journals/2026-10-10-scand-j-stat.md)
 
 ### Statistica Sinica
 
+- [2026-10-10](journals/2026-10-10-statistica-sinica.md)
 - [2026-06-23](journals/2026-06-23-statistica-sinica.md)
 - [2026-06-19](journals/2026-06-19-statistica-sinica.md)
 
@@ -189,6 +206,8 @@
 
 ### AoAS
 
+- [Vol 20 Issue 3 · 2026-10-10](journals/2026-10-10-aoas-v20-i3.md)
+- [Vol 20 Issue 2 · 2026-10-10](journals/2026-10-10-aoas-v20-i2.md)
 - [Vol 20 Issue 1 · 2026-06-10](journals/2026-06-10-aoas-v20-i1.md)
 - [Vol 19 Issue 4 · 2026-06-19](journals/2026-06-19-aoas-v19-i4.md)
 - [Vol 19 Issue 4 · 2026-06-10](journals/2026-06-10-aoas-v19-i4.md)
@@ -206,6 +225,8 @@
 
 ### Biometrics
 
+- [Vol 82 Issue 4 · 2026-10-10](journals/2026-10-10-biometrics-v82-i4.md)
+- [Vol 82 Issue 3 · 2026-10-10](journals/2026-10-10-biometrics-v82-i3.md)
 - [Vol 82 Issue 3 · 2026-07-03](journals/2026-07-03-biometrics-v82-i3.md)
 - [Vol 82 Issue 2 · 2026-07-03](journals/2026-07-03-biometrics-v82-i2.md)
 - [Vol 82 Issue 2 · 2026-06-24](journals/2026-06-24-biometrics-v82-i2.md)
@@ -227,9 +248,11 @@
 - [Vol 80 Issue 2 · 2026-06-24](journals/2026-06-24-biometrics-v80-i2.md)
 - [Vol 80 Issue 1 · 2026-07-03](journals/2026-07-03-biometrics-v80-i1.md)
 - [Vol 80 Issue 1 · 2026-06-24](journals/2026-06-24-biometrics-v80-i1.md)
+- [2026-10-10](journals/2026-10-10-biometrics.md)
 
 ### Biostatistics
 
+- [Vol 27 Issue 1 · 2026-10-10](journals/2026-10-10-biostatistics-v27-i1.md)
 - [Vol 27 Issue 1 · 2026-07-04](journals/2026-07-04-biostatistics-v27-i1.md)
 - [Vol 27 Issue 1 · 2026-06-20](journals/2026-06-20-biostatistics-v27-i1.md)
 - [Vol 27 Issue 1 · 2026-06-10](journals/2026-06-10-biostatistics-v27-i1.md)
@@ -249,6 +272,7 @@
 
 ### JRSS-C
 
+- [Vol 75 Issue 4 · 2026-10-10](journals/2026-10-10-jrss-c-v75-i4.md)
 - [Vol 75 Issue 3 · 2026-06-20](journals/2026-06-20-jrss-c-v75-i3.md)
 - [Vol 75 Issue 2 · 2026-06-10](journals/2026-06-10-jrss-c-v75-i2.md)
 - [Vol 75 Issue 1 · 2026-06-20](journals/2026-06-20-jrss-c-v75-i1.md)
@@ -264,11 +288,13 @@
 - [Vol 73 Issue 2 · 2026-07-04](journals/2026-07-04-jrss-c-v73-i2.md)
 - [Vol 73 Issue 1 · 2026-07-04](journals/2026-07-04-jrss-c-v73-i1.md)
 - [Vol 72 Issue 5 · 2026-07-04](journals/2026-07-04-jrss-c-v72-i5.md)
+- [2026-10-10](journals/2026-10-10-jrss-c.md)
 
 ## 经济学 / 计量 (Econ)
 
 ### Econometrica
 
+- [Vol 94 Issue 5 · 2026-10-12](journals/2026-10-12-econometrica-v94-i5.md)
 - [Vol 94 Issue 4 · 2026-07-18](journals/2026-07-18-econometrica-v94-i4.md)
 - [Vol 94 Issue 3 · 2026-06-07](journals/2026-06-07-econometrica-v94-i3.md)
 - [Vol 94 Issue 2 · 2026-06-07](journals/2026-06-07-econometrica-v94-i2.md)
