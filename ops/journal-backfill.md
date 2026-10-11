@@ -100,6 +100,75 @@ IEEE 系列 ieee（月刊、每期很大，全部先 dry-run、用小 N）：
 - [x] (2026-06-21) `--only TSP --n-issues 2`   ⚠
 - [x] (2026-06-21) `--only JSAIT --n-issues 4`
 
+### 阶段五 · 补齐 2026-08 之后新出的期（2026-10-11 加入，交给 journals 回补循环按格跑）
+
+> **背景**：2026-10-10 17:14 起做了一次性全刊大跑（`--n-issues 2`），到 applied 组收工时已
+> 落盘 18 个期刊页 + 342 篇精读（core / prob_stats / applied 全组覆盖）。剩下的 7 组改由本
+> 队列交给 `research-news-journals` 循环按格补：**每格跑完即提交、锁在格间释放**，所以
+> daily 不会被压，单格崩了也只丢那一格（不会像大跑那样一次冻结丢掉 5.5 小时）。
+>
+> 收工脚本（`logs/finish-after-applied.ps1`）已用 `data/llm_scores.jsonl` 里 `run_date=2026-10-10`
+> 的记录重建 `data/seen_papers.json`，因此下面这些格**只处理 2026-08-05 之后新出的论文**，
+> 不会重跑已发布的期，也不会重复计费。
+>
+> **重灾刊拆成两格**：先 `--n-issues 1`（最新一期），再 `--n-issues 2`（去重会自动只补更老的
+> 那一期）。这样单格 ≈1–1.5h（精读是瓶颈，实测串行 ~3 分钟/篇），不会让 9:10 的 daily 等锁
+> 超过 3 小时上限而被跳过。
+
+经济 / 计量 econ：
+- [ ] `--only Econometrica --n-issues 2`
+- [ ] `--only "J. Econometrics" --n-issues 2`   ⚠ 出刊密
+- [ ] `--only "Quant. Econ." --n-issues 2`
+- [ ] `--only JBES --n-issues 2`
+
+天文 astro：
+- [ ] `--only MNRAS --n-issues 1`   ⚠⚠ 每期上百篇
+- [ ] `--only MNRAS --n-issues 2`   （补更老那期）
+- [ ] `--only ApJS --n-issues 1`   ⚠
+- [ ] `--only ApJS --n-issues 2`   （补更老那期）
+
+流行病 epi：
+- [ ] `--only StatMed --n-issues 1`   ⚠ 双周刊、量大
+- [ ] `--only StatMed --n-issues 2`
+- [ ] `--only SMMR --n-issues 2`
+- [ ] `--only AJE --n-issues 1`   ⚠ 月刊
+- [ ] `--only AJE --n-issues 2`
+- [ ] `--only Epidemiology --n-issues 1`   ⚠
+- [ ] `--only Epidemiology --n-issues 2`
+
+计算 / 图形统计 compute：
+- [ ] `--only JCGS --n-issues 2`
+- [ ] `--only Technometrics --n-issues 1`   ⚠ 单期大
+- [ ] `--only Technometrics --n-issues 2`
+- [ ] `--only "Stat. Comput." --n-issues 2`
+- [ ] `--only CSDA --n-issues 1`   ⚠⚠ 月刊
+- [ ] `--only CSDA --n-issues 2`
+
+综合科学 general / broad：
+- [ ] `--only Nature --n-issues 2`
+- [ ] `--only Science --n-issues 1`
+- [ ] `--only Science --n-issues 2`
+- [ ] `--only PNAS --n-issues 1`   ⚠ 单期波动大
+- [ ] `--only PNAS --n-issues 2`
+- [ ] `--only "Nat. Methods" --n-issues 1`
+- [ ] `--only "Nat. Methods" --n-issues 2`
+- [ ] `--only NMI --n-issues 2`
+- [ ] `--only "Sci. Adv." --n-issues 1`   ⚠ 单期就大
+- [ ] `--only "Sci. Adv." --n-issues 2`
+- [ ] `--only "Nat. Commun." --n-issues 1`   ⚠⚠ 滚动刊
+- [ ] `--only "Nat. Commun." --n-issues 2`
+
+IEEE 系列 ieee（月刊、每期大）：
+- [ ] `--only TIT --n-issues 1`   ⚠
+- [ ] `--only TIT --n-issues 2`
+- [ ] `--only TPAMI --n-issues 1`   ⚠
+- [ ] `--only TPAMI --n-issues 2`
+- [ ] `--only TSP --n-issues 2`
+- [ ] `--only JSAIT --n-issues 2`
+
+> 队列跑空后循环会自动退出（退出码 7）。想一次多跑几格：`python -m research_news.journal_backfill --max 3`；
+> 想插队/改范围：直接编辑上面的行（`- [ ]` 是唯一状态来源，git 即进度）。
+
 ## 补得更深（之后想再往前翻）
 
 清单全打勾后，想继续往更早的年份补：把对应项的 `--n-issues` 调更大重跑即可（去重只会处理

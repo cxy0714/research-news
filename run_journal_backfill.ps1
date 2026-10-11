@@ -42,9 +42,18 @@ while ($Max -le 0 -or $done -lt $Max) {
     # daily window, pause (don't take the lock) so daily runs first. A wide window
     # (H..H+5) so even a longer unit that straddled 09:10 ends up yielding once it
     # finishes, letting the waiting daily grab the lock.
+    #
+    # Weekday gate (2026-10-11): the daily task only runs Mon-Fri, so on Sat/Sun
+    # docs\daily\<today>.md never appears and the old check made the loop idle the
+    # whole 09:00-14:00 window for a report that was never coming (10h/week of
+    # queue-grinding lost on weekends). Weekdays keep the exact old behaviour.
     $today = Get-Date -Format "yyyy-MM-dd"
     $hour = (Get-Date).Hour
-    if ($hour -ge $DailyHour -and $hour -lt ($DailyHour + 5) -and -not (Test-Path "docs\daily\$today.md")) {
+    $isWeekday = (Get-Date).DayOfWeek -ne [System.DayOfWeek]::Saturday -and
+                 (Get-Date).DayOfWeek -ne [System.DayOfWeek]::Sunday
+    if ($isWeekday -and
+        $hour -ge $DailyHour -and $hour -lt ($DailyHour + 5) -and
+        -not (Test-Path "docs\daily\$today.md")) {
         Log "daily not out yet - yielding 5 min"
         Start-Sleep -Seconds 300
         continue
