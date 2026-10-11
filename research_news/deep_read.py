@@ -149,7 +149,16 @@ def deep_read_paper(
     # from the actual references, not just how this paper paraphrases them.
     refs_block = ""
     if FETCH_REFS:
-        arxiv_id = refs.extract_arxiv_id(paper.paper_id, paper.arxiv_url, paper.url)
+        # Only arXiv-native ids / links are treated as arXiv ids. Other sources'
+        # ids can *look* like arXiv ids (Hexagon numbers works the same way:
+        # "hexagon:2610.00162", https://hexagonmath.org/abs/2610.00162v1) and
+        # resolving those would graft an unrelated paper's citations onto this
+        # read. Journal papers still work via their `arxiv_url` preprint link.
+        arxiv_id = refs.extract_arxiv_id(
+            paper.paper_id if paper.source == "arxiv" else None,
+            paper.arxiv_url,
+            paper.url if "arxiv.org" in (paper.url or "") else None,
+        )
         if arxiv_id:
             rows = refs.fetch_references(arxiv_id)
             # Persist the citation edges first — we want them even when the

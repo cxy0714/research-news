@@ -14,6 +14,20 @@ def test_doi_from_heading_journal_doi():
     assert bi._doi_from_heading(line) == "10.1214/23-AOS2345"
 
 
+def test_doi_from_heading_skips_hexagon_ids():
+    # Hexagon numbers works exactly like arXiv ("hexagon:2610.00165",
+    # https://hexagonmath.org/abs/2610.00165v1): looking those up as arXiv ids
+    # would write a *different* paper's institutions onto the page.
+    line = ("#### 1. [hexagon:2610.00165]"
+            "(https://hexagonmath.org/abs/2610.00165v1) — A Hexagon Paper")
+    assert bi._doi_from_heading(line) is None
+
+
+def test_doi_from_heading_bare_id_fallback_needs_no_link():
+    line = "#### 1. 2606.06441 — A Paper (heading without a link)"
+    assert bi._doi_from_heading(line) == "10.48550/arXiv.2606.06441"
+
+
 def test_insert_after_venue():
     block = [
         "- **作者**: A, B",

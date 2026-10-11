@@ -56,22 +56,30 @@ _COUNT_LINE_RE = re.compile(
 _DATE_STEM_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 _FOOTER_SEP_RE = re.compile(r"\n---\n")
 
+# Everything the daily pipeline scores and logs (journals log crossref / jmlr to
+# the same file and must never be folded into a daily page).
+DAILY_SOURCES: tuple[str, ...] = ("arxiv", "hexagon", "semantic_scholar")
+
 
 def rows_for_date(
     score_index: dict[str, list[dict]],
     run_date: str,
     *,
-    source: str = "arxiv",
+    sources: str | tuple[str, ...] = DAILY_SOURCES,
 ) -> dict[str, dict]:
-    """Score-log rows scored on ``run_date`` for ``source``, deduped by paper_id
-    (highest score wins). The journal pipeline logs to the same file, so the
-    ``source`` filter keeps the daily backfill to arXiv papers only."""
+    """Score-log rows scored on ``run_date`` by the daily pipeline, deduped by
+    paper_id (highest score wins). The journal pipeline logs to the same file, so
+    the ``sources`` filter keeps the daily backfill to daily papers (see
+    :data:`DAILY_SOURCES`) and journal articles out."""
+    if isinstance(sources, str):
+        sources = (sources,)
+    keep = set(sources)
     best: dict[str, dict] = {}
     for pid, rows in score_index.items():
         for row in rows:
             if row.get("run_date") != run_date:
                 continue
-            if (row.get("source") or "arxiv") != source:
+            if (row.get("source") or "arxiv") not in keep:
                 continue
             cur = best.get(pid)
             if cur is None or (row.get("score") or 0) > (cur.get("score") or 0):
@@ -103,14 +111,14 @@ def backfill_page(
     """Add/refresh the 🗂 section on one daily page.
 
     Returns the number of low papers written, or ``-1`` when the page is skipped
-    (filename isn't a date, or no arXiv rows were logged for that date)."""
+    (filename isn't a date, or no daily rows were logged for that date)."""
     if not _DATE_STEM_RE.match(path.stem):
         return -1
     run_date = path.stem
 
     best = rows_for_date(score_index, run_date)
     if not best:
-        log.info("%s: no arXiv scores in log — skip", run_date)
+        log.info("%s: no daily scores in log — skip", run_date)
         return -1
 
     text = path.read_text(encoding="utf-8")
@@ -194,8 +202,9 @@ def main() -> None:
         datefmt="%Y-%m-%d %H:%M:%S",
     )
     ap = argparse.ArgumentParser(
-        description="Recover scored-but-dropped arXiv papers into past daily "
-        "reports' '🗂 其他论文' section, from data/llm_scores.jsonl (no LLM)."
+        description="Recover scored-but-dropped daily papers (arXiv / Hexagon) "
+        "into past daily reports' '🗂 其他论文' section, from "
+        "data/llm_scores.jsonl (no LLM)."
     )
     g = ap.add_mutually_exclusive_group()
     g.add_argument("--date", metavar="YYYY-MM-DD", help="only this daily page")

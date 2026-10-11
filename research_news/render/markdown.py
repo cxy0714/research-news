@@ -213,7 +213,7 @@ def render_daily(
     out = output_dir / f"{when.isoformat()}.md"
 
     lines: list[str] = []
-    lines.append(f"# {when.isoformat()} 每日 arXiv 资讯\n")
+    lines.append(f"# {when.isoformat()} 每日资讯\n")
     lines.append(
         format_daily_count_line(
             len(papers_high), len(papers_mid), len(papers_low), len(events)

@@ -36,9 +36,27 @@
   `citation_*` 元标签（绝大多数出版社都发，所以「很多免费刊」不需要逐个登记）→ 少量 host 规则
   （落地页被反爬 / 是 JS 应用的站点）→ OpenAlex 的 OA 位置（`work_oa_info`）。每个候选都要**下回来
   验 `%PDF` 魔数**，付费墙页 / 反爬页永远不会被当成 PDF 存下来。
+- **新增抓取源 Hexagon（[hexagonmath.org](https://hexagonmath.org)）**：数学 / 理论 CS 的预印本库，
+  常被称作「AI 时代的 arXiv」——收录 AI 生成与人机混合文本，并署明所用工具（Lean / Claude /
+  ChatGPT…），不做同行评审。
+  新模块 `research_news/scrapers/hexagon.py`：走 JSON 列表 API `/api/v1/works`（最新在前、cursor
+  翻页），失败或空结果时回落到它 arXiv 兼容的 Atom 查询镜像（`sortBy=submittedDate` + 偏移翻页）；
+  抓取窗口是 `lookback_days`（默认 3——它周末也发，靠全局 `seen_papers.json` 去重），其余全部复用
+  arXiv 那条链（打分 → 摘要 → 下载 PDF → 精读）。`config/sources.yaml` 的 `hexagon.subjects: []`
+  表示**全库**（约 10 篇/天，让分数阈值去筛）；填白名单即收窄，注意 Hexagon 的 taxonomy 把
+  stat.ME / stat.CO / stat.AP / astro-ph.IM / physics.data-an 标为只能 cross-list，白名单里放这些
+  需要 `include_cross_listed: true`。它的元数据比 arXiv 富：**作者单位直接给**（不必等 OpenAlex
+  索引就能触发机构绿灯），**署名方式 / 人类理解程度 / 所用工具**写进 `Paper.venue`，所以打分与精读
+  prompt 都能看到「这篇是谁（或什么）写的、人类理解到什么程度」。id 落库为 `hexagon:2610.00165`
+  ——它和 arXiv 同号，不加前缀会在 `highlights.json` / `deep_reads_index.json` 这类按 id 索引的库里
+  撞车。配 `tests/test_hexagon.py`。
 
 ### Changed
 
+- **每日页标题 `每日 arXiv 资讯` → `每日资讯`**（源已经不止 arXiv 一家：Hexagon 也在同一条日报里）。
+  生成端两处（`render.markdown.render_daily`、`manual_requests._new_daily_page`）改掉，历史 111 个
+  `docs/daily/*.md` 的 H1 一并原地重写——只动标题那一行、按字节改，行尾 CRLF 不受影响；首批
+  2026-05-15/16 两页的旧标题 `每日研究资讯` 也归一到 `每日资讯`。
 - **不再「先用 LLM 把每篇抽成 JSON」**：精读笔记里的开放问题本来就带扎根引文（`扎根点：Remark 5`），
   所以改成按表头**前缀**（不是精确标题——格式漂移过四个月，`四、开放问题` 有 4 个变体）确定性切出
   五段（方向瓶颈 / 作者 framing / 被引张力 / 结论比证明窄 / 开放问题）。600 篇抽样实测：只留
@@ -63,6 +81,12 @@
 - **JMLR 精读一直只读到摘要**：`highlights._pdf_url` 拼的是 `/papers/v27/<stem>.pdf`（404），
   真实路径是 `/papers/volume27/<stem>/<stem>.pdf`。
 - `oa_pdf.fetch_pdf` 只重试传输错误，不重试「响应不是 PDF」（重试也不会变成 PDF）。
+- **其他源的 id 被当成 arXiv id**：Hexagon 用与 arXiv 完全相同的 `YYMM.NNNNN` 编号，于是
+  `hexagon:2610.00162` 和 `https://hexagonmath.org/abs/2610.00162v1` 都会被
+  `references.extract_arxiv_id` 认成 arXiv `2610.00162`——精读会给这篇挂上**另一篇论文**的引文，
+  `backfill_institutions` 会把**另一篇论文**的机构写进日报页（都是静默发生）。现在只有
+  `source="arxiv"`、真的 `arxiv.org` 链接或 `arxiv_url` 预印本字段才当作 arXiv id；日报页标题
+  自带链接时也不再退回「裸 id 猜 arXiv」。
 - **`data/open_problems.jsonl` 被一次 merge 塞进冲突标记，静默腐蚀了三个月**：两个 loader 都
   「跳过解析失败的行」，于是冲突标记 + 被拼接的记录直接变成「语料少了一半」，而且不报任何错。
   `extract_problems` 现在读文件时检测 `<<<<<<<` / `=======` / `>>>>>>>` 并打 ERROR，要求按

@@ -38,6 +38,11 @@ def _pdf_url(paper: Paper) -> str | None:
         return paper.pdf_url            # explicitly resolved (see oa_pdf.resolve)
     if paper.source == "arxiv":
         return f"https://arxiv.org/pdf/{paper.paper_id}"
+    if paper.source == "hexagon":
+        # paper_id is "hexagon:2610.00165"; the deposits are public and the
+        # scraper normally sets pdf_url itself — this is the fallback.
+        ident = paper.paper_id.split(":", 1)[-1]
+        return f"https://hexagonmath.org/pdf/{ident}"
     if paper.source == "jmlr":
         # paper_id is "jmlr:v27/<stem>"; the PDF lives at
         # /papers/volume27/<stem>/<stem>.pdf (NOT /papers/v27/<stem>.pdf — that

@@ -10,6 +10,29 @@ arxiv:
   include_cross_listed: false
   max_per_category: 80   # safety cap; daily new submissions in stat.ME are ~20-40
 
+hexagon:
+  # Hexagon (https://hexagonmath.org) — arXiv's AI-era counterpart (常被称作
+  # "AI 时代的 arXiv"): a moderated, non-peer-reviewed repository for
+  # research-level math / TCS, including AI-generated and human+AI texts.
+  # Fetched like arXiv (same id shape, same score → summary → PDF → deep-read
+  # pipeline) but from its JSON list API, newest first, over a short lookback
+  # window (it publishes continuously, weekends included);
+  # data/seen_papers.json dedups across runs.
+  enabled: true
+  # subjects: [] = the whole repository. Hexagon is a young beta (first works
+  # 2026-09-26): 100 public works in total across 26 subjects, i.e. 8-15 new
+  # works/day for ALL subjects combined — so "everything" is cheap and nothing
+  # is missed; the score threshold does the filtering. Narrow it to a whitelist
+  # if the pure-math tail gets noisy, e.g.
+  #   subjects: [math.ST, stat.TH, math.PR, math.OC, math.NA, cs.DS, cs.CC, stat.ME]
+  # note: Hexagon's taxonomy marks stat.ME / stat.CO / stat.AP / astro-ph.IM /
+  # physics.data-an as cross-list-only, so whitelisting those needs
+  # include_cross_listed: true.
+  subjects: []
+  include_cross_listed: true
+  lookback_days: 3    # catch works published after the previous run's cut-off
+  max_works: 300      # safety cap on works pulled per run
+
 conferences:
   enabled: false
   # Generic approach: fetch HTML/RSS, send cleaned text to LLM to extract events.

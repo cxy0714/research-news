@@ -399,7 +399,7 @@ def test_update_daily_page_creates_page_when_missing(tmp_path, monkeypatch):
     assert page.exists()
     body = page.read_text(encoding="utf-8")
     assert MANUAL_SECTION_HEADING in body
-    assert "每日 arXiv 资讯" in body
+    assert "每日资讯" in body
     assert "Maintained by" in body
 
 

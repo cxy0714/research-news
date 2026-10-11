@@ -489,7 +489,7 @@ def _new_daily_page(run_date: str, section_lines: list[str]) -> str:
     """A minimal daily page carrying only the manual section (used when the day
     has no report yet — e.g. a weekend with no arXiv announcements)."""
     lines = [
-        f"# {run_date} 每日 arXiv 资讯\n",
+        f"# {run_date} 每日资讯\n",
         "- 高相关论文 0 篇 · 中相关 0 篇 · 会议/Seminar 事件 0 条\n",
         "\n".join(section_lines).rstrip(),
         _footer(),

@@ -21,6 +21,7 @@ from .scrapers import affiliations as affil
 from .scrapers import arxiv as arxiv_scraper
 from .scrapers import authors as authors_scraper
 from .scrapers import conferences as conf_scraper
+from .scrapers import hexagon as hexagon_scraper
 from .usage import report as report_token_usage
 
 log = logging.getLogger("research_news")
@@ -42,6 +43,8 @@ def _collect_papers(sources_cfg: dict, for_date: date | None = None) -> list[Pap
     papers: list[Paper] = []
     if sources_cfg.get("arxiv", {}).get("enabled"):
         papers.extend(arxiv_scraper.fetch_all(sources_cfg["arxiv"], for_date=for_date))
+    if sources_cfg.get("hexagon", {}).get("enabled"):
+        papers.extend(hexagon_scraper.fetch_all(sources_cfg["hexagon"], for_date=for_date))
     if sources_cfg.get("authors", {}).get("enabled"):
         authors_cfg = yaml.safe_load(Path("config/authors.yaml").read_text(encoding="utf-8"))
         papers.extend(
@@ -257,7 +260,8 @@ def main() -> None:
     ap.add_argument(
         "--date",
         metavar="YYYY-MM-DD",
-        help="Fetch papers for this date instead of today (uses arXiv API)",
+        help="Fetch papers for this date instead of today (uses the arXiv API / "
+             "the Hexagon query API)",
     )
     ap.add_argument(
         "--lookback-days",

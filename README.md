@@ -2,7 +2,7 @@
 
 个人定制的研究资讯系统。两条独立管道：
 
-- **每日 arXiv**: 抓 stat.ME / stat.TH / math.ST / econ.EM / astro-ph.IM 新提交，按个人兴趣评分，对高相关论文按主题分组生成中文摘要 + 下载 PDF + LLM 全文精读
+- **每日 arXiv + Hexagon**: 抓 stat.ME / stat.TH / math.ST / econ.EM / astro-ph.IM 新提交，外加 [Hexagon](https://hexagonmath.org)（常被称作"AI 时代的 arXiv"：数学 / 理论 CS 的预印本库，含 AI 生成文本与工具署名）的新收录，按个人兴趣评分，对高相关论文按主题分组生成中文摘要 + 下载 PDF + LLM 全文精读
 - **季度期刊**: 拉 JMLR / AoS / JASA / JRSSB / Biometrika 等最新一期（或近 N 期），同样的评分 + 摘要 + 主题分组 + 精读
 
 都用 SJTU LLM API（默认 GLM-5.1），渲染成 MkDocs Material 站点。
@@ -41,7 +41,7 @@ python -m research_news.smoke_test    # 验 API 通
 
 Linux/macOS 上 `feedparser` 可能装不上 `sgmllib3k`（Python 3.10+ 移除了 sgmllib）。如果碰到，单独装 feedparser==6.0.10 或 6.0.11 一般能绕开，或 `pip install --no-build-isolation` 重试。
 
-## 每日 arXiv 管道
+## 每日 arXiv + Hexagon 管道
 
 ```powershell
 # 干跑（只抓不调 LLM）
@@ -50,13 +50,24 @@ python -m research_news.daily --dry-run
 # 完整跑
 python -m research_news.daily
 
-# 指定历史日期（用 arXiv API 拉过去某天的）
+# 指定历史日期（arXiv 用查询 API；Hexagon 用它的 Atom 查询镜像）
 python -m research_news.daily --date 2026-05-14
 python -m research_news.daily --lookback-days 3   # 周一补周五的
 
 # 临时换模型（只影响本次；持久改用 .env，见下）
 $env:DAILY_MODEL="deepseek-chat"; python -m research_news.daily
 ```
+
+### 抓取源（`config/sources.yaml`）
+
+| 源 | 怎么抓 | 说明 |
+|---|---|---|
+| `arxiv` | 当日 RSS（`rss.arxiv.org`）+ 0 篇时回落查询 API；历史日期走 `submittedDate` 查询 | `categories` 白名单，默认只取当天新提交 |
+| `hexagon` | JSON 列表 API `/api/v1/works`（最新在前、cursor 翻页）+ 失败 / 空结果时回落 arXiv 兼容的 Atom 查询 | [Hexagon](https://hexagonmath.org)：数学 / 理论 CS 的预印本库，含 **AI 生成 / 人机混合** 文本。id 形如 `2610.00165`，落库为 `hexagon:2610.00165`（避免与 arXiv 同号撞车）。`subjects: []` = 全库：它是 2026-09-26 开张的 beta，公开库共 **100 篇 / 26 个 subject**，全部 subject 合计也就 **8–15 篇/天**，所以全收不会把日报灌满；`lookback_days` 默认 3（它周末也发，靠 `seen_papers.json` 去重） |
+
+Hexagon 的元数据比 arXiv 富：**作者单位**直接给（无需 OpenAlex 就能触发机构绿灯）、
+**署名方式 / 人类理解程度 / 所用工具**（Lean、Claude、ChatGPT…）写在 `Paper.venue` 上，
+所以打分与精读 prompt 都能看到「这篇是谁（或什么）写的、人类理解到什么程度」。
 
 ### 模型配置（一处改，全局生效）
 
@@ -832,7 +843,7 @@ python -m research_news.shootout --source jmlr --n 10 `
 | 文件 | 作用 |
 |---|---|
 | `config/interests.yaml` | 你的研究兴趣 + score 阈值 + 摘要风格。LLM 直接读 |
-| `config/sources.yaml` | arxiv 抓哪些 category，是否启用会议 / authors 抓取 |
+| `config/sources.yaml` | arxiv 抓哪些 category、hexagon 抓哪些 subject（`[]` = 全库），是否启用会议 / authors 抓取 |
 | `config/authors.yaml` | 关注的作者列表（默认未启用） |
 | `config/journals.yaml` | 期刊列表 + ISSN |
 | `config/talks.yaml` | 讲座精读：要转写 + 精读的会议 / seminar 录像（URL + 讲者 + 对应论文 + ASR 偏置词） |
@@ -903,7 +914,7 @@ Start-ScheduledTask -TaskName research-news-daily   # 立刻测一次
 
 ```
 research_news/
-  daily.py            # arxiv 每日管道入口
+  daily.py            # arxiv + hexagon 每日管道入口
   journals.py         # 期刊管道入口（含 --rerun 整期重跑）
   talks.py            # 讲座精读管道：ingest（转写）+ read（LLM 精读）+ 独立页面 / 存档
   completeness.py     # 抓取完整性检查：权威 TOC ↔ 已抓 diff + 报缺 + 补抓
@@ -914,6 +925,7 @@ research_news/
   dedup.py            # 跨日 dedup
   scrapers/
     arxiv.py          # arxiv RSS + API
+    hexagon.py        # Hexagon（hexagonmath.org）JSON 列表 + Atom 查询镜像
     jmlr.py           # JMLR 卷索引页
     crossref.py       # 通用 ISSN → 期刊（含 T1-T4 abstract backfill、按期/按 DOI 单抓）
     euclid.py         # Project Euclid issue TOC（完整性检查权威源：出版方）

@@ -24,6 +24,7 @@ log = logging.getLogger(__name__)
 
 # A paper heading like "#### 1. [2606.06441](https://arxiv.org/abs/2606.06441) — Title".
 _HEADING_RE = re.compile(r"^#{2,6}\s+\d+\.\s+\[")
+_LINK_RE = re.compile(r"\]\((https?://[^)\s]+)\)")
 _ARXIV_URL_RE = re.compile(r"arxiv\.org/(?:abs|pdf)/(\d{4}\.\d{4,6})")
 _ARXIV_ID_RE = re.compile(r"\b(\d{4}\.\d{4,6})(?:v\d+)?\b")
 _DOI_RE = re.compile(r"(10\.\d{4,9}/[^\s)\]]+)")
@@ -37,6 +38,13 @@ def _doi_from_heading(line: str) -> str | None:
     m = _DOI_RE.search(line)
     if m:
         return m.group(1)
+    # Bare-id fallback only for a heading with no concrete link. Ids from other
+    # repositories can look exactly like arXiv ids (Hexagon numbers works the same
+    # way: "hexagon:2610.00162", https://hexagonmath.org/abs/2610.00162v1), and
+    # looking those up on arXiv would write a *different* paper's institutions
+    # onto the page.
+    if _LINK_RE.search(line):
+        return None
     m = _ARXIV_ID_RE.search(line)
     if m:
         return f"10.48550/arXiv.{m.group(1)}"

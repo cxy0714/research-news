@@ -56,14 +56,22 @@ def test_rows_for_date_filters_date_source_and_dedups(tmp_path, monkeypatch):
         {"run_date": "2026-06-12", "paper_id": "a", "source": "arxiv", "score": 5.0},
         {"run_date": "2026-06-11", "paper_id": "b", "source": "arxiv", "score": 9.0},
         {"run_date": "2026-06-12", "paper_id": "j", "source": "jmlr", "score": 7.0},
+        # Hexagon rides the daily pipeline → belongs on the page too.
+        {"run_date": "2026-06-12", "paper_id": "hexagon:2610.00165",
+         "source": "hexagon", "score": 4.0},
     ]
     score_file = tmp_path / "llm_scores.jsonl"
     _write_scores(score_file, rows)
     monkeypatch.setattr(rerun, "SCORE_LOG_FILE", score_file)
 
-    best = blr.rows_for_date(rerun.load_score_index(), "2026-06-12")
-    assert set(best) == {"a"}          # wrong-date 'b' + journal 'j' excluded
+    index = rerun.load_score_index()
+    best = blr.rows_for_date(index, "2026-06-12")
+    # wrong-date 'b' + journal 'j' excluded; daily sources (arxiv + hexagon) kept
+    assert set(best) == {"a", "hexagon:2610.00165"}
     assert best["a"]["score"] == 5.0   # dedup keeps the highest score
+    # Narrowing to one daily source still works (callers / ad-hoc inspection).
+    assert set(blr.rows_for_date(index, "2026-06-12", sources="hexagon")) == \
+        {"hexagon:2610.00165"}
 
 
 # ── end-to-end backfill on a real rendered page ───────────────────────────────
