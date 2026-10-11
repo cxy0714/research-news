@@ -391,6 +391,7 @@
 
 ### ApJS
 
+- [Vol 286 Issue 2 · 2026-10-12](journals/2026-10-12-apjs-v286-i2.md)
 - [Vol 285 Issue 2 · 2026-07-19](journals/2026-07-19-apjs-v285-i2.md)
 - [Vol 285 Issue 1 · 2026-07-19](journals/2026-07-19-apjs-v285-i1.md)
 - [Vol 285 Issue 1 · 2026-07-07](journals/2026-07-07-apjs-v285-i1.md)

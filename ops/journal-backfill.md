@@ -124,7 +124,7 @@ IEEE 系列 ieee（月刊、每期很大，全部先 dry-run、用小 N）：
 天文 astro：
 - [x] (2026-10-12) `--only MNRAS --n-issues 1`   ⚠⚠ 每期上百篇
 - [x] (2026-10-12) `--only MNRAS --n-issues 2`   （补更老那期）
-- [ ] `--only ApJS --n-issues 1`   ⚠
+- [x] (2026-10-12) `--only ApJS --n-issues 1`   ⚠
 - [ ] `--only ApJS --n-issues 2`   （补更老那期）
 
 流行病 epi：

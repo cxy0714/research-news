@@ -10580,6 +10580,11 @@
 - [Iterative distributed multinomial regression](deep_reads/2026-10-12-10.1016_j.jeconom.2026.106334.md)  
   6/10 [journals]
 
+#### Astrophysical Journal Supplement Series Vol 286 Issue 2
+
+- [STORM: RDMA-based Monte Carlo Transport Scheme for Distributed-memory Particle Simulations](deep_reads/2026-10-12-10.3847_1538-4365_aea3f8.md)  
+  4/10 [journals]
+
 #### Statistica Sinica
 
 - [Efficient Learning of Sparse Differential Networks in Multi-Source Non-Paranormal Models](deep_reads/2026-10-10-10.5705_ss.202025.0275.md)  
@@ -11973,6 +11978,57 @@
   3/10 [journals]
 - [The First Multi-Messenger Nova: External Shocks, TeV Photons, and Neutrinos in the Next Eruption of T CrB](deep_reads/2026-10-12-10.1093_mnras_stag1929.md)  
   3/10 [journals]
+
+#### Astrophysical Journal Supplement Series Vol 286 Issue 2
+
+- [<tt>LUNCH</tt> : A Lightweight Unified Deep Learning Framework for General Transients Classification in High-energy Time-domain Astronomy](deep_reads/2026-10-12-10.3847_1538-4365_ae9cb1.md)  
+  7/10 [journals]
+- [A Graph-based Neural-network Surrogate Model for an Accelerating Semianalytical Model of Galaxy Formation and Evolution](deep_reads/2026-10-12-10.3847_1538-4365_ae9a75.md)  
+  7/10 [journals]
+- [Dynamical Mass Demography of Single S-type Planets Shaped by Stellar Companions](deep_reads/2026-10-12-10.3847_1538-4365_aea08b.md)  
+  7/10 [journals]
+- [Morphology Classification for Galaxies in the Kilo Degree Survey Using a Label-efficient Self-supervised Learning Framework](deep_reads/2026-10-12-10.3847_1538-4365_aea210.md)  
+  6/10 [journals]
+- [An All-sky Catalog of 6.5 Million Primary Red Clump Stars from Gaia DR3 XP Spectra](deep_reads/2026-10-12-10.3847_1538-4365_aea224.md)  
+  6/10 [journals]
+- [Learning and Predicting the Nonlinear Variability of X-Ray Binaries with the Koopman Operator](deep_reads/2026-10-12-10.3847_1538-4365_ae9f56.md)  
+  6/10 [journals]
+- [Graph Learning with Multiplicative Aggregation for Solar Filament Fragment Association Modeling in Full-disk H <i>α</i> Images](deep_reads/2026-10-12-10.3847_1538-4365_aea152.md)  
+  6/10 [journals]
+- [Large-sample Statistics of Flares in Eclipsing Binaries Based on TESS and Gaia Data](deep_reads/2026-10-12-10.3847_1538-4365_ae9bbd.md)  
+  6/10 [journals]
+- [Photometric Identification and Dynamical Purification of Blue Horizontal-branch Stars in DESI MWS DR1](deep_reads/2026-10-12-10.3847_1538-4365_aea410.md)  
+  6/10 [journals]
+- [Short-term Forecasting of Total Solar Irradiance from Solar Disk Images: A Hybrid Unsupervised Deep Learning Approach](deep_reads/2026-10-12-10.3847_1538-4365_aea07a.md)  
+  6/10 [journals]
+- [A Data-driven Empirical Formula for Solar Wind Speed Prediction Using Symbolic Regression](deep_reads/2026-10-12-10.3847_1538-4365_ae985f.md)  
+  6/10 [journals]
+- [Demystifying Image Recovery from Radio Interferometers: Toward a Multiscale Predictive Model](deep_reads/2026-10-12-10.3847_1538-4365_ae9476.md)  
+  6/10 [journals]
+- [A Two-level Radial-velocity Zero-point Calibration for LAMOST MRS with Gaia and APOGEE and a Value-added RV Catalog](deep_reads/2026-10-12-10.3847_1538-4365_ae985e.md)  
+  6/10 [journals]
+- [A Probabilistic Framework for Incorporating Helioseismic Far-side Active Regions into Surface Flux Transport Models](deep_reads/2026-10-12-10.3847_1538-4365_aea139.md)  
+  5/10 [journals]
+- [Individual Star Sampling in Star Formation Simulations: A Semideterministic Model](deep_reads/2026-10-12-10.3847_1538-4365_ae974d.md)  
+  5/10 [journals]
+- [17 yr of Magnetar Bursts Observed with the Fermi Gamma-Ray Burst Monitor](deep_reads/2026-10-12-10.3847_1538-4365_ae9904.md)  
+  4/10 [journals]
+- [A Realistic Pulsar–Supermassive Black Hole Timing Model](deep_reads/2026-10-12-10.3847_1538-4365_ae8d23.md)  
+  4/10 [journals]
+- [A Hybrid Acceleration for Self-gravity Calculation in Infinitesimally Thin Disks with Adaptive Mesh Refinement](deep_reads/2026-10-12-10.3847_1538-4365_ae9caf.md)  
+  3/10 [journals]
+- [The Velocity Distribution of Heliosheath-created Pickup Ions along Voyager 2’s Trajectory and Energetic Neutral Atom Fluxes](deep_reads/2026-10-12-10.3847_1538-4365_aea206.md)  
+  3/10 [journals]
+- [The Simons Observatory: Rotation Performance of Cryogenic Half-wave Plate Polarization Modulators](deep_reads/2026-10-12-10.3847_1538-4365_ae9934.md)  
+  3/10 [journals]
+- [The Treasury of Extremely Metal-poor O Stars](deep_reads/2026-10-12-10.3847_1538-4365_ae95f6.md)  
+  3/10 [journals]
+- [The <i>s</i> -process at Subsolar Metallicity: Insights from High-resolution Infrared Spectroscopy of Magellanic Cloud Planetary Nebulae](deep_reads/2026-10-12-10.3847_1538-4365_ae9291.md)  
+  3/10 [journals]
+- [Atomic Data for Nonequilibrium Modeling of Kilonovae: The Ionization Properties of Te <scp>I</scp> – <scp>III</scp>](deep_reads/2026-10-12-10.3847_1538-4365_ae9f4a.md)  
+  2/10 [journals]
+- [Magnetar Fireballs and Short Bursts: Curved Spacetime Lensing, Quantum Electrodynamical Effects, Spectra, Polarization, and Impulse Responses](deep_reads/2026-10-12-10.3847_1538-4365_ae9754.md)  
+  2/10 [journals]
 
 #### Journal of the American Statistical Association
 
