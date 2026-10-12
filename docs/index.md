@@ -17,7 +17,7 @@
 
 [→ 查看完整报告](daily/2026-10-12.md)
 
-### 精读论文（255 篇）
+### 精读论文（276 篇）
 
 - [Causal Inference With Noisy Covariates: Heteroscedastic Measurement Error and Differential Privacy](deep_reads/2026-10-12-10.3982_ecta23897.md)  
   `因果推断` · 相关性 9/10
@@ -57,6 +57,12 @@
   `其他` · 相关性 8/10
 - [Causal Inference for Spatial Treatments](deep_reads/2026-10-12-10.3982_ecta21571.md)  
   `因果推断` · 相关性 8/10
+- [Spatial-Sign based Robust Sparse Precision Matrix Estimation and its Applications](deep_reads/2026-10-12-10.1080_10618600.2026.2743036.md)  
+  `高维统计 / 随机矩阵` · 相关性 7/10
+- [Directional False Discovery Rate Control via Distributed Procedures for Gaussian Graphical Models](deep_reads/2026-10-12-10.1080_10618600.2026.2719786.md)  
+  `数理统计 / 假设检验` · 相关性 7/10
+- [Optimal Adjustment and Combination of Independent Discrete <i>p</i> -Values](deep_reads/2026-10-12-10.1080_10618600.2026.2732157.md)  
+  `数理统计 / 假设检验` · 相关性 7/10
 - [Generalizing Findings in Nested Cohorts](deep_reads/2026-10-12-10.1097_ede.0000000000002012.md)  
   `因果推断` · 相关性 7/10
 - [Changes in Community-level Pedestrian Stops Following Overdose Prevention Center Implementation in New York City: An Augmented Synthetic Control Approach](deep_reads/2026-10-12-10.1097_ede.0000000000002000.md)  
@@ -161,6 +167,20 @@
   `高维统计 / 随机矩阵` · 相关性 7/10
 - [Measurement error and peer effects in networks](deep_reads/2026-10-12-10.1016_j.jeconom.2026.106339.md)  
   `因果推断` · 相关性 7/10
+- [Conformal Network Link Prediction with False Discovery Rate Control Under Unstructured Missingness](deep_reads/2026-10-12-10.1080_10618600.2026.2719794.md)  
+  `数理统计 / 假设检验` · 相关性 6/10
+- [Generalized Bayesian Inference for Dynamic Random Dot Product Graphs](deep_reads/2026-10-12-10.1080_10618600.2026.2714133.md)  
+  `其他` · 相关性 6/10
+- [Efficient Log-Rank Updates for Random Survival Forests](deep_reads/2026-10-12-10.1080_10618600.2026.2709001.md)  
+  `统计计算 / 算法` · 相关性 6/10
+- [A Functional Tensor Model for Dynamic Multilayer Networks with Common Invariant Subspaces and the RKHS Estimation](deep_reads/2026-10-12-10.1080_10618600.2026.2737261.md)  
+  `其他` · 相关性 6/10
+- [Statistical Theory of Multi-stage Newton Iteration Algorithm for Online Continual Learning](deep_reads/2026-10-12-10.1080_10618600.2026.2734226.md)  
+  `统计计算 / 算法` · 相关性 6/10
+- [Generative Conformal Prediction Under Covariate Shift](deep_reads/2026-10-12-10.1080_10618600.2026.2703276.md)  
+  `数理统计 / 假设检验` · 相关性 6/10
+- [Bayesian Penalized Transformation Models: Structured Additive Location-Scale Regression for Arbitrary Conditional Distributions](deep_reads/2026-10-12-10.1080_10618600.2026.2703269.md)  
+  `非参数 / 半参数` · 相关性 6/10
 - [The Long Arm of Childhood Policy: Historical Schooling Laws and COVID-19 Pandemic-era Mortality](deep_reads/2026-10-12-10.1097_ede.0000000000002002.md)  
   `因果推断` · 相关性 6/10
 - [Differential Misclassification by Time: A Proposed Validation Substudy Design to Account for Time Trends in Bias Parameters](deep_reads/2026-10-12-10.1097_ede.0000000000002008.md)  
@@ -305,6 +325,18 @@
   `其他` · 相关性 6/10
 - [Genetic Prediction and Adverse Selection](deep_reads/2026-10-12-10.3982_ecta24284.md)  
   `经济理论 / 应用` · 相关性 6/10
+- [Optimal Combination of Composite Likelihoods Using Approximate Bayesian Computation with Application to State-Space Models](deep_reads/2026-10-12-10.1080_10618600.2026.2718766.md)  
+  `统计计算 / 算法` · 相关性 5/10
+- [Scalable Fitting Methods for Multivariate Gaussian Additive Models with Covariate-dependent Covariance Matrices](deep_reads/2026-10-12-10.1080_10618600.2026.2732167.md)  
+  `统计计算 / 算法` · 相关性 5/10
+- [RKHS-Based Latent Position Random Graph Correlation](deep_reads/2026-10-12-10.1080_10618600.2026.2652933.md)  
+  `数理统计 / 假设检验` · 相关性 5/10
+- [Simultaneous Feature- and Sample-Splitting ADMM for Penalized Rank Regression](deep_reads/2026-10-12-10.1080_10618600.2026.2703277.md)  
+  `统计计算 / 算法` · 相关性 5/10
+- [A new framework for non-stationary spatio-temporal data fusion of multi-fidelity models](deep_reads/2026-10-12-10.1080_10618600.2026.2711783.md)  
+  `统计计算 / 算法` · 相关性 5/10
+- [Moment-Assisted Subsampling Method for Cox Proportional Hazards Model with Large-Scale Data](deep_reads/2026-10-12-10.1080_10618600.2026.2702530.md)  
+  `统计计算 / 算法` · 相关性 5/10
 - [Longitudinal Transitions Between Internalizing and Externalizing Symptoms and Associations with Substance Use among US Young Adults, 2016–2023](deep_reads/2026-10-12-10.1097_ede.0000000000002009.md)  
   `流行病学` · 相关性 5/10
 - [Lagged and Nonlinear Effects of Temperature Extremes on Mortality in US Federal Prisons: A Case-Crossover Study, 2009–2021](deep_reads/2026-10-12-10.1097_ede.0000000000002007.md)  
@@ -407,6 +439,16 @@
   `因果推断` · 相关性 5/10
 - [Do Asset Prices Help Predict Inflation? Evidence from Individual Stock Prices](deep_reads/2026-10-12-10.1080_07350015.2026.2654899.md)  
   `经济理论 / 应用` · 相关性 5/10
+- [Principal Subsimplex Analysis](deep_reads/2026-10-12-10.1080_10618600.2026.2708993.md)  
+  `其他` · 相关性 4/10
+- [Robust, partially alive particle Metropolis-Hastings via The Frankenfilter](deep_reads/2026-10-12-10.1080_10618600.2026.2732158.md)  
+  `统计计算 / 算法` · 相关性 4/10
+- [Representation Learning of Dynamic Networks](deep_reads/2026-10-12-10.1080_10618600.2026.2705295.md)  
+  `其他` · 相关性 4/10
+- [Sequential Bootstrap for More Powerful Similarity Test](deep_reads/2026-10-12-10.1080_10618600.2026.2652918.md)  
+  `数理统计 / 假设检验` · 相关性 4/10
+- [Scalable balanced <i>k</i> -d tree construction for distributed data](deep_reads/2026-10-12-10.1080_10618600.2026.2714131.md)  
+  `统计计算 / 算法` · 相关性 4/10
 - [Stratification and Accumulation?: Explaining Changing Mortality Inequities Between Business Owners and Non-owners in the United States (1984–2022)](deep_reads/2026-10-12-10.1097_ede.0000000000002013.md)  
   `流行病学` · 相关性 4/10
 - [Impact of the first nirsevimab immunization campaign on infant RSV-related emergency department visits and hospitalizations in Québec, Canada](deep_reads/2026-10-12-10.1097_ede.0000000000002050.md)  

@@ -476,6 +476,7 @@
 - [Vol 34 Issue 4 · 2026-07-13](journals/2026-07-13-jcgs-v34-i4.md)
 - [Vol 34 Issue 3 · 2026-07-13](journals/2026-07-13-jcgs-v34-i3.md)
 - [Vol 34 Issue 2 · 2026-07-13](journals/2026-07-13-jcgs-v34-i2.md)
+- [2026-10-12](journals/2026-10-12-jcgs.md)
 
 ### Stat. Comput.
 

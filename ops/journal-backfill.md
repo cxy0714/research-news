@@ -137,7 +137,7 @@ IEEE 系列 ieee（月刊、每期很大，全部先 dry-run、用小 N）：
 - [x] (2026-10-12) `--only Epidemiology --n-issues 2`
 
 计算 / 图形统计 compute：
-- [ ] `--only JCGS --n-issues 2`
+- [x] (2026-10-13) `--only JCGS --n-issues 2`
 - [ ] `--only Technometrics --n-issues 1`   ⚠ 单期大
 - [ ] `--only Technometrics --n-issues 2`
 - [ ] `--only "Stat. Comput." --n-issues 2`
