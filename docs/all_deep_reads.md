@@ -4,6 +4,12 @@
 
 ### Daily
 
+- [GMM for Panel Data Quantile Regression](deep_reads/2026-10-12-2610.12824.md)  
+  7/10 [daily]
+- [Design-based effect sizes and their synthesis in randomized multiple-baseline experiments](deep_reads/2026-10-12-2610.13001.md)  
+  6/10 [daily]
+- [Sequential Conformal Calibration under Recursive Selection](deep_reads/2026-10-12-2610.12937.md)  
+  6/10 [daily]
 - [Longitudinal causal inference under informative missingness using the self-censoring model](deep_reads/2026-10-09-2610.09234.md)  
   8/10 [daily]
 - [Cluster-Robust Prediction-Powered Inference](deep_reads/2026-10-09-2610.09601.md)  
@@ -5454,6 +5460,8 @@
 
 ### Daily
 
+- [Scalable Nonparametric Change-Plane Regression with Random Features: Estimation and Inference](deep_reads/2026-10-12-2610.13290.md)  
+  7/10 [daily]
 - [Manifold Fitting by Successive Tangent-Space Projection](deep_reads/2026-10-09-2610.09423.md)  
   6/10 [daily]
 - [Finite-Rank Logistic Gaussian Processes with Exact Likelihood for Conditional Density Estimation](deep_reads/2026-10-09-2610.09452.md)  
@@ -7940,6 +7948,8 @@
 
 ### Daily
 
+- [How Many Significant LISA?: A multiple testing correction](deep_reads/2026-10-12-2610.13472.md)  
+  6/10 [daily]
 - [Sequential resetting procedures and false discovery rate](deep_reads/2026-10-09-2610.09339.md)  
   7/10 [daily]
 - [The Lambert Penalty: Logarithmic Shrinkage for Sparse Regression](deep_reads/2026-10-09-2610.09627.md)  
@@ -10489,6 +10499,8 @@
 
 ### Daily
 
+- [An efficient stochastic generalized method of moments estimator for nonlinear moment models](deep_reads/2026-10-12-2610.12873.md)  
+  7/10 [daily]
 - [Exact Calibration and Sharp Risk Geometry for Volume-Sampled Ridge Regression](deep_reads/2026-10-08-2610.07721.md)  
   6/10 [daily]
 - [Markov chain Monte Carlo for predictively oriented posteriors](deep_reads/2026-10-01-2610.01818.md)  
@@ -11638,6 +11650,8 @@
 
 ### Daily
 
+- [An empirical calibration of the spectral resolution of JWST NIRSpec PRISM](deep_reads/2026-10-12-2610.13492.md)  
+  6/10 [daily]
 - [Armillary: A Label-Free Coordinate System for Stellar Spectra](deep_reads/2026-10-08-2610.07112.md)  
   6/10 [daily]
 - [Optimal Photon Counting with Fast, Low Noise Astronomical Imagers](deep_reads/2026-10-08-2610.07137.md)  
@@ -14915,6 +14929,20 @@
 
 ### Daily
 
+- [Neural Estimation of Summary Statistics for Simulation-Based Inference with Non-Asymptotic Guarantees](deep_reads/2026-10-12-2610.13031.md)  
+  6/10 [daily]
+- [Aging in Spherical Spin Glass Dynamics](deep_reads/2026-10-12-hexagon_2610.00190.md)  
+  6/10 [daily]
+- [Multi-coverings by lattice translates of convex bodies](deep_reads/2026-10-12-hexagon_2610.00165.md)  
+  2/10 [daily]
+- [Unconditional implications of the Quasi-Riemann Hypothesis](deep_reads/2026-10-12-hexagon_2610.00178.md)  
+  1/10 [daily]
+- [A counterexample to Vaught's Conjecture for $L_{\omega_1,\omega}$](deep_reads/2026-10-12-hexagon_2610.00188.md)  
+  1/10 [daily]
+- [From Snapshots to Processes: Dynamic Contact Algebras as a Foundation for Process-Oriented GIS](deep_reads/2026-10-12-hexagon_2610.00172.md)  
+  1/10 [daily]
+- [A counterexample to Han’s conjecture over arbitrary fields](deep_reads/2026-10-12-hexagon_2610.00182.md)  
+  0/10 [daily]
 - [Graph-monotone entrywise guarantees for MLE and Rank Centrality on general comparison graphs](deep_reads/2026-10-09-2610.09030.md)  
   6/10 [daily]
 - [Fridge: focused fine-tuning of ridge regression for personalize predictions](deep_reads/2026-10-08-2610.08481.md)  
