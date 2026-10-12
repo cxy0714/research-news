@@ -145,7 +145,7 @@ IEEE 系列 ieee（月刊、每期很大，全部先 dry-run、用小 N）：
 - [x] (2026-10-13) `--only CSDA --n-issues 2`
 
 综合科学 general / broad：
-- [ ] `--only Nature --n-issues 2`
+- [x] (2026-10-13) `--only Nature --n-issues 2`
 - [ ] `--only Science --n-issues 1`
 - [ ] `--only Science --n-issues 2`
 - [ ] `--only PNAS --n-issues 1`   ⚠ 单期波动大

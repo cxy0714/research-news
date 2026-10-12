@@ -15591,6 +15591,88 @@
 - [Non-centering for discrete-valued state transition models: an application to ESBL-producing E. coli transmission in Malawi](deep_reads/2026-10-13-10.1007_s11222-026-10956-z.md)  
   3/10 [journals]
 
+#### Nature Vol 658 Issue 8135
+
+- [Spatially deterministic nucleation of 2D semiconductors by etching flux](deep_reads/2026-10-13-10.1038_s41586-026-11095-1.md)  
+  0/10 [journals]
+
+#### Nature
+
+- [A Bayesian framework for longitudinal EHR and genetic discovery](deep_reads/2026-08-05-10.1038_s41586-026-10780-5.md)  
+  8/10 [journals]
+- [Amazonian earthwork survey indicates ancient population was much larger than thought](deep_reads/2026-08-05-10.1038_d41586-026-02321-x.md)  
+  6/10 [journals]
+- [Cell-type signatures of Alzheimer’s disease shared across population groups](deep_reads/2026-08-05-10.1038_s41586-026-10793-0.md)  
+  6/10 [journals]
+- [Rarely categorical, highly separable representations along the cortical hierarchy](deep_reads/2026-08-05-10.1038_s41586-026-10668-4.md)  
+  6/10 [journals]
+- [An encyclopedia of human enhancer–gene regulatory interactions](deep_reads/2026-08-05-10.1038_s41586-026-10781-4.md)  
+  5/10 [journals]
+- [Geomagnetic storms caused by solar wind might be more extreme than previously thought](deep_reads/2026-08-05-10.1038_d41586-026-02245-6.md)  
+  4/10 [journals]
+- [Improvements in educational opportunities go hand in hand with innovation](deep_reads/2026-08-05-10.1038_d41586-026-02016-3.md)  
+  4/10 [journals]
+- [A preinvasive regulatory T cell axis for lung cancer interception](deep_reads/2026-10-13-10.1038_s41586-026-11066-6.md)  
+  3/10 [journals]
+- [A thorium-229 optical nuclear clock with feedback loop](deep_reads/2026-10-13-10.1038_s41586-026-11084-4.md)  
+  3/10 [journals]
+- [Relapsed childhood cancers show genomic scars left by previous therapy](deep_reads/2026-08-05-10.1038_d41586-026-02329-3.md)  
+  3/10 [journals]
+- [Over 20,000 precolonial earthworks in the Southwest Amazonia](deep_reads/2026-08-05-10.1038_s41586-026-10835-7.md)  
+  3/10 [journals]
+- [AI-redesigned starting points and outcomes enhance protein evolution](deep_reads/2026-08-05-10.1038_s41586-026-10820-0.md)  
+  3/10 [journals]
+- [The planktonic microbiome of the Great Barrier Reef](deep_reads/2026-08-05-10.1038_s41586-026-10778-z.md)  
+  3/10 [journals]
+- [Genetic background sets the trajectory of experimental cancer evolution](deep_reads/2026-08-05-10.1038_s41586-026-10821-z.md)  
+  3/10 [journals]
+- [Background genetics and new mutations interact to direct cancer evolution](deep_reads/2026-08-05-10.1038_d41586-026-02155-7.md)  
+  3/10 [journals]
+- [Food systems transformation would reshape global agriculture](deep_reads/2026-08-05-10.1038_s41586-026-10775-2.md)  
+  3/10 [journals]
+- [Hydrogen bonding in water under extreme confinement](deep_reads/2026-10-13-10.1038_s41586-026-10858-0.md)  
+  2/10 [journals]
+- [Alveolar stem cells transdifferentiate to drive bronchiolar regeneration](deep_reads/2026-10-13-10.1038_s41586-026-11127-w.md)  
+  2/10 [journals]
+- [Structural basis for regulating lipopolysaccharide transmembrane transport](deep_reads/2026-10-13-10.1038_s41586-026-11129-8.md)  
+  2/10 [journals]
+- [Miniaturizing and modifying natural proteins with Raygun](deep_reads/2026-08-05-10.1038_s41586-026-10842-8.md)  
+  2/10 [journals]
+- [A global view of human centromere variation and evolution](deep_reads/2026-08-05-10.1038_s41586-026-10841-9.md)  
+  2/10 [journals]
+- [Mitochondrial metabolism and epigenetic crosstalk drive SASP](deep_reads/2026-08-05-10.1038_s41586-026-10791-2.md)  
+  2/10 [journals]
+- [A global molecular code for birth order and neuronal identity in Drosophila](deep_reads/2026-08-05-10.1038_s41586-026-10797-w.md)  
+  2/10 [journals]
+- [A vector-based strategy for olfactory navigation in Drosophila](deep_reads/2026-08-05-10.1038_s41586-026-10827-7.md)  
+  2/10 [journals]
+- [Brown bullhead catfish melanoma represents a novel transmissible cancer](deep_reads/2026-08-05-10.1038_s41586-026-10828-6.md)  
+  2/10 [journals]
+- [Prior therapy defines mutation profiles in childhood cancer at relapse](deep_reads/2026-08-05-10.1038_s41586-026-10803-1.md)  
+  2/10 [journals]
+- [A queen odour mediates reproductive suppression in a eusocial mammal](deep_reads/2026-08-05-10.1038_s41586-026-10772-5.md)  
+  2/10 [journals]
+- [In situ structure of the poxvirus portal complex](deep_reads/2026-08-05-10.1038_s41586-026-10856-2.md)  
+  1/10 [journals]
+- [Enzymatic glycosylation and amidation reshapes polyene bioactivity](deep_reads/2026-08-05-10.1038_s41586-026-10834-8.md)  
+  1/10 [journals]
+- [Plasmonic metamaterial time crystal](deep_reads/2026-08-05-10.1038_s41586-026-10825-9.md)  
+  1/10 [journals]
+- [Exceptional brain and ecological diversity in the earliest snakes](deep_reads/2026-08-05-10.1038_s41586-026-10809-9.md)  
+  1/10 [journals]
+- [Modular in vivo antibody–ADC click to reverse drug resistance in tumours](deep_reads/2026-08-05-10.1038_s41586-026-10789-w.md)  
+  1/10 [journals]
+- [An ATPγS recycling strategy for practical biocatalytic thiophosphorylation](deep_reads/2026-08-05-10.1038_s41586-026-10895-9.md)  
+  1/10 [journals]
+- [Publisher Correction: Sleep chart of biological ageing clocks in middle and late life](deep_reads/2026-10-13-10.1038_s41586-026-11273-1.md)  
+  0/10 [journals]
+- [Author Correction: Maturation and circuit integration of transplanted human cortical organoids](deep_reads/2026-08-05-10.1038_s41586-026-10943-4.md)  
+  0/10 [journals]
+- [Author Correction: Sleep chart of biological ageing clocks in middle and late life](deep_reads/2026-08-05-10.1038_s41586-026-10920-x.md)  
+  0/10 [journals]
+- [Imaging of nanoscale polar textures in quantum paraelectric SrTiO3](deep_reads/2026-08-05-10.1038_s41586-026-10823-x.md)  
+  0/10 [journals]
+
 #### Computational Statistics & Data Analysis Vol 225
 
 - [Comparison of estimators for multi-state models in potentially non-Markov processes](deep_reads/2026-10-13-10.1016_j.csda.2026.108466.md)  
@@ -16131,71 +16213,6 @@
 - [Moisture-induced surface degradation mechanism of argyrodite Li6PS5Cl under dry-room conditions](deep_reads/2026-08-05-10.1038_s41467-026-75537-0.md)  
   0/10 [journals]
 - [Screening of amphipathic helices identifies features linked to inner nuclear membrane properties](deep_reads/2026-08-05-10.1038_s41467-026-75561-0.md)  
-  0/10 [journals]
-
-#### Nature
-
-- [A Bayesian framework for longitudinal EHR and genetic discovery](deep_reads/2026-08-05-10.1038_s41586-026-10780-5.md)  
-  8/10 [journals]
-- [Amazonian earthwork survey indicates ancient population was much larger than thought](deep_reads/2026-08-05-10.1038_d41586-026-02321-x.md)  
-  6/10 [journals]
-- [Cell-type signatures of Alzheimer’s disease shared across population groups](deep_reads/2026-08-05-10.1038_s41586-026-10793-0.md)  
-  6/10 [journals]
-- [Rarely categorical, highly separable representations along the cortical hierarchy](deep_reads/2026-08-05-10.1038_s41586-026-10668-4.md)  
-  6/10 [journals]
-- [An encyclopedia of human enhancer–gene regulatory interactions](deep_reads/2026-08-05-10.1038_s41586-026-10781-4.md)  
-  5/10 [journals]
-- [Geomagnetic storms caused by solar wind might be more extreme than previously thought](deep_reads/2026-08-05-10.1038_d41586-026-02245-6.md)  
-  4/10 [journals]
-- [Improvements in educational opportunities go hand in hand with innovation](deep_reads/2026-08-05-10.1038_d41586-026-02016-3.md)  
-  4/10 [journals]
-- [Relapsed childhood cancers show genomic scars left by previous therapy](deep_reads/2026-08-05-10.1038_d41586-026-02329-3.md)  
-  3/10 [journals]
-- [Over 20,000 precolonial earthworks in the Southwest Amazonia](deep_reads/2026-08-05-10.1038_s41586-026-10835-7.md)  
-  3/10 [journals]
-- [AI-redesigned starting points and outcomes enhance protein evolution](deep_reads/2026-08-05-10.1038_s41586-026-10820-0.md)  
-  3/10 [journals]
-- [The planktonic microbiome of the Great Barrier Reef](deep_reads/2026-08-05-10.1038_s41586-026-10778-z.md)  
-  3/10 [journals]
-- [Genetic background sets the trajectory of experimental cancer evolution](deep_reads/2026-08-05-10.1038_s41586-026-10821-z.md)  
-  3/10 [journals]
-- [Background genetics and new mutations interact to direct cancer evolution](deep_reads/2026-08-05-10.1038_d41586-026-02155-7.md)  
-  3/10 [journals]
-- [Food systems transformation would reshape global agriculture](deep_reads/2026-08-05-10.1038_s41586-026-10775-2.md)  
-  3/10 [journals]
-- [Miniaturizing and modifying natural proteins with Raygun](deep_reads/2026-08-05-10.1038_s41586-026-10842-8.md)  
-  2/10 [journals]
-- [A global view of human centromere variation and evolution](deep_reads/2026-08-05-10.1038_s41586-026-10841-9.md)  
-  2/10 [journals]
-- [Mitochondrial metabolism and epigenetic crosstalk drive SASP](deep_reads/2026-08-05-10.1038_s41586-026-10791-2.md)  
-  2/10 [journals]
-- [A global molecular code for birth order and neuronal identity in Drosophila](deep_reads/2026-08-05-10.1038_s41586-026-10797-w.md)  
-  2/10 [journals]
-- [A vector-based strategy for olfactory navigation in Drosophila](deep_reads/2026-08-05-10.1038_s41586-026-10827-7.md)  
-  2/10 [journals]
-- [Brown bullhead catfish melanoma represents a novel transmissible cancer](deep_reads/2026-08-05-10.1038_s41586-026-10828-6.md)  
-  2/10 [journals]
-- [Prior therapy defines mutation profiles in childhood cancer at relapse](deep_reads/2026-08-05-10.1038_s41586-026-10803-1.md)  
-  2/10 [journals]
-- [A queen odour mediates reproductive suppression in a eusocial mammal](deep_reads/2026-08-05-10.1038_s41586-026-10772-5.md)  
-  2/10 [journals]
-- [In situ structure of the poxvirus portal complex](deep_reads/2026-08-05-10.1038_s41586-026-10856-2.md)  
-  1/10 [journals]
-- [Enzymatic glycosylation and amidation reshapes polyene bioactivity](deep_reads/2026-08-05-10.1038_s41586-026-10834-8.md)  
-  1/10 [journals]
-- [Plasmonic metamaterial time crystal](deep_reads/2026-08-05-10.1038_s41586-026-10825-9.md)  
-  1/10 [journals]
-- [Exceptional brain and ecological diversity in the earliest snakes](deep_reads/2026-08-05-10.1038_s41586-026-10809-9.md)  
-  1/10 [journals]
-- [Modular in vivo antibody–ADC click to reverse drug resistance in tumours](deep_reads/2026-08-05-10.1038_s41586-026-10789-w.md)  
-  1/10 [journals]
-- [An ATPγS recycling strategy for practical biocatalytic thiophosphorylation](deep_reads/2026-08-05-10.1038_s41586-026-10895-9.md)  
-  1/10 [journals]
-- [Author Correction: Maturation and circuit integration of transplanted human cortical organoids](deep_reads/2026-08-05-10.1038_s41586-026-10943-4.md)  
-  0/10 [journals]
-- [Author Correction: Sleep chart of biological ageing clocks in middle and late life](deep_reads/2026-08-05-10.1038_s41586-026-10920-x.md)  
-  0/10 [journals]
-- [Imaging of nanoscale polar textures in quantum paraelectric SrTiO3](deep_reads/2026-08-05-10.1038_s41586-026-10823-x.md)  
   0/10 [journals]
 
 #### Science Advances Vol 12 Issue 31
