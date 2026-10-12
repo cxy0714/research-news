@@ -1236,6 +1236,11 @@
 - [Semiparametric model averaging for high-dimensional quantile regression with nonignorable nonresponse](deep_reads/2026-10-13-10.1007_s11222-026-10953-2.md)  
   7/10 [journals]
 
+#### Computational Statistics & Data Analysis Vol 225
+
+- [Regression analysis after bipartite Bayesian record linkage](deep_reads/2026-10-13-10.1016_j.csda.2026.108461.md)  
+  6/10 [journals]
+
 #### Statistics in Medicine Vol 45 Issue 23-24
 
 - [Generalizing Conditional Average Treatment Effects From Nested Randomized Trials to Trial‐Eligible Individuals](deep_reads/2026-10-12-10.1002_sim.70767.md)  
