@@ -1225,6 +1225,25 @@
 
 ### 期刊
 
+#### Statistics in Medicine Vol 45 Issue 23-24
+
+- [Generalizing Conditional Average Treatment Effects From Nested Randomized Trials to Trial‐Eligible Individuals](deep_reads/2026-10-12-10.1002_sim.70767.md)  
+  8/10 [journals]
+- [A Nonparametric Data‐Fusion Approach for Identification and Estimation of Nonignorable Missing Data With Shadow Variable](deep_reads/2026-10-12-10.1002_sim.70747.md)  
+  8/10 [journals]
+- [Reliable Bayesian Causal Inference for Externally Controlled Single‐Arm Trials Under Transportability Violations](deep_reads/2026-10-12-10.1002_sim.70748.md)  
+  8/10 [journals]
+- [High‐Dimensional Mediation Analysis With Network Mediators: Applications to Pediatric Acute Lymphoblastic Leukemia](deep_reads/2026-10-12-10.1002_sim.70756.md)  
+  7/10 [journals]
+- [A Model‐Robust G‐Computation Method for Analyzing Hybrid Control Studies Without Assuming Exchangeability](deep_reads/2026-10-12-10.1002_sim.70754.md)  
+  7/10 [journals]
+- [Evaluating Informative Cluster Size in Cluster Randomized Trials](deep_reads/2026-10-12-10.1002_sim.70762.md)  
+  6/10 [journals]
+- [A Bias‐Adjusted Approach for Logistic Modeling With Predicted Exposures](deep_reads/2026-10-12-10.1002_sim.70740.md)  
+  6/10 [journals]
+- [Taking Into Account the Susceptible Window for Exposures in Cox Proportional Hazards Model: A Way Using Splines to Model the Lag‐Risk Relationship](deep_reads/2026-10-12-10.1002_sim.70755.md)  
+  5/10 [journals]
+
 #### Journal of Econometrics Vol 258
 
 - [Treatment evaluation at the intensive and extensive margins](deep_reads/2026-10-12-10.1016_j.jeconom.2026.106344.md)  
@@ -8536,6 +8555,11 @@
 
 ### 期刊
 
+#### Statistics in Medicine Vol 45 Issue 23-24
+
+- [Robust Alpha Spending for Unstable Data](deep_reads/2026-10-12-10.1002_sim.70760.md)  
+  6/10 [journals]
+
 #### Journal of Econometrics Vol 258
 
 - [High dimensional alpha test for linear factor pricing model with Lq-norm](deep_reads/2026-10-12-10.1016_j.jeconom.2026.106336.md)  
@@ -15067,6 +15091,15 @@
   8/10 [daily]
 
 ### 期刊
+
+#### Statistics in Medicine Vol 45 Issue 23-24
+
+- [Sandwich Variance Estimation in Scale Mixture of Skew‐Normal Linear Mixed Models](deep_reads/2026-10-12-10.1002_sim.70753.md)  
+  5/10 [journals]
+- [Group Sequential Sample Size for Comparing Two Survival Probabilities at a Specific Time Point](deep_reads/2026-10-12-10.1002_sim.70750.md)  
+  4/10 [journals]
+- [Calibration of Priors for Bayesian Model‐Based Dose‐Finding Trial Designs With Joint Outcomes](deep_reads/2026-10-12-10.1002_sim.70746.md)  
+  3/10 [journals]
 
 #### Journal of Econometrics Vol 258
 
