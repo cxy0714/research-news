@@ -12030,6 +12030,49 @@
 - [Magnetar Fireballs and Short Bursts: Curved Spacetime Lensing, Quantum Electrodynamical Effects, Spectra, Polarization, and Impulse Responses](deep_reads/2026-10-12-10.3847_1538-4365_ae9754.md)  
   2/10 [journals]
 
+#### Astrophysical Journal Supplement Series Vol 286 Issue 1
+
+- [Fine-grained Classification of Unknown Fermi LAT 4FGL-DR4 Sources with Spectral and Uncertainty Information](deep_reads/2026-10-12-10.3847_1538-4365_ae91e8.md)  
+  7/10 [journals]
+- [Optimization of Tessellation-based Statistics: Void Statistics](deep_reads/2026-10-12-10.3847_1538-4365_ae928f.md)  
+  7/10 [journals]
+- [GyroNet: Well-calibrated Rotation-based Stellar Ages from a Machine Learning and Bayesian Framework with Gaia DR3 Features](deep_reads/2026-10-12-10.3847_1538-4365_ae8f3f.md)  
+  6/10 [journals]
+- [Physical Properties of 6.7 Million Galaxies from the DESI Bright Galaxy Survey: Spectral Fitting and Systematic Tests with Mock Spectra](deep_reads/2026-10-12-10.3847_1538-4365_ae8e71.md)  
+  6/10 [journals]
+- [Toward Optimal Photometric Calibration of Digital Astronomical Plates with Deep Learning](deep_reads/2026-10-12-10.3847_1538-4365_ae93af.md)  
+  6/10 [journals]
+- [Neural-network-derived Stellar Parameters and Distances for Cool Giants](deep_reads/2026-10-12-10.3847_1538-4365_ae8cfe.md)  
+  6/10 [journals]
+- [Identification of White Dwarfs with Infrared Excesses in DESI DR1 Based on Deep Learning](deep_reads/2026-10-12-10.3847_1538-4365_ae9550.md)  
+  6/10 [journals]
+- [Spectral Map Making with SPHEREx](deep_reads/2026-10-12-10.3847_1538-4365_ae91df.md)  
+  6/10 [journals]
+- [Spectroscopic Analysis of LAMOST Transient Candidates: Methods and Feasibility for Time-domain Follow-up](deep_reads/2026-10-12-10.3847_1538-4365_ae91ea.md)  
+  6/10 [journals]
+- [Identifying and Determining Atmospheric Parameters of Blue Horizontal-branch Stars Based on LAMOST DR11](deep_reads/2026-10-12-10.3847_1538-4365_ae8f47.md)  
+  6/10 [journals]
+- [Investigating the Young Stellar Populations and Hierarchies in Nearby Galaxies with the UVIT. II. Presenting the Properties of ∼25,000 UV-detected Star-forming Clumps](deep_reads/2026-10-12-10.3847_1538-4365_ae9081.md)  
+  5/10 [journals]
+- [A New Methodology for Inferring the Plasma Conditions in Solar Flare Energetic Electron Source Regions from In Situ Electron Energy Spectra](deep_reads/2026-10-12-10.3847_1538-4365_ae91e2.md)  
+  5/10 [journals]
+- [A Minute-cadence Deep Bulge Survey: First Data Release of DREAMS](deep_reads/2026-10-12-10.3847_1538-4365_ae8fd4.md)  
+  5/10 [journals]
+- [The Stellar Population of NGC 346 in the Small Magellanic Cloud with JWST](deep_reads/2026-10-12-10.3847_1538-4365_ae954e.md)  
+  4/10 [journals]
+- [The Next Generation Virgo Cluster Survey (NGVS). II. A Catalog of Galaxies in the Virgo Cluster](deep_reads/2026-10-12-10.3847_1538-4365_ae8fc7.md)  
+  4/10 [journals]
+- [Comprehensive Neutrino Light Curves and Spectra: From Presupernova Evolution to Early Supernova Phase](deep_reads/2026-10-12-10.3847_1538-4365_ae8dc8.md)  
+  4/10 [journals]
+- [The FAST H <scp>I</scp> 21 cm Absorption Blind Survey. III. OH Absorption Search in the 21 cm Absorber Sample and Continued H <scp>I</scp> Absorption Search](deep_reads/2026-10-12-10.3847_1538-4365_ae8b90.md)  
+  4/10 [journals]
+- [Ongoing and Post-mass-transfer Binaries: A Living Catalog and Unified Review of Binary Mass-transfer Products](deep_reads/2026-10-12-10.3847_1538-4365_ae8d04.md)  
+  4/10 [journals]
+- [The Far-Ultraviolet Extragalactic Legacy (FUEL) Survey: Hubble Far-UV Images and Catalogs of the Extragalactic Legacy Fields](deep_reads/2026-10-12-10.3847_1538-4365_ae7f0f.md)  
+  3/10 [journals]
+- [Locating the Production Sites of High-energy Neutrinos in Blazar Jets](deep_reads/2026-10-12-10.3847_1538-4365_ae9286.md)  
+  3/10 [journals]
+
 #### Journal of the American Statistical Association
 
 - [Statistical methods for partitioning ribbon and globally-distributed flux using data from the Interstellar Boundary Explorer](deep_reads/2026-10-10-10.1080_01621459.2026.2738231.md)  
