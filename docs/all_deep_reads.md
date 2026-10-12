@@ -1277,6 +1277,43 @@
 - [Finite‐Sample Adjustments in Estimating Equations for Correlated Overdispersed Count Outcomes With Application to Cluster Randomized Trials](deep_reads/2026-10-12-10.1002_sim.70698.md)  
   4/10 [journals]
 
+#### Statistical Methods in Medical Research Vol 35 Issue 9
+
+- [Evaluating and testing for actionable treatment effect heterogeneity](deep_reads/2026-10-12-10.1177_09622802261470081.md)  
+  7/10 [journals]
+- [Bayesian mediation analysis for zero-inflated mediator](deep_reads/2026-10-12-10.1177_09622802261468022.md)  
+  7/10 [journals]
+- [Estimating the effects of treatment regimes over the course of chronic disease: A multi-state causal framework with baseline confounding](deep_reads/2026-10-12-10.1177_09622802261445822.md)  
+  7/10 [journals]
+- [What is estimated in cluster randomized crossover trials with informative sizes? A survey of estimands and common estimators](deep_reads/2026-10-12-10.1177_09622802261470087.md)  
+  6/10 [journals]
+- [A flexible rank-based framework for individualized treatment selection with mixed-type multivariate outcomes](deep_reads/2026-10-12-10.1177_09622802261454791.md)  
+  6/10 [journals]
+- [Covariate-adaptive randomization with dropouts](deep_reads/2026-10-12-10.1177_09622802261475671.md)  
+  4/10 [journals]
+
+#### Statistical Methods in Medical Research Vol 35 Issue 10
+
+- [Built-in selection bias in proportional hazards models with omitted covariates: Simulation evidence and alternative approaches](deep_reads/2026-10-12-10.1177_09622802261485825.md)  
+  6/10 [journals]
+- [A propensity score-integrated win ratio method for placebo borrowing](deep_reads/2026-10-12-10.1177_09622802261478737.md)  
+  6/10 [journals]
+- [Bayesian variable selection for joint models of heterogeneous longitudinal variables and a binary outcome](deep_reads/2026-10-12-10.1177_09622802261478572.md)  
+  6/10 [journals]
+- [Sample size calculation for the sequential multiple assignment randomized trial (SMART) design with a skewed outcome: Application to the SMART+ study](deep_reads/2026-10-12-10.1177_09622802261485814.md)  
+  5/10 [journals]
+- [Inclusive designs that allow the inclusion of a broader population in randomized controlled trials: An evaluation of randomization ratio and analysis strategy](deep_reads/2026-10-12-10.1177_09622802261475687.md)  
+  5/10 [journals]
+
+#### Statistical Methods in Medical Research
+
+- [Doubly robust estimation of causal survival effects via inverse probability of treatment and censoring weighting and semi-parametric AFT models with variable selection](deep_reads/2026-10-12-10.1177_09622802261488051.md)  
+  8/10 [journals]
+- [A flexible Monte Carlo quantitative bias analysis for unmeasured confounding](deep_reads/2026-10-12-10.1177_09622802261488056.md)  
+  7/10 [journals]
+- [Generalizing the two sources capture–recapture estimator for covariate information](deep_reads/2026-10-12-10.1177_09622802261491945.md)  
+  6/10 [journals]
+
 #### Journal of Econometrics Vol 258
 
 - [Treatment evaluation at the intensive and extensive margins](deep_reads/2026-10-12-10.1016_j.jeconom.2026.106344.md)  
@@ -8609,6 +8646,16 @@
 - [Robust Alpha Spending for Unstable Data](deep_reads/2026-10-12-10.1002_sim.70760.md)  
   6/10 [journals]
 
+#### Statistical Methods in Medical Research Vol 35 Issue 9
+
+- [Nonparametric inference for the localization receiver operating characteristic curve and its extension to free-response image localization tasks](deep_reads/2026-10-12-10.1177_09622802261468028.md)  
+  5/10 [journals]
+
+#### Statistical Methods in Medical Research Vol 35 Issue 10
+
+- [Combining dependent p-values with transformation using empirical distribution of correlated data and its application for genomic data](deep_reads/2026-10-12-10.1177_09622802261480383.md)  
+  7/10 [journals]
+
 #### Journal of Econometrics Vol 258
 
 - [High dimensional alpha test for linear factor pricing model with Lq-norm](deep_reads/2026-10-12-10.1016_j.jeconom.2026.106336.md)  
@@ -13727,6 +13774,16 @@
 - [A Bayesian Multi‐State Data Integration Approach for Estimating County‐Level Prevalence of Opioid Misuse in the United States](deep_reads/2026-10-12-10.1002_sim.70707.md)  
   4/10 [journals]
 
+#### Statistical Methods in Medical Research Vol 35 Issue 10
+
+- [Sample size determination for a prospective bridging study to harmonize retrospective data from multiple studies—Application to a biofluid biomarker study of Alzheimer’s disease](deep_reads/2026-10-12-10.1177_09622802261468023.md)  
+  5/10 [journals]
+
+#### Statistical Methods in Medical Research
+
+- [A Bayesian prevalence incidence cure model for estimating survival using electronic health records with incomplete baseline diagnoses](deep_reads/2026-10-12-10.1177_09622802261495109.md)  
+  5/10 [journals]
+
 #### Journal of the Royal Statistical Society Series C Vol 75 Issue 4
 
 - [On the PM2.5–mortality association: a Bayesian model for spatio-temporal confounding](deep_reads/2026-10-10-10.1093_jrsssc_qlag004.md)  
@@ -15185,6 +15242,20 @@
   4/10 [journals]
 - [<scp>ReMeDy</scp> : A Flexible Statistical Framework for Region‐Based Detection of <scp>DNA</scp> Methylation Dysregulation](deep_reads/2026-10-12-10.1002_sim.70716.md)  
   4/10 [journals]
+
+#### Statistical Methods in Medical Research Vol 35 Issue 10
+
+- [A general mixture loss function to optimize a personalized predictive model](deep_reads/2026-10-12-10.1177_09622802261488055.md)  
+  5/10 [journals]
+- [Robust Bayesian hierarchical models for basket trials enabling joint evaluation of toxicity and efficacy](deep_reads/2026-10-12-10.1177_09622802261465336.md)  
+  4/10 [journals]
+
+#### Statistical Methods in Medical Research
+
+- [A regularized semiparametric cure-rate model with high-dimensional imaging data](deep_reads/2026-10-12-10.1177_09622802261483498.md)  
+  6/10 [journals]
+- [A Bayesian adaptive shift-mixture approach for estimating incubation period and exposure time in small outbreaks](deep_reads/2026-10-12-10.1177_09622802261490778.md)  
+  5/10 [journals]
 
 #### Journal of Econometrics Vol 258
 

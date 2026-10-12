@@ -17,12 +17,14 @@
 
 [→ 查看完整报告](daily/2026-10-12.md)
 
-### 精读论文（162 篇）
+### 精读论文（184 篇）
 
 - [Causal Inference With Noisy Covariates: Heteroscedastic Measurement Error and Differential Privacy](deep_reads/2026-10-12-10.3982_ecta23897.md)  
   `因果推断` · 相关性 9/10
 - [Locally Robust Semiparametrically Efficient Bayesian Inference](deep_reads/2026-10-12-10.3982_ecta23242.md)  
   `效率理论 / Debiased ML` · 相关性 9/10
+- [Doubly robust estimation of causal survival effects via inverse probability of treatment and censoring weighting and semi-parametric AFT models with variable selection](deep_reads/2026-10-12-10.1177_09622802261488051.md)  
+  `因果推断` · 相关性 8/10
 - [Deconfounded‐Debiased Estimation and Inference for High‐Dimensional Mediation Analysis With Pervasive Hidden Confounders](deep_reads/2026-10-12-10.1002_sim.70741.md)  
   `因果推断` · 相关性 8/10
 - [Context‐Stratified Mendelian Randomization: Exploiting Regional Exposure Variation to Explore Causal Effect Heterogeneity and Nonlinearity](deep_reads/2026-10-12-10.1002_sim.70727.md)  
@@ -45,6 +47,16 @@
   `其他` · 相关性 8/10
 - [Causal Inference for Spatial Treatments](deep_reads/2026-10-12-10.3982_ecta21571.md)  
   `因果推断` · 相关性 8/10
+- [A flexible Monte Carlo quantitative bias analysis for unmeasured confounding](deep_reads/2026-10-12-10.1177_09622802261488056.md)  
+  `因果推断` · 相关性 7/10
+- [Evaluating and testing for actionable treatment effect heterogeneity](deep_reads/2026-10-12-10.1177_09622802261470081.md)  
+  `因果推断` · 相关性 7/10
+- [Bayesian mediation analysis for zero-inflated mediator](deep_reads/2026-10-12-10.1177_09622802261468022.md)  
+  `因果推断` · 相关性 7/10
+- [Estimating the effects of treatment regimes over the course of chronic disease: A multi-state causal framework with baseline confounding](deep_reads/2026-10-12-10.1177_09622802261445822.md)  
+  `因果推断` · 相关性 7/10
+- [Combining dependent p-values with transformation using empirical distribution of correlated data and its application for genomic data](deep_reads/2026-10-12-10.1177_09622802261480383.md)  
+  `数理统计 / 假设检验` · 相关性 7/10
 - [Forest Kernel Balancing Weights: Outcome‐Guided Features for Causal Inference](deep_reads/2026-10-12-10.1002_sim.70720.md)  
   `因果推断` · 相关性 7/10
 - [Nonparametric Assessment of the Calibration of Individualized Treatment Effects](deep_reads/2026-10-12-10.1002_sim.70724.md)  
@@ -93,6 +105,20 @@
   `高维统计 / 随机矩阵` · 相关性 7/10
 - [Measurement error and peer effects in networks](deep_reads/2026-10-12-10.1016_j.jeconom.2026.106339.md)  
   `因果推断` · 相关性 7/10
+- [A regularized semiparametric cure-rate model with high-dimensional imaging data](deep_reads/2026-10-12-10.1177_09622802261483498.md)  
+  `其他` · 相关性 6/10
+- [Generalizing the two sources capture–recapture estimator for covariate information](deep_reads/2026-10-12-10.1177_09622802261491945.md)  
+  `因果推断` · 相关性 6/10
+- [What is estimated in cluster randomized crossover trials with informative sizes? A survey of estimands and common estimators](deep_reads/2026-10-12-10.1177_09622802261470087.md)  
+  `因果推断` · 相关性 6/10
+- [A flexible rank-based framework for individualized treatment selection with mixed-type multivariate outcomes](deep_reads/2026-10-12-10.1177_09622802261454791.md)  
+  `因果推断` · 相关性 6/10
+- [Built-in selection bias in proportional hazards models with omitted covariates: Simulation evidence and alternative approaches](deep_reads/2026-10-12-10.1177_09622802261485825.md)  
+  `因果推断` · 相关性 6/10
+- [A propensity score-integrated win ratio method for placebo borrowing](deep_reads/2026-10-12-10.1177_09622802261478737.md)  
+  `因果推断` · 相关性 6/10
+- [Bayesian variable selection for joint models of heterogeneous longitudinal variables and a binary outcome](deep_reads/2026-10-12-10.1177_09622802261478572.md)  
+  `因果推断` · 相关性 6/10
 - [Regression Not‐to‐the‐Mean: An Oddity of Regression, Illustrated With the Risk of Overdose Deaths](deep_reads/2026-10-12-10.1002_sim.70734.md)  
   `因果推断` · 相关性 6/10
 - [Bayesian Additive Regression Trees for Modeling Multiple Exposures With Measurement Error](deep_reads/2026-10-12-10.1002_sim.70739.md)  
@@ -189,6 +215,20 @@
   `其他` · 相关性 6/10
 - [Genetic Prediction and Adverse Selection](deep_reads/2026-10-12-10.3982_ecta24284.md)  
   `经济理论 / 应用` · 相关性 6/10
+- [A Bayesian prevalence incidence cure model for estimating survival using electronic health records with incomplete baseline diagnoses](deep_reads/2026-10-12-10.1177_09622802261495109.md)  
+  `流行病学` · 相关性 5/10
+- [A Bayesian adaptive shift-mixture approach for estimating incubation period and exposure time in small outbreaks](deep_reads/2026-10-12-10.1177_09622802261490778.md)  
+  `其他` · 相关性 5/10
+- [Nonparametric inference for the localization receiver operating characteristic curve and its extension to free-response image localization tasks](deep_reads/2026-10-12-10.1177_09622802261468028.md)  
+  `数理统计 / 假设检验` · 相关性 5/10
+- [A general mixture loss function to optimize a personalized predictive model](deep_reads/2026-10-12-10.1177_09622802261488055.md)  
+  `其他` · 相关性 5/10
+- [Sample size calculation for the sequential multiple assignment randomized trial (SMART) design with a skewed outcome: Application to the SMART+ study](deep_reads/2026-10-12-10.1177_09622802261485814.md)  
+  `因果推断` · 相关性 5/10
+- [Sample size determination for a prospective bridging study to harmonize retrospective data from multiple studies—Application to a biofluid biomarker study of Alzheimer’s disease](deep_reads/2026-10-12-10.1177_09622802261468023.md)  
+  `流行病学` · 相关性 5/10
+- [Inclusive designs that allow the inclusion of a broader population in randomized controlled trials: An evaluation of randomization ratio and analysis strategy](deep_reads/2026-10-12-10.1177_09622802261475687.md)  
+  `因果推断` · 相关性 5/10
 - [A Novel Bayesian Distribution‐Free Survival Analysis](deep_reads/2026-10-12-10.1002_sim.70736.md)  
   `其他` · 相关性 5/10
 - [Multilevel Network Meta‐Regression With a Survival Outcome and an Application to Non‐Small Cell Lung Cancer](deep_reads/2026-10-12-10.1002_sim.70728.md)  
@@ -243,6 +283,10 @@
   `因果推断` · 相关性 5/10
 - [Do Asset Prices Help Predict Inflation? Evidence from Individual Stock Prices](deep_reads/2026-10-12-10.1080_07350015.2026.2654899.md)  
   `经济理论 / 应用` · 相关性 5/10
+- [Covariate-adaptive randomization with dropouts](deep_reads/2026-10-12-10.1177_09622802261475671.md)  
+  `因果推断` · 相关性 4/10
+- [Robust Bayesian hierarchical models for basket trials enabling joint evaluation of toxicity and efficacy](deep_reads/2026-10-12-10.1177_09622802261465336.md)  
+  `其他` · 相关性 4/10
 - [Joint Models of Two Longitudinal Biomarkers and Clustered Survival Data for Cluster‐Informed Dynamic Prediction With Application to Periodontitis](deep_reads/2026-10-12-10.1002_sim.70715.md)  
   `流行病学` · 相关性 4/10
 - [A Bayesian Multi‐State Data Integration Approach for Estimating County‐Level Prevalence of Opioid Misuse in the United States](deep_reads/2026-10-12-10.1002_sim.70707.md)  
