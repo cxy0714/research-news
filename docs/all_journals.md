@@ -423,6 +423,7 @@
 - [Vol 195 Issue 2 · 2026-06-24](journals/2026-06-24-aje-v195-i2.md)
 - [Vol 195 Issue 1 · 2026-06-24](journals/2026-06-24-aje-v195-i1.md)
 - [Vol 194 Issue 12 · 2026-06-24](journals/2026-06-24-aje-v194-i12.md)
+- [2026-10-12](journals/2026-10-12-aje.md)
 
 ### Epidemiology
 
