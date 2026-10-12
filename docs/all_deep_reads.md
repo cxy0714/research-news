@@ -5907,6 +5907,13 @@
 
 ### 期刊
 
+#### Technometrics
+
+- [Nonparametric Feature Screening for Non-Euclidean Data](deep_reads/2026-10-13-10.1080_00401706.2026.2735885.md)  
+  7/10 [journals]
+- [Calibrated Bayesian Nonparametric Tolerance Intervals](deep_reads/2026-10-13-10.1080_00401706.2026.2699103.md)  
+  6/10 [journals]
+
 #### Statistics in Medicine Vol 45 Issue 20-22
 
 - [Shape‐Based Partially Linear Single‐Index Cox Model for Alzheimer's Disease Conversion](deep_reads/2026-10-12-10.1002_sim.70708.md)  
@@ -8704,6 +8711,20 @@
 
 ### 期刊
 
+#### Technometrics Vol 68 Issue 3
+
+- [Multiple Change Point Detection in Time Series with Nonstationary Dynamics](deep_reads/2026-10-13-10.1080_00401706.2026.2625472.md)  
+  5/10 [journals]
+- [Is Grouping Always Detrimental to Monitoring Multinomial Data?](deep_reads/2026-10-13-10.1080_00401706.2026.2635355.md)  
+  4/10 [journals]
+
+#### Technometrics
+
+- [A Modified Test for Linear Hypotheses in Multivariate Functional Data Under Heteroscedasticity and Small Samples](deep_reads/2026-10-13-10.1080_00401706.2026.2740126.md)  
+  6/10 [journals]
+- [Federated Conformal Approach for Trustworthy Uncertainty Quantification in Distributed Fleet Prognostics](deep_reads/2026-10-13-10.1080_00401706.2026.2722103.md)  
+  5/10 [journals]
+
 #### Statistics in Medicine Vol 45 Issue 23-24
 
 - [Robust Alpha Spending for Unstable Data](deep_reads/2026-10-12-10.1002_sim.70760.md)  
@@ -10769,6 +10790,28 @@
   6/10 [daily]
 
 ### 期刊
+
+#### Technometrics Vol 68 Issue 3
+
+- [Robust Principal Components by Casewise and Cellwise Weighting](deep_reads/2026-10-13-10.1080_00401706.2026.2643216.md)  
+  5/10 [journals]
+
+#### Technometrics
+
+- [Tensor-Efficient High-Dimensional <i>Q</i> -learning](deep_reads/2026-10-13-10.1080_00401706.2026.2702440.md)  
+  6/10 [journals]
+- [Functional-Edged Network Modeling](deep_reads/2026-10-13-10.1080_00401706.2026.2724145.md)  
+  5/10 [journals]
+- [Spatio-temporal modeling and forecasting with Fourier neural operators](deep_reads/2026-10-13-10.1080_00401706.2026.2736750.md)  
+  5/10 [journals]
+- [Fully Bayesian Sequential Design for Heteroscedastic Stochastic Simulations](deep_reads/2026-10-13-10.1080_00401706.2026.2703239.md)  
+  5/10 [journals]
+- [Quality-Ensured In-Situ Process Monitoring with Deep Canonical Correlation Analysis](deep_reads/2026-10-13-10.1080_00401706.2026.2719486.md)  
+  4/10 [journals]
+- [Grouped Latin Hypercube Designs with Controlled Correlations](deep_reads/2026-10-13-10.1080_00401706.2026.2707208.md)  
+  4/10 [journals]
+- [Registration-Free Monitoring of Unstructured Point Cloud Data via Intrinsic Geometrical Properties](deep_reads/2026-10-13-10.1080_00401706.2026.2702438.md)  
+  3/10 [journals]
 
 #### Monthly Notices of the Royal Astronomical Society Vol 552 Issue 3
 
@@ -15440,6 +15483,24 @@
   8/10 [daily]
 
 ### 期刊
+
+#### Technometrics Vol 68 Issue 3
+
+- [Spatial In-Profile Monitoring via Latent Tensor Gaussian Process with Mixed Effects](deep_reads/2026-10-13-10.1080_00401706.2026.2649041.md)  
+  5/10 [journals]
+- [A General Framework For Modeling Gaussian Process with Qualitative and Quantitative Factors](deep_reads/2026-10-13-10.1080_00401706.2026.2635359.md)  
+  5/10 [journals]
+- [Multimodal Deep Generative Model for Semi-Supervised Learning under Class Imbalance](deep_reads/2026-10-13-10.1080_00401706.2026.2637593.md)  
+  4/10 [journals]
+- [A Neural Network-Based Adaptive Sampling in Monitoring High-Dimensional Processes](deep_reads/2026-10-13-10.1080_00401706.2026.2644479.md)  
+  4/10 [journals]
+
+#### Technometrics
+
+- [Spatio-Temporal Gaussian Process for Building Terrain-Incorporating Wind Power Curves](deep_reads/2026-10-13-10.1080_00401706.2026.2705589.md)  
+  5/10 [journals]
+- [Model-Based Prior for Model-Free Reinforcement Learning in Process Control: An Offline Methodology for Semiconductor Manufacturing](deep_reads/2026-10-13-10.1080_00401706.2026.2689966.md)  
+  4/10 [journals]
 
 #### Statistics in Medicine Vol 45 Issue 23-24
 

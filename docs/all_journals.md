@@ -488,6 +488,7 @@
 
 ### Technometrics
 
+- [Vol 68 Issue 3 · 2026-10-13](journals/2026-10-13-technometrics-v68-i3.md)
 - [Vol 68 Issue 2 · 2026-07-13](journals/2026-07-13-technometrics-v68-i2.md)
 - [Vol 68 Issue 1 · 2026-07-13](journals/2026-07-13-technometrics-v68-i1.md)
 - [Vol 67 Issue 4 · 2026-07-13](journals/2026-07-13-technometrics-v67-i4.md)
@@ -496,6 +497,7 @@
 - [Vol 67 Issue 1 · 2026-07-13](journals/2026-07-13-technometrics-v67-i1.md)
 - [Vol 66 Issue 4 · 2026-07-13](journals/2026-07-13-technometrics-v66-i4.md)
 - [Vol 66 Issue 3 · 2026-07-13](journals/2026-07-13-technometrics-v66-i3.md)
+- [2026-10-13](journals/2026-10-13-technometrics.md)
 
 ## 通用科学主刊 (General Science)
 
