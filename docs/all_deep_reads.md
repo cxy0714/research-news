@@ -1343,6 +1343,24 @@
 - [Prediction with Differential Covariate Classification: Illustrated by Covariate Classification in Medical Risk Assessment](deep_reads/2026-10-12-10.1080_07350015.2026.2680059.md)  
   5/10 [journals]
 
+#### Epidemiology Vol 37 Issue 6
+
+- [The Role of Assignment in Defining and Identifying Causal Effects in Randomized Trials](deep_reads/2026-10-12-10.1097_ede.0000000000002034.md)  
+  8/10 [journals]
+- [Everything All at Once](deep_reads/2026-10-12-10.1097_ede.0000000000002022.md)  
+  7/10 [journals]
+- [Vaccine Efficacy Against Naturally Asymptomatic Infections](deep_reads/2026-10-12-10.1097_ede.0000000000002021.md)  
+  7/10 [journals]
+- [Nesting a Target Study within a Target Trial](deep_reads/2026-10-12-10.1097_ede.0000000000002024.md)  
+  7/10 [journals]
+- [Nonrandom Selection With and Without Bias Due to Selecting on an Exposure](deep_reads/2026-10-12-10.1097_ede.0000000000002018.md)  
+  7/10 [journals]
+
+#### Epidemiology
+
+- [Understanding potential collider bias in external validity analysis depending on types of effect measure modifiers](deep_reads/2026-10-12-10.1097_ede.0000000000002048.md)  
+  7/10 [journals]
+
 #### Econometrica Vol 94 Issue 5
 
 - [Causal Inference With Noisy Covariates: Heteroscedastic Measurement Error and Differential Privacy](deep_reads/2026-10-12-10.3982_ecta23897.md)  
@@ -13800,6 +13818,54 @@
 
 - [A Bayesian prevalence incidence cure model for estimating survival using electronic health records with incomplete baseline diagnoses](deep_reads/2026-10-12-10.1177_09622802261495109.md)  
   5/10 [journals]
+
+#### Epidemiology Vol 37 Issue 6
+
+- [Can the All of Us Sample be Reweighted to Mirror a Nationally Representative Sample? A Comparison of Mortality Predictors](deep_reads/2026-10-12-10.1097_ede.0000000000002016.md)  
+  7/10 [journals]
+- [Development and Validation of a Vacant Lot Care Condition Instrument for Longitudinal Evaluation of Place-based Interventions](deep_reads/2026-10-12-10.1097_ede.0000000000002027.md)  
+  6/10 [journals]
+- [Long-term Effect of the Medicaid Expansion Program on Cancer Mortality by US Region, Gender, and Race/Ethnicity](deep_reads/2026-10-12-10.1097_ede.0000000000002030.md)  
+  6/10 [journals]
+- [Revisiting Severe Maternal Morbidity Recurrence](deep_reads/2026-10-12-10.1097_ede.0000000000002023.md)  
+  6/10 [journals]
+- [Maternal Exposure to Air Pollution and Fetal Growth](deep_reads/2026-10-12-10.1097_ede.0000000000002011.md)  
+  6/10 [journals]
+- [Air Pollution Exposure in Infancy and Incidence of Atopic Dermatitis in Preschool-Aged Children](deep_reads/2026-10-12-10.1097_ede.0000000000002033.md)  
+  5/10 [journals]
+- [Impact of Abortion-limiting Legislation on Preterm and Early Term Birth in Atlanta, Georgia, 2020–2023](deep_reads/2026-10-12-10.1097_ede.0000000000002029.md)  
+  5/10 [journals]
+- [Neighborhood Deprivation and Hypertensive Disorders of Pregnancy](deep_reads/2026-10-12-10.1097_ede.0000000000002025.md)  
+  5/10 [journals]
+- [Indoor Radon Concentrations and Hematologic Traits in the Women’s Health Initiative](deep_reads/2026-10-12-10.1097_ede.0000000000002020.md)  
+  5/10 [journals]
+- [Reproductive Health in an Era of Cascading Inequity](deep_reads/2026-10-12-10.1097_ede.0000000000002028.md)  
+  4/10 [journals]
+- [Temporal Connectivity of Social Contact Networks in Urban and Rural India](deep_reads/2026-10-12-10.1097_ede.0000000000002019.md)  
+  4/10 [journals]
+
+#### Epidemiology
+
+- [Transportability of Prognostic Markers](deep_reads/2026-10-12-10.1097_ede.0000000000002044.md)  
+  8/10 [journals]
+- [Enhanced screening and bacterial sexually-transmitted infection diagnoses after HIV pre-exposure prophylaxis initiation](deep_reads/2026-10-12-10.1097_ede.0000000000002052.md)  
+  7/10 [journals]
+- [Indirect Estimation of the Number of Prevalent Cases – Relaxing the Steady State Assumption](deep_reads/2026-10-12-10.1097_ede.0000000000002049.md)  
+  7/10 [journals]
+- [Long-term exposure to ultrafine particles and mortality from neurodegenerative diseases: a population-based cohort study](deep_reads/2026-10-12-10.1097_ede.0000000000002054.md)  
+  6/10 [journals]
+- [Evaluating Data Sources for Monitoring Guideline-Concordant Endometrial Cancer Treatment Among Older Adults](deep_reads/2026-10-12-10.1097_ede.0000000000002051.md)  
+  6/10 [journals]
+- [Association Between Proximity to Animal Agriculture During Pregnancy and Spontaneous Preterm Birth Among Nulliparous Women in a California Cohort](deep_reads/2026-10-12-10.1097_ede.0000000000002046.md)  
+  6/10 [journals]
+- [Occupational Fatality Data Systems: A Sensitivity Analysis of North Carolina Data Systems for Occupational Fatality from 1992-2017](deep_reads/2026-10-12-10.1097_ede.0000000000002053.md)  
+  5/10 [journals]
+- [Adolescent Interplay of Adversity and Risk: An Ising Network Analysis of the 2023 Youth Risk Behavior Survey](deep_reads/2026-10-12-10.1097_ede.0000000000002045.md)  
+  5/10 [journals]
+- [Association between high fat, sugar, and sodium diet and adverse pregnancy outcomes, modified by fruit and vegetable intake density](deep_reads/2026-10-12-10.1097_ede.0000000000002047.md)  
+  5/10 [journals]
+- [Impact of the first nirsevimab immunization campaign on infant RSV-related emergency department visits and hospitalizations in Québec, Canada](deep_reads/2026-10-12-10.1097_ede.0000000000002050.md)  
+  4/10 [journals]
 
 #### American Journal of Epidemiology Vol 195 Issue 10
 

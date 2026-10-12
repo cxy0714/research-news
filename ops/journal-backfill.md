@@ -133,7 +133,7 @@ IEEE 系列 ieee（月刊、每期很大，全部先 dry-run、用小 N）：
 - [x] (2026-10-12) `--only SMMR --n-issues 2`
 - [x] (2026-10-12) `--only AJE --n-issues 1`   ⚠ 月刊
 - [x] (2026-10-12) `--only AJE --n-issues 2`
-- [ ] `--only Epidemiology --n-issues 1`   ⚠
+- [x] (2026-10-12) `--only Epidemiology --n-issues 1`   ⚠
 - [ ] `--only Epidemiology --n-issues 2`
 
 计算 / 图形统计 compute：

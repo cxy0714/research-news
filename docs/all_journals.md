@@ -428,6 +428,7 @@
 
 ### Epidemiology
 
+- [Vol 37 Issue 6 · 2026-10-12](journals/2026-10-12-epidemiology-v37-i6.md)
 - [Vol 37 Issue 4 · 2026-06-24](journals/2026-06-24-epidemiology-v37-i4.md)
 - [Vol 37 Issue 4 · 2026-06-19](journals/2026-06-19-epidemiology-v37-i4.md)
 - [Vol 37 Issue 3 · 2026-06-19](journals/2026-06-19-epidemiology-v37-i3.md)
@@ -439,6 +440,7 @@
 - [Vol 36 Issue 3 · 2026-06-24](journals/2026-06-24-epidemiology-v36-i3.md)
 - [Vol 36 Issue 2 · 2026-06-24](journals/2026-06-24-epidemiology-v36-i2.md)
 - [Vol 36 Issue 1 · 2026-06-24](journals/2026-06-24-epidemiology-v36-i1.md)
+- [2026-10-12](journals/2026-10-12-epidemiology.md)
 
 ### SMMR
 

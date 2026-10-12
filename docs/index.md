@@ -17,12 +17,16 @@
 
 [→ 查看完整报告](daily/2026-10-12.md)
 
-### 精读论文（212 篇）
+### 精读论文（239 篇）
 
 - [Causal Inference With Noisy Covariates: Heteroscedastic Measurement Error and Differential Privacy](deep_reads/2026-10-12-10.3982_ecta23897.md)  
   `因果推断` · 相关性 9/10
 - [Locally Robust Semiparametrically Efficient Bayesian Inference](deep_reads/2026-10-12-10.3982_ecta23242.md)  
   `效率理论 / Debiased ML` · 相关性 9/10
+- [Transportability of Prognostic Markers](deep_reads/2026-10-12-10.1097_ede.0000000000002044.md)  
+  `流行病学` · 相关性 8/10
+- [The Role of Assignment in Defining and Identifying Causal Effects in Randomized Trials](deep_reads/2026-10-12-10.1097_ede.0000000000002034.md)  
+  `因果推断` · 相关性 8/10
 - [Event-time regression discontinuity for biomedical data: LATT estimation and covariate distribution tests](deep_reads/2026-10-12-10.1093_aje_kwag243.md)  
   `因果推断` · 相关性 8/10
 - [Doubly robust estimation of causal survival effects via inverse probability of treatment and censoring weighting and semi-parametric AFT models with variable selection](deep_reads/2026-10-12-10.1177_09622802261488051.md)  
@@ -49,6 +53,22 @@
   `其他` · 相关性 8/10
 - [Causal Inference for Spatial Treatments](deep_reads/2026-10-12-10.3982_ecta21571.md)  
   `因果推断` · 相关性 8/10
+- [Enhanced screening and bacterial sexually-transmitted infection diagnoses after HIV pre-exposure prophylaxis initiation](deep_reads/2026-10-12-10.1097_ede.0000000000002052.md)  
+  `流行病学` · 相关性 7/10
+- [Indirect Estimation of the Number of Prevalent Cases – Relaxing the Steady State Assumption](deep_reads/2026-10-12-10.1097_ede.0000000000002049.md)  
+  `流行病学` · 相关性 7/10
+- [Understanding potential collider bias in external validity analysis depending on types of effect measure modifiers](deep_reads/2026-10-12-10.1097_ede.0000000000002048.md)  
+  `因果推断` · 相关性 7/10
+- [Everything All at Once](deep_reads/2026-10-12-10.1097_ede.0000000000002022.md)  
+  `因果推断` · 相关性 7/10
+- [Vaccine Efficacy Against Naturally Asymptomatic Infections](deep_reads/2026-10-12-10.1097_ede.0000000000002021.md)  
+  `因果推断` · 相关性 7/10
+- [Nesting a Target Study within a Target Trial](deep_reads/2026-10-12-10.1097_ede.0000000000002024.md)  
+  `因果推断` · 相关性 7/10
+- [Nonrandom Selection With and Without Bias Due to Selecting on an Exposure](deep_reads/2026-10-12-10.1097_ede.0000000000002018.md)  
+  `因果推断` · 相关性 7/10
+- [Can the All of Us Sample be Reweighted to Mirror a Nationally Representative Sample? A Comparison of Mortality Predictors](deep_reads/2026-10-12-10.1097_ede.0000000000002016.md)  
+  `流行病学` · 相关性 7/10
 - [Causal inference of multiple interrelated exposures: Contributions of ischemic placental disease to preterm delivery](deep_reads/2026-10-12-10.1093_aje_kwag230.md)  
   `因果推断` · 相关性 7/10
 - [Real-world cardiovascular effects of liraglutide: transportability analysis of the LEADER trial](deep_reads/2026-10-12-10.1093_aje_kwag236.md)  
@@ -129,6 +149,20 @@
   `高维统计 / 随机矩阵` · 相关性 7/10
 - [Measurement error and peer effects in networks](deep_reads/2026-10-12-10.1016_j.jeconom.2026.106339.md)  
   `因果推断` · 相关性 7/10
+- [Long-term exposure to ultrafine particles and mortality from neurodegenerative diseases: a population-based cohort study](deep_reads/2026-10-12-10.1097_ede.0000000000002054.md)  
+  `流行病学` · 相关性 6/10
+- [Evaluating Data Sources for Monitoring Guideline-Concordant Endometrial Cancer Treatment Among Older Adults](deep_reads/2026-10-12-10.1097_ede.0000000000002051.md)  
+  `流行病学` · 相关性 6/10
+- [Association Between Proximity to Animal Agriculture During Pregnancy and Spontaneous Preterm Birth Among Nulliparous Women in a California Cohort](deep_reads/2026-10-12-10.1097_ede.0000000000002046.md)  
+  `流行病学` · 相关性 6/10
+- [Development and Validation of a Vacant Lot Care Condition Instrument for Longitudinal Evaluation of Place-based Interventions](deep_reads/2026-10-12-10.1097_ede.0000000000002027.md)  
+  `流行病学` · 相关性 6/10
+- [Long-term Effect of the Medicaid Expansion Program on Cancer Mortality by US Region, Gender, and Race/Ethnicity](deep_reads/2026-10-12-10.1097_ede.0000000000002030.md)  
+  `流行病学` · 相关性 6/10
+- [Revisiting Severe Maternal Morbidity Recurrence](deep_reads/2026-10-12-10.1097_ede.0000000000002023.md)  
+  `流行病学` · 相关性 6/10
+- [Maternal Exposure to Air Pollution and Fetal Growth](deep_reads/2026-10-12-10.1097_ede.0000000000002011.md)  
+  `流行病学` · 相关性 6/10
 - [Residential segregation and fecundability in the Black Women’s Health Study](deep_reads/2026-10-12-10.1093_aje_kwag229.md)  
   `流行病学` · 相关性 6/10
 - [Does despair drive increases in white mortality, or did the narrative get ahead of the data?](deep_reads/2026-10-12-10.1093_aje_kwag235.md)  
@@ -251,6 +285,20 @@
   `其他` · 相关性 6/10
 - [Genetic Prediction and Adverse Selection](deep_reads/2026-10-12-10.3982_ecta24284.md)  
   `经济理论 / 应用` · 相关性 6/10
+- [Occupational Fatality Data Systems: A Sensitivity Analysis of North Carolina Data Systems for Occupational Fatality from 1992-2017](deep_reads/2026-10-12-10.1097_ede.0000000000002053.md)  
+  `流行病学` · 相关性 5/10
+- [Adolescent Interplay of Adversity and Risk: An Ising Network Analysis of the 2023 Youth Risk Behavior Survey](deep_reads/2026-10-12-10.1097_ede.0000000000002045.md)  
+  `流行病学` · 相关性 5/10
+- [Association between high fat, sugar, and sodium diet and adverse pregnancy outcomes, modified by fruit and vegetable intake density](deep_reads/2026-10-12-10.1097_ede.0000000000002047.md)  
+  `流行病学` · 相关性 5/10
+- [Air Pollution Exposure in Infancy and Incidence of Atopic Dermatitis in Preschool-Aged Children](deep_reads/2026-10-12-10.1097_ede.0000000000002033.md)  
+  `流行病学` · 相关性 5/10
+- [Impact of Abortion-limiting Legislation on Preterm and Early Term Birth in Atlanta, Georgia, 2020–2023](deep_reads/2026-10-12-10.1097_ede.0000000000002029.md)  
+  `流行病学` · 相关性 5/10
+- [Neighborhood Deprivation and Hypertensive Disorders of Pregnancy](deep_reads/2026-10-12-10.1097_ede.0000000000002025.md)  
+  `流行病学` · 相关性 5/10
+- [Indoor Radon Concentrations and Hematologic Traits in the Women’s Health Initiative](deep_reads/2026-10-12-10.1097_ede.0000000000002020.md)  
+  `流行病学` · 相关性 5/10
 - [Housing-related payment hardship and associations with health and well-being: A 15-year longitudinal study in a national sample of US adults](deep_reads/2026-10-12-10.1093_aje_kwag231.md)  
   `流行病学` · 相关性 5/10
 - [The long half-life of neighborhood poverty: duration, timing, and biological aging](deep_reads/2026-10-12-10.1093_aje_kwag182.md)  
@@ -329,6 +377,12 @@
   `因果推断` · 相关性 5/10
 - [Do Asset Prices Help Predict Inflation? Evidence from Individual Stock Prices](deep_reads/2026-10-12-10.1080_07350015.2026.2654899.md)  
   `经济理论 / 应用` · 相关性 5/10
+- [Impact of the first nirsevimab immunization campaign on infant RSV-related emergency department visits and hospitalizations in Québec, Canada](deep_reads/2026-10-12-10.1097_ede.0000000000002050.md)  
+  `流行病学` · 相关性 4/10
+- [Reproductive Health in an Era of Cascading Inequity](deep_reads/2026-10-12-10.1097_ede.0000000000002028.md)  
+  `流行病学` · 相关性 4/10
+- [Temporal Connectivity of Social Contact Networks in Urban and Rural India](deep_reads/2026-10-12-10.1097_ede.0000000000002019.md)  
+  `流行病学` · 相关性 4/10
 - [Deaths of despair among former military service members, Massachusetts (2014-2021) and Minnesota (2014-2022)](deep_reads/2026-10-12-10.1093_aje_kwag233.md)  
   `流行病学` · 相关性 4/10
 - [Rationale and design of the Atherosclerosis Risk in Communities Generation 2 study](deep_reads/2026-10-12-10.1093_aje_kwag237.md)  
