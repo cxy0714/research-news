@@ -480,6 +480,8 @@
 
 ### Stat. Comput.
 
+- [Vol 36 Issue 6 · 2026-10-13](journals/2026-10-13-stat-comput-v36-i6.md)
+- [Vol 36 Issue 5 · 2026-10-13](journals/2026-10-13-stat-comput-v36-i5.md)
 - [Vol 36 Issue 4 · 2026-07-14](journals/2026-07-14-stat-comput-v36-i4.md)
 - [Vol 36 Issue 3 · 2026-07-14](journals/2026-07-14-stat-comput-v36-i3.md)
 - [Vol 36 Issue 2 · 2026-07-14](journals/2026-07-14-stat-comput-v36-i2.md)

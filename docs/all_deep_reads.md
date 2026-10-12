@@ -1231,6 +1231,11 @@
 
 ### 期刊
 
+#### Statistics and Computing Vol 36 Issue 5
+
+- [Semiparametric model averaging for high-dimensional quantile regression with nonignorable nonresponse](deep_reads/2026-10-13-10.1007_s11222-026-10953-2.md)  
+  7/10 [journals]
+
 #### Statistics in Medicine Vol 45 Issue 23-24
 
 - [Generalizing Conditional Average Treatment Effects From Nested Randomized Trials to Trial‐Eligible Individuals](deep_reads/2026-10-12-10.1002_sim.70767.md)  
@@ -5914,6 +5919,11 @@
 - [Calibrated Bayesian Nonparametric Tolerance Intervals](deep_reads/2026-10-13-10.1080_00401706.2026.2699103.md)  
   6/10 [journals]
 
+#### Statistics and Computing Vol 36 Issue 5
+
+- [Fast robust additive models using gamma-divergence](deep_reads/2026-10-13-10.1007_s11222-026-10960-3.md)  
+  5/10 [journals]
+
 #### Statistics in Medicine Vol 45 Issue 20-22
 
 - [Shape‐Based Partially Linear Single‐Index Cox Model for Alzheimer's Disease Conversion](deep_reads/2026-10-12-10.1002_sim.70708.md)  
@@ -8727,6 +8737,18 @@
 - [Federated Conformal Approach for Trustworthy Uncertainty Quantification in Distributed Fleet Prognostics](deep_reads/2026-10-13-10.1080_00401706.2026.2722103.md)  
   5/10 [journals]
 
+#### Statistics and Computing Vol 36 Issue 6
+
+- [Estimation of Tsallis entropy and its applications to goodness-of-fit tests](deep_reads/2026-10-13-10.1007_s11222-026-10989-4.md)  
+  6/10 [journals]
+
+#### Statistics and Computing Vol 36 Issue 5
+
+- [A fast and effective kernel two-sample test for large-scale data](deep_reads/2026-10-13-10.1007_s11222-026-10969-8.md)  
+  6/10 [journals]
+- [Generative conformal prediction under multiple covariate shifts](deep_reads/2026-10-13-10.1007_s11222-026-10936-3.md)  
+  6/10 [journals]
+
 #### Statistics in Medicine Vol 45 Issue 23-24
 
 - [Robust Alpha Spending for Unstable Data](deep_reads/2026-10-12-10.1002_sim.70760.md)  
@@ -10824,6 +10846,26 @@
   4/10 [journals]
 - [Registration-Free Monitoring of Unstructured Point Cloud Data via Intrinsic Geometrical Properties](deep_reads/2026-10-13-10.1080_00401706.2026.2702438.md)  
   3/10 [journals]
+
+#### Statistics and Computing Vol 36 Issue 6
+
+- [Statistical commutators with applications to estimation, inference, and regularization tuning](deep_reads/2026-10-13-10.1007_s11222-026-10991-w.md)  
+  7/10 [journals]
+- [A fast and stable algorithm for non-parametric maximum likelihood estimation of survival functions for left-truncated and interval-censored data](deep_reads/2026-10-13-10.1007_s11222-026-10984-9.md)  
+  6/10 [journals]
+- [Covariance matrix completion via auxiliary information](deep_reads/2026-10-13-10.1007_s11222-026-10963-0.md)  
+  6/10 [journals]
+
+#### Statistics and Computing Vol 36 Issue 5
+
+- [Rare event ABC-SMC$$^{2}$$](deep_reads/2026-10-13-10.1007_s11222-026-10979-6.md)  
+  4/10 [journals]
+- [Faster Hamiltonian Monte Carlo by learning leapfrog scale: an offline randomized solution](deep_reads/2026-10-13-10.1007_s11222-026-10972-z.md)  
+  4/10 [journals]
+- [Piecewise deterministic sampling for constrained distributions](deep_reads/2026-10-13-10.1007_s11222-026-10976-9.md)  
+  4/10 [journals]
+- [Kinetic interacting particle Langevin Monte Carlo](deep_reads/2026-10-13-10.1007_s11222-026-10980-z.md)  
+  4/10 [journals]
 
 #### Monthly Notices of the Royal Astronomical Society Vol 552 Issue 3
 
@@ -15521,6 +15563,18 @@
   4/10 [journals]
 - [Model-Based Prior for Model-Free Reinforcement Learning in Process Control: An Offline Methodology for Semiconductor Manufacturing](deep_reads/2026-10-13-10.1080_00401706.2026.2689966.md)  
   4/10 [journals]
+
+#### Statistics and Computing Vol 36 Issue 6
+
+- [Bayesian modelling of clustered extreme events using a nonparametric Hawkes process](deep_reads/2026-10-13-10.1007_s11222-026-10981-y.md)  
+  4/10 [journals]
+
+#### Statistics and Computing Vol 36 Issue 5
+
+- [On computing and the complexity of computing higher-order U-statistics, exactly](deep_reads/2026-10-13-10.1007_s11222-026-10974-x.md)  
+  10/10 [journals]
+- [Non-centering for discrete-valued state transition models: an application to ESBL-producing E. coli transmission in Malawi](deep_reads/2026-10-13-10.1007_s11222-026-10956-z.md)  
+  3/10 [journals]
 
 #### Statistics in Medicine Vol 45 Issue 23-24
 
