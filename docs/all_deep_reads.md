@@ -12264,6 +12264,16 @@
 
 ### 期刊
 
+#### Science Vol 394 Issue 6820
+
+- [Insights from more than a year of ongoing episodic lava fountaining at Kīlauea](deep_reads/2026-10-13-10.1126_science.aef2931.md)  
+  4/10 [journals]
+
+#### Science
+
+- [A fast radio burst at redshift 2, three billion years after the Big Bang](deep_reads/2026-10-13-10.1126_science.adz2675.md)  
+  3/10 [journals]
+
 #### Monthly Notices of the Royal Astronomical Society Vol 552 Issue 3
 
 - [Constraining inhomogeneities in SNe, FBOTs, and other high-energy transients from unresolved radio observations](deep_reads/2026-10-12-10.1093_mnras_stag1795.md)  
@@ -13978,6 +13988,11 @@
 
 ### 期刊
 
+#### Science
+
+- [Nutritional interventions’ impacts on human milk: Three trials in low-resource settings](deep_reads/2026-10-13-10.1126_science.aee9284.md)  
+  3/10 [journals]
+
 #### Statistics in Medicine Vol 45 Issue 20-22
 
 - [Joint Models of Two Longitudinal Biomarkers and Clustered Survival Data for Cluster‐Informed Dynamic Prediction With Application to Periodontitis](deep_reads/2026-10-12-10.1002_sim.70715.md)  
@@ -15589,6 +15604,58 @@
 - [On computing and the complexity of computing higher-order U-statistics, exactly](deep_reads/2026-10-13-10.1007_s11222-026-10974-x.md)  
   10/10 [journals]
 - [Non-centering for discrete-valued state transition models: an application to ESBL-producing E. coli transmission in Malawi](deep_reads/2026-10-13-10.1007_s11222-026-10956-z.md)  
+  3/10 [journals]
+
+#### Science Vol 394 Issue 6820
+
+- [Data everywhere, but are they fit for purpose?](deep_reads/2026-10-13-10.1126_science.ael8349.md)  
+  7/10 [journals]
+- [Phones impede learning: Evidence from a massive phone-free classroom experiment](deep_reads/2026-10-13-10.1126_science.aef7249.md)  
+  6/10 [journals]
+- [Epigenetic aging and transposon dysregulation reflect size-related lifespan compression in dogs](deep_reads/2026-10-13-10.1126_science.aeb2986.md)  
+  6/10 [journals]
+- [The human gut microbiome primes fever after vaccination](deep_reads/2026-10-13-10.1126_science.aea7733.md)  
+  6/10 [journals]
+- [Recent strengthening of eastern Pacific ENSO in the last millennium paleorecord](deep_reads/2026-10-13-10.1126_science.ady2660.md)  
+  5/10 [journals]
+- [Advancing mathematics research with AI-driven formal proof search](deep_reads/2026-10-13-10.1126_science.aej2213.md)  
+  5/10 [journals]
+- [High-capacity associative memory in a quantum-optical spin glass](deep_reads/2026-10-13-10.1126_science.aec3917.md)  
+  4/10 [journals]
+- [AI for research mathematics has arrived](deep_reads/2026-10-13-10.1126_science.ael6628.md)  
+  4/10 [journals]
+- [Demographic “doomsday” misses the mark](deep_reads/2026-10-13-10.1126_science.ael8752.md)  
+  3/10 [journals]
+- [Natural <sup>15</sup> N <sup>15</sup> N abundances constrain fixed nitrogen loss](deep_reads/2026-10-13-10.1126_science.aei0940.md)  
+  3/10 [journals]
+- [New studies probe how menopause puts brain at risk](deep_reads/2026-10-13-10.1126_science.aen0166.md)  
+  3/10 [journals]
+- [High-fidelity entangling gates and nonlocal circuits with neutral atoms](deep_reads/2026-10-13-10.1126_science.aei1312.md)  
+  3/10 [journals]
+- [Volatile eutectics to tailor crystallization for perovskite optoelectronics](deep_reads/2026-10-13-10.1126_science.aeb4554.md)  
+  2/10 [journals]
+- [Marine snow viscosity regulates microbial degradation and the ocean carbon sink](deep_reads/2026-10-13-10.1126_science.adx4170.md)  
+  2/10 [journals]
+- [Message in a bottleneck: Nested founder effects from French Polynesia to Rapa Nui and Hawaiʻi](deep_reads/2026-10-13-10.1126_science.aec7662.md)  
+  2/10 [journals]
+- [Before the immunological Big Bang](deep_reads/2026-10-13-10.1126_science.ael7318.md)  
+  2/10 [journals]
+- [The genetic basis for the production of toxic quinolizidine alkaloids in lupins](deep_reads/2026-10-13-10.1126_science.aei5520.md)  
+  1/10 [journals]
+- [Asymmetric enzymatic hydrophosphorylation through O <sub>2</sub> activation](deep_reads/2026-10-13-10.1126_science.aef3001.md)  
+  0/10 [journals]
+- [Golgi-derived vesicles containing PI(3,4)P <sub>2</sub> drive mitochondrial fusion](deep_reads/2026-10-13-10.1126_science.adx9628.md)  
+  0/10 [journals]
+- [Wafer-scale low-symmetry graphene moiré superlattice for integrated quantum rectifiers](deep_reads/2026-10-13-10.1126_science.aeh3915.md)  
+  0/10 [journals]
+
+#### Science
+
+- [A DNA Typewriter records the cell lineage history of a mouse, from zygote to late organogenesis](deep_reads/2026-10-13-10.1126_science.ael0508.md)  
+  4/10 [journals]
+- [Safeguarding global terrestrial vertebrate species from future sea-level rise](deep_reads/2026-10-13-10.1126_science.aed5772.md)  
+  4/10 [journals]
+- [Shared patterns of human milk composition link mammary gland function to infant growth](deep_reads/2026-10-13-10.1126_science.aee7240.md)  
   3/10 [journals]
 
 #### Nature Vol 658 Issue 8135

@@ -146,7 +146,7 @@ IEEE 系列 ieee（月刊、每期很大，全部先 dry-run、用小 N）：
 
 综合科学 general / broad：
 - [x] (2026-10-13) `--only Nature --n-issues 2`
-- [ ] `--only Science --n-issues 1`
+- [x] (2026-10-13) `--only Science --n-issues 1`
 - [ ] `--only Science --n-issues 2`
 - [ ] `--only PNAS --n-issues 1`   ⚠ 单期波动大
 - [ ] `--only PNAS --n-issues 2`
