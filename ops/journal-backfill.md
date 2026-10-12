@@ -149,7 +149,7 @@ IEEE 系列 ieee（月刊、每期很大，全部先 dry-run、用小 N）：
 - [x] (2026-10-13) `--only Science --n-issues 1`
 - [x] (2026-10-13) `--only Science --n-issues 2`
 - [x] (2026-10-13) `--only PNAS --n-issues 1`   ⚠ 单期波动大
-- [ ] `--only PNAS --n-issues 2`
+- [x] (2026-10-13) `--only PNAS --n-issues 2`
 - [ ] `--only "Nat. Methods" --n-issues 1`
 - [ ] `--only "Nat. Methods" --n-issues 2`
 - [ ] `--only NMI --n-issues 2`

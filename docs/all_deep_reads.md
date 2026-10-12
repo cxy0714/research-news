@@ -12279,6 +12279,11 @@
 - [Extensive glacier loss in the coterminous United States](deep_reads/2026-10-13-10.1073_pnas.2600941123.md)  
   3/10 [journals]
 
+#### Proceedings of the National Academy of Sciences Vol 123 Issue 42
+
+- [Improved assessment of Alaskan Arctic coastal wave exposure accounting for landfast ice](deep_reads/2026-10-13-10.1073_pnas.2612829123.md)  
+  3/10 [journals]
+
 #### Monthly Notices of the Royal Astronomical Society Vol 552 Issue 3
 
 - [Constraining inhomogeneities in SNe, FBOTs, and other high-energy transients from unresolved radio observations](deep_reads/2026-10-12-10.1093_mnras_stag1795.md)  
@@ -13998,6 +14003,11 @@
 - [Nutritional interventions’ impacts on human milk: Three trials in low-resource settings](deep_reads/2026-10-13-10.1126_science.aee9284.md)  
   3/10 [journals]
 
+#### Proceedings of the National Academy of Sciences Vol 123 Issue 42
+
+- [Laundering and evasion in response to antislavery policies in Brazil’s cattle sector](deep_reads/2026-10-13-10.1073_pnas.2532121123.md)  
+  5/10 [journals]
+
 #### Statistics in Medicine Vol 45 Issue 20-22
 
 - [Joint Models of Two Longitudinal Biomarkers and Clustered Survival Data for Cluster‐Informed Dynamic Prediction With Application to Periodontitis](deep_reads/2026-10-12-10.1002_sim.70715.md)  
@@ -15696,6 +15706,37 @@
 
 - [Nutrient legacies from elephant megacarcasses create coldspots of biodiversity and hotspots of ecosystem processes](deep_reads/2026-10-13-10.1073_pnas.2605332123.md)  
   3/10 [journals]
+
+#### Proceedings of the National Academy of Sciences Vol 123 Issue 42
+
+- [Integrating cooperative breeding with reciprocity and culture extends Hamilton’s rule to humans](deep_reads/2026-10-13-10.1073_pnas.2617040123.md)  
+  6/10 [journals]
+- [Learning dissipative chaotic dynamics with boundedness guarantees](deep_reads/2026-10-13-10.1073_pnas.2533077123.md)  
+  6/10 [journals]
+- [Heterochronicity shapes brain network formation](deep_reads/2026-10-13-10.1073_pnas.2610400123.md)  
+  5/10 [journals]
+- [Multidimensional vulnerabilities of informal settlements in the Urban South](deep_reads/2026-10-13-10.1073_pnas.2523034123.md)  
+  4/10 [journals]
+- [Thermodynamic origin of atmospheric new particle formation: Theory for stable nucleating pairs](deep_reads/2026-10-13-10.1073_pnas.2620565123.md)  
+  4/10 [journals]
+- [AI-generated language remains systematically distinguishable from human communication](deep_reads/2026-10-13-10.1073_pnas.2531748123.md)  
+  4/10 [journals]
+- [Evolution shapes ecosystem resilience through spatial self-organization](deep_reads/2026-10-13-10.1073_pnas.2536473123.md)  
+  4/10 [journals]
+- [Multiyear dual-isotope fingerprinting at South Asian receptor sites constrains carbon monoxide sources and enhanced oxidation](deep_reads/2026-10-13-10.1073_pnas.2606200123.md)  
+  3/10 [journals]
+- [Antiferromagnetism and tightly bound Cooper pairs induced by kinetic frustration](deep_reads/2026-10-13-10.1073_pnas.2606433123.md)  
+  3/10 [journals]
+- [Field experiments predict ecological response to a large-scale epidemic of an anti-keystone pathogen](deep_reads/2026-10-13-10.1073_pnas.2529492123.md)  
+  3/10 [journals]
+- [Cell identity competes with surface tension to determine stromal organization in tumor spheroids beyond the CAF shell paradigm](deep_reads/2026-10-13-10.1073_pnas.2624455123.md)  
+  3/10 [journals]
+- [GTP orchestrates CTP synthase via an allosteric effector–cycling mechanism](deep_reads/2026-10-13-10.1073_pnas.2620272123.md)  
+  1/10 [journals]
+- [Reaction-based cryo-EM resolves the continuous conformational spectrum of CTP synthase catalysis](deep_reads/2026-10-13-10.1073_pnas.2620271123.md)  
+  0/10 [journals]
+- [Understanding consciousness (biological and artificial) as a society of self-schemas](deep_reads/2026-10-13-10.1073_pnas.2628598123.md)  
+  0/10 [journals]
 
 #### Nature Vol 658 Issue 8135
 
