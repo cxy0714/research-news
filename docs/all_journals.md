@@ -463,6 +463,8 @@
 
 ### CSDA
 
+- [Vol 226 · 2026-10-13](journals/2026-10-13-csda-v226.md)
+- [Vol 225 · 2026-10-13](journals/2026-10-13-csda-v225.md)
 - [Vol 224 · 2026-07-14](journals/2026-07-14-csda-v224.md)
 - [Vol 223 · 2026-07-14](journals/2026-07-14-csda-v223.md)
 - [Vol 222 · 2026-07-14](journals/2026-07-14-csda-v222.md)

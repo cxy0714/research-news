@@ -4362,6 +4362,11 @@
 
 ### 期刊
 
+#### Computational Statistics & Data Analysis Vol 226
+
+- [HFG LASSO: A method for models with hierarchical categorical predictors](deep_reads/2026-10-13-10.1016_j.csda.2026.108478.md)  
+  5/10 [journals]
+
 #### Statistics in Medicine Vol 45 Issue 20-22
 
 - [A Group Structure Guided Ultra‐High Dimensional Feature Screening for Survival Outcome](deep_reads/2026-10-12-10.1002_sim.70725.md)  
@@ -10867,6 +10872,11 @@
 - [Kinetic interacting particle Langevin Monte Carlo](deep_reads/2026-10-13-10.1007_s11222-026-10980-z.md)  
   4/10 [journals]
 
+#### Computational Statistics & Data Analysis Vol 225
+
+- [A scalable variational bayes approach for fitting non-conjugate spatial generalized linear mixed models via basis expansions](deep_reads/2026-10-13-10.1016_j.csda.2026.108453.md)  
+  5/10 [journals]
+
 #### Monthly Notices of the Royal Astronomical Society Vol 552 Issue 3
 
 - [Fast and furious: long-term orbit integrations with collocation integrator Lobbie](deep_reads/2026-10-12-10.1093_mnras_stag1811.md)  
@@ -15575,6 +15585,15 @@
   10/10 [journals]
 - [Non-centering for discrete-valued state transition models: an application to ESBL-producing E. coli transmission in Malawi](deep_reads/2026-10-13-10.1007_s11222-026-10956-z.md)  
   3/10 [journals]
+
+#### Computational Statistics & Data Analysis Vol 225
+
+- [Comparison of estimators for multi-state models in potentially non-Markov processes](deep_reads/2026-10-13-10.1016_j.csda.2026.108466.md)  
+  6/10 [journals]
+- [Stable and practical semi-Markov modelling of intermittently-observed data](deep_reads/2026-10-13-10.1016_j.csda.2026.108462.md)  
+  6/10 [journals]
+- [A penalized least-squares estimator for extreme-value models with multiple extreme directions](deep_reads/2026-10-13-10.1016_j.csda.2026.108460.md)  
+  4/10 [journals]
 
 #### Statistics in Medicine Vol 45 Issue 23-24
 

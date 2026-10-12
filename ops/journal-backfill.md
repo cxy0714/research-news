@@ -141,7 +141,7 @@ IEEE 系列 ieee（月刊、每期很大，全部先 dry-run、用小 N）：
 - [x] (2026-10-13) `--only Technometrics --n-issues 1`   ⚠ 单期大
 - [x] (2026-10-13) `--only Technometrics --n-issues 2`
 - [x] (2026-10-13) `--only "Stat. Comput." --n-issues 2`
-- [ ] `--only CSDA --n-issues 1`   ⚠⚠ 月刊
+- [x] (2026-10-13) `--only CSDA --n-issues 1`   ⚠⚠ 月刊
 - [ ] `--only CSDA --n-issues 2`
 
 综合科学 general / broad：
