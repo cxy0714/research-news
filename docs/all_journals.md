@@ -413,6 +413,7 @@
 
 ### AJE
 
+- [Vol 195 Issue 10 · 2026-10-12](journals/2026-10-12-aje-v195-i10.md)
 - [Vol 195 Issue 6 · 2026-06-24](journals/2026-06-24-aje-v195-i6.md)
 - [Vol 195 Issue 6 · 2026-06-19](journals/2026-06-19-aje-v195-i6.md)
 - [Vol 195 Issue 5 · 2026-06-24](journals/2026-06-24-aje-v195-i5.md)

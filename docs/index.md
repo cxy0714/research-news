@@ -17,7 +17,7 @@
 
 [→ 查看完整报告](daily/2026-10-12.md)
 
-### 精读论文（195 篇）
+### 精读论文（212 篇）
 
 - [Causal Inference With Noisy Covariates: Heteroscedastic Measurement Error and Differential Privacy](deep_reads/2026-10-12-10.3982_ecta23897.md)  
   `因果推断` · 相关性 9/10
@@ -49,6 +49,20 @@
   `其他` · 相关性 8/10
 - [Causal Inference for Spatial Treatments](deep_reads/2026-10-12-10.3982_ecta21571.md)  
   `因果推断` · 相关性 8/10
+- [Causal inference of multiple interrelated exposures: Contributions of ischemic placental disease to preterm delivery](deep_reads/2026-10-12-10.1093_aje_kwag230.md)  
+  `因果推断` · 相关性 7/10
+- [Real-world cardiovascular effects of liraglutide: transportability analysis of the LEADER trial](deep_reads/2026-10-12-10.1093_aje_kwag236.md)  
+  `因果推断` · 相关性 7/10
+- [Hypothetical interventions on alcohol consumption and risk of mortality in healthy women: emulated target trials from the Norwegian Women and Health Study](deep_reads/2026-10-12-10.1093_aje_kwag232.md)  
+  `因果推断` · 相关性 7/10
+- [Contribution of adolescent movement behaviors to socioeconomic inequalities in adult cardiovascular disease risk: a causal decomposition in a population-based cohort](deep_reads/2026-10-12-10.1093_aje_kwag234.md)  
+  `流行病学` · 相关性 7/10
+- [A cautionary note on the use of sibling proxy outcomes as a selection bias diagnostic](deep_reads/2026-10-12-10.1093_aje_kwag226.md)  
+  `流行病学` · 相关性 7/10
+- [Advantages of a Two-Stage Randomized Trial Design to Evaluate Antimicrobial Treatment Strategies: a Simulation Study](deep_reads/2026-10-12-10.1093_aje_kwag220.md)  
+  `流行病学` · 相关性 7/10
+- [Health consequences of spousal health shocks: evidence from a matched event study in the United States](deep_reads/2026-10-12-10.1093_aje_kwag178.md)  
+  `流行病学` · 相关性 7/10
 - [Adapting the prevalent new-user study design and clone-censor-weighting approach to evaluate drug discontinuation](deep_reads/2026-10-12-10.1093_aje_kwag238.md)  
   `因果推断` · 相关性 7/10
 - [Estimation of the relative effectiveness and waning of the monovalent third dose of COVID-19 vaccine against hospital admission in France: a novel self-controlled case series analysis](deep_reads/2026-10-12-10.1093_aje_kwag250.md)  
@@ -115,6 +129,12 @@
   `高维统计 / 随机矩阵` · 相关性 7/10
 - [Measurement error and peer effects in networks](deep_reads/2026-10-12-10.1016_j.jeconom.2026.106339.md)  
   `因果推断` · 相关性 7/10
+- [Residential segregation and fecundability in the Black Women’s Health Study](deep_reads/2026-10-12-10.1093_aje_kwag229.md)  
+  `流行病学` · 相关性 6/10
+- [Does despair drive increases in white mortality, or did the narrative get ahead of the data?](deep_reads/2026-10-12-10.1093_aje_kwag235.md)  
+  `流行病学` · 相关性 6/10
+- [Coexposure confounding and amplification of bias—an exploration with practical interpretation and perspectives](deep_reads/2026-10-12-10.1093_aje_kwag183.md)  
+  `流行病学` · 相关性 6/10
 - [Reallocation of 24-hour movement behaviour composition and mortality: exploring effect modification by sleep characteristics](deep_reads/2026-10-12-10.1093_aje_kwag249.md)  
   `流行病学` · 相关性 6/10
 - [Prospective Pregnancy Preferences and Adverse Birth Outcomes in the United States: A Population-Based Study](deep_reads/2026-10-12-10.1093_aje_kwag244.md)  
@@ -231,6 +251,10 @@
   `其他` · 相关性 6/10
 - [Genetic Prediction and Adverse Selection](deep_reads/2026-10-12-10.3982_ecta24284.md)  
   `经济理论 / 应用` · 相关性 6/10
+- [Housing-related payment hardship and associations with health and well-being: A 15-year longitudinal study in a national sample of US adults](deep_reads/2026-10-12-10.1093_aje_kwag231.md)  
+  `流行病学` · 相关性 5/10
+- [The long half-life of neighborhood poverty: duration, timing, and biological aging](deep_reads/2026-10-12-10.1093_aje_kwag182.md)  
+  `流行病学` · 相关性 5/10
 - [Design considerations for incorporating serological monitoring into trachoma prevalence surveys](deep_reads/2026-10-12-10.1093_aje_kwag245.md)  
   `流行病学` · 相关性 5/10
 - [Beyond poverty and education: measuring structural racism in neighborhoods to understand racialized birth outcome disparities](deep_reads/2026-10-12-10.1093_aje_kwag193.md)  
@@ -305,6 +329,16 @@
   `因果推断` · 相关性 5/10
 - [Do Asset Prices Help Predict Inflation? Evidence from Individual Stock Prices](deep_reads/2026-10-12-10.1080_07350015.2026.2654899.md)  
   `经济理论 / 应用` · 相关性 5/10
+- [Deaths of despair among former military service members, Massachusetts (2014-2021) and Minnesota (2014-2022)](deep_reads/2026-10-12-10.1093_aje_kwag233.md)  
+  `流行病学` · 相关性 4/10
+- [Rationale and design of the Atherosclerosis Risk in Communities Generation 2 study](deep_reads/2026-10-12-10.1093_aje_kwag237.md)  
+  `流行病学` · 相关性 4/10
+- [The case for code sharing in <i>The American Journal of Epidemiology</i>](deep_reads/2026-10-12-10.1093_aje_kwag224.md)  
+  `流行病学` · 相关性 4/10
+- [Multi-mode design for studying cyber aggression in texts, Facebook and Twitter messages among middle school youth](deep_reads/2026-10-12-10.1093_aje_kwag222.md)  
+  `流行病学` · 相关性 4/10
+- [Influenza mitigation recommendations, symptoms, and viral RNA shedding durations—2023-2024 and 2024-2025 seasons](deep_reads/2026-10-12-10.1093_aje_kwag219.md)  
+  `流行病学` · 相关性 4/10
 - [Covariate-adaptive randomization with dropouts](deep_reads/2026-10-12-10.1177_09622802261475671.md)  
   `因果推断` · 相关性 4/10
 - [Robust Bayesian hierarchical models for basket trials enabling joint evaluation of toxicity and efficacy](deep_reads/2026-10-12-10.1177_09622802261465336.md)  
