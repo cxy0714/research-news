@@ -8722,6 +8722,8 @@
 
 - [A Modified Test for Linear Hypotheses in Multivariate Functional Data Under Heteroscedasticity and Small Samples](deep_reads/2026-10-13-10.1080_00401706.2026.2740126.md)  
   6/10 [journals]
+- [Bootstrapped Control Limits for Score-Based Concept Drift Control Charts](deep_reads/2026-10-13-10.1080_00401706.2026.2676855.md)  
+  5/10 [journals]
 - [Federated Conformal Approach for Trustworthy Uncertainty Quantification in Distributed Fleet Prognostics](deep_reads/2026-10-13-10.1080_00401706.2026.2722103.md)  
   5/10 [journals]
 
@@ -10798,14 +10800,24 @@
 
 #### Technometrics
 
+- [GEMSS-Driven Subsampling for Information Extraction and Redundancy Elimination](deep_reads/2026-10-13-10.1080_00401706.2026.2670596.md)  
+  6/10 [journals]
+- [Parametric Multi-Fidelity Monte Carlo Estimation With Applications to Extremes](deep_reads/2026-10-13-10.1080_00401706.2026.2653569.md)  
+  6/10 [journals]
+- [Emulating Simulation Experiments with Grounding Using a Two-Stage Classification-Regression Model](deep_reads/2026-10-13-10.1080_00401706.2026.2653566.md)  
+  6/10 [journals]
 - [Tensor-Efficient High-Dimensional <i>Q</i> -learning](deep_reads/2026-10-13-10.1080_00401706.2026.2702440.md)  
   6/10 [journals]
+- [Random Fourier Features Based Gaussian Process Models for Computer Experiments with Quantitative and Qualitative Inputs](deep_reads/2026-10-13-10.1080_00401706.2026.2671443.md)  
+  5/10 [journals]
 - [Functional-Edged Network Modeling](deep_reads/2026-10-13-10.1080_00401706.2026.2724145.md)  
   5/10 [journals]
 - [Spatio-temporal modeling and forecasting with Fourier neural operators](deep_reads/2026-10-13-10.1080_00401706.2026.2736750.md)  
   5/10 [journals]
 - [Fully Bayesian Sequential Design for Heteroscedastic Stochastic Simulations](deep_reads/2026-10-13-10.1080_00401706.2026.2703239.md)  
   5/10 [journals]
+- [Nonlinear Spatio-Temporal Run-to-Run Control: Leveraging Diffusion Models for Disturbance Management](deep_reads/2026-10-13-10.1080_00401706.2026.2669108.md)  
+  4/10 [journals]
 - [Quality-Ensured In-Situ Process Monitoring with Deep Canonical Correlation Analysis](deep_reads/2026-10-13-10.1080_00401706.2026.2719486.md)  
   4/10 [journals]
 - [Grouped Latin Hypercube Designs with Controlled Correlations](deep_reads/2026-10-13-10.1080_00401706.2026.2707208.md)  
@@ -15497,8 +15509,16 @@
 
 #### Technometrics
 
+- [Generative Multi-Scale Modeling via Spatial Autoregressive Transport Maps](deep_reads/2026-10-13-10.1080_00401706.2026.2689970.md)  
+  5/10 [journals]
 - [Spatio-Temporal Gaussian Process for Building Terrain-Incorporating Wind Power Curves](deep_reads/2026-10-13-10.1080_00401706.2026.2705589.md)  
   5/10 [journals]
+- [Uncertainty-Aware Out-of-Distribution Detection with Gaussian Processes](deep_reads/2026-10-13-10.1080_00401706.2026.2682179.md)  
+  4/10 [journals]
+- [SEE-OOD: Supervised Exploration for Enhanced Out-of-Distribution Detection](deep_reads/2026-10-13-10.1080_00401706.2026.2672595.md)  
+  4/10 [journals]
+- [Bayesian Joint Model of Multi-Sensor and Failure Event Data for Multi-Mode Failure Prediction](deep_reads/2026-10-13-10.1080_00401706.2026.2653564.md)  
+  4/10 [journals]
 - [Model-Based Prior for Model-Free Reinforcement Learning in Process Control: An Offline Methodology for Semiconductor Manufacturing](deep_reads/2026-10-13-10.1080_00401706.2026.2689966.md)  
   4/10 [journals]
 

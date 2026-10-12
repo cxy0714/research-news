@@ -1,186 +1,156 @@
 # Technometrics  ·  2026-10-13
 
-- 共 16 篇 · Technometrics
+- 共 13 篇 · Technometrics
 
 ## 本期导览
 
 > 自动生成：归纳本期主要主题与脉络，**不打分、不排名**。
 
-本期《Technometrics》的 16 篇论文大致可归为四条主线：**非参数与半参数方法**（含非欧数据特征筛选、校准贝叶斯容差区间）、**假设检验与不确定性量化**（多元函数型数据检验、联邦共形预测）、**统计计算与实验设计**（张量强化学习、函数边网络、傅里叶神经算子、序贯设计、拉丁超立方、主动学习、点云监控、OofA 设计、加速退化试验）、以及**应用驱动的建模与控制**（时空高斯过程风功率曲线、离线强化学习过程控制）。其中，计算与设计类论文数量最多，但方法论交叉明显，例如非参数思想渗透进容差区间和特征筛选，而张量与函数型工具则同时出现在网络建模和强化学习中。
+这一期 Technometrics 的 13 篇论文大致可归为三条主线：**大规模计算与代理模型**（GEMSS 子抽样、随机傅里叶特征 GP、多保真度估计、扩散模型控制）、**分布外检测与不确定性量化**（GP 基 OOD、监督生成 OOD、概念漂移控制图）、以及**实验设计与空间/函数型建模**（分裂区组设计、电动公交线路设计、多传感器失效预测、相对数据 FPCA）。此外还有一篇多尺度空间降尺度（空间自回归传输映射）和一篇仿真器 grounding 两阶段模型，可视为计算与空间建模的交叉。
 
-最突出的主线是**统计计算与实验设计**，共 8 篇，覆盖从代理模型到监控的全流程。`Tensor-Efficient Q-learning` 用低秩 CP 张量压缩状态-动作空间，配合不确定性引导探索，直接回应高维强化学习的维度灾难；`Functional-Edged Network Modeling` 将函数 Tucker 分解与张量补全结合，处理边权随时间连续变化的网络，两者共享张量分解工具但目标迥异。实验设计方面，`Grouped Latin Hypercube Designs` 通过块正交化控制组间/组内相关性，`Hamming Weight Uniform Designs` 则用 Hamming 距离度量均匀性以构造对模型误设稳健的 OofA 设计，二者均强调设计矩阵的结构约束而非单纯空间填充。`Active Learning with Adaptive Non stationary Kernel` 与 `Fully Bayesian Sequential Design` 都聚焦序贯采样，前者针对连续保真度代理模型，后者用双高斯过程和 EB-IMSPE 准则处理异方差仿真，计算成本权衡是共同关切。`Registration-Free Monitoring` 和 `Quality-Ensured In-Situ Monitoring` 则把几何特征提取与深度典型相关分析引入工业监控，属于计算方法的落地应用。
+最突出的是**大规模高斯过程与仿真器建模**这条线，四篇论文从不同角度解决计算瓶颈：GEMSS 利用 GP-线性模型等价性将子抽样转为泛化误差优化，随机傅里叶特征将核矩阵成本降至 O(n m^2) 并处理定性输入，double emulator 针对 grounding 非平稳性用分类-回归分解，多保真度估计则系统比较了联合 MLE、矩估计和边际 MLE 在极值参数族上的渐近性质。这组工作共同指向“如何在数据规模或模型复杂度上升时保持预测可靠”这一核心问题。
 
-第二条值得注意的主线是**假设检验与不确定性量化**，虽仅 3 篇但方法论互补。`A Modified Test for Linear Hypotheses in Multivariate Functional Data` 将 Wilks lambda 推广至函数型数据，用 Wishart 近似和 U 统计量自由度估计解决小样本异方差问题，直接面向多元均值函数检验；`Federated Conformal Approach` 针对联邦学习中交换性违反，用多水平隐马尔可夫模型估计重要性权重修正覆盖缺口，提供分布自由的预测区间；`Calibrated Bayesian Nonparametric Tolerance Intervals` 则从贝叶斯角度用校准 Gibbs 后验构造容差区间，将非参数先验与频率覆盖性质结合。三篇分别从频率检验、共形预测、贝叶斯校准切入，但都聚焦小样本或分布偏移下的推断可靠性。
+第二条值得关注的是**分布外检测**，三篇论文形成对比：GP 基方法仅用 InD 数据构造 logit 函数的后验不确定性评分，避免依赖 OOD 样本；SEE-OOD 则反其道而行，用少量真实 OOD 样本做监督生成并联合探索未见空间；概念漂移控制图将漂移检测转化为 MEWMA 监控，用嵌套自助法校准控制限并修正 0.632 偏差。三者分别从无监督、半监督和在线监控角度切入，方法工具差异明显但共享“不确定性量化”这一底层逻辑。
 
-若按主题优先阅读：因果推断方向虽无直接论文，但 `Calibrated Bayesian Nonparametric Tolerance Intervals` 的校准思路和 `Federated Conformal Approach` 的重要性加权修正可迁移至因果效应的稳健推断；半参数效率方向可关注 `Nonparametric Feature Screening for Non-Euclidean Data` 的 Fréchet R² 性质及其筛选一致性；高维方向则推荐 `Tensor-Efficient Q-learning` 和 `Functional-Edged Network Modeling` 的张量分解策略，以及 `Grouped Latin Hypercube Designs` 的块正交化思想。
+实验设计方面，分裂区组设计论文在非正则部分因子下构造平行平面结构以简化模型选择，电动公交线路设计则将贝叶斯 D-最优与图结构结合，均属构造性贡献。若您关注因果推断或半参数效率，本期直接相关度不高，但多保真度估计的渐近理论、相对数据 FPCA 的稳健协方差估计，以及 GP 基 OOD 中的后验校准思路，可作为方法迁移的参考。高维方向无直接论文，随机傅里叶特征与 GEMSS 的优化框架或对高维核方法有间接启发。
 
-## 非参数 / 半参数  *(nonparam_semipara, 2 篇)*
+## 非参数 / 半参数  *(nonparam_semipara, 1 篇)*
 
-### 1. [10.1080/00401706.2026.2735885](https://doi.org/10.1080/00401706.2026.2735885) — Nonparametric Feature Screening for Non-Euclidean Data
-- **作者**: Moshu Xu, Leheng Cai, Qirui Hu, Xu Guo
+### 1. [10.1080/00401706.2026.2663812](https://doi.org/10.1080/00401706.2026.2663812) · [arXiv](https://arxiv.org/abs/2412.19004) — Robust Functional PCA for Relative Data
+- **作者**: Jeremy Oguamalam, Peter Filzmoser, Karel Hron, Alessandra Menafoglio, Una Radojičić
 - **期刊/来源**: Technometrics
-- **机构**: Tsinghua University · Shanghai University of Finance and Economics · Beijing Normal University
-- **分类**: pp 1-92
-- 相关性 7/10 · novelty: `new_method`
-- **摘要**: 本文研究响应变量取值于非欧几里得空间（如分布、矩阵）且结构非线性时的特征筛选问题。作者重新审视了 Fréchet R⊕2 的概念，并证明其具有经典 R2 的存在性、有界性、拟合优度、单调性和尺度不变性等性质。基于这些性质，提出了一种新的筛选过程——局部 Fréchet 确信独立筛选（local Fréchet sure independence screening），通过单变量局部 Fréchet 回归的经验 Fréchet R⊕2 来识别重要协变量。在温和条件下，建立了该过程的一致一致性、确信筛选和确信排序性质。大量数值研究支持了方法的正确性和有效性，并用死亡率数据和巴塞罗那足球俱乐部比赛数据（分别对应分布值和矩阵值响应）展示了实际性能。
-- **关键技术**: `Fréchet regression`, `sure independence screening`, `local polynomial smoothing`, `uniform consistency`, `non-Euclidean data`
-- **为什么对您有用**: 本文属于非参数统计与特征筛选的交叉方向，与您的非参数/半参数理论兴趣直接相关。您可以用 very_familiar 的 minimax 界工具来检验其确信筛选性质的有限样本表现，或考虑将 Fréchet R⊕2 与您熟悉的 U-统计量投影技术结合，分析其高阶性质。中期可做：若想深入其局部回归的收敛性，需在非欧几里得空间的度量结构上补充知识。
-
-### 2. [10.1080/00401706.2026.2699103](https://doi.org/10.1080/00401706.2026.2699103) · [arXiv](https://arxiv.org/abs/2603.10924) — Calibrated Bayesian Nonparametric Tolerance Intervals
-- **作者**: Tony Pourmohamad, Robert Richardson, Bruno Sansó
-- **期刊/来源**: Technometrics
-- **机构**: Brigham Young University · University of California, Santa Cruz
-- **分类**: pp 1-13
-- 相关性 6/10 · novelty: `new_method`
-- **摘要**: 本文提出一种基于校准 Gibbs 后验的完全非参数容差区间构造方法，适用于参数假设失效或小样本情形。作者利用容差限与总体分位数的联系，采用非对称 Laplace（check）损失函数构建 Gibbs 后验，并校准学习率以保证名义频率覆盖。模拟研究表明，该方法在保持可靠覆盖的同时，区间长度常短于经典非参数基准（如 Wilks 区间）。应用实例涵盖生态学、生物制药制造和环境监测，展示了方法的灵活性和稳健性。对您而言，该方法将贝叶斯非参数与频率覆盖性质结合，可能为半参数效率理论中的稳健推断提供新视角。
-- **关键技术**: `Gibbs posterior`, `asymmetric Laplace loss`, `learning rate calibration`, `tolerance intervals`, `nonparametric quantile estimation`
-- **为什么对您有用**: 本文属于非参数与半参数理论方向，涉及分位数估计和覆盖性质，与您的非参数/半参数理论兴趣直接相关。您可以用 very_familiar 的非参数统计和 minimax 界工具来分析其校准 Gibbs 后验的覆盖精度与最优性，例如检验其区间长度是否达到 minimax 最优。中期可做：需在 moderately_familiar 的 M-估计理论上加强，以严格推导其渐近性质。
-
-## 数理统计 / 假设检验  *(hypothesis_testing, 2 篇)*
-
-### 1. [10.1080/00401706.2026.2740126](https://doi.org/10.1080/00401706.2026.2740126) — A Modified Test for Linear Hypotheses in Multivariate Functional Data Under Heteroscedasticity and Small Samples
-- **作者**: Tianming Zhu
-- **期刊/来源**: Technometrics
-- **机构**: Nanyang Technological University
-- **分类**: pp 1-117
-- 相关性 6/10 · novelty: `new_method`
-- **摘要**: 本文针对多元函数型数据（MFD）中的一般线性假设检验问题，提出了一种有限样本检验方法，目标是检验均值函数的线性组合是否满足给定假设。现有方法要么是重采样检验（耗时），要么是渐近检验（小样本下第一类错误控制不佳）。作者将MANOVA中的Wilks lambda检验推广到MFD，构造基于两个对称非负定矩阵的检验统计量，并用Wishart分布近似，自由度通过U统计量方法估计。该检验具有仿射不变性，对异方差稳健，计算效率高于重采样方法，且在小样本下比渐近检验更好地控制显著性水平。通过真实数据示例展示了其实用性。对您而言，该文将多元假设检验与函数型数据结合，并利用U统计量估计自由度，与您对假设检验和U统计量的兴趣直接相关。
-- **关键技术**: `Wilks' lambda test`, `Wishart approximation`, `U-statistics-based degrees of freedom estimation`, `multivariate functional data`, `affine invariance`
-- **为什么对您有用**: 该文属于假设检验方向，具体是函数型数据的多元线性假设检验，与您对假设检验的兴趣直接相关。文中用U统计量估计自由度，您可以用您对高阶U统计量的熟悉程度（如投影、渐近性质）来审视其估计的效率和有限样本表现。此外，该文提出的有限样本修正方法可能启发您在其他高维或函数型设定下设计类似检验。从可行性看，该文的核心工具（U统计量、Wishart近似）在您的武器库中属于非常熟悉或中等熟悉，因此可以立即可做：例如，验证其自由度估计的渐近性质或比较不同U统计量估计量的表现。
-
-### 2. [10.1080/00401706.2026.2722103](https://doi.org/10.1080/00401706.2026.2722103) — Federated Conformal Approach for Trustworthy Uncertainty Quantification in Distributed Fleet Prognostics
-- **作者**: Zihan Li, Mostafa Reisi Gahrooei, Minhee Kim
-- **期刊/来源**: Technometrics
-- **机构**: University of Florida
-- **分类**: pp 1-21
+- **机构**: TU Wien · Palacký University Olomouc · Politecnico di Milano
+- **分类**: pp 1-15
 - 相关性 5/10 · novelty: `application`
-- **摘要**: 本文研究联邦学习场景下预测模型的不确定性量化问题，目标是构造具有统计保证的预测区间。由于联邦学习中不同客户端数据分布存在异质性，且同一单元内部存在退化或进展模式，标准共形预测所依赖的交换性假设被违反，导致覆盖概率出现偏差。作者提出一种模型无关、分布自由的共形预测方法，通过多水平隐马尔可夫模型和联邦广义期望最大化算法估计重要性权重，以修正交换性违反带来的覆盖缺口。方法可事后应用于任意预测模型，并提供形式化的覆盖保证。在发动机退化与阿尔茨海默病进展两个数据集上的案例研究表明，该方法相比标准联邦学习和共形预测方法，能以更窄的区间达到目标覆盖率。对您而言，本文的覆盖缺口分析与重要性加权修正思路，可迁移到您关注的纵向因果推断中处理时间依赖与异质性时的推断问题。
-- **关键技术**: `conformal prediction`, `importance weighting`, `hidden Markov model`, `federated expectation maximization`, `coverage guarantee`
-- **为什么对您有用**: 本文属于假设检验/不确定性量化方向，与您的一级兴趣（假设检验）相关，但更偏向应用。其核心问题是交换性违反下的覆盖修正，与您在纵向因果推断中处理时间依赖和异质性时的推断问题有相通之处。您可以用非常熟悉的非参数统计和估计理论来审视其重要性权重估计的收敛性，中期可尝试将加权共形方法引入您的因果推断框架。
+- **摘要**: 本文针对相对数据（如成分数据）的函数型主成分分析（FPCA）提出鲁棒方法。在Bayes空间框架下，相对函数数据被映射到零和约束的子空间，但现有方法对异常值和重尾噪声敏感。作者将Mahalanobis距离概念推广到Bayes空间，并引入正则化版本以处理相对数据的约束。基于此，提出鲁棒相对主成分分析（RRPCA），通过稳健估计协方差算子来改进主成分估计。模拟和真实数据应用表明，RRPCA在存在异常值时比传统方法更准确地估计协方差和主成分。该方法涉及非参数函数型数据的稳健估计，与您的非参数/半参数理论兴趣相关，但更偏向应用方法，理论新颖性有限。
+- **关键技术**: `Bayes space`, `functional principal component analysis`, `robust covariance estimation`, `Mahalanobis distance`, `regularization`
+- **为什么对您有用**: 本文属于非参数函数型数据方法，与您的非参数/半参数理论兴趣相关，但更偏向应用方法。您可以用非常熟悉的非参数统计工具（如核方法、sieve）来评估其稳健估计的理论性质，例如影响函数或 minimax 界。作为应用导向的论文，它可能提供相对数据（如成分数据）的建模思路，但核心机器（Bayes空间）不在您的武器库中，因此属于中期可做：需先熟悉Bayes空间和成分数据分析。
 
-## 统计计算 / 算法  *(stat_computing, 8 篇)*
+## 数理统计 / 假设检验  *(hypothesis_testing, 1 篇)*
 
-### 1. [10.1080/00401706.2026.2702440](https://doi.org/10.1080/00401706.2026.2702440) · [arXiv](https://arxiv.org/abs/2511.03595) — Tensor-Efficient High-Dimensional <i>Q</i> -learning
-- **作者**: Junyi Wu, Dan Li
+### 1. [10.1080/00401706.2026.2676855](https://doi.org/10.1080/00401706.2026.2676855) · [arXiv](https://arxiv.org/abs/2507.16749) — Bootstrapped Control Limits for Score-Based Concept Drift Control Charts
+- **作者**: Jiezhong Wu, Daniel W. Apley
 - **期刊/来源**: Technometrics
-- **机构**: University of Washington
-- **分类**: pp 1-12
-- 相关性 6/10 · novelty: `new_method`
-- **摘要**: 本文针对高维强化学习中 Q-learning 的维度灾难问题，提出 Tensor-Efficient Q-Learning (TEQL) 方法。该方法将 Q 函数表示为离散状态-动作空间上的低秩 CP 张量，利用张量结构进行参数高效表示，并引入 Error-Uncertainty Guided Exploration (EUGE) 机制，结合张量近似误差与访问次数指导动作选择，同时采用频率感知正则化稳定更新。在匹配参数预算下，经典控制任务的实验表明 TEQL 在样本效率上优于矩阵低秩方法和深度 RL 基线。该方法适用于采样成本高的资源受限场景。对您而言，本文展示了如何将低秩张量分解与不确定性量化结合，提升高维估计问题的计算与样本效率，与您在高阶 U 统计量中利用张量收缩计算效率的兴趣点直接相关。
-- **关键技术**: `CP tensor decomposition`, `low-rank tensor representation`, `uncertainty-aware exploration`, `frequency-aware regularization`, `Q-learning`
-- **为什么对您有用**: 本文属于统计计算方向，直接关联您对张量分解与计算效率的兴趣。您可运用 very_familiar 的 tensor contraction / einsum 复杂度分析工具，评估 TEQL 中 CP 分解的更新成本，并探索将 EUGE 的不确定性量化思想迁移到高阶 U 统计量的计算中。中期可做：需在 moderately_familiar 的强化学习理论（如 regret 界）上补充知识，以严格分析 TEQL 的样本效率。
-
-### 2. [10.1080/00401706.2026.2724145](https://doi.org/10.1080/00401706.2026.2724145) · [arXiv](https://arxiv.org/abs/2404.00218) — Functional-Edged Network Modeling
-- **作者**: Haijie Xu, Bo Zhang, Chen Zhang
-- **期刊/来源**: Technometrics
-- **机构**: Tsinghua University
-- **分类**: pp 1-17
-- 相关性 5/10 · novelty: `new_method`
-- **摘要**: 本文研究一类新型网络——函数边网络，其中每条边的权重是随时间平滑变化的函数而非标量或向量。为建模此类网络，作者引入函数邻接张量，将传统邻接矩阵扩展出连续函数维度。为分析该张量的结构模式，提出函数 Tucker 分解框架，并对基矩阵施加对称正则化以捕捉节点社区结构。针对函数边观测不规则的问题，将模型推断表述为张量补全问题，并采用黎曼共轭梯度法求解。理论上建立了所提模型的估计性质，并在香港地铁系统和工业物联网 RSSI 数据上验证了有效性。对您而言，该文的函数 Tucker 分解与张量补全算法可能为您的统计计算兴趣提供新的数值方法参考，但其核心并非您的主要研究方向。
-- **关键技术**: `functional Tucker decomposition`, `tensor completion`, `Riemannian conjugate gradient`, `symmetry regularization`, `functional adjacency tensor`
-- **为什么对您有用**: 本文属于统计计算方向，与您的 statistical computing 兴趣相关，但并非核心。其函数张量分解和黎曼优化方法可能对您处理高维张量问题有启发，但您更熟悉的是 U-统计量和张量收缩复杂度，本文未涉及计算复杂度分析。作为入门读物，本文方法清晰但应用导向，不值得深入阅读。
-
-### 3. [10.1080/00401706.2026.2736750](https://doi.org/10.1080/00401706.2026.2736750) · [arXiv](https://arxiv.org/abs/2601.01813) — Spatio-temporal modeling and forecasting with Fourier neural operators
-- **作者**: Pratik Nag, Andrew Zammit-Mangion, Sumeetpal Singh, Noel Cressie
-- **期刊/来源**: Technometrics
-- **机构**: University of Wollongong · UNSW Sydney
-- **分类**: pp 1-78
+- **机构**: Northwestern University
+- **分类**: pp 1-10
 - 相关性 5/10 · novelty: `application`
-- **摘要**: 本文提出使用傅里叶神经算子（FNO）构建统计动态时空模型（DST）用于预测，目标是在无需显式偏微分方程（PDE）知识的情况下，高效逼近未知或非线性PDE的解算子。FNO作为函数映射，通过输入输出样本学习，避免了传统高斯过程等统计模型在复杂环境异质性和交互作用上的建模困难。通过已知解的PDE模拟，作者将FNO预测与最先进的统计时空预测方法比较，并在大西洋海表温度和欧洲降水数据上验证了FNO-DST的预测能力。结果显示FNO-DST预测准确且提供了有效的不确定性量化。
-- **关键技术**: `Fourier neural operators`, `spatio-temporal modeling`, `uncertainty quantification`, `PDE solution operator approximation`, `deep learning forecasting`
-- **为什么对您有用**: 本文属于统计计算方向，涉及深度学习方法在时空建模中的应用，与您的统计计算兴趣相关。虽然FNO不是您熟悉的传统统计方法，但作为统计计算的新兴工具，值得了解其方法论和不确定性量化框架。武器库中的非参数统计和软件工程技能可帮助您评估其预测性能，但核心的神经网络架构和训练机制不在当前武器库中，属于中期可探索方向。
+- **摘要**: 本文研究监督学习模型的概念漂移检测问题，将检测转化为对模型得分向量均值的多元指数加权移动平均（MEWMA）控制图的监控。现有方法需将初始数据分为训练集和测试集，用测试集校准控制限，导致模型拟合数据减少。本文提出一种嵌套自助法来校准控制限，允许使用全部初始数据拟合模型，从而获得更准确的基线模型，并省去大型留出集。作者发现标准嵌套自助法会严重低估监控统计量的变异性，为此开发了类似 0.632 的修正方法。外层自助循环完全可并行化，计算成本与现有方法相当或更快。数值实验展示了该方法的优势。
+- **关键技术**: `nested bootstrap`, `0.632 correction`, `MEWMA control chart`, `concept drift detection`, `Fisher score`
+- **为什么对您有用**: 本文属于假设检验与统计过程控制的应用，与您对假设检验的兴趣相关，但方法学新颖性有限。它涉及自助法的变异性修正，与您熟悉的非参数统计和重抽样技术有联系。作为应用型论文，其数值实验和计算实现（并行化）可能对您有参考价值，但核心理论深度一般。
 
-### 4. [10.1080/00401706.2026.2703239](https://doi.org/10.1080/00401706.2026.2703239) · [arXiv](https://arxiv.org/abs/2506.09722) — Fully Bayesian Sequential Design for Heteroscedastic Stochastic Simulations
-- **作者**: Yuying Huang, Samuel W. K. Wong
-- **期刊/来源**: Technometrics
-- **机构**: University of Waterloo
-- **分类**: pp 1-16
-- 相关性 5/10 · novelty: `new_method`
-- **摘要**: 本文提出一种全贝叶斯序贯设计策略，用于预测异方差随机仿真模型的均值响应面。采用双高斯过程作为代理模型，并基于期望贝叶斯积分均方预测误差（EB-IMSPE）作为选择准则，在序贯采样中充分考虑参数不确定性。通过序贯重要性采样高效更新参数后验分布，适用于预算有限的昂贵仿真模型。在合成数据上展示了相比现有方法在预测精度、噪声估计和不确定性量化方面的优势，并在木结构裙楼建筑抗震设计的实际应用中验证了有效性。对您而言，该文涉及统计计算与算法设计，与您对统计计算（数值方法、算法）的兴趣直接相关，其中序贯采样和代理模型优化策略可能对您的高维或因果推断中的计算问题有启发。
-- **关键技术**: `dual Gaussian processes`, `expected Bayesian integrated mean-square prediction error`, `sequential importance sampling`, `Bayesian sequential design`, `heteroscedastic stochastic simulation`
-- **为什么对您有用**: 本文属于统计计算方向，与您的统计计算（数值方法、算法）兴趣直接相关。您可以用您非常熟悉的软件开发和数值方法技能，快速复现其序贯设计算法，并探索将其应用于您熟悉的因果推断或高维问题中的计算瓶颈。该文是应用导向的方法论文，可作为中期可做的参考，无需额外长肌肉。
+## 统计计算 / 算法  *(stat_computing, 5 篇)*
 
-### 5. [10.1080/00401706.2026.2719486](https://doi.org/10.1080/00401706.2026.2719486) · [arXiv](https://arxiv.org/abs/2509.19652) — Quality-Ensured In-Situ Process Monitoring with Deep Canonical Correlation Analysis
-- **作者**: Xiaoyang Song, Wenbo Sun, Metin Kayitmazbatir, Jionghua (Judy) Jin
+### 1. [10.1080/00401706.2026.2670596](https://doi.org/10.1080/00401706.2026.2670596) — GEMSS-Driven Subsampling for Information Extraction and Redundancy Elimination
+- **作者**: Ming-Chung Chang, Sheng-Zhan Hua, C. F. Jeff Wu
 - **期刊/来源**: Technometrics
-- **机构**: University of Michigan · Istanbul Technical University
-- **分类**: pp 1-13
-- 相关性 4/10 · novelty: `application`
-- **摘要**: 本文提出一种基于深度典型相关分析（DCCA）的在线过程监控方法，用于先进制造中高维过程信号（如光谱）与离线产品质量数据（如CT图像）的非线性关联建模。该方法通过联合特征提取与相关性分析，学习质量导向的表示，无需标记缺陷样本，并避免了传统控制图方法对非正态性的依赖。作者给出了算法稳定性与收敛性的理论保证，并通过仿真和直接金属沉积（DMD）增材制造的真实案例验证了其有效性。对您而言，其多模态数据融合与无监督表示学习框架，可作为统计计算与高维数据降维应用的一个参考案例。
-- **关键技术**: `Deep Canonical Correlation Analysis (DCCA)`, `multi-modal feature extraction`, `unsupervised representation learning`, `process monitoring`, `control chart`
-- **为什么对您有用**: 本文属于统计计算与高维数据应用方向，与您的统计计算兴趣相关，但方法学新颖性一般。作为入门读物，它展示了深度学习工具在工业过程监控中的实际应用，但理论深度有限。您的武器库（如高维统计、U统计量）足以理解其方法，但无需深入跟进。
-
-### 6. [10.1080/00401706.2026.2707208](https://doi.org/10.1080/00401706.2026.2707208) — Grouped Latin Hypercube Designs with Controlled Correlations
-- **作者**: Wenlong Li, Jian-Feng Yang, Peter Chien
-- **期刊/来源**: Technometrics
-- **机构**: Beijing Jiaotong University · Nankai University · University of Wisconsin–Madison
+- **机构**: Institute of Statistical Science, Academia Sinica · Chinese University of Hong Kong
 - **分类**: pp 1-11
-- 相关性 4/10 · novelty: `new_method`
-- **摘要**: 本文针对现代计算机实验中输入变量分组的情形，提出了一类新的拉丁超立方设计——分组拉丁超立方设计（GLHD-CC）。该设计将设计矩阵的列划分为不相交的组，使得组间列相关性被控制在一个较低水平，而组内列相关性更低，从而在保持整体空间填充性的同时实现分组结构。构造方法基于多元线性回归中的多元块正交化技术，可同时控制多个变量间的相关性。作者给出了高效的构造算法，并建立了理论性质，算法在运行次数和输入维度上具有灵活性。通过三个常用测试函数和一个真实黑箱模拟器案例验证了方法的有效性。对您而言，该文属于统计计算与实验设计交叉方向，其块正交化与相关性控制思想可迁移到您在高维统计或因果推断中处理分组协变量时的设计问题。
-- **关键技术**: `Latin hypercube design`, `block orthogonalization`, `multivariate linear regression`, `correlation control`, `computer experiments`
-- **为什么对您有用**: 该文属于统计计算与实验设计方向，与您的 statistical computing 兴趣直接相关。您可用 very_familiar 的软件开发和数值方法技能快速实现其算法，并检验其理论性质；中期可做的是将块正交化思想与您 moderately_familiar 的 M-estimation 理论结合，用于分组协变量的半参数估计设计；暂不可做则无需，因为核心工具已在武器库内。
+- 相关性 6/10 · novelty: `new_method`
+- **摘要**: 本文针对大规模数据下高斯过程模型训练的计算瓶颈，提出一种基于子抽样的方法 GEMSS，目标是在输入空间未探索区域提升预测精度，同时剔除可能导致数值不稳定的冗余点。方法利用高斯过程模型与线性模型之间的等价性，将子抽样问题转化为最小化泛化误差的优化问题，并给出理论保证。数值实验在多种场景下验证了其有效性，并提供了 R 包 GEMSS 便于实现。该方法属于统计计算中面向大规模数据的算法设计，与您对统计计算和算法优化的兴趣相关。
+- **关键技术**: `subsampling`, `Gaussian process models`, `generalization error minimization`, `linear model equivalence`, `R package`
+- **为什么对您有用**: 本文属于统计计算方向，与您 primary interest 中的 statistical computing 直接相关。您可以用 very_familiar 的软件开发和数值方法经验快速评估其 R 包实现，并考虑将 GEMSS 的子抽样策略与您熟悉的高维统计或因果推断中的大规模数据处理结合。中期可做：若想深入理论，需在 moderately_familiar 的 M-estimation 理论上加强。
 
-### 7. [10.1080/00401706.2026.2702433](https://doi.org/10.1080/00401706.2026.2702433) · [arXiv](https://arxiv.org/abs/2503.23158) — Active Learning with Adaptive Non stationary Kernel for Continuous-Fidelity Surrogate Models
-- **作者**: Romain Boutelet-Smith, Chih-Li Sung
+### 2. [10.1080/00401706.2026.2653569](https://doi.org/10.1080/00401706.2026.2653569) · [arXiv](https://arxiv.org/abs/2410.08523) — Parametric Multi-Fidelity Monte Carlo Estimation With Applications to Extremes
+- **作者**: Minji Kim, Brendan Brown, Vladas Pipiras
 - **期刊/来源**: Technometrics
-- **机构**: Michigan State University
-- **分类**: pp 1-12
-- 相关性 4/10 · novelty: `new_method`
-- **摘要**: 本文针对多保真度计算机实验的代理模型问题，其中保真度由连续参数控制（如有限元网格密度），目标是利用廉价低保真模拟辅助昂贵高保真模拟，并对未观测保真度水平进行推断。作者提出一种新的自适应非平稳核函数，以更准确地刻画模拟输出随保真度参数变化的非平稳行为。同时，基于积分均方预测误差（IMSPE）准则开发主动学习策略，在输入参数和保真度参数空间中联合选择设计点，并将不同保真度的计算成本纳入优化。方法通过数值例子和有限元应用验证，并提供了开源的R包。对您而言，该文的主动学习与计算成本权衡思路可迁移到您在高维或因果推断中涉及昂贵模拟或计算受限的场景。
-- **关键技术**: `multi-fidelity surrogate modeling`, `non-stationary kernel`, `active learning`, `IMSPE`, `Gaussian process`
-- **为什么对您有用**: 本文属于统计计算方向，与您的 primary interest 中的 statistical computing 直接相关。您可以用 very_familiar 的软件开发和 minimax 估计视角来审视其主动学习准则的统计效率，例如分析 IMSPE 选择是否在计算成本约束下达到某种最优性。中期可做：若想深入理论，需在 moderately_familiar 的 M-estimation 理论上加强，以推导其估计量的渐近性质。
+- **机构**: University of North Carolina at Chapel Hill
+- **分类**: pp 1-14
+- 相关性 6/10 · novelty: `new_method`
+- **摘要**: 本文研究多保真度（multi-fidelity）框架下的参数估计问题：高保真数据量小但精确，低保真数据量大但偏差，目标是用低保真数据辅助高保真数据的参数估计，例如估计均值或拟合极值模型。作者提出并比较了三种参数估计方法：联合极大似然（joint MLE）、多保真矩估计（moment estimation）和多保真边际极大似然（marginal MLE），并推导了它们的渐近性质。方法在多个参数族上验证，重点聚焦极值分析中的参数族（如广义极值分布）。应用实例是量化两种不同保真度计算机代码生成的极端船舶运动的发生率。该文为多保真度参数估计提供了系统的方法比较，对统计计算和极值统计的应用有参考价值。
+- **关键技术**: `multi-fidelity estimation`, `joint maximum likelihood`, `moment estimation`, `marginal maximum likelihood`, `extreme value analysis`
+- **为什么对您有用**: 本文属于统计计算方向，涉及多源数据融合的参数估计，与您的统计计算兴趣相关。您可以用 very_familiar 的软件开发和估计理论工具，快速实现并比较这三种估计器的有限样本表现，或将其扩展到高维或半参数设定。中期可做：结合您 moderately_familiar 的 M-estimation 理论，分析联合 MLE 在模型误设下的稳健性。
 
-### 8. [10.1080/00401706.2026.2702438](https://doi.org/10.1080/00401706.2026.2702438) · [arXiv](https://arxiv.org/abs/2511.05623) — Registration-Free Monitoring of Unstructured Point Cloud Data via Intrinsic Geometrical Properties
-- **作者**: Mariafrancesca Patalano, Giovanna Capizzi, Kamran Paynabar
+### 3. [10.1080/00401706.2026.2653566](https://doi.org/10.1080/00401706.2026.2653566) — Emulating Simulation Experiments with Grounding Using a Two-Stage Classification-Regression Model
+- **作者**: Conor Crilly, Oliver Johnson, Alexander Lewis, Jonathan Rougier
 - **期刊/来源**: Technometrics
-- **机构**: University of Padua · Georgia Institute of Technology
+- **机构**: University of Exeter · University of Bristol · AWE Nuclear Security Technologies
 - **分类**: pp 1-13
-- 相关性 3/10 · novelty: `application`
-- **摘要**: 本文针对现代制造中非结构化点云数据（PCD）的在线监控问题，提出一种免配准（registration-free）的统计过程控制方法，无需预处理中的配准和网格重建步骤，以避免其引入的误差和伪影。方法包含两种特征学习方案，分别基于拉普拉斯算子和测地距离提取形状的内在几何特征，并采用无分布监控方案处理数百维特征。监控方案中利用阈值技术进一步筛选对异常状态最敏感的内在特征，以提升检测能力。数值实验和案例研究验证了该方法在识别不同类型缺陷（如局部变形、表面异常）方面的有效性。该方法对您可能有用，因为它展示了将几何特征提取与统计监控结合的新思路，可连接到您的统计计算兴趣，尤其是算法设计和数值方法在工业应用中的实践。
-- **关键技术**: `Laplacian eigenfeatures`, `geodesic distance features`, `distribution-free monitoring`, `feature selection via thresholding`, `point cloud data analysis`
-- **为什么对您有用**: 本文属于统计计算与工业应用交叉领域，与您的统计计算兴趣相关，但并非核心方法学创新。作为入门读物，它清晰展示了点云数据的特征提取和监控流程，但武器库（如非参数统计、高维方法）足以支撑理解，无需额外工具。值得花时间读全文以了解工业场景中的实际问题，但方法学迁移性有限。
+- 相关性 6/10 · novelty: `application`
+- **摘要**: 本文针对仿真器输出在输入空间大部分区域达到最小值（即“grounding”）时，传统高斯过程仿真器（GPE）的平稳性与光滑性假设失效的问题，提出一种称为“double emulator”的两阶段分类-回归模型。该方法首先用分类器识别输出是否处于grounding区域，再对非grounding区域用GPE建模，从而将非平稳过程分解为可处理的成分。作者以铀在水蒸气中早期氧化的有限元仿真器为动机，并在该仿真器及合成数据上比较了GPE与double emulator的预测性能。数值实验表明，double emulator在grounding场景下显著优于传统GPE，尤其在预测不确定性的校准方面。该方法为处理仿真器非平稳输出提供了一种实用且计算可行的替代方案。对您而言，本文属于统计计算与不确定性量化的应用，其两阶段建模思想可迁移至您关注的复杂仿真或代理模型问题，但方法论新颖性有限。
+- **关键技术**: `Gaussian process emulator`, `two-stage classification-regression`, `nonstationary surrogate modeling`, `uncertainty quantification`, `finite element simulator`
+- **为什么对您有用**: 本文属于统计计算与不确定性量化方向，与您的统计计算兴趣相关，但并非核心。作为gateway阅读，它清晰展示了仿真器代理模型的挑战与实用解法，适合了解该领域。您的武器库（如非参数统计、高斯过程）足以理解并评估其方法，但无需深入跟进。
 
-## 其他  *(other, 4 篇)*
+### 4. [10.1080/00401706.2026.2671443](https://doi.org/10.1080/00401706.2026.2671443) — Random Fourier Features Based Gaussian Process Models for Computer Experiments with Quantitative and Qualitative Inputs
+- **作者**: Kessys Oliveira, Peter Chien
+- **期刊/来源**: Technometrics
+- **机构**: University of Wisconsin–Madison
+- **分类**: pp 1-16
+- 相关性 5/10 · novelty: `application`
+- **摘要**: 本文提出一种用于计算机实验的、同时处理定量与定性输入的高斯过程模型的高效计算方法。针对定量输入，采用随机傅里叶特征近似平移不变核，将核矩阵构造与训练成本从 O(n^3) 降至 O(n m^2)（m 为特征数），适用于定量输入数大于定性输入数的场景。定性输入采用灵活的 Unrestrictive Correlation (UC) 结构，保持任意定性水平间相关建模的有效性与可解释性。通过多个计算机实验文献中的算例验证了方法的有效性与计算优势。该方法属于统计计算与算法设计范畴，对大规模仿真实验的代理模型构建有直接价值。
+- **关键技术**: `random Fourier features`, `Gaussian process models`, `shift-invariant kernels`, `Unrestrictive Correlation structure`, `kernel approximation`
+- **为什么对您有用**: 本文属于统计计算方向，与您的 statistical computing 兴趣直接相关，可作为计算效率改进的参考。您非常熟悉的非参数统计与高维渐近工具可用于分析随机傅里叶特征近似的误差界，但本文核心是算法实现而非新理论，因此 novelty 有限。作为入门级计算论文，值得快速浏览以了解 RFF 在 GP 中的应用，但不必深入。
 
-### 1. [10.1080/00401706.2026.2705589](https://doi.org/10.1080/00401706.2026.2705589) · [arXiv](https://arxiv.org/abs/2607.00051) — Spatio-Temporal Gaussian Process for Building Terrain-Incorporating Wind Power Curves
-- **作者**: Ahmadreza Chokhachian, V. Roshan Joseph, Yu Ding
+### 5. [10.1080/00401706.2026.2669108](https://doi.org/10.1080/00401706.2026.2669108) — Nonlinear Spatio-Temporal Run-to-Run Control: Leveraging Diffusion Models for Disturbance Management
+- **作者**: Zihan Zhang, Lingchao Mao, Jianjun Shi, Kamran Paynabar
 - **期刊/来源**: Technometrics
 - **机构**: Georgia Institute of Technology
 - **分类**: pp 1-13
-- 相关性 5/10 · novelty: `application`
-- **摘要**: 本文提出一种非参数时空高斯过程模型，用于构建融合地形协变量的风力发电功率曲线。现有模型多仅考虑风速、温度等时间变量，而忽略影响入流条件的地形特征。模型采用可分离核结构同时捕捉空间与时间依赖，但风场数据缺乏时间对齐，作者通过构造共享的代表性时间协变量集解决此问题，该集合大小比原始数据小一个数量级。在真实风场数据上的实证分析表明，该方法优于现有基线，并能量化地形特征对涡轮性能的影响。
-- **关键技术**: `spatio-temporal Gaussian process`, `separable kernel`, `representative temporal covariate set`, `nonparametric regression`
-- **为什么对您有用**: 本文属于统计计算与高斯过程建模的应用，与您的统计计算兴趣相关，但并非核心方向。作为入门阅读，它展示了如何将复杂时空数据转化为可计算的可分离核模型，但方法学新颖性有限，主要贡献在于数据对齐策略。武器库中的非参数统计和高维渐近工具足以理解其方法，但无需深入跟进。
-
-### 2. [10.1080/00401706.2026.2739351](https://doi.org/10.1080/00401706.2026.2739351) — Hamming Weight Uniform Designs for Order-of-Addition Experiments
-- **作者**: Yuwei Song, Min-Qian Liu, Jianbin Chen
-- **期刊/来源**: Technometrics
-- **机构**: Nankai University · Beijing Institute of Technology
-- **分类**: pp 1-46
-- 相关性 4/10 · novelty: `new_method`
-- **摘要**: 本文研究 order-of-addition (OofA) 实验设计，目标是构造对模型误设稳健的设计，使估计量在多种模型下保持一致性和渐近等价性。作者引入 Hamming weight 作为新的均匀性度量，建立了全设计中 Hamming weight 分布的理论性质，并据此高效构造 Hamming weight uniform designs (HWUDs)。HWUDs 保证估计量一致性，与全设计渐近等价，并在不同模型下表现稳健。此外，HWUDs 为渠道归因问题提供了基于设计的模型稳健框架。真实数据实验表明，HWUDs 在统计精度和计算效率上均优于现有方法。
-- **关键技术**: `Hamming weight`, `uniform designs`, `order-of-addition experiments`, `model-robust design`, `asymptotic equivalence`
-- **为什么对您有用**: 本文属于实验设计领域，与您的主要兴趣（因果推断、高维统计、U-统计量等）无直接交集，但其中对模型稳健性和渐近等价性的处理思路，可能对您在因果推断中的敏感性分析有所启发。作为 gateway reading，本文对实验设计的基本概念有清晰阐述，但并非您当前研究方向的直接入口，武器库足以理解，但无需深入。
-
-### 3. [10.1080/00401706.2026.2733032](https://doi.org/10.1080/00401706.2026.2733032) — Planning Dual-Stress Accelerated Degradation Tests with Random-Effects Wiener Process Models
-- **作者**: Guanqi Fang, Xi He, Yizi Wang, Rong Pan
-- **期刊/来源**: Technometrics
-- **机构**: Zhejiang Gongshang University · Arizona State University
-- **分类**: pp 1-114
 - 相关性 4/10 · novelty: `application`
-- **摘要**: 本文研究加速退化试验（ADT）的最优设计问题，在随机效应Wiener过程框架下同时考虑单元间初始退化水平和退化速率的异质性及其相关性（即“initiation-growth”相关）。目标是选择试验条件设置和样本分配，以最小化正常使用条件下第p分位寿命估计的渐近方差。针对双应力ADT，提出一种分裂策略，将两点退化设计中的低应力点沿等应力方向分解，同时保持加权质心不变，从而生成统计上等价的三点非退化设计，并证明边界极端分裂在该类设计中达到D-最优性。还探讨了增强鲁棒性的折中设计，以及基于初始退化水平排序的分配规则，但比较显示该规则并不总是优于随机分配。案例研究验证了方法的实用性。
-- **关键技术**: `Wiener process with random effects`, `asymptotic variance minimization`, `C-optimality`, `D-optimality`, `design of experiments`
-- **为什么对您有用**: 本文属于工程统计中的试验设计领域，与您的主要兴趣（因果推断、高维统计等）无直接交集，但作为Technometrics的应用统计工作，其最优设计框架和渐近方差方法可能对您理解统计计算中的优化问题有一定参考价值。不过，它并非您关注的核心方向，且不涉及您武器库中的具体工具，因此仅作为边缘阅读。
+- **摘要**: 本文针对先进制造中的 run-to-run (R2R) 控制问题，提出一种非线性时空 R2R 控制框架。传统 R2R 控制通常假设扰动具有线性结构或低秩近似，难以处理高维图像/视频数据中的复杂非线性扰动。作者利用扩散模型离线学习扰动动态，并在在线控制阶段动态调整控制动作以补偿扰动，使系统响应逼近目标。与确定性控制策略不同，该方法显式量化不确定性，从而支持更稳健的决策。通过仿真和案例研究验证了该方法在高维复杂环境中的适应性和有效性。对您而言，本文展示了扩散模型在统计过程控制中的应用，属于统计计算与算法方向，可作为了解生成模型在工程统计中前沿应用的入门读物。
+- **关键技术**: `diffusion models`, `run-to-run control`, `spatio-temporal modeling`, `uncertainty quantification`, `online control`
+- **为什么对您有用**: 本文属于统计计算与算法方向，与您的 statistical computing 兴趣相关。作为 gateway reading，它展示了扩散模型在工程统计控制中的应用，但方法学核心（扩散模型）不在您的技术武器库中（您熟悉的是非参数统计、U-统计量等），因此属于暂不可做范畴。不过，本文的建模思路（离线学习+在线控制）和不确定性量化视角可能对您理解生成模型在统计推断中的角色有帮助，值得花时间读全文以拓宽视野。
 
-### 4. [10.1080/00401706.2026.2689966](https://doi.org/10.1080/00401706.2026.2689966) — Model-Based Prior for Model-Free Reinforcement Learning in Process Control: An Offline Methodology for Semiconductor Manufacturing
-- **作者**: Yanrong Li, Fugee Tsung, Wei Jiang, Juan Du, Zhi-Sheng Ye
+## 其他  *(other, 6 篇)*
+
+### 1. [10.1080/00401706.2026.2689970](https://doi.org/10.1080/00401706.2026.2689970) · [arXiv](https://arxiv.org/abs/2509.22474) — Generative Multi-Scale Modeling via Spatial Autoregressive Transport Maps
+- **作者**: Alejandro Calle-Saldarriaga, Paul F. V. Wiemann, Matthias Katzfuss
 - **期刊/来源**: Technometrics
-- **机构**: National University of Singapore · Hong Kong University of Science and Technology · The Hong Kong University of Science and Technology (Guangzhou) · Shanghai Jiao Tong University
+- **机构**: University of Wisconsin–Madison · The Ohio State University
+- **分类**: pp 1-14
+- 相关性 5/10 · novelty: `application`
+- **摘要**: 本文提出一种用于多尺度空间场统计降尺度的可扩展贝叶斯方法，目标是从粗尺度数据（如全球环流模型输出）预测细尺度高分辨率场（如区域气候模型输出）。方法采用尺度感知的自回归高斯过程，并配以正则化先验来建模细尺度场对粗尺度场的条件分布，从而捕捉非高斯、非平稳及非线性依赖结构。利用共轭性，积分似然有闭式解，可通过随机梯度下降高效优化参数。训练后，给定粗尺度输入，细尺度场的后验分布有闭式表征，便于模拟与不确定性量化。数值实验表明该方法显著优于现有降尺度方法。对您而言，本文属于统计计算与空间统计的应用，与您的主要兴趣（如统计计算、非参数/半参数理论）关联较弱，但其中高斯过程与可扩展计算策略或可作为方法学参考。
+- **关键技术**: `Gaussian process`, `autoregressive models`, `Bayesian inference`, `stochastic gradient descent`, `closed-form posterior`
+- **为什么对您有用**: 本文属于统计计算与空间统计的应用，与您的主要兴趣（如统计计算、非参数/半参数理论）关联较弱，但其中高斯过程与可扩展计算策略或可作为方法学参考。作为 gateway reading，本文对统计学家而言入门友好，但方法学新颖性一般，不值得深入阅读。
+
+### 2. [10.1080/00401706.2026.2682179](https://doi.org/10.1080/00401706.2026.2682179) · [arXiv](https://arxiv.org/abs/2412.20918) — Uncertainty-Aware Out-of-Distribution Detection with Gaussian Processes
+- **作者**: Xiaoyang Song, Chih-Li Sung, Arpan Kusari, Yang Chen, Wenbo Sun
+- **期刊/来源**: Technometrics
+- **机构**: Carnegie Mellon University
+- **分类**: pp 1-10
+- 相关性 4/10 · novelty: `application`
+- **摘要**: 本文提出一种基于高斯过程（GP）的分布外（OOD）检测方法，在训练阶段仅使用分布内（InD）数据，无需任何OOD样本。核心思想是对深度神经网络（DNN）的logit函数进行多分类GP建模，通过后验预测分布的不确定性量化来构造评分函数，从而区分InD与潜在OOD数据。该方法避免了现有OOD检测方法依赖OOD数据做训练或调参的局限。在常规图像分类数据集和真实图像数据集上的案例研究表明，所提方法在无OOD训练样本时优于现有最先进方法。对您而言，本文属于统计机器学习应用，与您的主要兴趣（因果推断、高维统计等）关联较弱，但GP不确定性量化与决策边界构造的思路或可迁移至您关注的半参数推断中的模型校准问题。
+- **关键技术**: `Gaussian process classification`, `uncertainty quantification`, `out-of-distribution detection`, `deep neural networks`, `posterior predictive distribution`
+- **为什么对您有用**: 本文属于统计机器学习应用，与您的主要兴趣（因果推断、高维统计等）关联较弱，但GP不确定性量化与决策边界构造的思路或可迁移至您关注的半参数推断中的模型校准问题。
+
+### 3. [10.1080/00401706.2026.2672595](https://doi.org/10.1080/00401706.2026.2672595) · [arXiv](https://arxiv.org/abs/2310.08040) — SEE-OOD: Supervised Exploration for Enhanced Out-of-Distribution Detection
+- **作者**: Xiaoyang Song, Wenbo Sun, Maher Nouiehed, Raed Al Kontar, Judy Jin
+- **期刊/来源**: Technometrics
+- **机构**: University of Michigan · American University of Beirut
+- **分类**: pp 1-12
+- 相关性 4/10 · novelty: `application`
+- **摘要**: 本文研究制造业视觉检测中的分布外（OoD）缺陷检测问题，目标是在训练时仅见过预定义缺陷类别的情况下，识别新出现的缺陷类型。现有基于深度神经网络的OoD检测方法依赖预测不确定性或对有限OoD样本的正则化，容易过拟合特定OoD样本，泛化性差。作者提出一种生成对抗方法，利用少量真实OoD样本进行监督式OoD样本生成，并同时探索未见过的OoD空间，以缓解样本不足和过拟合问题。方法包含两个关键机制：基于真实OoD样本的监督生成（区别于基于InD数据的无监督虚拟异常生成），以及OoD样本增强与空间探索的联合优化。论文提供了理论结果证明方法的有效性，并在真实3D点云制造缺陷数据集上展示了优于现有技术的泛化性能。
+- **关键技术**: `generative adversarial networks`, `out-of-distribution detection`, `supervised sample generation`, `OoD space exploration`, `3D point cloud defect detection`
+- **为什么对您有用**: 本文属于应用机器学习方法，与您的主要兴趣（因果推断、高维统计、半参数理论等）无直接交集，但可作为统计计算与算法方向的泛读材料。其理论分析部分涉及生成模型的收敛性，可能对您理解对抗训练的理论基础略有帮助，但整体方法学新颖性有限，且不涉及您武器库中的具体工具。
+
+### 4. [10.1080/00401706.2026.2670598](https://doi.org/10.1080/00401706.2026.2670598) — Experimental Designs for Electric Bus Routes
+- **作者**: Nicholas Rios, Jie Xu, Ziqiao Xu
+- **期刊/来源**: Technometrics
+- **机构**: George Mason University
+- **分类**: pp 1-12
+- 相关性 4/10 · novelty: `application`
+- **摘要**: 本文研究电动公交线路的能耗估计与实验设计问题。由于实际测量条件的限制，无法对所有路段进行直接观测，作者将公交站点网络建模为无向图，每条边的能耗视为未知随机变量，并采用贝叶斯回归模型估计其分布。在给定能耗后验分布的基础上，利用模拟退火算法搜索贝叶斯 D-最优设计，以指导后续实验的测量方案。方法应用于美国弗吉尼亚州亚历山大市的真实电动公交数据集。本文属于应用统计与实验设计的交叉工作，方法学贡献主要在于将图结构与贝叶斯最优设计结合，但理论深度有限。对您而言，该文可作为统计计算与实验设计在交通领域应用的入门读物，但与其主要研究方向（因果推断、高维统计、U-统计量等）关联较弱。
+- **关键技术**: `Bayesian D-optimal design`, `Simulated Annealing`, `Bayesian regression`, `graph-based modeling`
+- **为什么对您有用**: 本文属于统计计算与实验设计的应用型工作，可作为 gateway reading 了解贝叶斯最优设计在实际问题中的落地流程。武器库中的软件开发和数值方法足以支撑理解其算法实现，但该文不涉及因果推断或高维理论，与主要兴趣的交叉有限。若您对实验设计或贝叶斯优化感兴趣，可作中期可做的参考，但暂不建议深入。
+
+### 5. [10.1080/00401706.2026.2653564](https://doi.org/10.1080/00401706.2026.2653564) · [arXiv](https://arxiv.org/abs/2506.17036) — Bayesian Joint Model of Multi-Sensor and Failure Event Data for Multi-Mode Failure Prediction
+- **作者**: Sina Aghaee Dabaghan Fard, Minhee Kim, Akash Deep, Jaesung Lee
+- **期刊/来源**: Technometrics
+- **机构**: Texas A&M University · University of Florida · Oklahoma State University
 - **分类**: pp 1-15
 - 相关性 4/10 · novelty: `application`
-- **摘要**: 本文针对先进制造中的过程控制问题，提出一种融合基于模型先验知识的无模型强化学习（RL）控制方法。在离线学习阶段，利用非参数回归近似未知过程动态，并用高斯过程预测不可观测的扰动；在线控制阶段，将这两者与策略梯度搜索 RL 算法结合，仅依赖固定历史数据，无需实时试验。理论性质（如估计误差对控制性能的影响）得到讨论，并通过仿真和结晶过程案例验证有效性。该方法的核心贡献在于用模型先验简化模型结构并降低无模型控制器的方差，属于统计与控制的交叉应用。对您而言，本文的非参数回归与高斯过程组合建模思路，以及离线-在线两阶段框架，可能对您在高维或半参数估计中的实际应用有启发，但方法论新颖性有限。
-- **关键技术**: `nonparametric regression`, `Gaussian process`, `policy gradient RL`, `offline RL`, `process control`
-- **为什么对您有用**: 本文属于统计计算与工业应用交叉，与您的统计计算兴趣有间接关联，但并非核心方向。作为应用型论文，其非参数回归与高斯过程结合的方法可迁移性有限，且未涉及因果推断或高维理论。武器库中的非参数统计和软件技能足以理解，但无需深入。建议作为了解工业界统计应用的泛读材料，不值得投入全文精读。
+- **摘要**: 本文针对工业系统中多传感器时间序列与多模式失效事件数据，提出一个统一的层次贝叶斯联合模型，以同时预测剩余使用寿命（RUL）和失效模式。模型将 Cox 比例风险模型、卷积多输出高斯过程（Convolved Multi-output Gaussian Process）与多项失效模式分布相结合，在贝叶斯框架下通过变分贝叶斯进行后验推断，并用蒙特卡洛采样进行预测。与将失效模式和 RUL 预测独立建模的现有方法相比，该模型显式刻画了两者间的内在关联，并提供了完整的不确定性量化。通过数值实验和喷气发动机数据集的案例研究，验证了模型在预测精度和不确定性校准上的优势。
+- **关键技术**: `Bayesian hierarchical model`, `Cox proportional hazards model`, `Convolved multi-output Gaussian process`, `Variational Bayes`, `Monte Carlo sampling`
+- **为什么对您有用**: 本文属于统计计算与贝叶斯建模的应用，与您的统计计算兴趣（数值方法、算法）有交集，可作为贝叶斯非参数与变分推断的入门读物；但方法学 novelty 一般，且与您的主要兴趣（因果推断、高维、U-统计量）无直接关联。
+
+### 6. [10.1080/00401706.2026.2672594](https://doi.org/10.1080/00401706.2026.2672594) — Two-Level Parallel Flats Split-Plot Designs
+- **作者**: Chunyan Wang, Robert W. Mee, David J. Edwards
+- **期刊/来源**: Technometrics
+- **机构**: Renmin University of China · University of Tennessee at Knoxville · Citadel
+- **分类**: pp 1-10
+- 相关性 3/10 · novelty: `minor`
+- **摘要**: 本文研究分裂区组设计（split-plot designs）中，当处理结构采用非正则部分因子设计时，效应对比与整区（whole plot）部分混杂的问题。作者提出一类基于平行平面（parallel flats）结构的清晰分裂区组设计，将因子效应划分为两个正交子空间，从而简化模型选择。这类设计在运行次数上灵活、构造简单，并相比其他非正则或算法生成的分裂区组设计具有额外优势。文章主要贡献在于设计构造与正交性理论，属于实验设计领域，与您的因果推断、高维统计等核心兴趣无直接交集。
+- **关键技术**: `split-plot designs`, `parallel flats`, `nonregular fractional factorial`, `orthogonal subspaces`, `effect confounding`
+- **为什么对您有用**: 本文属于实验设计（DOE）领域，与您的主要兴趣（因果推断、高维统计、半参数理论等）无直接关联。作为统计方法学的旁支，可能对您了解非正则设计的正交结构有一定背景价值，但并非入门读物，也不涉及您武器库中的具体工具。建议仅作泛读，不投入深读时间。
 
 
 ---
