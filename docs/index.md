@@ -17,12 +17,16 @@
 
 [→ 查看完整报告](daily/2026-10-12.md)
 
-### 精读论文（141 篇）
+### 精读论文（162 篇）
 
 - [Causal Inference With Noisy Covariates: Heteroscedastic Measurement Error and Differential Privacy](deep_reads/2026-10-12-10.3982_ecta23897.md)  
   `因果推断` · 相关性 9/10
 - [Locally Robust Semiparametrically Efficient Bayesian Inference](deep_reads/2026-10-12-10.3982_ecta23242.md)  
   `效率理论 / Debiased ML` · 相关性 9/10
+- [Deconfounded‐Debiased Estimation and Inference for High‐Dimensional Mediation Analysis With Pervasive Hidden Confounders](deep_reads/2026-10-12-10.1002_sim.70741.md)  
+  `因果推断` · 相关性 8/10
+- [Context‐Stratified Mendelian Randomization: Exploiting Regional Exposure Variation to Explore Causal Effect Heterogeneity and Nonlinearity](deep_reads/2026-10-12-10.1002_sim.70727.md)  
+  `因果推断` · 相关性 8/10
 - [Generalizing Conditional Average Treatment Effects From Nested Randomized Trials to Trial‐Eligible Individuals](deep_reads/2026-10-12-10.1002_sim.70767.md)  
   `因果推断` · 相关性 8/10
 - [A Nonparametric Data‐Fusion Approach for Identification and Estimation of Nonignorable Missing Data With Shadow Variable](deep_reads/2026-10-12-10.1002_sim.70747.md)  
@@ -41,6 +45,10 @@
   `其他` · 相关性 8/10
 - [Causal Inference for Spatial Treatments](deep_reads/2026-10-12-10.3982_ecta21571.md)  
   `因果推断` · 相关性 8/10
+- [Forest Kernel Balancing Weights: Outcome‐Guided Features for Causal Inference](deep_reads/2026-10-12-10.1002_sim.70720.md)  
+  `因果推断` · 相关性 7/10
+- [Nonparametric Assessment of the Calibration of Individualized Treatment Effects](deep_reads/2026-10-12-10.1002_sim.70724.md)  
+  `因果推断` · 相关性 7/10
 - [Scalable Nonparametric Change-Plane Regression with Random Features: Estimation and Inference](deep_reads/2026-10-12-2610.13290.md)  
   `非参数 / 半参数` · 相关性 7/10
 - [An efficient stochastic generalized method of moments estimator for nonlinear moment models](deep_reads/2026-10-12-2610.12873.md)  
@@ -85,6 +93,14 @@
   `高维统计 / 随机矩阵` · 相关性 7/10
 - [Measurement error and peer effects in networks](deep_reads/2026-10-12-10.1016_j.jeconom.2026.106339.md)  
   `因果推断` · 相关性 7/10
+- [Regression Not‐to‐the‐Mean: An Oddity of Regression, Illustrated With the Risk of Overdose Deaths](deep_reads/2026-10-12-10.1002_sim.70734.md)  
+  `因果推断` · 相关性 6/10
+- [Bayesian Additive Regression Trees for Modeling Multiple Exposures With Measurement Error](deep_reads/2026-10-12-10.1002_sim.70739.md)  
+  `因果推断` · 相关性 6/10
+- [Bayesian Machine Learning for Estimating Optimal Dynamic Treatment Regimes With Ordinal Outcomes](deep_reads/2026-10-12-10.1002_sim.70714.md)  
+  `因果推断` · 相关性 6/10
+- [Dynamic Predictions and Predictimands for Salvage Therapy in Recurrent Prostate Cancer Using Joint Models](deep_reads/2026-10-12-10.1002_sim.70710.md)  
+  `因果推断` · 相关性 6/10
 - [How Many Significant LISA?: A multiple testing correction](deep_reads/2026-10-12-2610.13472.md)  
   `数理统计 / 假设检验` · 相关性 6/10
 - [Neural Estimation of Summary Statistics for Simulation-Based Inference with Non-Asymptotic Guarantees](deep_reads/2026-10-12-2610.13031.md)  
@@ -173,6 +189,16 @@
   `其他` · 相关性 6/10
 - [Genetic Prediction and Adverse Selection](deep_reads/2026-10-12-10.3982_ecta24284.md)  
   `经济理论 / 应用` · 相关性 6/10
+- [A Novel Bayesian Distribution‐Free Survival Analysis](deep_reads/2026-10-12-10.1002_sim.70736.md)  
+  `其他` · 相关性 5/10
+- [Multilevel Network Meta‐Regression With a Survival Outcome and an Application to Non‐Small Cell Lung Cancer](deep_reads/2026-10-12-10.1002_sim.70728.md)  
+  `因果推断` · 相关性 5/10
+- [A Group Structure Guided Ultra‐High Dimensional Feature Screening for Survival Outcome](deep_reads/2026-10-12-10.1002_sim.70725.md)  
+  `高维统计 / 随机矩阵` · 相关性 5/10
+- [Shape‐Based Partially Linear Single‐Index Cox Model for Alzheimer's Disease Conversion](deep_reads/2026-10-12-10.1002_sim.70708.md)  
+  `非参数 / 半参数` · 相关性 5/10
+- [Local Linear Estimation for Covariate‐Dependent Coefficients Model in Disease Mapping](deep_reads/2026-10-12-10.1002_sim.70713.md)  
+  `其他` · 相关性 5/10
 - [Sandwich Variance Estimation in Scale Mixture of Skew‐Normal Linear Mixed Models](deep_reads/2026-10-12-10.1002_sim.70753.md)  
   `其他` · 相关性 5/10
 - [Taking Into Account the Susceptible Window for Exposures in Cox Proportional Hazards Model: A Way Using Splines to Model the Lag‐Risk Relationship](deep_reads/2026-10-12-10.1002_sim.70755.md)  
@@ -217,6 +243,22 @@
   `因果推断` · 相关性 5/10
 - [Do Asset Prices Help Predict Inflation? Evidence from Individual Stock Prices](deep_reads/2026-10-12-10.1080_07350015.2026.2654899.md)  
   `经济理论 / 应用` · 相关性 5/10
+- [Joint Models of Two Longitudinal Biomarkers and Clustered Survival Data for Cluster‐Informed Dynamic Prediction With Application to Periodontitis](deep_reads/2026-10-12-10.1002_sim.70715.md)  
+  `流行病学` · 相关性 4/10
+- [A Bayesian Multi‐State Data Integration Approach for Estimating County‐Level Prevalence of Opioid Misuse in the United States](deep_reads/2026-10-12-10.1002_sim.70707.md)  
+  `流行病学` · 相关性 4/10
+- [Comparing Missing Data Strategies for Generalized Pairwise Comparisons in Randomized Clinical Trials: A Simulation Study](deep_reads/2026-10-12-10.1002_sim.70737.md)  
+  `因果推断` · 相关性 4/10
+- [Adaptive Trial Designs for Assessing Predictiveness of a Biomarker in Early Phase Drug Development](deep_reads/2026-10-12-10.1002_sim.70719.md)  
+  `因果推断` · 相关性 4/10
+- [Penalised Spline Estimation of Covariate‐Specific Time‐Dependent ROC Curves](deep_reads/2026-10-12-10.1002_sim.70718.md)  
+  `非参数 / 半参数` · 相关性 4/10
+- [Finite‐Sample Adjustments in Estimating Equations for Correlated Overdispersed Count Outcomes With Application to Cluster Randomized Trials](deep_reads/2026-10-12-10.1002_sim.70698.md)  
+  `因果推断` · 相关性 4/10
+- [Penalized Cumulative Probability Model for a Continuous Outcome Subject to Detection Limits](deep_reads/2026-10-12-10.1002_sim.70723.md)  
+  `其他` · 相关性 4/10
+- [<scp>ReMeDy</scp> : A Flexible Statistical Framework for Region‐Based Detection of <scp>DNA</scp> Methylation Dysregulation](deep_reads/2026-10-12-10.1002_sim.70716.md)  
+  `其他` · 相关性 4/10
 - [Group Sequential Sample Size for Comparing Two Survival Probabilities at a Specific Time Point](deep_reads/2026-10-12-10.1002_sim.70750.md)  
   `其他` · 相关性 4/10
 - [The Stellar Population of NGC 346 in the Small Magellanic Cloud with JWST](deep_reads/2026-10-12-10.3847_1538-4365_ae954e.md)  

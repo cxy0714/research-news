@@ -1250,6 +1250,33 @@
 - [Taking Into Account the Susceptible Window for Exposures in Cox Proportional Hazards Model: A Way Using Splines to Model the Lag‐Risk Relationship](deep_reads/2026-10-12-10.1002_sim.70755.md)  
   5/10 [journals]
 
+#### Statistics in Medicine Vol 45 Issue 20-22
+
+- [Deconfounded‐Debiased Estimation and Inference for High‐Dimensional Mediation Analysis With Pervasive Hidden Confounders](deep_reads/2026-10-12-10.1002_sim.70741.md)  
+  8/10 [journals]
+- [Context‐Stratified Mendelian Randomization: Exploiting Regional Exposure Variation to Explore Causal Effect Heterogeneity and Nonlinearity](deep_reads/2026-10-12-10.1002_sim.70727.md)  
+  8/10 [journals]
+- [Forest Kernel Balancing Weights: Outcome‐Guided Features for Causal Inference](deep_reads/2026-10-12-10.1002_sim.70720.md)  
+  7/10 [journals]
+- [Nonparametric Assessment of the Calibration of Individualized Treatment Effects](deep_reads/2026-10-12-10.1002_sim.70724.md)  
+  7/10 [journals]
+- [Regression Not‐to‐the‐Mean: An Oddity of Regression, Illustrated With the Risk of Overdose Deaths](deep_reads/2026-10-12-10.1002_sim.70734.md)  
+  6/10 [journals]
+- [Bayesian Additive Regression Trees for Modeling Multiple Exposures With Measurement Error](deep_reads/2026-10-12-10.1002_sim.70739.md)  
+  6/10 [journals]
+- [Bayesian Machine Learning for Estimating Optimal Dynamic Treatment Regimes With Ordinal Outcomes](deep_reads/2026-10-12-10.1002_sim.70714.md)  
+  6/10 [journals]
+- [Dynamic Predictions and Predictimands for Salvage Therapy in Recurrent Prostate Cancer Using Joint Models](deep_reads/2026-10-12-10.1002_sim.70710.md)  
+  6/10 [journals]
+- [Multilevel Network Meta‐Regression With a Survival Outcome and an Application to Non‐Small Cell Lung Cancer](deep_reads/2026-10-12-10.1002_sim.70728.md)  
+  5/10 [journals]
+- [Comparing Missing Data Strategies for Generalized Pairwise Comparisons in Randomized Clinical Trials: A Simulation Study](deep_reads/2026-10-12-10.1002_sim.70737.md)  
+  4/10 [journals]
+- [Adaptive Trial Designs for Assessing Predictiveness of a Biomarker in Early Phase Drug Development](deep_reads/2026-10-12-10.1002_sim.70719.md)  
+  4/10 [journals]
+- [Finite‐Sample Adjustments in Estimating Equations for Correlated Overdispersed Count Outcomes With Application to Cluster Randomized Trials](deep_reads/2026-10-12-10.1002_sim.70698.md)  
+  4/10 [journals]
+
 #### Journal of Econometrics Vol 258
 
 - [Treatment evaluation at the intensive and extensive margins](deep_reads/2026-10-12-10.1016_j.jeconom.2026.106344.md)  
@@ -4245,6 +4272,11 @@
 
 ### 期刊
 
+#### Statistics in Medicine Vol 45 Issue 20-22
+
+- [A Group Structure Guided Ultra‐High Dimensional Feature Screening for Survival Outcome](deep_reads/2026-10-12-10.1002_sim.70725.md)  
+  5/10 [journals]
+
 #### Journal of Econometrics Vol 258
 
 - [Robust estimation and inference for high-dimensional panel data models](deep_reads/2026-10-12-10.1016_j.jeconom.2026.106342.md)  
@@ -5784,6 +5816,13 @@
   8/10 [daily]
 
 ### 期刊
+
+#### Statistics in Medicine Vol 45 Issue 20-22
+
+- [Shape‐Based Partially Linear Single‐Index Cox Model for Alzheimer's Disease Conversion](deep_reads/2026-10-12-10.1002_sim.70708.md)  
+  5/10 [journals]
+- [Penalised Spline Estimation of Covariate‐Specific Time‐Dependent ROC Curves](deep_reads/2026-10-12-10.1002_sim.70718.md)  
+  4/10 [journals]
 
 #### Journal of Business & Economic Statistics
 
@@ -13681,6 +13720,13 @@
 
 ### 期刊
 
+#### Statistics in Medicine Vol 45 Issue 20-22
+
+- [Joint Models of Two Longitudinal Biomarkers and Clustered Survival Data for Cluster‐Informed Dynamic Prediction With Application to Periodontitis](deep_reads/2026-10-12-10.1002_sim.70715.md)  
+  4/10 [journals]
+- [A Bayesian Multi‐State Data Integration Approach for Estimating County‐Level Prevalence of Opioid Misuse in the United States](deep_reads/2026-10-12-10.1002_sim.70707.md)  
+  4/10 [journals]
+
 #### Journal of the Royal Statistical Society Series C Vol 75 Issue 4
 
 - [On the PM2.5–mortality association: a Bayesian model for spatio-temporal confounding](deep_reads/2026-10-10-10.1093_jrsssc_qlag004.md)  
@@ -15128,6 +15174,17 @@
   4/10 [journals]
 - [Calibration of Priors for Bayesian Model‐Based Dose‐Finding Trial Designs With Joint Outcomes](deep_reads/2026-10-12-10.1002_sim.70746.md)  
   3/10 [journals]
+
+#### Statistics in Medicine Vol 45 Issue 20-22
+
+- [A Novel Bayesian Distribution‐Free Survival Analysis](deep_reads/2026-10-12-10.1002_sim.70736.md)  
+  5/10 [journals]
+- [Local Linear Estimation for Covariate‐Dependent Coefficients Model in Disease Mapping](deep_reads/2026-10-12-10.1002_sim.70713.md)  
+  5/10 [journals]
+- [Penalized Cumulative Probability Model for a Continuous Outcome Subject to Detection Limits](deep_reads/2026-10-12-10.1002_sim.70723.md)  
+  4/10 [journals]
+- [<scp>ReMeDy</scp> : A Flexible Statistical Framework for Region‐Based Detection of <scp>DNA</scp> Methylation Dysregulation](deep_reads/2026-10-12-10.1002_sim.70716.md)  
+  4/10 [journals]
 
 #### Journal of Econometrics Vol 258
 
