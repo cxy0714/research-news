@@ -541,6 +541,7 @@
 ### Science
 
 - [Vol 394 Issue 6820 · 2026-10-13](journals/2026-10-13-science-v394-i6820.md)
+- [Vol 394 Issue 6819 · 2026-10-13](journals/2026-10-13-science-v394-i6819.md)
 - [Vol 393 Issue 6810 · 2026-07-31](journals/2026-07-31-science-v393-i6810.md)
 - [Vol 393 Issue 6809 · 2026-08-01](journals/2026-08-01-science-v393-i6809.md)
 - [Vol 393 Issue 6809 · 2026-07-31](journals/2026-07-31-science-v393-i6809.md)

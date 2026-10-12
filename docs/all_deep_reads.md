@@ -15649,6 +15649,35 @@
 - [Wafer-scale low-symmetry graphene moiré superlattice for integrated quantum rectifiers](deep_reads/2026-10-13-10.1126_science.aeh3915.md)  
   0/10 [journals]
 
+#### Science Vol 394 Issue 6819
+
+- [Keep AI-augmented science contestable](deep_reads/2026-10-13-10.1126_science.aek7949.md)  
+  5/10 [journals]
+- [U.K. funder used ‘AI triage’ to reject grant proposals](deep_reads/2026-10-13-10.1126_science.aem8458.md)  
+  5/10 [journals]
+- [Quadrupolar sea level fluctuations reveal episodes of rapid polar wander](deep_reads/2026-10-13-10.1126_science.aec8423.md)  
+  4/10 [journals]
+- [Reframing menopause and menopause hormone therapy as opportunities for healthy aging](deep_reads/2026-10-13-10.1126_science.aeg5004.md)  
+  4/10 [journals]
+- [X and Y chromosomes as determinants of aging and disease](deep_reads/2026-10-13-10.1126_science.aeh0145.md)  
+  4/10 [journals]
+- [Verification makes discovery matter](deep_reads/2026-10-13-10.1126_science.aem6125.md)  
+  3/10 [journals]
+- [Precise length and charge segmentation of billion-dalton supramolecular polymers](deep_reads/2026-10-13-10.1126_science.aeg5583.md)  
+  3/10 [journals]
+- [Self-assembling polymers work up some nerve](deep_reads/2026-10-13-10.1126_science.ael4456.md)  
+  3/10 [journals]
+- [Can an AI feel pain? It can at least act like it does](deep_reads/2026-10-13-10.1126_science.aem8459.md)  
+  3/10 [journals]
+- [Longevity products: Innovation through regulation](deep_reads/2026-10-13-10.1126_science.aei2427.md)  
+  2/10 [journals]
+- [Ultrahigh piezoelectricity by polaron-defect complexes](deep_reads/2026-10-13-10.1126_science.aeg4972.md)  
+  2/10 [journals]
+- [Mitochondrial carrier SLC25A34 links clock, diet, and temperature control of adipocyte lipid cycling](deep_reads/2026-10-13-10.1126_science.adz4797.md)  
+  2/10 [journals]
+- [Dynamic multimodal cation-carbon interaction for efficient adiponitrile electrosynthesis](deep_reads/2026-10-13-10.1126_science.aef5175.md)  
+  2/10 [journals]
+
 #### Science
 
 - [A DNA Typewriter records the cell lineage history of a mouse, from zygote to late organogenesis](deep_reads/2026-10-13-10.1126_science.ael0508.md)  
