@@ -12274,6 +12274,11 @@
 - [A fast radio burst at redshift 2, three billion years after the Big Bang](deep_reads/2026-10-13-10.1126_science.adz2675.md)  
   3/10 [journals]
 
+#### Proceedings of the National Academy of Sciences Vol 123 Issue 43
+
+- [Extensive glacier loss in the coterminous United States](deep_reads/2026-10-13-10.1073_pnas.2600941123.md)  
+  3/10 [journals]
+
 #### Monthly Notices of the Royal Astronomical Society Vol 552 Issue 3
 
 - [Constraining inhomogeneities in SNe, FBOTs, and other high-energy transients from unresolved radio observations](deep_reads/2026-10-12-10.1093_mnras_stag1795.md)  
@@ -15685,6 +15690,11 @@
 - [Safeguarding global terrestrial vertebrate species from future sea-level rise](deep_reads/2026-10-13-10.1126_science.aed5772.md)  
   4/10 [journals]
 - [Shared patterns of human milk composition link mammary gland function to infant growth](deep_reads/2026-10-13-10.1126_science.aee7240.md)  
+  3/10 [journals]
+
+#### Proceedings of the National Academy of Sciences Vol 123 Issue 43
+
+- [Nutrient legacies from elephant megacarcasses create coldspots of biodiversity and hotspots of ecosystem processes](deep_reads/2026-10-13-10.1073_pnas.2605332123.md)  
   3/10 [journals]
 
 #### Nature Vol 658 Issue 8135
