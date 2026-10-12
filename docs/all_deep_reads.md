@@ -1356,6 +1356,19 @@
 - [Nonrandom Selection With and Without Bias Due to Selecting on an Exposure](deep_reads/2026-10-12-10.1097_ede.0000000000002018.md)  
   7/10 [journals]
 
+#### Epidemiology Vol 37 Issue 5
+
+- [Combining Observational Studies to Reduce Multiple Biases](deep_reads/2026-10-12-10.1097_ede.0000000000001999.md)  
+  8/10 [journals]
+- [Generalizing Findings in Nested Cohorts](deep_reads/2026-10-12-10.1097_ede.0000000000002012.md)  
+  7/10 [journals]
+- [Extending Inferences from a Randomized Trial to Trial-eligible and Treatment-candidate Target Populations: Examples of Generalizability and Transportability](deep_reads/2026-10-12-10.1097_ede.0000000000001994.md)  
+  7/10 [journals]
+- [The Long Arm of Childhood Policy: Historical Schooling Laws and COVID-19 Pandemic-era Mortality](deep_reads/2026-10-12-10.1097_ede.0000000000002002.md)  
+  6/10 [journals]
+- [Pooled Multinomial Logistic Regression for Parametric G-computation in the Presence of Competing Events](deep_reads/2026-10-12-10.1097_ede.0000000000001995.md)  
+  6/10 [journals]
+
 #### Epidemiology
 
 - [Understanding potential collider bias in external validity analysis depending on types of effect measure modifiers](deep_reads/2026-10-12-10.1097_ede.0000000000002048.md)  
@@ -7718,6 +7731,11 @@
 
 ### 期刊
 
+#### Epidemiology Vol 37 Issue 5
+
+- [Riesz Representers for the Rest of Us](deep_reads/2026-10-12-10.1097_ede.0000000000001996.md)  
+  8/10 [journals]
+
 #### Econometrica Vol 94 Issue 5
 
 - [Locally Robust Semiparametrically Efficient Bayesian Inference](deep_reads/2026-10-12-10.3982_ecta23242.md)  
@@ -13842,6 +13860,29 @@
 - [Reproductive Health in an Era of Cascading Inequity](deep_reads/2026-10-12-10.1097_ede.0000000000002028.md)  
   4/10 [journals]
 - [Temporal Connectivity of Social Contact Networks in Urban and Rural India](deep_reads/2026-10-12-10.1097_ede.0000000000002019.md)  
+  4/10 [journals]
+
+#### Epidemiology Vol 37 Issue 5
+
+- [Changes in Community-level Pedestrian Stops Following Overdose Prevention Center Implementation in New York City: An Augmented Synthetic Control Approach](deep_reads/2026-10-12-10.1097_ede.0000000000002000.md)  
+  7/10 [journals]
+- [Identifying Demographic Predictors of Increased Nonfatal Opioid Overdose Risk Among New York State Medicaid Enrollees After the COVID-19 Pandemic: An Analysis of Heterogeneous Treatment Effects](deep_reads/2026-10-12-10.1097_ede.0000000000001992.md)  
+  7/10 [journals]
+- [Differential Misclassification by Time: A Proposed Validation Substudy Design to Account for Time Trends in Bias Parameters](deep_reads/2026-10-12-10.1097_ede.0000000000002008.md)  
+  6/10 [journals]
+- [A Novel Transmission Model-based Method to Evaluate Population Attribution Methods for Norovirus and Rotavirus Diarrhea](deep_reads/2026-10-12-10.1097_ede.0000000000002004.md)  
+  6/10 [journals]
+- [Longitudinal Transitions Between Internalizing and Externalizing Symptoms and Associations with Substance Use among US Young Adults, 2016–2023](deep_reads/2026-10-12-10.1097_ede.0000000000002009.md)  
+  5/10 [journals]
+- [Lagged and Nonlinear Effects of Temperature Extremes on Mortality in US Federal Prisons: A Case-Crossover Study, 2009–2021](deep_reads/2026-10-12-10.1097_ede.0000000000002007.md)  
+  5/10 [journals]
+- [Smart Meter-derived Air Conditioning Penetration Rate Modifies the Association Between Ambient Temperature and Emergency Department Visits](deep_reads/2026-10-12-10.1097_ede.0000000000002006.md)  
+  5/10 [journals]
+- [Industrial Air Toxicant Exposure and Individual Mortality: Evidence from the Americans’ Changing Lives Cohort, 1986–2019](deep_reads/2026-10-12-10.1097_ede.0000000000002005.md)  
+  5/10 [journals]
+- [The Separate and Joint Associations of Own and Spousal Depression with Mortality in Couples](deep_reads/2026-10-12-10.1097_ede.0000000000001993.md)  
+  5/10 [journals]
+- [Stratification and Accumulation?: Explaining Changing Mortality Inequities Between Business Owners and Non-owners in the United States (1984–2022)](deep_reads/2026-10-12-10.1097_ede.0000000000002013.md)  
   4/10 [journals]
 
 #### Epidemiology

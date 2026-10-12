@@ -429,6 +429,7 @@
 ### Epidemiology
 
 - [Vol 37 Issue 6 · 2026-10-12](journals/2026-10-12-epidemiology-v37-i6.md)
+- [Vol 37 Issue 5 · 2026-10-12](journals/2026-10-12-epidemiology-v37-i5.md)
 - [Vol 37 Issue 4 · 2026-06-24](journals/2026-06-24-epidemiology-v37-i4.md)
 - [Vol 37 Issue 4 · 2026-06-19](journals/2026-06-19-epidemiology-v37-i4.md)
 - [Vol 37 Issue 3 · 2026-06-19](journals/2026-06-19-epidemiology-v37-i3.md)

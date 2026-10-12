@@ -17,12 +17,16 @@
 
 [→ 查看完整报告](daily/2026-10-12.md)
 
-### 精读论文（239 篇）
+### 精读论文（255 篇）
 
 - [Causal Inference With Noisy Covariates: Heteroscedastic Measurement Error and Differential Privacy](deep_reads/2026-10-12-10.3982_ecta23897.md)  
   `因果推断` · 相关性 9/10
 - [Locally Robust Semiparametrically Efficient Bayesian Inference](deep_reads/2026-10-12-10.3982_ecta23242.md)  
   `效率理论 / Debiased ML` · 相关性 9/10
+- [Riesz Representers for the Rest of Us](deep_reads/2026-10-12-10.1097_ede.0000000000001996.md)  
+  `效率理论 / Debiased ML` · 相关性 8/10
+- [Combining Observational Studies to Reduce Multiple Biases](deep_reads/2026-10-12-10.1097_ede.0000000000001999.md)  
+  `因果推断` · 相关性 8/10
 - [Transportability of Prognostic Markers](deep_reads/2026-10-12-10.1097_ede.0000000000002044.md)  
   `流行病学` · 相关性 8/10
 - [The Role of Assignment in Defining and Identifying Causal Effects in Randomized Trials](deep_reads/2026-10-12-10.1097_ede.0000000000002034.md)  
@@ -53,6 +57,14 @@
   `其他` · 相关性 8/10
 - [Causal Inference for Spatial Treatments](deep_reads/2026-10-12-10.3982_ecta21571.md)  
   `因果推断` · 相关性 8/10
+- [Generalizing Findings in Nested Cohorts](deep_reads/2026-10-12-10.1097_ede.0000000000002012.md)  
+  `因果推断` · 相关性 7/10
+- [Changes in Community-level Pedestrian Stops Following Overdose Prevention Center Implementation in New York City: An Augmented Synthetic Control Approach](deep_reads/2026-10-12-10.1097_ede.0000000000002000.md)  
+  `流行病学` · 相关性 7/10
+- [Extending Inferences from a Randomized Trial to Trial-eligible and Treatment-candidate Target Populations: Examples of Generalizability and Transportability](deep_reads/2026-10-12-10.1097_ede.0000000000001994.md)  
+  `因果推断` · 相关性 7/10
+- [Identifying Demographic Predictors of Increased Nonfatal Opioid Overdose Risk Among New York State Medicaid Enrollees After the COVID-19 Pandemic: An Analysis of Heterogeneous Treatment Effects](deep_reads/2026-10-12-10.1097_ede.0000000000001992.md)  
+  `流行病学` · 相关性 7/10
 - [Enhanced screening and bacterial sexually-transmitted infection diagnoses after HIV pre-exposure prophylaxis initiation](deep_reads/2026-10-12-10.1097_ede.0000000000002052.md)  
   `流行病学` · 相关性 7/10
 - [Indirect Estimation of the Number of Prevalent Cases – Relaxing the Steady State Assumption](deep_reads/2026-10-12-10.1097_ede.0000000000002049.md)  
@@ -149,6 +161,14 @@
   `高维统计 / 随机矩阵` · 相关性 7/10
 - [Measurement error and peer effects in networks](deep_reads/2026-10-12-10.1016_j.jeconom.2026.106339.md)  
   `因果推断` · 相关性 7/10
+- [The Long Arm of Childhood Policy: Historical Schooling Laws and COVID-19 Pandemic-era Mortality](deep_reads/2026-10-12-10.1097_ede.0000000000002002.md)  
+  `因果推断` · 相关性 6/10
+- [Differential Misclassification by Time: A Proposed Validation Substudy Design to Account for Time Trends in Bias Parameters](deep_reads/2026-10-12-10.1097_ede.0000000000002008.md)  
+  `流行病学` · 相关性 6/10
+- [A Novel Transmission Model-based Method to Evaluate Population Attribution Methods for Norovirus and Rotavirus Diarrhea](deep_reads/2026-10-12-10.1097_ede.0000000000002004.md)  
+  `流行病学` · 相关性 6/10
+- [Pooled Multinomial Logistic Regression for Parametric G-computation in the Presence of Competing Events](deep_reads/2026-10-12-10.1097_ede.0000000000001995.md)  
+  `因果推断` · 相关性 6/10
 - [Long-term exposure to ultrafine particles and mortality from neurodegenerative diseases: a population-based cohort study](deep_reads/2026-10-12-10.1097_ede.0000000000002054.md)  
   `流行病学` · 相关性 6/10
 - [Evaluating Data Sources for Monitoring Guideline-Concordant Endometrial Cancer Treatment Among Older Adults](deep_reads/2026-10-12-10.1097_ede.0000000000002051.md)  
@@ -285,6 +305,16 @@
   `其他` · 相关性 6/10
 - [Genetic Prediction and Adverse Selection](deep_reads/2026-10-12-10.3982_ecta24284.md)  
   `经济理论 / 应用` · 相关性 6/10
+- [Longitudinal Transitions Between Internalizing and Externalizing Symptoms and Associations with Substance Use among US Young Adults, 2016–2023](deep_reads/2026-10-12-10.1097_ede.0000000000002009.md)  
+  `流行病学` · 相关性 5/10
+- [Lagged and Nonlinear Effects of Temperature Extremes on Mortality in US Federal Prisons: A Case-Crossover Study, 2009–2021](deep_reads/2026-10-12-10.1097_ede.0000000000002007.md)  
+  `流行病学` · 相关性 5/10
+- [Smart Meter-derived Air Conditioning Penetration Rate Modifies the Association Between Ambient Temperature and Emergency Department Visits](deep_reads/2026-10-12-10.1097_ede.0000000000002006.md)  
+  `流行病学` · 相关性 5/10
+- [Industrial Air Toxicant Exposure and Individual Mortality: Evidence from the Americans’ Changing Lives Cohort, 1986–2019](deep_reads/2026-10-12-10.1097_ede.0000000000002005.md)  
+  `流行病学` · 相关性 5/10
+- [The Separate and Joint Associations of Own and Spousal Depression with Mortality in Couples](deep_reads/2026-10-12-10.1097_ede.0000000000001993.md)  
+  `流行病学` · 相关性 5/10
 - [Occupational Fatality Data Systems: A Sensitivity Analysis of North Carolina Data Systems for Occupational Fatality from 1992-2017](deep_reads/2026-10-12-10.1097_ede.0000000000002053.md)  
   `流行病学` · 相关性 5/10
 - [Adolescent Interplay of Adversity and Risk: An Ising Network Analysis of the 2023 Youth Risk Behavior Survey](deep_reads/2026-10-12-10.1097_ede.0000000000002045.md)  
@@ -377,6 +407,8 @@
   `因果推断` · 相关性 5/10
 - [Do Asset Prices Help Predict Inflation? Evidence from Individual Stock Prices](deep_reads/2026-10-12-10.1080_07350015.2026.2654899.md)  
   `经济理论 / 应用` · 相关性 5/10
+- [Stratification and Accumulation?: Explaining Changing Mortality Inequities Between Business Owners and Non-owners in the United States (1984–2022)](deep_reads/2026-10-12-10.1097_ede.0000000000002013.md)  
+  `流行病学` · 相关性 4/10
 - [Impact of the first nirsevimab immunization campaign on infant RSV-related emergency department visits and hospitalizations in Québec, Canada](deep_reads/2026-10-12-10.1097_ede.0000000000002050.md)  
   `流行病学` · 相关性 4/10
 - [Reproductive Health in an Era of Cascading Inequity](deep_reads/2026-10-12-10.1097_ede.0000000000002028.md)  
