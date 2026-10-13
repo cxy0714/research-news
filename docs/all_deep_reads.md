@@ -12297,6 +12297,12 @@
 
 #### Science Advances Vol 12 Issue 41
 
+- [Predicting regional gray swans via translocation: AI weather models and Dubai’s unprecedented 2024 rainfall](deep_reads/2026-10-13-10.1126_sciadv.ady9406.md)  
+  6/10 [journals]
+- [Escalating soil CO <sub>2</sub> degassing correlates with ground uplift and seismicity during the ongoing unrest of Campi Flegrei (2005–2025)](deep_reads/2026-10-13-10.1126_sciadv.aei8075.md)  
+  3/10 [journals]
+- [Surficial carbonates in mantle plume sources revealed by magnesium isotopes](deep_reads/2026-10-13-10.1126_sciadv.aee9247.md)  
+  3/10 [journals]
 - [Hydrogen isotopes reveal water leakage from the core](deep_reads/2026-10-13-10.1126_sciadv.aei4756.md)  
   3/10 [journals]
 
@@ -15695,12 +15701,18 @@
   5/10 [journals]
 - [Specific expertise from diffuse feedback: A feedforward-gated mechanism](deep_reads/2026-10-13-10.1126_sciadv.aeh5972.md)  
   5/10 [journals]
+- [Clonal lineage tracing and parallel multiomics profiling reveal transcriptional heterogeneity induced by ARID1A deficiency](deep_reads/2026-10-13-10.1126_sciadv.aed7880.md)  
+  4/10 [journals]
 - [Epigenetic insights into extreme longevity in the world’s oldest terrestrial animal, Jonathan](deep_reads/2026-10-13-10.1126_sciadv.adw8887.md)  
   4/10 [journals]
 - [On-fault and remote observations of exceptionally long, supershear rupture in the 2025 <i>M</i> 7.7 Mandalay earthquake](deep_reads/2026-10-13-10.1126_sciadv.aee5191.md)  
   4/10 [journals]
 - [Wildfires diminish vegetation control on surface runoff](deep_reads/2026-10-13-10.1126_sciadv.aei3713.md)  
   4/10 [journals]
+- [Rise and spread of lead-silver metallurgy deciphered from peatland archives](deep_reads/2026-10-13-10.1126_sciadv.aec1413.md)  
+  3/10 [journals]
+- [3D DNA origami-enabled molecularly addressable optical nanocircuit](deep_reads/2026-10-13-10.1126_sciadv.aeb2001.md)  
+  3/10 [journals]
 - [Real-time single-molecule imaging in zebrafish embryos uncovers noncanonical translation](deep_reads/2026-10-13-10.1126_sciadv.aeb6883.md)  
   3/10 [journals]
 - [Mitigating lateral sensing blind spots: A dual-segment bronchoscopic robot with a bioinspired skin](deep_reads/2026-10-13-10.1126_sciadv.aeh9503.md)  
@@ -15715,6 +15727,8 @@
   3/10 [journals]
 - [Dynamic self-polarization of the nuclear spins in a GaAs quantum well](deep_reads/2026-10-13-10.1126_sciadv.aeh7568.md)  
   3/10 [journals]
+- [MIMAS: An open-source microlens-array miniature microscope for accessible large-field cortical imaging in freely behaving mice](deep_reads/2026-10-13-10.1126_sciadv.aei8743.md)  
+  2/10 [journals]
 - [Human trilayer engineered blood vessel reveals influence of fibroblasts on disease progression in model of Hutchinson-Gilford progeria](deep_reads/2026-10-13-10.1126_sciadv.aeh3785.md)  
   2/10 [journals]
 - [Minimal-actuation feather star–inspired soft swimmers for multimodal 3D maneuverability](deep_reads/2026-10-13-10.1126_sciadv.aeg9211.md)  
@@ -15743,6 +15757,10 @@
   2/10 [journals]
 - [SMCHD1 is a target for gene activation therapy to treat Prader-Willi syndrome](deep_reads/2026-10-13-10.1126_sciadv.aej5702.md)  
   2/10 [journals]
+- [Endogenous retrovirus control of calbindin is essential for human early embryogenesis](deep_reads/2026-10-13-10.1126_sciadv.aee4523.md)  
+  1/10 [journals]
+- [Multidegree fluorescence–optical rotatory dispersion (F-ORD) from submonolayer interfacial chiral films](deep_reads/2026-10-13-10.1126_sciadv.aed0661.md)  
+  1/10 [journals]
 - [Sensory receptor expansion and neural accommodation in butterfly color vision](deep_reads/2026-10-13-10.1126_sciadv.aei7570.md)  
   1/10 [journals]
 - [A neuronal GPCR modifies neuropeptide signaling to suppress proteostasis in distal tissues](deep_reads/2026-10-13-10.1126_sciadv.ady6048.md)  

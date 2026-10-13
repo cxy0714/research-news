@@ -17,7 +17,7 @@
 
 [→ 查看完整报告](daily/2026-10-13.md)
 
-### 精读论文（215 篇）
+### 精读论文（224 篇）
 
 - [On computing and the complexity of computing higher-order U-statistics, exactly](deep_reads/2026-10-13-10.1007_s11222-026-10974-x.md)  
   `其他` · 相关性 10/10
@@ -41,6 +41,8 @@
   `统计计算 / 算法` · 相关性 7/10
 - [Nonparametric Feature Screening for Non-Euclidean Data](deep_reads/2026-10-13-10.1080_00401706.2026.2735885.md)  
   `非参数 / 半参数` · 相关性 7/10
+- [Predicting regional gray swans via translocation: AI weather models and Dubai’s unprecedented 2024 rainfall](deep_reads/2026-10-13-10.1126_sciadv.ady9406.md)  
+  `天体统计` · 相关性 6/10
 - [Record-setting heavy precipitation occurrence in 2024](deep_reads/2026-10-13-10.1126_sciadv.aeb1692.md)  
   `其他` · 相关性 6/10
 - [From plankton to fish: 21st-century redistribution of marine biodiversity and the changing role of rare species](deep_reads/2026-10-13-10.1126_sciadv.aee7253.md)  
@@ -165,6 +167,8 @@
   `数理统计 / 假设检验` · 相关性 5/10
 - [A General Framework For Modeling Gaussian Process with Qualitative and Quantitative Factors](deep_reads/2026-10-13-10.1080_00401706.2026.2635359.md)  
   `其他` · 相关性 5/10
+- [Clonal lineage tracing and parallel multiomics profiling reveal transcriptional heterogeneity induced by ARID1A deficiency](deep_reads/2026-10-13-10.1126_sciadv.aed7880.md)  
+  `其他` · 相关性 4/10
 - [Epigenetic insights into extreme longevity in the world’s oldest terrestrial animal, Jonathan](deep_reads/2026-10-13-10.1126_sciadv.adw8887.md)  
   `其他` · 相关性 4/10
 - [On-fault and remote observations of exceptionally long, supershear rupture in the 2025 <i>M</i> 7.7 Mandalay earthquake](deep_reads/2026-10-13-10.1126_sciadv.aee5191.md)  
@@ -251,6 +255,14 @@
   `其他` · 相关性 4/10
 - [Is Grouping Always Detrimental to Monitoring Multinomial Data?](deep_reads/2026-10-13-10.1080_00401706.2026.2635355.md)  
   `数理统计 / 假设检验` · 相关性 4/10
+- [Escalating soil CO <sub>2</sub> degassing correlates with ground uplift and seismicity during the ongoing unrest of Campi Flegrei (2005–2025)](deep_reads/2026-10-13-10.1126_sciadv.aei8075.md)  
+  `天体统计` · 相关性 3/10
+- [Rise and spread of lead-silver metallurgy deciphered from peatland archives](deep_reads/2026-10-13-10.1126_sciadv.aec1413.md)  
+  `其他` · 相关性 3/10
+- [3D DNA origami-enabled molecularly addressable optical nanocircuit](deep_reads/2026-10-13-10.1126_sciadv.aeb2001.md)  
+  `其他` · 相关性 3/10
+- [Surficial carbonates in mantle plume sources revealed by magnesium isotopes](deep_reads/2026-10-13-10.1126_sciadv.aee9247.md)  
+  `天体统计` · 相关性 3/10
 - [Real-time single-molecule imaging in zebrafish embryos uncovers noncanonical translation](deep_reads/2026-10-13-10.1126_sciadv.aeb6883.md)  
   `其他` · 相关性 3/10
 - [Mitigating lateral sensing blind spots: A dual-segment bronchoscopic robot with a bioinspired skin](deep_reads/2026-10-13-10.1126_sciadv.aeh9503.md)  
@@ -345,6 +357,8 @@
   `其他` · 相关性 3/10
 - [Registration-Free Monitoring of Unstructured Point Cloud Data via Intrinsic Geometrical Properties](deep_reads/2026-10-13-10.1080_00401706.2026.2702438.md)  
   `统计计算 / 算法` · 相关性 3/10
+- [MIMAS: An open-source microlens-array miniature microscope for accessible large-field cortical imaging in freely behaving mice](deep_reads/2026-10-13-10.1126_sciadv.aei8743.md)  
+  `其他` · 相关性 2/10
 - [Human trilayer engineered blood vessel reveals influence of fibroblasts on disease progression in model of Hutchinson-Gilford progeria](deep_reads/2026-10-13-10.1126_sciadv.aeh3785.md)  
   `其他` · 相关性 2/10
 - [Minimal-actuation feather star–inspired soft swimmers for multimodal 3D maneuverability](deep_reads/2026-10-13-10.1126_sciadv.aeg9211.md)  
@@ -417,6 +431,10 @@
   `其他` · 相关性 2/10
 - [Structural basis for regulating lipopolysaccharide transmembrane transport](deep_reads/2026-10-13-10.1038_s41586-026-11129-8.md)  
   `其他` · 相关性 2/10
+- [Endogenous retrovirus control of calbindin is essential for human early embryogenesis](deep_reads/2026-10-13-10.1126_sciadv.aee4523.md)  
+  `其他` · 相关性 1/10
+- [Multidegree fluorescence–optical rotatory dispersion (F-ORD) from submonolayer interfacial chiral films](deep_reads/2026-10-13-10.1126_sciadv.aed0661.md)  
+  `其他` · 相关性 1/10
 - [Sensory receptor expansion and neural accommodation in butterfly color vision](deep_reads/2026-10-13-10.1126_sciadv.aei7570.md)  
   `其他` · 相关性 1/10
 - [A neuronal GPCR modifies neuropeptide signaling to suppress proteostasis in distal tissues](deep_reads/2026-10-13-10.1126_sciadv.ady6048.md)  
