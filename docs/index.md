@@ -17,7 +17,7 @@
 
 [→ 查看完整报告](daily/2026-10-13.md)
 
-### 精读论文（224 篇）
+### 精读论文（231 篇）
 
 - [On computing and the complexity of computing higher-order U-statistics, exactly](deep_reads/2026-10-13-10.1007_s11222-026-10974-x.md)  
   `其他` · 相关性 10/10
@@ -41,6 +41,8 @@
   `统计计算 / 算法` · 相关性 7/10
 - [Nonparametric Feature Screening for Non-Euclidean Data](deep_reads/2026-10-13-10.1080_00401706.2026.2735885.md)  
   `非参数 / 半参数` · 相关性 7/10
+- [Block-fitness modeling of the global air mobility network](deep_reads/2026-10-13-10.1038_s41467-026-78115-6.md)  
+  `其他` · 相关性 6/10
 - [Predicting regional gray swans via translocation: AI weather models and Dubai’s unprecedented 2024 rainfall](deep_reads/2026-10-13-10.1126_sciadv.ady9406.md)  
   `天体统计` · 相关性 6/10
 - [Record-setting heavy precipitation occurrence in 2024](deep_reads/2026-10-13-10.1126_sciadv.aeb1692.md)  
@@ -105,6 +107,8 @@
   `统计计算 / 算法` · 相关性 6/10
 - [Calibrated Bayesian Nonparametric Tolerance Intervals](deep_reads/2026-10-13-10.1080_00401706.2026.2699103.md)  
   `非参数 / 半参数` · 相关性 6/10
+- [Time-lapse RESOLFT nanoscopy empowered by deep learning](deep_reads/2026-10-13-10.1038_s41467-026-78580-z.md)  
+  `其他` · 相关性 5/10
 - [Machine learning–assisted directed evolution of plant Rubisco](deep_reads/2026-10-13-10.1126_sciadv.aeh3246.md)  
   `其他` · 相关性 5/10
 - [AIMNet2-rxn: A machine-learned potential for generalized reaction modeling on a millions-of-pathways scale](deep_reads/2026-10-13-10.1126_sciadv.aea1557.md)  
@@ -167,6 +171,10 @@
   `数理统计 / 假设检验` · 相关性 5/10
 - [A General Framework For Modeling Gaussian Process with Qualitative and Quantitative Factors](deep_reads/2026-10-13-10.1080_00401706.2026.2635359.md)  
   `其他` · 相关性 5/10
+- [Interpretable AI-guided discovery of degradable ionizable lipids with enhanced hepatic mRNA delivery in vivo](deep_reads/2026-10-13-10.1038_s41467-026-78635-1.md)  
+  `其他` · 相关性 4/10
+- [Sea-level contribution from Thwaites Glacier doubles in an observation-constrained ice-sheet model](deep_reads/2026-10-13-10.1038_s41467-026-77976-1.md)  
+  `其他` · 相关性 4/10
 - [Clonal lineage tracing and parallel multiomics profiling reveal transcriptional heterogeneity induced by ARID1A deficiency](deep_reads/2026-10-13-10.1126_sciadv.aed7880.md)  
   `其他` · 相关性 4/10
 - [Epigenetic insights into extreme longevity in the world’s oldest terrestrial animal, Jonathan](deep_reads/2026-10-13-10.1126_sciadv.adw8887.md)  
@@ -255,6 +263,12 @@
   `其他` · 相关性 4/10
 - [Is Grouping Always Detrimental to Monitoring Multinomial Data?](deep_reads/2026-10-13-10.1080_00401706.2026.2635355.md)  
   `数理统计 / 假设检验` · 相关性 4/10
+- [Multiplexed single-molecule analysis of barcoded protein variants](deep_reads/2026-10-13-10.1038_s41467-026-78581-y.md)  
+  `其他` · 相关性 3/10
+- [Sleep forms flexible context representations in toddlers](deep_reads/2026-10-13-10.1038_s41467-026-78303-4.md)  
+  `其他` · 相关性 3/10
+- [A supergene and genomic mosaicism are associated with phenotypic evolution in Galápagos tree finches](deep_reads/2026-10-13-10.1038_s41467-026-78507-8.md)  
+  `其他` · 相关性 3/10
 - [Escalating soil CO <sub>2</sub> degassing correlates with ground uplift and seismicity during the ongoing unrest of Campi Flegrei (2005–2025)](deep_reads/2026-10-13-10.1126_sciadv.aei8075.md)  
   `天体统计` · 相关性 3/10
 - [Rise and spread of lead-silver metallurgy deciphered from peatland archives](deep_reads/2026-10-13-10.1126_sciadv.aec1413.md)  
