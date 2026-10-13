@@ -4380,6 +4380,11 @@
 
 ### 期刊
 
+#### IEEE Transactions on Information Theory Vol 72 Issue 9
+
+- [Provable Non-Convex Euclidean Distance Matrix Completion: Geometry, Reconstruction, and Robustness](deep_reads/2026-10-13-10.1109_tit.2026.3715063.md)  
+  6/10 [journals]
+
 #### IEEE Transactions on Information Theory Vol 72 Issue 10
 
 - [Sparse PCA: Phase Transitions in the Critical Regime](deep_reads/2026-10-13-10.1109_tit.2026.3722614.md)  
@@ -5959,6 +5964,11 @@
 
 - [Fast robust additive models using gamma-divergence](deep_reads/2026-10-13-10.1007_s11222-026-10960-3.md)  
   5/10 [journals]
+
+#### IEEE Transactions on Information Theory Vol 72 Issue 9
+
+- [Nuisance Parameters and Elliptically Symmetric Distributions: A Geometric Approach to Parametric and Semiparametric Efficiency](deep_reads/2026-10-13-10.1109_tit.2026.3706237.md)  
+  7/10 [journals]
 
 #### IEEE Transactions on Information Theory Vol 72 Issue 10
 
@@ -10932,6 +10942,13 @@
 
 - [Multi-resolution enhancement for full-spectrum neural representations](deep_reads/2026-10-13-10.1038_s42256-026-01287-9.md)  
   5/10 [journals]
+
+#### IEEE Transactions on Information Theory Vol 72 Issue 9
+
+- [Self-Regulating Random Walks for Resilient Decentralized Learning on Graphs](deep_reads/2026-10-13-10.1109_tit.2026.3706658.md)  
+  3/10 [journals]
+- [Efficient <i>ε</i> -Approximate Minimum-Entropy Couplings](deep_reads/2026-10-13-10.1109_tit.2026.3710290.md)  
+  2/10 [journals]
 
 #### IEEE Transactions on Information Theory Vol 72 Issue 10
 
@@ -16296,6 +16313,19 @@
   0/10 [journals]
 - [Imaging of nanoscale polar textures in quantum paraelectric SrTiO3](deep_reads/2026-08-05-10.1038_s41586-026-10823-x.md)  
   0/10 [journals]
+
+#### IEEE Transactions on Information Theory Vol 72 Issue 9
+
+- [Phase Retrieval via Overparametrized Nonconvex Optimization: Nonsmooth Amplitude Loss Landscapes](deep_reads/2026-10-13-10.1109_tit.2026.3709065.md)  
+  7/10 [journals]
+- [Optimal Tree-Based Mechanisms for Differentially Private Approximate CDFs](deep_reads/2026-10-13-10.1109_tit.2026.3704677.md)  
+  6/10 [journals]
+- [Linear Time Encodable Binary Code Achieving GV Bound With Linear Time Encodable Dual Achieving GV Bound](deep_reads/2026-10-13-10.1109_tit.2026.3711421.md)  
+  3/10 [journals]
+- [Communication Complexity of Distributed Unitary Synthesis](deep_reads/2026-10-13-10.1109_tit.2026.3706532.md)  
+  2/10 [journals]
+- [Uniquely-Decodable Coding for Zero-Error Network Function Computation](deep_reads/2026-10-13-10.1109_tit.2026.3689404.md)  
+  2/10 [journals]
 
 #### IEEE Transactions on Information Theory Vol 72 Issue 10
 

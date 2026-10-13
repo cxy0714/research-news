@@ -17,7 +17,7 @@
 
 [→ 查看完整报告](daily/2026-10-13.md)
 
-### 精读论文（257 篇）
+### 精读论文（266 篇）
 
 - [On computing and the complexity of computing higher-order U-statistics, exactly](deep_reads/2026-10-13-10.1007_s11222-026-10974-x.md)  
   `其他` · 相关性 10/10
@@ -27,6 +27,10 @@
   `高维统计 / 随机矩阵` · 相关性 8/10
 - [Simple Standard Errors for Complicated (Quasi-)Experimental Designs](deep_reads/2026-10-13-2610.12674.md)  
   `因果推断` · 相关性 8/10
+- [Phase Retrieval via Overparametrized Nonconvex Optimization: Nonsmooth Amplitude Loss Landscapes](deep_reads/2026-10-13-10.1109_tit.2026.3709065.md)  
+  `其他` · 相关性 7/10
+- [Nuisance Parameters and Elliptically Symmetric Distributions: A Geometric Approach to Parametric and Semiparametric Efficiency](deep_reads/2026-10-13-10.1109_tit.2026.3706237.md)  
+  `非参数 / 半参数` · 相关性 7/10
 - [Davis--Kahan Theorem in the Two-to-Infinity Norm and Its Application to Perfect Clustering](deep_reads/2026-10-13-10.1109_tit.2026.3720229.md)  
   `高维统计 / 随机矩阵` · 相关性 7/10
 - [Multilook Coherent Imaging: Theoretical Guarantees and Algorithms](deep_reads/2026-10-13-10.1109_tit.2026.3725068.md)  
@@ -59,6 +63,10 @@
   `统计计算 / 算法` · 相关性 7/10
 - [Nonparametric Feature Screening for Non-Euclidean Data](deep_reads/2026-10-13-10.1080_00401706.2026.2735885.md)  
   `非参数 / 半参数` · 相关性 7/10
+- [Optimal Tree-Based Mechanisms for Differentially Private Approximate CDFs](deep_reads/2026-10-13-10.1109_tit.2026.3704677.md)  
+  `其他` · 相关性 6/10
+- [Provable Non-Convex Euclidean Distance Matrix Completion: Geometry, Reconstruction, and Robustness](deep_reads/2026-10-13-10.1109_tit.2026.3715063.md)  
+  `高维统计 / 随机矩阵` · 相关性 6/10
 - [Quickest Change Detection With Cost-Constrained Experiment Design](deep_reads/2026-10-13-10.1109_tit.2026.3723839.md)  
   `数理统计 / 假设检验` · 相关性 6/10
 - [Block-fitness modeling of the global air mobility network](deep_reads/2026-10-13-10.1038_s41467-026-78115-6.md)  
@@ -289,6 +297,10 @@
   `其他` · 相关性 4/10
 - [Is Grouping Always Detrimental to Monitoring Multinomial Data?](deep_reads/2026-10-13-10.1080_00401706.2026.2635355.md)  
   `数理统计 / 假设检验` · 相关性 4/10
+- [Self-Regulating Random Walks for Resilient Decentralized Learning on Graphs](deep_reads/2026-10-13-10.1109_tit.2026.3706658.md)  
+  `统计计算 / 算法` · 相关性 3/10
+- [Linear Time Encodable Binary Code Achieving GV Bound With Linear Time Encodable Dual Achieving GV Bound](deep_reads/2026-10-13-10.1109_tit.2026.3711421.md)  
+  `其他` · 相关性 3/10
 - [Learning <i>k</i> -Body Hamiltonians via Compressed Sensing](deep_reads/2026-10-13-10.1109_tit.2026.3720996.md)  
   `其他` · 相关性 3/10
 - [Noisy Computing of the Threshold Function](deep_reads/2026-10-13-10.1109_tit.2026.3721399.md)  
@@ -403,6 +415,12 @@
   `其他` · 相关性 3/10
 - [Registration-Free Monitoring of Unstructured Point Cloud Data via Intrinsic Geometrical Properties](deep_reads/2026-10-13-10.1080_00401706.2026.2702438.md)  
   `统计计算 / 算法` · 相关性 3/10
+- [Efficient <i>ε</i> -Approximate Minimum-Entropy Couplings](deep_reads/2026-10-13-10.1109_tit.2026.3710290.md)  
+  `统计计算 / 算法` · 相关性 2/10
+- [Communication Complexity of Distributed Unitary Synthesis](deep_reads/2026-10-13-10.1109_tit.2026.3706532.md)  
+  `其他` · 相关性 2/10
+- [Uniquely-Decodable Coding for Zero-Error Network Function Computation](deep_reads/2026-10-13-10.1109_tit.2026.3689404.md)  
+  `其他` · 相关性 2/10
 - [Local Test for Unitarily Invariant Properties of Bipartite Quantum States](deep_reads/2026-10-13-10.1109_tit.2026.3697790.md)  
   `其他` · 相关性 2/10
 - [Robust Joint Message and State Communication Under Arbitrarily Varying Jamming](deep_reads/2026-10-13-10.1109_tit.2026.3720557.md)  
