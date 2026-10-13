@@ -15726,6 +15726,14 @@
   2/10 [journals]
 - [Sa2VA: Marrying SAM2 With MLLM for Dense Grounded Understanding of Images and Videos](deep_reads/2026-10-14-10.1109_tpami.2026.3720379.md)  
   2/10 [journals]
+- [Autoregressive Image to 3D Generation via Next Symmetric View Prediction](deep_reads/2026-10-14-10.1109_tpami.2026.3726806.md)  
+  1/10 [journals]
+- [LLM Post-Training: A Deep Dive Into Reasoning Large Language Models](deep_reads/2026-10-14-10.1109_tpami.2026.3720414.md)  
+  1/10 [journals]
+- [Integrating Agglomerative Perception With One-Step Action Generation for Robotic Manipulation](deep_reads/2026-10-14-10.1109_tpami.2026.3713027.md)  
+  1/10 [journals]
+- [Feature-Alteration Robustness for Out-of-Distribution Detection](deep_reads/2026-10-14-10.1109_tpami.2026.3723999.md)  
+  1/10 [journals]
 - [Grad-ECLIP: Gradient-Based Visual and Textual Explanations for CLIP](deep_reads/2026-10-14-10.1109_tpami.2026.3714444.md)  
   1/10 [journals]
 - [MambaX: Image Super-Resolution With State Predictive Control](deep_reads/2026-10-14-10.1109_tpami.2026.3721958.md)  
