@@ -10896,6 +10896,11 @@
 - [Tangermeme: a toolkit for understanding cis-regulatory logic using deep learning models](deep_reads/2026-10-13-10.1038_s41592-026-03254-z.md)  
   3/10 [journals]
 
+#### Nature Machine Intelligence Vol 8 Issue 9
+
+- [Multi-resolution enhancement for full-spectrum neural representations](deep_reads/2026-10-13-10.1038_s42256-026-01287-9.md)  
+  5/10 [journals]
+
 #### Computational Statistics & Data Analysis Vol 225
 
 - [A scalable variational bayes approach for fitting non-conjugate spatial generalized linear mixed models via basis expansions](deep_reads/2026-10-13-10.1016_j.csda.2026.108453.md)  
@@ -12303,6 +12308,11 @@
 #### Proceedings of the National Academy of Sciences Vol 123 Issue 42
 
 - [Improved assessment of Alaskan Arctic coastal wave exposure accounting for landfast ice](deep_reads/2026-10-13-10.1073_pnas.2612829123.md)  
+  3/10 [journals]
+
+#### Nature Machine Intelligence
+
+- [Towards foundation-style models for energy-frontier heterogeneous neutrino detectors via self-supervised pretraining](deep_reads/2026-10-13-10.1038_s42256-026-01309-6.md)  
   3/10 [journals]
 
 #### Monthly Notices of the Royal Astronomical Society Vol 552 Issue 3
@@ -15859,6 +15869,47 @@
   0/10 [journals]
 - [Design and optimization of a kinase-controlled allosteric switch](deep_reads/2026-08-05-10.1038_s41592-026-03163-1.md)  
   0/10 [journals]
+
+#### Nature Machine Intelligence Vol 8 Issue 9
+
+- [Large language models as uncertainty-calibrated optimizers for experimental discovery](deep_reads/2026-10-13-10.1038_s42256-026-01283-z.md)  
+  6/10 [journals]
+- [Causal evidence that language models use confidence to drive behaviour](deep_reads/2026-10-13-10.1038_s42256-026-01293-x.md)  
+  5/10 [journals]
+- [Implicit-bias-like patterns in reasoning models](deep_reads/2026-10-13-10.1038_s42256-026-01300-1.md)  
+  4/10 [journals]
+- [A knowledge-driven framework for predicting single-cell responses for unprofiled drugs](deep_reads/2026-10-13-10.1038_s42256-026-01286-w.md)  
+  4/10 [journals]
+- [A collaborative agent with two lightweight synergistic models for autonomous crystal materials research](deep_reads/2026-10-13-10.1038_s42256-026-01298-6.md)  
+  3/10 [journals]
+- [NucleicBERT interprets RNA sequence space through self-supervised language modelling](deep_reads/2026-10-13-10.1038_s42256-026-01295-9.md)  
+  3/10 [journals]
+- [Life-inspired interoceptive artificial intelligence for autonomous and adaptive agents](deep_reads/2026-10-13-10.1038_s42256-026-01296-8.md)  
+  3/10 [journals]
+
+#### Nature Machine Intelligence Vol 8 Issue 8
+
+- [Classifying multipartite continuous-variable entanglement structures through data-augmented neural networks](deep_reads/2026-10-13-10.1038_s42256-026-01284-y.md)  
+  5/10 [journals]
+- [Machine learning of artistic fingerprints in jazz](deep_reads/2026-10-13-10.1038_s42256-026-01279-9.md)  
+  4/10 [journals]
+- [Beyond representational alignment with brain-guided language models for robust reasoning](deep_reads/2026-10-13-10.1038_s42256-026-01278-w.md)  
+  4/10 [journals]
+- [A neural network model of free recall learns multiple memory strategies](deep_reads/2026-10-13-10.1038_s42256-026-01274-0.md)  
+  4/10 [journals]
+- [Towards general auditory intelligence for machine listening and speaking](deep_reads/2026-10-13-10.1038_s42256-026-01281-1.md)  
+  3/10 [journals]
+- [Impact-resistant, autonomous robots inspired by tensegrity architecture](deep_reads/2026-10-13-10.1038_s42256-026-01280-2.md)  
+  2/10 [journals]
+
+#### Nature Machine Intelligence
+
+- [Regional climate risk assessment from climate models using probabilistic machine learning](deep_reads/2026-10-13-10.1038_s42256-026-01308-7.md)  
+  6/10 [journals]
+- [Minute-scale training for microrobot navigation](deep_reads/2026-10-13-10.1038_s42256-026-01305-w.md)  
+  2/10 [journals]
+- [Guiding large language models to predict edit sequences for molecular synthesizability optimization](deep_reads/2026-10-13-10.1038_s42256-026-01304-x.md)  
+  2/10 [journals]
 
 #### Nature Vol 658 Issue 8135
 

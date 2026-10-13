@@ -566,6 +566,8 @@
 
 ### NMI
 
+- [Vol 8 Issue 9 · 2026-10-13](journals/2026-10-13-nmi-v8-i9.md)
+- [Vol 8 Issue 8 · 2026-10-13](journals/2026-10-13-nmi-v8-i8.md)
 - [Vol 8 Issue 7 · 2026-07-31](journals/2026-07-31-nmi-v8-i7.md)
 - [Vol 8 Issue 6 · 2026-07-31](journals/2026-07-31-nmi-v8-i6.md)
 - [Vol 8 Issue 5 · 2026-08-01](journals/2026-08-01-nmi-v8-i5.md)
@@ -581,6 +583,7 @@
 - [Vol 7 Issue 7 · 2026-08-01](journals/2026-08-01-nmi-v7-i7.md)
 - [Vol 7 Issue 6 · 2026-08-01](journals/2026-08-01-nmi-v7-i6.md)
 - [Vol 7 Issue 5 · 2026-08-01](journals/2026-08-01-nmi-v7-i5.md)
+- [2026-10-13](journals/2026-10-13-nmi.md)
 
 ### Sci. Adv.
 

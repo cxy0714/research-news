@@ -17,7 +17,7 @@
 
 [→ 查看完整报告](daily/2026-10-13.md)
 
-### 精读论文（157 篇）
+### 精读论文（175 篇）
 
 - [On computing and the complexity of computing higher-order U-statistics, exactly](deep_reads/2026-10-13-10.1007_s11222-026-10974-x.md)  
   `其他` · 相关性 10/10
@@ -39,6 +39,10 @@
   `统计计算 / 算法` · 相关性 7/10
 - [Nonparametric Feature Screening for Non-Euclidean Data](deep_reads/2026-10-13-10.1080_00401706.2026.2735885.md)  
   `非参数 / 半参数` · 相关性 7/10
+- [Regional climate risk assessment from climate models using probabilistic machine learning](deep_reads/2026-10-13-10.1038_s42256-026-01308-7.md)  
+  `其他` · 相关性 6/10
+- [Large language models as uncertainty-calibrated optimizers for experimental discovery](deep_reads/2026-10-13-10.1038_s42256-026-01283-z.md)  
+  `其他` · 相关性 6/10
 - [Kernel-based External Validity of Experimental Studies](deep_reads/2026-10-13-2610.13625.md)  
   `因果推断` · 相关性 6/10
 - [Quaternion Gaussian Probes for Tensor Frobenius-Norm Estimation](deep_reads/2026-10-13-2610.12534.md)  
@@ -87,6 +91,12 @@
   `统计计算 / 算法` · 相关性 6/10
 - [Calibrated Bayesian Nonparametric Tolerance Intervals](deep_reads/2026-10-13-10.1080_00401706.2026.2699103.md)  
   `非参数 / 半参数` · 相关性 6/10
+- [Classifying multipartite continuous-variable entanglement structures through data-augmented neural networks](deep_reads/2026-10-13-10.1038_s42256-026-01284-y.md)  
+  `其他` · 相关性 5/10
+- [Causal evidence that language models use confidence to drive behaviour](deep_reads/2026-10-13-10.1038_s42256-026-01293-x.md)  
+  `其他` · 相关性 5/10
+- [Multi-resolution enhancement for full-spectrum neural representations](deep_reads/2026-10-13-10.1038_s42256-026-01287-9.md)  
+  `统计计算 / 算法` · 相关性 5/10
 - [Lessons learned from a Kaggle challenge for particle picking in cryo-electron tomography](deep_reads/2026-10-13-10.1038_s41592-026-03198-4.md)  
   `其他` · 相关性 5/10
 - [GHT-SELEX demonstrates unexpectedly high intrinsic sequence specificity and complex DNA binding of many human transcription factors](deep_reads/2026-10-13-10.1038_s41592-026-03177-9.md)  
@@ -133,6 +143,16 @@
   `数理统计 / 假设检验` · 相关性 5/10
 - [A General Framework For Modeling Gaussian Process with Qualitative and Quantitative Factors](deep_reads/2026-10-13-10.1080_00401706.2026.2635359.md)  
   `其他` · 相关性 5/10
+- [Machine learning of artistic fingerprints in jazz](deep_reads/2026-10-13-10.1038_s42256-026-01279-9.md)  
+  `其他` · 相关性 4/10
+- [Beyond representational alignment with brain-guided language models for robust reasoning](deep_reads/2026-10-13-10.1038_s42256-026-01278-w.md)  
+  `其他` · 相关性 4/10
+- [A neural network model of free recall learns multiple memory strategies](deep_reads/2026-10-13-10.1038_s42256-026-01274-0.md)  
+  `其他` · 相关性 4/10
+- [Implicit-bias-like patterns in reasoning models](deep_reads/2026-10-13-10.1038_s42256-026-01300-1.md)  
+  `其他` · 相关性 4/10
+- [A knowledge-driven framework for predicting single-cell responses for unprofiled drugs](deep_reads/2026-10-13-10.1038_s42256-026-01286-w.md)  
+  `其他` · 相关性 4/10
 - [Beyond benchmarking: an expert-guided consensus approach to spatially aware clustering](deep_reads/2026-10-13-10.1038_s41592-026-03194-8.md)  
   `其他` · 相关性 4/10
 - [From pixels to patterns: the AI revolution in stem cell-derived models](deep_reads/2026-10-13-10.1038_s41592-026-03202-x.md)  
@@ -203,6 +223,16 @@
   `其他` · 相关性 4/10
 - [Is Grouping Always Detrimental to Monitoring Multinomial Data?](deep_reads/2026-10-13-10.1080_00401706.2026.2635355.md)  
   `数理统计 / 假设检验` · 相关性 4/10
+- [Towards foundation-style models for energy-frontier heterogeneous neutrino detectors via self-supervised pretraining](deep_reads/2026-10-13-10.1038_s42256-026-01309-6.md)  
+  `天体统计` · 相关性 3/10
+- [Towards general auditory intelligence for machine listening and speaking](deep_reads/2026-10-13-10.1038_s42256-026-01281-1.md)  
+  `其他` · 相关性 3/10
+- [A collaborative agent with two lightweight synergistic models for autonomous crystal materials research](deep_reads/2026-10-13-10.1038_s42256-026-01298-6.md)  
+  `其他` · 相关性 3/10
+- [NucleicBERT interprets RNA sequence space through self-supervised language modelling](deep_reads/2026-10-13-10.1038_s42256-026-01295-9.md)  
+  `其他` · 相关性 3/10
+- [Life-inspired interoceptive artificial intelligence for autonomous and adaptive agents](deep_reads/2026-10-13-10.1038_s42256-026-01296-8.md)  
+  `其他` · 相关性 3/10
 - [Benchmarking biomedical foundation models](deep_reads/2026-10-13-10.1038_s41592-026-03182-y.md)  
   `其他` · 相关性 3/10
 - [Aligning protein-generative models to experimental fitness with ProteinDPO](deep_reads/2026-10-13-10.1038_s41592-026-03137-3.md)  
@@ -271,6 +301,12 @@
   `其他` · 相关性 3/10
 - [Registration-Free Monitoring of Unstructured Point Cloud Data via Intrinsic Geometrical Properties](deep_reads/2026-10-13-10.1080_00401706.2026.2702438.md)  
   `统计计算 / 算法` · 相关性 3/10
+- [Minute-scale training for microrobot navigation](deep_reads/2026-10-13-10.1038_s42256-026-01305-w.md)  
+  `其他` · 相关性 2/10
+- [Guiding large language models to predict edit sequences for molecular synthesizability optimization](deep_reads/2026-10-13-10.1038_s42256-026-01304-x.md)  
+  `其他` · 相关性 2/10
+- [Impact-resistant, autonomous robots inspired by tensegrity architecture](deep_reads/2026-10-13-10.1038_s42256-026-01280-2.md)  
+  `其他` · 相关性 2/10
 - [Spatial isoform sequencing at single-cell resolution reveals cell-type-specific spatial isoform variability in multiple brain cell types](deep_reads/2026-10-13-10.1038_s41592-026-03211-w.md)  
   `其他` · 相关性 2/10
 - [Large-scale single-molecule analysis of tau proteoforms](deep_reads/2026-10-13-10.1038_s41592-026-03188-6.md)  
