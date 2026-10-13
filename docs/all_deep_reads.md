@@ -4385,6 +4385,13 @@
 
 ### 期刊
 
+#### IEEE Transactions on Signal Processing Vol 74
+
+- [Compressive Toeplitz Covariance Estimation From Few-Bit Quantized Measurements With Applications to DOA Estimation](deep_reads/2026-10-14-10.1109_tsp.2026.3727446.md)  
+  6/10 [journals]
+- [On Stochastic Beamforming for Ergodic Sum-Rate Maximization in Cooperative Transmission Systems](deep_reads/2026-06-05-10.1109_tsp.2025.3648327.md)  
+  0/10 [journals]
+
 #### IEEE Transactions on Information Theory Vol 72 Issue 9
 
 - [Provable Non-Convex Euclidean Distance Matrix Completion: Geometry, Reconstruction, and Robustness](deep_reads/2026-10-13-10.1109_tit.2026.3715063.md)  
@@ -5588,11 +5595,6 @@
 
 - [Factor Modeling for High-Dimensional Functional Time Series](deep_reads/2026-06-07-10.1080_07350015.2025.2505493.md)  
   4/10 [journals]
-
-#### IEEE Transactions on Signal Processing Vol 74
-
-- [On Stochastic Beamforming for Ergodic Sum-Rate Maximization in Cooperative Transmission Systems](deep_reads/2026-06-05-10.1109_tsp.2025.3648327.md)  
-  0/10 [journals]
 
 #### IEEE Transactions on Signal Processing
 
@@ -8779,6 +8781,15 @@
 
 ### 期刊
 
+#### IEEE Transactions on Signal Processing Vol 74
+
+- [Cram$\acute{\text{e}}$r-Rao Bounds for Laplacian Matrix Estimation](deep_reads/2026-10-14-10.1109_tsp.2025.3646236.md)  
+  6/10 [journals]
+- [Conditional Score Learning for Quickest Change Detection in Markov Transition Kernels](deep_reads/2026-10-14-10.1109_tsp.2026.3718274.md)  
+  5/10 [journals]
+- [Adaptive Radar for Uncooperative Spectrum Sharing: GLRT Asymptotic Performance](deep_reads/2026-10-14-10.1109_tsp.2026.3732738.md)  
+  3/10 [journals]
+
 #### Technometrics Vol 68 Issue 3
 
 - [Multiple Change Point Detection in Time Series with Nonstationary Dynamics](deep_reads/2026-10-13-10.1080_00401706.2026.2625472.md)  
@@ -10886,6 +10897,27 @@
 
 ### 期刊
 
+#### IEEE Transactions on Signal Processing Vol 74
+
+- [Rank-Revealing Bayesian Block-Term Tensor Completion With Graph Information](deep_reads/2026-06-05-10.1109_tsp.2026.3656119.md)  
+  6/10 [journals]
+- [Semi-Supervised Model-Free Bayesian State Estimation from Compressed Measurements](deep_reads/2026-06-05-10.1109_tsp.2026.3691273.md)  
+  6/10 [journals]
+- [Euclidean Distance Matrix Completion via Asymmetric Projected Gradient Descent](deep_reads/2026-06-05-10.1109_tsp.2025.3650509.md)  
+  6/10 [journals]
+- [External Division of Two Proximity Operators—Part I: Debiased Feature Grouping](deep_reads/2026-06-05-10.1109_tsp.2025.3619197.md)  
+  6/10 [journals]
+- [On the Convergence of Decentralized Stochastic Gradient-Tracking With Finite-Time Consensus](deep_reads/2026-10-14-10.1109_tsp.2026.3667215.md)  
+  5/10 [journals]
+- [Distributed Hybrid Sketching for $\ell_{2}$-Embeddings](deep_reads/2026-06-05-10.1109_tsp.2025.3614162.md)  
+  4/10 [journals]
+- [Learnable Geometric Filter Banks for Multiscale Representation of 3-D Shapes](deep_reads/2026-10-14-10.1109_tsp.2026.3707884.md)  
+  2/10 [journals]
+- [Over-the-Air Computation on Network Edge for Collaborative Estimation](deep_reads/2026-06-05-10.1109_tsp.2026.3678844.md)  
+  2/10 [journals]
+- [Super-Resolution Channel Estimation for RIS-Aided Multi-User mmWave Systems: Dictionary Adaptation and Error Modeling](deep_reads/2026-06-05-10.1109_tsp.2026.3689912.md)  
+  0/10 [journals]
+
 #### IEEE Transactions on Pattern Analysis and Machine Intelligence Vol 48 Issue 11
 
 - [Decentralized Federated Learning by Partial Message Exchange](deep_reads/2026-10-14-10.1109_tpami.2026.3722165.md)  
@@ -11922,23 +11954,6 @@
 
 - [Seasonal Adjustment of Time Series Observed at Mixed Frequencies Using Singular Value Decomposition with Wavelet Thresholding](deep_reads/2026-06-07-10.1080_07350015.2025.2540064.md)  
   4/10 [journals]
-
-#### IEEE Transactions on Signal Processing Vol 74
-
-- [Rank-Revealing Bayesian Block-Term Tensor Completion With Graph Information](deep_reads/2026-06-05-10.1109_tsp.2026.3656119.md)  
-  6/10 [journals]
-- [Semi-Supervised Model-Free Bayesian State Estimation from Compressed Measurements](deep_reads/2026-06-05-10.1109_tsp.2026.3691273.md)  
-  6/10 [journals]
-- [Euclidean Distance Matrix Completion via Asymmetric Projected Gradient Descent](deep_reads/2026-06-05-10.1109_tsp.2025.3650509.md)  
-  6/10 [journals]
-- [External Division of Two Proximity Operators—Part I: Debiased Feature Grouping](deep_reads/2026-06-05-10.1109_tsp.2025.3619197.md)  
-  6/10 [journals]
-- [Distributed Hybrid Sketching for $\ell_{2}$-Embeddings](deep_reads/2026-06-05-10.1109_tsp.2025.3614162.md)  
-  4/10 [journals]
-- [Over-the-Air Computation on Network Edge for Collaborative Estimation](deep_reads/2026-06-05-10.1109_tsp.2026.3678844.md)  
-  2/10 [journals]
-- [Super-Resolution Channel Estimation for RIS-Aided Multi-User mmWave Systems: Dictionary Adaptation and Error Modeling](deep_reads/2026-06-05-10.1109_tsp.2026.3689912.md)  
-  0/10 [journals]
 
 #### IEEE Transactions on Signal Processing
 
@@ -15706,6 +15721,29 @@
 
 ### 期刊
 
+#### IEEE Transactions on Signal Processing Vol 74
+
+- [Multi-Fidelity Bayesian Optimization for Nash Equilibria With Black-Box Utilities](deep_reads/2026-10-14-10.1109_tsp.2026.3670206.md)  
+  4/10 [journals]
+- [Unified Implicit Sparsity-Inducing Regularizers for Robust Sparse Signal Recovery](deep_reads/2026-10-14-10.1109_tsp.2026.3684761.md)  
+  4/10 [journals]
+- [Fast State-Augmented Learning for Wireless Resource Allocation With Dual Variable Regression](deep_reads/2026-10-14-10.1109_tsp.2026.3717245.md)  
+  4/10 [journals]
+- [RMMNet: Deep Memory Aided Extended Object Tracking via High-Order Markovian Modeling and State Decoupling](deep_reads/2026-10-14-10.1109_tsp.2026.3680260.md)  
+  3/10 [journals]
+- [Holographic Intelligence Surface Assisted Integrated Sensing and Communication](deep_reads/2026-10-14-10.1109_tsp.2026.3689152.md)  
+  2/10 [journals]
+- [A Multi-Token Coordinate Descent Method for Semi-Decentralized Vertical Federated Learning](deep_reads/2026-10-14-10.1109_tsp.2026.3652487.md)  
+  2/10 [journals]
+- [Byzantine Attacks in Over-the-Air Cooperative Sensing Networks: Analysis and Defense](deep_reads/2026-06-05-10.1109_tsp.2025.3646135.md)  
+  1/10 [journals]
+- [Camouflage Adversarial Attacks on Multi-Agent Reinforcement Learning Systems](deep_reads/2026-06-05-10.1109_tsp.2025.3644869.md)  
+  1/10 [journals]
+- [Mutual Coupling-Aware Channel Estimation for Holographic MIMO Systems: A Vector Factorization Design Paradigm](deep_reads/2026-07-19-10.1109_tsp.2026.3702335.md)  
+  0/10 [journals]
+- [Temperature Control for Cyber-Physical Thermal Systems over Wireless Networks: A Model-Assisted Deep Reinforcement Learning Approach](deep_reads/2026-06-05-10.1109_tsp.2026.3664289.md)  
+  0/10 [journals]
+
 #### IEEE Transactions on Pattern Analysis and Machine Intelligence Vol 48 Issue 11
 
 - [Sensitivity Analysis in Translation Averaging](deep_reads/2026-10-14-10.1109_tpami.2026.3722795.md)  
@@ -17681,17 +17719,6 @@
 
 - [Bayesian Inference for Regression Copulas](deep_reads/2026-07-19-10.1080_07350015.2020.1721295.md)  
   5/10 [journals]
-
-#### IEEE Transactions on Signal Processing Vol 74
-
-- [Byzantine Attacks in Over-the-Air Cooperative Sensing Networks: Analysis and Defense](deep_reads/2026-06-05-10.1109_tsp.2025.3646135.md)  
-  1/10 [journals]
-- [Camouflage Adversarial Attacks on Multi-Agent Reinforcement Learning Systems](deep_reads/2026-06-05-10.1109_tsp.2025.3644869.md)  
-  1/10 [journals]
-- [Mutual Coupling-Aware Channel Estimation for Holographic MIMO Systems: A Vector Factorization Design Paradigm](deep_reads/2026-07-19-10.1109_tsp.2026.3702335.md)  
-  0/10 [journals]
-- [Temperature Control for Cyber-Physical Thermal Systems over Wireless Networks: A Model-Assisted Deep Reinforcement Learning Approach](deep_reads/2026-06-05-10.1109_tsp.2026.3664289.md)  
-  0/10 [journals]
 
 #### IEEE Transactions on Information Theory Vol 72 Issue 8
 

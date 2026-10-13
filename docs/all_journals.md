@@ -636,6 +636,7 @@
 
 ### TSP
 
+- [Vol 74 · 2026-10-14](journals/2026-10-14-tsp-v74.md)
 - [Vol 74 · 2026-07-19](journals/2026-07-19-tsp-v74.md)
 - [Vol 74 · 2026-06-05](journals/2026-06-05-tsp-v74.md)
 - [2026-07-19](journals/2026-07-19-tsp.md)
