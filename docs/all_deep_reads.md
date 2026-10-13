@@ -1235,6 +1235,11 @@
 
 ### 期刊
 
+#### IEEE Transactions on Pattern Analysis and Machine Intelligence Vol 48 Issue 11
+
+- [BRFedTD: A Novel Framework for Federated Reinforcement Learning With Byzantine-Resilient Policy Evaluation](deep_reads/2026-10-14-10.1109_tpami.2026.3713184.md)  
+  2/10 [journals]
+
 #### Statistics and Computing Vol 36 Issue 5
 
 - [Semiparametric model averaging for high-dimensional quantile regression with nonignorable nonresponse](deep_reads/2026-10-13-10.1007_s11222-026-10953-2.md)  
@@ -10881,6 +10886,15 @@
 
 ### 期刊
 
+#### IEEE Transactions on Pattern Analysis and Machine Intelligence Vol 48 Issue 11
+
+- [Decentralized Federated Learning by Partial Message Exchange](deep_reads/2026-10-14-10.1109_tpami.2026.3722165.md)  
+  3/10 [journals]
+- [Low-Precision Training of Large Language Models: Methods, Challenges, and Opportunities](deep_reads/2026-10-14-10.1109_tpami.2026.3718968.md)  
+  2/10 [journals]
+- [MEGO: Learning Mixture-of-Experts for General-Purpose Binary Optimization](deep_reads/2026-10-14-10.1109_tpami.2026.3711708.md)  
+  2/10 [journals]
+
 #### Technometrics Vol 68 Issue 3
 
 - [Robust Principal Components by Casewise and Cellwise Weighting](deep_reads/2026-10-13-10.1080_00401706.2026.2643216.md)  
@@ -15691,6 +15705,49 @@
   8/10 [daily]
 
 ### 期刊
+
+#### IEEE Transactions on Pattern Analysis and Machine Intelligence Vol 48 Issue 11
+
+- [Sensitivity Analysis in Translation Averaging](deep_reads/2026-10-14-10.1109_tpami.2026.3722795.md)  
+  6/10 [journals]
+- [MIDAS: Mutual Information Disentanglement With Uncertainty-Aware Fusion for Incomplete Multimodal Sentiment Analysis](deep_reads/2026-10-14-10.1109_tpami.2026.3713694.md)  
+  4/10 [journals]
+- [Adapt in the Wild: Test-Time Entropy Minimization with Sharpness and Feature Regularization](deep_reads/2026-10-14-10.1109_tpami.2026.3721895.md)  
+  3/10 [journals]
+- [How Powerful are Hypergraph Neural Networks?](deep_reads/2026-10-14-10.1109_tpami.2026.3724944.md)  
+  3/10 [journals]
+- [Exposition on Over-Squashing Problem of GNNs: Current Methods, Benchmarks and Challenges](deep_reads/2026-10-14-10.1109_tpami.2026.3725957.md)  
+  3/10 [journals]
+- [The Hitchhiker’s Guide to Autonomous Research: A Survey of Scientific Agents](deep_reads/2026-10-14-10.1109_tpami.2026.3721500.md)  
+  2/10 [journals]
+- [Robust Audio-Visual Question Answering With Missing Modality in Training and Testing](deep_reads/2026-10-14-10.1109_tpami.2026.3723653.md)  
+  2/10 [journals]
+- [Text2Loc++: Generalizing 3D Point Cloud Localization From Natural Language](deep_reads/2026-10-14-10.1109_tpami.2026.3723656.md)  
+  2/10 [journals]
+- [Sa2VA: Marrying SAM2 With MLLM for Dense Grounded Understanding of Images and Videos](deep_reads/2026-10-14-10.1109_tpami.2026.3720379.md)  
+  2/10 [journals]
+- [Grad-ECLIP: Gradient-Based Visual and Textual Explanations for CLIP](deep_reads/2026-10-14-10.1109_tpami.2026.3714444.md)  
+  1/10 [journals]
+- [MambaX: Image Super-Resolution With State Predictive Control](deep_reads/2026-10-14-10.1109_tpami.2026.3721958.md)  
+  1/10 [journals]
+- [Afford-X: Generalizable and Slim Affordance Reasoning for Task-Oriented Manipulation](deep_reads/2026-10-14-10.1109_tpami.2026.3722040.md)  
+  1/10 [journals]
+- [S$^{2}$Q-VDiT$^+$: Accurate Quantized Video Diffusion Transformer With Multi-Resolution <u>S</u> ampling and <u>S</u> tructural Distillation](deep_reads/2026-10-14-10.1109_tpami.2026.3722360.md)  
+  1/10 [journals]
+- [Contextrast++: Robust Multi-Scale Contextual Contrastive Learning for Semantic Segmentation](deep_reads/2026-10-14-10.1109_tpami.2026.3721845.md)  
+  1/10 [journals]
+- [Shared Latent Characteristic Anchored Hash Codes Generation for Efficient Fine-Grained Image Retrieval](deep_reads/2026-10-14-10.1109_tpami.2026.3723930.md)  
+  1/10 [journals]
+- [CoNav: Collaborative Cross-Modal Reasoning for Embodied Navigation](deep_reads/2026-10-14-10.1109_tpami.2026.3711981.md)  
+  1/10 [journals]
+- [Symbiotic Evolutionary Learning for Task-Adaptive Infrared and Visible Image Fusion](deep_reads/2026-10-14-10.1109_tpami.2026.3722665.md)  
+  1/10 [journals]
+- [DeltaGNN: Graph Neural Network With Information Flow Control](deep_reads/2026-10-14-10.1109_tpami.2026.3725398.md)  
+  1/10 [journals]
+- [RBF++: Quantifying and Optimizing Reasoning Boundaries Across Measurable and Unmeasurable Capabilities for Chain-of-Thought Reasoning](deep_reads/2026-10-14-10.1109_tpami.2026.3708251.md)  
+  1/10 [journals]
+- [TopoMLP++: Toward Strong and Scalable Lane Topology Reasoning in Autonomous Driving](deep_reads/2026-10-14-10.1109_tpami.2026.3721163.md)  
+  1/10 [journals]
 
 #### Technometrics Vol 68 Issue 3
 

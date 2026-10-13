@@ -626,6 +626,7 @@
 
 ### TPAMI
 
+- [Vol 48 Issue 11 · 2026-10-14](journals/2026-10-14-tpami-v48-i11.md)
 - [Vol 48 Issue 8 · 2026-07-19](journals/2026-07-19-tpami-v48-i8.md)
 - [Vol 48 Issue 8 · 2026-07-07](journals/2026-07-07-tpami-v48-i8.md)
 - [Vol 48 Issue 7 · 2026-06-21](journals/2026-06-21-tpami-v48-i7.md)
