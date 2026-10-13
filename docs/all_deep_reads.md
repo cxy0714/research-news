@@ -1240,6 +1240,11 @@
 - [Semiparametric model averaging for high-dimensional quantile regression with nonignorable nonresponse](deep_reads/2026-10-13-10.1007_s11222-026-10953-2.md)  
   7/10 [journals]
 
+#### Science Advances Vol 12 Issue 41
+
+- [Costly missed connections: Visitation and misconduct in California prisons](deep_reads/2026-10-13-10.1126_sciadv.aed8424.md)  
+  6/10 [journals]
+
 #### Computational Statistics & Data Analysis Vol 225
 
 - [Regression analysis after bipartite Bayesian record linkage](deep_reads/2026-10-13-10.1016_j.csda.2026.108461.md)  
@@ -12290,6 +12295,11 @@
 
 ### 期刊
 
+#### Science Advances Vol 12 Issue 41
+
+- [Hydrogen isotopes reveal water leakage from the core](deep_reads/2026-10-13-10.1126_sciadv.aei4756.md)  
+  3/10 [journals]
+
 #### Science Vol 394 Issue 6820
 
 - [Insights from more than a year of ongoing episodic lava fountaining at Kīlauea](deep_reads/2026-10-13-10.1126_science.aef2931.md)  
@@ -14031,6 +14041,11 @@
 
 ### 期刊
 
+#### Science Advances Vol 12 Issue 41
+
+- [Exposure route, not dose, is the primary driver of infection patterns for a respiratory virus](deep_reads/2026-10-13-10.1126_sciadv.aei4853.md)  
+  6/10 [journals]
+
 #### Science
 
 - [Nutritional interventions’ impacts on human milk: Three trials in low-resource settings](deep_reads/2026-10-13-10.1126_science.aee9284.md)  
@@ -15659,6 +15674,83 @@
   10/10 [journals]
 - [Non-centering for discrete-valued state transition models: an application to ESBL-producing E. coli transmission in Malawi](deep_reads/2026-10-13-10.1007_s11222-026-10956-z.md)  
   3/10 [journals]
+
+#### Science Advances Vol 12 Issue 41
+
+- [Contagion-preserving compression for multiscale epidemic modeling](deep_reads/2026-10-13-10.1126_sciadv.adz4710.md)  
+  7/10 [journals]
+- [Record-setting heavy precipitation occurrence in 2024](deep_reads/2026-10-13-10.1126_sciadv.aeb1692.md)  
+  6/10 [journals]
+- [From plankton to fish: 21st-century redistribution of marine biodiversity and the changing role of rare species](deep_reads/2026-10-13-10.1126_sciadv.aee7253.md)  
+  6/10 [journals]
+- [A 256-year daily rainfall record reveals multiscale rainy-season variability and emerging hydroclimatic hazard over northern East Asia](deep_reads/2026-10-13-10.1126_sciadv.aeh6716.md)  
+  6/10 [journals]
+- [Machine learning–assisted directed evolution of plant Rubisco](deep_reads/2026-10-13-10.1126_sciadv.aeh3246.md)  
+  5/10 [journals]
+- [AIMNet2-rxn: A machine-learned potential for generalized reaction modeling on a millions-of-pathways scale](deep_reads/2026-10-13-10.1126_sciadv.aea1557.md)  
+  5/10 [journals]
+- [Intensification of East Asian summer extreme precipitation under a net-zero anthropogenic CO <sub>2</sub> emission scenario](deep_reads/2026-10-13-10.1126_sciadv.aec9366.md)  
+  5/10 [journals]
+- [Dopamine release-associated striatal blood oxygenation and whole-brain dynamics during associative learning](deep_reads/2026-10-13-10.1126_sciadv.aed0935.md)  
+  5/10 [journals]
+- [Specific expertise from diffuse feedback: A feedforward-gated mechanism](deep_reads/2026-10-13-10.1126_sciadv.aeh5972.md)  
+  5/10 [journals]
+- [Epigenetic insights into extreme longevity in the world’s oldest terrestrial animal, Jonathan](deep_reads/2026-10-13-10.1126_sciadv.adw8887.md)  
+  4/10 [journals]
+- [On-fault and remote observations of exceptionally long, supershear rupture in the 2025 <i>M</i> 7.7 Mandalay earthquake](deep_reads/2026-10-13-10.1126_sciadv.aee5191.md)  
+  4/10 [journals]
+- [Wildfires diminish vegetation control on surface runoff](deep_reads/2026-10-13-10.1126_sciadv.aei3713.md)  
+  4/10 [journals]
+- [Real-time single-molecule imaging in zebrafish embryos uncovers noncanonical translation](deep_reads/2026-10-13-10.1126_sciadv.aeb6883.md)  
+  3/10 [journals]
+- [Mitigating lateral sensing blind spots: A dual-segment bronchoscopic robot with a bioinspired skin](deep_reads/2026-10-13-10.1126_sciadv.aeh9503.md)  
+  3/10 [journals]
+- [Ocean circulation changes rather than global warming drove temperature trends across the Miocene Climatic Optimum](deep_reads/2026-10-13-10.1126_sciadv.adz2555.md)  
+  3/10 [journals]
+- [Magnetic omniconversion: Source-independent molding of magnetostatic fields](deep_reads/2026-10-13-10.1126_sciadv.aeh5747.md)  
+  3/10 [journals]
+- [Translocation-induced enhancer rewiring reveals cryptic oncogenic circuits in multiple myeloma](deep_reads/2026-10-13-10.1126_sciadv.aeg9610.md)  
+  3/10 [journals]
+- [Scalable design of fluidic DEMUX/MUX](deep_reads/2026-10-13-10.1126_sciadv.aed4468.md)  
+  3/10 [journals]
+- [Dynamic self-polarization of the nuclear spins in a GaAs quantum well](deep_reads/2026-10-13-10.1126_sciadv.aeh7568.md)  
+  3/10 [journals]
+- [Human trilayer engineered blood vessel reveals influence of fibroblasts on disease progression in model of Hutchinson-Gilford progeria](deep_reads/2026-10-13-10.1126_sciadv.aeh3785.md)  
+  2/10 [journals]
+- [Minimal-actuation feather star–inspired soft swimmers for multimodal 3D maneuverability](deep_reads/2026-10-13-10.1126_sciadv.aeg9211.md)  
+  2/10 [journals]
+- [Effects of probiotics on joint homeostasis and osteoarthritis: Development of microbe-gut-cartilage axis-on-a-chip](deep_reads/2026-10-13-10.1126_sciadv.aeg8557.md)  
+  2/10 [journals]
+- [Cis-regulatory inactivation of vitamin D signaling confers extreme calcium tolerance in Jialing fish](deep_reads/2026-10-13-10.1126_sciadv.aeg8398.md)  
+  2/10 [journals]
+- [Rapid protamine evolution suppresses meiotic drive in <i>Drosophila</i>](deep_reads/2026-10-13-10.1126_sciadv.aeb5514.md)  
+  2/10 [journals]
+- [Citron kinase activity controls alternative splicing events that drive prostate cancer growth](deep_reads/2026-10-13-10.1126_sciadv.aee5257.md)  
+  2/10 [journals]
+- [Correlated one-dimensional electron conduction in ferroelastic domain walls through nematic-like charge stripes](deep_reads/2026-10-13-10.1126_sciadv.aee1472.md)  
+  2/10 [journals]
+- [Long-term immunoprophylaxis by TLR9 ligand mediates macrophage-ILC cross-talk against respiratory viral infection](deep_reads/2026-10-13-10.1126_sciadv.aeh6480.md)  
+  2/10 [journals]
+- [Self-buoyant cell-spheroid culture programming multi-spheroid assembly](deep_reads/2026-10-13-10.1126_sciadv.aee3306.md)  
+  2/10 [journals]
+- [SLC39-driven zinc influx orchestrates pleiotropic tumor–immune system cross-talk to establish immune suppression in colorectal cancer](deep_reads/2026-10-13-10.1126_sciadv.aeh2362.md)  
+  2/10 [journals]
+- [Carbonic anhydrase VIII regulates IP3R1-dependent Ca <sup>2+</sup> signaling to coordinate insulin secretion and hepatic glucose production](deep_reads/2026-10-13-10.1126_sciadv.aeh4948.md)  
+  2/10 [journals]
+- [Rod photoreceptors have a dual dependency on both aerobic glycolysis and OXPHOS and diverge metabolically from other retinal neurons](deep_reads/2026-10-13-10.1126_sciadv.aeg8687.md)  
+  2/10 [journals]
+- [Standardizing Cell Ontology terms for cross-study integration in the female reproductive tract](deep_reads/2026-10-13-10.1126_sciadv.aef2358.md)  
+  2/10 [journals]
+- [SMCHD1 is a target for gene activation therapy to treat Prader-Willi syndrome](deep_reads/2026-10-13-10.1126_sciadv.aej5702.md)  
+  2/10 [journals]
+- [Sensory receptor expansion and neural accommodation in butterfly color vision](deep_reads/2026-10-13-10.1126_sciadv.aei7570.md)  
+  1/10 [journals]
+- [A neuronal GPCR modifies neuropeptide signaling to suppress proteostasis in distal tissues](deep_reads/2026-10-13-10.1126_sciadv.ady6048.md)  
+  1/10 [journals]
+- [Multiscale insights into screw dislocation-driven growth mechanisms](deep_reads/2026-10-13-10.1126_sciadv.aei7996.md)  
+  1/10 [journals]
+- [Packing-accelerated consecutive NIR excitation (PACE) enables high energy photocatalysis and antitumor immunity in vivo](deep_reads/2026-10-13-10.1126_sciadv.aeg3842.md)  
+  1/10 [journals]
 
 #### Science Vol 394 Issue 6820
 

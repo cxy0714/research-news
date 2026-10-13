@@ -17,12 +17,14 @@
 
 [→ 查看完整报告](daily/2026-10-13.md)
 
-### 精读论文（175 篇）
+### 精读论文（215 篇）
 
 - [On computing and the complexity of computing higher-order U-statistics, exactly](deep_reads/2026-10-13-10.1007_s11222-026-10974-x.md)  
   `其他` · 相关性 10/10
 - [Simple Standard Errors for Complicated (Quasi-)Experimental Designs](deep_reads/2026-10-13-2610.12674.md)  
   `因果推断` · 相关性 8/10
+- [Contagion-preserving compression for multiscale epidemic modeling](deep_reads/2026-10-13-10.1126_sciadv.adz4710.md)  
+  `其他` · 相关性 7/10
 - [Minimax Rates for Estimating Powered Sliced Wasserstein Functionals](deep_reads/2026-10-13-2610.12740.md)  
   `非参数 / 半参数` · 相关性 7/10
 - [Detecting Random Geometric Graphs with General Kernel](deep_reads/2026-10-13-2610.12765.md)  
@@ -39,6 +41,16 @@
   `统计计算 / 算法` · 相关性 7/10
 - [Nonparametric Feature Screening for Non-Euclidean Data](deep_reads/2026-10-13-10.1080_00401706.2026.2735885.md)  
   `非参数 / 半参数` · 相关性 7/10
+- [Record-setting heavy precipitation occurrence in 2024](deep_reads/2026-10-13-10.1126_sciadv.aeb1692.md)  
+  `其他` · 相关性 6/10
+- [From plankton to fish: 21st-century redistribution of marine biodiversity and the changing role of rare species](deep_reads/2026-10-13-10.1126_sciadv.aee7253.md)  
+  `其他` · 相关性 6/10
+- [A 256-year daily rainfall record reveals multiscale rainy-season variability and emerging hydroclimatic hazard over northern East Asia](deep_reads/2026-10-13-10.1126_sciadv.aeh6716.md)  
+  `其他` · 相关性 6/10
+- [Exposure route, not dose, is the primary driver of infection patterns for a respiratory virus](deep_reads/2026-10-13-10.1126_sciadv.aei4853.md)  
+  `流行病学` · 相关性 6/10
+- [Costly missed connections: Visitation and misconduct in California prisons](deep_reads/2026-10-13-10.1126_sciadv.aed8424.md)  
+  `因果推断` · 相关性 6/10
 - [Regional climate risk assessment from climate models using probabilistic machine learning](deep_reads/2026-10-13-10.1038_s42256-026-01308-7.md)  
   `其他` · 相关性 6/10
 - [Large language models as uncertainty-calibrated optimizers for experimental discovery](deep_reads/2026-10-13-10.1038_s42256-026-01283-z.md)  
@@ -91,6 +103,16 @@
   `统计计算 / 算法` · 相关性 6/10
 - [Calibrated Bayesian Nonparametric Tolerance Intervals](deep_reads/2026-10-13-10.1080_00401706.2026.2699103.md)  
   `非参数 / 半参数` · 相关性 6/10
+- [Machine learning–assisted directed evolution of plant Rubisco](deep_reads/2026-10-13-10.1126_sciadv.aeh3246.md)  
+  `其他` · 相关性 5/10
+- [AIMNet2-rxn: A machine-learned potential for generalized reaction modeling on a millions-of-pathways scale](deep_reads/2026-10-13-10.1126_sciadv.aea1557.md)  
+  `其他` · 相关性 5/10
+- [Intensification of East Asian summer extreme precipitation under a net-zero anthropogenic CO <sub>2</sub> emission scenario](deep_reads/2026-10-13-10.1126_sciadv.aec9366.md)  
+  `其他` · 相关性 5/10
+- [Dopamine release-associated striatal blood oxygenation and whole-brain dynamics during associative learning](deep_reads/2026-10-13-10.1126_sciadv.aed0935.md)  
+  `其他` · 相关性 5/10
+- [Specific expertise from diffuse feedback: A feedforward-gated mechanism](deep_reads/2026-10-13-10.1126_sciadv.aeh5972.md)  
+  `其他` · 相关性 5/10
 - [Classifying multipartite continuous-variable entanglement structures through data-augmented neural networks](deep_reads/2026-10-13-10.1038_s42256-026-01284-y.md)  
   `其他` · 相关性 5/10
 - [Causal evidence that language models use confidence to drive behaviour](deep_reads/2026-10-13-10.1038_s42256-026-01293-x.md)  
@@ -143,6 +165,12 @@
   `数理统计 / 假设检验` · 相关性 5/10
 - [A General Framework For Modeling Gaussian Process with Qualitative and Quantitative Factors](deep_reads/2026-10-13-10.1080_00401706.2026.2635359.md)  
   `其他` · 相关性 5/10
+- [Epigenetic insights into extreme longevity in the world’s oldest terrestrial animal, Jonathan](deep_reads/2026-10-13-10.1126_sciadv.adw8887.md)  
+  `其他` · 相关性 4/10
+- [On-fault and remote observations of exceptionally long, supershear rupture in the 2025 <i>M</i> 7.7 Mandalay earthquake](deep_reads/2026-10-13-10.1126_sciadv.aee5191.md)  
+  `其他` · 相关性 4/10
+- [Wildfires diminish vegetation control on surface runoff](deep_reads/2026-10-13-10.1126_sciadv.aei3713.md)  
+  `其他` · 相关性 4/10
 - [Machine learning of artistic fingerprints in jazz](deep_reads/2026-10-13-10.1038_s42256-026-01279-9.md)  
   `其他` · 相关性 4/10
 - [Beyond representational alignment with brain-guided language models for robust reasoning](deep_reads/2026-10-13-10.1038_s42256-026-01278-w.md)  
@@ -223,6 +251,22 @@
   `其他` · 相关性 4/10
 - [Is Grouping Always Detrimental to Monitoring Multinomial Data?](deep_reads/2026-10-13-10.1080_00401706.2026.2635355.md)  
   `数理统计 / 假设检验` · 相关性 4/10
+- [Real-time single-molecule imaging in zebrafish embryos uncovers noncanonical translation](deep_reads/2026-10-13-10.1126_sciadv.aeb6883.md)  
+  `其他` · 相关性 3/10
+- [Mitigating lateral sensing blind spots: A dual-segment bronchoscopic robot with a bioinspired skin](deep_reads/2026-10-13-10.1126_sciadv.aeh9503.md)  
+  `其他` · 相关性 3/10
+- [Ocean circulation changes rather than global warming drove temperature trends across the Miocene Climatic Optimum](deep_reads/2026-10-13-10.1126_sciadv.adz2555.md)  
+  `其他` · 相关性 3/10
+- [Magnetic omniconversion: Source-independent molding of magnetostatic fields](deep_reads/2026-10-13-10.1126_sciadv.aeh5747.md)  
+  `其他` · 相关性 3/10
+- [Hydrogen isotopes reveal water leakage from the core](deep_reads/2026-10-13-10.1126_sciadv.aei4756.md)  
+  `天体统计` · 相关性 3/10
+- [Translocation-induced enhancer rewiring reveals cryptic oncogenic circuits in multiple myeloma](deep_reads/2026-10-13-10.1126_sciadv.aeg9610.md)  
+  `其他` · 相关性 3/10
+- [Scalable design of fluidic DEMUX/MUX](deep_reads/2026-10-13-10.1126_sciadv.aed4468.md)  
+  `其他` · 相关性 3/10
+- [Dynamic self-polarization of the nuclear spins in a GaAs quantum well](deep_reads/2026-10-13-10.1126_sciadv.aeh7568.md)  
+  `其他` · 相关性 3/10
 - [Towards foundation-style models for energy-frontier heterogeneous neutrino detectors via self-supervised pretraining](deep_reads/2026-10-13-10.1038_s42256-026-01309-6.md)  
   `天体统计` · 相关性 3/10
 - [Towards general auditory intelligence for machine listening and speaking](deep_reads/2026-10-13-10.1038_s42256-026-01281-1.md)  
@@ -301,6 +345,34 @@
   `其他` · 相关性 3/10
 - [Registration-Free Monitoring of Unstructured Point Cloud Data via Intrinsic Geometrical Properties](deep_reads/2026-10-13-10.1080_00401706.2026.2702438.md)  
   `统计计算 / 算法` · 相关性 3/10
+- [Human trilayer engineered blood vessel reveals influence of fibroblasts on disease progression in model of Hutchinson-Gilford progeria](deep_reads/2026-10-13-10.1126_sciadv.aeh3785.md)  
+  `其他` · 相关性 2/10
+- [Minimal-actuation feather star–inspired soft swimmers for multimodal 3D maneuverability](deep_reads/2026-10-13-10.1126_sciadv.aeg9211.md)  
+  `其他` · 相关性 2/10
+- [Effects of probiotics on joint homeostasis and osteoarthritis: Development of microbe-gut-cartilage axis-on-a-chip](deep_reads/2026-10-13-10.1126_sciadv.aeg8557.md)  
+  `其他` · 相关性 2/10
+- [Cis-regulatory inactivation of vitamin D signaling confers extreme calcium tolerance in Jialing fish](deep_reads/2026-10-13-10.1126_sciadv.aeg8398.md)  
+  `其他` · 相关性 2/10
+- [Rapid protamine evolution suppresses meiotic drive in <i>Drosophila</i>](deep_reads/2026-10-13-10.1126_sciadv.aeb5514.md)  
+  `其他` · 相关性 2/10
+- [Citron kinase activity controls alternative splicing events that drive prostate cancer growth](deep_reads/2026-10-13-10.1126_sciadv.aee5257.md)  
+  `其他` · 相关性 2/10
+- [Correlated one-dimensional electron conduction in ferroelastic domain walls through nematic-like charge stripes](deep_reads/2026-10-13-10.1126_sciadv.aee1472.md)  
+  `其他` · 相关性 2/10
+- [Long-term immunoprophylaxis by TLR9 ligand mediates macrophage-ILC cross-talk against respiratory viral infection](deep_reads/2026-10-13-10.1126_sciadv.aeh6480.md)  
+  `其他` · 相关性 2/10
+- [Self-buoyant cell-spheroid culture programming multi-spheroid assembly](deep_reads/2026-10-13-10.1126_sciadv.aee3306.md)  
+  `其他` · 相关性 2/10
+- [SLC39-driven zinc influx orchestrates pleiotropic tumor–immune system cross-talk to establish immune suppression in colorectal cancer](deep_reads/2026-10-13-10.1126_sciadv.aeh2362.md)  
+  `其他` · 相关性 2/10
+- [Carbonic anhydrase VIII regulates IP3R1-dependent Ca <sup>2+</sup> signaling to coordinate insulin secretion and hepatic glucose production](deep_reads/2026-10-13-10.1126_sciadv.aeh4948.md)  
+  `其他` · 相关性 2/10
+- [Rod photoreceptors have a dual dependency on both aerobic glycolysis and OXPHOS and diverge metabolically from other retinal neurons](deep_reads/2026-10-13-10.1126_sciadv.aeg8687.md)  
+  `其他` · 相关性 2/10
+- [Standardizing Cell Ontology terms for cross-study integration in the female reproductive tract](deep_reads/2026-10-13-10.1126_sciadv.aef2358.md)  
+  `其他` · 相关性 2/10
+- [SMCHD1 is a target for gene activation therapy to treat Prader-Willi syndrome](deep_reads/2026-10-13-10.1126_sciadv.aej5702.md)  
+  `其他` · 相关性 2/10
 - [Minute-scale training for microrobot navigation](deep_reads/2026-10-13-10.1038_s42256-026-01305-w.md)  
   `其他` · 相关性 2/10
 - [Guiding large language models to predict edit sequences for molecular synthesizability optimization](deep_reads/2026-10-13-10.1038_s42256-026-01304-x.md)  
@@ -345,6 +417,14 @@
   `其他` · 相关性 2/10
 - [Structural basis for regulating lipopolysaccharide transmembrane transport](deep_reads/2026-10-13-10.1038_s41586-026-11129-8.md)  
   `其他` · 相关性 2/10
+- [Sensory receptor expansion and neural accommodation in butterfly color vision](deep_reads/2026-10-13-10.1126_sciadv.aei7570.md)  
+  `其他` · 相关性 1/10
+- [A neuronal GPCR modifies neuropeptide signaling to suppress proteostasis in distal tissues](deep_reads/2026-10-13-10.1126_sciadv.ady6048.md)  
+  `其他` · 相关性 1/10
+- [Multiscale insights into screw dislocation-driven growth mechanisms](deep_reads/2026-10-13-10.1126_sciadv.aei7996.md)  
+  `其他` · 相关性 1/10
+- [Packing-accelerated consecutive NIR excitation (PACE) enables high energy photocatalysis and antitumor immunity in vivo](deep_reads/2026-10-13-10.1126_sciadv.aeg3842.md)  
+  `其他` · 相关性 1/10
 - [GTP orchestrates CTP synthase via an allosteric effector–cycling mechanism](deep_reads/2026-10-13-10.1073_pnas.2620272123.md)  
   `其他` · 相关性 1/10
 - [The genetic basis for the production of toxic quinolizidine alkaloids in lupins](deep_reads/2026-10-13-10.1126_science.aei5520.md)  
