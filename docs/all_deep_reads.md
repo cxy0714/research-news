@@ -15743,6 +15743,33 @@
 - [Understanding consciousness (biological and artificial) as a society of self-schemas](deep_reads/2026-10-13-10.1073_pnas.2628598123.md)  
   0/10 [journals]
 
+#### Nature Methods Vol 23 Issue 9
+
+- [Lessons learned from a Kaggle challenge for particle picking in cryo-electron tomography](deep_reads/2026-10-13-10.1038_s41592-026-03198-4.md)  
+  5/10 [journals]
+- [GHT-SELEX demonstrates unexpectedly high intrinsic sequence specificity and complex DNA binding of many human transcription factors](deep_reads/2026-10-13-10.1038_s41592-026-03177-9.md)  
+  5/10 [journals]
+- [Beyond benchmarking: an expert-guided consensus approach to spatially aware clustering](deep_reads/2026-10-13-10.1038_s41592-026-03194-8.md)  
+  4/10 [journals]
+- [From pixels to patterns: the AI revolution in stem cell-derived models](deep_reads/2026-10-13-10.1038_s41592-026-03202-x.md)  
+  4/10 [journals]
+- [Benchmarking biomedical foundation models](deep_reads/2026-10-13-10.1038_s41592-026-03182-y.md)  
+  3/10 [journals]
+- [Aligning protein-generative models to experimental fitness with ProteinDPO](deep_reads/2026-10-13-10.1038_s41592-026-03137-3.md)  
+  3/10 [journals]
+- [Voltage imaging of neurons distributed across entire brains of larval zebrafish](deep_reads/2026-10-13-10.1038_s41592-026-03179-7.md)  
+  3/10 [journals]
+- [Spatial isoform sequencing at single-cell resolution reveals cell-type-specific spatial isoform variability in multiple brain cell types](deep_reads/2026-10-13-10.1038_s41592-026-03211-w.md)  
+  2/10 [journals]
+- [Large-scale single-molecule analysis of tau proteoforms](deep_reads/2026-10-13-10.1038_s41592-026-03188-6.md)  
+  2/10 [journals]
+- [All-optical multimodal mapping of single-cell-type-specific metabolic activities via REDCAT](deep_reads/2026-10-13-10.1038_s41592-026-03180-0.md)  
+  2/10 [journals]
+- [Overcoming air–water interface-induced artifacts in cryo-EM with protein nanocrates](deep_reads/2026-10-13-10.1038_s41592-026-03184-w.md)  
+  2/10 [journals]
+- [PASTA: versatile tyramide-oligonucleotide amplification for multimodal spatial biology](deep_reads/2026-10-13-10.1038_s41592-026-03200-z.md)  
+  2/10 [journals]
+
 #### Nature Methods Vol 23 Issue 10
 
 - [CytoVI: deep generative modeling of antibody-based single cell data](deep_reads/2026-10-13-10.1038_s41592-026-03224-5.md)  
