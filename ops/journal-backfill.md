@@ -164,7 +164,7 @@ IEEE 系列 ieee（月刊、每期大）：
 - [x] (2026-10-14) `--only TPAMI --n-issues 1`   ⚠
 - [x] (2026-10-14) `--only TPAMI --n-issues 2`
 - [x] (2026-10-14) `--only TSP --n-issues 2`
-- [ ] `--only JSAIT --n-issues 2`
+- [x] (2026-10-14) `--only JSAIT --n-issues 2`
 
 > 队列跑空后循环会自动退出（退出码 7）。想一次多跑几格：`python -m research_news.journal_backfill --max 3`；
 > 想插队/改范围：直接编辑上面的行（`- [ ]` 是唯一状态来源，git 即进度）。

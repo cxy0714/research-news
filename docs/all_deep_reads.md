@@ -10927,6 +10927,21 @@
 - [MEGO: Learning Mixture-of-Experts for General-Purpose Binary Optimization](deep_reads/2026-10-14-10.1109_tpami.2026.3711708.md)  
   2/10 [journals]
 
+#### IEEE Journal on Selected Areas in Information Theory Vol 7
+
+- [Reservoir Computing in Wireless Receive Processing: An Information-Theoretic Perspective](deep_reads/2026-06-05-10.1109_jsait.2026.3683606.md)  
+  4/10 [journals]
+- [The Thermodynamic Costs of Simple Linear Regression](deep_reads/2026-10-14-10.1109_jsait.2026.3732971.md)  
+  3/10 [journals]
+- [Efficient Near-Field Channel Feature Estimation: Criteria and Algorithms](deep_reads/2026-06-05-10.1109_jsait.2025.3649807.md)  
+  3/10 [journals]
+- [Fundamental Limits of Learning Under Erasure-Constrained Communication Channels](deep_reads/2026-06-05-10.1109_jsait.2026.3677413.md)  
+  2/10 [journals]
+- [In-Memory Bit Error Rate Estimation Using Syndromes of LDPC Codes](deep_reads/2026-06-05-10.1109_jsait.2026.3686020.md)  
+  0/10 [journals]
+- [Array Configuration and Scaling Laws in Near-Field Uplink Multiuser MIMO](deep_reads/2026-06-05-10.1109_jsait.2026.3674909.md)  
+  0/10 [journals]
+
 #### Technometrics Vol 68 Issue 3
 
 - [Robust Principal Components by Casewise and Cellwise Weighting](deep_reads/2026-10-13-10.1080_00401706.2026.2643216.md)  
@@ -11997,19 +12012,6 @@
 #### IEEE Transactions on Information Theory Vol 72 Issue 4
 
 - [Weakly Private Distributed Multi-User Secret Sharing](deep_reads/2026-06-05-10.1109_tit.2026.3666525.md)  
-  0/10 [journals]
-
-#### IEEE Journal on Selected Areas in Information Theory Vol 7
-
-- [Reservoir Computing in Wireless Receive Processing: An Information-Theoretic Perspective](deep_reads/2026-06-05-10.1109_jsait.2026.3683606.md)  
-  4/10 [journals]
-- [Efficient Near-Field Channel Feature Estimation: Criteria and Algorithms](deep_reads/2026-06-05-10.1109_jsait.2025.3649807.md)  
-  3/10 [journals]
-- [Fundamental Limits of Learning Under Erasure-Constrained Communication Channels](deep_reads/2026-06-05-10.1109_jsait.2026.3677413.md)  
-  2/10 [journals]
-- [In-Memory Bit Error Rate Estimation Using Syndromes of LDPC Codes](deep_reads/2026-06-05-10.1109_jsait.2026.3686020.md)  
-  0/10 [journals]
-- [Array Configuration and Scaling Laws in Near-Field Uplink Multiuser MIMO](deep_reads/2026-06-05-10.1109_jsait.2026.3674909.md)  
   0/10 [journals]
 
 #### IEEE Journal on Selected Areas in Information Theory Vol 6
@@ -15794,6 +15796,11 @@
   1/10 [journals]
 - [TopoMLP++: Toward Strong and Scalable Lane Topology Reasoning in Autonomous Driving](deep_reads/2026-10-14-10.1109_tpami.2026.3721163.md)  
   1/10 [journals]
+
+#### IEEE Journal on Selected Areas in Information Theory Vol 7
+
+- [Thermodynamic Characterization of Message-Passing: Framework and Initial Study](deep_reads/2026-10-14-10.1109_jsait.2026.3722113.md)  
+  2/10 [journals]
 
 #### Technometrics Vol 68 Issue 3
 

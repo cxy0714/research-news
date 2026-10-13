@@ -598,6 +598,7 @@
 
 ### JSAIT
 
+- [Vol 7 · 2026-10-14](journals/2026-10-14-jsait-v7.md)
 - [Vol 7 · 2026-06-05](journals/2026-06-05-jsait-v7.md)
 - [Vol 6 · 2026-06-05](journals/2026-06-05-jsait-v6.md)
 - [Vol 3 Issue 4 · 2026-07-19](journals/2026-07-19-jsait-v3-i4.md)
