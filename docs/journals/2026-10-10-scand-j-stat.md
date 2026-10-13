@@ -32,6 +32,7 @@
 ### 1. [10.1111/sjos.70095](https://doi.org/10.1111/sjos.70095) · [arXiv](https://arxiv.org/abs/2512.14959) — Nonparametric Survival Estimation With Contaminated and Adjudicated Events
 - **作者**: Martin Bladt, Kristian Vilhelm Dinesen
 - **期刊/来源**: Scandinavian Journal of Statistics
+- **机构**: University of Copenhagen
 - 相关性 5/10 · novelty: `new_method`
 - **摘要**: 本文研究条件专家 Kaplan–Meier 估计量，用于同时存在右删失和事件污染（observed events 可能非真实结局）的生存数据，其中专家意见用于裁定不确定事件，常见于保险和信用风险场景。在已有工作的基础上，作者通过核平滑引入协变量，发展该估计量的渐近理论。在正则条件下建立了函数一致性（functional consistency）和弱收敛，并量化了专家信息不完美所导致的偏差。结果表明，无偏的专家判断保证一致性，而系统性偏差会导致可显式表征的确定性渐近偏差。通过模拟研究考察有限样本性质，并应用于贷款违约数据。对您而言，该工作将非参数生存估计与测量误差/污染数据结合，其偏差分析框架可迁移到您熟悉的因果推断中关于 misclassification 的敏感性分析问题。
 - **关键技术**: `Kaplan-Meier estimator`, `kernel smoothing`, `functional weak convergence`, `asymptotic bias characterization`, `right-censoring`, `event contamination`

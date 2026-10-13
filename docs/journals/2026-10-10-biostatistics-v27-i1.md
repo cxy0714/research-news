@@ -228,6 +228,7 @@
 ### 7. [10.1093/biostatistics/kxag028](https://doi.org/10.1093/biostatistics/kxag028) · [arXiv](https://arxiv.org/abs/2502.10513) — A Bayesian multivariate spatial point pattern model: application to oral microbiome FISH image data
 - **作者**: Kyu Ha Lee, Brent A Coull, Suman Majumder, Patrick J La Riviere, Jessica L Mark Welch, Jacqueline R Starr
 - **期刊/来源**: Biostatistics
+- **机构**: Harvard University · Indian Statistical Institute · University of Chicago · American Dental Association · The Forsyth Institute · Brigham and Women's Hospital
 - **分类**: vol 27 · issue 1
 - 相关性 4/10 · novelty: `application`
 - **摘要**: 本文提出一个灵活的贝叶斯多元点过程模型，用于刻画和估计多种细胞类型之间的复杂空间相互作用，目标是对口腔微生物 FISH 图像中的空间组织进行量化。模型通过潜在高斯过程引入点模式间的依赖，并对相关系数采用收缩先验以保证估计的稳定性和可解释性。估计过程在贝叶斯框架下统一进行，能直接量化关键估计量（如类型间相关性和由类型间关系解释的方差比例）的不确定性。模型选择采用针对含潜变量模型设计的偏差信息准则（DIC），并通过贝叶斯分层池化模型综合图像特异的后验汇总，实现全局和个体水平的推断。计算上，R 包 mspatPPM 基于 Hamiltonian Monte Carlo 和自适应 Metropolis-Hastings 算法实现高效采样。应用于人类舌背微生物生物膜图像数据，发现特定菌对（如 S. mitis-S. salivarius）呈强正空间相关，而其他菌对（如 Actinomyces-Rothia）呈轻微负相关，且大部分菌群的空间方差可归因于菌间关系。

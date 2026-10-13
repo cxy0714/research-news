@@ -4,6 +4,10 @@
 
 ### Daily
 
+- [Simple Standard Errors for Complicated (Quasi-)Experimental Designs](deep_reads/2026-10-13-2610.12674.md)  
+  8/10 [daily]
+- [Kernel-based External Validity of Experimental Studies](deep_reads/2026-10-13-2610.13625.md)  
+  6/10 [daily]
 - [GMM for Panel Data Quantile Regression](deep_reads/2026-10-12-2610.12824.md)  
   7/10 [daily]
 - [Design-based effect sizes and their synthesis in randomized multiple-baseline experiments](deep_reads/2026-10-12-2610.13001.md)  
@@ -4138,6 +4142,10 @@
 
 ### Daily
 
+- [Detecting Random Geometric Graphs with General Kernel](deep_reads/2026-10-13-2610.12765.md)  
+  7/10 [daily]
+- [Mobility Edge for Sparse Complex Gaussian Matrices](deep_reads/2026-10-13-hexagon_2610.00168.md)  
+  7/10 [daily]
 - [Beyond Source-Level Transfer: Sample-Level Learning for High-Dimensional Quantile Regression](deep_reads/2026-10-09-2610.09722.md)  
   8/10 [daily]
 - [Tightness and Error Exponents of SDP with Logarithmically Many Communities](deep_reads/2026-10-09-2610.09303.md)  
@@ -5597,6 +5605,8 @@
 
 ### Daily
 
+- [Minimax Rates for Estimating Powered Sliced Wasserstein Functionals](deep_reads/2026-10-13-2610.12740.md)  
+  7/10 [daily]
 - [Scalable Nonparametric Change-Plane Regression with Random Features: Estimation and Inference](deep_reads/2026-10-12-2610.13290.md)  
   7/10 [daily]
 - [Manifold Fitting by Successive Tangent-Space Projection](deep_reads/2026-10-09-2610.09423.md)  
@@ -8114,6 +8124,8 @@
 
 ### Daily
 
+- [Beyond Discrepancy: Oracle Drift in Nonstationary Weighted Risk Minimization](deep_reads/2026-10-13-2610.13598.md)  
+  6/10 [daily]
 - [How Many Significant LISA?: A multiple testing correction](deep_reads/2026-10-12-2610.13472.md)  
   6/10 [daily]
 - [Sequential resetting procedures and false discovery rate](deep_reads/2026-10-09-2610.09339.md)  
@@ -10718,6 +10730,8 @@
 
 ### Daily
 
+- [Quaternion Gaussian Probes for Tensor Frobenius-Norm Estimation](deep_reads/2026-10-13-2610.12534.md)  
+  6/10 [daily]
 - [An efficient stochastic generalized method of moments estimator for nonlinear moment models](deep_reads/2026-10-12-2610.12873.md)  
   7/10 [daily]
 - [Exact Calibration and Sharp Risk Geometry for Volume-Sampled Ridge Regression](deep_reads/2026-10-08-2610.07721.md)  
@@ -11952,6 +11966,8 @@
 
 ### Daily
 
+- [First Experimental Results of Space Object Detection Using the InteRFeX Array](deep_reads/2026-10-13-2610.13537.md)  
+  6/10 [daily]
 - [An empirical calibration of the spectral resolution of JWST NIRSpec PRISM](deep_reads/2026-10-12-2610.13492.md)  
   6/10 [daily]
 - [Armillary: A Label-Free Coordinate System for Stellar Spectra](deep_reads/2026-10-08-2610.07112.md)  
@@ -12631,6 +12647,8 @@
 
 ### Daily
 
+- [Early Investment Snowballs for Low-Skill Children: Average Marginal Returns and the Dynamics of Skill Formation](deep_reads/2026-10-13-2610.12509.md)  
+  7/10 [daily]
 - [The Noise Is the Signal: Correlated Sampling Error Is Rank-Informative for Proxy Metric Selection](deep_reads/2026-10-08-2610.08194.md)  
   6/10 [daily]
 - [Impulse Response Inference for Matrix Autoregressions](deep_reads/2026-10-07-2610.05405.md)  
@@ -15397,6 +15415,12 @@
 
 ### Daily
 
+- [An $N^{-7/10}$ Bound for the Finite-Size Bias of the Sherrington-Kirkpatrick Free Energy](deep_reads/2026-10-13-hexagon_2610.00177.md)  
+  6/10 [daily]
+- [Finite quantum theta functions for skew-symmetrizable seeds](deep_reads/2026-10-13-hexagon_2610.00201.md)  
+  0/10 [daily]
+- [Infinitely Many Elliptic Curves of Exact Ranks Five, Six, and Seven](deep_reads/2026-10-13-hexagon_2610.00198.md)  
+  0/10 [daily]
 - [Neural Estimation of Summary Statistics for Simulation-Based Inference with Non-Asymptotic Guarantees](deep_reads/2026-10-12-2610.13031.md)  
   6/10 [daily]
 - [Aging in Spherical Spin Glass Dynamics](deep_reads/2026-10-12-hexagon_2610.00190.md)  
