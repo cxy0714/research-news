@@ -156,7 +156,7 @@ IEEE 系列 ieee（月刊、每期很大，全部先 dry-run、用小 N）：
 - [x] (2026-10-13) `--only "Sci. Adv." --n-issues 1`   ⚠ 单期就大
 - [x] (2026-10-13) `--only "Sci. Adv." --n-issues 2`
 - [x] (2026-10-13) `--only "Nat. Commun." --n-issues 1`   ⚠⚠ 滚动刊
-- [ ] `--only "Nat. Commun." --n-issues 2`
+- [x] (2026-10-13) `--only "Nat. Commun." --n-issues 2`
 
 IEEE 系列 ieee（月刊、每期大）：
 - [ ] `--only TIT --n-issues 1`   ⚠

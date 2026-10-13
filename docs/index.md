@@ -17,7 +17,7 @@
 
 [→ 查看完整报告](daily/2026-10-13.md)
 
-### 精读论文（231 篇）
+### 精读论文（236 篇）
 
 - [On computing and the complexity of computing higher-order U-statistics, exactly](deep_reads/2026-10-13-10.1007_s11222-026-10974-x.md)  
   `其他` · 相关性 10/10
@@ -107,6 +107,8 @@
   `统计计算 / 算法` · 相关性 6/10
 - [Calibrated Bayesian Nonparametric Tolerance Intervals](deep_reads/2026-10-13-10.1080_00401706.2026.2699103.md)  
   `非参数 / 半参数` · 相关性 6/10
+- [Whole blood transcriptomics atlas across human diseases](deep_reads/2026-10-13-10.1038_s41467-026-78440-w.md)  
+  `其他` · 相关性 5/10
 - [Time-lapse RESOLFT nanoscopy empowered by deep learning](deep_reads/2026-10-13-10.1038_s41467-026-78580-z.md)  
   `其他` · 相关性 5/10
 - [Machine learning–assisted directed evolution of plant Rubisco](deep_reads/2026-10-13-10.1126_sciadv.aeh3246.md)  
@@ -171,6 +173,8 @@
   `数理统计 / 假设检验` · 相关性 5/10
 - [A General Framework For Modeling Gaussian Process with Qualitative and Quantitative Factors](deep_reads/2026-10-13-10.1080_00401706.2026.2635359.md)  
   `其他` · 相关性 5/10
+- [Genomic bases of short-term evolution in wild barn owls revealed by long-term monitoring and population-scale sequencing](deep_reads/2026-10-13-10.1038_s41467-026-78632-4.md)  
+  `其他` · 相关性 4/10
 - [Interpretable AI-guided discovery of degradable ionizable lipids with enhanced hepatic mRNA delivery in vivo](deep_reads/2026-10-13-10.1038_s41467-026-78635-1.md)  
   `其他` · 相关性 4/10
 - [Sea-level contribution from Thwaites Glacier doubles in an observation-constrained ice-sheet model](deep_reads/2026-10-13-10.1038_s41467-026-77976-1.md)  
@@ -263,6 +267,8 @@
   `其他` · 相关性 4/10
 - [Is Grouping Always Detrimental to Monitoring Multinomial Data?](deep_reads/2026-10-13-10.1080_00401706.2026.2635355.md)  
   `数理统计 / 假设检验` · 相关性 4/10
+- [Precision functional mapping of imagined and experienced pain](deep_reads/2026-10-13-10.1038_s41467-026-78186-5.md)  
+  `其他` · 相关性 3/10
 - [Multiplexed single-molecule analysis of barcoded protein variants](deep_reads/2026-10-13-10.1038_s41467-026-78581-y.md)  
   `其他` · 相关性 3/10
 - [Sleep forms flexible context representations in toddlers](deep_reads/2026-10-13-10.1038_s41467-026-78303-4.md)  
@@ -371,6 +377,8 @@
   `其他` · 相关性 3/10
 - [Registration-Free Monitoring of Unstructured Point Cloud Data via Intrinsic Geometrical Properties](deep_reads/2026-10-13-10.1080_00401706.2026.2702438.md)  
   `统计计算 / 算法` · 相关性 3/10
+- [Extensive genomic diversity in Desulfovibrio reveals species-specific functional traits associated with disease](deep_reads/2026-10-13-10.1038_s41467-026-78314-1.md)  
+  `其他` · 相关性 2/10
 - [MIMAS: An open-source microlens-array miniature microscope for accessible large-field cortical imaging in freely behaving mice](deep_reads/2026-10-13-10.1126_sciadv.aei8743.md)  
   `其他` · 相关性 2/10
 - [Human trilayer engineered blood vessel reveals influence of fibroblasts on disease progression in model of Hutchinson-Gilford progeria](deep_reads/2026-10-13-10.1126_sciadv.aeh3785.md)  
@@ -445,6 +453,8 @@
   `其他` · 相关性 2/10
 - [Structural basis for regulating lipopolysaccharide transmembrane transport](deep_reads/2026-10-13-10.1038_s41586-026-11129-8.md)  
   `其他` · 相关性 2/10
+- [Discrete subdomains establish epigenetic diversity in subtelomeric heterochromatin in fission yeast](deep_reads/2026-10-13-10.1038_s41467-026-78445-5.md)  
+  `其他` · 相关性 1/10
 - [Endogenous retrovirus control of calbindin is essential for human early embryogenesis](deep_reads/2026-10-13-10.1126_sciadv.aee4523.md)  
   `其他` · 相关性 1/10
 - [Multidegree fluorescence–optical rotatory dispersion (F-ORD) from submonolayer interfacial chiral films](deep_reads/2026-10-13-10.1126_sciadv.aed0661.md)  

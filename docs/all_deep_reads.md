@@ -16057,6 +16057,8 @@
   3/10 [journals]
 - [Breeding for beneficial microbial associations](deep_reads/2026-08-05-10.1038_s41467-026-76260-6.md)  
   3/10 [journals]
+- [Extensive genomic diversity in Desulfovibrio reveals species-specific functional traits associated with disease](deep_reads/2026-10-13-10.1038_s41467-026-78314-1.md)  
+  2/10 [journals]
 - [Uncovering ectopic GC-like niches for tumor reactive lymphocyte priming in lung adenocarcinoma using Stereo-XCR-seq](deep_reads/2026-08-05-10.1038_s41467-026-75405-x.md)  
   2/10 [journals]
 - [Nonlinear reversal of photoexcitation on the attosecond time scale improves ultrafast X-ray diffraction images](deep_reads/2026-08-01-10.1038_s41467-026-75969-8.md)  
@@ -16096,6 +16098,8 @@
   6/10 [journals]
 - [Foraging models explain human exploration in uncertain tasks](deep_reads/2026-08-05-10.1038_s41467-026-75773-4.md)  
   6/10 [journals]
+- [Whole blood transcriptomics atlas across human diseases](deep_reads/2026-10-13-10.1038_s41467-026-78440-w.md)  
+  5/10 [journals]
 - [Regime shifts of AMOC-sea surface temperature relationship](deep_reads/2026-08-05-10.1038_s41467-026-76149-4.md)  
   5/10 [journals]
 - [High-quality pure shift NMR spectra by deep learning using multi-spectral input and joint loss functions](deep_reads/2026-08-05-10.1038_s41467-026-76276-y.md)  
@@ -16104,12 +16108,16 @@
   5/10 [journals]
 - [Unify learns cellular evolution with universal multimodal embeddings](deep_reads/2026-08-05-10.1038_s41467-026-76230-y.md)  
   5/10 [journals]
+- [Genomic bases of short-term evolution in wild barn owls revealed by long-term monitoring and population-scale sequencing](deep_reads/2026-10-13-10.1038_s41467-026-78632-4.md)  
+  4/10 [journals]
 - [Interpretable AI-guided discovery of degradable ionizable lipids with enhanced hepatic mRNA delivery in vivo](deep_reads/2026-10-13-10.1038_s41467-026-78635-1.md)  
   4/10 [journals]
 - [Polymorphism can extensively reshape the genome-wide crossover landscape in Arabidopsis thaliana](deep_reads/2026-08-05-10.1038_s41467-026-76213-z.md)  
   4/10 [journals]
 - [A machine learning framework for predicting and modulating condition-dependent protein phase separation](deep_reads/2026-08-05-10.1038_s41467-026-76248-2.md)  
   4/10 [journals]
+- [Precision functional mapping of imagined and experienced pain](deep_reads/2026-10-13-10.1038_s41467-026-78186-5.md)  
+  3/10 [journals]
 - [Multiplexed single-molecule analysis of barcoded protein variants](deep_reads/2026-10-13-10.1038_s41467-026-78581-y.md)  
   3/10 [journals]
 - [Hydrological regimes and drainage systems of aerial rivers across South America](deep_reads/2026-08-05-10.1038_s41467-026-76303-y.md)  
@@ -16148,6 +16156,8 @@
   2/10 [journals]
 - [Molecular mechanism of pore formation by Plasmodium Perforin-like Protein 2](deep_reads/2026-08-05-10.1038_s41467-026-76236-6.md)  
   2/10 [journals]
+- [Discrete subdomains establish epigenetic diversity in subtelomeric heterochromatin in fission yeast](deep_reads/2026-10-13-10.1038_s41467-026-78445-5.md)  
+  1/10 [journals]
 - [All-small-molecule Hydrogels for Safe and Efficient Photoprotection](deep_reads/2026-08-05-10.1038_s41467-026-75884-y.md)  
   1/10 [journals]
 - [Corisin induces proteostasis stress to drive epithelial injury and pulmonary fibrosis](deep_reads/2026-08-05-10.1038_s41467-026-76162-7.md)  
