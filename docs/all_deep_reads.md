@@ -4380,6 +4380,17 @@
 
 ### 期刊
 
+#### IEEE Transactions on Information Theory Vol 72 Issue 10
+
+- [Sparse PCA: Phase Transitions in the Critical Regime](deep_reads/2026-10-13-10.1109_tit.2026.3722614.md)  
+  8/10 [journals]
+- [Davis--Kahan Theorem in the Two-to-Infinity Norm and Its Application to Perfect Clustering](deep_reads/2026-10-13-10.1109_tit.2026.3720229.md)  
+  7/10 [journals]
+- [Orthogonal Approximate Message Passing With Optimal Spectral Initializations for Rectangular Spiked Matrix Models](deep_reads/2026-10-13-10.1109_tit.2026.3720644.md)  
+  7/10 [journals]
+- [Network Signflip Parallel Analysis for Selecting the Embedding Dimension](deep_reads/2026-10-13-10.1109_tit.2026.3712664.md)  
+  7/10 [journals]
+
 #### Computational Statistics & Data Analysis Vol 226
 
 - [HFG LASSO: A method for models with hierarchical categorical predictors](deep_reads/2026-10-13-10.1016_j.csda.2026.108478.md)  
@@ -5948,6 +5959,11 @@
 
 - [Fast robust additive models using gamma-divergence](deep_reads/2026-10-13-10.1007_s11222-026-10960-3.md)  
   5/10 [journals]
+
+#### IEEE Transactions on Information Theory Vol 72 Issue 10
+
+- [Toward an Asymptotic Efficiency Theory on Regular Parameter Manifolds](deep_reads/2026-10-13-10.1109_tit.2026.3715364.md)  
+  8/10 [journals]
 
 #### Statistics in Medicine Vol 45 Issue 20-22
 
@@ -8776,6 +8792,17 @@
 - [Generative conformal prediction under multiple covariate shifts](deep_reads/2026-10-13-10.1007_s11222-026-10936-3.md)  
   6/10 [journals]
 
+#### IEEE Transactions on Information Theory Vol 72 Issue 10
+
+- [Detecting Planted Structure in Circular Data](deep_reads/2026-10-13-10.1109_tit.2026.3715398.md)  
+  7/10 [journals]
+- [Estimating the Number of Rare Events With Applications to Large Alphabet Inference](deep_reads/2026-10-13-10.1109_tit.2026.3717745.md)  
+  7/10 [journals]
+- [Quickest Change Detection With Cost-Constrained Experiment Design](deep_reads/2026-10-13-10.1109_tit.2026.3723839.md)  
+  6/10 [journals]
+- [Statistical Mean Estimation With Coded Relayed Observations](deep_reads/2026-10-13-10.1109_tit.2026.3716635.md)  
+  5/10 [journals]
+
 #### Statistics in Medicine Vol 45 Issue 23-24
 
 - [Robust Alpha Spending for Unstable Data](deep_reads/2026-10-12-10.1002_sim.70760.md)  
@@ -10905,6 +10932,11 @@
 
 - [Multi-resolution enhancement for full-spectrum neural representations](deep_reads/2026-10-13-10.1038_s42256-026-01287-9.md)  
   5/10 [journals]
+
+#### IEEE Transactions on Information Theory Vol 72 Issue 10
+
+- [Multilook Coherent Imaging: Theoretical Guarantees and Algorithms](deep_reads/2026-10-13-10.1109_tit.2026.3725068.md)  
+  7/10 [journals]
 
 #### Computational Statistics & Data Analysis Vol 225
 
@@ -16264,6 +16296,31 @@
   0/10 [journals]
 - [Imaging of nanoscale polar textures in quantum paraelectric SrTiO3](deep_reads/2026-08-05-10.1038_s41586-026-10823-x.md)  
   0/10 [journals]
+
+#### IEEE Transactions on Information Theory Vol 72 Issue 10
+
+- [Learning Theory of Stochastic Regularized Dual Averaging](deep_reads/2026-10-13-10.1109_tit.2026.3724024.md)  
+  7/10 [journals]
+- [Learning <i>k</i> -Body Hamiltonians via Compressed Sensing](deep_reads/2026-10-13-10.1109_tit.2026.3720996.md)  
+  3/10 [journals]
+- [Noisy Computing of the Threshold Function](deep_reads/2026-10-13-10.1109_tit.2026.3721399.md)  
+  3/10 [journals]
+- [Local Test for Unitarily Invariant Properties of Bipartite Quantum States](deep_reads/2026-10-13-10.1109_tit.2026.3697790.md)  
+  2/10 [journals]
+- [Robust Joint Message and State Communication Under Arbitrarily Varying Jamming](deep_reads/2026-10-13-10.1109_tit.2026.3720557.md)  
+  2/10 [journals]
+- [How Many Simultaneous Beamformers are Needed for Integrated Sensing and Communications?](deep_reads/2026-10-13-10.1109_tit.2026.3704936.md)  
+  2/10 [journals]
+- [Federated Aggregation of Full Mallows Rankings via Borda and Lehmer Coding](deep_reads/2026-10-13-10.1109_tit.2026.3713439.md)  
+  2/10 [journals]
+- [Efficiently Computable Limits on EPR Pair Generation in Quantum Broadcast Channels](deep_reads/2026-10-13-10.1109_tit.2026.3695699.md)  
+  2/10 [journals]
+- [On the Existence and Nonexistence of Splitter Sets](deep_reads/2026-10-13-10.1109_tit.2026.3716011.md)  
+  1/10 [journals]
+- [Power and Limitations of Linear Programming Decoder for Quantum LDPC Codes](deep_reads/2026-10-13-10.1109_tit.2026.3715538.md)  
+  1/10 [journals]
+- [Virtual Signaling of CSIT via Non-Signaling Assistance](deep_reads/2026-10-13-10.1109_tit.2026.3722092.md)  
+  1/10 [journals]
 
 #### Computational Statistics & Data Analysis Vol 225
 

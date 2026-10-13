@@ -17,12 +17,30 @@
 
 [→ 查看完整报告](daily/2026-10-13.md)
 
-### 精读论文（236 篇）
+### 精读论文（257 篇）
 
 - [On computing and the complexity of computing higher-order U-statistics, exactly](deep_reads/2026-10-13-10.1007_s11222-026-10974-x.md)  
   `其他` · 相关性 10/10
+- [Toward an Asymptotic Efficiency Theory on Regular Parameter Manifolds](deep_reads/2026-10-13-10.1109_tit.2026.3715364.md)  
+  `非参数 / 半参数` · 相关性 8/10
+- [Sparse PCA: Phase Transitions in the Critical Regime](deep_reads/2026-10-13-10.1109_tit.2026.3722614.md)  
+  `高维统计 / 随机矩阵` · 相关性 8/10
 - [Simple Standard Errors for Complicated (Quasi-)Experimental Designs](deep_reads/2026-10-13-2610.12674.md)  
   `因果推断` · 相关性 8/10
+- [Davis--Kahan Theorem in the Two-to-Infinity Norm and Its Application to Perfect Clustering](deep_reads/2026-10-13-10.1109_tit.2026.3720229.md)  
+  `高维统计 / 随机矩阵` · 相关性 7/10
+- [Multilook Coherent Imaging: Theoretical Guarantees and Algorithms](deep_reads/2026-10-13-10.1109_tit.2026.3725068.md)  
+  `统计计算 / 算法` · 相关性 7/10
+- [Orthogonal Approximate Message Passing With Optimal Spectral Initializations for Rectangular Spiked Matrix Models](deep_reads/2026-10-13-10.1109_tit.2026.3720644.md)  
+  `高维统计 / 随机矩阵` · 相关性 7/10
+- [Detecting Planted Structure in Circular Data](deep_reads/2026-10-13-10.1109_tit.2026.3715398.md)  
+  `数理统计 / 假设检验` · 相关性 7/10
+- [Learning Theory of Stochastic Regularized Dual Averaging](deep_reads/2026-10-13-10.1109_tit.2026.3724024.md)  
+  `其他` · 相关性 7/10
+- [Network Signflip Parallel Analysis for Selecting the Embedding Dimension](deep_reads/2026-10-13-10.1109_tit.2026.3712664.md)  
+  `高维统计 / 随机矩阵` · 相关性 7/10
+- [Estimating the Number of Rare Events With Applications to Large Alphabet Inference](deep_reads/2026-10-13-10.1109_tit.2026.3717745.md)  
+  `数理统计 / 假设检验` · 相关性 7/10
 - [Contagion-preserving compression for multiscale epidemic modeling](deep_reads/2026-10-13-10.1126_sciadv.adz4710.md)  
   `其他` · 相关性 7/10
 - [Minimax Rates for Estimating Powered Sliced Wasserstein Functionals](deep_reads/2026-10-13-2610.12740.md)  
@@ -41,6 +59,8 @@
   `统计计算 / 算法` · 相关性 7/10
 - [Nonparametric Feature Screening for Non-Euclidean Data](deep_reads/2026-10-13-10.1080_00401706.2026.2735885.md)  
   `非参数 / 半参数` · 相关性 7/10
+- [Quickest Change Detection With Cost-Constrained Experiment Design](deep_reads/2026-10-13-10.1109_tit.2026.3723839.md)  
+  `数理统计 / 假设检验` · 相关性 6/10
 - [Block-fitness modeling of the global air mobility network](deep_reads/2026-10-13-10.1038_s41467-026-78115-6.md)  
   `其他` · 相关性 6/10
 - [Predicting regional gray swans via translocation: AI weather models and Dubai’s unprecedented 2024 rainfall](deep_reads/2026-10-13-10.1126_sciadv.ady9406.md)  
@@ -107,6 +127,8 @@
   `统计计算 / 算法` · 相关性 6/10
 - [Calibrated Bayesian Nonparametric Tolerance Intervals](deep_reads/2026-10-13-10.1080_00401706.2026.2699103.md)  
   `非参数 / 半参数` · 相关性 6/10
+- [Statistical Mean Estimation With Coded Relayed Observations](deep_reads/2026-10-13-10.1109_tit.2026.3716635.md)  
+  `数理统计 / 假设检验` · 相关性 5/10
 - [Whole blood transcriptomics atlas across human diseases](deep_reads/2026-10-13-10.1038_s41467-026-78440-w.md)  
   `其他` · 相关性 5/10
 - [Time-lapse RESOLFT nanoscopy empowered by deep learning](deep_reads/2026-10-13-10.1038_s41467-026-78580-z.md)  
@@ -267,6 +289,10 @@
   `其他` · 相关性 4/10
 - [Is Grouping Always Detrimental to Monitoring Multinomial Data?](deep_reads/2026-10-13-10.1080_00401706.2026.2635355.md)  
   `数理统计 / 假设检验` · 相关性 4/10
+- [Learning <i>k</i> -Body Hamiltonians via Compressed Sensing](deep_reads/2026-10-13-10.1109_tit.2026.3720996.md)  
+  `其他` · 相关性 3/10
+- [Noisy Computing of the Threshold Function](deep_reads/2026-10-13-10.1109_tit.2026.3721399.md)  
+  `其他` · 相关性 3/10
 - [Precision functional mapping of imagined and experienced pain](deep_reads/2026-10-13-10.1038_s41467-026-78186-5.md)  
   `其他` · 相关性 3/10
 - [Multiplexed single-molecule analysis of barcoded protein variants](deep_reads/2026-10-13-10.1038_s41467-026-78581-y.md)  
@@ -377,6 +403,16 @@
   `其他` · 相关性 3/10
 - [Registration-Free Monitoring of Unstructured Point Cloud Data via Intrinsic Geometrical Properties](deep_reads/2026-10-13-10.1080_00401706.2026.2702438.md)  
   `统计计算 / 算法` · 相关性 3/10
+- [Local Test for Unitarily Invariant Properties of Bipartite Quantum States](deep_reads/2026-10-13-10.1109_tit.2026.3697790.md)  
+  `其他` · 相关性 2/10
+- [Robust Joint Message and State Communication Under Arbitrarily Varying Jamming](deep_reads/2026-10-13-10.1109_tit.2026.3720557.md)  
+  `其他` · 相关性 2/10
+- [How Many Simultaneous Beamformers are Needed for Integrated Sensing and Communications?](deep_reads/2026-10-13-10.1109_tit.2026.3704936.md)  
+  `其他` · 相关性 2/10
+- [Federated Aggregation of Full Mallows Rankings via Borda and Lehmer Coding](deep_reads/2026-10-13-10.1109_tit.2026.3713439.md)  
+  `其他` · 相关性 2/10
+- [Efficiently Computable Limits on EPR Pair Generation in Quantum Broadcast Channels](deep_reads/2026-10-13-10.1109_tit.2026.3695699.md)  
+  `其他` · 相关性 2/10
 - [Extensive genomic diversity in Desulfovibrio reveals species-specific functional traits associated with disease](deep_reads/2026-10-13-10.1038_s41467-026-78314-1.md)  
   `其他` · 相关性 2/10
 - [MIMAS: An open-source microlens-array miniature microscope for accessible large-field cortical imaging in freely behaving mice](deep_reads/2026-10-13-10.1126_sciadv.aei8743.md)  
@@ -453,6 +489,12 @@
   `其他` · 相关性 2/10
 - [Structural basis for regulating lipopolysaccharide transmembrane transport](deep_reads/2026-10-13-10.1038_s41586-026-11129-8.md)  
   `其他` · 相关性 2/10
+- [On the Existence and Nonexistence of Splitter Sets](deep_reads/2026-10-13-10.1109_tit.2026.3716011.md)  
+  `其他` · 相关性 1/10
+- [Power and Limitations of Linear Programming Decoder for Quantum LDPC Codes](deep_reads/2026-10-13-10.1109_tit.2026.3715538.md)  
+  `其他` · 相关性 1/10
+- [Virtual Signaling of CSIT via Non-Signaling Assistance](deep_reads/2026-10-13-10.1109_tit.2026.3722092.md)  
+  `其他` · 相关性 1/10
 - [Discrete subdomains establish epigenetic diversity in subtelomeric heterochromatin in fission yeast](deep_reads/2026-10-13-10.1038_s41467-026-78445-5.md)  
   `其他` · 相关性 1/10
 - [Endogenous retrovirus control of calbindin is essential for human early embryogenesis](deep_reads/2026-10-13-10.1126_sciadv.aee4523.md)  

@@ -159,7 +159,7 @@ IEEE 系列 ieee（月刊、每期很大，全部先 dry-run、用小 N）：
 - [x] (2026-10-13) `--only "Nat. Commun." --n-issues 2`
 
 IEEE 系列 ieee（月刊、每期大）：
-- [ ] `--only TIT --n-issues 1`   ⚠
+- [x] (2026-10-13) `--only TIT --n-issues 1`   ⚠
 - [ ] `--only TIT --n-issues 2`
 - [ ] `--only TPAMI --n-issues 1`   ⚠
 - [ ] `--only TPAMI --n-issues 2`
