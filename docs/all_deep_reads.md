@@ -4121,6 +4121,8 @@
 
 - [Causal isotonic regression](deep_reads/2026-06-22-1810.03269.md)  
   9/10 [manual]
+- [Optimal Inference of the Mean Outcome under Optimal Treatment Regime](deep_reads/2026-10-14-2509.09773.md)  
+  8/10 [manual]
 - [Stochastic interventions, sensitivity analysis, and optimal transport](deep_reads/2026-08-31-2411.14285.md)  
   8/10 [manual]
 - [Incremental effects for continuous exposures](deep_reads/2026-08-31-2409.11967.md)  
@@ -15526,6 +15528,12 @@
 
 ### Daily
 
+- [Milne's rationality conjecture](deep_reads/2026-10-14-hexagon_2610.00226.md)  
+  0/10 [daily]
+- [A seven-eighths zero-free half-plane for unitary Weil L-functions](deep_reads/2026-10-14-hexagon_2610.00216.md)  
+  0/10 [daily]
+- [A zero-free strip for the $L$-functions of the elliptic curves $y^2=x^3+d$](deep_reads/2026-10-14-hexagon_2610.00220.md)  
+  0/10 [daily]
 - [An $N^{-7/10}$ Bound for the Finite-Size Bias of the Sherrington-Kirkpatrick Free Energy](deep_reads/2026-10-13-hexagon_2610.00177.md)  
   6/10 [daily]
 - [Finite quantum theta functions for skew-symmetrizable seeds](deep_reads/2026-10-13-hexagon_2610.00201.md)  
