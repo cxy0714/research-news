@@ -324,3 +324,44 @@ broad 组：
 - [x] (2026-08-05) `--only Nature --n-issues 8`   ⚠ 修复后每期含大量 online-first，dry-run 估 ~280 篇
 - [x] (2026-08-05) `--only "Nat. Commun." --n-issues 5`   ⚠⚠ 滚动刊、online-first 极多，dry-run 估 ~168 篇
 - [x] (2026-08-06) `--only "Nat. Methods" --n-issues 6`   （online-first 34/200，中等，补一轮）
+
+## 阶段六 · 补空档 + 新增 SIAM 两刊（2026-10-14 加入）
+
+> **空档是怎么算出来的**（不是猜的）：`logs/gap_analysis2.py` 把
+> ① `docs/journals` 的**页名**（= 我们实际渲染过哪些期，权威记录）
+> ∪ ② 历史日志里每次抓取的 `taking issues: [...]`
+> 与 ③ Crossref 上 **2026-04 起真实存在的期号** 做差集。
+> 结论：**11 本刊有空档，其余 27 本完全覆盖**（JMLR 走卷，不适用期号比对）。
+>
+> 每格的 `--n-issues` = 分析算出的「补到最老空档所需深度」**+2 余量**（万一分析之后
+> 又出了新期，也不至于把最老的洞挤出窗口）。去重保证已覆盖的期不会再花一分 token —
+> **只有洞本身会花钱**，所以 N 给足是安全的。
+>
+> **故意不补**：Epidemiology 的 `v37-S2` 是 SER 年会摘要增刊（99 条会议摘要，标题都是
+> poster 级），不是研究论文，补进来只会灌水。
+
+空档补齐（10 格）：
+- [ ] `--only JBES --n-issues 4`   （缺 v44-i4）
+- [ ] `--only MNRAS --n-issues 4`   （缺 v552-i4）⚠ 每期量大
+- [ ] `--only ApJS --n-issues 6`   （缺 v287-i1, v288-i1）⚠
+- [ ] `--only StatMed --n-issues 5`   （缺 v45-i18-19）⚠ 双周刊
+- [ ] `--only SMMR --n-issues 6`   （缺 v35-i7, v35-i8）
+- [ ] `--only AJE --n-issues 4`   （缺 v195-i9）
+- [ ] `--only JCGS --n-issues 4`   （缺 v35-i3）
+- [ ] `--only Science --n-issues 5`   （缺 v393-i6818）
+- [ ] `--only "Nat. Methods" --n-issues 5`   （缺 v23-i8）
+- [ ] `--only "Sci. Adv." --n-issues 4`   （缺 v12-i40）
+
+新增 SIAM 两刊（零覆盖；2026-10-14 加进 `config/journals.yaml` 的新组 `siam`）。
+两刊都是季刊（SIMODS 2026 = vol 8，JUQ 2026 = vol 14），**最新一期很薄**（实测
+SIMODS v8-i4 仅 2 篇、JUQ v14-i4 仅 5 篇），所以首轮直接用大 N；分三格递进，
+去重让后一格只补更老的期，单格 ≤~55 篇：
+- [ ] `--only SIMODS --n-issues 4`   （≈41 篇 ≈1 年）
+- [ ] `--only SIMODS --n-issues 6`   （再补更老一期）
+- [ ] `--only SIMODS --n-issues 8`   （再补约 55 篇，共 ≈2 年）
+- [ ] `--only JUQ --n-issues 4`   （≈48 篇 ≈1 年）
+- [ ] `--only JUQ --n-issues 6`   （再补更老一期）
+- [ ] `--only JUQ --n-issues 8`   （再补，共 ≈2 年）
+
+> 想再往前翻：把对应行的 N 继续加大重跑（例如 `--n-issues 16`），去重只会处理更老的新期。
+
