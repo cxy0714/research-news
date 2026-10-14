@@ -17,20 +17,116 @@
 
 [→ 查看完整报告](daily/2026-10-14.md)
 
-### 精读论文（46 篇）
+### 精读论文（99 篇）
 
+- [Estimation of Direct and Indirect Quantile Treatment Effects with Double Machine Learning](deep_reads/2026-10-14-10.1080_07350015.2026.2654889.md)  
+  `因果推断` · 相关性 8/10
+- [Deep Orthogonal Learner for Conditional Quantile Treatment Effect Estimation](deep_reads/2026-10-14-10.1080_07350015.2025.2569483.md)  
+  `因果推断` · 相关性 8/10
+- [Semiparametric Estimation of Treatment Effects in Observational Studies with Heterogeneous Partial Interference](deep_reads/2026-10-14-10.1080_07350015.2026.2635631.md)  
+  `因果推断` · 相关性 8/10
+- [Missing Endogenous Variables in Conditional Moment Restriction Models](deep_reads/2026-10-14-10.1080_07350015.2026.2619543.md)  
+  `因果推断` · 相关性 8/10
 - [Optimal Inference of the Mean Outcome under Optimal Treatment Regime](deep_reads/2026-10-14-2509.09773.md)  
   `因果推断` · 相关性 8/10
+- [Estimation of Factors Using Higher-Order Multi-Cumulants in Weak Factor Models](deep_reads/2026-10-14-10.1080_07350015.2026.2671240.md)  
+  `高维统计 / 随机矩阵` · 相关性 7/10
+- [Encompassing and Progression Testing in High-Dimensions](deep_reads/2026-10-14-10.1080_07350015.2026.2695448.md)  
+  `数理统计 / 假设检验` · 相关性 7/10
+- [Using a Special Regressor to Identify Type I and Type II Error Probabilities, With an Illustrative Application to Miscarriages of Justice](deep_reads/2026-10-14-10.1080_07350015.2026.2654891.md)  
+  `因果推断` · 相关性 7/10
+- [High-Dimensional Detection of Spatial Interference Effects](deep_reads/2026-10-14-10.1080_07350015.2025.2581341.md)  
+  `因果推断` · 相关性 7/10
+- [Partial Effects in Time-Varying Linear Transformation Panel Models with Endogeneity](deep_reads/2026-10-14-10.1080_07350015.2025.2566352.md)  
+  `因果推断` · 相关性 7/10
+- [Covariance Function Estimation for High-Dimensional Functional Time Series with Dual Factor Structures](deep_reads/2026-10-14-10.1080_07350015.2026.2637634.md)  
+  `高维统计 / 随机矩阵` · 相关性 7/10
+- [Distribution-Free Shrinkage of High-Dimensional Mean Vector](deep_reads/2026-10-14-10.1080_07350015.2026.2638490.md)  
+  `高维统计 / 随机矩阵` · 相关性 7/10
+- [A Panel Data Estimator for the Distribution and Quantiles of Marginal Effects in Nonlinear Structural Models with an Application to the Demand for Junk Food](deep_reads/2026-10-14-10.1080_07350015.2026.2635636.md)  
+  `因果推断` · 相关性 7/10
+- [Causal Inference Using Antidotal Variables](deep_reads/2026-10-14-10.1080_07350015.2026.2634820.md)  
+  `因果推断` · 相关性 7/10
+- [Invalid Proxies and Volatility Changes](deep_reads/2026-10-14-10.1080_07350015.2025.2602857.md)  
+  `因果推断` · 相关性 7/10
+- [Bounding Omitted Variable Bias Using Auxiliary Data: With an Application to Estimate Neighborhood Effects](deep_reads/2026-10-14-10.1080_07350015.2025.2606063.md)  
+  `因果推断` · 相关性 7/10
+- [From Penalization to Over-Parameterization: Achieving Implicit Regularization for High-Dimensional Linear Errors-in-Variables Models](deep_reads/2026-10-14-10.1080_07350015.2025.2583457.md)  
+  `高维统计 / 随机矩阵` · 相关性 7/10
+- [Regularized Interval-Valued Time Series Modeling](deep_reads/2026-10-14-10.1080_07350015.2026.2675481.md)  
+  `其他` · 相关性 6/10
+- [Factor Model Based Estimation for High Dimensional Reduced-Rank Time Series](deep_reads/2026-10-14-10.1080_07350015.2026.2681740.md)  
+  `高维统计 / 随机矩阵` · 相关性 6/10
+- [Sparsity-Induced Identification of Factor-Augmented VAR Models](deep_reads/2026-10-14-10.1080_07350015.2026.2671238.md)  
+  `经济理论 / 应用` · 相关性 6/10
+- [Factor-Augmented Sparse MIDAS Regressions with an Application to Nowcasting](deep_reads/2026-10-14-10.1080_07350015.2026.2649055.md)  
+  `其他` · 相关性 6/10
+- [Design of Bayesian A/B Tests Controlling False Discovery Rates and Power](deep_reads/2026-10-14-10.1080_07350015.2025.2572770.md)  
+  `数理统计 / 假设检验` · 相关性 6/10
+- [Robust Factor Analysis for High-Dimensional Data with Outliers](deep_reads/2026-10-14-10.1080_07350015.2025.2569730.md)  
+  `高维统计 / 随机矩阵` · 相关性 6/10
+- [Binary Outcomes and Linear Interactions](deep_reads/2026-10-14-10.1080_07350015.2025.2565281.md)  
+  `因果推断` · 相关性 6/10
+- [Testing for Change-Points in Heavy-Tailed Time Series—A Winsorized CUSUM Approach](deep_reads/2026-10-14-10.1080_07350015.2025.2561747.md)  
+  `数理统计 / 假设检验` · 相关性 6/10
+- [High-Dimensional Quantile Vector Autoregression with Influencers and Communities](deep_reads/2026-10-14-10.1080_07350015.2025.2551249.md)  
+  `高维统计 / 随机矩阵` · 相关性 6/10
+- [A Network View on Portfolio Risk](deep_reads/2026-10-14-10.1080_07350015.2026.2634827.md)  
+  `其他` · 相关性 6/10
+- [High-Dimensional Multivariate Realized Volatility Forecasting with Community Network Structure](deep_reads/2026-10-14-10.1080_07350015.2026.2632810.md)  
+  `其他` · 相关性 6/10
+- [High Dimensional Threshold Factor Models with Common Stochastic Trends](deep_reads/2026-10-14-10.1080_07350015.2026.2621765.md)  
+  `高维统计 / 随机矩阵` · 相关性 6/10
+- [Gradient Wild Bootstrap for Instrumental Variable Quantile Regressions with Weak and Few Clusters](deep_reads/2026-10-14-10.1080_07350015.2026.2618311.md)  
+  `因果推断` · 相关性 6/10
+- [Unit Averaging for Heterogeneous Panels](deep_reads/2026-10-14-10.1080_07350015.2025.2584579.md)  
+  `其他` · 相关性 6/10
+- [Joint Extreme Value-at-Risk and Expected Shortfall Dynamics with a Single Integrated Tail Shape Parameter](deep_reads/2026-10-14-10.1080_07350015.2026.2619541.md)  
+  `其他` · 相关性 6/10
+- [Dynamic CoVaR Modeling and Estimation](deep_reads/2026-10-14-10.1080_07350015.2025.2590126.md)  
+  `其他` · 相关性 6/10
 - [Cram$\acute{\text{e}}$r-Rao Bounds for Laplacian Matrix Estimation](deep_reads/2026-10-14-10.1109_tsp.2025.3646236.md)  
   `数理统计 / 假设检验` · 相关性 6/10
 - [Compressive Toeplitz Covariance Estimation From Few-Bit Quantized Measurements With Applications to DOA Estimation](deep_reads/2026-10-14-10.1109_tsp.2026.3727446.md)  
   `高维统计 / 随机矩阵` · 相关性 6/10
 - [Sensitivity Analysis in Translation Averaging](deep_reads/2026-10-14-10.1109_tpami.2026.3722795.md)  
   `其他` · 相关性 6/10
+- [Panel Stochastic Frontier Models with Latent Group Structures](deep_reads/2026-10-14-10.1080_07350015.2026.2667765.md)  
+  `其他` · 相关性 5/10
+- [CCE Estimation of Heterogeneous Panel Quantile Regression Models with Relatively Small <i>T</i>](deep_reads/2026-10-14-10.1080_07350015.2026.2641575.md)  
+  `非参数 / 半参数` · 相关性 5/10
+- [Bootstrap Model Averaging](deep_reads/2026-10-14-10.1080_07350015.2026.2643017.md)  
+  `数理统计 / 假设检验` · 相关性 5/10
+- [Inference on Dynamic Spatial Autoregressive Models with Change Point Detection](deep_reads/2026-10-14-10.1080_07350015.2025.2572768.md)  
+  `经济理论 / 应用` · 相关性 5/10
+- [Time-Varying High Quantile Estimation for Nonstationary Tail Dependent Time Series](deep_reads/2026-10-14-10.1080_07350015.2025.2554669.md)  
+  `非参数 / 半参数` · 相关性 5/10
+- [The Permanent and Temporary Effects of Stock Splits on Liquidity in a Dynamic Semiparametric Model](deep_reads/2026-10-14-10.1080_07350015.2025.2551246.md)  
+  `其他` · 相关性 5/10
+- [Adaptive LAD-Based Bootstrap Unit Root Tests Under Unconditional Heteroscedasticity](deep_reads/2026-10-14-10.1080_07350015.2026.2638489.md)  
+  `数理统计 / 假设检验` · 相关性 5/10
+- [How to Compare Copula Forecasts?](deep_reads/2026-10-14-10.1080_07350015.2025.2602855.md)  
+  `数理统计 / 假设检验` · 相关性 5/10
+- [Bayesian Methodology for Adaptive Sparsity and Shrinkage in Regression](deep_reads/2026-10-14-10.1080_07350015.2025.2592349.md)  
+  `其他` · 相关性 5/10
+- [Change-Point Detection in Time Series Using Mixed Integer Programming](deep_reads/2026-10-14-10.1080_07350015.2025.2583203.md)  
+  `其他` · 相关性 5/10
+- [Smoothing Variances Across Time: Adaptive Stochastic Volatility](deep_reads/2026-10-14-10.1080_07350015.2025.2602846.md)  
+  `其他` · 相关性 5/10
+- [Disentangling Structural Breaks in Factor Models for Macroeconomic Data](deep_reads/2026-10-14-10.1080_07350015.2025.2583205.md)  
+  `其他` · 相关性 5/10
 - [Conditional Score Learning for Quickest Change Detection in Markov Transition Kernels](deep_reads/2026-10-14-10.1109_tsp.2026.3718274.md)  
   `数理统计 / 假设检验` · 相关性 5/10
 - [On the Convergence of Decentralized Stochastic Gradient-Tracking With Finite-Time Consensus](deep_reads/2026-10-14-10.1109_tsp.2026.3667215.md)  
   `统计计算 / 算法` · 相关性 5/10
+- [Differentially Private Computation of the Gini Index for Income Inequality](deep_reads/2026-10-14-10.1080_07350015.2026.2676673.md)  
+  `其他` · 相关性 4/10
+- [Graphical Copula GARCH Modeling with Dynamic Conditional Dependence](deep_reads/2026-10-14-10.1080_07350015.2026.2654714.md)  
+  `其他` · 相关性 4/10
+- [Estimating the Natural Rate of Interest in a Macro-Finance Yield Curve Model](deep_reads/2026-10-14-10.1080_07350015.2025.2561409.md)  
+  `经济理论 / 应用` · 相关性 4/10
+- [Regime-Specific Return Predictability in Quantiles](deep_reads/2026-10-14-10.1080_07350015.2025.2573151.md)  
+  `数理统计 / 假设检验` · 相关性 4/10
 - [Multi-Fidelity Bayesian Optimization for Nash Equilibria With Black-Box Utilities](deep_reads/2026-10-14-10.1109_tsp.2026.3670206.md)  
   `其他` · 相关性 4/10
 - [Unified Implicit Sparsity-Inducing Regularizers for Robust Sparse Signal Recovery](deep_reads/2026-10-14-10.1109_tsp.2026.3684761.md)  
@@ -105,6 +201,16 @@
   `其他` · 相关性 1/10
 - [TopoMLP++: Toward Strong and Scalable Lane Topology Reasoning in Autonomous Driving](deep_reads/2026-10-14-10.1109_tpami.2026.3721163.md)  
   `其他` · 相关性 1/10
+- [Closed Form Estimators for a Class of Semiparametric Multinomial Choice Models](deep_reads/2026-10-14-10.1080_07350015.2026.2710360.md)  
+  `非参数 / 半参数` · 相关性 0/10
+- [Generalized Autoregressive Score Trees and Forests](deep_reads/2026-10-14-10.1080_07350015.2026.2674742.md)  
+  `其他` · 相关性 0/10
+- [Estimation and Inference for Multi-Threshold Regression with Endogeneity](deep_reads/2026-10-14-10.1080_07350015.2026.2668046.md)  
+  `因果推断` · 相关性 0/10
+- [Moment-Integrated Bias-Adjusted Spectral Method for Community Detection in Multi-Layer Networks](deep_reads/2026-10-14-10.1080_07350015.2026.2658865.md)  
+  `高维统计 / 随机矩阵` · 相关性 0/10
+- [Design Strategies for Networked Experiments via Interference Balancing](deep_reads/2026-10-14-10.1080_07350015.2026.2658067.md)  
+  `因果推断` · 相关性 0/10
 - [Milne's rationality conjecture](deep_reads/2026-10-14-hexagon_2610.00226.md)  
   `其他` · 相关性 0/10
 - [A seven-eighths zero-free half-plane for unitary Weil L-functions](deep_reads/2026-10-14-hexagon_2610.00216.md)  

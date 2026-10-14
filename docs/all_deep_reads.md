@@ -1235,6 +1235,55 @@
 
 ### 期刊
 
+#### Journal of Business & Economic Statistics Vol 44 Issue 4
+
+- [Semiparametric Estimation of Treatment Effects in Observational Studies with Heterogeneous Partial Interference](deep_reads/2026-10-14-10.1080_07350015.2026.2635631.md)  
+  8/10 [journals]
+- [Missing Endogenous Variables in Conditional Moment Restriction Models](deep_reads/2026-10-14-10.1080_07350015.2026.2619543.md)  
+  8/10 [journals]
+- [A Panel Data Estimator for the Distribution and Quantiles of Marginal Effects in Nonlinear Structural Models with an Application to the Demand for Junk Food](deep_reads/2026-10-14-10.1080_07350015.2026.2635636.md)  
+  7/10 [journals]
+- [Causal Inference Using Antidotal Variables](deep_reads/2026-10-14-10.1080_07350015.2026.2634820.md)  
+  7/10 [journals]
+- [Invalid Proxies and Volatility Changes](deep_reads/2026-10-14-10.1080_07350015.2025.2602857.md)  
+  7/10 [journals]
+- [Bounding Omitted Variable Bias Using Auxiliary Data: With an Application to Estimate Neighborhood Effects](deep_reads/2026-10-14-10.1080_07350015.2025.2606063.md)  
+  7/10 [journals]
+- [Gradient Wild Bootstrap for Instrumental Variable Quantile Regressions with Weak and Few Clusters](deep_reads/2026-10-14-10.1080_07350015.2026.2618311.md)  
+  6/10 [journals]
+
+#### Journal of Business & Economic Statistics Vol 44 Issue 3
+
+- [Deep Orthogonal Learner for Conditional Quantile Treatment Effect Estimation](deep_reads/2026-10-14-10.1080_07350015.2025.2569483.md)  
+  8/10 [journals]
+- [High-Dimensional Detection of Spatial Interference Effects](deep_reads/2026-10-14-10.1080_07350015.2025.2581341.md)  
+  7/10 [journals]
+- [Partial Effects in Time-Varying Linear Transformation Panel Models with Endogeneity](deep_reads/2026-10-14-10.1080_07350015.2025.2566352.md)  
+  7/10 [journals]
+- [Binary Outcomes and Linear Interactions](deep_reads/2026-10-14-10.1080_07350015.2025.2565281.md)  
+  6/10 [journals]
+
+#### Journal of Business & Economic Statistics
+
+- [Estimation of Direct and Indirect Quantile Treatment Effects with Double Machine Learning](deep_reads/2026-10-14-10.1080_07350015.2026.2654889.md)  
+  8/10 [journals]
+- [Changes-in-Changes for Ordered Choice Models with Underreporting](deep_reads/2026-10-12-10.1080_07350015.2026.2732285.md)  
+  8/10 [journals]
+- [A Simple Transformation Approach to Difference-in-Differences Estimation for Panel Data](deep_reads/2026-10-12-10.1080_07350015.2026.2683047.md)  
+  8/10 [journals]
+- [Using a Special Regressor to Identify Type I and Type II Error Probabilities, With an Illustrative Application to Miscarriages of Justice](deep_reads/2026-10-14-10.1080_07350015.2026.2654891.md)  
+  7/10 [journals]
+- [Threshold Regression with Errors-in-Variables](deep_reads/2026-10-12-10.1080_07350015.2026.2669269.md)  
+  7/10 [journals]
+- [Estimating Unobserved Cross-Sectional Network Links with Large-T Panel Data](deep_reads/2026-10-12-10.1080_07350015.2026.2721418.md)  
+  5/10 [journals]
+- [Prediction with Differential Covariate Classification: Illustrated by Covariate Classification in Medical Risk Assessment](deep_reads/2026-10-12-10.1080_07350015.2026.2680059.md)  
+  5/10 [journals]
+- [Estimation and Inference for Multi-Threshold Regression with Endogeneity](deep_reads/2026-10-14-10.1080_07350015.2026.2668046.md)  
+  0/10 [journals]
+- [Design Strategies for Networked Experiments via Interference Balancing](deep_reads/2026-10-14-10.1080_07350015.2026.2658067.md)  
+  0/10 [journals]
+
 #### IEEE Transactions on Pattern Analysis and Machine Intelligence Vol 48 Issue 11
 
 - [BRFedTD: A Novel Framework for Federated Reinforcement Learning With Byzantine-Resilient Policy Evaluation](deep_reads/2026-10-14-10.1109_tpami.2026.3713184.md)  
@@ -1353,19 +1402,6 @@
   8/10 [journals]
 - [Estimation and inference on average treatment effect in percentage points under heterogeneity](deep_reads/2026-10-12-10.1016_j.jeconom.2026.106303.md)  
   7/10 [journals]
-
-#### Journal of Business & Economic Statistics
-
-- [Changes-in-Changes for Ordered Choice Models with Underreporting](deep_reads/2026-10-12-10.1080_07350015.2026.2732285.md)  
-  8/10 [journals]
-- [A Simple Transformation Approach to Difference-in-Differences Estimation for Panel Data](deep_reads/2026-10-12-10.1080_07350015.2026.2683047.md)  
-  8/10 [journals]
-- [Threshold Regression with Errors-in-Variables](deep_reads/2026-10-12-10.1080_07350015.2026.2669269.md)  
-  7/10 [journals]
-- [Estimating Unobserved Cross-Sectional Network Links with Large-T Panel Data](deep_reads/2026-10-12-10.1080_07350015.2026.2721418.md)  
-  5/10 [journals]
-- [Prediction with Differential Covariate Classification: Illustrated by Covariate Classification in Medical Risk Assessment](deep_reads/2026-10-12-10.1080_07350015.2026.2680059.md)  
-  5/10 [journals]
 
 #### Epidemiology Vol 37 Issue 6
 
@@ -4387,6 +4423,39 @@
 
 ### 期刊
 
+#### Journal of Business & Economic Statistics Vol 44 Issue 4
+
+- [Covariance Function Estimation for High-Dimensional Functional Time Series with Dual Factor Structures](deep_reads/2026-10-14-10.1080_07350015.2026.2637634.md)  
+  7/10 [journals]
+- [Distribution-Free Shrinkage of High-Dimensional Mean Vector](deep_reads/2026-10-14-10.1080_07350015.2026.2638490.md)  
+  7/10 [journals]
+- [From Penalization to Over-Parameterization: Achieving Implicit Regularization for High-Dimensional Linear Errors-in-Variables Models](deep_reads/2026-10-14-10.1080_07350015.2025.2583457.md)  
+  7/10 [journals]
+- [High Dimensional Threshold Factor Models with Common Stochastic Trends](deep_reads/2026-10-14-10.1080_07350015.2026.2621765.md)  
+  6/10 [journals]
+
+#### Journal of Business & Economic Statistics Vol 44 Issue 3
+
+- [Robust Factor Analysis for High-Dimensional Data with Outliers](deep_reads/2026-10-14-10.1080_07350015.2025.2569730.md)  
+  6/10 [journals]
+- [High-Dimensional Quantile Vector Autoregression with Influencers and Communities](deep_reads/2026-10-14-10.1080_07350015.2025.2551249.md)  
+  6/10 [journals]
+
+#### Journal of Business & Economic Statistics
+
+- [Estimation of Factors Using Higher-Order Multi-Cumulants in Weak Factor Models](deep_reads/2026-10-14-10.1080_07350015.2026.2671240.md)  
+  7/10 [journals]
+- [Bias Correction in Factor-Augmented Regression Models with Weak Factors](deep_reads/2026-10-12-10.1080_07350015.2026.2695989.md)  
+  7/10 [journals]
+- [Factor Model Based Estimation for High Dimensional Reduced-Rank Time Series](deep_reads/2026-10-14-10.1080_07350015.2026.2681740.md)  
+  6/10 [journals]
+- [High-Dimensional Sliced Inverse Kendall’s Tau Estimation for Heavy-Tailed Data](deep_reads/2026-10-12-10.1080_07350015.2026.2707219.md)  
+  6/10 [journals]
+- [Matrix Quantile Factor Model](deep_reads/2026-10-12-10.1080_07350015.2026.2719893.md)  
+  6/10 [journals]
+- [Moment-Integrated Bias-Adjusted Spectral Method for Community Detection in Multi-Layer Networks](deep_reads/2026-10-14-10.1080_07350015.2026.2658865.md)  
+  0/10 [journals]
+
 #### IEEE Transactions on Signal Processing Vol 74
 
 - [Compressive Toeplitz Covariance Estimation From Few-Bit Quantized Measurements With Applications to DOA Estimation](deep_reads/2026-10-14-10.1109_tsp.2026.3727446.md)  
@@ -4431,15 +4500,6 @@
 
 - [Spatial-Sign based Robust Sparse Precision Matrix Estimation and its Applications](deep_reads/2026-10-12-10.1080_10618600.2026.2743036.md)  
   7/10 [journals]
-
-#### Journal of Business & Economic Statistics
-
-- [Bias Correction in Factor-Augmented Regression Models with Weak Factors](deep_reads/2026-10-12-10.1080_07350015.2026.2695989.md)  
-  7/10 [journals]
-- [High-Dimensional Sliced Inverse Kendall’s Tau Estimation for Heavy-Tailed Data](deep_reads/2026-10-12-10.1080_07350015.2026.2707219.md)  
-  6/10 [journals]
-- [Matrix Quantile Factor Model](deep_reads/2026-10-12-10.1080_07350015.2026.2719893.md)  
-  6/10 [journals]
 
 #### Statistica Sinica
 
@@ -5962,6 +6022,22 @@
 
 ### 期刊
 
+#### Journal of Business & Economic Statistics Vol 44 Issue 3
+
+- [Time-Varying High Quantile Estimation for Nonstationary Tail Dependent Time Series](deep_reads/2026-10-14-10.1080_07350015.2025.2554669.md)  
+  5/10 [journals]
+
+#### Journal of Business & Economic Statistics
+
+- [Specification LASSO and a Flexible Characteristics-Based Asset Pricing Model](deep_reads/2026-10-12-10.1080_07350015.2026.2729095.md)  
+  7/10 [journals]
+- [Multiscale Comparison of Nonparametric Trend Curves](deep_reads/2026-10-12-10.1080_07350015.2026.2682538.md)  
+  7/10 [journals]
+- [CCE Estimation of Heterogeneous Panel Quantile Regression Models with Relatively Small <i>T</i>](deep_reads/2026-10-14-10.1080_07350015.2026.2641575.md)  
+  5/10 [journals]
+- [Closed Form Estimators for a Class of Semiparametric Multinomial Choice Models](deep_reads/2026-10-14-10.1080_07350015.2026.2710360.md)  
+  0/10 [journals]
+
 #### Technometrics
 
 - [Nonparametric Feature Screening for Non-Euclidean Data](deep_reads/2026-10-13-10.1080_00401706.2026.2735885.md)  
@@ -5995,13 +6071,6 @@
 
 - [Bayesian Penalized Transformation Models: Structured Additive Location-Scale Regression for Arbitrary Conditional Distributions](deep_reads/2026-10-12-10.1080_10618600.2026.2703269.md)  
   6/10 [journals]
-
-#### Journal of Business & Economic Statistics
-
-- [Specification LASSO and a Flexible Characteristics-Based Asset Pricing Model](deep_reads/2026-10-12-10.1080_07350015.2026.2729095.md)  
-  7/10 [journals]
-- [Multiscale Comparison of Nonparametric Trend Curves](deep_reads/2026-10-12-10.1080_07350015.2026.2682538.md)  
-  7/10 [journals]
 
 #### Statistica Sinica
 
@@ -8783,6 +8852,39 @@
 
 ### 期刊
 
+#### Journal of Business & Economic Statistics Vol 44 Issue 4
+
+- [Adaptive LAD-Based Bootstrap Unit Root Tests Under Unconditional Heteroscedasticity](deep_reads/2026-10-14-10.1080_07350015.2026.2638489.md)  
+  5/10 [journals]
+- [How to Compare Copula Forecasts?](deep_reads/2026-10-14-10.1080_07350015.2025.2602855.md)  
+  5/10 [journals]
+
+#### Journal of Business & Economic Statistics Vol 44 Issue 3
+
+- [Design of Bayesian A/B Tests Controlling False Discovery Rates and Power](deep_reads/2026-10-14-10.1080_07350015.2025.2572770.md)  
+  6/10 [journals]
+- [Testing for Change-Points in Heavy-Tailed Time Series—A Winsorized CUSUM Approach](deep_reads/2026-10-14-10.1080_07350015.2025.2561747.md)  
+  6/10 [journals]
+- [Regime-Specific Return Predictability in Quantiles](deep_reads/2026-10-14-10.1080_07350015.2025.2573151.md)  
+  4/10 [journals]
+
+#### Journal of Business & Economic Statistics
+
+- [Encompassing and Progression Testing in High-Dimensions](deep_reads/2026-10-14-10.1080_07350015.2026.2695448.md)  
+  7/10 [journals]
+- [Testing High-Dimensional Effects in Quantile Regression with High-Dimensional Confounding: A Decorrelated Approach](deep_reads/2026-10-12-10.1080_07350015.2026.2737286.md)  
+  7/10 [journals]
+- [Model-Free and Distributionally Robust Feature Screening with False Discovery Control for High-Dimensional Heterogeneous Data](deep_reads/2026-10-12-10.1080_07350015.2026.2703863.md)  
+  7/10 [journals]
+- [Testing Alphas in Linear Factor Models: A Portfolio Approach](deep_reads/2026-10-12-10.1080_07350015.2026.2734092.md)  
+  6/10 [journals]
+- [Extremal Local Linear Quantile Regression for Heavy-Tailed Time Series with near Epoch Dependence](deep_reads/2026-10-12-10.1080_07350015.2026.2691740.md)  
+  6/10 [journals]
+- [Bootstrap Model Averaging](deep_reads/2026-10-14-10.1080_07350015.2026.2643017.md)  
+  5/10 [journals]
+- [Self-Normalized Tests for Skewness, Kurtosis, and Normality for Time Series Data](deep_reads/2026-10-12-10.1080_07350015.2026.2696492.md)  
+  5/10 [journals]
+
 #### IEEE Transactions on Signal Processing Vol 74
 
 - [Cram$\acute{\text{e}}$r-Rao Bounds for Laplacian Matrix Estimation](deep_reads/2026-10-14-10.1109_tsp.2025.3646236.md)  
@@ -8879,19 +8981,6 @@
   5/10 [journals]
 - [Sequential Bootstrap for More Powerful Similarity Test](deep_reads/2026-10-12-10.1080_10618600.2026.2652918.md)  
   4/10 [journals]
-
-#### Journal of Business & Economic Statistics
-
-- [Testing High-Dimensional Effects in Quantile Regression with High-Dimensional Confounding: A Decorrelated Approach](deep_reads/2026-10-12-10.1080_07350015.2026.2737286.md)  
-  7/10 [journals]
-- [Model-Free and Distributionally Robust Feature Screening with False Discovery Control for High-Dimensional Heterogeneous Data](deep_reads/2026-10-12-10.1080_07350015.2026.2703863.md)  
-  7/10 [journals]
-- [Testing Alphas in Linear Factor Models: A Portfolio Approach](deep_reads/2026-10-12-10.1080_07350015.2026.2734092.md)  
-  6/10 [journals]
-- [Extremal Local Linear Quantile Regression for Heavy-Tailed Time Series with near Epoch Dependence](deep_reads/2026-10-12-10.1080_07350015.2026.2691740.md)  
-  6/10 [journals]
-- [Self-Normalized Tests for Skewness, Kurtosis, and Normality for Time Series Data](deep_reads/2026-10-12-10.1080_07350015.2026.2696492.md)  
-  5/10 [journals]
 
 #### Statistica Sinica
 
@@ -12940,22 +13029,28 @@
 
 ### 期刊
 
-#### Journal of Econometrics Vol 258
-
-- [Clustering with potential multidimensionality: Inference and practice](deep_reads/2026-10-12-10.1016_j.jeconom.2026.106321.md)  
-  7/10 [journals]
-
 #### Journal of Business & Economic Statistics Vol 44 Issue 3
 
+- [Inference on Dynamic Spatial Autoregressive Models with Change Point Detection](deep_reads/2026-10-14-10.1080_07350015.2025.2572768.md)  
+  5/10 [journals]
 - [Do Asset Prices Help Predict Inflation? Evidence from Individual Stock Prices](deep_reads/2026-10-12-10.1080_07350015.2026.2654899.md)  
   5/10 [journals]
+- [Estimating the Natural Rate of Interest in a Macro-Finance Yield Curve Model](deep_reads/2026-10-14-10.1080_07350015.2025.2561409.md)  
+  4/10 [journals]
 
 #### Journal of Business & Economic Statistics
 
+- [Sparsity-Induced Identification of Factor-Augmented VAR Models](deep_reads/2026-10-14-10.1080_07350015.2026.2671238.md)  
+  6/10 [journals]
 - [Asymptotic Distributions of Nonlinear Least Squares Estimators for Panel-MIDAS Models](deep_reads/2026-10-12-10.1080_07350015.2026.2707220.md)  
   6/10 [journals]
 - [Fast and Efficient Estimation of Macromodels with Large Shocks](deep_reads/2026-10-12-10.1080_07350015.2026.2740570.md)  
   4/10 [journals]
+
+#### Journal of Econometrics Vol 258
+
+- [Clustering with potential multidimensionality: Inference and practice](deep_reads/2026-10-12-10.1016_j.jeconom.2026.106321.md)  
+  7/10 [journals]
 
 #### Econometrica Vol 94 Issue 5
 
@@ -15731,6 +15826,57 @@
 
 ### 期刊
 
+#### Journal of Business & Economic Statistics Vol 44 Issue 4
+
+- [A Network View on Portfolio Risk](deep_reads/2026-10-14-10.1080_07350015.2026.2634827.md)  
+  6/10 [journals]
+- [High-Dimensional Multivariate Realized Volatility Forecasting with Community Network Structure](deep_reads/2026-10-14-10.1080_07350015.2026.2632810.md)  
+  6/10 [journals]
+- [Unit Averaging for Heterogeneous Panels](deep_reads/2026-10-14-10.1080_07350015.2025.2584579.md)  
+  6/10 [journals]
+- [Joint Extreme Value-at-Risk and Expected Shortfall Dynamics with a Single Integrated Tail Shape Parameter](deep_reads/2026-10-14-10.1080_07350015.2026.2619541.md)  
+  6/10 [journals]
+- [Dynamic CoVaR Modeling and Estimation](deep_reads/2026-10-14-10.1080_07350015.2025.2590126.md)  
+  6/10 [journals]
+- [Bayesian Methodology for Adaptive Sparsity and Shrinkage in Regression](deep_reads/2026-10-14-10.1080_07350015.2025.2592349.md)  
+  5/10 [journals]
+- [Change-Point Detection in Time Series Using Mixed Integer Programming](deep_reads/2026-10-14-10.1080_07350015.2025.2583203.md)  
+  5/10 [journals]
+- [Smoothing Variances Across Time: Adaptive Stochastic Volatility](deep_reads/2026-10-14-10.1080_07350015.2025.2602846.md)  
+  5/10 [journals]
+- [Disentangling Structural Breaks in Factor Models for Macroeconomic Data](deep_reads/2026-10-14-10.1080_07350015.2025.2583205.md)  
+  5/10 [journals]
+
+#### Journal of Business & Economic Statistics Vol 44 Issue 3
+
+- [The Permanent and Temporary Effects of Stock Splits on Liquidity in a Dynamic Semiparametric Model](deep_reads/2026-10-14-10.1080_07350015.2025.2551246.md)  
+  5/10 [journals]
+
+#### Journal of Business & Economic Statistics
+
+- [Regularized Interval-Valued Time Series Modeling](deep_reads/2026-10-14-10.1080_07350015.2026.2675481.md)  
+  6/10 [journals]
+- [Factor-Augmented Sparse MIDAS Regressions with an Application to Nowcasting](deep_reads/2026-10-14-10.1080_07350015.2026.2649055.md)  
+  6/10 [journals]
+- [Approximate Factor Models for Functional Time Series](deep_reads/2026-10-12-10.1080_07350015.2026.2736042.md)  
+  6/10 [journals]
+- [Geometric Model Averaging](deep_reads/2026-10-12-10.1080_07350015.2026.2683048.md)  
+  6/10 [journals]
+- [Panel Stochastic Frontier Models with Latent Group Structures](deep_reads/2026-10-14-10.1080_07350015.2026.2667765.md)  
+  5/10 [journals]
+- [A Flexible Approach to Augmenting a Bayesian VAR with Nonlinear Factors](deep_reads/2026-10-12-10.1080_07350015.2026.2703238.md)  
+  5/10 [journals]
+- [Robust Estimation of Double Autoregressive Models via Normal Mixture QMLE](deep_reads/2026-10-12-10.1080_07350015.2026.2705382.md)  
+  5/10 [journals]
+- [Multi-Matrix Autoregressive Models with an Application to Multi-Modal Network](deep_reads/2026-10-12-10.1080_07350015.2026.2682541.md)  
+  5/10 [journals]
+- [Differentially Private Computation of the Gini Index for Income Inequality](deep_reads/2026-10-14-10.1080_07350015.2026.2676673.md)  
+  4/10 [journals]
+- [Graphical Copula GARCH Modeling with Dynamic Conditional Dependence](deep_reads/2026-10-14-10.1080_07350015.2026.2654714.md)  
+  4/10 [journals]
+- [Generalized Autoregressive Score Trees and Forests](deep_reads/2026-10-14-10.1080_07350015.2026.2674742.md)  
+  0/10 [journals]
+
 #### IEEE Transactions on Signal Processing Vol 74
 
 - [Multi-Fidelity Bayesian Optimization for Nash Equilibria With Black-Box Utilities](deep_reads/2026-10-14-10.1109_tsp.2026.3670206.md)  
@@ -16530,19 +16676,6 @@
   4/10 [journals]
 - [Representation Learning of Dynamic Networks](deep_reads/2026-10-12-10.1080_10618600.2026.2705295.md)  
   4/10 [journals]
-
-#### Journal of Business & Economic Statistics
-
-- [Approximate Factor Models for Functional Time Series](deep_reads/2026-10-12-10.1080_07350015.2026.2736042.md)  
-  6/10 [journals]
-- [Geometric Model Averaging](deep_reads/2026-10-12-10.1080_07350015.2026.2683048.md)  
-  6/10 [journals]
-- [A Flexible Approach to Augmenting a Bayesian VAR with Nonlinear Factors](deep_reads/2026-10-12-10.1080_07350015.2026.2703238.md)  
-  5/10 [journals]
-- [Robust Estimation of Double Autoregressive Models via Normal Mixture QMLE](deep_reads/2026-10-12-10.1080_07350015.2026.2705382.md)  
-  5/10 [journals]
-- [Multi-Matrix Autoregressive Models with an Application to Multi-Modal Network](deep_reads/2026-10-12-10.1080_07350015.2026.2682541.md)  
-  5/10 [journals]
 
 #### Scandinavian Journal of Statistics Vol 53 Issue 3
 

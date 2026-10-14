@@ -339,6 +339,8 @@
 
 ### JBES
 
+- [Vol 44 Issue 4 · 2026-10-14](journals/2026-10-14-jbes-v44-i4.md)
+- [Vol 44 Issue 3 · 2026-10-14](journals/2026-10-14-jbes-v44-i3.md)
 - [Vol 44 Issue 3 · 2026-10-12](journals/2026-10-12-jbes-v44-i3.md)
 - [Vol 44 Issue 2 · 2026-06-07](journals/2026-06-07-jbes-v44-i2.md)
 - [Vol 44 Issue 1 · 2026-06-21](journals/2026-06-21-jbes-v44-i1.md)
@@ -362,6 +364,7 @@
 - [Vol 40 Issue 1 · 2026-07-19](journals/2026-07-19-jbes-v40-i1.md)
 - [Vol 39 Issue 4 · 2026-07-19](journals/2026-07-19-jbes-v39-i4.md)
 - [Vol 39 Issue 3 · 2026-07-19](journals/2026-07-19-jbes-v39-i3.md)
+- [2026-10-14](journals/2026-10-14-jbes.md)
 - [2026-10-12](journals/2026-10-12-jbes.md)
 
 ### Quant. Econ.
