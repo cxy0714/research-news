@@ -342,7 +342,7 @@ broad 组：
 
 空档补齐（10 格）：
 - [x] (2026-10-14) `--only JBES --n-issues 4`   （缺 v44-i4）
-- [ ] `--only MNRAS --n-issues 4`   （缺 v552-i4）⚠ 每期量大
+- [x] (2026-10-15) `--only MNRAS --n-issues 4`   （缺 v552-i4）⚠ 每期量大
 - [ ] `--only ApJS --n-issues 6`   （缺 v287-i1, v288-i1）⚠
 - [ ] `--only StatMed --n-issues 5`   （缺 v45-i18-19）⚠ 双周刊
 - [ ] `--only SMMR --n-issues 6`   （缺 v35-i7, v35-i8）
