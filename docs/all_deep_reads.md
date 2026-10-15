@@ -12612,6 +12612,132 @@
 - [Ten years since the NGC 6334I-MM1 accretion outburst: the impact on its environment](deep_reads/2026-10-15-10.1093_mnras_stag1845.md)  
   2/10 [journals]
 
+#### Astrophysical Journal Supplement Series Vol 288 Issue 1
+
+- [Correlation of Diffusion Upstream of Shocks with Their Magnetic Compression: An Application of IMAP’s Living Catalog of Interplanetary Shocks](deep_reads/2026-10-15-10.3847_1538-4365_aea973.md)  
+  3/10 [journals]
+- [Survival Probabilities of Heliospheric Energetic Neutral Atoms Observed by the Interstellar Mapping and Acceleration Probe (IMAP)](deep_reads/2026-10-15-10.3847_1538-4365_ae9b02.md)  
+  3/10 [journals]
+
+#### Astrophysical Journal Supplement Series Vol 287 Issue 1
+
+- [Decoding Fast Radio Burst Energetics and Frequency Features Hidden by Observational Incompleteness](deep_reads/2026-10-15-10.3847_1538-4365_aea6bb.md)  
+  7/10 [journals]
+- [BOSS-CLAM: Utilizing a Constrained Linear Absorption Model to Infer Stellar Parameters from BOSS Spectra](deep_reads/2026-10-15-10.3847_1538-4365_aea56f.md)  
+  6/10 [journals]
+- [Searching for Green Pea Galaxies in the SFACT Survey](deep_reads/2026-10-15-10.3847_1538-4365_aea97c.md)  
+  6/10 [journals]
+- [Hemispheric Distribution of Long-term Solar Activity: Coronal Bright Points from 1996 to 2023](deep_reads/2026-10-15-10.3847_1538-4365_aea082.md)  
+  6/10 [journals]
+- [The Montreal Open Clusters and Associations (MOCA) Database: A Census of Nearby Associations, Open Clusters, and Young Substellar Objects within 500 pc of the Sun](deep_reads/2026-10-15-10.3847_1538-4365_ae9b09.md)  
+  4/10 [journals]
+
+#### Astrophysical Journal Supplement Series Vol 286 Issue 1
+
+- [Fine-grained Classification of Unknown Fermi LAT 4FGL-DR4 Sources with Spectral and Uncertainty Information](deep_reads/2026-10-12-10.3847_1538-4365_ae91e8.md)  
+  7/10 [journals]
+- [Optimization of Tessellation-based Statistics: Void Statistics](deep_reads/2026-10-12-10.3847_1538-4365_ae928f.md)  
+  7/10 [journals]
+- [Impact of Large-scale Structure along the Line of Sight on Time-delay Cosmography](deep_reads/2026-10-15-10.3847_1538-4365_ae8538.md)  
+  6/10 [journals]
+- [Graph Convolutional Network–augmented Multimodal Fusion for Coronal Mass Ejection Arrival-time Prediction Using Transformer Feature Extraction](deep_reads/2026-10-15-10.3847_1538-4365_ae88f7.md)  
+  6/10 [journals]
+- [GyroNet: Well-calibrated Rotation-based Stellar Ages from a Machine Learning and Bayesian Framework with Gaia DR3 Features](deep_reads/2026-10-12-10.3847_1538-4365_ae8f3f.md)  
+  6/10 [journals]
+- [Physical Properties of 6.7 Million Galaxies from the DESI Bright Galaxy Survey: Spectral Fitting and Systematic Tests with Mock Spectra](deep_reads/2026-10-12-10.3847_1538-4365_ae8e71.md)  
+  6/10 [journals]
+- [Toward Optimal Photometric Calibration of Digital Astronomical Plates with Deep Learning](deep_reads/2026-10-12-10.3847_1538-4365_ae93af.md)  
+  6/10 [journals]
+- [Neural-network-derived Stellar Parameters and Distances for Cool Giants](deep_reads/2026-10-12-10.3847_1538-4365_ae8cfe.md)  
+  6/10 [journals]
+- [Identification of White Dwarfs with Infrared Excesses in DESI DR1 Based on Deep Learning](deep_reads/2026-10-12-10.3847_1538-4365_ae9550.md)  
+  6/10 [journals]
+- [Spectral Map Making with SPHEREx](deep_reads/2026-10-12-10.3847_1538-4365_ae91df.md)  
+  6/10 [journals]
+- [Spectroscopic Analysis of LAMOST Transient Candidates: Methods and Feasibility for Time-domain Follow-up](deep_reads/2026-10-12-10.3847_1538-4365_ae91ea.md)  
+  6/10 [journals]
+- [Identifying and Determining Atmospheric Parameters of Blue Horizontal-branch Stars Based on LAMOST DR11](deep_reads/2026-10-12-10.3847_1538-4365_ae8f47.md)  
+  6/10 [journals]
+- [<tt>GRACE-DG</tt> : A Discontinuous Galerkin Method–based Code for General Nonlinear Coagulation–Fragmentation Equations](deep_reads/2026-10-15-10.3847_1538-4365_ae8b9a.md)  
+  5/10 [journals]
+- [Escaped White Dwarf Candidates from Open Clusters](deep_reads/2026-10-15-10.3847_1538-4365_ae8a45.md)  
+  5/10 [journals]
+- [Investigating the Young Stellar Populations and Hierarchies in Nearby Galaxies with the UVIT. II. Presenting the Properties of ∼25,000 UV-detected Star-forming Clumps](deep_reads/2026-10-12-10.3847_1538-4365_ae9081.md)  
+  5/10 [journals]
+- [A New Methodology for Inferring the Plasma Conditions in Solar Flare Energetic Electron Source Regions from In Situ Electron Energy Spectra](deep_reads/2026-10-12-10.3847_1538-4365_ae91e2.md)  
+  5/10 [journals]
+- [A Minute-cadence Deep Bulge Survey: First Data Release of DREAMS](deep_reads/2026-10-12-10.3847_1538-4365_ae8fd4.md)  
+  5/10 [journals]
+- [DESI Strong Lens Foundry. IV. Spectroscopic Confirmation of DESI Lens Candidates with VLT/MUSE](deep_reads/2026-10-15-10.3847_1538-4365_ae844d.md)  
+  4/10 [journals]
+- [Multiband Optical Photometric Variability of the Blazar OJ 287 from 2015 to 2025](deep_reads/2026-10-15-10.3847_1538-4365_ae8795.md)  
+  4/10 [journals]
+- [The Stellar Population of NGC 346 in the Small Magellanic Cloud with JWST](deep_reads/2026-10-12-10.3847_1538-4365_ae954e.md)  
+  4/10 [journals]
+- [The Next Generation Virgo Cluster Survey (NGVS). II. A Catalog of Galaxies in the Virgo Cluster](deep_reads/2026-10-12-10.3847_1538-4365_ae8fc7.md)  
+  4/10 [journals]
+- [Comprehensive Neutrino Light Curves and Spectra: From Presupernova Evolution to Early Supernova Phase](deep_reads/2026-10-12-10.3847_1538-4365_ae8dc8.md)  
+  4/10 [journals]
+- [The FAST H <scp>I</scp> 21 cm Absorption Blind Survey. III. OH Absorption Search in the 21 cm Absorber Sample and Continued H <scp>I</scp> Absorption Search](deep_reads/2026-10-12-10.3847_1538-4365_ae8b90.md)  
+  4/10 [journals]
+- [Ongoing and Post-mass-transfer Binaries: A Living Catalog and Unified Review of Binary Mass-transfer Products](deep_reads/2026-10-12-10.3847_1538-4365_ae8d04.md)  
+  4/10 [journals]
+- [The Far-Ultraviolet Extragalactic Legacy (FUEL) Survey: Hubble Far-UV Images and Catalogs of the Extragalactic Legacy Fields](deep_reads/2026-10-12-10.3847_1538-4365_ae7f0f.md)  
+  3/10 [journals]
+- [Locating the Production Sites of High-energy Neutrinos in Blazar Jets](deep_reads/2026-10-12-10.3847_1538-4365_ae9286.md)  
+  3/10 [journals]
+- [High-resolution Optical Methane Line List from Observations of Titan for Cross-correlation Studies](deep_reads/2026-10-15-10.3847_1538-4365_ae89a9.md)  
+  2/10 [journals]
+
+#### Astrophysical Journal Supplement Series Vol 285 Issue 2
+
+- [Revisiting the Hubble Tension with DESI DR2 Baryon Acoustic Oscillation Observations and Machine Learning Methods](deep_reads/2026-10-15-10.3847_1538-4365_ae7d1a.md)  
+  7/10 [journals]
+- [QhX Catalog of Coherent and Quasi-coherent Active Galactic Nucleus Variability from Vera C. Rubin LSST DP1](deep_reads/2026-10-15-10.3847_1538-4365_ae8444.md)  
+  7/10 [journals]
+- [An AI-ready Stellar Dataset Assembled from LAMOST DR11](deep_reads/2026-10-15-10.3847_1538-4365_ae81b7.md)  
+  7/10 [journals]
+- [An Image-based Search for L and T Dwarf Candidates in Pan-STARRS with Object Detection](deep_reads/2026-10-15-10.3847_1538-4365_ae8849.md)  
+  6/10 [journals]
+- [What Causes the Asymmetry of Conjugate Hard X-Ray Footpoints in Solar Flares?](deep_reads/2026-10-15-10.3847_1538-4365_ae84c2.md)  
+  6/10 [journals]
+- [Investigation into the Relation between Active Regions’ Compliance with Empirical Laws and Flare Productivity](deep_reads/2026-10-15-10.3847_1538-4365_ae88ee.md)  
+  6/10 [journals]
+- [Statistical Analysis of Minifilament Eruptions Using Full-disk H <i>α</i> Blue-wing Observations at Big Bear Solar Observatory](deep_reads/2026-10-15-10.3847_1538-4365_ae8844.md)  
+  6/10 [journals]
+- [Predictions of Transiting Exoplanet Confirmations from Rubin LSST Surveys](deep_reads/2026-10-15-10.3847_1538-4365_ae8260.md)  
+  6/10 [journals]
+- [Pulsar-vision-language Model: A Visual Reasoning Model for Pulsar Candidate Identification](deep_reads/2026-10-15-10.3847_1538-4365_ae83b3.md)  
+  6/10 [journals]
+- [EAA: Adapting the Segment Anything Model for Perception-driven Astronomical Source Extraction](deep_reads/2026-10-15-10.3847_1538-4365_ae7b24.md)  
+  6/10 [journals]
+- [TDL <scp>ight</scp> : A Framework for Incremental Light-curve Management and Continuous Classification Optimization](deep_reads/2026-10-15-10.3847_1538-4365_ae8300.md)  
+  6/10 [journals]
+- [Efficient Low-rank Bayesian Neural Networks for Incremental Pulsar Candidate Identification](deep_reads/2026-10-15-10.3847_1538-4365_ae809c.md)  
+  6/10 [journals]
+- [Statistical Properties of Molecular Clouds in the Milky Way: Insights from Three-isotopologue CO Observations of the MWISP Project](deep_reads/2026-10-15-10.3847_1538-4365_ae8155.md)  
+  6/10 [journals]
+- [MSFA-Net: An Advanced Deep Learning Model for Identifying Blue Horizontal-branch Stars from LAMOST DR12](deep_reads/2026-10-15-10.3847_1538-4365_ae83b7.md)  
+  6/10 [journals]
+- [Salvaging Defective Spectra: Deep Learning Restoration of Defective Stellar Spectra](deep_reads/2026-07-19-10.3847_1538-4365_ae7e81.md)  
+  6/10 [journals]
+- [Characterizing the Origins of the Optical Variability of Radio-quiet Active Galactic Nuclei Detected by the Swift Burst Alert Telescope](deep_reads/2026-07-19-10.3847_1538-4365_ae7a52.md)  
+  6/10 [journals]
+- [Everything Every Band All at Once. I. A Global Morphology Catalog in A2744 Based on UNCOVER/MegaScience](deep_reads/2026-10-15-10.3847_1538-4365_ae82f7.md)  
+  5/10 [journals]
+- [The SPHEREx Image and Spectrophotometry Processing Pipeline](deep_reads/2026-10-15-10.3847_1538-4365_ae8843.md)  
+  5/10 [journals]
+- [LHAASO Observations of Mrk 421 during 2021 March–2024 March: A Comprehensive Very-high-energy Catalog of Multitimescale Outbursts and Its Time-averaged Behavior](deep_reads/2026-07-19-10.3847_1538-4365_ae76cc.md)  
+  5/10 [journals]
+- [Constructing a Mock Galaxy Catalog for the All-sky Spectroscopic Survey of Nearby Galaxies (A-SPEC) Using the Machine-assisted Semi-Simulation Model](deep_reads/2026-10-15-10.3847_1538-4365_ae80aa.md)  
+  4/10 [journals]
+- [Physics of Eclipsing Binaries. VI. Hot, Compact Stars](deep_reads/2026-10-15-10.3847_1538-4365_ae844a.md)  
+  3/10 [journals]
+- [A Wide and Deep Exploration of Radio-detected Active Galactic Nuclei with Subaru HSC (WERGS). XII. Final Optical Identification of VLASS Radio Sources from the Subaru/HSC-SSP Wide Survey over 1200 deg <sup>2</sup>](deep_reads/2026-07-19-10.3847_1538-4365_ae7bff.md)  
+  3/10 [journals]
+- [Dielectronic Recombination of Iron M-shell Ions: Fe <sup>6+</sup> –Fe <sup>3+</sup> *](deep_reads/2026-10-15-10.3847_1538-4365_ae80c0.md)  
+  2/10 [journals]
+
 #### Science Advances Vol 12 Issue 41
 
 - [Predicting regional gray swans via translocation: AI weather models and Dubai’s unprecedented 2024 rainfall](deep_reads/2026-10-13-10.1126_sciadv.ady9406.md)  
@@ -12699,49 +12825,6 @@
 - [Magnetar Fireballs and Short Bursts: Curved Spacetime Lensing, Quantum Electrodynamical Effects, Spectra, Polarization, and Impulse Responses](deep_reads/2026-10-12-10.3847_1538-4365_ae9754.md)  
   2/10 [journals]
 
-#### Astrophysical Journal Supplement Series Vol 286 Issue 1
-
-- [Fine-grained Classification of Unknown Fermi LAT 4FGL-DR4 Sources with Spectral and Uncertainty Information](deep_reads/2026-10-12-10.3847_1538-4365_ae91e8.md)  
-  7/10 [journals]
-- [Optimization of Tessellation-based Statistics: Void Statistics](deep_reads/2026-10-12-10.3847_1538-4365_ae928f.md)  
-  7/10 [journals]
-- [GyroNet: Well-calibrated Rotation-based Stellar Ages from a Machine Learning and Bayesian Framework with Gaia DR3 Features](deep_reads/2026-10-12-10.3847_1538-4365_ae8f3f.md)  
-  6/10 [journals]
-- [Physical Properties of 6.7 Million Galaxies from the DESI Bright Galaxy Survey: Spectral Fitting and Systematic Tests with Mock Spectra](deep_reads/2026-10-12-10.3847_1538-4365_ae8e71.md)  
-  6/10 [journals]
-- [Toward Optimal Photometric Calibration of Digital Astronomical Plates with Deep Learning](deep_reads/2026-10-12-10.3847_1538-4365_ae93af.md)  
-  6/10 [journals]
-- [Neural-network-derived Stellar Parameters and Distances for Cool Giants](deep_reads/2026-10-12-10.3847_1538-4365_ae8cfe.md)  
-  6/10 [journals]
-- [Identification of White Dwarfs with Infrared Excesses in DESI DR1 Based on Deep Learning](deep_reads/2026-10-12-10.3847_1538-4365_ae9550.md)  
-  6/10 [journals]
-- [Spectral Map Making with SPHEREx](deep_reads/2026-10-12-10.3847_1538-4365_ae91df.md)  
-  6/10 [journals]
-- [Spectroscopic Analysis of LAMOST Transient Candidates: Methods and Feasibility for Time-domain Follow-up](deep_reads/2026-10-12-10.3847_1538-4365_ae91ea.md)  
-  6/10 [journals]
-- [Identifying and Determining Atmospheric Parameters of Blue Horizontal-branch Stars Based on LAMOST DR11](deep_reads/2026-10-12-10.3847_1538-4365_ae8f47.md)  
-  6/10 [journals]
-- [Investigating the Young Stellar Populations and Hierarchies in Nearby Galaxies with the UVIT. II. Presenting the Properties of ∼25,000 UV-detected Star-forming Clumps](deep_reads/2026-10-12-10.3847_1538-4365_ae9081.md)  
-  5/10 [journals]
-- [A New Methodology for Inferring the Plasma Conditions in Solar Flare Energetic Electron Source Regions from In Situ Electron Energy Spectra](deep_reads/2026-10-12-10.3847_1538-4365_ae91e2.md)  
-  5/10 [journals]
-- [A Minute-cadence Deep Bulge Survey: First Data Release of DREAMS](deep_reads/2026-10-12-10.3847_1538-4365_ae8fd4.md)  
-  5/10 [journals]
-- [The Stellar Population of NGC 346 in the Small Magellanic Cloud with JWST](deep_reads/2026-10-12-10.3847_1538-4365_ae954e.md)  
-  4/10 [journals]
-- [The Next Generation Virgo Cluster Survey (NGVS). II. A Catalog of Galaxies in the Virgo Cluster](deep_reads/2026-10-12-10.3847_1538-4365_ae8fc7.md)  
-  4/10 [journals]
-- [Comprehensive Neutrino Light Curves and Spectra: From Presupernova Evolution to Early Supernova Phase](deep_reads/2026-10-12-10.3847_1538-4365_ae8dc8.md)  
-  4/10 [journals]
-- [The FAST H <scp>I</scp> 21 cm Absorption Blind Survey. III. OH Absorption Search in the 21 cm Absorber Sample and Continued H <scp>I</scp> Absorption Search](deep_reads/2026-10-12-10.3847_1538-4365_ae8b90.md)  
-  4/10 [journals]
-- [Ongoing and Post-mass-transfer Binaries: A Living Catalog and Unified Review of Binary Mass-transfer Products](deep_reads/2026-10-12-10.3847_1538-4365_ae8d04.md)  
-  4/10 [journals]
-- [The Far-Ultraviolet Extragalactic Legacy (FUEL) Survey: Hubble Far-UV Images and Catalogs of the Extragalactic Legacy Fields](deep_reads/2026-10-12-10.3847_1538-4365_ae7f0f.md)  
-  3/10 [journals]
-- [Locating the Production Sites of High-energy Neutrinos in Blazar Jets](deep_reads/2026-10-12-10.3847_1538-4365_ae9286.md)  
-  3/10 [journals]
-
 #### Journal of the American Statistical Association
 
 - [Statistical methods for partitioning ribbon and globally-distributed flux using data from the Interstellar Boundary Explorer](deep_reads/2026-10-10-10.1080_01621459.2026.2738231.md)  
@@ -12794,17 +12877,6 @@
   2/10 [journals]
 - [GRB 230307A formed no dust or was not a binary neutron-star merger](deep_reads/2026-07-19-10.1093_mnras_stag1158.md)  
   1/10 [journals]
-
-#### Astrophysical Journal Supplement Series Vol 285 Issue 2
-
-- [Salvaging Defective Spectra: Deep Learning Restoration of Defective Stellar Spectra](deep_reads/2026-07-19-10.3847_1538-4365_ae7e81.md)  
-  6/10 [journals]
-- [Characterizing the Origins of the Optical Variability of Radio-quiet Active Galactic Nuclei Detected by the Swift Burst Alert Telescope](deep_reads/2026-07-19-10.3847_1538-4365_ae7a52.md)  
-  6/10 [journals]
-- [LHAASO Observations of Mrk 421 during 2021 March–2024 March: A Comprehensive Very-high-energy Catalog of Multitimescale Outbursts and Its Time-averaged Behavior](deep_reads/2026-07-19-10.3847_1538-4365_ae76cc.md)  
-  5/10 [journals]
-- [A Wide and Deep Exploration of Radio-detected Active Galactic Nuclei with Subaru HSC (WERGS). XII. Final Optical Identification of VLASS Radio Sources from the Subaru/HSC-SSP Wide Survey over 1200 deg <sup>2</sup>](deep_reads/2026-07-19-10.3847_1538-4365_ae7bff.md)  
-  3/10 [journals]
 
 #### Astrophysical Journal Supplement Series Vol 285 Issue 1
 
