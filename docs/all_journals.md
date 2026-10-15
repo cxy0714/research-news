@@ -682,7 +682,12 @@
 
 ### STATMED V45 I15 17
 
+- [2026-10-16](journals/2026-10-16-statmed-v45-i15-17.md)
 - [2026-06-24](journals/2026-06-24-statmed-v45-i15-17.md)
+
+### STATMED V45 I18 19
+
+- [2026-10-16](journals/2026-10-16-statmed-v45-i18-19.md)
 
 ### STATMED V45 I20 22
 
@@ -690,6 +695,7 @@
 
 ### STATMED V45 I23 24
 
+- [2026-10-16](journals/2026-10-16-statmed-v45-i23-24.md)
 - [2026-10-12](journals/2026-10-12-statmed-v45-i23-24.md)
 
 ### STATMED V45 I8 9

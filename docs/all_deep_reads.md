@@ -1235,6 +1235,83 @@
 
 ### 期刊
 
+#### Statistics in Medicine Vol 45 Issue 23-24
+
+- [Generalizing Conditional Average Treatment Effects From Nested Randomized Trials to Trial‐Eligible Individuals](deep_reads/2026-10-12-10.1002_sim.70767.md)  
+  8/10 [journals]
+- [A Nonparametric Data‐Fusion Approach for Identification and Estimation of Nonignorable Missing Data With Shadow Variable](deep_reads/2026-10-12-10.1002_sim.70747.md)  
+  8/10 [journals]
+- [Reliable Bayesian Causal Inference for Externally Controlled Single‐Arm Trials Under Transportability Violations](deep_reads/2026-10-12-10.1002_sim.70748.md)  
+  8/10 [journals]
+- [Randomization‐Based Covariate Adjustment for Randomized Block 2K Factorial Experiments With Missing Baselines](deep_reads/2026-10-16-10.1002_sim.70761.md)  
+  7/10 [journals]
+- [High‐Dimensional Mediation Analysis With Network Mediators: Applications to Pediatric Acute Lymphoblastic Leukemia](deep_reads/2026-10-12-10.1002_sim.70756.md)  
+  7/10 [journals]
+- [A Model‐Robust G‐Computation Method for Analyzing Hybrid Control Studies Without Assuming Exchangeability](deep_reads/2026-10-12-10.1002_sim.70754.md)  
+  7/10 [journals]
+- [A Multi‐Task Learning Approach for Identifying Prognostic Variables Across Multiple Historical Clinical Trials](deep_reads/2026-10-16-10.1002_sim.70772.md)  
+  6/10 [journals]
+- [Evaluating Informative Cluster Size in Cluster Randomized Trials](deep_reads/2026-10-12-10.1002_sim.70762.md)  
+  6/10 [journals]
+- [A Bias‐Adjusted Approach for Logistic Modeling With Predicted Exposures](deep_reads/2026-10-12-10.1002_sim.70740.md)  
+  6/10 [journals]
+- [Taking Into Account the Susceptible Window for Exposures in Cox Proportional Hazards Model: A Way Using Splines to Model the Lag‐Risk Relationship](deep_reads/2026-10-12-10.1002_sim.70755.md)  
+  5/10 [journals]
+
+#### Statistics in Medicine Vol 45 Issue 18-19
+
+- [Non‐Parametric Mediation Analysis of Non‐Markov Illness‐Death Model](deep_reads/2026-10-16-10.1002_sim.70685.md)  
+  8/10 [journals]
+- [Estimating Optimal Site‐Specific Individualized Treatment Rules With Limited Data Sharing](deep_reads/2026-10-16-10.1002_sim.70696.md)  
+  7/10 [journals]
+- [Using Negative Control Outcomes to Detect Selection Bias in Mendelian Randomization Studies](deep_reads/2026-10-16-10.1002_sim.70703.md)  
+  7/10 [journals]
+- [Optimal Dynamic Treatment Regimes for High‐Dimensional Accelerated Failure Time Model](deep_reads/2026-10-16-10.1002_sim.70705.md)  
+  7/10 [journals]
+- [Improving Sensitivity Analysis By Synthesizing Randomized Clinical Trials With Limited Overlap](deep_reads/2026-10-16-10.1002_sim.70637.md)  
+  7/10 [journals]
+- [A Cautionary Note for Plasmode Simulation Studies in the Setting of Causal Inference](deep_reads/2026-10-16-10.1002_sim.70676.md)  
+  7/10 [journals]
+- [On the Statistical Limitations of Landmark Analysis for Addressing Immortal Time Bias](deep_reads/2026-10-16-10.1002_sim.70679.md)  
+  6/10 [journals]
+- [Inverse‐Intensity‐Weighted Generalized Estimating Equations With Irregularly Measured Longitudinal Data and Informative Dropout](deep_reads/2026-10-16-10.1002_sim.70674.md)  
+  6/10 [journals]
+- [Fixed or Random Effects: Analysis of Clustered Data](deep_reads/2026-10-16-10.1002_sim.70687.md)  
+  5/10 [journals]
+- [Long Run Non‐Transitivity of Win Ratio and How to Rule It Out](deep_reads/2026-10-16-10.1002_sim.70581.md)  
+  4/10 [journals]
+
+#### Statistics in Medicine Vol 45 Issue 15-17
+
+- [Reluctant Transfer Learning in Penalized Regressions for Individualized Treatment Rules Under Effect Heterogeneity](deep_reads/2026-10-16-10.1002_sim.70671.md)  
+  7/10 [journals]
+- [Practical Considerations for Gaussian Process Modeling for Causal Inference in Quasi‐Experimental Studies With Panel Data](deep_reads/2026-10-16-10.1002_sim.70652.md)  
+  7/10 [journals]
+- [Checking Genetic Homogeneity Between Two Samples Using Summary Statistics With Application to Mendelian Randomization](deep_reads/2026-10-16-10.1002_sim.70663.md)  
+  7/10 [journals]
+- [Bayesian Bidirectional Mendelian Randomization Under Correlated and Uncorrelated Pleiotropy Using GWAS Summary Statistics](deep_reads/2026-10-16-10.1002_sim.70667.md)  
+  7/10 [journals]
+- [Choosing Covariate Balancing Methods for Causal Inference: Practical Insights From a Simulation Study](deep_reads/2026-10-16-10.1002_sim.70672.md)  
+  7/10 [journals]
+- [A Causal Framework for Evaluating the Total Effect of Strategies Aiming to Expand Screening and to Improve Outcomes](deep_reads/2026-10-16-10.1002_sim.70648.md)  
+  7/10 [journals]
+- [Causal Effects on Nonterminal Event Time With Application to Antibiotic Usage and Future Resistance](deep_reads/2026-10-16-10.1002_sim.70650.md)  
+  7/10 [journals]
+- [Caveats on Using Firth's Penalization in the Model‐Based Regression Standardization for Rare Diseases](deep_reads/2026-06-24-10.1002_sim.70644.md)  
+  7/10 [journals]
+- [Improving Variance and Confidence Interval Estimation in Small‐Sample Propensity Score Analyses: Bootstrap Versus Asymptotic Methods](deep_reads/2026-06-24-10.1002_sim.70643.md)  
+  7/10 [journals]
+- [Efficiency Enhancement in Testing Treatment Efficacy Across Multiple Populations Using Treatment Crossover Data](deep_reads/2026-10-16-10.1002_sim.70651.md)  
+  6/10 [journals]
+- [Optimizing Treatment Decision Estimation for Right‐Censored Survival Data Through Parameter Transfer Learning](deep_reads/2026-10-16-10.1002_sim.70668.md)  
+  6/10 [journals]
+- [Moving From Individualized Risk‐Based Prevention to Benefit‐Based Prevention: Estimating Individualized Life‐Years Gained From Prevention Services as a Basis for Eligibility](deep_reads/2026-10-16-10.1002_sim.70659.md)  
+  6/10 [journals]
+- [Identifiable Copula‐Double‐Cox Models: A Fully Parametric Framework for Dependent Right‐Censored Survival Data](deep_reads/2026-10-16-10.1002_sim.70647.md)  
+  6/10 [journals]
+- [Novel Distance Regression for Repeated Outcomes With Missing Data: Applications to Longitudinal and Crossover Studies of Microbiome Beta‐Diversity](deep_reads/2026-10-16-10.1002_sim.70654.md)  
+  5/10 [journals]
+
 #### Journal of Business & Economic Statistics Vol 44 Issue 4
 
 - [Semiparametric Estimation of Treatment Effects in Observational Studies with Heterogeneous Partial Interference](deep_reads/2026-10-14-10.1080_07350015.2026.2635631.md)  
@@ -1303,25 +1380,6 @@
 
 - [Regression analysis after bipartite Bayesian record linkage](deep_reads/2026-10-13-10.1016_j.csda.2026.108461.md)  
   6/10 [journals]
-
-#### Statistics in Medicine Vol 45 Issue 23-24
-
-- [Generalizing Conditional Average Treatment Effects From Nested Randomized Trials to Trial‐Eligible Individuals](deep_reads/2026-10-12-10.1002_sim.70767.md)  
-  8/10 [journals]
-- [A Nonparametric Data‐Fusion Approach for Identification and Estimation of Nonignorable Missing Data With Shadow Variable](deep_reads/2026-10-12-10.1002_sim.70747.md)  
-  8/10 [journals]
-- [Reliable Bayesian Causal Inference for Externally Controlled Single‐Arm Trials Under Transportability Violations](deep_reads/2026-10-12-10.1002_sim.70748.md)  
-  8/10 [journals]
-- [High‐Dimensional Mediation Analysis With Network Mediators: Applications to Pediatric Acute Lymphoblastic Leukemia](deep_reads/2026-10-12-10.1002_sim.70756.md)  
-  7/10 [journals]
-- [A Model‐Robust G‐Computation Method for Analyzing Hybrid Control Studies Without Assuming Exchangeability](deep_reads/2026-10-12-10.1002_sim.70754.md)  
-  7/10 [journals]
-- [Evaluating Informative Cluster Size in Cluster Randomized Trials](deep_reads/2026-10-12-10.1002_sim.70762.md)  
-  6/10 [journals]
-- [A Bias‐Adjusted Approach for Logistic Modeling With Predicted Exposures](deep_reads/2026-10-12-10.1002_sim.70740.md)  
-  6/10 [journals]
-- [Taking Into Account the Susceptible Window for Exposures in Cox Proportional Hazards Model: A Way Using Splines to Model the Lag‐Risk Relationship](deep_reads/2026-10-12-10.1002_sim.70755.md)  
-  5/10 [journals]
 
 #### Statistics in Medicine Vol 45 Issue 20-22
 
@@ -2866,13 +2924,6 @@
   6/10 [journals]
 - [Randomization‐Based Covariance Analysis for Confidence Intervals of Treatment Comparisons Based on Restricted Mean Survival Time With Categorized Time‐to‐Event Data](deep_reads/2026-06-24-10.1002_sim.70422.md)  
   5/10 [journals]
-
-#### Statistics in Medicine Vol 45 Issue 15-17
-
-- [Caveats on Using Firth's Penalization in the Model‐Based Regression Standardization for Rare Diseases](deep_reads/2026-06-24-10.1002_sim.70644.md)  
-  7/10 [journals]
-- [Improving Variance and Confidence Interval Estimation in Small‐Sample Propensity Score Analyses: Bootstrap Versus Asymptotic Methods](deep_reads/2026-06-24-10.1002_sim.70643.md)  
-  7/10 [journals]
 
 #### Statistics in Medicine Vol 45 Issue 10-12
 
@@ -8852,6 +8903,27 @@
 
 ### 期刊
 
+#### Statistics in Medicine Vol 45 Issue 23-24
+
+- [Valid Data‐Driven Subgroup Selection With Uniform Guarantees in Clinical Trials](deep_reads/2026-10-16-10.1002_sim.70745.md)  
+  7/10 [journals]
+- [Robust Alpha Spending for Unstable Data](deep_reads/2026-10-12-10.1002_sim.70760.md)  
+  6/10 [journals]
+
+#### Statistics in Medicine Vol 45 Issue 18-19
+
+- [Statistical Inference for Covariate‐Adaptive Randomization Procedures With Missing Covariates](deep_reads/2026-10-16-10.1002_sim.70697.md)  
+  6/10 [journals]
+- [Pragmatic Two‐Stage Design for Clinical Trials With Treatment Selection](deep_reads/2026-10-16-10.1002_sim.70683.md)  
+  4/10 [journals]
+
+#### Statistics in Medicine Vol 45 Issue 15-17
+
+- [Covariate Adjustment for Wilcoxon Two Sample Statistic and Test](deep_reads/2026-10-16-10.1002_sim.70657.md)  
+  7/10 [journals]
+- [Adaptive Sequential Multiple Hypotheses Testing for Concomitant Vaccine Safety Surveillance](deep_reads/2026-10-16-10.1002_sim.70662.md)  
+  5/10 [journals]
+
 #### Journal of Business & Economic Statistics Vol 44 Issue 4
 
 - [Adaptive LAD-Based Bootstrap Unit Root Tests Under Unconditional Heteroscedasticity](deep_reads/2026-10-14-10.1080_07350015.2026.2638489.md)  
@@ -8932,11 +9004,6 @@
   6/10 [journals]
 - [Statistical Mean Estimation With Coded Relayed Observations](deep_reads/2026-10-13-10.1109_tit.2026.3716635.md)  
   5/10 [journals]
-
-#### Statistics in Medicine Vol 45 Issue 23-24
-
-- [Robust Alpha Spending for Unstable Data](deep_reads/2026-10-12-10.1002_sim.70760.md)  
-  6/10 [journals]
 
 #### Statistical Methods in Medical Research Vol 35 Issue 9
 
@@ -10987,6 +11054,11 @@
   6/10 [daily]
 
 ### 期刊
+
+#### Statistics in Medicine Vol 45 Issue 23-24
+
+- [Optimal Subsampling for the Proportional Mean Residual Life Model With Massive Survival Data](deep_reads/2026-10-16-10.1002_sim.70766.md)  
+  6/10 [journals]
 
 #### IEEE Transactions on Signal Processing Vol 74
 
@@ -14392,6 +14464,18 @@
 
 ### 期刊
 
+#### Statistics in Medicine Vol 45 Issue 18-19
+
+- [Multivariable Behavioral Change Modeling of Epidemics in the Presence of Undetected Infections](deep_reads/2026-10-16-10.1002_sim.70709.md)  
+  4/10 [journals]
+
+#### Statistics in Medicine Vol 45 Issue 15-17
+
+- [Latent Class Log‐Linear Models for Estimating Diagnostic Test Accuracy Without a Gold Standard: A Simulation Study](deep_reads/2026-10-16-10.1002_sim.70660.md)  
+  5/10 [journals]
+- [Multi‐Level Latent Variable Models for Coheritability Analysis in Electronic Health Records](deep_reads/2026-10-16-10.1002_sim.70675.md)  
+  5/10 [journals]
+
 #### Science Advances Vol 12 Issue 41
 
 - [Exposure route, not dose, is the primary driver of infection patterns for a respiratory virus](deep_reads/2026-10-13-10.1126_sciadv.aei4853.md)  
@@ -15994,6 +16078,53 @@
 
 ### 期刊
 
+#### Statistics in Medicine Vol 45 Issue 23-24
+
+- [Generalized Linear Mixed Models for Changepoint Analysis of Biomedical Time Series Data](deep_reads/2026-10-16-10.1002_sim.70769.md)  
+  5/10 [journals]
+- [Sandwich Variance Estimation in Scale Mixture of Skew‐Normal Linear Mixed Models](deep_reads/2026-10-12-10.1002_sim.70753.md)  
+  5/10 [journals]
+- [Using Joint Models in Phase I Dose‐Finding Designs in Oncology: Considerations for Frequentist Approaches](deep_reads/2026-10-16-10.1002_sim.70758.md)  
+  4/10 [journals]
+- [Cancer Heterogeneity Modeling With Omics Data via Network‐Based Block‐Wise Regulatory Analysis](deep_reads/2026-10-16-10.1002_sim.70779.md)  
+  4/10 [journals]
+- [Group Sequential Sample Size for Comparing Two Survival Probabilities at a Specific Time Point](deep_reads/2026-10-12-10.1002_sim.70750.md)  
+  4/10 [journals]
+- [Calibration of Priors for Bayesian Model‐Based Dose‐Finding Trial Designs With Joint Outcomes](deep_reads/2026-10-12-10.1002_sim.70746.md)  
+  3/10 [journals]
+
+#### Statistics in Medicine Vol 45 Issue 18-19
+
+- [Efficient Variance Estimation for the Polytomous Discrimination Index](deep_reads/2026-10-16-10.1002_sim.70690.md)  
+  5/10 [journals]
+- [Network Meta‐Analysis of Survival Outcomes With Non‐Proportional Hazards Using Flexible M‐Splines](deep_reads/2026-10-16-10.1002_sim.70695.md)  
+  5/10 [journals]
+- [Dynamic Individualized Prediction of Binary Clinical Outcomes Using Bayesian Generalized Linear Mixed Models With Application in Scleroderma](deep_reads/2026-10-16-10.1002_sim.70692.md)  
+  4/10 [journals]
+- [Bayesian Model Selection for Derived Responses](deep_reads/2026-10-16-10.1002_sim.70682.md)  
+  4/10 [journals]
+- [Microbial Diversity Estimation and Hill Number Calculation Using the Hierarchical Pitman‐Yor Process](deep_reads/2026-10-16-10.1002_sim.70689.md)  
+  3/10 [journals]
+- [Cloud‐Plots for Spherical Data With Applications to Glaucoma and Gait Cyclograms](deep_reads/2026-10-16-10.1002_sim.70704.md)  
+  3/10 [journals]
+
+#### Statistics in Medicine Vol 45 Issue 15-17
+
+- [Transformation Discriminant Analysis for Constructing Optimal Biomarker Combinations](deep_reads/2026-10-16-10.1002_sim.70665.md)  
+  6/10 [journals]
+- [Predictor‐Assisted Nonparametric Graphical Models With Multivariate Error‐Prone Data](deep_reads/2026-10-16-10.1002_sim.70658.md)  
+  6/10 [journals]
+- [LEARNER: A Transfer Learning Method for Low‐Rank Matrix Estimation](deep_reads/2026-10-16-10.1002_sim.70669.md)  
+  6/10 [journals]
+- [Semiparametric Panel Count Model, With Applications to Signal Detection in Post‐Market Drug Surveillance Systems](deep_reads/2026-10-16-10.1002_sim.70649.md)  
+  6/10 [journals]
+- [Subgroup Analysis of Interval‐censored Failure Time Data With Application to Alzheimer's Disease](deep_reads/2026-10-16-10.1002_sim.70613.md)  
+  6/10 [journals]
+- [Beyond Fixed Thresholds: Optimizing Summaries of Wearable Device Data via Piecewise Linearization of Quantile Functions](deep_reads/2026-10-16-10.1002_sim.70646.md)  
+  5/10 [journals]
+- [Composite Categorical Regression for Correlated Categorical Exposures: Application to Adverse Childhood Experiences and Their Health Effects](deep_reads/2026-10-16-10.1002_sim.70664.md)  
+  4/10 [journals]
+
 #### Journal of Business & Economic Statistics Vol 44 Issue 4
 
 - [A Network View on Portfolio Risk](deep_reads/2026-10-14-10.1080_07350015.2026.2634827.md)  
@@ -16792,15 +16923,6 @@
   6/10 [journals]
 - [A penalized least-squares estimator for extreme-value models with multiple extreme directions](deep_reads/2026-10-13-10.1016_j.csda.2026.108460.md)  
   4/10 [journals]
-
-#### Statistics in Medicine Vol 45 Issue 23-24
-
-- [Sandwich Variance Estimation in Scale Mixture of Skew‐Normal Linear Mixed Models](deep_reads/2026-10-12-10.1002_sim.70753.md)  
-  5/10 [journals]
-- [Group Sequential Sample Size for Comparing Two Survival Probabilities at a Specific Time Point](deep_reads/2026-10-12-10.1002_sim.70750.md)  
-  4/10 [journals]
-- [Calibration of Priors for Bayesian Model‐Based Dose‐Finding Trial Designs With Joint Outcomes](deep_reads/2026-10-12-10.1002_sim.70746.md)  
-  3/10 [journals]
 
 #### Statistics in Medicine Vol 45 Issue 20-22
 
