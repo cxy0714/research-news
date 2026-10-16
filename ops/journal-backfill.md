@@ -350,7 +350,7 @@ broad 组：
 - [x] (2026-10-16) `--only JCGS --n-issues 4`   （缺 v35-i3）
 - [x] (2026-10-16) `--only Science --n-issues 5`   （缺 v393-i6818）
 - [x] (2026-10-16) `--only "Nat. Methods" --n-issues 5`   （缺 v23-i8）
-- [ ] `--only "Sci. Adv." --n-issues 4`   （缺 v12-i40）
+- [x] (2026-10-17) `--only "Sci. Adv." --n-issues 4`   （缺 v12-i40）
 
 新增 SIAM 两刊（零覆盖；2026-10-14 加进 `config/journals.yaml` 的新组 `siam`）。
 两刊都是季刊（SIMODS 2026 = vol 8，JUQ 2026 = vol 14），**最新一期很薄**（实测

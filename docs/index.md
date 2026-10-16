@@ -17,7 +17,7 @@
 
 [→ 查看完整报告](daily/2026-10-16.md)
 
-### 精读论文（198 篇）
+### 精读论文（252 篇）
 
 - [Doubly Robust and Efficient Estimation in a Partially Linear Multiple-Index Model](deep_reads/2026-10-16-10.1080_10618600.2026.2685845.md)  
   `非参数 / 半参数` · 相关性 8/10
@@ -29,6 +29,10 @@
   `因果推断` · 相关性 8/10
 - [Non‐Parametric Mediation Analysis of Non‐Markov Illness‐Death Model](deep_reads/2026-10-16-10.1002_sim.70685.md)  
   `因果推断` · 相关性 8/10
+- [Global conservation additionality hindered by persisting fishing pressure in marine protected areas](deep_reads/2026-10-16-10.1126_sciadv.aed6878.md)  
+  `其他` · 相关性 7/10
+- [A fast and frugal Gaussian boson sampling emulator](deep_reads/2026-10-16-10.1126_sciadv.aef8431.md)  
+  `统计计算 / 算法` · 相关性 7/10
 - [Tensor Additive Quantile Regression](deep_reads/2026-10-16-10.1080_10618600.2026.2687761.md)  
   `非参数 / 半参数` · 相关性 7/10
 - [A PC Algorithm for Max-Linear Bayesian Networks](deep_reads/2026-10-16-10.1080_10618600.2026.2673046.md)  
@@ -83,6 +87,18 @@
   `因果推断` · 相关性 7/10
 - [Valid Data‐Driven Subgroup Selection With Uniform Guarantees in Clinical Trials](deep_reads/2026-10-16-10.1002_sim.70745.md)  
   `数理统计 / 假设检验` · 相关性 7/10
+- [Mesoscale structures in signed networks](deep_reads/2026-10-16-10.1126_sciadv.aee5886.md)  
+  `其他` · 相关性 6/10
+- [Divergent demographic responses to the Kikai-Akahoya volcanic catastrophe in mid-Holocene Japan](deep_reads/2026-10-16-10.1126_sciadv.aeh7197.md)  
+  `其他` · 相关性 6/10
+- [From scrap to prime: Designing high-performance alloys from dirty feedstocks with machine learning](deep_reads/2026-10-16-10.1126_sciadv.aeg9183.md)  
+  `其他` · 相关性 6/10
+- [The network structure of the urban revolution](deep_reads/2026-10-16-10.1126_sciadv.aee5162.md)  
+  `其他` · 相关性 6/10
+- [Rising global population coexposure to heatwaves and landscape fire-sourced air pollution](deep_reads/2026-10-16-10.1126_sciadv.aea9749.md)  
+  `流行病学` · 相关性 6/10
+- [Deep learning reveals ecological decoupling and rate heterogeneity in Hymenoptera wing evolution](deep_reads/2026-10-16-10.1126_sciadv.aef0605.md)  
+  `其他` · 相关性 6/10
 - [The Virtual Biotech: A multi-agent AI framework for therapeutic discovery and development](deep_reads/2026-10-16-10.1126_science.aeg6779.md)  
   `其他` · 相关性 6/10
 - [Robustifying Approximate Bayesian Computation](deep_reads/2026-10-16-10.1080_10618600.2026.2748043.md)  
@@ -179,6 +195,10 @@
   `统计计算 / 算法` · 相关性 6/10
 - [A Multi‐Task Learning Approach for Identifying Prognostic Variables Across Multiple Historical Clinical Trials](deep_reads/2026-10-16-10.1002_sim.70772.md)  
   `因果推断` · 相关性 6/10
+- [Cell heterogeneity contributes to the variable response of HIV-1 to latency-reversing agents](deep_reads/2026-10-16-10.1126_sciadv.aeb1435.md)  
+  `其他` · 相关性 5/10
+- [Reversible Atlantic overturning despite continued Greenland ice sheet melt](deep_reads/2026-10-16-10.1126_sciadv.aee5373.md)  
+  `其他` · 相关性 5/10
 - [Satellite reveals a world of altered rivers](deep_reads/2026-10-16-10.1126_science.aem6543.md)  
   `其他` · 相关性 5/10
 - [Making the invisible visible](deep_reads/2026-10-16-10.1126_science.aem8012.md)  
@@ -235,6 +255,18 @@
   `其他` · 相关性 5/10
 - [Generalized Linear Mixed Models for Changepoint Analysis of Biomedical Time Series Data](deep_reads/2026-10-16-10.1002_sim.70769.md)  
   `其他` · 相关性 5/10
+- [Multiobjective V <sub>H</sub> H discovery through integrated high-throughput screening and AlphaFold3-guided structural prioritization](deep_reads/2026-10-16-10.1126_sciadv.aef5325.md)  
+  `其他` · 相关性 4/10
+- [Insights into temporal and spatial dynamics of short association fiber formation in the human fetal brain](deep_reads/2026-10-16-10.1126_sciadv.aee7989.md)  
+  `其他` · 相关性 4/10
+- [Influenza A virus infection induces immune dysregulation in the placenta and fetus without vertical transmission in nonhuman primates](deep_reads/2026-10-16-10.1126_sciadv.aee9861.md)  
+  `流行病学` · 相关性 4/10
+- [How inequality became durable before states: Evidence from 6000 years in the Central Plain of China](deep_reads/2026-10-16-10.1126_sciadv.ady6737.md)  
+  `其他` · 相关性 4/10
+- [Bedrock erodibility governs transient erosion and CO <sub>2</sub> release in alpine landscapes](deep_reads/2026-10-16-10.1126_sciadv.aei9275.md)  
+  `其他` · 相关性 4/10
+- [Comprehensive characterization of transposable element expression reveals regulatory circuitry and clinical implications in cancers](deep_reads/2026-10-16-10.1126_sciadv.aec9550.md)  
+  `其他` · 相关性 4/10
 - [MassNet: billion-scale AI-ready mass spectral corpus empowering scalable deep learning in proteomics](deep_reads/2026-10-16-10.1038_s41592-026-03247-y.md)  
   `其他` · 相关性 4/10
 - [Inference of secreted protein signaling activities in intercellular communication](deep_reads/2026-10-16-10.1038_s41592-026-03172-0.md)  
@@ -307,6 +339,38 @@
   `其他` · 相关性 4/10
 - [Cancer Heterogeneity Modeling With Omics Data via Network‐Based Block‐Wise Regulatory Analysis](deep_reads/2026-10-16-10.1002_sim.70779.md)  
   `其他` · 相关性 4/10
+- [Electronic profiling of neuronal extracellular vesicles enables early prediction of Parkinson’s disease](deep_reads/2026-10-16-10.1126_sciadv.aee4525.md)  
+  `其他` · 相关性 3/10
+- [Reduced organic nitrogen compounds dominate the toxicity of PM <sub>2.5</sub> organics following internal exposure](deep_reads/2026-10-16-10.1126_sciadv.aea8654.md)  
+  `其他` · 相关性 3/10
+- [Surface temperatures drive strong seasonality in urban reactive carbon emissions](deep_reads/2026-10-16-10.1126_sciadv.aef9622.md)  
+  `其他` · 相关性 3/10
+- [Highlights from an early base camp in Beringia 13,800 years ago: Shég’ Xdaltth’í’ and the Late Pleistocene peopling of Alaska](deep_reads/2026-10-16-10.1126_sciadv.aeh0802.md)  
+  `其他` · 相关性 3/10
+- [Seabirds and native vegetation drive ecosystem processes that support atoll island resilience](deep_reads/2026-10-16-10.1126_sciadv.aei1145.md)  
+  `其他` · 相关性 3/10
+- [Immune biomarkers of response and resistance to ipilimumab and nivolumab in metastatic castration-resistant prostate cancer](deep_reads/2026-10-16-10.1126_sciadv.aee8730.md)  
+  `流行病学` · 相关性 3/10
+- [Sustainable solar water purification: Exploring the structural advantages of higher plants](deep_reads/2026-10-16-10.1126_sciadv.aeh3059.md)  
+  `其他` · 相关性 3/10
+- [A transcriptional cofactor GRIP1 drives PPARγ DNA binding and p300-dependent enhancer activity during homeostatic macrophage polarization](deep_reads/2026-10-16-10.1126_sciadv.aeh4524.md)  
+  `其他` · 相关性 3/10
+- [Spectral tuning and signaling of diverse and far red–sensitive rhodopsins in mantis shrimp eyes](deep_reads/2026-10-16-10.1126_sciadv.aef5666.md)  
+  `其他` · 相关性 3/10
+- [Local control of Cre-regulated genetic modeling in vivo using wireless implantable optoelectronics](deep_reads/2026-10-16-10.1126_sciadv.aed1014.md)  
+  `其他` · 相关性 3/10
+- [A “Progenitor Cell Ark” hydrogel system for intervertebral disc regeneration via mitochondrial targeting and mitophagy enhancement](deep_reads/2026-10-16-10.1126_sciadv.aeh5001.md)  
+  `其他` · 相关性 3/10
+- [Nanoconfinement-cooperated catalysis enables rapid tandem redox kinetics for wide-temperature lithium-sulfur batteries](deep_reads/2026-10-16-10.1126_sciadv.aej0353.md)  
+  `其他` · 相关性 3/10
+- [Macrophage- or neutrophil-expressed UPP1 drives tumor growth and immune suppression in the tumor microenvironment](deep_reads/2026-10-16-10.1126_sciadv.aea8798.md)  
+  `其他` · 相关性 3/10
+- [Photomapping electrically coupled networks of the mature thalamus and cortex](deep_reads/2026-10-16-10.1126_sciadv.aed7447.md)  
+  `其他` · 相关性 3/10
+- [Humans experienced abrupt environmental changes at White Sands during the Last Glacial Maximum](deep_reads/2026-10-16-10.1126_sciadv.aeh0707.md)  
+  `其他` · 相关性 3/10
+- [Ice nucleation by kaolinite: Morphology shapes the size dependence of ice nucleation active sites on dust particles](deep_reads/2026-10-16-10.1126_sciadv.aeg1206.md)  
+  `天体统计` · 相关性 3/10
 - [AmpliconSuite: an end-to-end workflow for analyzing focal amplifications in cancer genomes](deep_reads/2026-10-16-10.1038_s41592-026-03264-x.md)  
   `其他` · 相关性 3/10
 - [LoL-align: sensitive and fast probabilistic protein structure alignment](deep_reads/2026-10-16-10.1038_s41592-026-03249-w.md)  
@@ -363,6 +427,44 @@
   `其他` · 相关性 3/10
 - [Cloud‐Plots for Spherical Data With Applications to Glaucoma and Gait Cyclograms](deep_reads/2026-10-16-10.1002_sim.70704.md)  
   `其他` · 相关性 3/10
+- [Background trade winds and climate sensitivity control the eastern equatorial Pacific warming pattern](deep_reads/2026-10-16-10.1126_sciadv.aec5746.md)  
+  `天体统计` · 相关性 2/10
+- [Kupffer cells are key mediators of antigen-specific immune tolerance by peptide-coupled red blood cells](deep_reads/2026-10-16-10.1126_sciadv.aeg6770.md)  
+  `其他` · 相关性 2/10
+- [SUMO2 deletion changes chromatin accessibility and enhances cytotoxic T cell activation and tumor infiltration](deep_reads/2026-10-16-10.1126_sciadv.aef2217.md)  
+  `其他` · 相关性 2/10
+- [Herpes simplex virus pUL56 abolishes neuronal activity by removing voltage-gated ion channels from the plasma membrane](deep_reads/2026-10-16-10.1126_sciadv.aei1796.md)  
+  `其他` · 相关性 2/10
+- [Enhancer binding kinetics explain transcription factor hub formation](deep_reads/2026-10-16-10.1126_sciadv.aeh1086.md)  
+  `其他` · 相关性 2/10
+- [Atomic structure and dynamics of the mechanosensitive channel MscL from <i>Escherichia coli</i> by cryo-EM and solid-state NMR](deep_reads/2026-10-16-10.1126_sciadv.aei0096.md)  
+  `其他` · 相关性 2/10
+- [Chromatin interaction landscape of epimorphic regeneration in teleost fish](deep_reads/2026-10-16-10.1126_sciadv.aeh2087.md)  
+  `其他` · 相关性 2/10
+- [Deep hydrous melting of the mantle wedge recorded by Mg isotopes](deep_reads/2026-10-16-10.1126_sciadv.aei6572.md)  
+  `其他` · 相关性 2/10
+- [Radical-induced autoxidation dominates squalene oxidative aging under environmental conditions](deep_reads/2026-10-16-10.1126_sciadv.aei2144.md)  
+  `其他` · 相关性 2/10
+- [Rapid coral bleaching recovery via symbiont transfer from healthy corals](deep_reads/2026-10-16-10.1126_sciadv.aeh1580.md)  
+  `其他` · 相关性 2/10
+- [TIME FOR COFFEE coordinates phase separation and chromatin regulation for salt tolerance](deep_reads/2026-10-16-10.1126_sciadv.aei1213.md)  
+  `其他` · 相关性 2/10
+- [Rewilding the atoll engine](deep_reads/2026-10-16-10.1126_sciadv.aem6116.md)  
+  `其他` · 相关性 2/10
+- [Ultrasound-driven electronically programmable microbubbles](deep_reads/2026-10-16-10.1126_sciadv.aeg5408.md)  
+  `其他` · 相关性 2/10
+- [A B1 SINE element within the mouse <i>Malat1</i> long noncoding RNA acts as an internal ribosome entry site mediating micropeptide translation](deep_reads/2026-10-16-10.1126_sciadv.aee5884.md)  
+  `其他` · 相关性 2/10
+- [An inspiration-off attractor supports the robust and flexible control of breathing](deep_reads/2026-10-16-10.1126_sciadv.aed2474.md)  
+  `其他` · 相关性 2/10
+- [Plasmonic metasurface microfluidic accelerates redox reactions for rapid phenotypic antibiotic susceptibility testing](deep_reads/2026-10-16-10.1126_sciadv.aec7686.md)  
+  `其他` · 相关性 2/10
+- [Bioinspired supramolecular thermistor for resolving subtle temperature variations](deep_reads/2026-10-16-10.1126_sciadv.aei0002.md)  
+  `其他` · 相关性 2/10
+- [Integrative multi-omics reveals CUL4B as a modulator of macrophage pyroptosis and innate defense against <i>Staphylococcus aureus</i>](deep_reads/2026-10-16-10.1126_sciadv.aeh4023.md)  
+  `其他` · 相关性 2/10
+- [Bisulfate-mediated selective methane oxidation under mild aqueous conditions](deep_reads/2026-10-16-10.1126_sciadv.aei3285.md)  
+  `其他` · 相关性 2/10
 - [Near-infrared photochromic miniprotein enables photoacoustic molecular imaging of acute inflammation and intracellular antigens](deep_reads/2026-10-16-10.1038_s41592-026-03255-y.md)  
   `其他` · 相关性 2/10
 - [An ultralow-background far-red light-responsive optogenetic tool based on an engineered biliverdin-binding domain](deep_reads/2026-10-16-10.1038_s41592-026-03223-6.md)  
@@ -391,6 +493,12 @@
   `其他` · 相关性 2/10
 - [A Bayesian phase I/II platform design with survival efficacy endpoint for dose optimization](deep_reads/2026-10-16-10.1177_09622802261449367.md)  
   `其他` · 相关性 2/10
+- [A bifunctional actuator to correct loss-of-function deficits in cardiac voltage-gated sodium channels](deep_reads/2026-10-16-10.1126_sciadv.aeb2110.md)  
+  `其他` · 相关性 1/10
+- [Dishevelled-mediated clustering stabilizes Frizzled6 and Vangl2 to establish planar cell polarity in the mammalian skin](deep_reads/2026-10-16-10.1126_sciadv.aeh6920.md)  
+  `其他` · 相关性 1/10
+- [Maternal vaccination with capsular polysaccharide bioconjugates protects against murine <i>Klebsiella pneumoniae</i> neonatal sepsis](deep_reads/2026-10-16-10.1126_sciadv.aeh8222.md)  
+  `其他` · 相关性 1/10
 - [The indomitable Stephen Hawking <b>Hawking</b> <i>Graham Farmelo</i> Bantam, 2026. 608 pp.](deep_reads/2026-10-16-10.1126_science.aej4194.md)  
   `其他` · 相关性 1/10
 - [Escape of the <i>BC200</i> gene to a human poxvirus reveals its persistent transposition in primates](deep_reads/2026-10-16-10.1126_science.aeh3441.md)  
