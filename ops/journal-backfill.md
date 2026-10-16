@@ -347,7 +347,7 @@ broad 组：
 - [x] (2026-10-16) `--only StatMed --n-issues 5`   （缺 v45-i18-19）⚠ 双周刊
 - [x] (2026-10-16) `--only SMMR --n-issues 6`   （缺 v35-i7, v35-i8）
 - [x] (2026-10-16) `--only AJE --n-issues 4`   （缺 v195-i9）
-- [ ] `--only JCGS --n-issues 4`   （缺 v35-i3）
+- [x] (2026-10-16) `--only JCGS --n-issues 4`   （缺 v35-i3）
 - [ ] `--only Science --n-issues 5`   （缺 v393-i6818）
 - [ ] `--only "Nat. Methods" --n-issues 5`   （缺 v23-i8）
 - [ ] `--only "Sci. Adv." --n-issues 4`   （缺 v12-i40）

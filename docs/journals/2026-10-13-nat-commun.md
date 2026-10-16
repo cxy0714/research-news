@@ -19,6 +19,7 @@
 ### 1. [10.1038/s41467-026-78440-w](https://doi.org/10.1038/s41467-026-78440-w) — Whole blood transcriptomics atlas across human diseases
 - **作者**: Mengzhen Li, Abdulgani Tatar, Emre Green, Ebru Simsek, Cigdem Yuce Kahraman, Mustafa Ceylan et al.
 - **期刊/来源**: Nature Communications
+- **机构**: Science for Life Laboratory · KTH Royal Institute of Technology · Atatürk University · Kent Hastanesi · Erzurum Regional Training and Research Hospital · Sağlık Bilimleri Üniversitesi · King's College London · Foundation for Liver Research 等
 - 相关性 5/10 · novelty: `application`
 - **摘要**: 本文构建了一个全血转录组图谱（WBT Atlas），包含4444个样本、98种健康状况，系统刻画了疾病相关的转录组特征。在基因、基因模块和通路水平上，针对免疫、代谢和细胞类型特异性特征进行了健康状态特异性的分析。通过整合1280名参与者、28种健康状况的匹配血浆蛋白质组数据，评估了血液RNA-蛋白质关系，并展示了其互补的生物学作用。基于RNA和蛋白质特征，开发了多分类模型，能够准确区分多种健康状况，且整合模型优于单一组学模型。识别的RNA和蛋白质特征在十个独立WBT队列和UK Biobank中得到验证。该图谱为精准医学中的转化发现提供了全基因组资源。
 - **关键技术**: `multi-omics integration`, `multi-class classification`, `transcriptomic profiling`, `proteomics integration`, `external validation`
@@ -27,6 +28,7 @@
 ### 2. [10.1038/s41467-026-78632-4](https://doi.org/10.1038/s41467-026-78632-4) — Genomic bases of short-term evolution in wild barn owls revealed by long-term monitoring and population-scale sequencing
 - **作者**: Tristan Cumer, Alexandros Topaloudis, Eleonore Lavanchy, Anne-Lyse Ducrest, Sonia Sarmiento Cabello, Anna Hewett et al.
 - **期刊/来源**: Nature Communications
+- **机构**: SIB Swiss Institute of Bioinformatics · University of Lausanne · Swiss Ornithological Institute
 - 相关性 4/10 · novelty: `application`
 - **摘要**: 该研究利用瑞士仓鸮30年的长期监测数据和3102个个体的全基因组测序，探究两种黑色素表型（羽色和斑点）的短期演化。研究发现表型随时间向更黑、更多斑点方向一致漂移，且由少数主效位点控制，这些位点具有部分重叠的遗传架构。通过比较等位基因频率的实测轨迹与模拟，作者在其中一个主效位点排除了遗传漂变的充分解释，提示选择的作用。方法上涉及全基因组关联分析、等位基因频率时间序列分析和基于模拟的统计推断。结论表明少数位点的选择可驱动野生连续性状的快速表型演化，并凸显长期基因组与表型监测的价值。对您而言，本文作为遗传学应用案例，其时间序列等位基因频率的统计推断框架（如模拟比较）或可迁移至您关注的纵向因果推断或流行病学队列研究中的动态暴露-结局关系分析。
 - **关键技术**: `whole-genome sequencing`, `allele frequency time series`, `simulation-based inference`, `GWAS`, `genetic drift vs selection test`
@@ -35,6 +37,7 @@
 ### 3. [10.1038/s41467-026-78186-5](https://doi.org/10.1038/s41467-026-78186-5) — Precision functional mapping of imagined and experienced pain
 - **作者**: Michael Sun, Bogdan Petre, Ke Bo, Carmen I. Bango, Malka Hershkop, Sydney L. Shohan et al.
 - **期刊/来源**: Nature Communications
+- **机构**: Dartmouth College · The University of Texas at Dallas · Oregon Health & Science University · Columbia University · Stanford University
 - 相关性 3/10 · novelty: `application`
 - **摘要**: 该研究利用深度表型化精准功能磁共振成像（每名被试超过7小时扫描，N=9），考察了8个身体部位的经验疼痛与想象疼痛的神经表征。通过传统映射、模式分类和表征相似性分析，发现两者均激活伤害性区域（如背后岛叶）和非伤害性区域（如前运动区和下效应器运动皮层），但想象疼痛未能可靠地重激活身体部位选择性的伤害性模式。相反，想象与经验疼痛在广泛皮层和皮层下区域（尤其是跨模态皮层，如背内侧和外侧前额叶、海马和丘脑）共享多变量表征。结果表明想象产生分布式的疼痛样活动，但两者具有可分离的神经编码，这可能解释生动想象疼痛的困难及其在共情、计划和疼痛慢性化中的潜在作用。对您而言，本文作为神经科学领域的gateway阅读，展示了高维多变量模式分析在个体化脑图谱中的应用，但方法学上与您的核心兴趣（因果推断、高维统计）关联较弱。
 - **关键技术**: `precision functional MRI`, `representational similarity analysis`, `multivariate pattern classification`, `deep phenotyping`
@@ -43,6 +46,7 @@
 ### 4. [10.1038/s41467-026-78310-5](https://doi.org/10.1038/s41467-026-78310-5) · [arXiv](https://arxiv.org/abs/2601.05952) — Continuous-time noise mitigation in analogue quantum simulation
 - **作者**: Gabriele Bressanini, Yue Ma, Michael Hanks, Hyukjoon Kwon, M. S. Kim
 - **期刊/来源**: Nature Communications
+- **机构**: Imperial College London · Korea Institute for Advanced Study
 - 相关性 2/10 · novelty: `application`
 - **摘要**: 本文针对模拟量子模拟器中的噪声问题，提出了一种连续时间框架下的噪声缓解协议。该协议在动力学过程中不进行主动控制或测量，完全保持连续时间特性，同时实现精确的噪声消除。其核心机制是引入少量辅助量子比特，通过精心设计的系统-辅助相互作用，并结合经典后处理联合测量数据来抵消噪声效应。该协议具有哈密顿量无关性，且对辅助比特自身的噪声具有鲁棒性。数值或理论分析表明，该方法为在有噪声环境下实现高保真模拟量子模拟提供了有前景的途径。对您而言，本文属于量子计算领域的前沿应用，虽与您的统计研究方向无直接方法学关联，但可作为跨学科广度阅读的素材。
 - **关键技术**: `analogue quantum simulation`, `noise mitigation`, `ancilla qubits`, `classical post-processing`, `continuous-time dynamics`
@@ -51,6 +55,7 @@
 ### 5. [10.1038/s41467-026-78608-4](https://doi.org/10.1038/s41467-026-78608-4) — Structures and molecular mechanisms of RAD54B in modulating homologous recombination
 - **作者**: Pengtao Liang, Stephanie Tye, Johanna Ertl da Costa, Neelam Maharshi, Bilge Argunhan, Lucas Kuhlen et al.
 - **期刊/来源**: Nature Communications
+- **机构**: The Francis Crick Institute · Imperial College London · Technische Universität Darmstadt · University of California, Davis
 - 相关性 1/10 · novelty: `application`
 - **摘要**: 该研究聚焦于RAD54B蛋白在同源重组修复DNA双链断裂中的结构与分子机制。通过冷冻电镜、突变和生化实验，作者发现RAD54B能稳定RAD51-DNA丝、抑制RAD51 ATPase活性，并促进D-loop形成和链交换。RAD54B具有两个主要的RAD51相互作用位点和一个β结构域，后者桥接RAD51原体、接触供体双链DNA并调节RAD54B自身的ATPase活性。细胞实验证实这些相互作用位点对人类细胞中HR修复DSB是必需的。该工作揭示了RAD54B在基因组维护中的模块化架构和机制框架。对您而言，这是一篇结构生物学论文，与您的统计兴趣无直接关联，但可作为跨学科科普阅读。
 - **关键技术**: `cryo-EM`, `mutagenesis`, `biochemical assays`, `ATPase activity assays`, `D-loop formation assay`
@@ -59,6 +64,7 @@
 ### 6. [10.1038/s41467-026-78613-7](https://doi.org/10.1038/s41467-026-78613-7) — Short Wavelength Infrared Diimmonium Nano-Agents for Photoacoustic Imaging
 - **作者**: Longcai Liu, Yang Chen, Liya Yu, Xiaozhou Mou, Guangxue Feng, Yu Cai
 - **期刊/来源**: Nature Communications
+- **机构**: Zhejiang Provincial People's Hospital · Hangzhou Medical College · State Key Laboratory of Luminescent Materials and Devices · South China University of Technology
 - 相关性 1/10 · novelty: `application`
 - **摘要**: 本文报道了一类新型二亚胺（diimmonium）基双阳离子纳米造影剂（DB·2X），用于1700 nm激发的光声成像（PAI）。通过密度泛函理论（DFT）计算，发现双阳离子DB²⁺通过分子工程显著降低激发能（1.24 eV）并增强振子强度（f=1.11），归因于对称允许的局域激发机制。单晶X射线衍射表明DB·2X聚集体中分子间距>5.0 Å，有利于优化非辐射跃迁，放大光声信号。体内实验显示，在1700 nm激发下，DB·2TFSI纳米剂相比传统1064 nm激发具有更高的信背比和更少的内源性发色团干扰。生物相容性评估证实低细胞毒性，为开发1700 nm可激发的PAI纳米剂提供了新范式。该工作属于材料化学与生物医学成像领域，与您的统计研究兴趣无直接关联。
 - **关键技术**: `density functional theory (DFT)`, `single-crystal X-ray diffraction`, `photoacoustic imaging`, `non-radiative decay optimization`
@@ -76,6 +82,7 @@
 ### 8. [10.1038/s41467-026-78225-1](https://doi.org/10.1038/s41467-026-78225-1) — The central coupler of ClpXP controls intersubunit communication and couples intrasubunit chemical energy with force generation
 - **作者**: Robert P. Sosa, Alfredo Jose Florez Ariza, Jeonghoon Kim, Alexander B. Tong, Zhen-Hui Kang, Alicia Li et al.
 - **期刊/来源**: Nature Communications
+- **机构**: QB3 · Howard Hughes Medical Institute · University of California, Berkeley · St. Jude Children's Research Hospital · Sichuan University of Science and Engineering · Vanderbilt University
 - 相关性 1/10 · novelty: `application`
 - **摘要**: 该研究结合单分子光镊、生化实验和单颗粒冷冻电镜，探究AAA+ ATPase ClpX中中央耦合器（central coupler）如何实现亚基间通讯并耦合ATP水解化学能与机械力产生。研究发现，螺旋排列中次高亚基的中央耦合器通过定位其精氨酸指、sensor-I和sensor-II，接触逆时针相邻亚基的ATP并触发其水解；随后最高亚基的中央耦合器迅速将ATP水解与底物转运环的下行运动耦合，实现快速力产生以高效解折叠蛋白底物，同时最大化马达的热力学效率。该工作揭示了ClpX中机械化学耦合的分子机制，属于结构生物学与单分子生物物理领域。
 - **关键技术**: `single-molecule optical tweezers`, `cryo-EM`, `biochemical assays`, `mechanochemical coupling`

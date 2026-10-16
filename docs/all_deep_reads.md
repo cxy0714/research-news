@@ -1347,6 +1347,11 @@
 - [Generalizing the two sources capture–recapture estimator for covariate information](deep_reads/2026-10-12-10.1177_09622802261491945.md)  
   6/10 [journals]
 
+#### Journal of Computational and Graphical Statistics
+
+- [A PC Algorithm for Max-Linear Bayesian Networks](deep_reads/2026-10-16-10.1080_10618600.2026.2673046.md)  
+  7/10 [journals]
+
 #### American Journal of Epidemiology Vol 195 Issue 9
 
 - [A simple and powerful test of vaccine waning](deep_reads/2026-10-16-10.1093_aje_kwag118.md)  
@@ -4519,6 +4524,20 @@
 
 ### 期刊
 
+#### Journal of Computational and Graphical Statistics Vol 35 Issue 3
+
+- [Least Squares and Hypothesis Testing Based Transfer Learning for High-Dimensional Quantile Regression](deep_reads/2026-10-16-10.1080_10618600.2026.2628275.md)  
+  7/10 [journals]
+
+#### Journal of Computational and Graphical Statistics
+
+- [Spatial-Sign based Robust Sparse Precision Matrix Estimation and its Applications](deep_reads/2026-10-12-10.1080_10618600.2026.2743036.md)  
+  7/10 [journals]
+- [Doubly Regularized Matrix-Variate Regression](deep_reads/2026-10-16-10.1080_10618600.2026.2702534.md)  
+  6/10 [journals]
+- [Change Point Detection in Precision Matrices with D-Trace Loss](deep_reads/2026-10-16-10.1080_10618600.2026.2685828.md)  
+  6/10 [journals]
+
 #### Journal of Business & Economic Statistics Vol 44 Issue 4
 
 - [Covariance Function Estimation for High-Dimensional Functional Time Series with Dual Factor Structures](deep_reads/2026-10-14-10.1080_07350015.2026.2637634.md)  
@@ -4591,11 +4610,6 @@
   7/10 [journals]
 - [Spatio-temporal autoregressions for high dimensional matrix-valued time series](deep_reads/2026-10-12-10.1016_j.jeconom.2026.106319.md)  
   6/10 [journals]
-
-#### Journal of Computational and Graphical Statistics
-
-- [Spatial-Sign based Robust Sparse Precision Matrix Estimation and its Applications](deep_reads/2026-10-12-10.1080_10618600.2026.2743036.md)  
-  7/10 [journals]
 
 #### Statistica Sinica
 
@@ -6123,6 +6137,26 @@
 - [Maximum likelihood estimation in proportional odds regression model based on interval-censored event-time data](deep_reads/2026-10-16-10.1177_09622802261461775.md)  
   6/10 [journals]
 
+#### Journal of Computational and Graphical Statistics Vol 35 Issue 3
+
+- [Distributed Nonparametric Regression with Heterogeneity Through Prediction-Based Aggregation](deep_reads/2026-10-16-10.1080_10618600.2026.2626382.md)  
+  7/10 [journals]
+- [Martingale Posterior Distributions for Log-Concave Density Functions](deep_reads/2026-10-16-10.1080_10618600.2026.2627458.md)  
+  6/10 [journals]
+
+#### Journal of Computational and Graphical Statistics
+
+- [Doubly Robust and Efficient Estimation in a Partially Linear Multiple-Index Model](deep_reads/2026-10-16-10.1080_10618600.2026.2685845.md)  
+  8/10 [journals]
+- [Tensor Additive Quantile Regression](deep_reads/2026-10-16-10.1080_10618600.2026.2687761.md)  
+  7/10 [journals]
+- [Bayesian Penalized Transformation Models: Structured Additive Location-Scale Regression for Arbitrary Conditional Distributions](deep_reads/2026-10-12-10.1080_10618600.2026.2703269.md)  
+  6/10 [journals]
+- [Exploration of Random Objects Through Increasing Ball Statistics](deep_reads/2026-10-16-10.1080_10618600.2026.2697928.md)  
+  5/10 [journals]
+- [Elastic Full Procrustes Analysis of Plane Curves via Hermitian Covariance Smoothing](deep_reads/2026-10-16-10.1080_10618600.2026.2679146.md)  
+  4/10 [journals]
+
 #### Journal of Business & Economic Statistics Vol 44 Issue 3
 
 - [Time-Varying High Quantile Estimation for Nonstationary Tail Dependent Time Series](deep_reads/2026-10-14-10.1080_07350015.2025.2554669.md)  
@@ -6167,11 +6201,6 @@
   5/10 [journals]
 - [Penalised Spline Estimation of Covariate‐Specific Time‐Dependent ROC Curves](deep_reads/2026-10-12-10.1002_sim.70718.md)  
   4/10 [journals]
-
-#### Journal of Computational and Graphical Statistics
-
-- [Bayesian Penalized Transformation Models: Structured Additive Location-Scale Regression for Arbitrary Conditional Distributions](deep_reads/2026-10-12-10.1080_10618600.2026.2703269.md)  
-  6/10 [journals]
 
 #### Statistica Sinica
 
@@ -8979,6 +9008,28 @@
 - [Asymptotic online FWER control for dependent test statistics](deep_reads/2026-10-16-10.1177_09622802261461776.md)  
   6/10 [journals]
 
+#### Journal of Computational and Graphical Statistics Vol 35 Issue 3
+
+- [A Graph-Based Framework for Nonparametric Tests of Multivariate Independence](deep_reads/2026-10-16-10.1080_10618600.2026.2627465.md)  
+  7/10 [journals]
+
+#### Journal of Computational and Graphical Statistics
+
+- [Directional False Discovery Rate Control via Distributed Procedures for Gaussian Graphical Models](deep_reads/2026-10-12-10.1080_10618600.2026.2719786.md)  
+  7/10 [journals]
+- [Optimal Adjustment and Combination of Independent Discrete <i>p</i> -Values](deep_reads/2026-10-12-10.1080_10618600.2026.2732157.md)  
+  7/10 [journals]
+- [OPTICS: Order-Preserved Test-Inverse Confidence Set for Number of Change-Points](deep_reads/2026-10-16-10.1080_10618600.2026.2686430.md)  
+  6/10 [journals]
+- [Conformal Network Link Prediction with False Discovery Rate Control Under Unstructured Missingness](deep_reads/2026-10-12-10.1080_10618600.2026.2719794.md)  
+  6/10 [journals]
+- [Generative Conformal Prediction Under Covariate Shift](deep_reads/2026-10-12-10.1080_10618600.2026.2703276.md)  
+  6/10 [journals]
+- [RKHS-Based Latent Position Random Graph Correlation](deep_reads/2026-10-12-10.1080_10618600.2026.2652933.md)  
+  5/10 [journals]
+- [Sequential Bootstrap for More Powerful Similarity Test](deep_reads/2026-10-12-10.1080_10618600.2026.2652918.md)  
+  4/10 [journals]
+
 #### Journal of Business & Economic Statistics Vol 44 Issue 4
 
 - [Adaptive LAD-Based Bootstrap Unit Root Tests Under Unconditional Heteroscedasticity](deep_reads/2026-10-14-10.1080_07350015.2026.2638489.md)  
@@ -9088,21 +9139,6 @@
 
 - [Coordinated testing for identification failure and correct model specification](deep_reads/2026-10-12-10.1016_j.jeconom.2026.106338.md)  
   7/10 [journals]
-
-#### Journal of Computational and Graphical Statistics
-
-- [Directional False Discovery Rate Control via Distributed Procedures for Gaussian Graphical Models](deep_reads/2026-10-12-10.1080_10618600.2026.2719786.md)  
-  7/10 [journals]
-- [Optimal Adjustment and Combination of Independent Discrete <i>p</i> -Values](deep_reads/2026-10-12-10.1080_10618600.2026.2732157.md)  
-  7/10 [journals]
-- [Conformal Network Link Prediction with False Discovery Rate Control Under Unstructured Missingness](deep_reads/2026-10-12-10.1080_10618600.2026.2719794.md)  
-  6/10 [journals]
-- [Generative Conformal Prediction Under Covariate Shift](deep_reads/2026-10-12-10.1080_10618600.2026.2703276.md)  
-  6/10 [journals]
-- [RKHS-Based Latent Position Random Graph Correlation](deep_reads/2026-10-12-10.1080_10618600.2026.2652933.md)  
-  5/10 [journals]
-- [Sequential Bootstrap for More Powerful Similarity Test](deep_reads/2026-10-12-10.1080_10618600.2026.2652918.md)  
-  4/10 [journals]
 
 #### Statistica Sinica
 
@@ -11115,6 +11151,62 @@
 - [Optimal Subsampling for the Proportional Mean Residual Life Model With Massive Survival Data](deep_reads/2026-10-16-10.1002_sim.70766.md)  
   6/10 [journals]
 
+#### Journal of Computational and Graphical Statistics Vol 35 Issue 3
+
+- [Fast and Cheap Covariance Smoothing](deep_reads/2026-10-16-10.1080_10618600.2026.2615054.md)  
+  7/10 [journals]
+- [Bayesian Smoothing and Variable Selection Using Variational Automatic Relevance Determination](deep_reads/2026-10-16-10.1080_10618600.2026.2619519.md)  
+  6/10 [journals]
+- [Renewable <i>ℓ</i> <sub>1</sub> -Regularized Linear Support Vector Machine with High-Dimensional Streaming Data](deep_reads/2026-10-16-10.1080_10618600.2025.2604177.md)  
+  6/10 [journals]
+- [Computational Approaches for Exponential-Family Factor Analysis](deep_reads/2026-10-16-10.1080_10618600.2026.2627453.md)  
+  5/10 [journals]
+- [Adaptive Sequential Monte Carlo for Structured Cross Validation in Bayesian Hierarchical Models](deep_reads/2026-10-16-10.1080_10618600.2025.2612246.md)  
+  5/10 [journals]
+- [Squintability and Other Metrics for Assessing Projection Pursuit Indexes, and Guiding Optimization Choices](deep_reads/2026-10-16-10.1080_10618600.2026.2614076.md)  
+  4/10 [journals]
+- [Swarm-Based Search Procedure for Finding Optimal Multi-Stage Designs for Phase II Clinical Trials](deep_reads/2026-10-16-10.1080_10618600.2025.2612633.md)  
+  4/10 [journals]
+- [Variational Inference for Hierarchical Models with Conditional Scale and Skewness Corrections](deep_reads/2026-10-16-10.1080_10618600.2025.2609645.md)  
+  4/10 [journals]
+
+#### Journal of Computational and Graphical Statistics
+
+- [Scalable Subset Selection in Linear Mixed Models](deep_reads/2026-10-16-10.1080_10618600.2026.2701133.md)  
+  6/10 [journals]
+- [Multiple Linked Tensor Factorization](deep_reads/2026-10-16-10.1080_10618600.2026.2685851.md)  
+  6/10 [journals]
+- [Efficient Log-Rank Updates for Random Survival Forests](deep_reads/2026-10-12-10.1080_10618600.2026.2709001.md)  
+  6/10 [journals]
+- [Statistical Theory of Multi-stage Newton Iteration Algorithm for Online Continual Learning](deep_reads/2026-10-12-10.1080_10618600.2026.2734226.md)  
+  6/10 [journals]
+- [MCMC using bouncy Hamiltonian dynamics: A unifying framework for Hamiltonian Monte Carlo and piecewise deterministic Markov process samplers](deep_reads/2026-10-16-10.1080_10618600.2026.2748046.md)  
+  5/10 [journals]
+- [Sparsification Subsampling for Partial Least Squares Regression](deep_reads/2026-10-16-10.1080_10618600.2026.2686429.md)  
+  5/10 [journals]
+- [Optimal Combination of Composite Likelihoods Using Approximate Bayesian Computation with Application to State-Space Models](deep_reads/2026-10-12-10.1080_10618600.2026.2718766.md)  
+  5/10 [journals]
+- [Scalable Fitting Methods for Multivariate Gaussian Additive Models with Covariate-dependent Covariance Matrices](deep_reads/2026-10-12-10.1080_10618600.2026.2732167.md)  
+  5/10 [journals]
+- [Simultaneous Feature- and Sample-Splitting ADMM for Penalized Rank Regression](deep_reads/2026-10-12-10.1080_10618600.2026.2703277.md)  
+  5/10 [journals]
+- [A new framework for non-stationary spatio-temporal data fusion of multi-fidelity models](deep_reads/2026-10-12-10.1080_10618600.2026.2711783.md)  
+  5/10 [journals]
+- [Moment-Assisted Subsampling Method for Cox Proportional Hazards Model with Large-Scale Data](deep_reads/2026-10-12-10.1080_10618600.2026.2702530.md)  
+  5/10 [journals]
+- [Grid Particle Gibbs with Ancestor Sampling for State-Space Models](deep_reads/2026-10-16-10.1080_10618600.2026.2681775.md)  
+  4/10 [journals]
+- [Adaptive Generative Moment Matching Networks for Improved Learning of Dependence Structures](deep_reads/2026-10-16-10.1080_10618600.2026.2689663.md)  
+  4/10 [journals]
+- [A Semidefinite Programming Approach to Maximum Von Neumann Entropy Experimental Design for Multiresponse Models](deep_reads/2026-10-16-10.1080_10618600.2026.2681777.md)  
+  4/10 [journals]
+- [Robust, partially alive particle Metropolis-Hastings via The Frankenfilter](deep_reads/2026-10-12-10.1080_10618600.2026.2732158.md)  
+  4/10 [journals]
+- [Scalable balanced <i>k</i> -d tree construction for distributed data](deep_reads/2026-10-12-10.1080_10618600.2026.2714131.md)  
+  4/10 [journals]
+- [FedDecay: Balancing Model Performance and Rapid Personalization in Federated Learning with Learning Rate Scheduling](deep_reads/2026-10-16-10.1080_10618600.2026.2696264.md)  
+  3/10 [journals]
+
 #### IEEE Transactions on Signal Processing Vol 74
 
 - [Rank-Revealing Bayesian Block-Term Tensor Completion With Graph Information](deep_reads/2026-06-05-10.1109_tsp.2026.3656119.md)  
@@ -11248,27 +11340,6 @@
 
 - [Iterative distributed multinomial regression](deep_reads/2026-10-12-10.1016_j.jeconom.2026.106334.md)  
   6/10 [journals]
-
-#### Journal of Computational and Graphical Statistics
-
-- [Efficient Log-Rank Updates for Random Survival Forests](deep_reads/2026-10-12-10.1080_10618600.2026.2709001.md)  
-  6/10 [journals]
-- [Statistical Theory of Multi-stage Newton Iteration Algorithm for Online Continual Learning](deep_reads/2026-10-12-10.1080_10618600.2026.2734226.md)  
-  6/10 [journals]
-- [Optimal Combination of Composite Likelihoods Using Approximate Bayesian Computation with Application to State-Space Models](deep_reads/2026-10-12-10.1080_10618600.2026.2718766.md)  
-  5/10 [journals]
-- [Scalable Fitting Methods for Multivariate Gaussian Additive Models with Covariate-dependent Covariance Matrices](deep_reads/2026-10-12-10.1080_10618600.2026.2732167.md)  
-  5/10 [journals]
-- [Simultaneous Feature- and Sample-Splitting ADMM for Penalized Rank Regression](deep_reads/2026-10-12-10.1080_10618600.2026.2703277.md)  
-  5/10 [journals]
-- [A new framework for non-stationary spatio-temporal data fusion of multi-fidelity models](deep_reads/2026-10-12-10.1080_10618600.2026.2711783.md)  
-  5/10 [journals]
-- [Moment-Assisted Subsampling Method for Cox Proportional Hazards Model with Large-Scale Data](deep_reads/2026-10-12-10.1080_10618600.2026.2702530.md)  
-  5/10 [journals]
-- [Robust, partially alive particle Metropolis-Hastings via The Frankenfilter](deep_reads/2026-10-12-10.1080_10618600.2026.2732158.md)  
-  4/10 [journals]
-- [Scalable balanced <i>k</i> -d tree construction for distributed data](deep_reads/2026-10-12-10.1080_10618600.2026.2714131.md)  
-  4/10 [journals]
 
 #### Astrophysical Journal Supplement Series Vol 286 Issue 2
 
@@ -16277,6 +16348,34 @@
 - [A historical note: Rediscovering an unpublished response to Korn and Freidlin (2011)](deep_reads/2026-10-16-10.1177_09622802251403371.md)  
   3/10 [journals]
 
+#### Journal of Computational and Graphical Statistics Vol 35 Issue 3
+
+- [Unveil Linear Patterns of Dependence via K Regression Clustering](deep_reads/2026-10-16-10.1080_10618600.2025.2606055.md)  
+  6/10 [journals]
+- [Regression Modeling of Spatiotemporal Extreme U.S. Wildfires via Partially Interpretable Neural Networks](deep_reads/2026-10-16-10.1080_10618600.2025.2609641.md)  
+  0/10 [journals]
+
+#### Journal of Computational and Graphical Statistics
+
+- [Robustifying Approximate Bayesian Computation](deep_reads/2026-10-16-10.1080_10618600.2026.2748043.md)  
+  6/10 [journals]
+- [Generalized Bayesian Inference for Dynamic Random Dot Product Graphs](deep_reads/2026-10-12-10.1080_10618600.2026.2714133.md)  
+  6/10 [journals]
+- [A Functional Tensor Model for Dynamic Multilayer Networks with Common Invariant Subspaces and the RKHS Estimation](deep_reads/2026-10-12-10.1080_10618600.2026.2737261.md)  
+  6/10 [journals]
+- [MaxTDA: Robust Statistical Inference for Maximal Persistence in Topological Data Analysis](deep_reads/2026-10-16-10.1080_10618600.2026.2748028.md)  
+  5/10 [journals]
+- [Bayesian local clustering of functional data via semi-Markovian random partitions](deep_reads/2026-10-16-10.1080_10618600.2026.2748033.md)  
+  4/10 [journals]
+- [Loss-Based Prior for CART and BART Models](deep_reads/2026-10-16-10.1080_10618600.2026.2703268.md)  
+  4/10 [journals]
+- [Supervised Bayesian Joint Graphical Model for Simultaneous Network Estimation and Subgroup Identification](deep_reads/2026-10-16-10.1080_10618600.2026.2685844.md)  
+  4/10 [journals]
+- [Principal Subsimplex Analysis](deep_reads/2026-10-12-10.1080_10618600.2026.2708993.md)  
+  4/10 [journals]
+- [Representation Learning of Dynamic Networks](deep_reads/2026-10-12-10.1080_10618600.2026.2705295.md)  
+  4/10 [journals]
+
 #### Journal of Business & Economic Statistics Vol 44 Issue 4
 
 - [A Network View on Portfolio Risk](deep_reads/2026-10-14-10.1080_07350015.2026.2634827.md)  
@@ -17100,17 +17199,6 @@
   8/10 [journals]
 - [Nonparametric identification of first-price auction with unobserved competition: A density discontinuity framework](deep_reads/2026-10-12-10.1016_j.jeconom.2026.106345.md)  
   6/10 [journals]
-
-#### Journal of Computational and Graphical Statistics
-
-- [Generalized Bayesian Inference for Dynamic Random Dot Product Graphs](deep_reads/2026-10-12-10.1080_10618600.2026.2714133.md)  
-  6/10 [journals]
-- [A Functional Tensor Model for Dynamic Multilayer Networks with Common Invariant Subspaces and the RKHS Estimation](deep_reads/2026-10-12-10.1080_10618600.2026.2737261.md)  
-  6/10 [journals]
-- [Principal Subsimplex Analysis](deep_reads/2026-10-12-10.1080_10618600.2026.2708993.md)  
-  4/10 [journals]
-- [Representation Learning of Dynamic Networks](deep_reads/2026-10-12-10.1080_10618600.2026.2705295.md)  
-  4/10 [journals]
 
 #### Scandinavian Journal of Statistics Vol 53 Issue 3
 

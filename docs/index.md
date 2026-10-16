@@ -11,212 +11,300 @@
 - **[收藏](favorites.md)** — 登录后在各页点 ☆ 收藏的论文，自动汇总到这里（总收藏按类别分组、可切换按周；每篇可写评论，无需手动维护）。
 - **[模型测评](all_shootout.md)** — 不同 LLM 在同一批论文上的打分 / 解读对比。
 
-## 今日 · 2026-10-14
+## 今日 · 2026-10-16
 
 ### 每日 arXiv 速览
 
-[→ 查看完整报告](daily/2026-10-14.md)
+[→ 查看完整报告](daily/2026-10-16.md)
 
-### 精读论文（99 篇）
+### 精读论文（143 篇）
 
-- [Estimation of Direct and Indirect Quantile Treatment Effects with Double Machine Learning](deep_reads/2026-10-14-10.1080_07350015.2026.2654889.md)  
+- [Doubly Robust and Efficient Estimation in a Partially Linear Multiple-Index Model](deep_reads/2026-10-16-10.1080_10618600.2026.2685845.md)  
+  `非参数 / 半参数` · 相关性 8/10
+- [Doubly robust methods for recurrent event outcomes: causal effects of blood pressure medications on acute kidney injuries](deep_reads/2026-10-16-10.1093_aje_kwag214.md)  
   `因果推断` · 相关性 8/10
-- [Deep Orthogonal Learner for Conditional Quantile Treatment Effect Estimation](deep_reads/2026-10-14-10.1080_07350015.2025.2569483.md)  
+- [A simple and powerful test of vaccine waning](deep_reads/2026-10-16-10.1093_aje_kwag118.md)  
   `因果推断` · 相关性 8/10
-- [Semiparametric Estimation of Treatment Effects in Observational Studies with Heterogeneous Partial Interference](deep_reads/2026-10-14-10.1080_07350015.2026.2635631.md)  
+- [Efficient semi-supervised estimation of optimal individualized treatment regimes with survival outcome](deep_reads/2026-10-16-10.1177_09622802261460255.md)  
   `因果推断` · 相关性 8/10
-- [Missing Endogenous Variables in Conditional Moment Restriction Models](deep_reads/2026-10-14-10.1080_07350015.2026.2619543.md)  
+- [Non‐Parametric Mediation Analysis of Non‐Markov Illness‐Death Model](deep_reads/2026-10-16-10.1002_sim.70685.md)  
   `因果推断` · 相关性 8/10
-- [Optimal Inference of the Mean Outcome under Optimal Treatment Regime](deep_reads/2026-10-14-2509.09773.md)  
-  `因果推断` · 相关性 8/10
-- [Estimation of Factors Using Higher-Order Multi-Cumulants in Weak Factor Models](deep_reads/2026-10-14-10.1080_07350015.2026.2671240.md)  
-  `高维统计 / 随机矩阵` · 相关性 7/10
-- [Encompassing and Progression Testing in High-Dimensions](deep_reads/2026-10-14-10.1080_07350015.2026.2695448.md)  
+- [Tensor Additive Quantile Regression](deep_reads/2026-10-16-10.1080_10618600.2026.2687761.md)  
+  `非参数 / 半参数` · 相关性 7/10
+- [A PC Algorithm for Max-Linear Bayesian Networks](deep_reads/2026-10-16-10.1080_10618600.2026.2673046.md)  
+  `因果推断` · 相关性 7/10
+- [A Graph-Based Framework for Nonparametric Tests of Multivariate Independence](deep_reads/2026-10-16-10.1080_10618600.2026.2627465.md)  
   `数理统计 / 假设检验` · 相关性 7/10
-- [Using a Special Regressor to Identify Type I and Type II Error Probabilities, With an Illustrative Application to Miscarriages of Justice](deep_reads/2026-10-14-10.1080_07350015.2026.2654891.md)  
-  `因果推断` · 相关性 7/10
-- [High-Dimensional Detection of Spatial Interference Effects](deep_reads/2026-10-14-10.1080_07350015.2025.2581341.md)  
-  `因果推断` · 相关性 7/10
-- [Partial Effects in Time-Varying Linear Transformation Panel Models with Endogeneity](deep_reads/2026-10-14-10.1080_07350015.2025.2566352.md)  
-  `因果推断` · 相关性 7/10
-- [Covariance Function Estimation for High-Dimensional Functional Time Series with Dual Factor Structures](deep_reads/2026-10-14-10.1080_07350015.2026.2637634.md)  
+- [Least Squares and Hypothesis Testing Based Transfer Learning for High-Dimensional Quantile Regression](deep_reads/2026-10-16-10.1080_10618600.2026.2628275.md)  
   `高维统计 / 随机矩阵` · 相关性 7/10
-- [Distribution-Free Shrinkage of High-Dimensional Mean Vector](deep_reads/2026-10-14-10.1080_07350015.2026.2638490.md)  
-  `高维统计 / 随机矩阵` · 相关性 7/10
-- [A Panel Data Estimator for the Distribution and Quantiles of Marginal Effects in Nonlinear Structural Models with an Application to the Demand for Junk Food](deep_reads/2026-10-14-10.1080_07350015.2026.2635636.md)  
+- [Distributed Nonparametric Regression with Heterogeneity Through Prediction-Based Aggregation](deep_reads/2026-10-16-10.1080_10618600.2026.2626382.md)  
+  `非参数 / 半参数` · 相关性 7/10
+- [Fast and Cheap Covariance Smoothing](deep_reads/2026-10-16-10.1080_10618600.2026.2615054.md)  
+  `统计计算 / 算法` · 相关性 7/10
+- [The effect of hypothetical interventions to limit weight gain on incident type 2 diabetes mellitus among people with HIV initiating antiretroviral therapy in the United States, 2012-2021](deep_reads/2026-10-16-10.1093_aje_kwag255.md)  
   `因果推断` · 相关性 7/10
-- [Causal Inference Using Antidotal Variables](deep_reads/2026-10-14-10.1080_07350015.2026.2634820.md)  
+- [Estimate Optimal Dynamic Treatment Regimes with Partial Compatibility: An Application to data from a TREAT Asia HIV Observational Database (TAHOD) site in Pune, India](deep_reads/2026-10-16-10.1093_aje_kwag254.md)  
   `因果推断` · 相关性 7/10
-- [Invalid Proxies and Volatility Changes](deep_reads/2026-10-14-10.1080_07350015.2025.2602857.md)  
+- [Assessing and adjusting for selection bias in Mendelian randomization: the effects of body mass index, education, and C-reactive protein on depression in UK Biobank](deep_reads/2026-10-16-10.1093_aje_kwag211.md)  
   `因果推断` · 相关性 7/10
-- [Bounding Omitted Variable Bias Using Auxiliary Data: With an Application to Estimate Neighborhood Effects](deep_reads/2026-10-14-10.1080_07350015.2025.2606063.md)  
+- [Structural limitations of Early–Late treatment comparisons under target trial emulation: a simulation study](deep_reads/2026-10-16-10.1093_aje_kwag208.md)  
   `因果推断` · 相关性 7/10
-- [From Penalization to Over-Parameterization: Achieving Implicit Regularization for High-Dimensional Linear Errors-in-Variables Models](deep_reads/2026-10-14-10.1080_07350015.2025.2583457.md)  
-  `高维统计 / 随机矩阵` · 相关性 7/10
-- [Regularized Interval-Valued Time Series Modeling](deep_reads/2026-10-14-10.1080_07350015.2026.2675481.md)  
+- [Antibiotic treatment for non-specific upper respiratory tract infections and exacerbation risk in children with asthma: a target trial emulation study](deep_reads/2026-10-16-10.1093_aje_kwag132.md)  
+  `流行病学` · 相关性 7/10
+- [A comparison of missing data approaches for linear regression with missing not at random outcome and predictors](deep_reads/2026-10-16-10.1177_09622802261458074.md)  
+  `因果推断` · 相关性 7/10
+- [Reluctant Transfer Learning in Penalized Regressions for Individualized Treatment Rules Under Effect Heterogeneity](deep_reads/2026-10-16-10.1002_sim.70671.md)  
+  `因果推断` · 相关性 7/10
+- [Practical Considerations for Gaussian Process Modeling for Causal Inference in Quasi‐Experimental Studies With Panel Data](deep_reads/2026-10-16-10.1002_sim.70652.md)  
+  `因果推断` · 相关性 7/10
+- [Checking Genetic Homogeneity Between Two Samples Using Summary Statistics With Application to Mendelian Randomization](deep_reads/2026-10-16-10.1002_sim.70663.md)  
+  `因果推断` · 相关性 7/10
+- [Bayesian Bidirectional Mendelian Randomization Under Correlated and Uncorrelated Pleiotropy Using GWAS Summary Statistics](deep_reads/2026-10-16-10.1002_sim.70667.md)  
+  `因果推断` · 相关性 7/10
+- [Choosing Covariate Balancing Methods for Causal Inference: Practical Insights From a Simulation Study](deep_reads/2026-10-16-10.1002_sim.70672.md)  
+  `因果推断` · 相关性 7/10
+- [Covariate Adjustment for Wilcoxon Two Sample Statistic and Test](deep_reads/2026-10-16-10.1002_sim.70657.md)  
+  `数理统计 / 假设检验` · 相关性 7/10
+- [A Causal Framework for Evaluating the Total Effect of Strategies Aiming to Expand Screening and to Improve Outcomes](deep_reads/2026-10-16-10.1002_sim.70648.md)  
+  `因果推断` · 相关性 7/10
+- [Causal Effects on Nonterminal Event Time With Application to Antibiotic Usage and Future Resistance](deep_reads/2026-10-16-10.1002_sim.70650.md)  
+  `因果推断` · 相关性 7/10
+- [Estimating Optimal Site‐Specific Individualized Treatment Rules With Limited Data Sharing](deep_reads/2026-10-16-10.1002_sim.70696.md)  
+  `因果推断` · 相关性 7/10
+- [Using Negative Control Outcomes to Detect Selection Bias in Mendelian Randomization Studies](deep_reads/2026-10-16-10.1002_sim.70703.md)  
+  `因果推断` · 相关性 7/10
+- [Optimal Dynamic Treatment Regimes for High‐Dimensional Accelerated Failure Time Model](deep_reads/2026-10-16-10.1002_sim.70705.md)  
+  `因果推断` · 相关性 7/10
+- [Improving Sensitivity Analysis By Synthesizing Randomized Clinical Trials With Limited Overlap](deep_reads/2026-10-16-10.1002_sim.70637.md)  
+  `因果推断` · 相关性 7/10
+- [A Cautionary Note for Plasmode Simulation Studies in the Setting of Causal Inference](deep_reads/2026-10-16-10.1002_sim.70676.md)  
+  `因果推断` · 相关性 7/10
+- [Randomization‐Based Covariate Adjustment for Randomized Block 2K Factorial Experiments With Missing Baselines](deep_reads/2026-10-16-10.1002_sim.70761.md)  
+  `因果推断` · 相关性 7/10
+- [Valid Data‐Driven Subgroup Selection With Uniform Guarantees in Clinical Trials](deep_reads/2026-10-16-10.1002_sim.70745.md)  
+  `数理统计 / 假设检验` · 相关性 7/10
+- [Robustifying Approximate Bayesian Computation](deep_reads/2026-10-16-10.1080_10618600.2026.2748043.md)  
   `其他` · 相关性 6/10
-- [Factor Model Based Estimation for High Dimensional Reduced-Rank Time Series](deep_reads/2026-10-14-10.1080_07350015.2026.2681740.md)  
+- [Doubly Regularized Matrix-Variate Regression](deep_reads/2026-10-16-10.1080_10618600.2026.2702534.md)  
   `高维统计 / 随机矩阵` · 相关性 6/10
-- [Sparsity-Induced Identification of Factor-Augmented VAR Models](deep_reads/2026-10-14-10.1080_07350015.2026.2671238.md)  
-  `经济理论 / 应用` · 相关性 6/10
-- [Factor-Augmented Sparse MIDAS Regressions with an Application to Nowcasting](deep_reads/2026-10-14-10.1080_07350015.2026.2649055.md)  
-  `其他` · 相关性 6/10
-- [Design of Bayesian A/B Tests Controlling False Discovery Rates and Power](deep_reads/2026-10-14-10.1080_07350015.2025.2572770.md)  
+- [Scalable Subset Selection in Linear Mixed Models](deep_reads/2026-10-16-10.1080_10618600.2026.2701133.md)  
+  `统计计算 / 算法` · 相关性 6/10
+- [OPTICS: Order-Preserved Test-Inverse Confidence Set for Number of Change-Points](deep_reads/2026-10-16-10.1080_10618600.2026.2686430.md)  
   `数理统计 / 假设检验` · 相关性 6/10
-- [Robust Factor Analysis for High-Dimensional Data with Outliers](deep_reads/2026-10-14-10.1080_07350015.2025.2569730.md)  
+- [Multiple Linked Tensor Factorization](deep_reads/2026-10-16-10.1080_10618600.2026.2685851.md)  
+  `统计计算 / 算法` · 相关性 6/10
+- [Change Point Detection in Precision Matrices with D-Trace Loss](deep_reads/2026-10-16-10.1080_10618600.2026.2685828.md)  
   `高维统计 / 随机矩阵` · 相关性 6/10
-- [Binary Outcomes and Linear Interactions](deep_reads/2026-10-14-10.1080_07350015.2025.2565281.md)  
+- [Bayesian Smoothing and Variable Selection Using Variational Automatic Relevance Determination](deep_reads/2026-10-16-10.1080_10618600.2026.2619519.md)  
+  `统计计算 / 算法` · 相关性 6/10
+- [Martingale Posterior Distributions for Log-Concave Density Functions](deep_reads/2026-10-16-10.1080_10618600.2026.2627458.md)  
+  `非参数 / 半参数` · 相关性 6/10
+- [Renewable <i>ℓ</i> <sub>1</sub> -Regularized Linear Support Vector Machine with High-Dimensional Streaming Data](deep_reads/2026-10-16-10.1080_10618600.2025.2604177.md)  
+  `统计计算 / 算法` · 相关性 6/10
+- [Unveil Linear Patterns of Dependence via K Regression Clustering](deep_reads/2026-10-16-10.1080_10618600.2025.2606055.md)  
+  `其他` · 相关性 6/10
+- [Classification Matters: Divergent Estimates of Dementia Risk Factors in the Health and Retirement Study](deep_reads/2026-10-16-10.1093_aje_kwag260.md)  
+  `流行病学` · 相关性 6/10
+- [Racial discrimination and preterm birth subtype among a prospective cohort of nulliparous Black women in the United States, 2010-2013](deep_reads/2026-10-16-10.1093_aje_kwag252.md)  
+  `流行病学` · 相关性 6/10
+- [A Law of Iterated Expectation Primer for Causal Inference](deep_reads/2026-10-16-10.1093_aje_kwag258.md)  
   `因果推断` · 相关性 6/10
-- [Testing for Change-Points in Heavy-Tailed Time Series—A Winsorized CUSUM Approach](deep_reads/2026-10-14-10.1080_07350015.2025.2561747.md)  
-  `数理统计 / 假设检验` · 相关性 6/10
-- [High-Dimensional Quantile Vector Autoregression with Influencers and Communities](deep_reads/2026-10-14-10.1080_07350015.2025.2551249.md)  
-  `高维统计 / 随机矩阵` · 相关性 6/10
-- [A Network View on Portfolio Risk](deep_reads/2026-10-14-10.1080_07350015.2026.2634827.md)  
-  `其他` · 相关性 6/10
-- [High-Dimensional Multivariate Realized Volatility Forecasting with Community Network Structure](deep_reads/2026-10-14-10.1080_07350015.2026.2632810.md)  
-  `其他` · 相关性 6/10
-- [High Dimensional Threshold Factor Models with Common Stochastic Trends](deep_reads/2026-10-14-10.1080_07350015.2026.2621765.md)  
-  `高维统计 / 随机矩阵` · 相关性 6/10
-- [Gradient Wild Bootstrap for Instrumental Variable Quantile Regressions with Weak and Few Clusters](deep_reads/2026-10-14-10.1080_07350015.2026.2618311.md)  
+- [Improving dietary data quality in nutrition studies: development and validation of an explainable, reproducible, open machine learning-assisted framework for outlier detection in 24-hour recalls](deep_reads/2026-10-16-10.1093_aje_kwag204.md)  
+  `流行病学` · 相关性 6/10
+- [Confusion in evaluating research quality comes from lack of clarity: the case for explicit research questions](deep_reads/2026-10-16-10.1093_aje_kwag201.md)  
+  `流行病学` · 相关性 6/10
+- [Evaluating statistical models for overdispersed multiomics data: a multiplex immunofluorescence case study](deep_reads/2026-10-16-10.1093_aje_kwag127.md)  
+  `流行病学` · 相关性 6/10
+- [Identifiability and model misspecification for modelling recurrent infections using routine health care data](deep_reads/2026-10-16-10.1093_aje_kwag138.md)  
+  `流行病学` · 相关性 6/10
+- [Depressive symptoms and neuroimaging markers of brain aging in an ethno-racially diverse sample: a Bayesian analysis](deep_reads/2026-10-16-10.1093_aje_kwag135.md)  
+  `流行病学` · 相关性 6/10
+- [Postpartum depression in fathers: prevalence and evaluation of selection bias in the HOPE cohort](deep_reads/2026-10-16-10.1093_aje_kwag133.md)  
+  `流行病学` · 相关性 6/10
+- [Streetview greenspace types and dementia risk in older adults: the Multi-Ethnic Study of Atherosclerosis](deep_reads/2026-10-16-10.1093_aje_kwag129.md)  
+  `流行病学` · 相关性 6/10
+- [Extreme risk protection order policies and homicide risk among cohabitants of handgun owners](deep_reads/2026-10-16-10.1093_aje_kwag173.md)  
+  `流行病学` · 相关性 6/10
+- [Depression at the intersection of race/ethnicity, sex/gender, and sexual orientation in a nationally representative sample of US adults: a design-weighted intersectional MAIHDA](deep_reads/2026-10-16-10.1093_aje_kwag144.md)  
+  `流行病学` · 相关性 6/10
+- [Neighborhood poverty duration, timing, and severity from adolescence to early midlife and biological aging](deep_reads/2026-10-16-10.1093_aje_kwag176.md)  
+  `流行病学` · 相关性 6/10
+- [Air pollution and healthy aging: a longitudinal inquire on the association of PM2.5 with intrinsic capacity and its domains](deep_reads/2026-10-16-10.1093_aje_kwag160.md)  
+  `流行病学` · 相关性 6/10
+- [Age-period-cohort analysis of low birth weight, early-term delivery, induction, and cesarean-section, US births 1990-2019](deep_reads/2026-10-16-10.1093_aje_kwag147.md)  
+  `流行病学` · 相关性 6/10
+- [Handling of multicohort data in pooled analysis of environmental exposures: confounding by cohort of the relationship between perfluoroalkyl substances and birthweight in the ECHO Program](deep_reads/2026-10-16-10.1093_aje_kwag131.md)  
+  `流行病学` · 相关性 6/10
+- [Treatment comparisons using a measurement during follow-up and a right-censored time-to-event outcome](deep_reads/2026-10-16-10.1177_09622802261498390.md)  
   `因果推断` · 相关性 6/10
-- [Unit Averaging for Heterogeneous Panels](deep_reads/2026-10-14-10.1080_07350015.2025.2584579.md)  
-  `其他` · 相关性 6/10
-- [Joint Extreme Value-at-Risk and Expected Shortfall Dynamics with a Single Integrated Tail Shape Parameter](deep_reads/2026-10-14-10.1080_07350015.2026.2619541.md)  
-  `其他` · 相关性 6/10
-- [Dynamic CoVaR Modeling and Estimation](deep_reads/2026-10-14-10.1080_07350015.2025.2590126.md)  
-  `其他` · 相关性 6/10
-- [Cram$\acute{\text{e}}$r-Rao Bounds for Laplacian Matrix Estimation](deep_reads/2026-10-14-10.1109_tsp.2025.3646236.md)  
+- [Cluster-level analysis in three-level cluster randomised trials with multi-level covariate-dependent missingness](deep_reads/2026-10-16-10.1177_09622802261498389.md)  
+  `因果推断` · 相关性 6/10
+- [Implementing response-adaptive designs when responses are missing: Impute or ignore?](deep_reads/2026-10-16-10.1177_09622802251366843.md)  
+  `因果推断` · 相关性 6/10
+- [Maximum likelihood estimation in proportional odds regression model based on interval-censored event-time data](deep_reads/2026-10-16-10.1177_09622802261461775.md)  
+  `非参数 / 半参数` · 相关性 6/10
+- [Empirical likelihood inference for the area under the receiver operating characteristic (ROC) curve with verification biased data](deep_reads/2026-10-16-10.1177_09622802261455678.md)  
+  `因果推断` · 相关性 6/10
+- [Modeling treatment effects on absorbing outcomes in clinical trials: Leveraging longitudinal and ordinal data for efficiency gains](deep_reads/2026-10-16-10.1177_09622802261462925.md)  
+  `因果推断` · 相关性 6/10
+- [Asymptotic online FWER control for dependent test statistics](deep_reads/2026-10-16-10.1177_09622802261461776.md)  
   `数理统计 / 假设检验` · 相关性 6/10
-- [Compressive Toeplitz Covariance Estimation From Few-Bit Quantized Measurements With Applications to DOA Estimation](deep_reads/2026-10-14-10.1109_tsp.2026.3727446.md)  
-  `高维统计 / 随机矩阵` · 相关性 6/10
-- [Sensitivity Analysis in Translation Averaging](deep_reads/2026-10-14-10.1109_tpami.2026.3722795.md)  
+- [Efficiency Enhancement in Testing Treatment Efficacy Across Multiple Populations Using Treatment Crossover Data](deep_reads/2026-10-16-10.1002_sim.70651.md)  
+  `因果推断` · 相关性 6/10
+- [Transformation Discriminant Analysis for Constructing Optimal Biomarker Combinations](deep_reads/2026-10-16-10.1002_sim.70665.md)  
   `其他` · 相关性 6/10
-- [Panel Stochastic Frontier Models with Latent Group Structures](deep_reads/2026-10-14-10.1080_07350015.2026.2667765.md)  
+- [Predictor‐Assisted Nonparametric Graphical Models With Multivariate Error‐Prone Data](deep_reads/2026-10-16-10.1002_sim.70658.md)  
+  `其他` · 相关性 6/10
+- [Optimizing Treatment Decision Estimation for Right‐Censored Survival Data Through Parameter Transfer Learning](deep_reads/2026-10-16-10.1002_sim.70668.md)  
+  `因果推断` · 相关性 6/10
+- [LEARNER: A Transfer Learning Method for Low‐Rank Matrix Estimation](deep_reads/2026-10-16-10.1002_sim.70669.md)  
+  `其他` · 相关性 6/10
+- [Semiparametric Panel Count Model, With Applications to Signal Detection in Post‐Market Drug Surveillance Systems](deep_reads/2026-10-16-10.1002_sim.70649.md)  
+  `其他` · 相关性 6/10
+- [Moving From Individualized Risk‐Based Prevention to Benefit‐Based Prevention: Estimating Individualized Life‐Years Gained From Prevention Services as a Basis for Eligibility](deep_reads/2026-10-16-10.1002_sim.70659.md)  
+  `因果推断` · 相关性 6/10
+- [Identifiable Copula‐Double‐Cox Models: A Fully Parametric Framework for Dependent Right‐Censored Survival Data](deep_reads/2026-10-16-10.1002_sim.70647.md)  
+  `因果推断` · 相关性 6/10
+- [Subgroup Analysis of Interval‐censored Failure Time Data With Application to Alzheimer's Disease](deep_reads/2026-10-16-10.1002_sim.70613.md)  
+  `其他` · 相关性 6/10
+- [Statistical Inference for Covariate‐Adaptive Randomization Procedures With Missing Covariates](deep_reads/2026-10-16-10.1002_sim.70697.md)  
+  `数理统计 / 假设检验` · 相关性 6/10
+- [On the Statistical Limitations of Landmark Analysis for Addressing Immortal Time Bias](deep_reads/2026-10-16-10.1002_sim.70679.md)  
+  `因果推断` · 相关性 6/10
+- [Inverse‐Intensity‐Weighted Generalized Estimating Equations With Irregularly Measured Longitudinal Data and Informative Dropout](deep_reads/2026-10-16-10.1002_sim.70674.md)  
+  `因果推断` · 相关性 6/10
+- [Optimal Subsampling for the Proportional Mean Residual Life Model With Massive Survival Data](deep_reads/2026-10-16-10.1002_sim.70766.md)  
+  `统计计算 / 算法` · 相关性 6/10
+- [A Multi‐Task Learning Approach for Identifying Prognostic Variables Across Multiple Historical Clinical Trials](deep_reads/2026-10-16-10.1002_sim.70772.md)  
+  `因果推断` · 相关性 6/10
+- [MaxTDA: Robust Statistical Inference for Maximal Persistence in Topological Data Analysis](deep_reads/2026-10-16-10.1080_10618600.2026.2748028.md)  
   `其他` · 相关性 5/10
-- [CCE Estimation of Heterogeneous Panel Quantile Regression Models with Relatively Small <i>T</i>](deep_reads/2026-10-14-10.1080_07350015.2026.2641575.md)  
-  `非参数 / 半参数` · 相关性 5/10
-- [Bootstrap Model Averaging](deep_reads/2026-10-14-10.1080_07350015.2026.2643017.md)  
-  `数理统计 / 假设检验` · 相关性 5/10
-- [Inference on Dynamic Spatial Autoregressive Models with Change Point Detection](deep_reads/2026-10-14-10.1080_07350015.2025.2572768.md)  
-  `经济理论 / 应用` · 相关性 5/10
-- [Time-Varying High Quantile Estimation for Nonstationary Tail Dependent Time Series](deep_reads/2026-10-14-10.1080_07350015.2025.2554669.md)  
-  `非参数 / 半参数` · 相关性 5/10
-- [The Permanent and Temporary Effects of Stock Splits on Liquidity in a Dynamic Semiparametric Model](deep_reads/2026-10-14-10.1080_07350015.2025.2551246.md)  
-  `其他` · 相关性 5/10
-- [Adaptive LAD-Based Bootstrap Unit Root Tests Under Unconditional Heteroscedasticity](deep_reads/2026-10-14-10.1080_07350015.2026.2638489.md)  
-  `数理统计 / 假设检验` · 相关性 5/10
-- [How to Compare Copula Forecasts?](deep_reads/2026-10-14-10.1080_07350015.2025.2602855.md)  
-  `数理统计 / 假设检验` · 相关性 5/10
-- [Bayesian Methodology for Adaptive Sparsity and Shrinkage in Regression](deep_reads/2026-10-14-10.1080_07350015.2025.2592349.md)  
-  `其他` · 相关性 5/10
-- [Change-Point Detection in Time Series Using Mixed Integer Programming](deep_reads/2026-10-14-10.1080_07350015.2025.2583203.md)  
-  `其他` · 相关性 5/10
-- [Smoothing Variances Across Time: Adaptive Stochastic Volatility](deep_reads/2026-10-14-10.1080_07350015.2025.2602846.md)  
-  `其他` · 相关性 5/10
-- [Disentangling Structural Breaks in Factor Models for Macroeconomic Data](deep_reads/2026-10-14-10.1080_07350015.2025.2583205.md)  
-  `其他` · 相关性 5/10
-- [Conditional Score Learning for Quickest Change Detection in Markov Transition Kernels](deep_reads/2026-10-14-10.1109_tsp.2026.3718274.md)  
-  `数理统计 / 假设检验` · 相关性 5/10
-- [On the Convergence of Decentralized Stochastic Gradient-Tracking With Finite-Time Consensus](deep_reads/2026-10-14-10.1109_tsp.2026.3667215.md)  
+- [MCMC using bouncy Hamiltonian dynamics: A unifying framework for Hamiltonian Monte Carlo and piecewise deterministic Markov process samplers](deep_reads/2026-10-16-10.1080_10618600.2026.2748046.md)  
   `统计计算 / 算法` · 相关性 5/10
-- [Differentially Private Computation of the Gini Index for Income Inequality](deep_reads/2026-10-14-10.1080_07350015.2026.2676673.md)  
+- [Exploration of Random Objects Through Increasing Ball Statistics](deep_reads/2026-10-16-10.1080_10618600.2026.2697928.md)  
+  `非参数 / 半参数` · 相关性 5/10
+- [Sparsification Subsampling for Partial Least Squares Regression](deep_reads/2026-10-16-10.1080_10618600.2026.2686429.md)  
+  `统计计算 / 算法` · 相关性 5/10
+- [Computational Approaches for Exponential-Family Factor Analysis](deep_reads/2026-10-16-10.1080_10618600.2026.2627453.md)  
+  `统计计算 / 算法` · 相关性 5/10
+- [Adaptive Sequential Monte Carlo for Structured Cross Validation in Bayesian Hierarchical Models](deep_reads/2026-10-16-10.1080_10618600.2025.2612246.md)  
+  `统计计算 / 算法` · 相关性 5/10
+- [Questions asked and, maybe, answered with Mendelian randomization](deep_reads/2026-10-16-10.1093_aje_kwag223.md)  
+  `因果推断` · 相关性 5/10
+- [Early-life and adulthood eviction and risk of depressive symptoms in Black reproductive-aged women: Social Epidemiology to Combat Unjust Residential Evictions (SECURE) study](deep_reads/2026-10-16-10.1093_aje_kwag203.md)  
+  `流行病学` · 相关性 5/10
+- [Association of cultural racism with breast cancer survival among US adults, 2018-2020](deep_reads/2026-10-16-10.1093_aje_kwag126.md)  
+  `流行病学` · 相关性 5/10
+- [A measurement comparability study to support instrument harmonization in the Canadian Longitudinal Study on Aging](deep_reads/2026-10-16-10.1093_aje_kwag137.md)  
+  `流行病学` · 相关性 5/10
+- [Changes in PM2.5 exposure due to residential relocation and mortality among United States Veterans](deep_reads/2026-10-16-10.1093_aje_kwag130.md)  
+  `流行病学` · 相关性 5/10
+- [Road traffic crashes after implementation of the Congestion Relief Zone in New York City](deep_reads/2026-10-16-10.1093_aje_kwag090.md)  
+  `流行病学` · 相关性 5/10
+- [Implementing response-adaptive randomisation in stratified rare-disease trials: Design challenges and practical solutions](deep_reads/2026-10-16-10.1177_09622802251380625.md)  
+  `其他` · 相关性 5/10
+- [A bounded hazard ratio Cox model for the effect of time to treatment on mortality](deep_reads/2026-10-16-10.1177_09622802261458075.md)  
+  `因果推断` · 相关性 5/10
+- [A joint model for a longitudinal outcome and a progressive multistate model under a mixed observation scheme](deep_reads/2026-10-16-10.1177_09622802261455480.md)  
+  `因果推断` · 相关性 5/10
+- [Latent Class Log‐Linear Models for Estimating Diagnostic Test Accuracy Without a Gold Standard: A Simulation Study](deep_reads/2026-10-16-10.1002_sim.70660.md)  
+  `流行病学` · 相关性 5/10
+- [Adaptive Sequential Multiple Hypotheses Testing for Concomitant Vaccine Safety Surveillance](deep_reads/2026-10-16-10.1002_sim.70662.md)  
+  `数理统计 / 假设检验` · 相关性 5/10
+- [Multi‐Level Latent Variable Models for Coheritability Analysis in Electronic Health Records](deep_reads/2026-10-16-10.1002_sim.70675.md)  
+  `流行病学` · 相关性 5/10
+- [Novel Distance Regression for Repeated Outcomes With Missing Data: Applications to Longitudinal and Crossover Studies of Microbiome Beta‐Diversity](deep_reads/2026-10-16-10.1002_sim.70654.md)  
+  `因果推断` · 相关性 5/10
+- [Beyond Fixed Thresholds: Optimizing Summaries of Wearable Device Data via Piecewise Linearization of Quantile Functions](deep_reads/2026-10-16-10.1002_sim.70646.md)  
+  `其他` · 相关性 5/10
+- [Fixed or Random Effects: Analysis of Clustered Data](deep_reads/2026-10-16-10.1002_sim.70687.md)  
+  `因果推断` · 相关性 5/10
+- [Efficient Variance Estimation for the Polytomous Discrimination Index](deep_reads/2026-10-16-10.1002_sim.70690.md)  
+  `其他` · 相关性 5/10
+- [Network Meta‐Analysis of Survival Outcomes With Non‐Proportional Hazards Using Flexible M‐Splines](deep_reads/2026-10-16-10.1002_sim.70695.md)  
+  `其他` · 相关性 5/10
+- [Generalized Linear Mixed Models for Changepoint Analysis of Biomedical Time Series Data](deep_reads/2026-10-16-10.1002_sim.70769.md)  
+  `其他` · 相关性 5/10
+- [Bayesian local clustering of functional data via semi-Markovian random partitions](deep_reads/2026-10-16-10.1080_10618600.2026.2748033.md)  
   `其他` · 相关性 4/10
-- [Graphical Copula GARCH Modeling with Dynamic Conditional Dependence](deep_reads/2026-10-14-10.1080_07350015.2026.2654714.md)  
+- [Grid Particle Gibbs with Ancestor Sampling for State-Space Models](deep_reads/2026-10-16-10.1080_10618600.2026.2681775.md)  
+  `统计计算 / 算法` · 相关性 4/10
+- [Loss-Based Prior for CART and BART Models](deep_reads/2026-10-16-10.1080_10618600.2026.2703268.md)  
   `其他` · 相关性 4/10
-- [Estimating the Natural Rate of Interest in a Macro-Finance Yield Curve Model](deep_reads/2026-10-14-10.1080_07350015.2025.2561409.md)  
-  `经济理论 / 应用` · 相关性 4/10
-- [Regime-Specific Return Predictability in Quantiles](deep_reads/2026-10-14-10.1080_07350015.2025.2573151.md)  
+- [Adaptive Generative Moment Matching Networks for Improved Learning of Dependence Structures](deep_reads/2026-10-16-10.1080_10618600.2026.2689663.md)  
+  `统计计算 / 算法` · 相关性 4/10
+- [Supervised Bayesian Joint Graphical Model for Simultaneous Network Estimation and Subgroup Identification](deep_reads/2026-10-16-10.1080_10618600.2026.2685844.md)  
+  `其他` · 相关性 4/10
+- [A Semidefinite Programming Approach to Maximum Von Neumann Entropy Experimental Design for Multiresponse Models](deep_reads/2026-10-16-10.1080_10618600.2026.2681777.md)  
+  `统计计算 / 算法` · 相关性 4/10
+- [Elastic Full Procrustes Analysis of Plane Curves via Hermitian Covariance Smoothing](deep_reads/2026-10-16-10.1080_10618600.2026.2679146.md)  
+  `非参数 / 半参数` · 相关性 4/10
+- [Squintability and Other Metrics for Assessing Projection Pursuit Indexes, and Guiding Optimization Choices](deep_reads/2026-10-16-10.1080_10618600.2026.2614076.md)  
+  `统计计算 / 算法` · 相关性 4/10
+- [Swarm-Based Search Procedure for Finding Optimal Multi-Stage Designs for Phase II Clinical Trials](deep_reads/2026-10-16-10.1080_10618600.2025.2612633.md)  
+  `统计计算 / 算法` · 相关性 4/10
+- [Variational Inference for Hierarchical Models with Conditional Scale and Skewness Corrections](deep_reads/2026-10-16-10.1080_10618600.2025.2609645.md)  
+  `统计计算 / 算法` · 相关性 4/10
+- [Advancing neighborhood exposure assessment with GPS-based mobility data: toward theoretically driven standardized approaches in population health research](deep_reads/2026-10-16-10.1093_aje_kwag205.md)  
+  `流行病学` · 相关性 4/10
+- [Patterns of cohort participation among people with systemic sclerosis in an open cohort: a Scleroderma Patient-centered Intervention Network Cohort study](deep_reads/2026-10-16-10.1093_aje_kwag217.md)  
+  `流行病学` · 相关性 4/10
+- [Cumulative layoffs in adulthood and cognitive function in mid-to-later life among US working-age adults, 1979-2020](deep_reads/2026-10-16-10.1093_aje_kwag218.md)  
+  `流行病学` · 相关性 4/10
+- [Gestational diabetes mellitus in second pregnancy by adverse outcomes of first pregnancy: a population-based historical cohort study](deep_reads/2026-10-16-10.1093_aje_kwag213.md)  
+  `流行病学` · 相关性 4/10
+- [Science or advocacy? The global rise of policy claims and calls to action in population health research (1990-2024)](deep_reads/2026-10-16-10.1093_aje_kwag196.md)  
+  `流行病学` · 相关性 4/10
+- [Hyperemesis gravidarum and adverse pregnancy outcomes: a population-based cohort study of 2.5 million births in California](deep_reads/2026-10-16-10.1093_aje_kwag134.md)  
+  `流行病学` · 相关性 4/10
+- [US cardiovascular mortality before and during COVID-19: CDC WONDER vs GBD comparison](deep_reads/2026-10-16-10.1093_aje_kwag153.md)  
+  `流行病学` · 相关性 4/10
+- [A comparison of methods for designing hybrid type 2 cluster-randomized trials with continuous effectiveness and implementation endpoints](deep_reads/2026-10-16-10.1177_09622802261457277.md)  
+  `因果推断` · 相关性 4/10
+- [Adaptive spline-based weighting functions for blended survival curve extrapolation](deep_reads/2026-10-16-10.1177_09622802261458072.md)  
+  `其他` · 相关性 4/10
+- [A robust neural network with random effects for subject-specific prediction of clustered count data](deep_reads/2026-10-16-10.1177_09622802261459873.md)  
+  `其他` · 相关性 4/10
+- [Composite Categorical Regression for Correlated Categorical Exposures: Application to Adverse Childhood Experiences and Their Health Effects](deep_reads/2026-10-16-10.1002_sim.70664.md)  
+  `其他` · 相关性 4/10
+- [Dynamic Individualized Prediction of Binary Clinical Outcomes Using Bayesian Generalized Linear Mixed Models With Application in Scleroderma](deep_reads/2026-10-16-10.1002_sim.70692.md)  
+  `其他` · 相关性 4/10
+- [Long Run Non‐Transitivity of Win Ratio and How to Rule It Out](deep_reads/2026-10-16-10.1002_sim.70581.md)  
+  `因果推断` · 相关性 4/10
+- [Multivariable Behavioral Change Modeling of Epidemics in the Presence of Undetected Infections](deep_reads/2026-10-16-10.1002_sim.70709.md)  
+  `流行病学` · 相关性 4/10
+- [Bayesian Model Selection for Derived Responses](deep_reads/2026-10-16-10.1002_sim.70682.md)  
+  `其他` · 相关性 4/10
+- [Pragmatic Two‐Stage Design for Clinical Trials With Treatment Selection](deep_reads/2026-10-16-10.1002_sim.70683.md)  
   `数理统计 / 假设检验` · 相关性 4/10
-- [Multi-Fidelity Bayesian Optimization for Nash Equilibria With Black-Box Utilities](deep_reads/2026-10-14-10.1109_tsp.2026.3670206.md)  
+- [Using Joint Models in Phase I Dose‐Finding Designs in Oncology: Considerations for Frequentist Approaches](deep_reads/2026-10-16-10.1002_sim.70758.md)  
   `其他` · 相关性 4/10
-- [Unified Implicit Sparsity-Inducing Regularizers for Robust Sparse Signal Recovery](deep_reads/2026-10-14-10.1109_tsp.2026.3684761.md)  
+- [Cancer Heterogeneity Modeling With Omics Data via Network‐Based Block‐Wise Regulatory Analysis](deep_reads/2026-10-16-10.1002_sim.70779.md)  
   `其他` · 相关性 4/10
-- [Fast State-Augmented Learning for Wireless Resource Allocation With Dual Variable Regression](deep_reads/2026-10-14-10.1109_tsp.2026.3717245.md)  
-  `其他` · 相关性 4/10
-- [MIDAS: Mutual Information Disentanglement With Uncertainty-Aware Fusion for Incomplete Multimodal Sentiment Analysis](deep_reads/2026-10-14-10.1109_tpami.2026.3713694.md)  
-  `其他` · 相关性 4/10
-- [The Thermodynamic Costs of Simple Linear Regression](deep_reads/2026-10-14-10.1109_jsait.2026.3732971.md)  
+- [FedDecay: Balancing Model Performance and Rapid Personalization in Federated Learning with Learning Rate Scheduling](deep_reads/2026-10-16-10.1080_10618600.2026.2696264.md)  
   `统计计算 / 算法` · 相关性 3/10
-- [Adaptive Radar for Uncooperative Spectrum Sharing: GLRT Asymptotic Performance](deep_reads/2026-10-14-10.1109_tsp.2026.3732738.md)  
-  `数理统计 / 假设检验` · 相关性 3/10
-- [RMMNet: Deep Memory Aided Extended Object Tracking via High-Order Markovian Modeling and State Decoupling](deep_reads/2026-10-14-10.1109_tsp.2026.3680260.md)  
+- [Changes in COVID-19-related death certification practices and quality of cause-of-death reporting in the United States from 2020 to 2023](deep_reads/2026-10-16-10.1093_aje_kwag215.md)  
+  `流行病学` · 相关性 3/10
+- [Neighborhood Church Closure Density and Self-Reported Mental Health Diagnoses in Southeastern Pennsylvania: A Population-Based Analysis](deep_reads/2026-10-16-10.1093_aje_kwag206.md)  
+  `流行病学` · 相关性 3/10
+- [A historical note: Rediscovering an unpublished response to Korn and Freidlin (2011)](deep_reads/2026-10-16-10.1177_09622802251403371.md)  
   `其他` · 相关性 3/10
-- [Adapt in the Wild: Test-Time Entropy Minimization with Sharpness and Feature Regularization](deep_reads/2026-10-14-10.1109_tpami.2026.3721895.md)  
+- [Microbial Diversity Estimation and Hill Number Calculation Using the Hierarchical Pitman‐Yor Process](deep_reads/2026-10-16-10.1002_sim.70689.md)  
   `其他` · 相关性 3/10
-- [How Powerful are Hypergraph Neural Networks?](deep_reads/2026-10-14-10.1109_tpami.2026.3724944.md)  
+- [Cloud‐Plots for Spherical Data With Applications to Glaucoma and Gait Cyclograms](deep_reads/2026-10-16-10.1002_sim.70704.md)  
   `其他` · 相关性 3/10
-- [Exposition on Over-Squashing Problem of GNNs: Current Methods, Benchmarks and Challenges](deep_reads/2026-10-14-10.1109_tpami.2026.3725957.md)  
-  `其他` · 相关性 3/10
-- [Decentralized Federated Learning by Partial Message Exchange](deep_reads/2026-10-14-10.1109_tpami.2026.3722165.md)  
-  `统计计算 / 算法` · 相关性 3/10
-- [Thermodynamic Characterization of Message-Passing: Framework and Initial Study](deep_reads/2026-10-14-10.1109_jsait.2026.3722113.md)  
+- [The complexities of comprehensive exams in epidemiology](deep_reads/2026-10-16-10.1093_aje_kwag158.md)  
+  `流行病学` · 相关性 2/10
+- [An evaluation of designs for Phase I/IIa dose-finding studies in Tuberculosis](deep_reads/2026-10-16-10.1177_09622802261430905.md)  
   `其他` · 相关性 2/10
-- [Holographic Intelligence Surface Assisted Integrated Sensing and Communication](deep_reads/2026-10-14-10.1109_tsp.2026.3689152.md)  
+- [A Bayesian phase I/II platform design with survival efficacy endpoint for dose optimization](deep_reads/2026-10-16-10.1177_09622802261449367.md)  
   `其他` · 相关性 2/10
-- [A Multi-Token Coordinate Descent Method for Semi-Decentralized Vertical Federated Learning](deep_reads/2026-10-14-10.1109_tsp.2026.3652487.md)  
-  `其他` · 相关性 2/10
-- [Learnable Geometric Filter Banks for Multiscale Representation of 3-D Shapes](deep_reads/2026-10-14-10.1109_tsp.2026.3707884.md)  
-  `统计计算 / 算法` · 相关性 2/10
-- [The Hitchhiker’s Guide to Autonomous Research: A Survey of Scientific Agents](deep_reads/2026-10-14-10.1109_tpami.2026.3721500.md)  
-  `其他` · 相关性 2/10
-- [Robust Audio-Visual Question Answering With Missing Modality in Training and Testing](deep_reads/2026-10-14-10.1109_tpami.2026.3723653.md)  
-  `其他` · 相关性 2/10
-- [Text2Loc++: Generalizing 3D Point Cloud Localization From Natural Language](deep_reads/2026-10-14-10.1109_tpami.2026.3723656.md)  
-  `其他` · 相关性 2/10
-- [Sa2VA: Marrying SAM2 With MLLM for Dense Grounded Understanding of Images and Videos](deep_reads/2026-10-14-10.1109_tpami.2026.3720379.md)  
-  `其他` · 相关性 2/10
-- [BRFedTD: A Novel Framework for Federated Reinforcement Learning With Byzantine-Resilient Policy Evaluation](deep_reads/2026-10-14-10.1109_tpami.2026.3713184.md)  
-  `因果推断` · 相关性 2/10
-- [Low-Precision Training of Large Language Models: Methods, Challenges, and Opportunities](deep_reads/2026-10-14-10.1109_tpami.2026.3718968.md)  
-  `统计计算 / 算法` · 相关性 2/10
-- [MEGO: Learning Mixture-of-Experts for General-Purpose Binary Optimization](deep_reads/2026-10-14-10.1109_tpami.2026.3711708.md)  
-  `统计计算 / 算法` · 相关性 2/10
-- [Autoregressive Image to 3D Generation via Next Symmetric View Prediction](deep_reads/2026-10-14-10.1109_tpami.2026.3726806.md)  
-  `其他` · 相关性 1/10
-- [LLM Post-Training: A Deep Dive Into Reasoning Large Language Models](deep_reads/2026-10-14-10.1109_tpami.2026.3720414.md)  
-  `其他` · 相关性 1/10
-- [Integrating Agglomerative Perception With One-Step Action Generation for Robotic Manipulation](deep_reads/2026-10-14-10.1109_tpami.2026.3713027.md)  
-  `其他` · 相关性 1/10
-- [Feature-Alteration Robustness for Out-of-Distribution Detection](deep_reads/2026-10-14-10.1109_tpami.2026.3723999.md)  
-  `其他` · 相关性 1/10
-- [Grad-ECLIP: Gradient-Based Visual and Textual Explanations for CLIP](deep_reads/2026-10-14-10.1109_tpami.2026.3714444.md)  
-  `其他` · 相关性 1/10
-- [MambaX: Image Super-Resolution With State Predictive Control](deep_reads/2026-10-14-10.1109_tpami.2026.3721958.md)  
-  `其他` · 相关性 1/10
-- [Afford-X: Generalizable and Slim Affordance Reasoning for Task-Oriented Manipulation](deep_reads/2026-10-14-10.1109_tpami.2026.3722040.md)  
-  `其他` · 相关性 1/10
-- [S$^{2}$Q-VDiT$^+$: Accurate Quantized Video Diffusion Transformer With Multi-Resolution <u>S</u> ampling and <u>S</u> tructural Distillation](deep_reads/2026-10-14-10.1109_tpami.2026.3722360.md)  
-  `其他` · 相关性 1/10
-- [Contextrast++: Robust Multi-Scale Contextual Contrastive Learning for Semantic Segmentation](deep_reads/2026-10-14-10.1109_tpami.2026.3721845.md)  
-  `其他` · 相关性 1/10
-- [Shared Latent Characteristic Anchored Hash Codes Generation for Efficient Fine-Grained Image Retrieval](deep_reads/2026-10-14-10.1109_tpami.2026.3723930.md)  
-  `其他` · 相关性 1/10
-- [CoNav: Collaborative Cross-Modal Reasoning for Embodied Navigation](deep_reads/2026-10-14-10.1109_tpami.2026.3711981.md)  
-  `其他` · 相关性 1/10
-- [Symbiotic Evolutionary Learning for Task-Adaptive Infrared and Visible Image Fusion](deep_reads/2026-10-14-10.1109_tpami.2026.3722665.md)  
-  `其他` · 相关性 1/10
-- [DeltaGNN: Graph Neural Network With Information Flow Control](deep_reads/2026-10-14-10.1109_tpami.2026.3725398.md)  
-  `其他` · 相关性 1/10
-- [RBF++: Quantifying and Optimizing Reasoning Boundaries Across Measurable and Unmeasurable Capabilities for Chain-of-Thought Reasoning](deep_reads/2026-10-14-10.1109_tpami.2026.3708251.md)  
-  `其他` · 相关性 1/10
-- [TopoMLP++: Toward Strong and Scalable Lane Topology Reasoning in Autonomous Driving](deep_reads/2026-10-14-10.1109_tpami.2026.3721163.md)  
-  `其他` · 相关性 1/10
-- [Closed Form Estimators for a Class of Semiparametric Multinomial Choice Models](deep_reads/2026-10-14-10.1080_07350015.2026.2710360.md)  
-  `非参数 / 半参数` · 相关性 0/10
-- [Generalized Autoregressive Score Trees and Forests](deep_reads/2026-10-14-10.1080_07350015.2026.2674742.md)  
+- [Authors’ response to “Racial and Ethnic Variation in Socioeconomic Differentials in Young Adult Cardiovascular Health”](deep_reads/2026-10-16-10.1093_aje_kwag136.md)  
+  `流行病学` · 相关性 1/10
+- [Regression Modeling of Spatiotemporal Extreme U.S. Wildfires via Partially Interpretable Neural Networks](deep_reads/2026-10-16-10.1080_10618600.2025.2609641.md)  
   `其他` · 相关性 0/10
-- [Estimation and Inference for Multi-Threshold Regression with Endogeneity](deep_reads/2026-10-14-10.1080_07350015.2026.2668046.md)  
-  `因果推断` · 相关性 0/10
-- [Moment-Integrated Bias-Adjusted Spectral Method for Community Detection in Multi-Layer Networks](deep_reads/2026-10-14-10.1080_07350015.2026.2658865.md)  
-  `高维统计 / 随机矩阵` · 相关性 0/10
-- [Design Strategies for Networked Experiments via Interference Balancing](deep_reads/2026-10-14-10.1080_07350015.2026.2658067.md)  
-  `因果推断` · 相关性 0/10
-- [Milne's rationality conjecture](deep_reads/2026-10-14-hexagon_2610.00226.md)  
-  `其他` · 相关性 0/10
-- [A seven-eighths zero-free half-plane for unitary Weil L-functions](deep_reads/2026-10-14-hexagon_2610.00216.md)  
-  `其他` · 相关性 0/10
-- [A zero-free strip for the $L$-functions of the elliptic curves $y^2=x^3+d$](deep_reads/2026-10-14-hexagon_2610.00220.md)  
-  `其他` · 相关性 0/10
+- [In Memoriam: the enduring legacy of Dr. Roger Detels (1936-2026)](deep_reads/2026-10-16-10.1093_aje_kwag199.md)  
+  `流行病学` · 相关性 0/10
 
 ## 收藏
 
@@ -224,11 +312,10 @@
 
 ## 本周每日报告
 
+- [2026-10-14](daily/2026-10-14.md)
 - [2026-10-13](daily/2026-10-13.md)
 - [2026-10-12](daily/2026-10-12.md)
 - [2026-10-09](daily/2026-10-09.md)
-- [2026-10-08](daily/2026-10-08.md)
-- [2026-10-07](daily/2026-10-07.md)
 
 
 ---
