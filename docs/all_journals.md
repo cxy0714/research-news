@@ -677,6 +677,15 @@
 - [2026-06-21](journals/2026-06-21-tsp.md)
 - [2026-06-05](journals/2026-06-05-tsp.md)
 
+## SIAM 数据科学 / 不确定性量化 (SIAM)
+
+### SIMODS
+
+- [Vol 8 Issue 4 · 2026-10-17](journals/2026-10-17-simods-v8-i4.md)
+- [Vol 8 Issue 3 · 2026-10-17](journals/2026-10-17-simods-v8-i3.md)
+- [Vol 8 Issue 2 · 2026-10-17](journals/2026-10-17-simods-v8-i2.md)
+- [Vol 8 Issue 1 · 2026-10-17](journals/2026-10-17-simods-v8-i1.md)
+
 ## 其他 / Unmatched
 
 ### EPIDEMIOLOGY V37 I1S

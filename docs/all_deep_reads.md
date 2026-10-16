@@ -4524,6 +4524,32 @@
 
 ### 期刊
 
+#### SIAM Journal on Mathematics of Data Science Vol 8 Issue 4
+
+- [Sparse Max-Affine Regression](deep_reads/2026-10-17-10.1137_24m1709303.md)  
+  6/10 [journals]
+
+#### SIAM Journal on Mathematics of Data Science Vol 8 Issue 3
+
+- [High-Dimensional Analysis of Ridge Regression for Non-identically Distributed Data with a Variance Profile](deep_reads/2026-10-17-10.1137_25m1754790.md)  
+  8/10 [journals]
+- [PriME: Privacy-Aware Membership Profile Estimation in Networks](deep_reads/2026-10-17-10.1137_24m1668779.md)  
+  5/10 [journals]
+- [Can We Spot a Fake?](deep_reads/2026-10-17-10.1137_25m1733562.md)  
+  5/10 [journals]
+
+#### SIAM Journal on Mathematics of Data Science Vol 8 Issue 2
+
+- [Precise Asymptotics for Spectral Methods in Mixed Generalized Linear Models](deep_reads/2026-10-17-10.1137_24m1702854.md)  
+  7/10 [journals]
+- [Denoising Guarantees for Optimized Sampling Schemes in Compressed Sensing](deep_reads/2026-10-17-10.1137_25m1746707.md)  
+  6/10 [journals]
+
+#### SIAM Journal on Mathematics of Data Science Vol 8 Issue 1
+
+- [Kernel Density Estimators in Large Dimensions](deep_reads/2026-10-17-10.1137_24m1703677.md)  
+  8/10 [journals]
+
 #### Journal of Computational and Graphical Statistics Vol 35 Issue 3
 
 - [Least Squares and Hypothesis Testing Based Transfer Learning for High-Dimensional Quantile Regression](deep_reads/2026-10-16-10.1080_10618600.2026.2628275.md)  
@@ -6131,6 +6157,18 @@
   8/10 [daily]
 
 ### 期刊
+
+#### SIAM Journal on Mathematics of Data Science Vol 8 Issue 3
+
+- [Functional Adaptive Huber Linear Regression](deep_reads/2026-10-17-10.1137_24m171125x.md)  
+  7/10 [journals]
+- [Gradient-Based Nonlinear Inverse Learning](deep_reads/2026-10-17-10.1137_25m1735044.md)  
+  7/10 [journals]
+
+#### SIAM Journal on Mathematics of Data Science Vol 8 Issue 2
+
+- [Manifold Diffusion Geometry: Curvature, Tangent Spaces, and Dimension](deep_reads/2026-10-17-10.1137_24m1719219.md)  
+  6/10 [journals]
 
 #### Statistical Methods in Medical Research Vol 35 Issue 7
 
@@ -11145,6 +11183,33 @@
   6/10 [daily]
 
 ### 期刊
+
+#### SIAM Journal on Mathematics of Data Science Vol 8 Issue 3
+
+- [A Library of Mirrors: Deep Neural Nets in Low Dimensions Are Convex Lasso Models with Reflection Features](deep_reads/2026-10-17-10.1137_24m1707845.md)  
+  5/10 [journals]
+- [Gradient Is All You Need? How Consensus-Based Optimization Can Be Interpreted as a Stochastic Relaxation of Gradient Descent](deep_reads/2026-10-17-10.1137_25m1733409.md)  
+  5/10 [journals]
+- [Improving Implicit Regularization of SGD with Preconditioning for Least Square Problems](deep_reads/2026-10-17-10.1137_24m1710425.md)  
+  5/10 [journals]
+- [Subspace Langevin Monte Carlo](deep_reads/2026-10-17-10.1137_25m1739327.md)  
+  4/10 [journals]
+- [Greedy Construction of Quadratic Manifolds for Nonlinear Dimensionality Reduction and Nonlinear Model Reduction](deep_reads/2026-10-17-10.1137_25m1734531.md)  
+  4/10 [journals]
+- [Learning Algorithm Hyperparameters for Fast Parametric Convex Optimization](deep_reads/2026-10-17-10.1137_24m1712242.md)  
+  4/10 [journals]
+
+#### SIAM Journal on Mathematics of Data Science Vol 8 Issue 2
+
+- [Möbius Inversion and the Iterated Bootstrap](deep_reads/2026-10-17-10.1137_24m1712667.md)  
+  7/10 [journals]
+- [Stable Gradient-Adjusted Root Mean Square Propagation on Least Squares Problem](deep_reads/2026-10-17-10.1137_24m171262x.md)  
+  5/10 [journals]
+
+#### SIAM Journal on Mathematics of Data Science Vol 8 Issue 1
+
+- [A Randomized Algorithm to Solve Reduced Rank Operator Regression](deep_reads/2026-10-17-10.1137_24m1632097.md)  
+  6/10 [journals]
 
 #### Statistics in Medicine Vol 45 Issue 23-24
 
@@ -16304,6 +16369,48 @@
   8/10 [daily]
 
 ### 期刊
+
+#### SIAM Journal on Mathematics of Data Science Vol 8 Issue 4
+
+- [Entropic Optimal Transport Eigenmaps for Nonlinear Alignment and Joint Embedding of High-Dimensional Datasets](deep_reads/2026-10-17-10.1137_24m1713181.md)  
+  5/10 [journals]
+- [On the Convergence and Size Transferability of Continuous-Depth Graph Neural Networks](deep_reads/2026-10-17-10.1137_25m1800822.md)  
+  4/10 [journals]
+
+#### SIAM Journal on Mathematics of Data Science Vol 8 Issue 3
+
+- [Functional Multireference Alignment via Deconvolution](deep_reads/2026-10-17-10.1137_25m1765602.md)  
+  7/10 [journals]
+- [Detection and Estimation of Vertexwise Latent Position Shifts Across Networks](deep_reads/2026-10-17-10.1137_25m1734804.md)  
+  6/10 [journals]
+- [On Bellman Equations for Continuous-Time Policy Evaluation: High-Order Discretization and Function Approximation](deep_reads/2026-10-17-10.1137_24m170199x.md)  
+  5/10 [journals]
+- [Gromov–Wasserstein Barycenters: The Analysis Problem](deep_reads/2026-10-17-10.1137_25m1777116.md)  
+  4/10 [journals]
+- [Wasserstein Proximal Operators Describe Score-Based Generative Models and Resolve Memorization](deep_reads/2026-10-17-10.1137_24m1644584.md)  
+  4/10 [journals]
+
+#### SIAM Journal on Mathematics of Data Science Vol 8 Issue 2
+
+- [Data Denoising with Self-Consistency, Variance Maximization, and the Kantorovich Dominance](deep_reads/2026-10-17-10.1137_25m1746379.md)  
+  6/10 [journals]
+- [Exact Bayesian Gaussian Cox Processes Using Random Integrals](deep_reads/2026-10-17-10.1137_24m1711595.md)  
+  5/10 [journals]
+- [Can Overfitted Deep Neural Networks in Adversarial Training Generalize? An Approximation Viewpoint](deep_reads/2026-10-17-10.1137_24m1634023.md)  
+  4/10 [journals]
+
+#### SIAM Journal on Mathematics of Data Science Vol 8 Issue 1
+
+- [Method of Moments for Estimation of Noisy Curves](deep_reads/2026-10-17-10.1137_24m1711248.md)  
+  6/10 [journals]
+- [Learning Sparsity-Promoting Regularizers for Linear Inverse Problems](deep_reads/2026-10-17-10.1137_24m1719785.md)  
+  6/10 [journals]
+- [Data-Driven Priors in the Maximum Entropy on the Mean Method for Linear Inverse Problems](deep_reads/2026-10-17-10.1137_24m1720494.md)  
+  6/10 [journals]
+- [Learning Memory Kernels in Generalized Langevin Equations](deep_reads/2026-10-17-10.1137_24m1651101.md)  
+  5/10 [journals]
+- [Robust Reinforcement Learning with Dynamic Distortion Risk Measures](deep_reads/2026-10-17-10.1137_24m1699802.md)  
+  3/10 [journals]
 
 #### Statistics in Medicine Vol 45 Issue 23-24
 
