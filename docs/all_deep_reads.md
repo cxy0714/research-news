@@ -1312,6 +1312,41 @@
 - [Novel Distance Regression for Repeated Outcomes With Missing Data: Applications to Longitudinal and Crossover Studies of Microbiome Beta‐Diversity](deep_reads/2026-10-16-10.1002_sim.70654.md)  
   5/10 [journals]
 
+#### Statistical Methods in Medical Research Vol 35 Issue 8
+
+- [Efficient semi-supervised estimation of optimal individualized treatment regimes with survival outcome](deep_reads/2026-10-16-10.1177_09622802261460255.md)  
+  8/10 [journals]
+- [A comparison of missing data approaches for linear regression with missing not at random outcome and predictors](deep_reads/2026-10-16-10.1177_09622802261458074.md)  
+  7/10 [journals]
+- [Modeling treatment effects on absorbing outcomes in clinical trials: Leveraging longitudinal and ordinal data for efficiency gains](deep_reads/2026-10-16-10.1177_09622802261462925.md)  
+  6/10 [journals]
+- [A joint model for a longitudinal outcome and a progressive multistate model under a mixed observation scheme](deep_reads/2026-10-16-10.1177_09622802261455480.md)  
+  5/10 [journals]
+
+#### Statistical Methods in Medical Research Vol 35 Issue 7
+
+- [Empirical likelihood inference for the area under the receiver operating characteristic (ROC) curve with verification biased data](deep_reads/2026-10-16-10.1177_09622802261455678.md)  
+  6/10 [journals]
+- [A bounded hazard ratio Cox model for the effect of time to treatment on mortality](deep_reads/2026-10-16-10.1177_09622802261458075.md)  
+  5/10 [journals]
+- [A comparison of methods for designing hybrid type 2 cluster-randomized trials with continuous effectiveness and implementation endpoints](deep_reads/2026-10-16-10.1177_09622802261457277.md)  
+  4/10 [journals]
+
+#### Statistical Methods in Medical Research
+
+- [Doubly robust estimation of causal survival effects via inverse probability of treatment and censoring weighting and semi-parametric AFT models with variable selection](deep_reads/2026-10-12-10.1177_09622802261488051.md)  
+  8/10 [journals]
+- [A flexible Monte Carlo quantitative bias analysis for unmeasured confounding](deep_reads/2026-10-12-10.1177_09622802261488056.md)  
+  7/10 [journals]
+- [Treatment comparisons using a measurement during follow-up and a right-censored time-to-event outcome](deep_reads/2026-10-16-10.1177_09622802261498390.md)  
+  6/10 [journals]
+- [Cluster-level analysis in three-level cluster randomised trials with multi-level covariate-dependent missingness](deep_reads/2026-10-16-10.1177_09622802261498389.md)  
+  6/10 [journals]
+- [Implementing response-adaptive designs when responses are missing: Impute or ignore?](deep_reads/2026-10-16-10.1177_09622802251366843.md)  
+  6/10 [journals]
+- [Generalizing the two sources capture–recapture estimator for covariate information](deep_reads/2026-10-12-10.1177_09622802261491945.md)  
+  6/10 [journals]
+
 #### Journal of Business & Economic Statistics Vol 44 Issue 4
 
 - [Semiparametric Estimation of Treatment Effects in Observational Studies with Heterogeneous Partial Interference](deep_reads/2026-10-14-10.1080_07350015.2026.2635631.md)  
@@ -1435,15 +1470,6 @@
   5/10 [journals]
 - [Inclusive designs that allow the inclusion of a broader population in randomized controlled trials: An evaluation of randomization ratio and analysis strategy](deep_reads/2026-10-12-10.1177_09622802261475687.md)  
   5/10 [journals]
-
-#### Statistical Methods in Medical Research
-
-- [Doubly robust estimation of causal survival effects via inverse probability of treatment and censoring weighting and semi-parametric AFT models with variable selection](deep_reads/2026-10-12-10.1177_09622802261488051.md)  
-  8/10 [journals]
-- [A flexible Monte Carlo quantitative bias analysis for unmeasured confounding](deep_reads/2026-10-12-10.1177_09622802261488056.md)  
-  7/10 [journals]
-- [Generalizing the two sources capture–recapture estimator for covariate information](deep_reads/2026-10-12-10.1177_09622802261491945.md)  
-  6/10 [journals]
 
 #### Journal of Econometrics Vol 258
 
@@ -6073,6 +6099,11 @@
 
 ### 期刊
 
+#### Statistical Methods in Medical Research Vol 35 Issue 7
+
+- [Maximum likelihood estimation in proportional odds regression model based on interval-censored event-time data](deep_reads/2026-10-16-10.1177_09622802261461775.md)  
+  6/10 [journals]
+
 #### Journal of Business & Economic Statistics Vol 44 Issue 3
 
 - [Time-Varying High Quantile Estimation for Nonstationary Tail Dependent Time Series](deep_reads/2026-10-14-10.1080_07350015.2025.2554669.md)  
@@ -8923,6 +8954,11 @@
   7/10 [journals]
 - [Adaptive Sequential Multiple Hypotheses Testing for Concomitant Vaccine Safety Surveillance](deep_reads/2026-10-16-10.1002_sim.70662.md)  
   5/10 [journals]
+
+#### Statistical Methods in Medical Research Vol 35 Issue 8
+
+- [Asymptotic online FWER control for dependent test statistics](deep_reads/2026-10-16-10.1177_09622802261461776.md)  
+  6/10 [journals]
 
 #### Journal of Business & Economic Statistics Vol 44 Issue 4
 
@@ -16125,6 +16161,31 @@
 - [Composite Categorical Regression for Correlated Categorical Exposures: Application to Adverse Childhood Experiences and Their Health Effects](deep_reads/2026-10-16-10.1002_sim.70664.md)  
   4/10 [journals]
 
+#### Statistical Methods in Medical Research Vol 35 Issue 8
+
+- [Adaptive spline-based weighting functions for blended survival curve extrapolation](deep_reads/2026-10-16-10.1177_09622802261458072.md)  
+  4/10 [journals]
+- [A robust neural network with random effects for subject-specific prediction of clustered count data](deep_reads/2026-10-16-10.1177_09622802261459873.md)  
+  4/10 [journals]
+
+#### Statistical Methods in Medical Research Vol 35 Issue 7
+
+- [An evaluation of designs for Phase I/IIa dose-finding studies in Tuberculosis](deep_reads/2026-10-16-10.1177_09622802261430905.md)  
+  2/10 [journals]
+- [A Bayesian phase I/II platform design with survival efficacy endpoint for dose optimization](deep_reads/2026-10-16-10.1177_09622802261449367.md)  
+  2/10 [journals]
+
+#### Statistical Methods in Medical Research
+
+- [A regularized semiparametric cure-rate model with high-dimensional imaging data](deep_reads/2026-10-12-10.1177_09622802261483498.md)  
+  6/10 [journals]
+- [Implementing response-adaptive randomisation in stratified rare-disease trials: Design challenges and practical solutions](deep_reads/2026-10-16-10.1177_09622802251380625.md)  
+  5/10 [journals]
+- [A Bayesian adaptive shift-mixture approach for estimating incubation period and exposure time in small outbreaks](deep_reads/2026-10-12-10.1177_09622802261490778.md)  
+  5/10 [journals]
+- [A historical note: Rediscovering an unpublished response to Korn and Freidlin (2011)](deep_reads/2026-10-16-10.1177_09622802251403371.md)  
+  3/10 [journals]
+
 #### Journal of Business & Economic Statistics Vol 44 Issue 4
 
 - [A Network View on Portfolio Risk](deep_reads/2026-10-14-10.1080_07350015.2026.2634827.md)  
@@ -16941,13 +17002,6 @@
   5/10 [journals]
 - [Robust Bayesian hierarchical models for basket trials enabling joint evaluation of toxicity and efficacy](deep_reads/2026-10-12-10.1177_09622802261465336.md)  
   4/10 [journals]
-
-#### Statistical Methods in Medical Research
-
-- [A regularized semiparametric cure-rate model with high-dimensional imaging data](deep_reads/2026-10-12-10.1177_09622802261483498.md)  
-  6/10 [journals]
-- [A Bayesian adaptive shift-mixture approach for estimating incubation period and exposure time in small outbreaks](deep_reads/2026-10-12-10.1177_09622802261490778.md)  
-  5/10 [journals]
 
 #### Journal of Econometrics Vol 258
 

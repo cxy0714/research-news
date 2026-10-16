@@ -345,7 +345,7 @@ broad 组：
 - [x] (2026-10-15) `--only MNRAS --n-issues 4`   （缺 v552-i4）⚠ 每期量大
 - [x] (2026-10-16) `--only ApJS --n-issues 6`   （缺 v287-i1, v288-i1）⚠
 - [x] (2026-10-16) `--only StatMed --n-issues 5`   （缺 v45-i18-19）⚠ 双周刊
-- [ ] `--only SMMR --n-issues 6`   （缺 v35-i7, v35-i8）
+- [x] (2026-10-16) `--only SMMR --n-issues 6`   （缺 v35-i7, v35-i8）
 - [ ] `--only AJE --n-issues 4`   （缺 v195-i9）
 - [ ] `--only JCGS --n-issues 4`   （缺 v35-i3）
 - [ ] `--only Science --n-issues 5`   （缺 v393-i6818）

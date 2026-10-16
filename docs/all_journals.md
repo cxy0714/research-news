@@ -458,7 +458,10 @@
 ### SMMR
 
 - [Vol 35 Issue 10 · 2026-10-12](journals/2026-10-12-smmr-v35-i10.md)
+- [Vol 35 Issue 9 · 2026-10-16](journals/2026-10-16-smmr-v35-i9.md)
 - [Vol 35 Issue 9 · 2026-10-12](journals/2026-10-12-smmr-v35-i9.md)
+- [Vol 35 Issue 8 · 2026-10-16](journals/2026-10-16-smmr-v35-i8.md)
+- [Vol 35 Issue 7 · 2026-10-16](journals/2026-10-16-smmr-v35-i7.md)
 - [Vol 35 Issue 6 · 2026-06-24](journals/2026-06-24-smmr-v35-i6.md)
 - [Vol 35 Issue 5 · 2026-06-19](journals/2026-06-19-smmr-v35-i5.md)
 - [Vol 35 Issue 4 · 2026-06-19](journals/2026-06-19-smmr-v35-i4.md)
@@ -469,6 +472,7 @@
 - [Vol 34 Issue 11 · 2026-06-24](journals/2026-06-24-smmr-v34-i11.md)
 - [Vol 34 Issue 10 · 2026-06-24](journals/2026-06-24-smmr-v34-i10.md)
 - [Vol 34 Issue 9 · 2026-06-24](journals/2026-06-24-smmr-v34-i9.md)
+- [2026-10-16](journals/2026-10-16-smmr.md)
 - [2026-10-12](journals/2026-10-12-smmr.md)
 
 ## 计算 / 图形统计 (Computational)
