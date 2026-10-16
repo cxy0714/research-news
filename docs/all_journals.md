@@ -425,7 +425,10 @@
 
 ### AJE
 
+- [Vol 195 Issue 10 · 2026-10-16](journals/2026-10-16-aje-v195-i10.md)
 - [Vol 195 Issue 10 · 2026-10-12](journals/2026-10-12-aje-v195-i10.md)
+- [Vol 195 Issue 9 · 2026-10-16](journals/2026-10-16-aje-v195-i9.md)
+- [Vol 195 Issue 8 · 2026-10-16](journals/2026-10-16-aje-v195-i8.md)
 - [Vol 195 Issue 6 · 2026-06-24](journals/2026-06-24-aje-v195-i6.md)
 - [Vol 195 Issue 6 · 2026-06-19](journals/2026-06-19-aje-v195-i6.md)
 - [Vol 195 Issue 5 · 2026-06-24](journals/2026-06-24-aje-v195-i5.md)
@@ -436,6 +439,7 @@
 - [Vol 195 Issue 2 · 2026-06-24](journals/2026-06-24-aje-v195-i2.md)
 - [Vol 195 Issue 1 · 2026-06-24](journals/2026-06-24-aje-v195-i1.md)
 - [Vol 194 Issue 12 · 2026-06-24](journals/2026-06-24-aje-v194-i12.md)
+- [2026-10-16](journals/2026-10-16-aje.md)
 - [2026-10-12](journals/2026-10-12-aje.md)
 
 ### Epidemiology
