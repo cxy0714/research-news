@@ -17,7 +17,7 @@
 
 [→ 查看完整报告](daily/2026-10-16.md)
 
-### 精读论文（192 篇）
+### 精读论文（198 篇）
 
 - [Doubly Robust and Efficient Estimation in a Partially Linear Multiple-Index Model](deep_reads/2026-10-16-10.1080_10618600.2026.2685845.md)  
   `非参数 / 半参数` · 相关性 8/10
@@ -235,6 +235,10 @@
   `其他` · 相关性 5/10
 - [Generalized Linear Mixed Models for Changepoint Analysis of Biomedical Time Series Data](deep_reads/2026-10-16-10.1002_sim.70769.md)  
   `其他` · 相关性 5/10
+- [MassNet: billion-scale AI-ready mass spectral corpus empowering scalable deep learning in proteomics](deep_reads/2026-10-16-10.1038_s41592-026-03247-y.md)  
+  `其他` · 相关性 4/10
+- [Inference of secreted protein signaling activities in intercellular communication](deep_reads/2026-10-16-10.1038_s41592-026-03172-0.md)  
+  `其他` · 相关性 4/10
 - [Transcriptome-based classification in mice with ASD-risk mutations](deep_reads/2026-10-16-10.1126_science.adz6688.md)  
   `其他` · 相关性 4/10
 - [Ancient introgression drives wild boar expansion and phenotypic diversification of domestic pigs](deep_reads/2026-10-16-10.1126_science.adq7553.md)  
@@ -303,6 +307,10 @@
   `其他` · 相关性 4/10
 - [Cancer Heterogeneity Modeling With Omics Data via Network‐Based Block‐Wise Regulatory Analysis](deep_reads/2026-10-16-10.1002_sim.70779.md)  
   `其他` · 相关性 4/10
+- [AmpliconSuite: an end-to-end workflow for analyzing focal amplifications in cancer genomes](deep_reads/2026-10-16-10.1038_s41592-026-03264-x.md)  
+  `其他` · 相关性 3/10
+- [LoL-align: sensitive and fast probabilistic protein structure alignment](deep_reads/2026-10-16-10.1038_s41592-026-03249-w.md)  
+  `其他` · 相关性 3/10
 - [Atomic functional site scaffolding in biopolymers with RFdiffusion3](deep_reads/2026-10-16-10.1126_science.aeh2982.md)  
   `其他` · 相关性 3/10
 - [Magic state cultivation on a superconducting quantum processor](deep_reads/2026-10-16-10.1126_science.aee7961.md)  
@@ -355,6 +363,10 @@
   `其他` · 相关性 3/10
 - [Cloud‐Plots for Spherical Data With Applications to Glaucoma and Gait Cyclograms](deep_reads/2026-10-16-10.1002_sim.70704.md)  
   `其他` · 相关性 3/10
+- [Near-infrared photochromic miniprotein enables photoacoustic molecular imaging of acute inflammation and intracellular antigens](deep_reads/2026-10-16-10.1038_s41592-026-03255-y.md)  
+  `其他` · 相关性 2/10
+- [An ultralow-background far-red light-responsive optogenetic tool based on an engineered biliverdin-binding domain](deep_reads/2026-10-16-10.1038_s41592-026-03223-6.md)  
+  `其他` · 相关性 2/10
 - [Extreme loss suppression in an ultracold molecular gas with widely tunable dipolar interactions](deep_reads/2026-10-16-10.1126_science.adz0521.md)  
   `其他` · 相关性 2/10
 - [Unlocking cycle life of lithium metal batteries](deep_reads/2026-10-16-10.1126_science.aee1630.md)  

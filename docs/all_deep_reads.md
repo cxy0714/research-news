@@ -16496,6 +16496,87 @@
 - [Shared patterns of human milk composition link mammary gland function to infant growth](deep_reads/2026-10-13-10.1126_science.aee7240.md)  
   3/10 [journals]
 
+#### Nature Methods Vol 23 Issue 8
+
+- [Inference of secreted protein signaling activities in intercellular communication](deep_reads/2026-10-16-10.1038_s41592-026-03172-0.md)  
+  4/10 [journals]
+
+#### Nature Methods Vol 23 Issue 10
+
+- [CytoVI: deep generative modeling of antibody-based single cell data](deep_reads/2026-10-13-10.1038_s41592-026-03224-5.md)  
+  4/10 [journals]
+- [ResolVI: addressing noise and bias in spatial transcriptomics](deep_reads/2026-10-13-10.1038_s41592-026-03212-9.md)  
+  4/10 [journals]
+- [Reconstructing signaling histories of single cells via perturbation screens and transfer learning](deep_reads/2026-10-13-10.1038_s41592-026-03213-8.md)  
+  4/10 [journals]
+- [Resolving cell–cell interaction networks and their molecular logic in complex tissues](deep_reads/2026-10-13-10.1038_s41592-026-03237-0.md)  
+  3/10 [journals]
+- [Generalizable perturbation prediction](deep_reads/2026-10-13-10.1038_s41592-026-03260-1.md)  
+  3/10 [journals]
+- [NanoTS: a deep learning tool for accurate SNP calling in nanopore long-read transcriptome data](deep_reads/2026-10-13-10.1038_s41592-026-03225-4.md)  
+  3/10 [journals]
+- [SVPG: a pangenome-based structural variant detection approach and rapid augmentation of pangenome graphs with new samples](deep_reads/2026-10-13-10.1038_s41592-026-03219-2.md)  
+  3/10 [journals]
+- [Spatial chromatin architecture and accessibility co-profiling of mammalian tissues](deep_reads/2026-10-13-10.1038_s41592-026-03217-4.md)  
+  3/10 [journals]
+- [SPIFFI enables single-shot super-resolution and multidimensional imaging](deep_reads/2026-10-13-10.1038_s41592-026-03196-6.md)  
+  3/10 [journals]
+- [An ultralow-background far-red light-responsive optogenetic tool based on an engineered biliverdin-binding domain](deep_reads/2026-10-16-10.1038_s41592-026-03223-6.md)  
+  2/10 [journals]
+- [A FAIR road to a bioAFM databank](deep_reads/2026-10-13-10.1038_s41592-026-03214-7.md)  
+  2/10 [journals]
+- [Author Correction: OrthoFinder: improved phylogenetic orthology inference with enhanced accuracy and scalability](deep_reads/2026-10-13-10.1038_s41592-026-03238-z.md)  
+  0/10 [journals]
+
+#### Nature Methods
+
+- [Open and sustainable AI: challenges, opportunities and the road ahead in the life sciences](deep_reads/2026-08-05-10.1038_s41592-026-03037-6.md)  
+  6/10 [journals]
+- [NicheTrans: spatial-aware cross-omics translation](deep_reads/2026-08-05-10.1038_s41592-026-03153-3.md)  
+  5/10 [journals]
+- [MassNet: billion-scale AI-ready mass spectral corpus empowering scalable deep learning in proteomics](deep_reads/2026-10-16-10.1038_s41592-026-03247-y.md)  
+  4/10 [journals]
+- [Accurate and well-powered case–control analysis of spatial molecular data](deep_reads/2026-10-13-10.1038_s41592-026-03236-1.md)  
+  4/10 [journals]
+- [Go figure: transparency in neuroscience images preserves context and clarifies interpretation](deep_reads/2026-10-13-10.1038_s41592-026-03206-7.md)  
+  4/10 [journals]
+- [Spike inference from calcium imaging data acquired with GCaMP8 indicators](deep_reads/2026-08-05-10.1038_s41592-026-03183-x.md)  
+  4/10 [journals]
+- [Simultaneous single-cell calcium imaging of neuronal population activity and brain-wide BOLD fMRI](deep_reads/2026-08-05-10.1038_s41592-026-03154-2.md)  
+  4/10 [journals]
+- [ClairS: a deep-learning method for long-read tumor–normal pair somatic small variant calling](deep_reads/2026-08-05-10.1038_s41592-026-03152-4.md)  
+  4/10 [journals]
+- [Integration of imaging-based and sequencing-based spatial omics mapping on the same tissue section via DBiTplus](deep_reads/2026-08-05-10.1038_s41592-025-02948-0.md)  
+  4/10 [journals]
+- [AmpliconSuite: an end-to-end workflow for analyzing focal amplifications in cancer genomes](deep_reads/2026-10-16-10.1038_s41592-026-03264-x.md)  
+  3/10 [journals]
+- [LoL-align: sensitive and fast probabilistic protein structure alignment](deep_reads/2026-10-16-10.1038_s41592-026-03249-w.md)  
+  3/10 [journals]
+- [Times are changing but order matters: transferable prediction of small-molecule liquid chromatography retention times](deep_reads/2026-10-13-10.1038_s41592-026-03243-2.md)  
+  3/10 [journals]
+- [MemBrain v2: an end-to-end tool for the analysis of membranes in cryo-electron tomography](deep_reads/2026-10-13-10.1038_s41592-026-03178-8.md)  
+  3/10 [journals]
+- [CellTune: an integrative software for accurate cell classification in spatial proteomics](deep_reads/2026-08-05-10.1038_s41592-026-03162-2.md)  
+  3/10 [journals]
+- [SpaMTP: integrative statistical analysis and visualization of spatial metabolomics and transcriptomics data](deep_reads/2026-08-05-10.1038_s41592-026-03140-8.md)  
+  3/10 [journals]
+- [Spatialproteomics: an interoperable toolbox for analyzing highly multiplexed fluorescence image data](deep_reads/2026-08-05-10.1038_s41592-026-03155-1.md)  
+  3/10 [journals]
+- [Efficient evidence-based genome annotation with EviAnn](deep_reads/2026-08-05-10.1038_s41592-026-03156-0.md)  
+  3/10 [journals]
+- [Near-infrared photochromic miniprotein enables photoacoustic molecular imaging of acute inflammation and intracellular antigens](deep_reads/2026-10-16-10.1038_s41592-026-03255-y.md)  
+  2/10 [journals]
+- [Control of ice thickness in cryo-EM via confinement](deep_reads/2026-10-13-10.1038_s41592-026-03244-1.md)  
+  2/10 [journals]
+- [Human stewardship in the age of organoids](deep_reads/2026-10-13-10.1038_s41592-026-03228-1.md)  
+  2/10 [journals]
+- [Siibra: a software tool suite for realizing a Multilevel Human Brain Atlas from complex data resources](deep_reads/2026-08-05-10.1038_s41592-026-03159-x.md)  
+  2/10 [journals]
+- [Light-activated tetanus neurotoxin for conditional proteolysis and inducible synaptic inhibition in vivo](deep_reads/2026-08-05-10.1038_s41592-026-03176-w.md)  
+  0/10 [journals]
+- [Design and optimization of a kinase-controlled allosteric switch](deep_reads/2026-08-05-10.1038_s41592-026-03163-1.md)  
+  0/10 [journals]
+
 #### Journal of Computational and Graphical Statistics Vol 35 Issue 3
 
 - [Unveil Linear Patterns of Dependence via K Regression Clustering](deep_reads/2026-10-16-10.1080_10618600.2025.2606055.md)  
@@ -16886,72 +16967,6 @@
   2/10 [journals]
 - [PASTA: versatile tyramide-oligonucleotide amplification for multimodal spatial biology](deep_reads/2026-10-13-10.1038_s41592-026-03200-z.md)  
   2/10 [journals]
-
-#### Nature Methods Vol 23 Issue 10
-
-- [CytoVI: deep generative modeling of antibody-based single cell data](deep_reads/2026-10-13-10.1038_s41592-026-03224-5.md)  
-  4/10 [journals]
-- [ResolVI: addressing noise and bias in spatial transcriptomics](deep_reads/2026-10-13-10.1038_s41592-026-03212-9.md)  
-  4/10 [journals]
-- [Reconstructing signaling histories of single cells via perturbation screens and transfer learning](deep_reads/2026-10-13-10.1038_s41592-026-03213-8.md)  
-  4/10 [journals]
-- [Resolving cell–cell interaction networks and their molecular logic in complex tissues](deep_reads/2026-10-13-10.1038_s41592-026-03237-0.md)  
-  3/10 [journals]
-- [Generalizable perturbation prediction](deep_reads/2026-10-13-10.1038_s41592-026-03260-1.md)  
-  3/10 [journals]
-- [NanoTS: a deep learning tool for accurate SNP calling in nanopore long-read transcriptome data](deep_reads/2026-10-13-10.1038_s41592-026-03225-4.md)  
-  3/10 [journals]
-- [SVPG: a pangenome-based structural variant detection approach and rapid augmentation of pangenome graphs with new samples](deep_reads/2026-10-13-10.1038_s41592-026-03219-2.md)  
-  3/10 [journals]
-- [Spatial chromatin architecture and accessibility co-profiling of mammalian tissues](deep_reads/2026-10-13-10.1038_s41592-026-03217-4.md)  
-  3/10 [journals]
-- [SPIFFI enables single-shot super-resolution and multidimensional imaging](deep_reads/2026-10-13-10.1038_s41592-026-03196-6.md)  
-  3/10 [journals]
-- [A FAIR road to a bioAFM databank](deep_reads/2026-10-13-10.1038_s41592-026-03214-7.md)  
-  2/10 [journals]
-- [Author Correction: OrthoFinder: improved phylogenetic orthology inference with enhanced accuracy and scalability](deep_reads/2026-10-13-10.1038_s41592-026-03238-z.md)  
-  0/10 [journals]
-
-#### Nature Methods
-
-- [Open and sustainable AI: challenges, opportunities and the road ahead in the life sciences](deep_reads/2026-08-05-10.1038_s41592-026-03037-6.md)  
-  6/10 [journals]
-- [NicheTrans: spatial-aware cross-omics translation](deep_reads/2026-08-05-10.1038_s41592-026-03153-3.md)  
-  5/10 [journals]
-- [Accurate and well-powered case–control analysis of spatial molecular data](deep_reads/2026-10-13-10.1038_s41592-026-03236-1.md)  
-  4/10 [journals]
-- [Go figure: transparency in neuroscience images preserves context and clarifies interpretation](deep_reads/2026-10-13-10.1038_s41592-026-03206-7.md)  
-  4/10 [journals]
-- [Spike inference from calcium imaging data acquired with GCaMP8 indicators](deep_reads/2026-08-05-10.1038_s41592-026-03183-x.md)  
-  4/10 [journals]
-- [Simultaneous single-cell calcium imaging of neuronal population activity and brain-wide BOLD fMRI](deep_reads/2026-08-05-10.1038_s41592-026-03154-2.md)  
-  4/10 [journals]
-- [ClairS: a deep-learning method for long-read tumor–normal pair somatic small variant calling](deep_reads/2026-08-05-10.1038_s41592-026-03152-4.md)  
-  4/10 [journals]
-- [Integration of imaging-based and sequencing-based spatial omics mapping on the same tissue section via DBiTplus](deep_reads/2026-08-05-10.1038_s41592-025-02948-0.md)  
-  4/10 [journals]
-- [Times are changing but order matters: transferable prediction of small-molecule liquid chromatography retention times](deep_reads/2026-10-13-10.1038_s41592-026-03243-2.md)  
-  3/10 [journals]
-- [MemBrain v2: an end-to-end tool for the analysis of membranes in cryo-electron tomography](deep_reads/2026-10-13-10.1038_s41592-026-03178-8.md)  
-  3/10 [journals]
-- [CellTune: an integrative software for accurate cell classification in spatial proteomics](deep_reads/2026-08-05-10.1038_s41592-026-03162-2.md)  
-  3/10 [journals]
-- [SpaMTP: integrative statistical analysis and visualization of spatial metabolomics and transcriptomics data](deep_reads/2026-08-05-10.1038_s41592-026-03140-8.md)  
-  3/10 [journals]
-- [Spatialproteomics: an interoperable toolbox for analyzing highly multiplexed fluorescence image data](deep_reads/2026-08-05-10.1038_s41592-026-03155-1.md)  
-  3/10 [journals]
-- [Efficient evidence-based genome annotation with EviAnn](deep_reads/2026-08-05-10.1038_s41592-026-03156-0.md)  
-  3/10 [journals]
-- [Control of ice thickness in cryo-EM via confinement](deep_reads/2026-10-13-10.1038_s41592-026-03244-1.md)  
-  2/10 [journals]
-- [Human stewardship in the age of organoids](deep_reads/2026-10-13-10.1038_s41592-026-03228-1.md)  
-  2/10 [journals]
-- [Siibra: a software tool suite for realizing a Multilevel Human Brain Atlas from complex data resources](deep_reads/2026-08-05-10.1038_s41592-026-03159-x.md)  
-  2/10 [journals]
-- [Light-activated tetanus neurotoxin for conditional proteolysis and inducible synaptic inhibition in vivo](deep_reads/2026-08-05-10.1038_s41592-026-03176-w.md)  
-  0/10 [journals]
-- [Design and optimization of a kinase-controlled allosteric switch](deep_reads/2026-08-05-10.1038_s41592-026-03163-1.md)  
-  0/10 [journals]
 
 #### Nature Machine Intelligence Vol 8 Issue 9
 
