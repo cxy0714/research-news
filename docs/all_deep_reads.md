@@ -14602,6 +14602,11 @@
 - [Multi‐Level Latent Variable Models for Coheritability Analysis in Electronic Health Records](deep_reads/2026-10-16-10.1002_sim.70675.md)  
   5/10 [journals]
 
+#### Science Vol 393 Issue 6818
+
+- [Single wildfire smoke exposure causes lasting harm, natural experiment in monkeys hints](deep_reads/2026-10-16-10.1126_science.aem6545.md)  
+  3/10 [journals]
+
 #### American Journal of Epidemiology Vol 195 Issue 9
 
 - [Antibiotic treatment for non-specific upper respiratory tract infections and exacerbation risk in children with asthma: a target trial emulation study](deep_reads/2026-10-16-10.1093_aje_kwag132.md)  
@@ -16348,6 +16353,149 @@
 - [A historical note: Rediscovering an unpublished response to Korn and Freidlin (2011)](deep_reads/2026-10-16-10.1177_09622802251403371.md)  
   3/10 [journals]
 
+#### Science Vol 394 Issue 6821
+
+- [AI takes a bite out of math’s hardest problem](deep_reads/2026-10-16-10.1126_science.aen2355.md)  
+  5/10 [journals]
+- [New tools may help decide who needs antidepressants](deep_reads/2026-10-16-10.1126_science.aen2359.md)  
+  5/10 [journals]
+- [Empirical constraints on ice cliff calving](deep_reads/2026-10-16-10.1126_science.aee0658.md)  
+  4/10 [journals]
+- [OpenAI just changed math forever. Exactly how, no one yet knows](deep_reads/2026-10-16-10.1126_science.aen2356.md)  
+  4/10 [journals]
+- [Frequency encoding regulates cell type composition in the small intestine](deep_reads/2026-10-16-10.1126_science.adt1928.md)  
+  4/10 [journals]
+- [Market dilution, fair use, and generative AI](deep_reads/2026-10-16-10.1126_science.ael4888.md)  
+  3/10 [journals]
+- [Dendritic computation for abstract rule-based flexible decision-making](deep_reads/2026-10-16-10.1126_science.adz5323.md)  
+  3/10 [journals]
+- [Airflows redefine the cost of aerial transport in the wild](deep_reads/2026-10-16-10.1126_science.aee6550.md)  
+  3/10 [journals]
+- [Deterministic generation and distribution of genuine multipartite entanglement in macroscopic acoustic resonators](deep_reads/2026-10-16-10.1126_science.aeh4273.md)  
+  3/10 [journals]
+- [Redating the Inca empire](deep_reads/2026-10-16-10.1126_science.aen2353.md)  
+  3/10 [journals]
+- [‘Super’ El Niño spurs research on ecosystem impacts](deep_reads/2026-10-16-10.1126_science.aen2357.md)  
+  3/10 [journals]
+- [Winds make bird flights cheaper](deep_reads/2026-10-16-10.1126_science.ael9047.md)  
+  3/10 [journals]
+- [A pair of chitosan receptors confer broad-spectrum fungal resistance](deep_reads/2026-10-16-10.1126_science.ady7647.md)  
+  3/10 [journals]
+- [In situ structure of the human ciliary transition zone links linker defects to primary ciliary dyskinesia](deep_reads/2026-10-16-10.1126_science.aei5957.md)  
+  1/10 [journals]
+- [Stereoselective polysubstituted bicyclo[1.1.0]butane synthesis by rhodium-catalyzed kinetic resolution](deep_reads/2026-10-16-10.1126_science.aeh6251.md)  
+  0/10 [journals]
+
+#### Science Vol 394 Issue 6819
+
+- [Making the invisible visible](deep_reads/2026-10-16-10.1126_science.aem8012.md)  
+  5/10 [journals]
+- [Keep AI-augmented science contestable](deep_reads/2026-10-13-10.1126_science.aek7949.md)  
+  5/10 [journals]
+- [U.K. funder used ‘AI triage’ to reject grant proposals](deep_reads/2026-10-13-10.1126_science.aem8458.md)  
+  5/10 [journals]
+- [Project will track Amazon biodiversity in real time](deep_reads/2026-10-16-10.1126_science.aem8461.md)  
+  4/10 [journals]
+- [Quadrupolar sea level fluctuations reveal episodes of rapid polar wander](deep_reads/2026-10-13-10.1126_science.aec8423.md)  
+  4/10 [journals]
+- [Reframing menopause and menopause hormone therapy as opportunities for healthy aging](deep_reads/2026-10-13-10.1126_science.aeg5004.md)  
+  4/10 [journals]
+- [X and Y chromosomes as determinants of aging and disease](deep_reads/2026-10-13-10.1126_science.aeh0145.md)  
+  4/10 [journals]
+- [Hypertension fuels osteoarthritis through neuroendocrine signaling](deep_reads/2026-10-16-10.1126_science.aed8207.md)  
+  3/10 [journals]
+- [Verification makes discovery matter](deep_reads/2026-10-13-10.1126_science.aem6125.md)  
+  3/10 [journals]
+- [Precise length and charge segmentation of billion-dalton supramolecular polymers](deep_reads/2026-10-13-10.1126_science.aeg5583.md)  
+  3/10 [journals]
+- [Self-assembling polymers work up some nerve](deep_reads/2026-10-13-10.1126_science.ael4456.md)  
+  3/10 [journals]
+- [Can an AI feel pain? It can at least act like it does](deep_reads/2026-10-13-10.1126_science.aem8459.md)  
+  3/10 [journals]
+- [Phage proteases activate CBASS antiphage immunity](deep_reads/2026-10-16-10.1126_science.aeg3949.md)  
+  2/10 [journals]
+- [Longevity products: Innovation through regulation](deep_reads/2026-10-13-10.1126_science.aei2427.md)  
+  2/10 [journals]
+- [Ultrahigh piezoelectricity by polaron-defect complexes](deep_reads/2026-10-13-10.1126_science.aeg4972.md)  
+  2/10 [journals]
+- [Mitochondrial carrier SLC25A34 links clock, diet, and temperature control of adipocyte lipid cycling](deep_reads/2026-10-13-10.1126_science.adz4797.md)  
+  2/10 [journals]
+- [Dynamic multimodal cation-carbon interaction for efficient adiponitrile electrosynthesis](deep_reads/2026-10-13-10.1126_science.aef5175.md)  
+  2/10 [journals]
+- [Does the postmenopausal ovary still matter?](deep_reads/2026-10-16-10.1126_science.aeh7496.md)  
+  1/10 [journals]
+
+#### Science Vol 393 Issue 6818
+
+- [Satellite reveals a world of altered rivers](deep_reads/2026-10-16-10.1126_science.aem6543.md)  
+  5/10 [journals]
+- [Ancient introgression drives wild boar expansion and phenotypic diversification of domestic pigs](deep_reads/2026-10-16-10.1126_science.adq7553.md)  
+  4/10 [journals]
+- [Hedging El Niño isn’t the same as adapting to it](deep_reads/2026-10-16-10.1126_science.aem2972.md)  
+  3/10 [journals]
+- [An in-body networking system for communication between wearable and implantable therapeutics](deep_reads/2026-10-16-10.1126_science.adz5300.md)  
+  3/10 [journals]
+- [Why AI agents invent their own language if you let them chat](deep_reads/2026-10-16-10.1126_science.aem6544.md)  
+  3/10 [journals]
+- [Two-dimensional topological quantum chemistry and catalog of topological materials](deep_reads/2026-10-16-10.1126_science.adu2107.md)  
+  3/10 [journals]
+- [Unlocking cycle life of lithium metal batteries](deep_reads/2026-10-16-10.1126_science.aee1630.md)  
+  2/10 [journals]
+- [2D theoretically twistable material database](deep_reads/2026-10-16-10.1126_science.adu1550.md)  
+  2/10 [journals]
+- [Ceramide synthesis mediates colorectal cancer metastasis through a YAP-driven regenerative program](deep_reads/2026-10-16-10.1126_science.adw8520.md)  
+  2/10 [journals]
+- [Targeting an atypical G protein–coupled receptor signaling pathway for cardiac fibrosis therapy](deep_reads/2026-10-16-10.1126_science.aej5896.md)  
+  2/10 [journals]
+- [Observation and exploration widen the menu](deep_reads/2026-10-16-10.1126_science.ael7040.md)  
+  2/10 [journals]
+- [Embracing triplet nitrenes for C-to-N replacement of complex bicyclic (hetero)aryl azides](deep_reads/2026-10-16-10.1126_science.aef3511.md)  
+  2/10 [journals]
+- [Nanotherapy against senescence](deep_reads/2026-10-16-10.1126_science.ael2714.md)  
+  2/10 [journals]
+- [Escape of the <i>BC200</i> gene to a human poxvirus reveals its persistent transposition in primates](deep_reads/2026-10-16-10.1126_science.aeh3441.md)  
+  1/10 [journals]
+- [Mammals produce <i>cyclo</i> -octasulfur to suppress lipid peroxidation and ferroptosis](deep_reads/2026-10-16-10.1126_science.aec5473.md)  
+  1/10 [journals]
+- [Fibroblasts restrain gut inflammation by IGF1-dependent regulation of innate lymphocytes](deep_reads/2026-10-16-10.1126_science.aei0062.md)  
+  1/10 [journals]
+- [Prussian blue regulates ion dynamics in perovskite solar cells](deep_reads/2026-10-16-10.1126_science.aef5487.md)  
+  1/10 [journals]
+- [King sulfur](deep_reads/2026-10-16-10.1126_science.ael0139.md)  
+  1/10 [journals]
+
+#### Science Vol 393 Issue 6817
+
+- [Transcriptome-based classification in mice with ASD-risk mutations](deep_reads/2026-10-16-10.1126_science.adz6688.md)  
+  4/10 [journals]
+- [Extreme loss suppression in an ultracold molecular gas with widely tunable dipolar interactions](deep_reads/2026-10-16-10.1126_science.adz0521.md)  
+  2/10 [journals]
+- [The indomitable Stephen Hawking <b>Hawking</b> <i>Graham Farmelo</i> Bantam, 2026. 608 pp.](deep_reads/2026-10-16-10.1126_science.aej4194.md)  
+  1/10 [journals]
+
+#### Science
+
+- [The Virtual Biotech: A multi-agent AI framework for therapeutic discovery and development](deep_reads/2026-10-16-10.1126_science.aeg6779.md)  
+  6/10 [journals]
+- [A DNA Typewriter records the cell lineage history of a mouse, from zygote to late organogenesis](deep_reads/2026-10-13-10.1126_science.ael0508.md)  
+  4/10 [journals]
+- [Safeguarding global terrestrial vertebrate species from future sea-level rise](deep_reads/2026-10-13-10.1126_science.aed5772.md)  
+  4/10 [journals]
+- [Atomic functional site scaffolding in biopolymers with RFdiffusion3](deep_reads/2026-10-16-10.1126_science.aeh2982.md)  
+  3/10 [journals]
+- [Magic state cultivation on a superconducting quantum processor](deep_reads/2026-10-16-10.1126_science.aee7961.md)  
+  3/10 [journals]
+- [Snowball refrigeration of Earth’s crust mimics glacial erosion](deep_reads/2026-10-16-10.1126_science.aed3341.md)  
+  3/10 [journals]
+- [Antiferroelectric hafnia down to the 2D limit](deep_reads/2026-10-16-10.1126_science.ady5526.md)  
+  3/10 [journals]
+- [In-cell structures visualize human pre-ribosome assembly in the nucleolus](deep_reads/2026-10-16-10.1126_science.aej0483.md)  
+  3/10 [journals]
+- [Stereodivergent telomerization of linear functionalized dienes with amines](deep_reads/2026-10-16-10.1126_science.aeh7895.md)  
+  3/10 [journals]
+- [Shared patterns of human milk composition link mammary gland function to infant growth](deep_reads/2026-10-13-10.1126_science.aee7240.md)  
+  3/10 [journals]
+
 #### Journal of Computational and Graphical Statistics Vol 35 Issue 3
 
 - [Unveil Linear Patterns of Dependence via K Regression Clustering](deep_reads/2026-10-16-10.1080_10618600.2025.2606055.md)  
@@ -16675,44 +16823,6 @@
   0/10 [journals]
 - [Wafer-scale low-symmetry graphene moiré superlattice for integrated quantum rectifiers](deep_reads/2026-10-13-10.1126_science.aeh3915.md)  
   0/10 [journals]
-
-#### Science Vol 394 Issue 6819
-
-- [Keep AI-augmented science contestable](deep_reads/2026-10-13-10.1126_science.aek7949.md)  
-  5/10 [journals]
-- [U.K. funder used ‘AI triage’ to reject grant proposals](deep_reads/2026-10-13-10.1126_science.aem8458.md)  
-  5/10 [journals]
-- [Quadrupolar sea level fluctuations reveal episodes of rapid polar wander](deep_reads/2026-10-13-10.1126_science.aec8423.md)  
-  4/10 [journals]
-- [Reframing menopause and menopause hormone therapy as opportunities for healthy aging](deep_reads/2026-10-13-10.1126_science.aeg5004.md)  
-  4/10 [journals]
-- [X and Y chromosomes as determinants of aging and disease](deep_reads/2026-10-13-10.1126_science.aeh0145.md)  
-  4/10 [journals]
-- [Verification makes discovery matter](deep_reads/2026-10-13-10.1126_science.aem6125.md)  
-  3/10 [journals]
-- [Precise length and charge segmentation of billion-dalton supramolecular polymers](deep_reads/2026-10-13-10.1126_science.aeg5583.md)  
-  3/10 [journals]
-- [Self-assembling polymers work up some nerve](deep_reads/2026-10-13-10.1126_science.ael4456.md)  
-  3/10 [journals]
-- [Can an AI feel pain? It can at least act like it does](deep_reads/2026-10-13-10.1126_science.aem8459.md)  
-  3/10 [journals]
-- [Longevity products: Innovation through regulation](deep_reads/2026-10-13-10.1126_science.aei2427.md)  
-  2/10 [journals]
-- [Ultrahigh piezoelectricity by polaron-defect complexes](deep_reads/2026-10-13-10.1126_science.aeg4972.md)  
-  2/10 [journals]
-- [Mitochondrial carrier SLC25A34 links clock, diet, and temperature control of adipocyte lipid cycling](deep_reads/2026-10-13-10.1126_science.adz4797.md)  
-  2/10 [journals]
-- [Dynamic multimodal cation-carbon interaction for efficient adiponitrile electrosynthesis](deep_reads/2026-10-13-10.1126_science.aef5175.md)  
-  2/10 [journals]
-
-#### Science
-
-- [A DNA Typewriter records the cell lineage history of a mouse, from zygote to late organogenesis](deep_reads/2026-10-13-10.1126_science.ael0508.md)  
-  4/10 [journals]
-- [Safeguarding global terrestrial vertebrate species from future sea-level rise](deep_reads/2026-10-13-10.1126_science.aed5772.md)  
-  4/10 [journals]
-- [Shared patterns of human milk composition link mammary gland function to infant growth](deep_reads/2026-10-13-10.1126_science.aee7240.md)  
-  3/10 [journals]
 
 #### Proceedings of the National Academy of Sciences Vol 123 Issue 43
 

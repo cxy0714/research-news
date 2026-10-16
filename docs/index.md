@@ -17,7 +17,7 @@
 
 [→ 查看完整报告](daily/2026-10-16.md)
 
-### 精读论文（143 篇）
+### 精读论文（192 篇）
 
 - [Doubly Robust and Efficient Estimation in a Partially Linear Multiple-Index Model](deep_reads/2026-10-16-10.1080_10618600.2026.2685845.md)  
   `非参数 / 半参数` · 相关性 8/10
@@ -83,6 +83,8 @@
   `因果推断` · 相关性 7/10
 - [Valid Data‐Driven Subgroup Selection With Uniform Guarantees in Clinical Trials](deep_reads/2026-10-16-10.1002_sim.70745.md)  
   `数理统计 / 假设检验` · 相关性 7/10
+- [The Virtual Biotech: A multi-agent AI framework for therapeutic discovery and development](deep_reads/2026-10-16-10.1126_science.aeg6779.md)  
+  `其他` · 相关性 6/10
 - [Robustifying Approximate Bayesian Computation](deep_reads/2026-10-16-10.1080_10618600.2026.2748043.md)  
   `其他` · 相关性 6/10
 - [Doubly Regularized Matrix-Variate Regression](deep_reads/2026-10-16-10.1080_10618600.2026.2702534.md)  
@@ -177,6 +179,14 @@
   `统计计算 / 算法` · 相关性 6/10
 - [A Multi‐Task Learning Approach for Identifying Prognostic Variables Across Multiple Historical Clinical Trials](deep_reads/2026-10-16-10.1002_sim.70772.md)  
   `因果推断` · 相关性 6/10
+- [Satellite reveals a world of altered rivers](deep_reads/2026-10-16-10.1126_science.aem6543.md)  
+  `其他` · 相关性 5/10
+- [Making the invisible visible](deep_reads/2026-10-16-10.1126_science.aem8012.md)  
+  `其他` · 相关性 5/10
+- [AI takes a bite out of math’s hardest problem](deep_reads/2026-10-16-10.1126_science.aen2355.md)  
+  `其他` · 相关性 5/10
+- [New tools may help decide who needs antidepressants](deep_reads/2026-10-16-10.1126_science.aen2359.md)  
+  `其他` · 相关性 5/10
 - [MaxTDA: Robust Statistical Inference for Maximal Persistence in Topological Data Analysis](deep_reads/2026-10-16-10.1080_10618600.2026.2748028.md)  
   `其他` · 相关性 5/10
 - [MCMC using bouncy Hamiltonian dynamics: A unifying framework for Hamiltonian Monte Carlo and piecewise deterministic Markov process samplers](deep_reads/2026-10-16-10.1080_10618600.2026.2748046.md)  
@@ -225,6 +235,18 @@
   `其他` · 相关性 5/10
 - [Generalized Linear Mixed Models for Changepoint Analysis of Biomedical Time Series Data](deep_reads/2026-10-16-10.1002_sim.70769.md)  
   `其他` · 相关性 5/10
+- [Transcriptome-based classification in mice with ASD-risk mutations](deep_reads/2026-10-16-10.1126_science.adz6688.md)  
+  `其他` · 相关性 4/10
+- [Ancient introgression drives wild boar expansion and phenotypic diversification of domestic pigs](deep_reads/2026-10-16-10.1126_science.adq7553.md)  
+  `其他` · 相关性 4/10
+- [Project will track Amazon biodiversity in real time](deep_reads/2026-10-16-10.1126_science.aem8461.md)  
+  `其他` · 相关性 4/10
+- [Empirical constraints on ice cliff calving](deep_reads/2026-10-16-10.1126_science.aee0658.md)  
+  `其他` · 相关性 4/10
+- [OpenAI just changed math forever. Exactly how, no one yet knows](deep_reads/2026-10-16-10.1126_science.aen2356.md)  
+  `其他` · 相关性 4/10
+- [Frequency encoding regulates cell type composition in the small intestine](deep_reads/2026-10-16-10.1126_science.adt1928.md)  
+  `其他` · 相关性 4/10
 - [Bayesian local clustering of functional data via semi-Markovian random partitions](deep_reads/2026-10-16-10.1080_10618600.2026.2748033.md)  
   `其他` · 相关性 4/10
 - [Grid Particle Gibbs with Ancestor Sampling for State-Space Models](deep_reads/2026-10-16-10.1080_10618600.2026.2681775.md)  
@@ -281,6 +303,46 @@
   `其他` · 相关性 4/10
 - [Cancer Heterogeneity Modeling With Omics Data via Network‐Based Block‐Wise Regulatory Analysis](deep_reads/2026-10-16-10.1002_sim.70779.md)  
   `其他` · 相关性 4/10
+- [Atomic functional site scaffolding in biopolymers with RFdiffusion3](deep_reads/2026-10-16-10.1126_science.aeh2982.md)  
+  `其他` · 相关性 3/10
+- [Magic state cultivation on a superconducting quantum processor](deep_reads/2026-10-16-10.1126_science.aee7961.md)  
+  `其他` · 相关性 3/10
+- [Snowball refrigeration of Earth’s crust mimics glacial erosion](deep_reads/2026-10-16-10.1126_science.aed3341.md)  
+  `其他` · 相关性 3/10
+- [Antiferroelectric hafnia down to the 2D limit](deep_reads/2026-10-16-10.1126_science.ady5526.md)  
+  `其他` · 相关性 3/10
+- [In-cell structures visualize human pre-ribosome assembly in the nucleolus](deep_reads/2026-10-16-10.1126_science.aej0483.md)  
+  `其他` · 相关性 3/10
+- [Stereodivergent telomerization of linear functionalized dienes with amines](deep_reads/2026-10-16-10.1126_science.aeh7895.md)  
+  `其他` · 相关性 3/10
+- [Single wildfire smoke exposure causes lasting harm, natural experiment in monkeys hints](deep_reads/2026-10-16-10.1126_science.aem6545.md)  
+  `流行病学` · 相关性 3/10
+- [Hedging El Niño isn’t the same as adapting to it](deep_reads/2026-10-16-10.1126_science.aem2972.md)  
+  `其他` · 相关性 3/10
+- [An in-body networking system for communication between wearable and implantable therapeutics](deep_reads/2026-10-16-10.1126_science.adz5300.md)  
+  `其他` · 相关性 3/10
+- [Why AI agents invent their own language if you let them chat](deep_reads/2026-10-16-10.1126_science.aem6544.md)  
+  `其他` · 相关性 3/10
+- [Two-dimensional topological quantum chemistry and catalog of topological materials](deep_reads/2026-10-16-10.1126_science.adu2107.md)  
+  `其他` · 相关性 3/10
+- [Hypertension fuels osteoarthritis through neuroendocrine signaling](deep_reads/2026-10-16-10.1126_science.aed8207.md)  
+  `其他` · 相关性 3/10
+- [Market dilution, fair use, and generative AI](deep_reads/2026-10-16-10.1126_science.ael4888.md)  
+  `其他` · 相关性 3/10
+- [Dendritic computation for abstract rule-based flexible decision-making](deep_reads/2026-10-16-10.1126_science.adz5323.md)  
+  `其他` · 相关性 3/10
+- [Airflows redefine the cost of aerial transport in the wild](deep_reads/2026-10-16-10.1126_science.aee6550.md)  
+  `其他` · 相关性 3/10
+- [Deterministic generation and distribution of genuine multipartite entanglement in macroscopic acoustic resonators](deep_reads/2026-10-16-10.1126_science.aeh4273.md)  
+  `其他` · 相关性 3/10
+- [Redating the Inca empire](deep_reads/2026-10-16-10.1126_science.aen2353.md)  
+  `其他` · 相关性 3/10
+- [‘Super’ El Niño spurs research on ecosystem impacts](deep_reads/2026-10-16-10.1126_science.aen2357.md)  
+  `其他` · 相关性 3/10
+- [Winds make bird flights cheaper](deep_reads/2026-10-16-10.1126_science.ael9047.md)  
+  `其他` · 相关性 3/10
+- [A pair of chitosan receptors confer broad-spectrum fungal resistance](deep_reads/2026-10-16-10.1126_science.ady7647.md)  
+  `其他` · 相关性 3/10
 - [FedDecay: Balancing Model Performance and Rapid Personalization in Federated Learning with Learning Rate Scheduling](deep_reads/2026-10-16-10.1080_10618600.2026.2696264.md)  
   `统计计算 / 算法` · 相关性 3/10
 - [Changes in COVID-19-related death certification practices and quality of cause-of-death reporting in the United States from 2020 to 2023](deep_reads/2026-10-16-10.1093_aje_kwag215.md)  
@@ -293,14 +355,50 @@
   `其他` · 相关性 3/10
 - [Cloud‐Plots for Spherical Data With Applications to Glaucoma and Gait Cyclograms](deep_reads/2026-10-16-10.1002_sim.70704.md)  
   `其他` · 相关性 3/10
+- [Extreme loss suppression in an ultracold molecular gas with widely tunable dipolar interactions](deep_reads/2026-10-16-10.1126_science.adz0521.md)  
+  `其他` · 相关性 2/10
+- [Unlocking cycle life of lithium metal batteries](deep_reads/2026-10-16-10.1126_science.aee1630.md)  
+  `其他` · 相关性 2/10
+- [2D theoretically twistable material database](deep_reads/2026-10-16-10.1126_science.adu1550.md)  
+  `其他` · 相关性 2/10
+- [Ceramide synthesis mediates colorectal cancer metastasis through a YAP-driven regenerative program](deep_reads/2026-10-16-10.1126_science.adw8520.md)  
+  `其他` · 相关性 2/10
+- [Targeting an atypical G protein–coupled receptor signaling pathway for cardiac fibrosis therapy](deep_reads/2026-10-16-10.1126_science.aej5896.md)  
+  `其他` · 相关性 2/10
+- [Observation and exploration widen the menu](deep_reads/2026-10-16-10.1126_science.ael7040.md)  
+  `其他` · 相关性 2/10
+- [Embracing triplet nitrenes for C-to-N replacement of complex bicyclic (hetero)aryl azides](deep_reads/2026-10-16-10.1126_science.aef3511.md)  
+  `其他` · 相关性 2/10
+- [Nanotherapy against senescence](deep_reads/2026-10-16-10.1126_science.ael2714.md)  
+  `其他` · 相关性 2/10
+- [Phage proteases activate CBASS antiphage immunity](deep_reads/2026-10-16-10.1126_science.aeg3949.md)  
+  `其他` · 相关性 2/10
 - [The complexities of comprehensive exams in epidemiology](deep_reads/2026-10-16-10.1093_aje_kwag158.md)  
   `流行病学` · 相关性 2/10
 - [An evaluation of designs for Phase I/IIa dose-finding studies in Tuberculosis](deep_reads/2026-10-16-10.1177_09622802261430905.md)  
   `其他` · 相关性 2/10
 - [A Bayesian phase I/II platform design with survival efficacy endpoint for dose optimization](deep_reads/2026-10-16-10.1177_09622802261449367.md)  
   `其他` · 相关性 2/10
+- [The indomitable Stephen Hawking <b>Hawking</b> <i>Graham Farmelo</i> Bantam, 2026. 608 pp.](deep_reads/2026-10-16-10.1126_science.aej4194.md)  
+  `其他` · 相关性 1/10
+- [Escape of the <i>BC200</i> gene to a human poxvirus reveals its persistent transposition in primates](deep_reads/2026-10-16-10.1126_science.aeh3441.md)  
+  `其他` · 相关性 1/10
+- [Mammals produce <i>cyclo</i> -octasulfur to suppress lipid peroxidation and ferroptosis](deep_reads/2026-10-16-10.1126_science.aec5473.md)  
+  `其他` · 相关性 1/10
+- [Fibroblasts restrain gut inflammation by IGF1-dependent regulation of innate lymphocytes](deep_reads/2026-10-16-10.1126_science.aei0062.md)  
+  `其他` · 相关性 1/10
+- [Prussian blue regulates ion dynamics in perovskite solar cells](deep_reads/2026-10-16-10.1126_science.aef5487.md)  
+  `其他` · 相关性 1/10
+- [King sulfur](deep_reads/2026-10-16-10.1126_science.ael0139.md)  
+  `其他` · 相关性 1/10
+- [Does the postmenopausal ovary still matter?](deep_reads/2026-10-16-10.1126_science.aeh7496.md)  
+  `其他` · 相关性 1/10
+- [In situ structure of the human ciliary transition zone links linker defects to primary ciliary dyskinesia](deep_reads/2026-10-16-10.1126_science.aei5957.md)  
+  `其他` · 相关性 1/10
 - [Authors’ response to “Racial and Ethnic Variation in Socioeconomic Differentials in Young Adult Cardiovascular Health”](deep_reads/2026-10-16-10.1093_aje_kwag136.md)  
   `流行病学` · 相关性 1/10
+- [Stereoselective polysubstituted bicyclo[1.1.0]butane synthesis by rhodium-catalyzed kinetic resolution](deep_reads/2026-10-16-10.1126_science.aeh6251.md)  
+  `其他` · 相关性 0/10
 - [Regression Modeling of Spatiotemporal Extreme U.S. Wildfires via Partially Interpretable Neural Networks](deep_reads/2026-10-16-10.1080_10618600.2025.2609641.md)  
   `其他` · 相关性 0/10
 - [In Memoriam: the enduring legacy of Dr. Roger Detels (1936-2026)](deep_reads/2026-10-16-10.1093_aje_kwag199.md)  

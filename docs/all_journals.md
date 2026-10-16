@@ -567,14 +567,19 @@
 
 ### Science
 
+- [Vol 394 Issue 6821 · 2026-10-16](journals/2026-10-16-science-v394-i6821.md)
 - [Vol 394 Issue 6820 · 2026-10-13](journals/2026-10-13-science-v394-i6820.md)
+- [Vol 394 Issue 6819 · 2026-10-16](journals/2026-10-16-science-v394-i6819.md)
 - [Vol 394 Issue 6819 · 2026-10-13](journals/2026-10-13-science-v394-i6819.md)
+- [Vol 393 Issue 6818 · 2026-10-16](journals/2026-10-16-science-v393-i6818.md)
+- [Vol 393 Issue 6817 · 2026-10-16](journals/2026-10-16-science-v393-i6817.md)
 - [Vol 393 Issue 6810 · 2026-07-31](journals/2026-07-31-science-v393-i6810.md)
 - [Vol 393 Issue 6809 · 2026-08-01](journals/2026-08-01-science-v393-i6809.md)
 - [Vol 393 Issue 6809 · 2026-07-31](journals/2026-07-31-science-v393-i6809.md)
 - [Vol 393 Issue 6808 · 2026-08-01](journals/2026-08-01-science-v393-i6808.md)
 - [Vol 393 Issue 6807 · 2026-08-01](journals/2026-08-01-science-v393-i6807.md)
 - [Vol 393 Issue 6806 · 2026-08-01](journals/2026-08-01-science-v393-i6806.md)
+- [2026-10-16](journals/2026-10-16-science.md)
 - [2026-10-13](journals/2026-10-13-science.md)
 
 ## 广覆盖开放刊 (Broad-Scope)
