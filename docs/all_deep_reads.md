@@ -4550,6 +4550,18 @@
 - [Kernel Density Estimators in Large Dimensions](deep_reads/2026-10-17-10.1137_24m1703677.md)  
   8/10 [journals]
 
+#### SIAM Journal on Mathematics of Data Science Vol 7 Issue 2
+
+- [Spectral Properties of Elementwise-Transformed Spiked Matrices](deep_reads/2026-10-17-10.1137_23m1627985.md)  
+  7/10 [journals]
+- [Ensemble Linear Interpolators: The Role of Ensembling](deep_reads/2026-10-17-10.1137_24m1642548.md)  
+  6/10 [journals]
+
+#### SIAM Journal on Mathematics of Data Science Vol 7 Issue 1
+
+- [CA-PCA: Manifold Dimension Estimation, Adapted for Curvature](deep_reads/2026-10-17-10.1137_23m1575135.md)  
+  6/10 [journals]
+
 #### Journal of Computational and Graphical Statistics Vol 35 Issue 3
 
 - [Least Squares and Hypothesis Testing Based Transfer Learning for High-Dimensional Quantile Regression](deep_reads/2026-10-16-10.1080_10618600.2026.2628275.md)  
@@ -6183,6 +6195,11 @@
   8/10 [journals]
 - [Efficient Estimation of the Central Mean Subspace via Smoothed Gradient Outer Products](deep_reads/2026-10-17-10.1137_23m1626700.md)  
   7/10 [journals]
+
+#### SIAM Journal on Mathematics of Data Science Vol 7 Issue 2
+
+- [Insights into Kernel PCA with Application to Multivariate Extremes](deep_reads/2026-10-17-10.1137_24m1678635.md)  
+  5/10 [journals]
 
 #### Statistical Methods in Medical Research Vol 35 Issue 7
 
@@ -11255,6 +11272,34 @@
   4/10 [journals]
 - [An Adaptively Inexact First-Order Method for Bilevel Optimization with Application to Hyperparameter Learning](deep_reads/2026-10-17-10.1137_24m1653513.md)  
   4/10 [journals]
+
+#### SIAM Journal on Mathematics of Data Science Vol 7 Issue 2
+
+- [Finding Planted Cliques Using Gradient Descent](deep_reads/2026-10-17-10.1137_24m1680489.md)  
+  7/10 [journals]
+- [Stochastic Gradient Descent for Streaming Linear and Rectified Linear Systems with Adversarial Corruptions](deep_reads/2026-10-17-10.1137_24m1652167.md)  
+  6/10 [journals]
+- [Randomized Nyström Approximation of Non-negative Self-Adjoint Operators](deep_reads/2026-10-17-10.1137_24m165082x.md)  
+  5/10 [journals]
+- [Nonlinear Tomographic Reconstruction via Nonsmooth Optimization](deep_reads/2026-10-17-10.1137_24m1678982.md)  
+  5/10 [journals]
+- [Landmark Alternating Diffusion](deep_reads/2026-10-17-10.1137_24m1656682.md)  
+  4/10 [journals]
+
+#### SIAM Journal on Mathematics of Data Science Vol 7 Issue 1
+
+- [Random Fourier Signature Features](deep_reads/2026-10-17-10.1137_23m1620478.md)  
+  7/10 [journals]
+- [Kernel-Based Regularized Learning with Random Projections: Beyond Least Squares](deep_reads/2026-10-17-10.1137_23m1602954.md)  
+  7/10 [journals]
+- [Nonparametric Finite Mixture Models with Possible Shape Constraints: A Cubic Newton Approach](deep_reads/2026-10-17-10.1137_21m1430972.md)  
+  7/10 [journals]
+- [Adaptive Joint Distribution Learning](deep_reads/2026-10-17-10.1137_24m1629900.md)  
+  7/10 [journals]
+- [Multifidelity Covariance Estimation via Regression on the Manifold of Symmetric Positive Definite Matrices](deep_reads/2026-10-17-10.1137_23m159247x.md)  
+  6/10 [journals]
+- [Randomized Low-Rank Approximations beyond Gaussian Random Matrices](deep_reads/2026-10-17-10.1137_23m1593255.md)  
+  6/10 [journals]
 
 #### Statistics in Medicine Vol 45 Issue 23-24
 
@@ -16489,6 +16534,36 @@
 - [Online Machine Teaching under Learner Uncertainty: Gradient Descent Learners of a Quadratic Loss](deep_reads/2026-10-17-10.1137_24m1657997.md)  
   4/10 [journals]
 - [Multilevel Diffusion: Infinite Dimensional Score-Based Diffusion Models for Image Generation](deep_reads/2026-10-17-10.1137_23m1614092.md)  
+  3/10 [journals]
+
+#### SIAM Journal on Mathematics of Data Science Vol 7 Issue 2
+
+- [Convergence of Gradient Descent for Recurrent Neural Networks: A Nonasymptotic Analysis](deep_reads/2026-10-17-10.1137_24m1642500.md)  
+  4/10 [journals]
+- [Generalization Bounds for Message Passing Networks on Mixture of Graphons](deep_reads/2026-10-17-10.1137_24m1651526.md)  
+  4/10 [journals]
+- [G-Mapper: Learning a Cover in the Mapper Construction](deep_reads/2026-10-17-10.1137_24m1641312.md)  
+  4/10 [journals]
+- [\({O({k})}\)-Equivariant Dimensionality Reduction on Stiefel Manifolds](deep_reads/2026-10-17-10.1137_23m1603443.md)  
+  4/10 [journals]
+- [Invariant Kernels on Riemannian Symmetric Spaces: A Harmonic-Analytic Approach](deep_reads/2026-10-17-10.1137_23m1613566.md)  
+  3/10 [journals]
+- [A Priori Estimates for Deep Residual Network in Continuous-Time Reinforcement Learning](deep_reads/2026-10-17-10.1137_24m1640811.md)  
+  3/10 [journals]
+
+#### SIAM Journal on Mathematics of Data Science Vol 7 Issue 1
+
+- [Estimating Gaussian Mixtures Using Sparse Polynomial Moment Systems](deep_reads/2026-10-17-10.1137_23m1610082.md)  
+  6/10 [journals]
+- [KL Convergence Guarantees for Score Diffusion Models under Minimal Data Assumptions](deep_reads/2026-10-17-10.1137_23m1613670.md)  
+  6/10 [journals]
+- [First-Order Conditions for Optimization in the Wasserstein Space](deep_reads/2026-10-17-10.1137_23m156687x.md)  
+  5/10 [journals]
+- [Function-Space Optimality of Neural Architectures with Multivariate Nonlinearities](deep_reads/2026-10-17-10.1137_23m1620971.md)  
+  4/10 [journals]
+- [Principles for Initialization and Architecture Selection in Graph Neural Networks with ReLU Activations](deep_reads/2026-10-17-10.1137_23m1600621.md)  
+  4/10 [journals]
+- [Inverse Evolution Layers: Physics-Informed Regularizers for Image Segmentation](deep_reads/2026-10-17-10.1137_24m1633662.md)  
   3/10 [journals]
 
 #### Statistics in Medicine Vol 45 Issue 23-24
