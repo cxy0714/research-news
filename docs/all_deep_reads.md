@@ -6170,6 +6170,20 @@
 - [Manifold Diffusion Geometry: Curvature, Tangent Spaces, and Dimension](deep_reads/2026-10-17-10.1137_24m1719219.md)  
   6/10 [journals]
 
+#### SIAM Journal on Mathematics of Data Science Vol 7 Issue 4
+
+- [On the Rates of Convergence for Learning with Convolutional Neural Networks](deep_reads/2026-10-17-10.1137_24m1652945.md)  
+  5/10 [journals]
+- [Nonlinear Meta-learning Can Guarantee Faster Rates](deep_reads/2026-10-17-10.1137_24m1662977.md)  
+  5/10 [journals]
+
+#### SIAM Journal on Mathematics of Data Science Vol 7 Issue 3
+
+- [Log-Concave Density Estimation with Independent Components](deep_reads/2026-10-17-10.1137_24m1646947.md)  
+  8/10 [journals]
+- [Efficient Estimation of the Central Mean Subspace via Smoothed Gradient Outer Products](deep_reads/2026-10-17-10.1137_23m1626700.md)  
+  7/10 [journals]
+
 #### Statistical Methods in Medical Research Vol 35 Issue 7
 
 - [Maximum likelihood estimation in proportional odds regression model based on interval-censored event-time data](deep_reads/2026-10-16-10.1177_09622802261461775.md)  
@@ -9020,6 +9034,11 @@
 
 ### 期刊
 
+#### SIAM Journal on Mathematics of Data Science Vol 7 Issue 3
+
+- [Covariance Alignment: From Maximum Likelihood Estimation to Gromov–Wasserstein](deep_reads/2026-10-17-10.1137_24m1682841.md)  
+  7/10 [journals]
+
 #### Statistics in Medicine Vol 45 Issue 23-24
 
 - [Valid Data‐Driven Subgroup Selection With Uniform Guarantees in Clinical Trials](deep_reads/2026-10-16-10.1002_sim.70745.md)  
@@ -11210,6 +11229,32 @@
 
 - [A Randomized Algorithm to Solve Reduced Rank Operator Regression](deep_reads/2026-10-17-10.1137_24m1632097.md)  
   6/10 [journals]
+
+#### SIAM Journal on Mathematics of Data Science Vol 7 Issue 4
+
+- [Representation Theorems for Matrix Product States](deep_reads/2026-10-17-10.1137_24m172010x.md)  
+  6/10 [journals]
+- [Stochastic Optimal Transport in Banach Spaces for Regularized Estimation of Multivariate Quantiles](deep_reads/2026-10-17-10.1137_23m1550852.md)  
+  6/10 [journals]
+- [Deep Block Proximal Linearized Minimization Algorithm for Nonconvex Inverse Problems](deep_reads/2026-10-17-10.1137_24m1682464.md)  
+  4/10 [journals]
+- [Generative Modeling of Lévy Area for High Order SDE Simulation](deep_reads/2026-10-17-10.1137_23m161077x.md)  
+  4/10 [journals]
+
+#### SIAM Journal on Mathematics of Data Science Vol 7 Issue 3
+
+- [On the Quality of Randomized Approximations of Tukey’s Depth](deep_reads/2026-10-17-10.1137_24m1654919.md)  
+  6/10 [journals]
+- [Resolving the Mixing Time of the Langevin Algorithm to Its Stationary Distribution for Log-Concave Sampling](deep_reads/2026-10-17-10.1137_24m1638689.md)  
+  6/10 [journals]
+- [Simple Alternating Minimization Provably Solves Complete Dictionary Learning](deep_reads/2026-10-17-10.1137_23m1568120.md)  
+  6/10 [journals]
+- [ReLU Neural Networks with Linear Layers Are Biased towards Single- and Multi-index Models](deep_reads/2026-10-17-10.1137_24m1672158.md)  
+  5/10 [journals]
+- [Bayesian Deep Learning with Multilevel Trace-Class Neural Networks](deep_reads/2026-10-17-10.1137_23m1544738.md)  
+  4/10 [journals]
+- [An Adaptively Inexact First-Order Method for Bilevel Optimization with Application to Hyperparameter Learning](deep_reads/2026-10-17-10.1137_24m1653513.md)  
+  4/10 [journals]
 
 #### Statistics in Medicine Vol 45 Issue 23-24
 
@@ -16410,6 +16455,40 @@
 - [Learning Memory Kernels in Generalized Langevin Equations](deep_reads/2026-10-17-10.1137_24m1651101.md)  
   5/10 [journals]
 - [Robust Reinforcement Learning with Dynamic Distortion Risk Measures](deep_reads/2026-10-17-10.1137_24m1699802.md)  
+  3/10 [journals]
+
+#### SIAM Journal on Mathematics of Data Science Vol 7 Issue 4
+
+- [HADES: Fast Singularity Detection with Local Measure Comparison](deep_reads/2026-10-17-10.1137_24m1665763.md)  
+  5/10 [journals]
+- [Tight PAC-Bayesian Risk Certificates for Contrastive Learning](deep_reads/2026-10-17-10.1137_24m1715283.md)  
+  4/10 [journals]
+- [Phase Retrieval with Semialgebraic and ReLU Neural Network Priors](deep_reads/2026-10-17-10.1137_23m161731x.md)  
+  4/10 [journals]
+- [Supermodular Rank: Set Function Decomposition and Optimization](deep_reads/2026-10-17-10.1137_24m1643475.md)  
+  3/10 [journals]
+- [On Neural Network Approximation of Ideal Adversarial Attack and Convergence of Adversarial Training](deep_reads/2026-10-17-10.1137_23m1590512.md)  
+  3/10 [journals]
+
+#### SIAM Journal on Mathematics of Data Science Vol 7 Issue 3
+
+- [Plug-in Estimation of Schrödinger Bridges](deep_reads/2026-10-17-10.1137_24m1687340.md)  
+  6/10 [journals]
+- [Adaptive Smooth Nonstationary Bandits](deep_reads/2026-10-17-10.1137_24m167651x.md)  
+  6/10 [journals]
+- [Stability of Sequential Lateration and of Stress Minimization in the Presence of Noise](deep_reads/2026-10-17-10.1137_24m1661790.md)  
+  5/10 [journals]
+- [Select without Fear: Almost All Minibatch Schedules Generalize Optimally](deep_reads/2026-10-17-10.1137_23m1617096.md)  
+  5/10 [journals]
+- [Theoretical Foundations of Ordinal Multidimensional Scaling, Including Internal Unfolding and External Unfolding](deep_reads/2026-10-17-10.1137_24m1691624.md)  
+  4/10 [journals]
+- [Monotone Generative Modeling via a Gromov–Monge Embedding](deep_reads/2026-10-17-10.1137_24m1673772.md)  
+  4/10 [journals]
+- [Diffeomorphic Measure Matching with Kernels for Generative Modeling](deep_reads/2026-10-17-10.1137_24m1642202.md)  
+  4/10 [journals]
+- [Online Machine Teaching under Learner Uncertainty: Gradient Descent Learners of a Quadratic Loss](deep_reads/2026-10-17-10.1137_24m1657997.md)  
+  4/10 [journals]
+- [Multilevel Diffusion: Infinite Dimensional Score-Based Diffusion Models for Image Generation](deep_reads/2026-10-17-10.1137_23m1614092.md)  
   3/10 [journals]
 
 #### Statistics in Medicine Vol 45 Issue 23-24

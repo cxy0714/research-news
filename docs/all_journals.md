@@ -685,6 +685,8 @@
 - [Vol 8 Issue 3 · 2026-10-17](journals/2026-10-17-simods-v8-i3.md)
 - [Vol 8 Issue 2 · 2026-10-17](journals/2026-10-17-simods-v8-i2.md)
 - [Vol 8 Issue 1 · 2026-10-17](journals/2026-10-17-simods-v8-i1.md)
+- [Vol 7 Issue 4 · 2026-10-17](journals/2026-10-17-simods-v7-i4.md)
+- [Vol 7 Issue 3 · 2026-10-17](journals/2026-10-17-simods-v7-i3.md)
 
 ## 其他 / Unmatched
 
