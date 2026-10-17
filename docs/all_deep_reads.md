@@ -6170,6 +6170,16 @@
 
 ### 期刊
 
+#### SIAM/ASA Journal on Uncertainty Quantification Vol 14 Issue 3
+
+- [Nonparametric Estimation in SDE Models Involving an Explanatory Process](deep_reads/2026-10-17-10.1137_25m1780778.md)  
+  6/10 [journals]
+
+#### SIAM/ASA Journal on Uncertainty Quantification Vol 14 Issue 2
+
+- [A Kernel-Based Approach for Gaussian Process Modeling with Functional Information](deep_reads/2026-10-17-10.1137_25m176430x.md)  
+  6/10 [journals]
+
 #### SIAM Journal on Mathematics of Data Science Vol 8 Issue 3
 
 - [Functional Adaptive Huber Linear Regression](deep_reads/2026-10-17-10.1137_24m171125x.md)  
@@ -11219,6 +11229,66 @@
   6/10 [daily]
 
 ### 期刊
+
+#### SIAM/ASA Journal on Uncertainty Quantification Vol 14 Issue 4
+
+- [Optimal Low-Rank Posterior Covariance Approximation in Linear Gaussian Inverse Problems on Hilbert Spaces](deep_reads/2026-10-17-10.1137_25m1784491.md)  
+  7/10 [journals]
+- [Subspace Accelerated Measure Transport Methods for Fast and Scalable Sequential Experimental Design, with Application to Photoacoustic Imaging](deep_reads/2026-10-17-10.1137_25m1735329.md)  
+  6/10 [journals]
+- [Quasi-Monte Carlo Methods for Uncertainty Quantification of Tumor Growth Modeled by a Parametric Semilinear Parabolic Reaction-diffusion Equation](deep_reads/2026-10-17-10.1137_25m1805102.md)  
+  5/10 [journals]
+
+#### SIAM/ASA Journal on Uncertainty Quantification Vol 14 Issue 3
+
+- [Optimally Balancing Exploration and Exploitation to Automate Multifidelity Statistical Estimation](deep_reads/2026-10-17-10.1137_25m1761744.md)  
+  6/10 [journals]
+- [Expected Information Gain Estimation via Density Approximations: Sample Allocation and Dimension Reduction](deep_reads/2026-10-17-10.1137_25m1740164.md)  
+  6/10 [journals]
+- [An Interpretation of the Brownian Bridge as a Physics-Informed Prior for the Poisson Equation](deep_reads/2026-10-17-10.1137_25m1756831.md)  
+  6/10 [journals]
+- [Fast Data Inversion for High-Dimensional Ornstein–Uhlenbeck Processes from Noisy Measurements](deep_reads/2026-10-17-10.1137_25m1770205.md)  
+  5/10 [journals]
+- [Scalability of the Second-Order Reliability Method for Stochastic Differential Equations with Multiplicative Noise](deep_reads/2026-10-17-10.1137_25m1743867.md)  
+  5/10 [journals]
+- [Efficient Sampling for Sparse Bayesian Learning Using Hierarchical Prior Normalization](deep_reads/2026-10-17-10.1137_25m1790427.md)  
+  5/10 [journals]
+- [Bifidelity Parameter Estimation Using Conditional Diffusion Models](deep_reads/2026-10-17-10.1137_25m1734567.md)  
+  5/10 [journals]
+- [Unbiased Approximations for Stationary Distributions of McKean-Vlasov SDEs](deep_reads/2026-10-17-10.1137_25m172392x.md)  
+  4/10 [journals]
+
+#### SIAM/ASA Journal on Uncertainty Quantification Vol 14 Issue 2
+
+- [Hierarchical Gaussian Random Field Sampling for Multilevel Markov Chain Monte Carlo: Coupling Stochastic Partial Differential Equation and the Karhunen–Loève Decomposition](deep_reads/2026-10-17-10.1137_25m179590x.md)  
+  6/10 [journals]
+- [High-Dimensional Stochastic Finite Volumes Using the Tensor Train Format](deep_reads/2026-10-17-10.1137_25m1732039.md)  
+  6/10 [journals]
+- [Tensor-Variate Gaussian Process Regression for Efficient Emulation of Complex Systems: Comparing Regressor and Covariance Structures in Outer Product and Parallel Partial Emulators](deep_reads/2026-10-17-10.1137_24m1716835.md)  
+  6/10 [journals]
+- [FLARE MCMC: Fidelity-Based Layer-Adaptive Recursive Proposals for MCMC](deep_reads/2026-10-17-10.1137_25m1795194.md)  
+  5/10 [journals]
+- [Dirichlet–Neumann Averaging: The DNA of Efficient Gaussian Process Simulation](deep_reads/2026-10-17-10.1137_24m1715854.md)  
+  5/10 [journals]
+- [The Bayesian Finite Element Method in Inverse Problems: A Critical Comparison between Probabilistic Models for Discretization Error](deep_reads/2026-10-17-10.1137_25m1765481.md)  
+  5/10 [journals]
+
+#### SIAM/ASA Journal on Uncertainty Quantification Vol 14 Issue 1
+
+- [<tt>PCE-Net</tt> : High-Dimensional Surrogate Modeling for Learning Uncertainty](deep_reads/2026-10-17-10.1137_24m1723838.md)  
+  5/10 [journals]
+- [Iterative Methods for Full-Scale Gaussian Process Approximations for Large Spatial Data](deep_reads/2026-10-17-10.1137_25m1731320.md)  
+  5/10 [journals]
+- [Random Fourier Features Based Gaussian Process Models for Stochastic Simulations](deep_reads/2026-10-17-10.1137_24m1684220.md)  
+  5/10 [journals]
+- [Goal-Oriented Bayesian Optimal Experimental Design for Nonlinear Models Using Markov Chain Monte Carlo](deep_reads/2026-10-17-10.1137_24m1649344.md)  
+  5/10 [journals]
+- [Active Learning via Heteroskedastic Rational Kriging](deep_reads/2026-10-17-10.1137_24m1721591.md)  
+  5/10 [journals]
+- [Batch Bayesian Optimization via Particle Gradient Flows](deep_reads/2026-10-17-10.1137_23m1549080.md)  
+  4/10 [journals]
+- [Neural Network Approaches for Variance Reduction in Fluctuation Formulas](deep_reads/2026-10-17-10.1137_24m1710693.md)  
+  4/10 [journals]
 
 #### SIAM Journal on Mathematics of Data Science Vol 8 Issue 3
 
@@ -16459,6 +16529,36 @@
   8/10 [daily]
 
 ### 期刊
+
+#### SIAM/ASA Journal on Uncertainty Quantification Vol 14 Issue 4
+
+- [The BdryMatérn GP: A New Gaussian Process Model for Incorporating Boundary Information](deep_reads/2026-10-17-10.1137_25m1790270.md)  
+  5/10 [journals]
+
+#### SIAM/ASA Journal on Uncertainty Quantification Vol 14 Issue 3
+
+- [The Inverse Problem for Single Trajectories of Rough Differential Equations](deep_reads/2026-10-17-10.1137_25m177148x.md)  
+  5/10 [journals]
+- [The Evolution of Pointwise Statistics in Hyperbolic Equations with Random Data](deep_reads/2026-10-17-10.1137_25m1777955.md)  
+  5/10 [journals]
+- [Error Analysis of Generalized Langevin Equations with Approximated Memory Kernels](deep_reads/2026-10-17-10.1137_26m1837290.md)  
+  4/10 [journals]
+- [Empirical Risk Minimization for Risk-Neutral Composite Optimal Control with Applications to Bang-Bang Control](deep_reads/2026-10-17-10.1137_24m1690382.md)  
+  4/10 [journals]
+
+#### SIAM/ASA Journal on Uncertainty Quantification Vol 14 Issue 2
+
+- [A Control-Oriented Approach to Optimal Sensor Placement](deep_reads/2026-10-17-10.1137_25m1733537.md)  
+  6/10 [journals]
+- [Local Sensitivity Analysis for Bayesian Inverse Problems](deep_reads/2026-10-17-10.1137_25m1745350.md)  
+  6/10 [journals]
+- [Bayesian Inference for Non-synchronously Observed Diffusions](deep_reads/2026-10-17-10.1137_25m175319x.md)  
+  4/10 [journals]
+
+#### SIAM/ASA Journal on Uncertainty Quantification Vol 14 Issue 1
+
+- [Local Transfer Learning Gaussian Process Modeling, with Applications to Surrogate Modeling of Expensive Computer Simulators](deep_reads/2026-10-17-10.1137_24m1703057.md)  
+  4/10 [journals]
 
 #### SIAM Journal on Mathematics of Data Science Vol 8 Issue 4
 

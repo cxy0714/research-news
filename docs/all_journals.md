@@ -679,6 +679,13 @@
 
 ## SIAM 数据科学 / 不确定性量化 (SIAM)
 
+### JUQ
+
+- [Vol 14 Issue 4 · 2026-10-17](journals/2026-10-17-juq-v14-i4.md)
+- [Vol 14 Issue 3 · 2026-10-17](journals/2026-10-17-juq-v14-i3.md)
+- [Vol 14 Issue 2 · 2026-10-17](journals/2026-10-17-juq-v14-i2.md)
+- [Vol 14 Issue 1 · 2026-10-17](journals/2026-10-17-juq-v14-i1.md)
+
 ### SIMODS
 
 - [Vol 8 Issue 4 · 2026-10-17](journals/2026-10-17-simods-v8-i4.md)
