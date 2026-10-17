@@ -24,7 +24,7 @@
 
 **讲者**：史作强（清华大学 · 数学中心） · 14:00-14:30
 
-**对应论文**：Weighted Laplacian Flow: A Deterministic Particle Flow with Exponential Convergence · [arXiv:2608.21831](https://arxiv.org/abs/2608.21831)
+**对应论文**：Weighted Laplacian Flow: A Deterministic Particle Flow with Exponential Convergence · [arXiv:2608.21831](https://arxiv.org/abs/2608.21831) · 📖 [长篇精读](../../deep_reads/xagi2026-2608.21831.md)
 
 <details><summary>摘要（会议官网）</summary>
 

@@ -56,7 +56,7 @@
   "matched_at": "2026-10-17T14:07:21"
  },
  "short_read": "**问题**  \n从仅知未归一化密度的目标分布中采样，是统计与机器学习的基础任务。现有路线中，Langevin 动力学依赖局部 score 力，在多模态或重尾目标上易受能量势垒阻碍；SVGD 等确定性粒子法又高度依赖核函数的选择。报告提出 weighted Laplacian flow（WLF），旨在构造一种无需核、可证明收敛的确定性粒子流，以克服扩散型方法在长程质量输运上的低效。官网摘要强调，该方法在子线性强迫条件下还能实现有限时间精确收敛，这为采样理论提供了新的收敛保证。\n\n**核心方法**  \nWLF 不直接演化粒子密度，而是演化目标密度 $\\rho$ 与当前输运密度 $q_t$ 的对数比 $\\omega=\\log(\\rho/q_t)$。令粒子速度 $v=\\nabla\\phi$，通过目标加权 Poisson 方程  \n$$L_\\rho\\phi:=\\frac{1}{\\rho}\\nabla\\cdot(\\rho\\nabla\\phi)=-(\\omega-\\bar\\omega)$$  \n确定势函数 $\\phi$，其中 $\\bar\\omega$ 由 Neumann 相容性条件决定。沿特征线，$\\omega$ 满足中心化线性松弛 $\\frac{d}{dt}\\omega=-(\\omega-\\bar\\omega)$，从而将采样问题转化为椭圆-输运耦合系统（论文中的式 (7)）。该构造的关键是：$\\rho$ 乘任意正常数不改变 $\\omega-\\bar\\omega$ 与速度场，因此天然免归一化；速度场由非局部椭圆算子给出，无需核函数。\n\n**与已有工作的关系**  \n论文明确将 WLF 与两条经典路线对比：一是 overdamped Langevin 动力学，其 Wasserstein 梯度流结构对应局部 score 力 $v_{\\mathrm{Lan}}=\\nabla\\log(p/q)$；二是 SVGD，其均值场极限依赖核积分算子 $T_{k,q_t}$。WLF 则是在目标锚定度量下反向 KL 散度 $\\mathrm{KL}(p\\|q)$ 的梯度流，用目标加权 Poisson 逆算子替代核平滑，从而将输运几何从 Wasserstein 改为由固定目标 $p$ 决定的椭圆度量。这一构造与 He 等人关于正则化 Stein 流的联系不同，WLF 不引入正则化参数。\n\n**贡献与边界**  \n主要贡献包括：在 Lipschitz 初值下建立全局适定性（Schauder 不动点 + 对数椭圆估计）；证明对数密度比振荡精确按 $e^{-t}$ 收缩，进而得到 $L^\\infty$ 收敛与 KL 散度指数衰减；给出精确熵耗散恒等式，耗散率恰为 Jeffreys 散度；并揭示其变分几何结构。边界方面：理论限于有界光滑域与齐次 Neumann 边界，要求 $\\rho$ 严格正光滑；官网摘要仅报告十维数值实验，论文摘要称“高维”但未给出具体规模与运行时间；有限时间精确收敛依赖子线性强迫条件，一般情形仅为指数收敛。官网摘要未给出与其他方法的数值对比。",
- "long_read": null,
+ "long_read": "deep_reads/xagi2026-2608.21831.md",
  "model": "deepseek-reasoner",
  "generated_at": "2026-10-17T17:40:57"
 }
