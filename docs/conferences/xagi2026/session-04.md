@@ -78,7 +78,7 @@
 
 **讲者**：陈焕然（清华大学/字节跳动 · 人工智能学院） · 15:20-16:00
 
-**对应论文**：Nexus : Same Pretraining Loss , Better Downstream Generalization via Common Minima · [arXiv:2604.09258](https://arxiv.org/abs/2604.09258)
+**对应论文**：Nexus : Same Pretraining Loss , Better Downstream Generalization via Common Minima · [arXiv:2604.09258](https://arxiv.org/abs/2604.09258) · 📖 [长篇精读](../../deep_reads/xagi2026-2604.09258.md)
 
 <details><summary>摘要（会议官网）</summary>
 
