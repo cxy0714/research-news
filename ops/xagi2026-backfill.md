@@ -80,7 +80,7 @@ XAGI 2026 交叉智能大会（2026.10.16-18，北京友谊宾馆）的**逐场�
 - [x] (2026-10-17) `sess12-t3` ConvergeFlow: Language Flow with Provable Convergence to Token Embeddings — 李根（香港中文大学）
 
 ### Session 13 · AI的数理和计算基础 · 2026-10-18 14:00-16:00 · 4会（友谊宫二层4号会议室）
-- [ ] `sess13-t1` Spiked Matrix Models with Rotationally Invariant Noise: AMP Algorithms and Optimality — 马俊杰（中国科学院数学与系统科学研究院）
+- [x] (2026-10-17) `sess13-t1` Spiked Matrix Models with Rotationally Invariant Noise: AMP Algorithms and Optimality — 马俊杰（中国科学院数学与系统科学研究院）
 - [ ] `sess13-t2` An Improved SE(3)-Transformer Driven by Hamiltonian Flow — 许洪腾（中国人民大学）
 - [ ] `sess13-t3` 高效大模型 — 周峰（中国人民大学）
 
