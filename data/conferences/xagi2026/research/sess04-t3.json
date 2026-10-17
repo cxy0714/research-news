@@ -1,0 +1,60 @@
+{
+ "cell": "sess04-t3",
+ "session": {
+  "no": 4,
+  "title": "预训练算法的新进展",
+  "date": "2026-10-17",
+  "weekday": "周六",
+  "period": "下午",
+  "time": "14:00-16:00",
+  "room": "5会（友谊宫二层5号会议室）",
+  "chairs": [
+   {
+    "name": "谢天",
+    "org": "Qwen",
+    "bio": "谢天，本科毕业于中国科学技术大学，现就职于 Qwen。专注于预训练模型架构及其训练优化算法研究，希望通过算法侧改进提升智能上限。 个人主页"
+   }
+  ]
+ },
+ "talk": {
+  "no": 3,
+  "title": "Pretraining Loss相同，模型能力则相同么？",
+  "speaker": "陈焕然",
+  "org": "清华大学",
+  "affiliation": "清华大学/字节跳动 · 人工智能学院",
+  "time": "15:20-16:00",
+  "abstract": "大语言模型的能力主要源于互联网级别数据上的预训练。在本工作中，我们提出了一个非常有趣的问题：“相同的预训练损失，一定意味着相同的模型能力吗？” 我们猜想，特定任务极小值点之间的几何“接近性”（Closeness）与下游泛化能力有着内在的必然联系。然而，标准的优化器（如 AdamW）往往会收敛到各任务特定极小值点彼此疏远的区域。为了打破这一局限，我们提出了 Nexus 优化器，通过在优化过程中最大化梯度相似度，显式促进这些极小值点的几何接近。在 130M 到 3B 参数规模的模型、多种数据配比和超参数下的广泛实验表明：尽管预训练损失完全相同，Nexus 却大幅度提升了下游任务的性能。 例如，Nexus 将分布外（OOD）损失降低了 0.012，并在复杂推理任务（如 GSM8k）上实现了高达 15.0% 的准确率提升。这一发现挑战了“将预训练损失作为评估模型能力唯一指标”的传统范式，有力证明了隐式偏置（Implicit Biases）在解锁下游泛化能力中的重要性。"
+ },
+ "paper": {
+  "found": true,
+  "title": "Nexus : Same Pretraining Loss , Better Downstream Generalization via Common Minima",
+  "authors": [
+   "Huanran Chen",
+   "Huaqing Zhang",
+   "Xiao Li",
+   "Yinpeng Dong",
+   "Ke Shen",
+   "Jun Zhu"
+  ],
+  "abstract": "Abstract : The foundational capabilities of large language… ▽ More The foundational capabilities of large language models are acquired during pretraining on internet-scale, highly heterogeneous data mixtures. In this work, we investigate an interesting geometric question regarding the converged state of pretraining : Does the model converge to a common minimizer across all data sources (e.g., \\cref{fig:cwa_illustration:close}), or merely a minimizer of the summed loss (e.g., \\cref{fig:cwa_illustration:distant})? We hypothesize that the geometric \" closeness \" of task-specific minima is intrinsically linked to downstream generalization . We reveal that standard optimizers (e.g., AdamW) often converge to points where task-specific minima are distant from each other. To address this, we propose the Nexus optimizer , which encourages the closeness of these minima by maximizing gradient similarity during optimization . Experiments across models ranging from 130M to 3B parameters, various data mixtures and hyperparameter schedules, show that Nexus \\textit{significantly boosts downstream performance}, despite \\textit{achieving the same pretraining loss } (see \\cref{fig:demo:benchmark}). Notably, on the 3B model , Nexus reduces the out-of-distribution loss by 0.012 and yields up to a 15.0\\% accuracy improvement on complex reasoning tasks (e.g., GSM8k). This finding challenges the reliance on pretraining loss as the sole proxy for model evaluation and demonstrates the importance of implicit biases in unlocking downstream generalization . △ Less",
+  "arxiv_id": "2604.09258",
+  "doi": null,
+  "url": "https://arxiv.org/abs/2604.09258",
+  "source": "arxiv",
+  "score": 0.821,
+  "title_sim": 0.23,
+  "keyword_cov": 0.5,
+  "query": "Nexus optimizer pretraining loss model capability closeness generalization",
+  "title_en": "Does Equal Pretraining Loss Imply Equal Model Capability?",
+  "hint_authors": [
+   "Huanran Chen"
+  ],
+  "has_paper_hint": true,
+  "note": "摘要明确描述了一项具体研究，提出Nexus优化器并给出实验数据，讲者为博士生，一作很可能为本人。",
+  "matched_at": "2026-10-17T14:33:17"
+ },
+ "short_read": "*（对应论文为自动检索推断，可能有偏差）*\n\n**问题**：大语言模型的能力主要来自互联网规模数据上的预训练，但评估模型时普遍以预训练损失作为唯一指标。报告提出一个反直觉的问题：预训练损失完全相同，模型能力是否必然相同？动机在于，预训练数据由大量异构来源组成，标准做法是平均各数据源的损失，但收敛到的极小值点可能只是“平均型极小值”，与各任务自身极小值在几何上相距甚远，从而损害下游泛化。这个问题在当前从“算力受限”转向“数据受限”的预训练阶段尤为值得研究，因为若损失相同而能力不同，则单纯追求损失下降可能误导模型筛选与训练策略。\n\n**核心方法**：作者提出“Closeness”概念，即训练收敛参数与各数据源任务极小值之间的几何接近程度，并证明在二次损失假设下，相同训练损失时，Closeness越高的极小值点在下游任务上的期望损失越低（定理2.1）。直接优化Closeness需要知道每个任务的极小值，计算不可行；他们转而证明梯度相似度 $\\mathrm{CosSim}(\\nabla L_i,\\nabla L_j)$ 是Closeness的上界，因此提出Nexus优化器：在每次外层更新前，用归一化SGD（NSGD）在内部对多个数据源依次做小步更新，用内外参数位移近似梯度-海森向量积，从而隐式最大化梯度相似度。该伪梯度可接入AdamW、Muon等任意基础优化器，且几乎不增加前向-反向计算量。\n\n**与已有工作的关系**：工作直接挑战了“预训练损失是能力唯一代理”的常规范式，与近期关注优化隐式偏置（如平坦度）的路线互补。作者明确区分了已有工作充分研究的“平坦度”（flatness）与本文提出的“接近性”（closeness），认为二者共同构成二阶泛化信息。基线采用Wen et al. (2025) 的最优超参数设置，并对比AdamW等标准优化器；Nexus作为即插即用的梯度近似器，可与Muon等新优化器结合，而非替代它们。\n\n**贡献与边界**：主要贡献是理论上给出Closeness与泛化误差的定量关系，并设计出可扩展至3B参数规模、多种数据配比和超参数计划的Nexus优化器。实验显示，在预训练损失几乎相同的情况下，Nexus将OOD损失降低0.012，GSM8k准确率提升最高15%，MATH500提升8%，HumanEval提升4%。边界也很明显：理论分析依赖二次损失和任务同分布假设，实际预训练任务远非二次；实验最大规模为3B参数，更大模型上的有效性未知；且论文使用内部清洗数据集，公开数据集上的结果可能受污染影响，官网摘要未给出跨数据集一致性的详细分析。",
+ "long_read": null,
+ "model": "deepseek-reasoner",
+ "generated_at": "2026-10-17T16:53:57"
+}
