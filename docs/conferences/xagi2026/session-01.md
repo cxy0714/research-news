@@ -2,7 +2,7 @@
 
 > XAGI 2026 交叉智能大会 · 10 月 17 日（周六）上午 08:45-12:00 · 聚英厅（友谊宫二层） · [返回会议总览](index.md)
 
-- 4 场报告 · 已精读 3 场
+- 4 场报告 · 已精读 4 场
 
 **主持**：王健桥（清华大学）
 
@@ -103,7 +103,7 @@
 
 **讲者**：邱子涵（阿里巴巴 · Qwen 预训练） · 11:10-12:00
 
-**对应论文**：A Unified View of Attention and Residual Sinks: Outlier-Driven Rescaling is Essential for Transformer Training · [arXiv:2601.22966](https://arxiv.org/abs/2601.22966)
+**对应论文**：A Unified View of Attention and Residual Sinks: Outlier-Driven Rescaling is Essential for Transformer Training · [arXiv:2601.22966](https://arxiv.org/abs/2601.22966) · 📖 [长篇精读](../../deep_reads/xagi2026-2601.22966.md)
 
 <details><summary>摘要（会议官网）</summary>
 
@@ -111,7 +111,17 @@
 
 </details>
 
-*（待精读 — 本场在精读队列中）*
+**问题**  
+大模型高维激活中的离群值——Attention Sinks（少数词元获得异常高的注意力得分）与 Residual Sinks（少数固定维度持续保持大激活）——长期被视为量化障碍或异常现象，但直接裁剪或移除它们会严重损害性能。报告提出一个统一的功能性视角：这些离群值并非病理产物，而是与归一化层（Softmax、RMSNorm）协同、对非离群分量实施有效缩放的关键机制，即“离群值驱动的缩放”（outlier-driven rescaling）。该问题之所以现在值得做，是因为随着模型规模扩大，离群值对训练稳定性与量化鲁棒性的影响愈发显著，而既有工作多停留在现象描述或工程规避，缺乏对其功能角色的系统性解释。
+
+**核心方法**  
+论文通过干预实验验证假设：移除归一化层会使对应离群值消失，但训练稳定性下降；保留归一化层而直接裁剪离群值同样导致性能退化，表明离群值主要充当缩放因子而非语义载体——其最终贡献远小于非离群分量。基于此，作者提出两类缓解手段：将离群值吸收进可学习参数（如 PreAffine，在 RMSNorm 前引入可训练逐元素缩放向量 $\lambda_1$），或引入显式门控缩放（GatedNorm，在归一化后加低秩自门控 $y_g=\sigma(W_{up}(\text{swish}(W_{down}(y))))$，$r\ll d$）。在 2B 模型、120B tokens 的设置下，GatedNorm 仅增加约 3.7M 参数（约 2%），延迟开销约 5%；平均提升训练性能 2 点，并在 W4A4 量化下将退化控制在 1.2 点以内。
+
+**与已有工作的关系**  
+该工作直接回应了 Attention Sinks（Xiao et al., 2023b）与 massive activations（Sun et al., 2024）等既有观察，并将二者统一到同一缩放机制下。它区别于仅将离群值视为 Softmax 或 RMSNorm 副产品的解释，也不同于通过架构替换（如 DyT 点式归一化）来消除离群值的路线——论文实验显示 DyT 虽降低离群值幅度，却带来显著性能损失（+0.259）。同时，它借鉴了 Gated Attention（Bondarenko et al., 2023）中显式门控的思想，将其推广到残差流归一化，并证明在引入门控后，SwiGLU 与基于 sigmoid 的 GLU 性能差距缩小甚至反转，说明离群值缩放机制是架构选择敏感性的重要来源。
+
+**贡献与边界**  
+主要贡献是提出并验证了离群值驱动的缩放作为 Transformer 训练稳定性的必要机制，为 Attention Sinks 与 Residual Sinks 提供了统一的功能性解释，并给出两种可落地的缓解方案（PreAffine、GatedNorm），同时改善训练性能与量化鲁棒性。边界方面：核心结论基于 2B 模型与 120B tokens 的稠密设置，虽在 24.6B MoE 上有初步验证，但更大规模、更长训练下的外推性仍需更多证据；论文假设离群值主要起缩放作用而非语义载体，这一判断在特定任务或下游微调中是否始终成立，官网摘要未给出充分讨论；此外，GatedNorm 的延迟开销在 MoE 中虽会下降，但稠密小模型上约 5% 的额外成本是否值得，取决于具体部署约束。
 
 <details><summary>讲者简介</summary>
 
