@@ -1,0 +1,66 @@
+{
+ "cell": "sess04-t2",
+ "session": {
+  "no": 4,
+  "title": "预训练算法的新进展",
+  "date": "2026-10-17",
+  "weekday": "周六",
+  "period": "下午",
+  "time": "14:00-16:00",
+  "room": "5会（友谊宫二层5号会议室）",
+  "chairs": [
+   {
+    "name": "谢天",
+    "org": "Qwen",
+    "bio": "谢天，本科毕业于中国科学技术大学，现就职于 Qwen。专注于预训练模型架构及其训练优化算法研究，希望通过算法侧改进提升智能上限。 个人主页"
+   }
+  ]
+ },
+ "talk": {
+  "no": 2,
+  "title": "Controlled LLM Training on Spectral Sphere",
+  "speaker": "胡译文",
+  "org": "中国人民大学",
+  "affiliation": "中国人民大学 · 高瓴人工智能学院",
+  "time": "14:40-15:20",
+  "abstract": "Scaling large models requires optimization strategies that ensure rapid convergence grounded in stability. Maximal Update Parametrization (μP) provides a theoretical safeguard for width-invariant Θ(1) activation control, whereas emerging optimizers like Muon are only half-aligned with these constraints: they control updates but allow weights to drift. To address this limitation, we introduce the Spectral Sphere Optimizer (SSO), which enforces strict module-wise spectral constraints on both weights and their updates. By deriving the steepest descent direction on the spectral sphere, SSO realizes a fully μP-aligned optimization process. To enable large-scale training, we implement SSO as an efficient parallel algorithm within Megatron. Through extensive pretraining on diverse architectures, including Dense 1.7B, MoE 8B-A1B, and 200-layer DeepNet models, SSO consistently outperforms AdamW and Muon. Furthermore, we observe significant practical stability benefits, including improved MoE router load balancing, suppressed outliers, and strictly bounded activations."
+ },
+ "paper": {
+  "found": true,
+  "title": "Controlled LLM Training on Spectral Sphere",
+  "authors": [
+   "Tian Xie",
+   "Haoming Luo",
+   "Haoyu Tang",
+   "Yiwen Hu",
+   "Jason Klein Liu",
+   "Qingnan Ren",
+   "Yang Wang",
+   "Wayne Xin Zhao",
+   "Rui Yan",
+   "Bing Su",
+   "Chong Luo",
+   "Baining Guo"
+  ],
+  "abstract": "Scaling large models requires optimization strategies that ensure rapid convergence grounded in stability. Maximal Update Parametrization ($\\boldsymbolμ$P) provides a theoretical safeguard for width-invariant $Θ(1)$ activation control, whereas emerging optimizers like Muon are only ``half-aligned'' with these constraints: they control updates but allow weights to drift. To address this limitation, we introduce the \\textbf{Spectral Sphere Optimizer (SSO)}, which enforces strict module-wise spectral constraints on both weights and their updates. By deriving the steepest descent direction on the spectral sphere, SSO realizes a fully $\\boldsymbolμ$P-aligned optimization process. To enable large-scale training, we implement SSO as an efficient parallel algorithm within Megatron. Through extensive pretraining on diverse architectures, including Dense 1.7B, MoE 8B-A1B, and 200-layer DeepNet models, SSO consistently outperforms AdamW and Muon. Furthermore, we observe significant practical stability benefits, including improved MoE router load balancing, suppressed outliers, and strictly bounded activations.",
+  "arxiv_id": "2601.08393",
+  "doi": "10.48550/arxiv.2601.08393",
+  "url": "https://arxiv.org/abs/2601.08393",
+  "source": "openalex",
+  "score": 1.2,
+  "title_sim": 1.0,
+  "keyword_cov": 0.3,
+  "query": "Spectral Sphere Optimizer SSO muP Maximal Update Parametrization LLM pretraining",
+  "title_en": "Controlled LLM Training on Spectral Sphere",
+  "hint_authors": [
+   "Yiwen Hu"
+  ],
+  "has_paper_hint": true,
+  "note": "报告摘要明确提出了新方法SSO，并给出实验细节，是具体论文报告。",
+  "matched_at": "2026-10-17T14:02:43"
+ },
+ "short_read": "**问题**：（对应论文为自动检索推断，可能有偏差）大模型预训练需要稳定前提下的快速收敛。μP 理论上保证激活尺度 $\\Theta(1)$，但 Muon 只约束更新、不约束权重，导致权重漂移与激活异常；现有做法靠 SandwichNorm、QK-Norm 等架构补丁强行稳定，牺牲表达力且调参成本高。报告要解决的问题是：能否构造一个同时满足最速下降与严格 μP 约束的优化器，从优化器层面根治不稳定？\n\n**核心方法**：提出 Spectral Sphere Optimizer (SSO)。对权重 $W\\in\\mathbb{R}^{d_{\\text{out}}\\times d_{\\text{in}}}$，令谱半径 $R=\\Theta(\\sqrt{d_{\\text{out}}/d_{\\text{in}}})$，更新 $\\Delta W=\\eta R\\Phi$，其中 $\\Phi$ 在谱球切平面内最大化 $\\langle G,\\Phi\\rangle$ 且满足 $\\langle\\Theta,\\Phi\\rangle=0$（$\\Theta=u_1v_1^\\top$）。通过 Lagrange 乘子 $\\lambda$ 搜索，$\\Phi^*(\\lambda)=\\operatorname{msign}(G+\\lambda\\Theta)$，用 bracketing+bisection 求 $h(\\lambda)=\\langle\\Theta,\\operatorname{msign}(G+\\lambda\\Theta)\\rangle$ 的根，并加 retraction 投影回谱球。在 Megatron 中实现原子模块分片、ping-pong 负载均衡、自适应 kernel 与多流并行。实验覆盖 Dense 1.7B、MoE 8B-A1B、200 层 DeepNet，均优于 AdamW 和 Muon，且改善 MoE 路由均衡、抑制 outlier、激活严格有界。\n\n**与已有工作的关系**：SSO 直接推进 μP（Yang et al., 2024）的谱条件，补上 Muon（Jordan et al., 2024）缺失的权重约束。与 Scion（Pethick et al., 2025）及 MuonSphere（$\\lambda=0$ 变体）相比，SSO 通过 $\\lambda$ 搜索实现真正的切空间最速下降，而非简单归一化。实验还显示 SSO 在 μP 宽度扩展下学习率迁移更稳，且可去掉隐藏层权重衰减，减少一个超参数。\n\n**贡献与边界**：主要贡献是给出一个完全 μP 对齐的优化器，兼具理论推导、分布式实现和跨架构验证。边界：论文为自动检索匹配，细节可能有偏差；SSO 每步比 Muon 慢 11.45%（表 2），CPU 端二分求解器带来同步开销；谱半径常数 $c$ 需人工调节（$c=2.0$ 最佳）；方法只作用于 2D 权重，embedding 仍用权重衰减。官网摘要未给出完整实验设置，泛化性仍需更多任务验证。",
+ "long_read": "deep_reads/xagi2026-2601.08393.md",
+ "model": "deepseek-reasoner",
+ "generated_at": "2026-10-17T14:52:08"
+}

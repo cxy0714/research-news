@@ -26,6 +26,7 @@ so it never overlaps the daily run or a journal unit.
 from __future__ import annotations
 
 import argparse
+import html
 import json
 import logging
 import os
@@ -33,6 +34,7 @@ import re
 import shlex  # noqa: F401  (used by tests / future queue args)
 import subprocess
 import sys
+import time
 from datetime import date, datetime
 from pathlib import Path
 
@@ -70,10 +72,12 @@ DEFAULT_FAST_MODEL = os.environ.get("XAGI_FAST_MODEL", os.environ.get("DAILY_MOD
 MATCH_THRESHOLD = float(os.environ.get("XAGI_MATCH_THRESHOLD", "0.58"))
 MAX_PDF_CHARS = 240_000
 MAX_CONTEXT_CHARS = 30_000     # PDF text fed to the short read
-SHORT_READ_MAX_TOKENS = 2_000
+SHORT_READ_MAX_TOKENS = 8_000
 LONG_READ_MAX_TOKENS = 24_000
 
 _QUEUE_ITEM_RE = re.compile(r"^(\s*-\s*)\[ \](\s*)`([^`]+)`(.*)$")
+
+_last_openalex_at = 0.0
 
 _STOP = {
     "a", "an", "the", "of", "for", "and", "or", "to", "in", "on", "with",
@@ -177,6 +181,14 @@ def _search_openalex(query: str, per_page: int = 8) -> list[dict]:
 
     if not (query or "").strip():
         return []
+    # OpenAlex 429s a burst of title searches; space them out (override with
+    # XAGI_SEARCH_DELAY=0 on a fast / whitelisted connection).
+    delay = float(os.environ.get("XAGI_SEARCH_DELAY", "1.2"))
+    global _last_openalex_at
+    wait = delay - (time.monotonic() - _last_openalex_at)
+    if wait > 0:
+        time.sleep(wait)
+    _last_openalex_at = time.monotonic()
     out = []
     for w in openalex.search_works_by_title(query, per_page=per_page):
         out.append({
@@ -191,11 +203,24 @@ def _search_openalex(query: str, per_page: int = 8) -> list[dict]:
     return out
 
 
+def _clean_title(t: str) -> str:
+    """Tidy an arXiv-search title ('Nexus : Same Loss , Better' → normal)."""
+    t = re.sub(r"\s+", " ", (t or "")).strip()
+    t = re.sub(r"\s+([,;:.!?)\]])", r"\1", t)
+    t = re.sub(r"([(\[])\s+", r"\1", t)
+    return t
+
+
 def _search_arxiv_html(query: str, max_results: int = 8) -> list[dict]:
     """Scrape arXiv's own search page (the export API is often rate-limited)."""
     import httpx
 
     if not (query or "").strip():
+        return []
+    # arXiv's search treats '*', '$', '?' etc. as syntax and returns nothing for
+    # a title containing them ("Offline Deep Q* Estimation …" → 0 hits).
+    query = " ".join(re.sub(r"[^\w\s-]", " ", query).split())
+    if not query:
         return []
     ua = "Mozilla/5.0 (research-news)"
     try:
@@ -216,7 +241,8 @@ def _search_arxiv_html(query: str, max_results: int = 8) -> list[dict]:
     out: list[dict] = []
     for li in soup.select("li.arxiv-result")[:max_results]:
         title = li.select_one("p.title")
-        title = re.sub(r"^Title:\s*", "", title.get_text(" ", strip=True)) if title else ""
+        title = _clean_title(re.sub(r"^Title:\s*", "", title.get_text(" ", strip=True))
+                              if title else "")
         if not title:
             continue
         abs_el = li.select_one("p.abstract")
@@ -269,26 +295,61 @@ def keyword_coverage(query: str, text: str) -> float:
     return len(q & t) / len(q)
 
 
-def _last_names(names: list[str]) -> set[str]:
-    out: set[str] = set()
-    for n in names:
-        parts = re.sub(r"[^\w\s]", " ", n or "").split()
-        if parts:
-            out.add(parts[-1].lower())
-    return out
+def _mostly_ascii(s: str) -> bool:
+    letters = [c for c in (s or "") if c.isalpha()]
+    if not letters:
+        return False
+    return sum(1 for c in letters if ord(c) < 128) / len(letters) >= 0.5
+
+
+_openalex_ok: bool | None = None
+
+
+def _openalex_available() -> bool:
+    """One cheap probe: is OpenAlex answering (i.e. has today's IP budget left)?"""
+    global _openalex_ok
+    if _openalex_ok is not None:
+        return _openalex_ok
+    import httpx
+
+    try:
+        r = httpx.get("https://api.openalex.org/works",
+                      params={"search": "test", "per-page": 1},
+                      headers={"User-Agent": "research-news/1.0 (mailto:noreply@example.com)"},
+                      timeout=12)
+        _openalex_ok = r.status_code == 200
+        if not _openalex_ok:
+            log.info("OpenAlex probe: HTTP %s — skipping OpenAlex this run", r.status_code)
+    except Exception as e:  # noqa: BLE001
+        _openalex_ok = False
+        log.info("OpenAlex probe failed (%s) — skipping OpenAlex this run", e)
+    return _openalex_ok
+
+
+def _name_tokens(name: str) -> set[str]:
+    """Name → token set, order/comma insensitive ('Qiu, Zihan' = 'Zihan Qiu')."""
+    return {w for w in re.sub(r"[^\w\s]", " ", (name or "").lower()).split() if w}
 
 
 def _author_match(talk: dict, hint_authors: list[str], cand_authors: list[str]) -> float:
-    """1.0 when the speaker (Chinese or English) is one of the paper's authors.
+    """1.0 when the speaker is one of the paper's authors.
 
-    Chinese names don't tokenize into surname/given-name, so the LLM's English
-    spelling of the speaker (`hint_authors`) is what actually matches arXiv /
-    OpenAlex author lists.
+    Full-name matching (token-set containment), not surname-only: 'Huaqing
+    Zhang' must NOT match 'Hanshan Zhang'. Chinese speaker names don't tokenize
+    into given/family name, so the LLM's English spelling (`hint_authors`) is
+    what actually matches arXiv / OpenAlex author lists; a bare Chinese name on
+    its own is never matched by surname.
     """
     if not cand_authors:
         return 0.0
-    speakers = _last_names([talk.get("speaker") or ""] + list(hint_authors or []))
-    return 1.0 if speakers & _last_names(cand_authors) else 0.0
+    wants = [_name_tokens(n) for n in (hint_authors or [])]
+    wants = [w for w in wants if len(w) >= 2]
+    for want in wants:
+        for a in cand_authors:
+            have = _name_tokens(a)
+            if have and (want <= have or have <= want):
+                return 1.0
+    return 0.0
 
 
 def score_candidate(talk: dict, cand: dict, *, alt_title: str | None = None,
@@ -310,10 +371,17 @@ def score_candidate(talk: dict, cand: dict, *, alt_title: str | None = None,
     # Keywords must appear in the **title** (not the abstract): abstracts share
     # too much boilerplate for "large language models" to mean anything.
     kcov = keyword_coverage(query, cand.get("title") or "")
+    acov = keyword_coverage(query, cand.get("abstract") or "")
 
     title_score = tsim + 0.18 * aov + arxiv_bonus
     kw_score = (0.6 + 0.4 * kcov + arxiv_bonus) if (aov >= 1.0 and kcov >= 0.6) else 0.0
-    return max(title_score, kw_score), tsim, kcov
+    # Author-led: the speaker is demonstrably an author AND the candidate came
+    # from the talk-derived query, with *some* title or abstract overlap. This
+    # is how a talk retitled for the audience ("Pretraining Loss 相同…" vs
+    # "Nexus: Same Pretraining Loss…") still finds its paper.
+    author_score = (0.6 + 0.2 * tsim + 0.2 * acov) \
+        if (aov >= 1.0 and (tsim >= 0.2 or acov >= 0.5)) else 0.0
+    return max(title_score, kw_score, author_score), tsim, kcov
 
 
 def _accept(talk: dict, cands: list[dict], alt_title: str | None, *, query: str = "",
@@ -330,7 +398,8 @@ def _accept(talk: dict, cands: list[dict], alt_title: str | None, *, query: str 
 
 
 def match_talk(client, session: dict, talk: dict, *, use_llm: bool = True,
-               force: bool = False, model: str | None = None) -> dict:
+               force: bool = False, model: str | None = None,
+               retry: bool = False) -> dict:
     """Find the paper behind one talk. Returns the match record (never raises).
 
     Deterministic search (OpenAlex title search + arXiv search page) scored by
@@ -340,7 +409,7 @@ def match_talk(client, session: dict, talk: dict, *, use_llm: bool = True,
     found=False rather than guessing.
     """
     cur = talk.get("paper") or {}
-    if cur.get("found") is not None and not force:
+    if cur.get("found") is not None and not (force or retry):
         return cur
     if talk.get("skip") and not force:
         return {"found": False, "manual": True, "note": talk["skip"].get("reason"),
@@ -352,30 +421,46 @@ def match_talk(client, session: dict, talk: dict, *, use_llm: bool = True,
     has_paper = hint.get("has_paper", True)
     title_en = (hint.get("title_en") or "").strip()
     query = (hint.get("query") or title_en or talk.get("title") or "").strip()
+    # Named systems / models from the abstract ("Gengram", "LLaDA 2.x", "CogEvol")
+    # are the strongest search keys — they usually appear verbatim in the title.
+    names = [str(n).strip() for n in (hint.get("names") or []) if str(n).strip()][:3]
+    score_query = " ".join([query] + names).strip()
 
-    queries: list[str] = []
-    for q in (title_en, query, talk.get("title")):
-        if q and q not in queries:
-            queries.append(q)
+    queries: list[str] = list(dict.fromkeys(
+        q for q in (title_en, score_query, talk.get("title")) if q))
+    arxiv_queries = [q for q in queries if _mostly_ascii(q)]
+    for n in names:
+        if _mostly_ascii(n) and n.lower() not in {q.lower() for q in arxiv_queries}:
+            arxiv_queries.append(n)
+    arxiv_queries = arxiv_queries[:3]
 
     cands: list[dict] = []
     seen_titles: set[str] = set()
-    for q in queries:
-        for c in _search_openalex(q, per_page=8):
+
+    def _add(items: list[dict]) -> None:
+        for c in items:
             key = (c.get("title") or "").lower()
             if key and key not in seen_titles:
                 seen_titles.add(key)
                 cands.append(c)
-    if not cands:
+
+    # arXiv's public search page first: no API key, no client-side daily budget,
+    # and most conference talks are about preprints. Only ASCII queries make
+    # sense there (a Chinese title matches nothing).
+    arxiv_delay = float(os.environ.get("XAGI_ARXIV_DELAY", "1.5"))
+    for i, q in enumerate(arxiv_queries):
+        if i:
+            time.sleep(arxiv_delay)
+        _add(_search_arxiv_html(q, max_results=6))
+    # OpenAlex adds published versions / abstracts on top, but its shared-IP
+    # daily budget is easy to exhaust (429) — probe once, then skip it for the
+    # rest of the run instead of stalling every query behind retry backoffs.
+    if _openalex_available():
         for q in queries:
-            for c in _search_arxiv_html(q, max_results=6):
-                key = (c.get("title") or "").lower()
-                if key and key not in seen_titles:
-                    seen_titles.add(key)
-                    cands.append(c)
+            _add(_search_openalex(q, per_page=8))
     cands = [c for c in cands if is_paperlike(c)]
 
-    best, score, sim, kcov = _accept(talk, cands, title_en or None, query=query,
+    best, score, sim, kcov = _accept(talk, cands, title_en or None, query=score_query,
                                      hint_authors=hint.get("authors") or [])
     found = best is not None
     if found and has_paper is False:
@@ -396,6 +481,7 @@ def match_talk(client, session: dict, talk: dict, *, use_llm: bool = True,
         "title_sim": round(sim, 3),
         "keyword_cov": round(kcov, 3),
         "query": query,
+        "names": names,
         "title_en": title_en or None,
         "hint_authors": hint.get("authors") or [],
         "has_paper_hint": has_paper,
@@ -408,7 +494,7 @@ def match_talk(client, session: dict, talk: dict, *, use_llm: bool = True,
 
 
 def match_all(*, use_llm: bool = True, force: bool = False, limit: int | None = None,
-              cells: list[str] | None = None) -> int:
+              cells: list[str] | None = None, retry_missing: bool = False) -> int:
     """Match every talk that has no match yet (or --force). Returns #matched."""
     data = load_sessions()
     client = _client() if use_llm else None
@@ -419,9 +505,12 @@ def match_all(*, use_llm: bool = True, force: bool = False, limit: int | None = 
             continue
         if limit is not None and n >= limit:
             break
-        if talk.get("paper") and not force:
-            continue
-        talk["paper"] = match_talk(client, session, talk, use_llm=use_llm, force=force)
+        paper = talk.get("paper") or {}
+        if paper and not force:
+            if not (retry_missing and paper.get("found") is False):
+                continue
+        talk["paper"] = match_talk(client, session, talk, use_llm=use_llm, force=force,
+                                   retry=retry_missing)
         n += 1
     save_sessions(data)
     log.info("matched %d talk(s)", n)
@@ -482,15 +571,27 @@ def _talk_context(session: dict, talk: dict, paper: dict | None) -> str:
         talk.get("bio") or "（无）",
     ]
     if paper and paper.get("found"):
+        certain = ((paper.get("score") or 0) >= 1.0
+                   or (paper.get("title_sim") or 0) >= 0.85)
+        header = ("## 检索到的对应论文（标题高度一致，可视为本场报告的论文）"
+                  if certain else
+                  "## 检索到的对应论文（自动匹配，可能有偏差）")
         lines += [
             "",
-            "## 检索到的对应论文（自动匹配，可能不完全对应）",
+            header,
             f"题目：{paper.get('title')}",
             f"作者：{', '.join((paper.get('authors') or [])[:8])}",
             f"arXiv：{paper.get('arxiv_id') or '—'} · DOI：{paper.get('doi') or '—'}",
             "",
             "## 论文摘要",
             paper.get("abstract") or "（无）",
+        ]
+    else:
+        lines += [
+            "",
+            "## 对应论文",
+            "未检索到公开论文（自动检索未命中）。请只依据报告摘要与讲者简介做方向层面的梳理，"
+            "并在精读开头注明「未检索到公开论文，以下为推断」。",
         ]
     return "\n".join(lines)
 
@@ -504,16 +605,22 @@ def short_read(client, session: dict, talk: dict, paper: dict | None, *,
     if paper_text:
         user += ("\n\n## 论文全文节选（用于核对方法 / 结果；可能有排版噪声）\n"
                  + paper_text[:MAX_CONTEXT_CHARS])
-    try:
-        out = client.chat(
-            [{"role": "system", "content": XAGI_READ_SYSTEM},
-             {"role": "user", "content": user}],
-            model=model or DEFAULT_READ_MODEL, max_tokens=SHORT_READ_MAX_TOKENS,
-        ).strip()
-    except Exception as e:  # noqa: BLE001
-        log.error("short read failed for %s: %s", talk.get("id"), e)
-        return ""
-    return out
+    for attempt in (1, 2):
+        try:
+            out = client.chat(
+                [{"role": "system", "content": XAGI_READ_SYSTEM},
+                 {"role": "user", "content": user}],
+                model=model or DEFAULT_READ_MODEL, max_tokens=SHORT_READ_MAX_TOKENS,
+            ).strip()
+        except Exception as e:  # noqa: BLE001
+            log.error("short read failed for %s (attempt %d): %s", talk.get("id"), attempt, e)
+            out = ""
+        if out:
+            return out
+        # A reasoning model can burn the whole budget on thinking and return an
+        # empty content — retry once before giving up.
+        log.warning("empty short read for %s (attempt %d)", talk.get("id"), attempt)
+    return ""
 
 
 def _references_block(arxiv_id: str) -> str:
@@ -525,7 +632,9 @@ def _references_block(arxiv_id: str) -> str:
         rows = refs.fetch_references(arxiv_id)
         if not rows:
             return ""
-        citations.record_citations(f"xagi2026:{arxiv_id}", arxiv_id, rows)
+        # Record under the plain arXiv id so the shared citation graph stays
+        # unified with the daily / journal reads of the same paper.
+        citations.record_citations(arxiv_id, arxiv_id, rows)
         return refs.format_references_block(rows)
     except Exception as e:  # noqa: BLE001
         log.info("references unavailable for %s: %s", arxiv_id, e)
@@ -619,8 +728,10 @@ def read_cell(cell: str, *, force: bool = False, model: str | None = None,
     short = short_read(client, session, talk, paper, paper_text=pdf_text, model=model)
     long_path = None
     if paper.get("found") and not no_long:
+        # Reuse an existing long read on a re-run; also covers a re-read whose
+        # short read needs regenerating.
         long_path = long_read(client, session, talk, paper, paper_text=pdf_text,
-                              interests=_interests(), model=model, force=force)
+                              interests=_interests(), model=model, force=False)
 
     rec = {
         "cell": cell,
@@ -850,7 +961,7 @@ def render_session_page(session: dict, blurb: str = "") -> Path:
         if talk.get("abstract"):
             lines += [
                 "<details><summary>摘要（会议官网）</summary>\n",
-                talk["abstract"],
+                f"<p>{html.escape(talk['abstract'])}</p>",
                 "",
                 "</details>\n",
             ]
@@ -861,7 +972,7 @@ def render_session_page(session: dict, blurb: str = "") -> Path:
         if talk.get("bio"):
             lines += [
                 "<details><summary>讲者简介</summary>\n",
-                talk["bio"],
+                f"<p>{html.escape(talk['bio'])}</p>",
                 "",
                 "</details>\n",
             ]
@@ -889,9 +1000,9 @@ def render_index(data: dict | None = None) -> Path:
         f"全会有 **{len(sessions)} 个场次、{len(talks)} 场报告**。本页是日程的**结构化存档与精读入口**："
         f"每个场次一页，逐场精读，按队列一格一格推进。\n",
         f"- 已精读 **{n_read}/{len(talks)}** 场；其中 **{n_found}** 场检索到对应论文，"
-        f"**{n_long}** 篇有长篇精读。\n",
-        "- **场次导航**：下表链接到每个场次的页面（含该场全部报告的精读）。\n",
-        "- **完整日程**：页面底部按日期列出全部报告，即使尚未精读也能看到「谁在讲、讲什么」。\n",
+        f"**{n_long}** 篇有长篇精读。",
+        "- **场次导航**：下表链接到每个场次的页面（含该场全部报告的精读）。",
+        "- **完整日程**：页面底部按日期列出全部报告，即使尚未精读也能看到「谁在讲、讲什么」。",
         "",
         "---\n",
         "## 场次导航\n",
@@ -1021,6 +1132,25 @@ def generate_blurbs(*, force: bool = False, model: str | None = None) -> int:
 
 # ── status ───────────────────────────────────────────────────────────────────
 
+def matches_table() -> str:
+    """A compact 'talk → matched paper' table for reviewing the matching step."""
+    data = load_sessions()
+    lines: list[str] = []
+    for _s, t in scrape.iter_talks(data):
+        p = t.get("paper") or {}
+        if p.get("found"):
+            flag = "✓"
+        elif p:
+            flag = "·"
+        else:
+            flag = "?"
+        paper = (p.get("title") or "") if p else ""
+        score = f" [{p.get('score')}]" if p.get("score") is not None else ""
+        lines.append(f"{flag} {t['id']:11s} {t.get('title') or '':42.42s} → "
+                     f"{paper:62.62s}{score}")
+    return "\n".join(lines)
+
+
 def status() -> str:
     data = load_sessions()
     sessions = data.get("sessions") or []
@@ -1037,6 +1167,13 @@ def status() -> str:
 # ── CLI ──────────────────────────────────────────────────────────────────────
 
 def main() -> None:
+    # Windows consoles default to GBK, which can't encode "✓" / full-width
+    # punctuation used in the status tables — force UTF-8 with replacement.
+    for stream in (sys.stdout, sys.stderr):
+        try:
+            stream.reconfigure(encoding="utf-8", errors="replace")
+        except Exception:  # noqa: BLE001
+            pass
     logging.basicConfig(level=logging.INFO,
                         format="%(asctime)s %(levelname)s %(name)s: %(message)s",
                         datefmt="%Y-%m-%d %H:%M:%S")
@@ -1051,6 +1188,8 @@ def main() -> None:
     p_mat = sub.add_parser("match", help="find each talk's paper (LLM + OpenAlex/arXiv)")
     p_mat.add_argument("--no-llm", action="store_true", help="skip the LLM query builder")
     p_mat.add_argument("--force", action="store_true", help="re-match even if a match exists")
+    p_mat.add_argument("--retry-missing", action="store_true",
+                       help="re-attempt talks whose earlier search found nothing")
     p_mat.add_argument("--limit", type=int, help="match at most N talks")
     p_mat.add_argument("--cell", action="append", default=[], help="only these cells")
 
@@ -1077,6 +1216,7 @@ def main() -> None:
     p_bl.add_argument("--model", default=None)
 
     sub.add_parser("queue", help="rewrite ops/xagi2026-backfill.md, keeping ticks")
+    sub.add_parser("matches", help="print the talk → matched-paper table")
     sub.add_parser("status", help="print progress")
 
     args = ap.parse_args()
@@ -1092,7 +1232,7 @@ def main() -> None:
               f"{sum(len(s['talks']) for s in data['sessions'])} talk(s)")
     elif args.cmd == "match":
         n = match_all(use_llm=not args.no_llm, force=args.force, limit=args.limit,
-                      cells=list(args.cell) or None)
+                      cells=list(args.cell) or None, retry_missing=args.retry_missing)
         print(f"matched {n} talk(s)")
     elif args.cmd == "skip":
         data = load_sessions()
@@ -1111,8 +1251,16 @@ def main() -> None:
     elif args.cmd == "read":
         rec = read_cell(args.cell, force=args.force, model=args.model,
                         no_long=args.no_long)
+        try:
+            render(nav=False)   # keep the session/index pages in sync
+        except Exception as e:  # noqa: BLE001
+            log.warning("render after read failed: %s", e)
         print(f"read {args.cell}: {len(rec.get('short_read') or '')} chars, "
               f"long={rec.get('long_read')}")
+        if not rec.get("short_read"):
+            # Non-zero so the queue driver leaves the cell unchecked and retries
+            # it on a later run (backfill skips the failure and moves on).
+            sys.exit(3)
     elif args.cmd == "backfill":
         done = backfill(max_units=args.max_units, dry_run=args.dry_run, force=args.force)
         if not args.dry_run and done == 0:
@@ -1125,6 +1273,8 @@ def main() -> None:
     elif args.cmd == "queue":
         render_queue()
         print("queue rewritten")
+    elif args.cmd == "matches":
+        print(matches_table())
     elif args.cmd == "status":
         print(status())
 

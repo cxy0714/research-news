@@ -976,6 +976,8 @@ research_news/
   daily.py            # arxiv + hexagon 每日管道入口
   journals.py         # 期刊管道入口（含 --rerun 整期重跑）
   talks.py            # 讲座精读管道：ingest（转写）+ read（LLM 精读）+ 独立页面 / 存档
+  xagi.py             # XAGI 2026 会议管道：import/match/read/backfill/render（队列 + 共享锁）
+  journal_backfill.py # 期刊回补队列驱动（一次一个单元）
   completeness.py     # 抓取完整性检查：权威 TOC ↔ 已抓 diff + 报缺 + 补抓
   deep_read.py        # PDF 精读：文本抽取 + LLM 精读 + 独立页面生成
   shootout.py         # prompt / 模型对照评估
@@ -993,6 +995,7 @@ research_news/
     conferences.py    # 会议 / seminar 页面（事件预告，默认禁用）
     transcribe.py     # 讲座转写工具：yt-dlp 下音频 + faster-whisper ASR + VTT/转写清洗（[asr] extra）
     ocis.py           # OCIS 历史讲座目录导入：抓 video/arxiv/slides 链接 + LLM 关联 → talks.ocis.yaml
+    xagi.py           # XAGI 2026 日程页解析（BeautifulSoup，确定性；无 LLM / 无需 API key）
   llm/
     prompts.py        # SCORE / RICH_SUMMARY / DEEP_READ / TOPICS 共享
     pipeline.py       # score_papers / summarize_paper
@@ -1004,6 +1007,7 @@ docs/
   journals/           # 期刊页，每期刊一页（自动生成）
   deep_reads/         # 精读页，每篇论文一页（自动生成）
   talks/              # 讲座精读页，每场（或每讲者）一页（自动生成）
+  conferences/        # 会议专题（JCSDS 2026、XAGI 2026 …），每场次一页 + 总览（自动生成）
   shootout/           # 模型对比页（手动/脚本生成）
   index.md            # 首页（自动生成）
   all_daily.md        # 每日存档（自动生成）
@@ -1018,6 +1022,7 @@ data/
   talks/              # 讲座转写稿 <id>.txt（纳入 git）；audio/ 子目录为音频（.gitignore）
   talks_index.json    # 讲座元数据索引
   ocis_catalog.json   # OCIS 导入的完整讲座目录（含 slides；import-ocis 生成）
+  conferences/xagi2026/  # XAGI 2026：sessions.json（日程 + 匹配）、research/<cell>.json（逐格精读）、pdfs/
   token_usage.json    # API token 用量记录
 logs/                 # 每日日志（.gitignore）
 ```
