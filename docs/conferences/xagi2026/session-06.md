@@ -24,7 +24,7 @@
 
 **讲者**：韩佳乐（深圳河套学院 · 社会科学智能中心） · 14:00-14:30
 
-**对应论文**：From Economic Agents to Agentic Economies: A Systems Blueprint for Economic World Models · [arXiv:2608.06020](https://arxiv.org/abs/2608.06020)
+**对应论文**：From Economic Agents to Agentic Economies: A Systems Blueprint for Economic World Models · [arXiv:2608.06020](https://arxiv.org/abs/2608.06020) · 📖 [长篇精读](../../deep_reads/xagi2026-2608.06020.md)
 
 <details><summary>摘要（会议官网）</summary>
 
