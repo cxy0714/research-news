@@ -67,7 +67,7 @@ XAGI 2026 交叉智能大会（2026.10.16-18，北京友谊宾馆）的**逐场�
 ### Session 10 · 机器学习理论 · 2026-10-18 10:00-12:00 · 3会（友谊宫二层3号会议室）
 - [x] (2026-10-17) `sess10-t1` 步长加速梯度下降的收敛下界 — 马鉴昊（清华大学）
 - [x] (2026-10-17) `sess10-t2` 在线学习与大模型高效推理 — 赵鹏（南京大学）
-- [ ] `sess10-t3` Learning to Build Agents: Adaptive Planning, Memory, and Harness Evolution — 常恒（Unity China）
+- [x] (2026-10-17) `sess10-t3` Learning to Build Agents: Adaptive Planning, Memory, and Harness Evolution — 常恒（Unity China）
 
 ### Session 11 · Physics of Deep Learning · 2026-10-18 10:00-12:00 · 5会（友谊宫二层5号会议室）
 - [ ] `sess11-t1` 从AI的物理学到AI自进化 — 刘子鸣（清华大学）
