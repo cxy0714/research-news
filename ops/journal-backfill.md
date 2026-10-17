@@ -360,7 +360,7 @@ SIMODS v8-i4 仅 2 篇、JUQ v14-i4 仅 5 篇），所以首轮直接用大 N；
 - [x] (2026-10-17) `--only SIMODS --n-issues 6`   （再补更老一期）
 - [x] (2026-10-17) `--only SIMODS --n-issues 8`   （再补约 55 篇，共 ≈2 年）
 - [x] (2026-10-17) `--only JUQ --n-issues 4`   （≈48 篇 ≈1 年）
-- [ ] `--only JUQ --n-issues 6`   （再补更老一期）
+- [x] (2026-10-17) `--only JUQ --n-issues 6`   （再补更老一期）
 - [ ] `--only JUQ --n-issues 8`   （再补，共 ≈2 年）
 
 > 想再往前翻：把对应行的 N 继续加大重跑（例如 `--n-issues 16`），去重只会处理更老的新期。

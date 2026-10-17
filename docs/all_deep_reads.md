@@ -4524,6 +4524,11 @@
 
 ### 期刊
 
+#### SIAM/ASA Journal on Uncertainty Quantification Vol 13 Issue 3
+
+- [Precision and Cholesky Factor Estimation for Gaussian Processes](deep_reads/2026-10-17-10.1137_24m1717282.md)  
+  7/10 [journals]
+
 #### SIAM Journal on Mathematics of Data Science Vol 8 Issue 4
 
 - [Sparse Max-Affine Regression](deep_reads/2026-10-17-10.1137_24m1709303.md)  
@@ -6178,6 +6183,16 @@
 #### SIAM/ASA Journal on Uncertainty Quantification Vol 14 Issue 2
 
 - [A Kernel-Based Approach for Gaussian Process Modeling with Functional Information](deep_reads/2026-10-17-10.1137_25m176430x.md)  
+  6/10 [journals]
+
+#### SIAM/ASA Journal on Uncertainty Quantification Vol 13 Issue 4
+
+- [Convergence Rates for the Maximum A Posteriori Estimator in PDE-Regression Models with Random Design](deep_reads/2026-10-17-10.1137_25m1744526.md)  
+  7/10 [journals]
+
+#### SIAM/ASA Journal on Uncertainty Quantification Vol 13 Issue 3
+
+- [Regularization for the Approximation of Functions by Mollified Discretization Methods](deep_reads/2026-10-17-10.1137_24m1678210.md)  
   6/10 [journals]
 
 #### SIAM Journal on Mathematics of Data Science Vol 8 Issue 3
@@ -11289,6 +11304,36 @@
   4/10 [journals]
 - [Neural Network Approaches for Variance Reduction in Fluctuation Formulas](deep_reads/2026-10-17-10.1137_24m1710693.md)  
   4/10 [journals]
+
+#### SIAM/ASA Journal on Uncertainty Quantification Vol 13 Issue 4
+
+- [A Multifidelity Estimator of the Expected Information Gain for Bayesian Optimal Experimental Design](deep_reads/2026-10-17-10.1137_25m1731812.md)  
+  5/10 [journals]
+- [Gradient-Adjusted Underdamped Langevin Dynamics for Sampling](deep_reads/2026-10-17-10.1137_24m1702015.md)  
+  5/10 [journals]
+- [A Gradient-based and Determinant-free Framework for Fully Bayesian Gaussian Process Regression](deep_reads/2026-10-17-10.1137_25m1724833.md)  
+  5/10 [journals]
+
+#### SIAM/ASA Journal on Uncertainty Quantification Vol 13 Issue 3
+
+- [Statistical Finite Elements via Interacting Particle Langevin Dynamics](deep_reads/2026-10-17-10.1137_24m1693593.md)  
+  6/10 [journals]
+- [Sparse Inverse Cholesky Factorization of Dense Kernel Matrices by Greedy Conditional Selection](deep_reads/2026-10-17-10.1137_23m1606253.md)  
+  5/10 [journals]
+- [Low-dimensional Subspace Regularization through Structured Tensor Priors](deep_reads/2026-10-17-10.1137_24m1688497.md)  
+  5/10 [journals]
+- [Enhancing Gaussian Process Surrogates for Optimization and Posterior Approximation via Random Exploration](deep_reads/2026-10-17-10.1137_24m1677009.md)  
+  5/10 [journals]
+- [Scalable Bayesian Physics-Informed Kolmogorov-Arnold Networks](deep_reads/2026-10-17-10.1137_25m1729253.md)  
+  4/10 [journals]
+- [Sampling Parameters of Ordinary Differential Equations with Constrained Langevin Dynamics](deep_reads/2026-10-17-10.1137_24m1691569.md)  
+  4/10 [journals]
+- [Covariance-Free Bifidelity Control Variates Importance Sampling for Rare Event Reliability Analysis](deep_reads/2026-10-17-10.1137_24m1658498.md)  
+  4/10 [journals]
+- [Accelerate Langevin Sampling with Birth-Death Process and Exploration Component](deep_reads/2026-10-17-10.1137_23m1577584.md)  
+  4/10 [journals]
+- [Non-convergence to Global Minimizers for Adam and Stochastic Gradient Descent Optimization and Constructions of Local Minimizers in the Training of Artificial Neural Networks](deep_reads/2026-10-17-10.1137_24m1639464.md)  
+  3/10 [journals]
 
 #### SIAM Journal on Mathematics of Data Science Vol 8 Issue 3
 
@@ -16558,6 +16603,26 @@
 #### SIAM/ASA Journal on Uncertainty Quantification Vol 14 Issue 1
 
 - [Local Transfer Learning Gaussian Process Modeling, with Applications to Surrogate Modeling of Expensive Computer Simulators](deep_reads/2026-10-17-10.1137_24m1703057.md)  
+  4/10 [journals]
+
+#### SIAM/ASA Journal on Uncertainty Quantification Vol 13 Issue 4
+
+- [Stability for a Stochastic Inverse Source Problem in Eddy Current Equations](deep_reads/2026-10-17-10.1137_24m170003x.md)  
+  6/10 [journals]
+- [Frequency-Explicit Shape Holomorphy in Uncertainty Quantification for Acoustic Scattering](deep_reads/2026-10-17-10.1137_24m1688643.md)  
+  4/10 [journals]
+- [Grouped Orthogonal Arrays for Computer Experiments with Grouped Inputs](deep_reads/2026-10-17-10.1137_25m1741960.md)  
+  4/10 [journals]
+- [Mean Field Games for Controlling Coherent Structures in Nonlinear Fluid Systems](deep_reads/2026-10-17-10.1137_24m1632231.md)  
+  2/10 [journals]
+
+#### SIAM/ASA Journal on Uncertainty Quantification Vol 13 Issue 3
+
+- [Stochastic Convergence Analysis of the Inverse Potential Problem](deep_reads/2026-10-17-10.1137_24m1703422.md)  
+  7/10 [journals]
+- [Consistency of Bayesian Inference for a Subdiffusion Equation](deep_reads/2026-10-17-10.1137_24m1707419.md)  
+  6/10 [journals]
+- [Optimal Control under Uncertainty with Joint Chance State Constraints: Almost-Everywhere Bounds, Variance Reduction, and Application to (Bi)linear Elliptic PDEs](deep_reads/2026-10-17-10.1137_24m171557x.md)  
   4/10 [journals]
 
 #### SIAM Journal on Mathematics of Data Science Vol 8 Issue 4

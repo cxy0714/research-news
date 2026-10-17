@@ -685,6 +685,8 @@
 - [Vol 14 Issue 3 · 2026-10-17](journals/2026-10-17-juq-v14-i3.md)
 - [Vol 14 Issue 2 · 2026-10-17](journals/2026-10-17-juq-v14-i2.md)
 - [Vol 14 Issue 1 · 2026-10-17](journals/2026-10-17-juq-v14-i1.md)
+- [Vol 13 Issue 4 · 2026-10-17](journals/2026-10-17-juq-v13-i4.md)
+- [Vol 13 Issue 3 · 2026-10-17](journals/2026-10-17-juq-v13-i3.md)
 
 ### SIMODS
 
