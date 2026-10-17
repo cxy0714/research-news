@@ -22,7 +22,7 @@
 
 **讲者**：许慧楠（中国科学院大学 · 杭州高等研究院） · 10:00-10:30
 
-**对应论文**：Beyond Conditional Computation: Retrieval-Augmented Genomic Foundation Models with Gengram · [arXiv:2601.22203](https://arxiv.org/abs/2601.22203)
+**对应论文**：Beyond Conditional Computation: Retrieval-Augmented Genomic Foundation Models with Gengram · [arXiv:2601.22203](https://arxiv.org/abs/2601.22203) · 📖 [长篇精读](../../deep_reads/xagi2026-2601.22203.md)
 
 <details><summary>摘要（会议官网）</summary>
 
