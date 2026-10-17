@@ -2,7 +2,7 @@
 
 > XAGI 2026 交叉智能大会 · 10 月 17 日（周六）下午 14:00-16:00 · 8会（友谊宫二层8号会议室） · [返回会议总览](index.md)
 
-- 4 场报告 · 已精读 1 场
+- 4 场报告 · 已精读 2 场
 
 **主持**：陆一平（北京大学）、周默（北京大学）
 
@@ -65,7 +65,13 @@ $$L_\rho\phi:=\frac{1}{\rho}\nabla\cdot(\rho\nabla\phi)=-(\omega-\bar\omega)$$
 
 </details>
 
-*（待精读 — 本场在精读队列中）*
+**问题**：单细胞转录组测序只能得到少量时间快照，且细胞增殖与凋亡使总质量不守恒，因此需要在不平衡最优传输（UOT）框架下重建连续动态。Wasserstein-Fisher-Rao（WFR）度量同时刻画位移与质量生灭，为不平衡动态建模提供原理性几何，但现有 WFR 求解器不稳定、计算昂贵、难以扩展。经典 flow matching 只回归传输速度场，无法处理质量变化。报告提出 WFR-FM，目标是在 simulation-free 框架下同时学习位移场与生长率，并精确恢复 WFR 测地线。
+
+**核心方法**：WFR-FM 将 flow matching 推广到不平衡动态。核心构造是 traveling Gaussian 条件路径：利用 WFR 度量下两个 Dirac 测度间 traveling Dirac 测地线的解析形式（$m(t)=At^2-2Bt+m_0$，$u(t)m(t)=\omega_0$），定义条件向量场 $u_t(x|z)$ 与条件生长率 $g_t(x|z)$。训练时最小化条件不平衡 flow matching 损失 $L_{CUFM}=\mathbb{E}_{t,z,x\sim\tilde\rho_t(\cdot|z)}[(\|v_\theta-u_t\|^2+\kappa\|g_\phi-g_t\|^2)m_t(z)]$，并证明该损失与原始不平衡 flow matching 损失梯度一致，从而无需 ODE 模拟。对多时间点数据，先通过 mini-batch WFR-OET 求解半耦合，再共享网络参数训练。
+
+**与已有工作的关系**：在不平衡 flow matching 方向上，已有工作如 Eyring et al.、Corso et al. 只回归速度场而忽略生长率；VGFM（Wang et al.）虽联合学习传输与生长，但将生灭与传输分离，且后处理仍需 ODE 模拟，并非完全 simulation-free。Action Matching 与 WLF 虽免模拟，但前者需要连续密度曲线，后者引入内外层优化开销。WFR-FM 与 OT-CFM（Tong et al.）的平衡情形相容：当 $m_t\equiv1$、$g_t\equiv0$ 时退化为标准 flow matching。论文在 Gene、Dyngen、1000 维高斯混合及真实胚胎体数据上对比了 TIGON、DeepRUOT、Var-RUOT 等基线，称 WFR-FM 在 $W_1$ 与相对质量误差（RME）上均最优（具体数值在节选中未完整给出）。
+
+**贡献与边界**：主要贡献是给出一个理论上有保证、训练完全免模拟的不平衡动态 OT 求解器，同时恢复速度场与生长率，并支持多时间点轨迹推断。边界：方法依赖 WFR 度量与 traveling Dirac 测地线的解析形式，对非 Dirac 初值依赖高斯条件路径近似；mini-batch WFR-OET 是对全局耦合的近似，可能引入偏差；超参数 $\delta,\sigma,\kappa$ 需调节。报告题目中的 "one-step inference" 在摘要与节选中未展开，官网摘要未给出具体机制。整体上，该工作适合关注单细胞轨迹推断与生成模型理论交叉的研究者。
 
 <details><summary>讲者简介</summary>
 
