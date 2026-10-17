@@ -14,6 +14,7 @@ param(
     [datetime]$XagiTime = "11:30",
     [int]$JournalMax = 0,            # 0 = loop until the queue is empty
     [int]$XagiMax = 0,               # 0 = loop until the queue is empty
+    [string]$XagiLongModel = "",     # e.g. deepseek-chat for the long-read phase
     [string]$TaskName = "research-news-daily",
     [string]$CatchUpTaskName = "research-news-catchup",
     [string]$JournalTaskName = "research-news-journals",
@@ -95,9 +96,10 @@ if (-not $NoJournals) {
 }
 
 # XAGI 2026 conference deep reads — same loop pattern as the journals: one talk
-# ("一格") per lock hold from ops\xagi2026-backfill.md, yielding to daily, exit
-# when the queue is empty. Started at logon + restarted daily so it survives a
-# reboot; IgnoreNew keeps a single loop alive.
+# ("一格") per lock hold from ops\xagi2026-backfill.md, then one long paper read
+# per lock hold for any that timed out, yielding to daily; exits when both are
+# done. Started at logon + restarted daily so it survives a reboot; IgnoreNew
+# keeps a single loop alive.
 if (-not $NoXagi) {
     $xagiSettings = New-ScheduledTaskSettingsSet `
         -StartWhenAvailable -MultipleInstances IgnoreNew `
@@ -105,8 +107,12 @@ if (-not $NoXagi) {
         -DontStopIfGoingOnBatteries -AllowStartIfOnBatteries
     $xLogon = New-ScheduledTaskTrigger -AtLogOn
     $xDaily = New-ScheduledTaskTrigger -Daily -At $XagiTime
+    # The long-read phase can be pointed at a faster model (the reasoning model
+    # sometimes hits the request timeout on 160k-char full texts).
+    $xArgs = "-Max $XagiMax"
+    if ($XagiLongModel) { $xArgs += " -LongModel $XagiLongModel" }
     if (Register-RnTask $XagiTaskName "run_xagi_backfill.ps1" @($xLogon, $xDaily) `
-            "research-news XAGI 2026 conference deep-read loop" "-Max $XagiMax" $xagiSettings) {
+            "research-news XAGI 2026 conference deep-read loop" $xArgs $xagiSettings) {
         Write-Host "OK: '$XagiTaskName' - loop at logon (+ daily $($XagiTime.ToString('HH:mm')) restart)."
     }
 }

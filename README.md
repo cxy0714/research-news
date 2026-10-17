@@ -699,6 +699,10 @@ python -m research_news.xagi read --cell sess04-t2
 # ④ 队列驱动（和期刊回补同一个套路：一次一格，做完打勾）
 python -m research_news.xagi backfill --max 1
 python -m research_news.xagi status
+
+# ⑤ 补长篇精读（某篇长调用超时 / 后补；deepseek-chat 更快、更不容易超时）
+python -m research_news.xagi long --max 1
+python -m research_news.xagi long --max 0 --model deepseek-chat
 ```
 
 产物：
@@ -719,6 +723,9 @@ python -m research_news.xagi status
 `ops/xagi2026-backfill.md` 是本会议的逐格队列，`run_xagi_backfill.ps1` 是它的执行器：
 
 - **一次一格**：每次取第一个未打勾的格子 → `xagi backfill --max 1` → 成功才打勾。
+- **两阶段**：队列跑完后，`xagi long --max 1` 会把因请求超时没写成的**长篇论文精读**一篇一篇补上
+  （短精读当时已写好并打勾，不会重做）；两阶段共用同一把锁、同样是「一格一格」。`-LongModel`
+  可给第二阶段换更快模型（如 `deepseek-chat`，长调用更不容易超时）。
 - **共享锁**：与 daily、期刊回补共用同一把命名互斥量 `Global\research-news-daily`，
   同一时刻只有一个任务在跑；daily 时段（工作日 09:00-14:00 且当天日报未出）主动让路。
 - **可续跑**：结果按格子落盘，重跑会跳过已完成的格子；中断、重启、换机器都安全。
