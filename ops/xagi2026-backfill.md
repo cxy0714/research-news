@@ -77,7 +77,7 @@ XAGI 2026 交叉智能大会（2026.10.16-18，北京友谊宾馆）的**逐场�
 ### Session 12 · 扩散语言模型 · 2026-10-18 10:00-12:00 · 7会（友谊宫二层7号会议室）
 - [x] (2026-10-17) `sess12-t1` Parallel Generation, Iterative Refinement: The Evolution of LLaDA 2.x in Practice — 刘华斌（蚂蚁集团）
 - [x] (2026-10-17) `sess12-t2` 扩散式语言建模探索：从掩码扩散到连续扩散 — 胡天阳（香港中文大学（深圳））
-- [ ] `sess12-t3` ConvergeFlow: Language Flow with Provable Convergence to Token Embeddings — 李根（香港中文大学）
+- [x] (2026-10-17) `sess12-t3` ConvergeFlow: Language Flow with Provable Convergence to Token Embeddings — 李根（香港中文大学）
 
 ### Session 13 · AI的数理和计算基础 · 2026-10-18 14:00-16:00 · 4会（友谊宫二层4号会议室）
 - [ ] `sess13-t1` Spiked Matrix Models with Rotationally Invariant Noise: AMP Algorithms and Optimality — 马俊杰（中国科学院数学与系统科学研究院）

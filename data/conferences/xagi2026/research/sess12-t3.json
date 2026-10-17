@@ -1,0 +1,58 @@
+{
+ "cell": "sess12-t3",
+ "session": {
+  "no": 12,
+  "title": "扩散语言模型",
+  "date": "2026-10-18",
+  "weekday": "周日",
+  "period": "上午",
+  "time": "10:00-12:00",
+  "room": "7会（友谊宫二层7号会议室）",
+  "chairs": [
+   {
+    "name": "胡天阳",
+    "org": "香港中文大学（深圳）",
+    "bio": "胡天阳现为香港中文大学（深圳）数据科学学院的助理教授。他的主要研究方向为人工智能与统计的交叉领域，包括统计机器学习、可信 AI、特征表示学习、深度生成模型等，旨在通过揭示 AI 模型的深层机制，为设计更有效的新算法提供理论指导。"
+   }
+  ]
+ },
+ "talk": {
+  "no": 3,
+  "title": "ConvergeFlow: Language Flow with Provable Convergence to Token Embeddings",
+  "speaker": "李根",
+  "org": "香港中文大学",
+  "affiliation": "香港中文大学 · 统计与数据科学",
+  "time": "11:20-12:00",
+  "abstract": "Existing continuous frameworks still rely on decoders supervised with cross entropy (CE) because the flow trajectories are not guaranteed to terminate at valid token embeddings. Motivated by this limitation, we introduce ConvergeFlow, an embedding-space flow-based LM, which constrains the data predictor to the convex hull of token embeddings and trains it solely with the mean squared error objective induced by flow matching. Under suitable regularity conditions, we prove that the resulting flow converges to valid token embeddings despite errors in the data predictor, enabling direct token prediction without a CE-supervised decoder. We further develop three sampling mechanisms for controlling the trade-off between the generative perplexity and entropy. Experiments on OpenWebText demonstrate that ConvergeFlow achieves performance competitive with existing continuous and discrete diffusion LMs. These findings demonstrate the potential of the flow-based paradigm for language modeling."
+ },
+ "paper": {
+  "found": true,
+  "title": "ConvergeFlow : Language Flow with Provable Convergence to Token Embeddings",
+  "authors": [
+   "Na Li",
+   "Yuchen Jiao",
+   "Changxiao Cai",
+   "Gen Li"
+  ],
+  "abstract": "Abstract : Recent advances in continuous diffusion and flow -based… ▽ More Recent advances in continuous diffusion and flow -based language models (LMs) have achieved performance competitive with discrete LMs. However, existing continuous frameworks still rely on decoders supervised with cross entropy (CE) because the flow trajectories are not guaranteed to terminate at valid token embeddings . Motivated by this limitation, we introduce \\textbf{ ConvergeFlow }, an embedding -space flow -based LM, which constrains the data predictor to the convex hull of token embeddings and trains it solely with the mean squared error objective induced by flow matching. Under suitable regularity conditions, we prove that the resulting flow converges to valid token embeddings despite errors in the data predictor, enabling direct token prediction without a CE-supervised decoder. We further develop three sampling mechanisms for controlling the trade-off between the generative perplexity and entropy. Experiments on OpenWebText demonstrate that ConvergeFlow achieves performance competitive with existing continuous and discrete diffusion LMs. These findings demonstrate the potential of the flow -based paradigm for language modeling. Our code is available at https://github.com/Na-Li66/ ConvergeFlow . △ Less",
+  "arxiv_id": "2608.23551",
+  "doi": null,
+  "url": "https://arxiv.org/abs/2608.23551",
+  "source": "arxiv",
+  "score": 1.197,
+  "title_sim": 0.997,
+  "keyword_cov": 1.0,
+  "query": "ConvergeFlow language flow provable convergence token embeddings",
+  "title_en": "ConvergeFlow: Language Flow with Provable Convergence to Token Embeddings",
+  "hint_authors": [
+   "Gen Li"
+  ],
+  "has_paper_hint": true,
+  "note": "摘要明确介绍方法名 ConvergeFlow 及其理论贡献，讲者为助理教授，论文一作很可能为本人。",
+  "matched_at": "2026-10-17T14:20:55"
+ },
+ "short_read": "**问题**：现有连续扩散/流式语言模型（LM）虽在嵌入空间上定义生成过程，但采样轨迹并不保证终止于合法的 token embedding，因此仍需额外训练一个以交叉熵（CE）监督的解码器来把连续状态映射回离散 token。这使“纯连续”的流式范式并不完整。ConvergeFlow 要回答的问题是：能否让流式 LM 的轨迹直接收敛到合法 token embedding，从而去掉 CE 解码器？在连续流式 LM 已能与离散扩散 LM 性能竞争的背景下，这一理论保证的缺失成为当前值得补上的关键环节。\n\n**核心方法**：ConvergeFlow 在嵌入空间上做流匹配，将数据预测器参数化为 token embedding 凸包上的加权平均：$\\mu_\\theta^{(i)}(x_t,t)=\\sum_{j=1}^V w_\\theta^{(i)}(j|x_t,t)e_j$，其中权重由可学习基函数与加噪过程诱导的精确高斯核相乘并归一化得到。训练只使用流匹配导出的均方误差（MSE）目标，完全不引入 CE 损失。作者证明，在基函数恒正且 log-权重沿采样轨迹 Lipschitz 连续等正则条件下，流会收敛到合法 token embedding。此外还提出三种采样机制，用于显式控制生成困惑度（Gen. PPL）与熵之间的权衡。在 OpenWebText 上，ConvergeFlow 在数据集熵 5.44 处取得 Gen. PPL 33.17，模型规模 130M。\n\n**与已有工作的关系**：该工作直接针对连续流式 LM 的短板：LangFlow 和 FLM 在轨迹上施加 CE 目标，ELF 则在最终解码步使用 CE，三者都未摆脱离散监督。ConvergeFlow 沿用 LangFlow 的预训练 embedding 并固定不变，但把凸组合参数化仅作为架构约束，训练目标纯粹是 FM 的 MSE。与离散扩散 LM（如 MDLM、Duo、SEDD）相比，它保留了连续框架的全部工具（如 ODE 求解、自条件化），并在报告结果中达到与离散基线竞争的性能；在相同熵水平下，其 Gen. PPL 明显低于所列连续基线（约 60），也低于表中 AR Transformer 的 35.90。\n\n**贡献与边界**：主要贡献是给出了首个（据作者所述）可证明收敛到 token embedding 的流式 LM，从而在理论上允许去掉 CE 解码器，并提供质量—多样性的显式控制。边界也很清楚：理论结论依赖基函数正性和 Lipschitz 连续性等正则假设；embedding 矩阵来自预训练 LangFlow 且固定，未与流模型联合学习；实验仅在 OpenWebText 上报告，官网摘要未给出采样机制的具体实现、计算成本及更大规模验证。因此，其“可证明收敛”目前是在特定构造与假设下的保证，尚不能直接外推到任意嵌入空间或训练设置。",
+ "long_read": null,
+ "model": "deepseek-reasoner",
+ "generated_at": "2026-10-17T19:28:17"
+}
