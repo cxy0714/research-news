@@ -84,7 +84,7 @@ LLaDA 2.0 采用自回归模型到块扩散模型的渐进式转换，将扩散�
 
 **讲者**：李根（香港中文大学 · 统计与数据科学） · 11:20-12:00
 
-**对应论文**：ConvergeFlow : Language Flow with Provable Convergence to Token Embeddings · [arXiv:2608.23551](https://arxiv.org/abs/2608.23551)
+**对应论文**：ConvergeFlow : Language Flow with Provable Convergence to Token Embeddings · [arXiv:2608.23551](https://arxiv.org/abs/2608.23551) · 📖 [长篇精读](../../deep_reads/xagi2026-2608.23551.md)
 
 <details><summary>摘要（会议官网）</summary>
 
