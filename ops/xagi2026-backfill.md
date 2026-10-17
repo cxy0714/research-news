@@ -88,4 +88,4 @@ XAGI 2026 交叉智能大会（2026.10.16-18，北京友谊宾馆）的**逐场�
 - [x] (2026-10-17) `sess14-t1` 情境学习与协作发现：人工智能赋能教育教学新范式 — 王宏宁（清华大学）
 - [x] (2026-10-17) `sess14-t2` 自然语言驱动的数学研究智能体 - AIM系统的探索与实践 — 李鹏（清华大学）
 - [x] (2026-10-17) `sess14-t3` PilotDeck - 面向生产力的智能体操作系统尝试 — 闫宇坤（启元）
-- [ ] `sess14-t4` Benchmarking Language Models for Statistical Problem Formulation — 从鑫（清华大学）
+- [x] (2026-10-17) `sess14-t4` Benchmarking Language Models for Statistical Problem Formulation — 从鑫（清华大学）
