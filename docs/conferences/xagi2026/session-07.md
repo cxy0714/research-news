@@ -57,7 +57,7 @@ $$L_\rho\phi:=\frac{1}{\rho}\nabla\cdot(\rho\nabla\phi)=-(\omega-\bar\omega)$$
 
 **讲者**：周沛劼（北京大学 · 前沿交叉学科研究院） · 14:30-15:00
 
-**对应论文**：WFR-FM: Simulation-Free Dynamic Unbalanced Optimal Transport · [arXiv:2601.06810](https://arxiv.org/abs/2601.06810)
+**对应论文**：WFR-FM: Simulation-Free Dynamic Unbalanced Optimal Transport · [arXiv:2601.06810](https://arxiv.org/abs/2601.06810) · 📖 [长篇精读](../../deep_reads/xagi2026-2601.06810.md)
 
 <details><summary>摘要（会议官网）</summary>
 
