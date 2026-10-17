@@ -77,8 +77,10 @@ function Invoke-LockedUnit([scriptblock]$body) {
     }
     $code = 0
     try {
-        git pull --rebase --autostash
-        & $body
+        # Suppress git's stdout so the function's return value stays the exit
+        # code (PowerShell functions return everything written to the pipeline).
+        $null = git pull --rebase --autostash 2>&1
+        & $body | Out-Host
         $code = $LASTEXITCODE
     }
     finally {
@@ -86,14 +88,15 @@ function Invoke-LockedUnit([scriptblock]$body) {
         $mutex.Dispose()
     }
 
-    if (git status --porcelain) {
-        git add -A
-        git commit -m "xagi backfill $today" | Out-Null
+    $changes = git status --porcelain
+    if ($changes) {
+        $null = git add -A 2>&1
+        $null = git commit -m "xagi backfill $today" 2>&1
         for ($i = 1; $i -le 4; $i++) {
-            git push
+            $null = git push 2>&1
             if ($LASTEXITCODE -eq 0) { break }
             Start-Sleep -Seconds ([math]::Pow(2, $i))
-            git pull --rebase --autostash
+            $null = git pull --rebase --autostash 2>&1
         }
     }
     return $code
