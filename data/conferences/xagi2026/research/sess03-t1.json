@@ -1,0 +1,57 @@
+{
+ "cell": "sess03-t1",
+ "session": {
+  "no": 3,
+  "title": "LLM评测 & Benchmark",
+  "date": "2026-10-17",
+  "weekday": "周六",
+  "period": "下午",
+  "time": "14:00-16:00",
+  "room": "7会（友谊宫二层7号会议室）",
+  "chairs": [
+   {
+    "name": "张辉帅",
+    "org": "北京大学",
+    "bio": "张辉帅，北京大学王选计算机研究所助理教授，此前曾在微软亚洲研究院担任首席研究员。他的研究领域包括自然语言处理、大语言模型，及大模型优化训练算法。已在机器学习和人工智能的顶级会议与期刊上发表了50余篇论文。他与合作者的一系列创新性工作首次成功将隐私保护技术应用于大型语言模型的训练中，推动了相关技术在商业产品中的应用。"
+   }
+  ]
+ },
+ "talk": {
+  "no": 1,
+  "title": "大模型数据归因：从行为溯源到精准干预",
+  "speaker": "潘亮铭",
+  "org": "北京大学",
+  "affiliation": "北京大学 · 计算机学院",
+  "time": "14:00-14:30",
+  "abstract": "大模型的能力与行为从何而来？数据归因（Data Attribution）试图回答这一根本问题：将模型的行为与内部机制追溯到塑造它们的具体训练数据。本次报告将结合我们近期的两项工作，介绍数据归因研究的两条路径。其一是“溯源”：我们提出“机理数据归因”框架（ICML 2026 Oral），首次打通从训练数据到内部机制再到模型行为的完整因果链，揭示归纳头等可解释单元由哪些训练样本塑造。其二是“干预”：通过对影响函数选出的关键样本进行定向改写，实现对模型弃答与安全拒绝等行为的精准双向操控。这些结果表明，数据归因不仅可用于理解大模型行为的成因，也为在数据层面定向调控模型行为提供了可行途径。报告最后将探讨“以机理理解驱动数据研究”的研究愿景，让数据的筛选、增强与治理从经验驱动走向机理指导。"
+ },
+ "paper": {
+  "found": true,
+  "title": "Mechanistic Data Attribution: Tracing the Training Origins of Interpretable LLM Units",
+  "authors": [
+   "Jianhui Chen",
+   "Yuzhang Luo",
+   "Liangming Pan"
+  ],
+  "abstract": "While Mechanistic Interpretability has identified interpretable circuits in LLMs, their causal origins in training data remain elusive. We introduce Mechanistic Data Attribution (MDA), a scalable framework that employs Influence Functions to trace interpretable units back to specific training samples. Through extensive experiments on the Pythia family, we causally validate that targeted intervention--removing or augmenting a small fraction of high-influence samples--significantly modulates the emergence of interpretable heads, whereas random interventions show no effect. Our analysis reveals that repetitive structural data (e.g., LaTeX, XML) acts as a mechanistic catalyst. Furthermore, we observe that interventions targeting induction head formation induce a concurrent change in the model's in-context learning (ICL) capability. This provides direct causal evidence for the long-standing hypothesis regarding the functional link between induction heads and ICL. Finally, we propose a mechanistic data augmentation pipeline that consistently accelerates circuit convergence across model scales, providing a principled methodology for steering the developmental trajectories of LLMs.",
+  "arxiv_id": "2601.21996",
+  "doi": "10.48550/arxiv.2601.21996",
+  "url": "https://arxiv.org/abs/2601.21996",
+  "source": "openalex",
+  "score": 0.663,
+  "title_sim": 0.463,
+  "keyword_cov": 0.444,
+  "query": "mechanistic data attribution large language models training data behavior intervention",
+  "title_en": "Mechanistic Data Attribution: From Behavior Tracing to Targeted Intervention",
+  "hint_authors": [
+   "Liangming Pan"
+  ],
+  "has_paper_hint": true,
+  "note": "报告明确提及两项工作，其中一项为ICML 2026 Oral的机理数据归因框架，另一项为基于影响函数的关键样本改写干预，均对应具体论文，讲者为助理教授且为报告人，推断为作者之一。",
+  "matched_at": "2026-10-17T14:04:07"
+ },
+ "short_read": "*（对应论文为自动检索推断，可能有偏差）*\n\n**问题**：大模型的能力与行为从何而来？可解释性研究已能定位模型内部的归纳头等可解释单元，但它们的训练数据成因仍是黑箱。报告要解决的是“数据归因”的粒度问题：传统数据归因只能回答哪些数据影响了整体行为，无法回答哪些样本塑造了某个具体机制。官网摘要强调，这项工作首次打通“训练数据→内部机制→模型行为”的完整因果链，并进一步把归因从理解工具推进为干预手段，为数据筛选、增强与治理提供机理指导。\n\n**核心方法**：报告提出“机理数据归因”（MDA）框架，分三步：先用监测指标定位可解释单元（如归纳头），再在单元对应的参数子空间 $\\theta_{\\text{sub}}$ 上用影响函数计算训练样本对单元行为的贡献，核心公式为 $I_{\\text{MDA}}(z_{\\text{train}}, D_{\\text{probe}}) = -\\nabla_{\\theta_{\\text{sub}}} L(z_{\\text{train}})^\\top \\hat{H}^{-1}_{\\theta_{\\text{sub}}} \\nabla_{\\theta_{\\text{sub}}} f_{\\text{probe}}(\\theta, D_{\\text{probe}})$，其中 $\\hat{H}^{-1}$ 用 EK-FAC 近似。论文在 Pythia 系列（14M–160M）上做了因果验证：删除或重复 ≤10% 的高影响样本可显著抑制或加速归纳头与前词头的涌现，随机干预无效；高影响样本呈幂律分布，且以 LaTeX、XML 等重复结构数据为主。干预归纳头会同步改变模型的上下文学习（ICL）能力，为归纳头与 ICL 的关联提供了直接因果证据。\n\n**与已有工作的关系**：它把 Koh & Liang (2017) 的影响函数从“全局行为归因”扩展到“机制级归因”，并采用 Grosse et al. (2023) 的 EK-FAC 近似来应对大模型 Hessian 计算开销。与同期观察性研究（如 Lee et al. 2026、Baker et al. 2026 对数据模式与归纳头涌现的相关分析）相比，MDA 的优势在于做了训练期因果干预，而非仅报告相关性。论文还对比了随机删除/增强基线，并验证了高影响样本在不同归纳头间的可迁移性。\n\n**贡献与边界**：主要贡献是提出可扩展的机理数据归因框架，首次在真实规模模型上因果验证了特定训练样本对可解释单元涌现的充分性与必要性，并展示了数据级干预对 ICL 等能力的双向调控。边界方面：论文的因果实验限于 Pythia 14M–160M，对 OLMo-2-1B/7B 仅做了定性分析，未做完整重训练验证；归因计算限定在关键发育窗口内，未覆盖全训练语料；高影响样本的“重复结构”特征是否适用于其他机制（如知识存储、推理）尚不清楚。官网摘要提到的“精准干预”第二项工作（弃答与安全行为调控）未在检索到的论文中展开，具体方法与效果边界需以报告现场为准。",
+ "long_read": null,
+ "model": "deepseek-reasoner",
+ "generated_at": "2026-10-17T16:26:40"
+}
