@@ -1,0 +1,60 @@
+{
+ "cell": "sess04-t1",
+ "session": {
+  "no": 4,
+  "title": "预训练算法的新进展",
+  "date": "2026-10-17",
+  "weekday": "周六",
+  "period": "下午",
+  "time": "14:00-16:00",
+  "room": "5会（友谊宫二层5号会议室）",
+  "chairs": [
+   {
+    "name": "谢天",
+    "org": "Qwen",
+    "bio": "谢天，本科毕业于中国科学技术大学，现就职于 Qwen。专注于预训练模型架构及其训练优化算法研究，希望通过算法侧改进提升智能上限。 个人主页"
+   }
+  ]
+ },
+ "talk": {
+  "no": 1,
+  "title": "On Optimal Hyperparameter Scaling for LLM Pretraining",
+  "speaker": "张华清",
+  "org": "清华大学",
+  "affiliation": "清华大学 · 交叉信息研究院",
+  "time": "14:00-14:40",
+  "abstract": "Setting appropriate training hyperparameters is critical for efficient and stable large language model pretraining. Since sweeping hyperparameters at the target training scale is prohibitively expensive, a common approach is to use smaller training runs to fit a hyperparameter scaling law for extrapolation. In this talk, we discuss our approach to deriving hyperparameter scaling laws for the next generation of Qwen models (Qwen3.8-flash-next), which enables accurate extrapolation. Notably, the current hyperparameter scaling law predicts larger learning rates and batch sizes than our previous scaling law and several published results suggest. Through controlled ablation studies, we examine how other training factors (data, architecture, optimizer) influence hyperparameter scaling. We will also discuss several practical guidelines for fitting a hyperparameter scaling law as accurately as possible within a limited compute budget."
+ },
+ "paper": {
+  "found": true,
+  "title": "Configuration-to-Performance Scaling Law with Neural Ansatz",
+  "authors": [
+   "Huaqing Zhang",
+   "Kaiyue Wen",
+   "Tengyu Ma"
+  ],
+  "abstract": "Abstract : Researchers build scaling laws to forecast the training performance of expensive large-… ▽ More Researchers build scaling laws to forecast the training performance of expensive large- scale runs with larger model size N and data size D. These laws assume that other training hyperparameters are optimally chosen, which can require significant effort and, in some cases, be impossible due to external hardware constraints. To improve predictability across a broader set of hyperparameters and enable simpler tuning at scale , we propose learning a \\textit{Configuration-to-Performance Scaling Law} (CPL): a mapping from the \\textit{full training configuration} to training performance. Because no simple functional form can express this mapping, we parameterize it with a large language model ( LLM ), and fit it with diverse open-source pretraining logs across multiple sources, yielding a \\textit{Neural} Configuration-to-Performance Scaling Law (NCPL). NCPL accurately predicts how training configurations influence the final pretraining loss, achieving 20-40% lower prediction error than the configuration-agnostic Chinchilla law and generalizing to runs using up to 10 x more compute than any run in the training set. It further supports joint tuning of multiple hyperparameters with performance comparable to hyperparameter scaling law baselines. Finally, NCPL naturally and effectively extends to richer prediction targets such as loss-curve prediction. △ Less",
+  "arxiv_id": "2602.10300",
+  "doi": null,
+  "url": "https://arxiv.org/abs/2602.10300",
+  "source": "arxiv",
+  "score": 0.757,
+  "title_sim": 0.231,
+  "keyword_cov": 0.222,
+  "query": "hyperparameter scaling law LLM pretraining Qwen",
+  "names": [
+   "Qwen3.8-flash-next"
+  ],
+  "title_en": "On Optimal Hyperparameter Scaling for LLM Pretraining",
+  "hint_authors": [
+   "Huaqing Zhang"
+  ],
+  "has_paper_hint": true,
+  "note": "报告题目与摘要直接对应一篇具体论文，讲者为第一作者，摘要中提及Qwen3.8-flash-next模型和超参数缩放律方法。",
+  "matched_at": "2026-10-17T14:58:26"
+ },
+ "short_read": "（对应论文为自动检索推断，可能有偏差）\n\n**问题**：大模型预训练中，超参数设置直接决定训练效率与稳定性，但在目标规模上直接扫参成本过高，通行做法是用小规模运行拟合超参数缩放律再外推。报告针对下一代 Qwen 模型（Qwen3.8-flash-next）推导超参数缩放律，发现现有缩放律预测的学习率和批大小偏保守。论文则进一步指出，标准缩放律（如 Chinchilla）隐含“其他超参数已最优”的假设，而实际训练常受硬件约束无法满足该假设，因此需要更完整的配置—性能映射。\n\n**核心方法**：报告方法是通过受控消融实验，系统考察数据、架构、优化器如何影响超参数缩放律，并给出有限计算预算下拟合缩放律的实用准则。论文提出 Configuration-to-Performance Scaling Law（CPL）：用 LLM 作为神经 ansatz，将完整训练配置（模型大小、数据量、层数、头数、优化器、学习率、批大小、权重衰减等）映射到预训练损失，并预测相对 Chinchilla 基线的残差以提升外推能力。模型基于 Qwen3-1.7B 微调，采用两阶段训练（先冻结主干、后全量微调），在 Marin 和 StepLaw 两个开源项目共约五千条预训练日志上训练，最终损失预测误差比 Chinchilla 低 20–40%，并能外推到训练集中最大计算量的 10 倍规模。\n\n**与已有工作的关系**：该工作直接推进两条路线：一是 Chinchilla 缩放律（仅以 N、D 为输入，忽略其他超参数），二是 StepLaw 等手工设计的超参数幂律（如 $\\eta(N,D)=cN^\\alpha D^\\beta$）。NCPL 无需预设函数形式，用神经网络自动学习超参数间的非线性交互，且能联合优化多个超参数，而传统方法通常逐个拟合。论文实验也以 Chinchilla 和 StepLaw 为基线，在 ID 与 OOD 设置下比较预测误差和调参效果。\n\n**贡献与边界**：主要贡献是提出一种数据驱动的神经缩放律范式，能利用异构开源日志、支持联合调参与损失曲线预测，并展示了对计算量外推的可行性。边界也很明显：依赖已有日志覆盖的超参数空间，对全新架构或数据分布的外推能力未验证；论文提到 OOD 时模型倾向推荐更大学习率，可能源于训练集小模型占比高；报告摘要未给出具体缩放指数或消融细节，且检索论文与报告题目不完全对应，现场报告可能包含更多未公开的 Qwen 实际经验。",
+ "long_read": "deep_reads/xagi2026-2602.10300.md",
+ "model": "deepseek-reasoner",
+ "generated_at": "2026-10-17T16:37:06"
+}

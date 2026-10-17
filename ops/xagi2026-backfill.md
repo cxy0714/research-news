@@ -32,7 +32,7 @@ XAGI 2026 交叉智能大会（2026.10.16-18，北京友谊宾馆）的**逐场�
 - [x] (2026-10-17) `sess03-t4` 大语言模型持续优化能力评测 — 张辉帅（北京大学）
 
 ### Session 04 · 预训练算法的新进展 · 2026-10-17 14:00-16:00 · 5会（友谊宫二层5号会议室）
-- [ ] `sess04-t1` On Optimal Hyperparameter Scaling for LLM Pretraining — 张华清（清华大学）
+- [x] (2026-10-17) `sess04-t1` On Optimal Hyperparameter Scaling for LLM Pretraining — 张华清（清华大学）
 - [ ] `sess04-t2` Controlled LLM Training on Spectral Sphere — 胡译文（中国人民大学）
 - [ ] `sess04-t3` Pretraining Loss相同，模型能力则相同么？ — 陈焕然（清华大学）
 
