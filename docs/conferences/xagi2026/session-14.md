@@ -109,7 +109,7 @@
 
 **讲者**：从鑫（清华大学 · 统计与数据科学系） · 15:30-16:00
 
-**对应论文**：Benchmarking Language Models for Statistical Problem Formulation · [arXiv:2609.01982](https://arxiv.org/abs/2609.01982)
+**对应论文**：Benchmarking Language Models for Statistical Problem Formulation · [arXiv:2609.01982](https://arxiv.org/abs/2609.01982) · 📖 [长篇精读](../../deep_reads/xagi2026-2609.01982.md)
 
 <details><summary>摘要（会议官网）</summary>
 
