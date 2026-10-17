@@ -51,7 +51,7 @@ XAGI 2026 交叉智能大会（2026.10.16-18，北京友谊宾馆）的**逐场�
 - [x] (2026-10-17) `sess07-t1` Weighted Laplacian Flow: A Deterministic Particle Flow with Provable Convergence — 史作强（清华大学）
 - [x] (2026-10-17) `sess07-t2` Simulation-Free Dynamic Unbalanced Optimal Transport and One-step Inference — 周沛劼（北京大学）
 - [x] (2026-10-17) `sess07-t3` 基于Bellman缺陷校正的科学机器学习与生成式人工智能的推理算法 — 陆一平（北京大学）
-- [ ] `sess07-t4` Offline Deep Q* Estimation with Diffusion Models — 焦雨领（武汉大学）
+- [x] (2026-10-17) `sess07-t4` Offline Deep Q* Estimation with Diffusion Models — 焦雨领（武汉大学）
 
 ### Session 08 · AI + 教育 · 2026-10-18 10:00-12:00 · 4会（友谊宫二层4号会议室）
 - [ ] `sess08-t1` 从灵感到实现：AI赋能教育中的创造力支持 — 陈晴（同济大学）

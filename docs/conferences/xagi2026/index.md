@@ -4,7 +4,7 @@
 
 全会有 **14 个场次、49 场报告**。本页是日程的**结构化存档与精读入口**：每个场次一页，逐场精读，按队列一格一格推进。
 
-- 已精读 **25/49** 场；其中 **18** 场检索到对应论文，**3** 篇有长篇精读。
+- 已精读 **26/49** 场；其中 **18** 场检索到对应论文，**3** 篇有长篇精读。
 - **场次导航**：下表链接到每个场次的页面（含该场全部报告的精读）。
 - **完整日程**：页面底部按日期列出全部报告，即使尚未精读也能看到「谁在讲、讲什么」。
 
@@ -20,7 +20,7 @@
 | [Session 04](session-04.md) | 10 月 17 日 周六 | 14:00-16:00 | 下午 | 预训练算法的新进展 | 3 | 3/3 |
 | [Session 05](session-05.md) | 10 月 17 日 周六 | 14:00-16:00 | 下午 | AI Infra | 3 | 3/3 |
 | [Session 06](session-06.md) | 10 月 17 日 周六 | 14:00-16:00 | 下午 | AI + Finance | 4 | 4/4 |
-| [Session 07](session-07.md) | 10 月 17 日 周六 | 14:00-16:00 | 下午 | 扩散模型的理论基础以及推理测算法 | 4 | 3/4 |
+| [Session 07](session-07.md) | 10 月 17 日 周六 | 14:00-16:00 | 下午 | 扩散模型的理论基础以及推理测算法 | 4 | 4/4 |
 | [Session 08](session-08.md) | 10 月 18 日 周日 | 10:00-12:00 | 上午 | AI + 教育 | 3 | 0/3 |
 | [Session 09](session-09.md) | 10 月 18 日 周日 | 10:00-12:00 | 上午 | AI4Science | 4 | 0/4 |
 | [Session 10](session-10.md) | 10 月 18 日 周日 | 10:00-12:00 | 上午 | 机器学习理论 | 3 | 0/3 |
@@ -111,7 +111,7 @@
 
 </details>
 
-<details><summary><b>下午 14:00-16:00</b> · 8会（友谊宫二层8号会议室） · <b>扩散模型的理论基础以及推理测算法</b>（4 场，已精读 3）</summary>
+<details><summary><b>下午 14:00-16:00</b> · 8会（友谊宫二层8号会议室） · <b>扩散模型的理论基础以及推理测算法</b>（4 场，已精读 4）</summary>
 
 *主持：陆一平（北京大学）、周默（北京大学）*
 
@@ -120,7 +120,7 @@
 | 1 | 14:00-14:30 | [Weighted Laplacian Flow: A Deterministic Particle Flow with Provable Convergence](session-07.md) | 史作强 | 清华大学 |
 | 2 | 14:30-15:00 | [Simulation-Free Dynamic Unbalanced Optimal Transport and One-step Inference](session-07.md) | 周沛劼 | 北京大学 |
 | 3 | 15:00-15:30 | [基于Bellman缺陷校正的科学机器学习与生成式人工智能的推理算法](session-07.md) | 陆一平 | 北京大学 |
-| 4 | 15:30-16:00 | Offline Deep Q* Estimation with Diffusion Models | 焦雨领 | 武汉大学 |
+| 4 | 15:30-16:00 | [Offline Deep Q* Estimation with Diffusion Models](session-07.md) | 焦雨领 | 武汉大学 |
 
 </details>
 
