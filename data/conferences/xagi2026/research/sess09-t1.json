@@ -1,0 +1,75 @@
+{
+ "cell": "sess09-t1",
+ "session": {
+  "no": 9,
+  "title": "AI4Science",
+  "date": "2026-10-18",
+  "weekday": "周日",
+  "period": "上午",
+  "time": "10:00-12:00",
+  "room": "8会（友谊宫二层8号会议室）",
+  "chairs": [
+   {
+    "name": "田润泽",
+    "org": "中国人民大学",
+    "bio": "个人简介补充中。"
+   },
+   {
+    "name": "谢超",
+    "org": "清华大学",
+    "bio": "谢超，清华大学心理与认知科学系助理教授。研究方向为脑发育与精神共病的神经认知机制，结合大规模脑影像、连接组预测建模、行为遗传与计算建模等手段。以第一作者身份在Nature Medicine、Nature Mental Health，Science Advances等期刊上发表论文，并获得博新计划和教育部珠峰计划等支持，主持国自然面上和青年项目等项目。"
+   }
+  ]
+ },
+ "talk": {
+  "no": 1,
+  "title": "Memory Mechanisms in Genomic Foundation Models",
+  "speaker": "许慧楠",
+  "org": "中国科学院大学",
+  "affiliation": "中国科学院大学 · 杭州高等研究院",
+  "time": "10:00-10:30",
+  "abstract": "Genomic sequences exhibit widespread long‑range dependencies, and their data density is completely different from that of natural language. Architectures for information compression in natural language are not fully applicable to the genomic domain, and genome modeling requires its unique approaches. Studies including Gengram have introduced memory into genomic large models and achieved unprecedented performance across multiple tasks. Memory mechanisms can retain key biological features, mitigate attention computational costs, and improve the model’s ability to extract long‑range genomic signals, yielding promising effects for long‑sequence modeling."
+ },
+ "paper": {
+  "found": true,
+  "title": "Beyond Conditional Computation: Retrieval-Augmented Genomic Foundation Models with Gengram",
+  "authors": [
+   "Huinan Xu",
+   "Xuyang Feng",
+   "Junhong Chen",
+   "Junchen Liu",
+   "Kaiwen Deng",
+   "Kai Ding",
+   "Shengning Long",
+   "Jiaxue Shuai",
+   "Zhaorong Li",
+   "Shiping Liu",
+   "Guirong Xue",
+   "Zhan Xiao"
+  ],
+  "abstract": "Abstract : Current genomic foundation models (GFMs) rely on extensive neural computation to implicitly approximate conserved biological motifs from single-nucleotide inputs. We propose Gengram , a conditional memory module that introduces an explicit and highly efficient lookup primitive for multi-base motifs via a genomic-specific hashing scheme, establishing genomic &… ▽ More Current genomic foundation models (GFMs) rely on extensive neural computation to implicitly approximate conserved biological motifs from single-nucleotide inputs. We propose Gengram , a conditional memory module that introduces an explicit and highly efficient lookup primitive for multi-base motifs via a genomic-specific hashing scheme, establishing genomic \"syntax\". Integrated into the backbone of state-of-the-art GFMs, Gengram achieves substantial gains (up to 14%) across several functional genomics tasks. The module demonstrates robust architectural generalization, while further inspection of Gengram's latent space reveals the emergence of meaningful representations that align closely with fundamental biological knowledge. By establishing structured motif memory as a modeling primitive, Gengram simultaneously boosts empirical performance and mechanistic interpretability, providing a scalable and biology-aligned pathway for the next generation of GFMs. The code is available at https://github.com/zhejianglab/Genos, and the model checkpoint is available at https://huggingface.co/ZhejiangLab/ Gengram . △ Less",
+  "arxiv_id": "2601.22203",
+  "doi": null,
+  "url": "https://arxiv.org/abs/2601.22203",
+  "source": "arxiv",
+  "score": 0.767,
+  "title_sim": 0.334,
+  "keyword_cov": 0.3,
+  "query": "genomic foundation model memory mechanism long-range dependency",
+  "names": [
+   "Gengram",
+   "Meno"
+  ],
+  "title_en": "Memory Mechanisms in Genomic Foundation Models",
+  "hint_authors": [
+   "Huinan Xu"
+  ],
+  "has_paper_hint": true,
+  "note": "摘要明确提及Gengram引入记忆机制并取得突破，讲者主导Meno研发，报告内容对应其具体论文。",
+  "matched_at": "2026-10-17T14:55:29"
+ },
+ "short_read": "*（对应论文为自动检索推断，可能有偏差）*\n\n**问题**：基因组序列存在广泛的长程依赖，且其数据密度与自然语言截然不同，自然语言中的信息压缩架构无法直接迁移到基因组域。现有基因组基座模型（GFM）多从单核苷酸输入出发，依赖大规模神经计算隐式近似保守基序，在基序主导的功能元件检测上效率低且可解释性差。报告提出将记忆机制引入基因组大模型，以显式存储和检索多碱基基序，从而在保留关键生物特征的同时缓解注意力计算成本，提升长序列建模能力。\n\n**核心方法**：论文提出 Gengram，一种条件记忆模块。它通过基因组特异的哈希方案，为所有可能的 k-mer（$k=1,2,3,4,5,6$）建立静态键和可学习嵌入值；在预测当前位置时，用滑动窗口枚举前序局部窗口内的全部连续子串，去重后按 k-mer 长度分组做均值池化，再经线性投影、缩放点积门控（sigmoid）和残差连接注入 Transformer 主干。窗口大小经实验选为 21，恰好对应 B-DNA 双螺旋两圈（约 10.4–10.5 bp/圈）的周期，使模型能捕获与蛋白结合相关的相位模式。模块仅插入第 3、6、10 层，额外参数约 60M；10B 模型在 200B tokens 上训练，采用 MoE（8 专家、top-2 路由），在多个功能基因组学基准上相对基线提升最高达 14%。\n\n**与已有工作的关系**：Gengram 直接对标现有 GFM 的“隐式基序近似”路线，包括基于 Transformer 的 DNABERT、Nucleotide Transformer，以及状态空间模型 Caduceus 等。其设计灵感来自 DeepSeek 的 Engram 条件记忆模块，但 Engram 仅检索单个前序 n-gram，Gengram 引入局部窗口聚合，使记忆内容覆盖多尺度基序组合。实验中的基线包括 Genos-10B、Evo2-40B、GENERATOR-3B 等，Gengram 在更少训练数据（200B vs 2.2T/9.3T）和更少激活参数（2.87B vs 40.3B）下取得相当或更优结果，并验证了跨 MHA、GQA、MLA 及 MoE/Dense 架构的泛化性。\n\n**贡献与边界**：主要贡献是将显式基序记忆作为建模原语，同时提升性能与机制可解释性，且模块轻量、可即插即用。但方法依赖固定窗口大小和 k-mer 长度上限 6，对更长结构变异或非连续基序的覆盖有限；窗口大小 21 的生物学解释虽合理，但仅在人类/灵长类数据上验证，跨物种泛化未知。官网摘要未给出具体数字，以上结果来自论文；且自动匹配可能有偏差，报告可能还涉及讲者主导的 Meno 等其他记忆机制工作，需以现场内容为准。",
+ "long_read": null,
+ "model": "deepseek-reasoner",
+ "generated_at": "2026-10-17T18:54:36"
+}
