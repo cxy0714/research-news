@@ -23,7 +23,7 @@ XAGI 2026 交叉智能大会（2026.10.16-18，北京友谊宾馆）的**逐场�
 - [x] (2026-10-17) `sess02-t1` 深度学习理论的技术科学道路 — 刘方辉（上海交通大学）
 - [x] (2026-10-17) `sess02-t2` LLM for ML Theory at Scale: The VALG Agent and OpenTheoryBench — 邹荻凡（香港大学）
 - [x] (2026-10-17) `sess02-t3` 数学自然语言的形式化与结构化 — 罗涛（上海交通大学）
-- [ ] `sess02-t4` MechGeo: Autoformalizing and Proving Euclidean Geometry in Lean 4 — 沈皓（中国科学院数学与系统科学研究院）
+- [x] (2026-10-17) `sess02-t4` MechGeo: Autoformalizing and Proving Euclidean Geometry in Lean 4 — 沈皓（中国科学院数学与系统科学研究院）
 
 ### Session 03 · LLM评测 & Benchmark · 2026-10-17 14:00-16:00 · 7会（友谊宫二层7号会议室）
 - [ ] `sess03-t1` 大模型数据归因：从行为溯源到精准干预 — 潘亮铭（北京大学）
