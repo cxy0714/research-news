@@ -73,7 +73,11 @@ MATCH_THRESHOLD = float(os.environ.get("XAGI_MATCH_THRESHOLD", "0.58"))
 MAX_PDF_CHARS = 240_000
 MAX_CONTEXT_CHARS = 30_000     # PDF text fed to the short read
 SHORT_READ_MAX_TOKENS = 8_000
-LONG_READ_MAX_TOKENS = 24_000
+LONG_READ_MAX_TOKENS = 20_000
+# The full 240k-char deep-read prompt plus a long reasoning output can exceed
+# the endpoint's request timeout; for conference pages 160k chars (intro +
+# body + most of the bibliography) is enough and much more reliable.
+LONG_PDF_CHARS = int(os.environ.get("XAGI_LONG_PDF_CHARS", "160000"))
 
 _QUEUE_ITEM_RE = re.compile(r"^(\s*-\s*)\[ \](\s*)`([^`]+)`(.*)$")
 
@@ -668,7 +672,7 @@ def long_read(client, session: dict, talk: dict, paper: dict, *,
         f"## Researcher interests\n{interests}\n\n"
         "## Paper metadata\n" + "\n".join(meta) + "\n\n"
         + (f"{refs_block}\n" if refs_block else "")
-        + f"## Full text\n{paper_text}\n"
+        + f"## Full text\n{paper_text[:LONG_PDF_CHARS]}\n"
     )
     try:
         body = client.chat(
@@ -699,6 +703,68 @@ def long_read(client, session: dict, talk: dict, paper: dict, *,
     ]
     out.write_text("\n".join(lines) + "\n", encoding="utf-8")
     return f"deep_reads/{out.name}"
+
+
+def _client_with_timeout(seconds: float):
+    """A client whose per-request timeout is raised for long-read calls.
+
+    ``SJTUClient`` reads ``REQUEST_TIMEOUT`` at construction time, so bumping
+    the module constant before building one is enough (daily / journal runs keep
+    their own budget). Long deep reads legitimately take 5-10 min on a busy
+    endpoint.
+    """
+    from .llm import sjtu_client as sc
+
+    sc.REQUEST_TIMEOUT = seconds
+    return _client()
+
+
+def retry_long(*, max_units: int = 1, force: bool = False, model: str | None = None,
+               cells: list[str] | None = None) -> int:
+    """Generate long paper reads that are still missing (e.g. after a timeout).
+
+    The per-talk short read is the queue's unit; a long read that timed out
+    leaves ``long_read: null`` in the research JSON. This walks the already-read
+    talks and fills those in, one at a time, without redoing any short read.
+    """
+    data = load_sessions()
+    want = set(cells or [])
+    client = None
+    interests = _interests()
+    done = 0
+    for session, talk in scrape.iter_talks(data):
+        if done >= max_units:
+            break
+        if want and talk["id"] not in want:
+            continue
+        rec = _load_research(talk["id"])
+        if not rec:
+            continue
+        paper = rec.get("paper") or talk.get("paper") or {}
+        arxiv_id = paper.get("arxiv_id")
+        if not paper.get("found") or not arxiv_id:
+            continue
+        page = DEEP_READS / f"xagi2026-{_slug(arxiv_id)}.md"
+        if page.exists() and not force:
+            continue
+        if client is None:
+            client = _client_with_timeout(
+                float(os.environ.get("XAGI_LONG_TIMEOUT", "900")))
+        log.info("%s: long read for arXiv:%s (%s)", talk["id"], arxiv_id,
+                 (paper.get("title") or "")[:60])
+        text = _paper_text(arxiv_id)
+        path = long_read(client, session, talk, paper, paper_text=text,
+                         interests=interests, model=model, force=force)
+        if not path:
+            log.warning("%s: long read still failed (will retry on a later run)", talk["id"])
+            continue
+        rec["long_read"] = path
+        _save_research(rec)
+        talk["read"] = {**(talk.get("read") or {}), "long_read": path}
+        save_sessions(data)
+        done += 1
+    log.info("generated %d long read(s)", done)
+    return done
 
 
 def read_cell(cell: str, *, force: bool = False, model: str | None = None,
@@ -1208,6 +1274,13 @@ def main() -> None:
     p_bf.add_argument("--force", action="store_true")
     p_bf.add_argument("--dry-run", action="store_true")
 
+    p_lg = sub.add_parser("long", help="(re)generate missing long paper reads")
+    p_lg.add_argument("--max", type=int, default=1, dest="max_units",
+                      help="how many to generate this run (0 = all missing)")
+    p_lg.add_argument("--force", action="store_true", help="regenerate even if the page exists")
+    p_lg.add_argument("--cell", action="append", default=[], help="only these cells")
+    p_lg.add_argument("--model", default=None)
+
     p_rn = sub.add_parser("render", help="rebuild the conference pages + nav")
     p_rn.add_argument("--no-nav", action="store_true")
 
@@ -1264,6 +1337,17 @@ def main() -> None:
     elif args.cmd == "backfill":
         done = backfill(max_units=args.max_units, dry_run=args.dry_run, force=args.force)
         if not args.dry_run and done == 0:
+            sys.exit(7)
+    elif args.cmd == "long":
+        n = retry_long(max_units=args.max_units or 10_000, force=args.force,
+                       model=args.model, cells=list(args.cell) or None)
+        try:
+            render(nav=False)
+        except Exception as e:  # noqa: BLE001
+            log.warning("render after long reads failed: %s", e)
+        print(f"generated {n} long read(s)")
+        if n == 0:
+            # Non-zero so the loop wrapper knows there is nothing left to do.
             sys.exit(7)
     elif args.cmd == "render":
         render(nav=not args.no_nav)

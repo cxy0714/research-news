@@ -51,7 +51,7 @@
 
 **讲者**：邹荻凡（香港大学 · 计算与数据科学学院） · 14:30-15:00
 
-**对应论文**：VALG: An Agentic System for ML Theory Research · [arXiv:2608.13060](https://arxiv.org/abs/2608.13060)
+**对应论文**：VALG: An Agentic System for ML Theory Research · [arXiv:2608.13060](https://arxiv.org/abs/2608.13060) · 📖 [长篇精读](../../deep_reads/xagi2026-2608.13060.md)
 
 <details><summary>摘要（会议官网）</summary>
 
@@ -107,7 +107,7 @@
 
 **讲者**：沈皓（中国科学院大学 · 中国科学院数学与系统科学研究院） · 15:30-16:00
 
-**对应论文**：MechGeo: Autoformalizing and Proving Euclidean Geometry in Lean 4 · [arXiv:2608.02295](https://arxiv.org/abs/2608.02295)
+**对应论文**：MechGeo: Autoformalizing and Proving Euclidean Geometry in Lean 4 · [arXiv:2608.02295](https://arxiv.org/abs/2608.02295) · 📖 [长篇精读](../../deep_reads/xagi2026-2608.02295.md)
 
 <details><summary>摘要（会议官网）</summary>
 

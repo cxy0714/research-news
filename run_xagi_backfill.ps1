@@ -2,9 +2,17 @@
 # one talk ("一格") at a time until the queue (ops\xagi2026-backfill.md) is empty,
 # releasing the shared lock between units and yielding to the daily run. Same
 # pattern as run_journal_backfill.ps1: start at logon on a mostly-always-on
-# desktop; it exits on its own when the queue is done.
+# desktop; it exits on its own when both phases are done.
 #
-#   -Max N       : stop after N units (default 0 = run until the queue is empty)
+#   Phase 1 — the queue: one talk per lock hold, tick it, commit + push.
+#   Phase 2 — long reads: papers whose long deep read timed out during phase 1
+#             (the short per-talk read is already written) are retried one at a
+#             time via `xagi long --max 1`, again committing each.
+#
+#   -Max N       : stop phase 1 after N units (default 0 = until the queue is empty)
+#   -MaxLong N   : stop phase 2 after N long reads (default 0 = until none missing)
+#   -LongModel M : model for phase 2 (default "" = the configured deep-read model;
+#                  `deepseek-chat` is much faster when the reasoning model times out)
 #   -DailyHour H : the daily run's hour (default 9). The loop pauses during
 #                  H:00–(H+5):00 on weekdays until today's report exists, so the
 #                  daily run gets the lock first (run_daily.ps1 also waits for
@@ -16,6 +24,8 @@
 
 param(
     [int]$Max = 0,
+    [int]$MaxLong = 0,
+    [string]$LongModel = "",
     [int]$DailyHour = 9
 )
 
@@ -37,11 +47,9 @@ function Log($msg) {
 $venvActivate = Join-Path $PSScriptRoot ".venv\Scripts\Activate.ps1"
 if (Test-Path $venvActivate) { . $venvActivate }
 
-Log "xagi backfill loop start (Max=$Max)"
-$done = 0
-while ($Max -le 0 -or $done -lt $Max) {
-    # Yield to the daily run during the weekday daily window while today's report
-    # isn't out yet (a wider H..H+5 window so a unit straddling 09:10 still yields).
+# During the weekday daily window, wait for today's report so daily runs first
+# (a wider H..H+5 window so a unit straddling 09:10 still yields).
+function Test-DailyWindow {
     $today = Get-Date -Format "yyyy-MM-dd"
     $hour = (Get-Date).Hour
     $isWeekday = (Get-Date).DayOfWeek -ne [System.DayOfWeek]::Saturday -and
@@ -51,21 +59,26 @@ while ($Max -le 0 -or $done -lt $Max) {
         -not (Test-Path "docs\daily\$today.md")) {
         Log "daily not out yet - yielding 5 min"
         Start-Sleep -Seconds 300
-        continue
+        return $true
     }
+    return $false
+}
 
-    # Take the SHARED lock for ONE unit (wait up to 60 min behind a running
-    # daily / journal unit). Same mutex name as run_daily.ps1 and
-    # run_journal_backfill.ps1 — that is what makes "绝不并行" hold.
+# Run ONE unit under the shared lock, then commit + push whatever it produced
+# (read JSON, conference pages, long read, ticked queue, logs), self-healing a
+# non-fast-forward push. Returns the unit's exit code.
+function Invoke-LockedUnit([scriptblock]$body) {
+    # Same mutex name as run_daily.ps1 and run_journal_backfill.ps1 — that is
+    # what makes "绝不并行" hold across daily / journals / XAGI.
     $mutex = New-Object System.Threading.Mutex($false, "Global\research-news-daily")
     if (-not $mutex.WaitOne([TimeSpan]::FromMinutes(60))) {
         $mutex.Dispose()
-        continue
+        return -1
     }
     $code = 0
     try {
         git pull --rebase --autostash
-        python -m research_news.xagi backfill --max 1
+        & $body
         $code = $LASTEXITCODE
     }
     finally {
@@ -73,9 +86,6 @@ while ($Max -le 0 -or $done -lt $Max) {
         $mutex.Dispose()
     }
 
-    # Commit + push whatever the unit produced (the read JSON, the conference
-    # pages, the long read, the ticked queue, the logs), self-healing a
-    # non-fast-forward push.
     if (git status --porcelain) {
         git add -A
         git commit -m "xagi backfill $today" | Out-Null
@@ -86,13 +96,38 @@ while ($Max -le 0 -or $done -lt $Max) {
             git pull --rebase --autostash
         }
     }
+    return $code
+}
 
-    # Non-zero = no unit to do (queue empty) or the unit failed → stop the loop.
+$today = Get-Date -Format "yyyy-MM-dd"
+Log "xagi backfill loop start (Max=$Max, MaxLong=$MaxLong)"
+
+# ── phase 1: the per-talk queue ───────────────────────────────────────────────
+$done = 0
+while ($Max -le 0 -or $done -lt $Max) {
+    if (Test-DailyWindow) { continue }
+    $code = Invoke-LockedUnit { python -m research_news.xagi backfill --max 1 }
     if ($code -ne 0) {
-        Log "no more units (or unit failed, exit $code) - stopping"
+        Log "no more queue units (or unit failed, exit $code) - phase 1 done"
         break
     }
     $done++
     Start-Sleep -Seconds 10   # brief gap so a pending daily can grab the lock
 }
-Log "xagi backfill loop done ($done unit(s) this run)"
+Log "phase 1 done ($done unit(s) this run)"
+
+# ── phase 2: long reads that timed out earlier ────────────────────────────────
+$longArgs = @("-m", "research_news.xagi", "long", "--max", "1")
+if ($LongModel) { $longArgs += @("--model", $LongModel) }
+$longDone = 0
+while ($MaxLong -le 0 -or $longDone -lt $MaxLong) {
+    if (Test-DailyWindow) { continue }
+    $code = Invoke-LockedUnit { python @longArgs }
+    if ($code -ne 0) {
+        Log "no missing long reads (or one failed, exit $code) - phase 2 done"
+        break
+    }
+    $longDone++
+    Start-Sleep -Seconds 10
+}
+Log "xagi backfill loop done ($done unit(s), $longDone long read(s) this run)"
