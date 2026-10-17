@@ -4,7 +4,7 @@
 
 全会有 **14 个场次、49 场报告**。本页是日程的**结构化存档与精读入口**：每个场次一页，逐场精读，按队列一格一格推进。
 
-- 已精读 **39/49** 场；其中 **18** 场检索到对应论文，**3** 篇有长篇精读。
+- 已精读 **40/49** 场；其中 **18** 场检索到对应论文，**3** 篇有长篇精读。
 - **场次导航**：下表链接到每个场次的页面（含该场全部报告的精读）。
 - **完整日程**：页面底部按日期列出全部报告，即使尚未精读也能看到「谁在讲、讲什么」。
 
@@ -25,7 +25,7 @@
 | [Session 09](session-09.md) | 10 月 18 日 周日 | 10:00-12:00 | 上午 | AI4Science | 4 | 4/4 |
 | [Session 10](session-10.md) | 10 月 18 日 周日 | 10:00-12:00 | 上午 | 机器学习理论 | 3 | 3/3 |
 | [Session 11](session-11.md) | 10 月 18 日 周日 | 10:00-12:00 | 上午 | Physics of Deep Learning | 3 | 3/3 |
-| [Session 12](session-12.md) | 10 月 18 日 周日 | 10:00-12:00 | 上午 | 扩散语言模型 | 3 | 0/3 |
+| [Session 12](session-12.md) | 10 月 18 日 周日 | 10:00-12:00 | 上午 | 扩散语言模型 | 3 | 1/3 |
 | [Session 13](session-13.md) | 10 月 18 日 周日 | 14:00-16:00 | 下午 | AI的数理和计算基础 | 3 | 0/3 |
 | [Session 14](session-14.md) | 10 月 18 日 周日 | 14:00-16:00 | 下午 | Agent技术及应用 | 4 | 0/4 |
 
@@ -176,13 +176,13 @@
 
 </details>
 
-<details><summary><b>上午 10:00-12:00</b> · 7会（友谊宫二层7号会议室） · <b>扩散语言模型</b>（3 场，已精读 0）</summary>
+<details><summary><b>上午 10:00-12:00</b> · 7会（友谊宫二层7号会议室） · <b>扩散语言模型</b>（3 场，已精读 1）</summary>
 
 *主持：胡天阳（香港中文大学（深圳））*
 
 | # | 时间 | 题目 | 讲者 | 单位 |
 |:--:|:--:|------|------|------|
-| 1 | 10:00-10:40 | Parallel Generation, Iterative Refinement: The Evolution of LLaDA 2.x in Practice | 刘华斌 | 蚂蚁集团 |
+| 1 | 10:00-10:40 | [Parallel Generation, Iterative Refinement: The Evolution of LLaDA 2.x in Practice](session-12.md) | 刘华斌 | 蚂蚁集团 |
 | 2 | 10:40-11:20 | 扩散式语言建模探索：从掩码扩散到连续扩散 | 胡天阳 | 香港中文大学（深圳） |
 | 3 | 11:20-12:00 | ConvergeFlow: Language Flow with Provable Convergence to Token Embeddings | 李根 | 香港中文大学 |
 
