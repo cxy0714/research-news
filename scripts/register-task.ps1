@@ -2,20 +2,25 @@
 # repo root. Registering tasks can require admin — if you get "Access denied",
 # re-run this from an ELEVATED PowerShell (Start menu -> Windows PowerShell ->
 # Run as administrator; then `cd <repo>; .\scripts\register-task.ps1`).
-#   .\scripts\register-task.ps1                          # daily + catch-up + journals loop
+#   .\scripts\register-task.ps1                          # daily + catch-up + journals + xagi loops
 #   .\scripts\register-task.ps1 -Time "08:30"
-#   .\scripts\register-task.ps1 -NoCatchUp -NoJournals   # only the daily task
+#   .\scripts\register-task.ps1 -NoCatchUp -NoJournals   # daily + xagi only
 #   .\scripts\register-task.ps1 -JournalMax 5            # journals: do 5 units then stop
+#   .\scripts\register-task.ps1 -NoXagi                  # skip the XAGI conference loop
 
 param(
     [datetime]$Time = "09:10",
     [datetime]$JournalTime = "10:30",
+    [datetime]$XagiTime = "11:30",
     [int]$JournalMax = 0,            # 0 = loop until the queue is empty
+    [int]$XagiMax = 0,               # 0 = loop until the queue is empty
     [string]$TaskName = "research-news-daily",
     [string]$CatchUpTaskName = "research-news-catchup",
     [string]$JournalTaskName = "research-news-journals",
+    [string]$XagiTaskName = "research-news-xagi",
     [switch]$NoCatchUp,
-    [switch]$NoJournals
+    [switch]$NoJournals,
+    [switch]$NoXagi
 )
 
 $repo = Split-Path -Parent $PSScriptRoot          # repo root (script is in scripts\)
@@ -86,6 +91,23 @@ if (-not $NoJournals) {
     if (Register-RnTask $JournalTaskName "run_journal_backfill.ps1" @($jLogon, $jDaily) `
             "research-news journal back-catalog backfill" "-Max $JournalMax" $journalSettings) {
         Write-Host "OK: '$JournalTaskName' - loop at logon (+ daily $($JournalTime.ToString('HH:mm')) restart)."
+    }
+}
+
+# XAGI 2026 conference deep reads — same loop pattern as the journals: one talk
+# ("一格") per lock hold from ops\xagi2026-backfill.md, yielding to daily, exit
+# when the queue is empty. Started at logon + restarted daily so it survives a
+# reboot; IgnoreNew keeps a single loop alive.
+if (-not $NoXagi) {
+    $xagiSettings = New-ScheduledTaskSettingsSet `
+        -StartWhenAvailable -MultipleInstances IgnoreNew `
+        -ExecutionTimeLimit (New-TimeSpan -Days 30) `
+        -DontStopIfGoingOnBatteries -AllowStartIfOnBatteries
+    $xLogon = New-ScheduledTaskTrigger -AtLogOn
+    $xDaily = New-ScheduledTaskTrigger -Daily -At $XagiTime
+    if (Register-RnTask $XagiTaskName "run_xagi_backfill.ps1" @($xLogon, $xDaily) `
+            "research-news XAGI 2026 conference deep-read loop" "-Max $XagiMax" $xagiSettings) {
+        Write-Host "OK: '$XagiTaskName' - loop at logon (+ daily $($XagiTime.ToString('HH:mm')) restart)."
     }
 }
 

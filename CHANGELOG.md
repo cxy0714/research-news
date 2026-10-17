@@ -18,6 +18,18 @@
 
 ### Added
 
+- **XAGI 2026 会议精读（队列 + 共享锁）**：新增 `research_news/scrapers/xagi.py`（日程页确定性
+  解析，14 场次 / 49 场报告，无 LLM、无 API key，落 `data/conferences/xagi2026/sessions.json`）与
+  `research_news/xagi.py`（整条会议流水线）：①`match` 用 LLM 推断报告的英文论文题目 + OpenAlex /
+  arXiv 搜索页检索，打分只接受「标题高度相似」或「讲者是论文作者 + 检索词命中标题」，另加
+  `skip` 人工兜底，宁可标「未检索到论文」也不硬凑；②`read` 每格生成 400-600 字四段精读
+  （问题 / 核心方法 / 与已有工作关系 / 贡献与边界），命中 arXiv 的报告额外写一篇
+  `docs/deep_reads/xagi2026-<arXiv>.md` 长篇精读；③`backfill` 按 `ops/xagi2026-backfill.md` 队列
+  **一格一格**执行（一次一场、成功才打勾、失败不阻塞后续），`run_xagi_backfill.ps1` 循环复用
+  daily / journals 的 **`Global\research-news-daily` 共享锁**并在 daily 时段让路，
+  `scripts/register-task.ps1` 新增 `research-news-xagi` 计划任务（登录 + 每日重启）；
+  ④`render` 生成 `docs/conferences/xagi2026/`（总览 + 每场一页 + 进度）并维护 mkdocs 导航块。
+  站点新增「会议专题 / XAGI 2026」入口。
 - **选题提案引擎 `research_news/proposals.py`**：把攒下来的精读语料 + 收藏变成**可上手的提案**
   ——能投出去的标题、点名数学对象的 claim、先打哪个最简特例、哪几篇论文**独立**点名了这个 gap
   （附原话）、接武器库的哪一件、什么会杀死它、第一周做什么。候选池是「每篇取最新一次精读，

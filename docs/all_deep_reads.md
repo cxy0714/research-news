@@ -6195,6 +6195,16 @@
 - [Regularization for the Approximation of Functions by Mollified Discretization Methods](deep_reads/2026-10-17-10.1137_24m1678210.md)  
   6/10 [journals]
 
+#### SIAM/ASA Journal on Uncertainty Quantification Vol 13 Issue 2
+
+- [Comparing Scale Parameter Estimators for Gaussian Process Interpolation with the Brownian Motion Prior: Leave-One-Out Cross Validation and Maximum Likelihood](deep_reads/2026-10-17-10.1137_23m1586884.md)  
+  6/10 [journals]
+
+#### SIAM/ASA Journal on Uncertainty Quantification Vol 13 Issue 1
+
+- [Conditional Optimal Transport on Function Spaces](deep_reads/2026-10-17-10.1137_23m1618922.md)  
+  4/10 [journals]
+
 #### SIAM Journal on Mathematics of Data Science Vol 8 Issue 3
 
 - [Functional Adaptive Huber Linear Regression](deep_reads/2026-10-17-10.1137_24m171125x.md)  
@@ -9076,6 +9086,11 @@
 
 ### 期刊
 
+#### SIAM/ASA Journal on Uncertainty Quantification Vol 13 Issue 2
+
+- [Surrogate-Based Global Sensitivity Analysis with Statistical Guarantees via Floodgate](deep_reads/2026-10-17-10.1137_24m1718330.md)  
+  6/10 [journals]
+
 #### SIAM Journal on Mathematics of Data Science Vol 7 Issue 3
 
 - [Covariance Alignment: From Maximum Likelihood Estimation to Gromov–Wasserstein](deep_reads/2026-10-17-10.1137_24m1682841.md)  
@@ -11334,6 +11349,32 @@
   4/10 [journals]
 - [Non-convergence to Global Minimizers for Adam and Stochastic Gradient Descent Optimization and Constructions of Local Minimizers in the Training of Artificial Neural Networks](deep_reads/2026-10-17-10.1137_24m1639464.md)  
   3/10 [journals]
+
+#### SIAM/ASA Journal on Uncertainty Quantification Vol 13 Issue 2
+
+- [Tensor Train Based Sampling Algorithms for Approximating Regularized Wasserstein Proximal Operators](deep_reads/2026-10-17-10.1137_24m1633765.md)  
+  7/10 [journals]
+- [Complex-Valued Signal Recovery Using a Generalized Bayesian LASSO](deep_reads/2026-10-17-10.1137_24m1644778.md)  
+  6/10 [journals]
+- [Robust A-Optimal Experimental Design for Sensor Placement in Bayesian Linear Inverse Problems](deep_reads/2026-10-17-10.1137_24m1667543.md)  
+  6/10 [journals]
+- [Advancing Inverse Scattering with Surrogate Modeling and Bayesian Inference for Functional Inputs](deep_reads/2026-10-17-10.1137_24m1637295.md)  
+  5/10 [journals]
+- [Multilevel Markov Chain Monte Carlo with Likelihood Scaling for Bayesian Inversion with High-resolution Observations](deep_reads/2026-10-17-10.1137_24m1634333.md)  
+  5/10 [journals]
+- [Antithetic Multilevel Methods for Elliptic and Hypoelliptic Diffusions with Applications](deep_reads/2026-10-17-10.1137_24m1695178.md)  
+  4/10 [journals]
+- [An Energy-Based Model Approach to Rare Event Probability Estimation](deep_reads/2026-10-17-10.1137_23m1605065.md)  
+  4/10 [journals]
+- [A Convergent Interacting Particle Method for Computing KPP Front Speeds in Random Flows](deep_reads/2026-10-17-10.1137_23m1604564.md)  
+  3/10 [journals]
+
+#### SIAM/ASA Journal on Uncertainty Quantification Vol 13 Issue 1
+
+- [HMC and Underdamped Langevin United in the Unadjusted Convex Smooth Case](deep_reads/2026-10-17-10.1137_23m1608963.md)  
+  4/10 [journals]
+- [Equispaced Fourier Representations for Efficient Gaussian Process Regression from a Billion Data Points](deep_reads/2026-10-17-10.1137_23m1565310.md)  
+  0/10 [journals]
 
 #### SIAM Journal on Mathematics of Data Science Vol 8 Issue 3
 
@@ -16624,6 +16665,18 @@
   6/10 [journals]
 - [Optimal Control under Uncertainty with Joint Chance State Constraints: Almost-Everywhere Bounds, Variance Reduction, and Application to (Bi)linear Elliptic PDEs](deep_reads/2026-10-17-10.1137_24m171557x.md)  
   4/10 [journals]
+
+#### SIAM/ASA Journal on Uncertainty Quantification Vol 13 Issue 2
+
+- [Deep Learning for Model Correction of Dynamical Systems with Data Scarcity](deep_reads/2026-10-17-10.1137_24m1704324.md)  
+  4/10 [journals]
+
+#### SIAM/ASA Journal on Uncertainty Quantification Vol 13 Issue 1
+
+- [Worst-Case Learning under a Multifidelity Model](deep_reads/2026-10-17-10.1137_24m1671025.md)  
+  5/10 [journals]
+- [Sampling Low-Fidelity Outputs for Estimation of High-Fidelity Density and Its Tails](deep_reads/2026-10-17-10.1137_24m1639142.md)  
+  0/10 [journals]
 
 #### SIAM Journal on Mathematics of Data Science Vol 8 Issue 4
 

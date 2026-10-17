@@ -677,6 +677,62 @@ python -m research_news.talks read   --id ocis-2026-06-02-suhas-vijaykumar
 `config/talks.ocis.yaml`（有 video 的可转写条目）。个别老页排版怪异时，`--llm` 可改用模型做
 关联兜底。链接抓取是确定性的，建议核对一下少量老条目的讲者 / 题目。
 
+## 会议精读（XAGI 2026 交叉智能大会）
+
+[**XAGI 2026**](https://www.x-agi.cc/schedule/)（2026.10.16-18，北京友谊宾馆）的日程本身就是
+一份高质量报告清单：14 个场次、49 场报告，每场都有讲者、单位、官方摘要和讲者简介。这个管道
+把它变成站点的「会议专题」：**逐场精读 + 对应论文的长篇精读**，做法照搬 JCSDS 2026 那一次的
+会议模式，运行方式照搬期刊回补的**队列 + 共享锁**。
+
+```bash
+# ① 抓日程（确定性解析，无 LLM；产出 data/conferences/xagi2026/sessions.json）
+python -m research_news.xagi import
+
+# ② 给每场报告找对应论文（LLM 推断英文题目 + OpenAlex/arXiv 检索 + 讲者/关键词打分）
+python -m research_news.xagi match
+python -m research_news.xagi match --cell sess04-t2 --force   # 重匹一格
+python -m research_news.xagi skip  --cell sess01-t1           # 人工判定「没有对应论文」
+
+# ③ 精读一格（自动匹配 → 400-600 字四段精读 → 有 arXiv 论文再写一篇长篇精读）
+python -m research_news.xagi read --cell sess04-t2
+
+# ④ 队列驱动（和期刊回补同一个套路：一次一格，做完打勾）
+python -m research_news.xagi backfill --max 1
+python -m research_news.xagi status
+```
+
+产物：
+
+- `docs/conferences/xagi2026/index.md` — 会议总览：场次导航 + 完整日程（带精读进度）。
+- `docs/conferences/xagi2026/session-XX.md` — **每场一页**：本场导览 + 每场报告的官方摘要、
+  对应论文链接、四段精读（问题 / 核心方法 / 与已有工作的关系 / 贡献与边界）。
+- `docs/deep_reads/xagi2026-<arXiv>.md` — 检索到 arXiv 论文的报告，额外生成一篇**长篇精读**
+  （和日常论文精读同一套 prompt：领域脉络 → 最小内核 → 论文做了什么 → 开放问题）。
+- `data/conferences/xagi2026/research/<cell>.json` — 每格的完整结果（论文、精读、模型、时间）。
+- `ops/xagi2026-backfill.md` — **队列即状态**（git 里）：一格一行，`- [ ]` → `- [x]`。
+
+匹配是**保守**的：只接受标题高度相似、或「讲者是论文作者 + 检索词命中标题」的结果；宁可标
+「未检索到公开论文（以下为推断）」，也不硬凑一篇不相关的论文（`skip` 可人工兜底）。
+
+### 队列 + 共享锁（和期刊回补一样）
+
+`ops/xagi2026-backfill.md` 是本会议的逐格队列，`run_xagi_backfill.ps1` 是它的执行器：
+
+- **一次一格**：每次取第一个未打勾的格子 → `xagi backfill --max 1` → 成功才打勾。
+- **共享锁**：与 daily、期刊回补共用同一把命名互斥量 `Global\research-news-daily`，
+  同一时刻只有一个任务在跑；daily 时段（工作日 09:00-14:00 且当天日报未出）主动让路。
+- **可续跑**：结果按格子落盘，重跑会跳过已完成的格子；中断、重启、换机器都安全。
+- **每格提交推送**：跑完一格 `git add -A` + commit + 带重试 push，站点随之更新。
+
+注册成计划任务（与 daily / journals 同一个脚本）：
+
+```powershell
+.\scripts\register-task.ps1                 # daily + catch-up + journals + xagi 四个任务
+.\scripts\register-task.ps1 -XagiMax 6      # XAGI 循环每次最多做 6 格就停
+.\scripts\register-task.ps1 -NoXagi         # 不要 XAGI 循环
+Start-ScheduledTask -TaskName research-news-xagi   # 立刻跑一次
+```
+
 ## 账户与收藏（网页端）
 
 站点是纯静态的（GitHub Pages，无后端），但通过把状态存进你 GitHub 账号下的一个
@@ -866,7 +922,7 @@ daily 全流程交给 Windows 任务计划程序跑 `run_daily.ps1` 即可，**�
 Start-ScheduledTask -TaskName research-news-daily   # 立刻测一次
 ```
 
-它注册**三个**任务，都勾好关键项（**错过自动补跑** `-StartWhenAvailable`、**绝不并行**
+它注册**四个**任务，都勾好关键项（**错过自动补跑** `-StartWhenAvailable`、**绝不并行**
 `-MultipleInstances IgnoreNew`、电池不挡）：
 
 - `research-news-daily`：工作日 09:10 跑 `run_daily.ps1`。
@@ -878,9 +934,12 @@ Start-ScheduledTask -TaskName research-news-daily   # 立刻测一次
   `ops\journal-backfill.md` 的队列一格接一格补期刊往期、**直到队列空才退出**（每天 10:30 还有个
   重启触发器兜底）。机器常开就让它一直补，约 1-2 天补完 28 格。它在 **daily 时段主动让路**。
   限格数 / 改重启时间 / 关掉：`register-task.ps1 -JournalMax 5` / `-JournalTime "14:00"` / `-NoJournals`。
+- `research-news-xagi`：同款循环 `run_xagi_backfill.ps1`，按 `ops\xagi2026-backfill.md` 的队列
+  **一格 = 一场报告**地做 XAGI 2026 会议精读（详见「会议精读」一节），队列空即退出；每天 11:30
+  重启触发器兜底。限格 / 关掉：`-XagiMax 6` / `-NoXagi`。
 
-三个任务**共用同一把锁**，所以绝不并行；期刊循环会给 daily 让路，daily 也改成**等锁不跳过**——
-所以 daily 永不被期刊挤掉，且有重跑保护、已存在的报告不会被覆盖。
+四个任务**共用同一把锁**，所以绝不并行；期刊 / XAGI 循环都会给 daily 让路，daily 也改成**等锁不
+跳过**——所以 daily 永不被挤掉，且有重跑保护、已存在的报告不会被覆盖。
 
 > 手动建任务的话：创建任务 → 触发器 周一至周五 09:10 → 操作
 > `powershell.exe -NoProfile -ExecutionPolicy Bypass -File "C:\path\to\research-news\run_daily.ps1"`
