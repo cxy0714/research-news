@@ -4,7 +4,7 @@
 
 全会有 **14 个场次、49 场报告**。本页是日程的**结构化存档与精读入口**：每个场次一页，逐场精读，按队列一格一格推进。
 
-- 已精读 **18/49** 场；其中 **18** 场检索到对应论文，**3** 篇有长篇精读。
+- 已精读 **19/49** 场；其中 **18** 场检索到对应论文，**3** 篇有长篇精读。
 - **场次导航**：下表链接到每个场次的页面（含该场全部报告的精读）。
 - **完整日程**：页面底部按日期列出全部报告，即使尚未精读也能看到「谁在讲、讲什么」。
 
@@ -19,7 +19,7 @@
 | [Session 03](session-03.md) | 10 月 17 日 周六 | 14:00-16:00 | 下午 | LLM评测 & Benchmark | 4 | 4/4 |
 | [Session 04](session-04.md) | 10 月 17 日 周六 | 14:00-16:00 | 下午 | 预训练算法的新进展 | 3 | 3/3 |
 | [Session 05](session-05.md) | 10 月 17 日 周六 | 14:00-16:00 | 下午 | AI Infra | 3 | 3/3 |
-| [Session 06](session-06.md) | 10 月 17 日 周六 | 14:00-16:00 | 下午 | AI + Finance | 4 | 0/4 |
+| [Session 06](session-06.md) | 10 月 17 日 周六 | 14:00-16:00 | 下午 | AI + Finance | 4 | 1/4 |
 | [Session 07](session-07.md) | 10 月 17 日 周六 | 14:00-16:00 | 下午 | 扩散模型的理论基础以及推理测算法 | 4 | 0/4 |
 | [Session 08](session-08.md) | 10 月 18 日 周日 | 10:00-12:00 | 上午 | AI + 教育 | 3 | 0/3 |
 | [Session 09](session-09.md) | 10 月 18 日 周日 | 10:00-12:00 | 上午 | AI4Science | 4 | 0/4 |
@@ -98,13 +98,13 @@
 
 </details>
 
-<details><summary><b>下午 14:00-16:00</b> · 4会（友谊宫二层4号会议室） · <b>AI + Finance</b>（4 场，已精读 0）</summary>
+<details><summary><b>下午 14:00-16:00</b> · 4会（友谊宫二层4号会议室） · <b>AI + Finance</b>（4 场，已精读 1）</summary>
 
 *主持：祝武（清华大学）*
 
 | # | 时间 | 题目 | 讲者 | 单位 |
 |:--:|:--:|------|------|------|
-| 1 | 14:00-14:30 | From Economic Agents to Agentic Economies: A Systems Blueprint for Economic World Models | 韩佳乐 | 深圳河套学院 |
+| 1 | 14:00-14:30 | [From Economic Agents to Agentic Economies: A Systems Blueprint for Economic World Models](session-06.md) | 韩佳乐 | 深圳河套学院 |
 | 2 | 14:30-15:00 | Who Verifies Decentralized Information? Economic Incentives, Accountability, and Trustworthy AI Across Oracle Protocols | Luyao Zhang | Duke Kunshan University |
 | 3 | 15:00-15:30 | Large and Deep Factor Models | Yuan Zhang | 上海财经大学 |
 | 4 | 15:30-16:00 | Incorporating Return Prediction in High-Dimensional Mean-Variance Portfolio Optimization | 黄睿钊 | 香港科技大学 |
