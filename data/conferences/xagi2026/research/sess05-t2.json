@@ -1,0 +1,69 @@
+{
+ "cell": "sess05-t2",
+ "session": {
+  "no": 5,
+  "title": "AI Infra",
+  "date": "2026-10-17",
+  "weekday": "周六",
+  "period": "下午",
+  "time": "14:00-16:00",
+  "room": "3会（友谊宫二层3号会议室）",
+  "chairs": [
+   {
+    "name": "杨朋昆",
+    "org": "清华大学",
+    "bio": "Pengkun Yang is an associate professor at the Department of Statistics and Data Science at Tsinghua University. Prior to joining Tsinghua, he was a Postdoctoral Research Associate at the Department of Electrical Engineering at Princeton University. He received a Ph.D. degree (2018) and a master degree (2016) from the Department of Electrical and Computer Engineering at University of Illinois at Urbana-Champaign, and a B.E. degree (2013) from the Department of Electronic Engineering at Tsinghua University. His research interests include statistical inference, learning, optimization, and systems. He is a recipient of Thomas M. Cover Dissertation Award in 2020, and a recipient of Jack Keil Wolf ISIT Student Paper Award at the 2015 IEEE International Symposium on Information Theory (semi-plenary talk)."
+   }
+  ]
+ },
+ "talk": {
+  "no": 2,
+  "title": "跨集群异构PD分离：挑战、设计与工程实践",
+  "speaker": "李秀红",
+  "org": "无问芯穹",
+  "affiliation": "无问芯穹 · 技术",
+  "time": "14:40-15:20",
+  "abstract": "本演讲将介绍无问芯穹发布的跨集群异构推理架构PDD（Prefill-RelayDecode-MainDecode）。该架构以高性价比的广域网以太网串联多地已建成的同构数据中心，并将传统的 PD 分离链路“P-D”创新解构为“P-RLD-MD”的三级分离式推理架构。在让“偏科”的硬件能够只刷自己最擅长的题的同时，更突破性解决了以太网环境下 KV Cache 的传输延迟痛点。实测显示，该架构在实现了首 Token 延迟降低 51.5% 的同时，单 Token 成本可降低 37.5%。不仅意味着用户端速度体验得到显著提升，更实现了全域异构算力的最大化调度，让分散各处的存量集群资源能够充分释放产业价值。"
+ },
+ "paper": {
+  "found": false,
+  "title": "PDD: Unleashing Economical and Flexible Heterogeneous LLM Inference via Cross-Datacenter Prefill-Decode Disaggregation",
+  "authors": [
+   "Yida Wang",
+   "Xiuhong Li",
+   "Jianping Ma",
+   "Gan Sun",
+   "Yunshen Xu",
+   "Buhe Han",
+   "Jingxu Ng",
+   "Yuhao Luo",
+   "Ke Hong",
+   "Guohao Dai",
+   "Boxun Li",
+   "Yu Wang"
+  ],
+  "abstract": "Abstract : …Time-to-First-Token (TTFT) latency, which is especially detrimental for agentic workloads characterized by long contexts, high cache hit rates, and short outputs.\n  We propose PDD , a three-tier disaggregation architecture built upon prefill-decode (PD) disaggregation, consisting of Prefill, RelayDecode (RLD), and MainDecode (MD) instances. On Cluster A, Pref… ▽ More Interconnecting geographically dispersed clusters over wide-area Ethernet provides a scalable and cost-effective alternative to dedicated intra-datacenter heterogeneous clusters for Large Language Model (LLM) inference. However, this cross-datacenter disaggregation imposes heavy KV-cache transfers between clusters, causing substantial Time-to-First-Token (TTFT) latency, which is especially detrimental for agentic workloads characterized by long contexts, high cache hit rates, and short outputs.\n  We propose PDD , a three-tier disaggregation architecture built upon prefill-decode (PD) disaggregation, consisting of Prefill, RelayDecode (RLD), and MainDecode (MD) instances. On Cluster A, Prefill instances perform the prefill computation, while RLD instances immediately receive the KV cache via high-speed RDMA and begin decoding, thereby overlapping the KV transfer to Cluster B over TCP-based Ethernet. MD instances on Cluster B receive the KV cache along with the tokens produced by RLD, and decoding is then seamlessly handed off from RLD to MD for completion.\n  To maximize overall efficiency, PDD employs three core mechanisms: Decode-side RadixCache to alleviate bandwidth bottlenecks, an Extend-Decode Handoff mechanism for smooth control migration between RLD and MD, and multi-stage pipeline orchestration to manage complex inter-tier dependencies under high concurrency and long-term serving. We further design a low-cost, fine-grained heterogeneous deployment scheme that maximizes latency-masking efficiency at marginal cost. Compared to the intra-DC homogeneous PD baseline, PDD's cross-datacenter mapping of compute-intensive H100s and memory-bandwidth-optimized H200s achieves a Benefit-Cost Ratio (BCR) up to 37.5% higher in SLA-compliant goodput. △ Less",
+  "arxiv_id": "2609.13161",
+  "doi": null,
+  "url": "https://arxiv.org/abs/2609.13161",
+  "source": "arxiv",
+  "score": 0.807,
+  "title_sim": 0.18,
+  "keyword_cov": 0.429,
+  "query": "cross-cluster heterogeneous PD separation PDD architecture",
+  "names": [
+   "PDD"
+  ],
+  "title_en": "Cross-Cluster Heterogeneous PD Separation: Challenges, Design, and Engineering Practice",
+  "hint_authors": [
+   "Xiuhong Li"
+  ],
+  "has_paper_hint": false,
+  "note": "报告为工程实践/系统介绍，无对应论文，PDD为系统名。",
+  "matched_at": "2026-10-17T14:58:46"
+ },
+ "short_read": "*（未检索到公开论文，以下依据报告摘要与讲者方向推断）*\n\n**问题**：本报告针对跨集群异构推理中传统 PD（Prefill-Decode）分离在广域网以太网环境下的瓶颈。多地已建成的数据中心算力分散，但硬件“偏科”严重，传统两级分离假设专用高带宽网络，而以太网下 KV Cache 传输延迟成为首 Token 延迟和成本的主要痛点。在推理成本高企、存量集群资源闲置的背景下，如何用低成本网络串联异构算力并提升利用率，是当前推理基础设施的关键问题。\n\n**核心方法**：提出跨集群异构推理架构 PDD，将传统“P-D”链路解构为“P-RLD-MD”三级：Prefill（预填充）、RelayDecode（中继解码）、MainDecode（主解码）。通过广域网以太网串联多地数据中心，让不同硬件只执行各自擅长的阶段，同时针对以太网环境优化 KV Cache 传输。实测显示，该架构实现首 Token 延迟降低 51.5%，单 Token 成本降低 37.5%。但具体传输优化机制（如压缩、调度策略）与实验配置，官网摘要未给出。\n\n**与已有工作的关系**：相对传统 PD 分离路线的直接推进。传统 PD 通常将 Prefill 与 Decode 拆到不同集群，依赖 RDMA 等低延迟网络；PDD 则面向广域网以太网这一更廉价但高延迟的环境，并引入中继解码环节来缓解 KV Cache 传输压力。讲者团队在高性能计算与推理基础设施方向有积累（如 ASPLOS '24 最佳论文），但本次报告的技术细节未公开，无法确认与具体基线方法的量化对比。\n\n**贡献与边界**：主要贡献是提出三级分离架构，在以太网环境下同时改善用户感知延迟与单位成本，并提升异构算力调度效率。边界在于：实测数据可能依赖特定硬件组合与网络拓扑，未给出模型规模、集群规模及 KV Cache 传输的具体实现；且未检索到公开论文，无法验证复现。该架构是否适用于超长上下文、多租户混部等场景，仍需进一步材料支撑。",
+ "long_read": null,
+ "model": "deepseek-reasoner",
+ "generated_at": "2026-10-17T16:58:50"
+}
