@@ -51,7 +51,7 @@
 
 **讲者**：涂尚卿（清华大学 · 计算机系） · 10:40-11:20
 
-**对应论文**：CogEvol: Towards Efficient and Reliable Learning Environment Generation · [arXiv:2608.30968](https://arxiv.org/abs/2608.30968)
+**对应论文**：CogEvol: Towards Efficient and Reliable Learning Environment Generation · [arXiv:2608.30968](https://arxiv.org/abs/2608.30968) · 📖 [长篇精读](../../deep_reads/xagi2026-2608.30968.md)
 
 <details><summary>摘要（会议官网）</summary>
 
