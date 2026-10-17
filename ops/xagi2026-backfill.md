@@ -39,7 +39,7 @@ XAGI 2026 交叉智能大会（2026.10.16-18，北京友谊宾馆）的**逐场�
 ### Session 05 · AI Infra · 2026-10-17 14:00-16:00 · 3会（友谊宫二层3号会议室）
 - [x] (2026-10-17) `sess05-t1` 基于FlagOS的高性价比混合云Token工厂 — 张先轶（澎峰科技）
 - [x] (2026-10-17) `sess05-t2` 跨集群异构PD分离：挑战、设计与工程实践 — 李秀红（无问芯穹）
-- [ ] `sess05-t3` 基于昇腾的AgenticRL训练技术与企业级Agent落地实践 — 吴晨玮（华为）
+- [x] (2026-10-17) `sess05-t3` 基于昇腾的AgenticRL训练技术与企业级Agent落地实践 — 吴晨玮（华为）
 
 ### Session 06 · AI + Finance · 2026-10-17 14:00-16:00 · 4会（友谊宫二层4号会议室）
 - [ ] `sess06-t1` From Economic Agents to Agentic Economies: A Systems Blueprint for Economic World Models — 韩佳乐（深圳河套学院）
