@@ -22,7 +22,7 @@
 
 **讲者**：潘亮铭（北京大学 · 计算机学院） · 14:00-14:30
 
-**对应论文**：Mechanistic Data Attribution: Tracing the Training Origins of Interpretable LLM Units · [arXiv:2601.21996](https://arxiv.org/abs/2601.21996)
+**对应论文**：Mechanistic Data Attribution: Tracing the Training Origins of Interpretable LLM Units · [arXiv:2601.21996](https://arxiv.org/abs/2601.21996) · 📖 [长篇精读](../../deep_reads/xagi2026-2601.21996.md)
 
 <details><summary>摘要（会议官网）</summary>
 
