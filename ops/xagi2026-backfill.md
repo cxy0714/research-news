@@ -44,7 +44,7 @@ XAGI 2026 交叉智能大会（2026.10.16-18，北京友谊宾馆）的**逐场�
 ### Session 06 · AI + Finance · 2026-10-17 14:00-16:00 · 4会（友谊宫二层4号会议室）
 - [x] (2026-10-17) `sess06-t1` From Economic Agents to Agentic Economies: A Systems Blueprint for Economic World Models — 韩佳乐（深圳河套学院）
 - [x] (2026-10-17) `sess06-t2` Who Verifies Decentralized Information? Economic Incentives, Accountability, and Trustworthy AI Across Oracle Protocols — Luyao Zhang（Duke Kunshan University）
-- [ ] `sess06-t3` Large and Deep Factor Models — Yuan Zhang（上海财经大学）
+- [x] (2026-10-17) `sess06-t3` Large and Deep Factor Models — Yuan Zhang（上海财经大学）
 - [ ] `sess06-t4` Incorporating Return Prediction in High-Dimensional Mean-Variance Portfolio Optimization — 黄睿钊（香港科技大学）
 
 ### Session 07 · 扩散模型的理论基础以及推理测算法 · 2026-10-17 14:00-16:00 · 8会（友谊宫二层8号会议室）
