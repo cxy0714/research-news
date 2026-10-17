@@ -70,7 +70,7 @@ XAGI 2026 交叉智能大会（2026.10.16-18，北京友谊宾馆）的**逐场�
 - [x] (2026-10-17) `sess10-t3` Learning to Build Agents: Adaptive Planning, Memory, and Harness Evolution — 常恒（Unity China）
 
 ### Session 11 · Physics of Deep Learning · 2026-10-18 10:00-12:00 · 5会（友谊宫二层5号会议室）
-- [ ] `sess11-t1` 从AI的物理学到AI自进化 — 刘子鸣（清华大学）
+- [x] (2026-10-17) `sess11-t1` 从AI的物理学到AI自进化 — 刘子鸣（清华大学）
 - [ ] `sess11-t2` Towards the Foundation of Deep Learning — 张耀宇（上海交通大学）
 - [ ] `sess11-t3` 物理第一性 AI：从物理到智能 — 罗迪（清华大学）
 
