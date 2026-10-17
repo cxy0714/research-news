@@ -113,7 +113,7 @@ $$L_\rho\phi:=\frac{1}{\rho}\nabla\cdot(\rho\nabla\phi)=-(\omega-\bar\omega)$$
 
 **讲者**：焦雨领（武汉大学 · 人工智能学院） · 15:30-16:00
 
-**对应论文**：Offline Deep Q * Estimation with Diffusion Models · [arXiv:2608.14401](https://arxiv.org/abs/2608.14401)
+**对应论文**：Offline Deep Q * Estimation with Diffusion Models · [arXiv:2608.14401](https://arxiv.org/abs/2608.14401) · 📖 [长篇精读](../../deep_reads/xagi2026-2608.14401.md)
 
 <details><summary>摘要（会议官网）</summary>
 

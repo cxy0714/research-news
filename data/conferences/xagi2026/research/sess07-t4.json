@@ -58,7 +58,7 @@
   "matched_at": "2026-10-17T14:47:15"
  },
  "short_read": "**问题**  \n离线强化学习中，最优动作值函数 $Q^*$ 可视为最优 Bellman 方程的唯一解，但奖励函数与转移核未知，导致最优 Bellman 算子无法直接从数据观测。现有深度 RL 理论常依赖 Bellman 完备性假设或递归拟合目标，误差易在迭代中累积。该报告提出将算子估计与值函数学习解耦：先用条件扩散模型估计奖励分布与转移核，再据此构造数据驱动的 Bellman 算子，最后在神经网络函数类上最小化经验 Bellman 残差。这一框架把离线 RL 转化为可端到端分析的统计估计问题，为高维连续状态-动作空间下的 $Q^*$ 估计提供了新的理论切入点。\n\n**核心方法**  \n方法分两步。第一步，用条件扩散模型分别估计奖励条件分布 $R(\\cdot|x,a)$ 与下一状态转移核 $P(\\cdot|x,a)$，得到最优 Bellman 算子的近似 $\\widehat{\\mathcal T}^*$；第二步，将 $\\widehat{\\mathcal T}^*$ 代入最优 Bellman 方程，在深度网络函数类中通过最小化经验 Bellman 残差求解 $\\widehat Q$。理论分析先给出条件扩散估计在总变差距离下的非渐近收敛率，再将其误差传播到值函数估计。最终得到 Bellman 残差风险上界 $\\widetilde{\\mathcal O}\\bigl(n^{-\\frac{2\\beta}{d_x+d_a+2\\beta}}\\bigr)$，并在 concentrability 条件下导出 $L^2$ 收敛率 $\\widetilde{\\mathcal O}\\bigl(n^{-\\frac{\\beta}{d_x+d_a+2\\beta}}\\bigr)$，其中 $d_x,d_a$ 为状态、动作维数，$\\beta$ 为 $Q^*$ 的 Hölder 光滑指数。实验在 OpenAI Gym 的 Pendulum、Swimmer 及 MIMIC-III 临床数据集上与 MOPO、DFQI、MABO 对比。\n\n**与已有工作的关系**  \n该工作处于两条路线的交汇处。一条是直接值函数估计路线，如 FQI、DQN、DFQI 以及基于最小最大 Bellman 误差的 MSBO/MABO，这些方法通常需要 Bellman 完备性或耦合优化；另一条是基于模型的离线 RL，如 MBPO、MOPO、MOReL、COMBO，它们用学习到的模型做 rollout 或保守惩罚，但未将模型误差显式纳入 $Q^*$ 的统计收敛分析。与扩散 RL 中用于策略表示或轨迹生成的 Diffusion Q-learning、Decision Diffuser 不同，本文用扩散模型估计环境动态本身，并给出端到端的误差传播界。最接近的是 Ding et al. (2024) 的扩散世界模型，但本文聚焦单步条件分布估计与 Bellman 算子学习，而非多步 rollout。\n\n**贡献与边界**  \n主要贡献是提出一个解耦框架，将离线 $Q^*$ 估计拆分为条件扩散估计与残差最小化两个可独立分析的子问题，并给出不依赖 Bellman 完备性假设的非渐近收敛率。边界方面：理论要求状态-动作空间为 $[0,1]^{d_x+d_a}$，数据 i.i.d. 且由行为策略生成，并需要三个独立样本集分别用于奖励、转移核与值函数学习；$L^2$ 收敛率还需 concentrability 条件。实验仅覆盖两个低维 Gym 任务和一个医疗数据集，未报告高维连续控制或与更大规模离线基准的对比，官网摘要也未给出具体数值结果。",
- "long_read": null,
+ "long_read": "deep_reads/xagi2026-2608.14401.md",
  "model": "deepseek-reasoner",
  "generated_at": "2026-10-17T18:17:42"
 }
