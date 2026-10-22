@@ -4,6 +4,22 @@
 
 ### Daily
 
+- [Minimax Slope Estimation and Support Recovery under Weak Gaussian Selection](deep_reads/2026-10-19-2610.24749.md)  
+  8/10 [daily]
+- [Quantile-Only Regression: Inference and Partial Identification under Quantile Disclosure](deep_reads/2026-10-19-2610.27224.md)  
+  7/10 [daily]
+- [Synthetic Control: An Exact Geometric Formulation](deep_reads/2026-10-19-2610.26576.md)  
+  7/10 [daily]
+- [A LATE-Targeting Experimental Design for Multi-Arm RCTs](deep_reads/2026-10-19-2610.25667.md)  
+  7/10 [daily]
+- [Linear Regression with Common Unobserved Heterogeneity](deep_reads/2026-10-19-2610.25589.md)  
+  7/10 [daily]
+- [Discrete Choice with Generalized Social Interactions](deep_reads/2026-10-19-2610.27324.md)  
+  6/10 [daily]
+- [Almost Uniform Bias Correction for Persistent Panel Local Projections](deep_reads/2026-10-19-2610.26427.md)  
+  6/10 [daily]
+- [Persistence is not Independence: A structural Credibility Protocol for Distribution based Recovery in VARLiNGAM](deep_reads/2026-10-19-2610.25238.md)  
+  6/10 [daily]
 - [Simple Standard Errors for Complicated (Quasi-)Experimental Designs](deep_reads/2026-10-13-2610.12674.md)  
   8/10 [daily]
 - [Kernel-based External Validity of Experimental Studies](deep_reads/2026-10-13-2610.13625.md)  
@@ -4291,6 +4307,8 @@
 
 ### Daily
 
+- [Benign Overfitting Property of the Minimum $\ell_q$ -norm Interpolant Estimator in Regression Problem via Feature Space Decomposition](deep_reads/2026-10-19-2610.24350.md)  
+  7/10 [daily]
 - [Detecting Random Geometric Graphs with General Kernel](deep_reads/2026-10-13-2610.12765.md)  
   7/10 [daily]
 - [Mobility Edge for Sparse Complex Gaussian Matrices](deep_reads/2026-10-13-hexagon_2610.00168.md)  
@@ -5848,6 +5866,12 @@
 
 ### Daily
 
+- [Robust Local Fréchet Regression: Nonasymptotic Theory and Minimax Optimality](deep_reads/2026-10-19-2610.23757.md)  
+  8/10 [daily]
+- [Sieve-free ReLU Bayesian priors with near-minimax posterior contraction](deep_reads/2026-10-19-2610.23308.md)  
+  8/10 [daily]
+- [Nonparametric Dyadic Quantile Regression](deep_reads/2026-10-19-2610.25009.md)  
+  8/10 [daily]
 - [Minimax Rates for Estimating Powered Sliced Wasserstein Functionals](deep_reads/2026-10-13-2610.12740.md)  
   7/10 [daily]
 - [Scalable Nonparametric Change-Plane Regression with Random Features: Estimation and Inference](deep_reads/2026-10-12-2610.13290.md)  
@@ -8467,6 +8491,14 @@
 
 ### Daily
 
+- [Sample complexity of weak-signal latent-variable models](deep_reads/2026-10-19-2610.24770.md)  
+  8/10 [daily]
+- [Tuning-Free Tests for Treatment Effect Heterogeneity via Expectile Processes](deep_reads/2026-10-19-2610.25986.md)  
+  8/10 [daily]
+- [Inference on Linear Programs via Feasibility Testing](deep_reads/2026-10-19-2610.25453.md)  
+  7/10 [daily]
+- [Dimension-free comparison inequalities between $f$-divergences for Gaussian location mixtures](deep_reads/2026-10-19-2610.25070.md)  
+  6/10 [daily]
 - [Beyond Discrepancy: Oracle Drift in Nonstationary Weighted Risk Minimization](deep_reads/2026-10-13-2610.13598.md)  
   6/10 [daily]
 - [How Many Significant LISA?: A multiple testing correction](deep_reads/2026-10-12-2610.13472.md)  
@@ -13536,6 +13568,8 @@
 
 ### Daily
 
+- [Evidence-Based Policy Choice in Macroeconomics](deep_reads/2026-10-19-2610.27405.md)  
+  6/10 [daily]
 - [Early Investment Snowballs for Low-Skill Children: Average Marginal Returns and the Dynamics of Skill Formation](deep_reads/2026-10-13-2610.12509.md)  
   7/10 [daily]
 - [The Noise Is the Signal: Correlated Sampling Error Is Rank-Informative for Proxy Metric Selection](deep_reads/2026-10-08-2610.08194.md)  
@@ -16413,6 +16447,40 @@
 
 ### Daily
 
+- [Identifiability from Moments in Independent Component Analysis Mixture Models](deep_reads/2026-10-19-2610.23846.md)  
+  7/10 [daily]
+- [Asymptotic Normality of the Hill Estimator in Linear Preferential Attachment](deep_reads/2026-10-19-2610.24413.md)  
+  6/10 [daily]
+- [Pattern-avoiding binary arrays and a Stirling-type table: explicit formulas, exact recurrence orders, and non-D-finiteness](deep_reads/2026-10-19-hexagon_2610.00279.md)  
+  3/10 [daily]
+- [A sqrt(17/2) Lower Bound for Depth Reduction in Explainable Planar k-Center Clustering](deep_reads/2026-10-19-hexagon_2610.00323.md)  
+  2/10 [daily]
+- [A Three-Polynomial Counterexample to the Generalized Effective Hypercube Nullstellensatz](deep_reads/2026-10-19-hexagon_2610.00327.md)  
+  2/10 [daily]
+- [Fixed-Level TQFT Transport of Marked Handleslide Coherence: Disjoint Cubes and a Three-Handle Pentagon](deep_reads/2026-10-19-hexagon_2610.00276.md)  
+  2/10 [daily]
+- [Three-Element Lucky Sets of Stirling Permutations](deep_reads/2026-10-19-hexagon_2610.00324.md)  
+  1/10 [daily]
+- [A Nonunimodal Acyclic Polynomial with All Roots in the Left Half-Plane](deep_reads/2026-10-19-hexagon_2610.00325.md)  
+  1/10 [daily]
+- [A Bipartite Graph with a Nonunimodal Acyclic Polynomial](deep_reads/2026-10-19-hexagon_2610.00326.md)  
+  1/10 [daily]
+- [Marked Heegaard Boundary Modules: Filling, Joint Completion, and Integral Lattices](deep_reads/2026-10-19-hexagon_2610.00339.md)  
+  1/10 [daily]
+- [Integral root fibers and closed factorizations: Pairing maps, Rees covariance, caps, and sewing](deep_reads/2026-10-19-hexagon_2610.00340.md)  
+  1/10 [daily]
+- [A Counterexample to Affine-Subspace Union Stability under Small Deletions](deep_reads/2026-10-19-hexagon_2610.00328.md)  
+  1/10 [daily]
+- [Values of the Huang–Ma invariant](deep_reads/2026-10-19-hexagon_2610.00331.md)  
+  1/10 [daily]
+- [The fifteenth cohomology of moduli spaces of stable curves](deep_reads/2026-10-19-hexagon_2610.00267.md)  
+  1/10 [daily]
+- [Rational points on elliptic curves that are primitive modulo a positive proportion of primes](deep_reads/2026-10-19-hexagon_2610.00294.md)  
+  0/10 [daily]
+- [Almost all Markoff numbers are unique.](deep_reads/2026-10-19-hexagon_2610.00281.md)  
+  0/10 [daily]
+- [A fourteen-dimensional biperfect Lie bialgebra](deep_reads/2026-10-19-hexagon_2610.00284.md)  
+  0/10 [daily]
 - [Milne's rationality conjecture](deep_reads/2026-10-14-hexagon_2610.00226.md)  
   0/10 [daily]
 - [A seven-eighths zero-free half-plane for unitary Weil L-functions](deep_reads/2026-10-14-hexagon_2610.00216.md)  

@@ -19,6 +19,7 @@
 ### 1. [10.1038/s41592-026-03247-y](https://doi.org/10.1038/s41592-026-03247-y) — MassNet: billion-scale AI-ready mass spectral corpus empowering scalable deep learning in proteomics
 - **作者**: Jun A., Xiang Zhang, Xiaofan Zhang, Jiaqi Wei, Te Zhang, Yamin Deng et al.
 - **期刊/来源**: Nature Methods
+- **机构**: Westlake University · Affiliated Hangzhou First People's Hospital, Westlake University, School of Medicine · University of British Columbia · Fudan University · Shanghai Artificial Intelligence Laboratory · Zhejiang University · Beike Biotechnology (China) · Soochow University 等
 - 相关性 4/10 · novelty: `application`
 - **摘要**: 本文介绍 MassNet，一个面向质谱蛋白质组学的大规模 AI 就绪数据语料库，包含来自 35 个物种的 15 亿张串联质谱（MS/MS）谱图，其中约 170 万条肽段前体来自人类样本。作者提出了一种紧凑且标准化的数据格式 MSDT（Mass Spectrometry DDA Tensor），并支持转换为 Lightning Memory-Mapped Database 以加速深度学习中的输入/输出。基于 MassNet，他们开发了 XuanjiNovo，一种非自回归 Transformer 模型，结合课程学习策略进行从头肽段测序，在人类 Astral 数据上相比现有方法提升了 38.35%-143.57%。MassNet 还支持保留时间预测和 PSM rescoring 等下游任务。该工作为 AI 蛋白质组学提供了基础数据资源，但方法学上主要是工程和数据资源贡献，而非新的统计理论。
 - **关键技术**: `data corpus construction`, `tensor data format`, `non-autoregressive transformer`, `curriculum learning`, `de novo peptide sequencing`
@@ -27,6 +28,7 @@
 ### 2. [10.1038/s41592-026-03264-x](https://doi.org/10.1038/s41592-026-03264-x) — AmpliconSuite: an end-to-end workflow for analyzing focal amplifications in cancer genomes
 - **作者**: Jens Luebeck, Ted Liefeld, Ivy Tsz-Lo Wong, Edwin Huang, Forrest Kim, Bhargavi Dameracharla et al.
 - **期刊/来源**: Nature Methods
+- **机构**: University of California San Diego · Stanford Health Care · Stanford Medicine · Stanford University · Shanghai Jiao Tong University · University of Glasgow · Charité - Universitätsmedizin Berlin · Sungkyunkwan University 等
 - 相关性 3/10 · novelty: `application`
 - **摘要**: 本文介绍 AmpliconSuite，一个用于分析癌症基因组中局部扩增（尤其是染色体外DNA ecDNA）的端到端工作流。它整合了多个模块，包括识别扩增模式、通过 ecContext 模块对 ecDNA 结构进行分类以理解其形成机制。在 72 个模型中对 175 个经 FISH 验证的基因进行验证，预测准确。对 6,506 例泛癌样本的分析揭示了 ecDNA 介导的癌基因共扩增偏好。此外，作者创建了 AmpliconRepository 社区平台，以共享超过 15,000 个公开样本的结果。作为 Nature Methods 的方法学论文，其核心贡献在于生物信息学工具和流程，而非新的统计方法。对您而言，本文可作为了解癌症基因组学中大规模数据分析和可视化流程的入门读物，但其统计方法学含量有限。
 - **关键技术**: `whole-genome sequencing analysis`, `ecDNA detection`, `breakage-fusion-bridge classification`, `community data repository`
@@ -35,6 +37,7 @@
 ### 3. [10.1038/s41592-026-03249-w](https://doi.org/10.1038/s41592-026-03249-w) — LoL-align: sensitive and fast probabilistic protein structure alignment
 - **作者**: Lasse Reifenrath, Michel van Kempen, Gyuri Kim, Soo Hyun Kim, Mohammadreza Radnezhad, Cameron L. M. Gilchrist et al.
 - **期刊/来源**: Nature Methods
+- **机构**: Max Planck Institute for Multidisciplinary Sciences · Seoul National University · Korea Basic Science Institute · Sungkyunkwan University · Campus-Institut Data Science (CIDAS)
 - 相关性 3/10 · novelty: `application`
 - **摘要**: 本文提出 LoL-align，一种基于局部 log-odds 评分的蛋白质结构比对算法，利用蛋白质内部 Cα-Cα 距离来识别同源蛋白。与 TM-align 和 Dali 相比，LoL-align 在单域和多域基准上对远缘同源物的检测灵敏度显著更高，且比对质量更好，速度提升 5-20 倍。算法已完全集成到 Foldseek 中，便于实际应用。该方法的核心在于将结构比对问题转化为概率评分优化，而非依赖传统几何或序列特征。对统计学家而言，本文展示了如何将概率模型与高效优化结合以解决生物信息学中的大规模比对问题。
 - **关键技术**: `log-odds scoring`, `protein structure alignment`, `Cα-Cα distance`, `Foldseek integration`, `probabilistic optimization`
