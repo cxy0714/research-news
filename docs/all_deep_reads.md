@@ -4,6 +4,20 @@
 
 ### Daily
 
+- [Backtracking Direct, Indirect and Total Effects](deep_reads/2026-10-23-2610.28910.md)  
+  8/10 [daily]
+- [Testing Common Causality of Covariates: Evidence from Private-Sector Ban-the-Box Policies](deep_reads/2026-10-23-2610.29148.md)  
+  8/10 [daily]
+- [Anytime-Valid Inference in Conjoint Experiments](deep_reads/2026-10-23-2610.28979.md)  
+  7/10 [daily]
+- [CAQ: Clustered Asymptotically Anytime-Valid Quantile Treatment Effects for Online Experiments](deep_reads/2026-10-23-2610.30019.md)  
+  7/10 [daily]
+- [Policy Learning with Network-Shaping Assignments](deep_reads/2026-10-23-2610.29221.md)  
+  7/10 [daily]
+- [Estimand frameworks for causal inference in clinical research and regulatory decision making](deep_reads/2026-10-23-2610.28983.md)  
+  6/10 [daily]
+- [Online Augmented Plug-in Inference for Multi-group Fair Prediction](deep_reads/2026-10-23-2610.29099.md)  
+  6/10 [daily]
 - [Minimax Slope Estimation and Support Recovery under Weak Gaussian Selection](deep_reads/2026-10-19-2610.24749.md)  
   8/10 [daily]
 - [Quantile-Only Regression: Inference and Partial Identification under Quantile Disclosure](deep_reads/2026-10-19-2610.27224.md)  
@@ -4307,6 +4321,8 @@
 
 ### Daily
 
+- [When Standardization Spreads Factor Variation Across the Spectrum](deep_reads/2026-10-23-2610.30082.md)  
+  7/10 [daily]
 - [Benign Overfitting Property of the Minimum $\ell_q$ -norm Interpolant Estimator in Regression Problem via Feature Space Decomposition](deep_reads/2026-10-19-2610.24350.md)  
   7/10 [daily]
 - [Detecting Random Geometric Graphs with General Kernel](deep_reads/2026-10-13-2610.12765.md)  
@@ -5866,6 +5882,10 @@
 
 ### Daily
 
+- [Minimax Optimality of the NPMLE for Gaussian Mixtures in Hellinger Distance](deep_reads/2026-10-23-2610.30109.md)  
+  9/10 [daily]
+- [Minimax Rates for imperfect Physics-Informed Regression](deep_reads/2026-10-23-2610.29532.md)  
+  7/10 [daily]
 - [Robust Local Fréchet Regression: Nonasymptotic Theory and Minimax Optimality](deep_reads/2026-10-19-2610.23757.md)  
   8/10 [daily]
 - [Sieve-free ReLU Bayesian priors with near-minimax posterior contraction](deep_reads/2026-10-19-2610.23308.md)  
@@ -8491,6 +8511,14 @@
 
 ### Daily
 
+- [Boot-AVT: Asymptotically Anytime-Valid Testing with Degenerate U-Statistics via Bootstrap](deep_reads/2026-10-23-2610.28931.md)  
+  9/10 [daily]
+- [Third and Fourth Moment Phenomena for Monochromatic Edges and Applications to Graph-Based Two-Sample Tests](deep_reads/2026-10-23-2610.29215.md)  
+  7/10 [daily]
+- [Time-Uniform Dependent Central Limit Theory](deep_reads/2026-10-23-2610.29288.md)  
+  7/10 [daily]
+- [Uniformly Improved Adaptive Filtering Procedures for Replicability Testing with FWER Control](deep_reads/2026-10-23-2610.29266.md)  
+  6/10 [daily]
 - [Sample complexity of weak-signal latent-variable models](deep_reads/2026-10-19-2610.24770.md)  
   8/10 [daily]
 - [Tuning-Free Tests for Treatment Effect Heterogeneity via Expectile Processes](deep_reads/2026-10-19-2610.25986.md)  
@@ -11183,6 +11211,8 @@
 
 ### Daily
 
+- [Rare-Feature-Adaptive Subsampling for Big Data Regression](deep_reads/2026-10-23-2610.29083.md)  
+  6/10 [daily]
 - [Quaternion Gaussian Probes for Tensor Frobenius-Norm Estimation](deep_reads/2026-10-13-2610.12534.md)  
   6/10 [daily]
 - [An efficient stochastic generalized method of moments estimator for nonlinear moment models](deep_reads/2026-10-12-2610.12873.md)  
@@ -12693,6 +12723,8 @@
 
 ### Daily
 
+- [Data-driven characterisation of variable source light curves with multimodal representation learning](deep_reads/2026-10-23-2610.29412.md)  
+  6/10 [daily]
 - [First Experimental Results of Space Object Detection Using the InteRFeX Array](deep_reads/2026-10-13-2610.13537.md)  
   6/10 [daily]
 - [An empirical calibration of the spectral resolution of JWST NIRSpec PRISM](deep_reads/2026-10-12-2610.13492.md)  
@@ -13568,6 +13600,8 @@
 
 ### Daily
 
+- [Demand Estimation for Rationally Inattentive Consumers](deep_reads/2026-10-23-2610.29600.md)  
+  6/10 [daily]
 - [Evidence-Based Policy Choice in Macroeconomics](deep_reads/2026-10-19-2610.27405.md)  
   6/10 [daily]
 - [Early Investment Snowballs for Low-Skill Children: Average Marginal Returns and the Dynamics of Skill Formation](deep_reads/2026-10-13-2610.12509.md)  
@@ -16447,6 +16481,44 @@
 
 ### Daily
 
+- [Image Reconstruction from Projections using Fourier Slice Theorem](deep_reads/2026-10-23-hexagon_2610.00344.md)  
+  7/10 [daily]
+- [Lower and Upper Bounds for Glauber Dynamics from Typical States of the Low-Temperature Sherrington–Kirkpatrick Model](deep_reads/2026-10-23-hexagon_2610.00402.md)  
+  6/10 [daily]
+- [Slow Equilibration and Persistent Stationary Correlations in Spherical Spin Glasses](deep_reads/2026-10-23-hexagon_2610.00376.md)  
+  3/10 [daily]
+- [Small algebraic integers and Frobenius prime sums](deep_reads/2026-10-23-hexagon_2610.00451.md)  
+  1/10 [daily]
+- [Superfluid Stiffness and Nonclassical Rotational Inertia of the Dilute Hard-Sphere Bose Gas](deep_reads/2026-10-23-hexagon_2610.00450.md)  
+  1/10 [daily]
+- [Waring--Goldbach Problem: One square, four fifth powers and twenty-two seventh powers](deep_reads/2026-10-23-hexagon_2610.00423.md)  
+  1/10 [daily]
+- [Waring--Goldbach Problem: One square, four fifth powers and fifteen sixth powers](deep_reads/2026-10-23-hexagon_2610.00422.md)  
+  1/10 [daily]
+- [The Binder-DeMarco-Dupont Inequality](deep_reads/2026-10-23-hexagon_2610.00418.md)  
+  1/10 [daily]
+- [A proof of the second pinching theorem in dimension four](deep_reads/2026-10-23-hexagon_2610.00381.md)  
+  1/10 [daily]
+- [Note on variable role-reversals](deep_reads/2026-10-23-hexagon_2610.00380.md)  
+  1/10 [daily]
+- [Reduction of the Gorenstein symmetry conjecture to finite prime fields](deep_reads/2026-10-23-hexagon_2610.00397.md)  
+  1/10 [daily]
+- [A reduction of the Gorenstein symmetry conjecture to gendo-symmetric algebras](deep_reads/2026-10-23-hexagon_2610.00396.md)  
+  1/10 [daily]
+- [Cartan determinants in finite representation type over arbitrary fields](deep_reads/2026-10-23-hexagon_2610.00392.md)  
+  1/10 [daily]
+- [Faster-than-power-law decay of order parameter correlations in the two-dimensional RP2 model: a rigorous result by vibe-proving](deep_reads/2026-10-23-hexagon_2610.00453.md)  
+  0/10 [daily]
+- [Distinct partial products in prime dihedral groups](deep_reads/2026-10-23-hexagon_2610.00443.md)  
+  0/10 [daily]
+- [Counterexamples to the weakly Gorenstein symmetry conjecture](deep_reads/2026-10-23-hexagon_2610.00436.md)  
+  0/10 [daily]
+- [Quillen's local parameter conjecture in dimension four](deep_reads/2026-10-23-hexagon_2610.00404.md)  
+  0/10 [daily]
+- [Hall polynomials for representation-finite algebras](deep_reads/2026-10-23-hexagon_2610.00403.md)  
+  0/10 [daily]
+- [Durfee inequalities for quasihomogeneous complete intersections of codimension two](deep_reads/2026-10-23-hexagon_2610.00363.md)  
+  0/10 [daily]
 - [Identifiability from Moments in Independent Component Analysis Mixture Models](deep_reads/2026-10-19-2610.23846.md)  
   7/10 [daily]
 - [Asymptotic Normality of the Hill Estimator in Linear Preferential Attachment](deep_reads/2026-10-19-2610.24413.md)  
