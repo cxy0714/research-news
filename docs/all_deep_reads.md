@@ -4,6 +4,12 @@
 
 ### Daily
 
+- [Higher Order Asymptotics of Regression Adjustment Estimators for Causal Inference](deep_reads/2026-10-26-2610.32023.md)  
+  9/10 [daily]
+- [Partial Identification of Survival Prediction Performance under Dependent Right Censoring](deep_reads/2026-10-26-2610.32488.md)  
+  8/10 [daily]
+- [Honest Inference for Synthetic Controls with Imperfect Fit: Time-Split Validity and the Choice of Anchor](deep_reads/2026-10-26-2610.32383.md)  
+  7/10 [daily]
 - [Backtracking Direct, Indirect and Total Effects](deep_reads/2026-10-23-2610.28910.md)  
   8/10 [daily]
 - [Testing Common Causality of Covariates: Evidence from Private-Sector Ban-the-Box Policies](deep_reads/2026-10-23-2610.29148.md)  
@@ -4321,6 +4327,10 @@
 
 ### Daily
 
+- [Asymptotic spectral properties and extreme eigenvalues of sample correlation matrices from nonstationary high-dimensional VAR processes](deep_reads/2026-10-26-2610.32284.md)  
+  8/10 [daily]
+- [Largest Gaps between Eigenvalues of the Gaussian Orthogonal Ensemble](deep_reads/2026-10-26-hexagon_2610.00491.md)  
+  7/10 [daily]
 - [When Standardization Spreads Factor Variation Across the Spectrum](deep_reads/2026-10-23-2610.30082.md)  
   7/10 [daily]
 - [Benign Overfitting Property of the Minimum $\ell_q$ -norm Interpolant Estimator in Regression Problem via Feature Space Decomposition](deep_reads/2026-10-19-2610.24350.md)  
@@ -5882,6 +5892,8 @@
 
 ### Daily
 
+- [Random Jump Forests](deep_reads/2026-10-26-2610.32498.md)  
+  7/10 [daily]
 - [Minimax Optimality of the NPMLE for Gaussian Mixtures in Hellinger Distance](deep_reads/2026-10-23-2610.30109.md)  
   9/10 [daily]
 - [Minimax Rates for imperfect Physics-Informed Regression](deep_reads/2026-10-23-2610.29532.md)  
@@ -16481,6 +16493,8 @@
 
 ### Daily
 
+- [Fitting Dynamic Conditional Densities to Cross-Sectional Returns with Persistent Tail Intensities](deep_reads/2026-10-26-2610.32011.md)  
+  6/10 [daily]
 - [Image Reconstruction from Projections using Fourier Slice Theorem](deep_reads/2026-10-23-hexagon_2610.00344.md)  
   7/10 [daily]
 - [Lower and Upper Bounds for Glauber Dynamics from Typical States of the Low-Temperature Sherrington–Kirkpatrick Model](deep_reads/2026-10-23-hexagon_2610.00402.md)  
