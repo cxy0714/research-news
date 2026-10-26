@@ -24,6 +24,10 @@
   6/10 [daily]
 - [Online Augmented Plug-in Inference for Multi-group Fair Prediction](deep_reads/2026-10-23-2610.29099.md)  
   6/10 [daily]
+- [A Bayesian machine learning approach to direct and spillover effects in cluster-randomized trials with noncompliance](deep_reads/2026-10-20-2610.27425.md)  
+  8/10 [daily]
+- [Interpretable subgroup identification across survival and generalized-linear outcomes](deep_reads/2026-10-20-2610.28379.md)  
+  7/10 [daily]
 - [Minimax Slope Estimation and Support Recovery under Weak Gaussian Selection](deep_reads/2026-10-19-2610.24749.md)  
   8/10 [daily]
 - [Quantile-Only Regression: Inference and Partial Identification under Quantile Disclosure](deep_reads/2026-10-19-2610.27224.md)  
@@ -16533,6 +16537,8 @@
   0/10 [daily]
 - [Durfee inequalities for quasihomogeneous complete intersections of codimension two](deep_reads/2026-10-23-hexagon_2610.00363.md)  
   0/10 [daily]
+- [Exact Covariance Structure and Efficient Computation for L-Comoments](deep_reads/2026-10-20-2610.28387.md)  
+  8/10 [daily]
 - [Identifiability from Moments in Independent Component Analysis Mixture Models](deep_reads/2026-10-19-2610.23846.md)  
   7/10 [daily]
 - [Asymptotic Normality of the Hill Estimator in Linear Preferential Attachment](deep_reads/2026-10-19-2610.24413.md)  

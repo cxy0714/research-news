@@ -19,7 +19,14 @@
 param(
     [string]$Since = "2026-10-20",
     [string]$Until = "2026-10-22",
-    [string]$Model = "deepseek-chat"
+    [string]$Model = "deepseek-chat",
+    # Only regenerate the FAILED deep reads (the "精读失败" stubs), skipping the
+    # threshold pass. Cheapest option: 10-20 has 3 stubs, nothing else to redo.
+    [switch]$RetryStubsOnly,
+    # Per-request LLM timeout (seconds). The client default is 300s and these
+    # 10k-35k-char deep reads blow through it, so retry-stubs can never succeed
+    # at the default. 0 = leave the client default alone.
+    [int]$TimeoutSec = 0
 )
 
 $repo = Split-Path -Parent $PSScriptRoot
@@ -35,6 +42,10 @@ $transcript = "logs\deepreads-$stamp-$hostTag.log"
 Start-Transcript -Path $transcript -Append -ErrorAction SilentlyContinue | Out-Null
 
 $env:PYTHONIOENCODING = "utf-8"
+if ($TimeoutSec -gt 0) {
+    $env:SJTU_TIMEOUT = "$TimeoutSec"
+    Write-Host "SJTU_TIMEOUT=$($env:SJTU_TIMEOUT)s"
+}
 $py = Join-Path $repo ".venv\Scripts\python.exe"
 if (-not (Test-Path $py)) { $py = "python" }
 
@@ -63,10 +74,15 @@ if (-not $mutex.WaitOne([TimeSpan]::FromHours(3))) {
 try {
     git pull --rebase --autostash 2>&1 | Out-Host
 
-    Write-Host "=== pass 1/2: threshold backfill ==="
-    Write-Status "running" "threshold backfill"
-    & $py -m research_news.backfill_deep_reads --since $Since --until $Until --model $Model 2>&1 | Out-Host
-    $pass1 = $LASTEXITCODE
+    if (-not $RetryStubsOnly) {
+        Write-Host "=== pass 1/2: threshold backfill ==="
+        Write-Status "running" "threshold backfill"
+        & $py -m research_news.backfill_deep_reads --since $Since --until $Until --model $Model 2>&1 | Out-Host
+        $pass1 = $LASTEXITCODE
+    } else {
+        Write-Host "=== pass 1/2: skipped (-RetryStubsOnly) ==="
+        $pass1 = 0
+    }
 
     Write-Host "=== pass 2/2: retry failed stubs ==="
     Write-Status "running" "retry-stubs"
