@@ -4,6 +4,8 @@
 
 ### Daily
 
+- [Optimal Treatment Assignment Rules on Networked Populations](deep_reads/2026-10-27-2610.32735.md)  
+  7/10 [daily]
 - [Higher Order Asymptotics of Regression Adjustment Estimators for Causal Inference](deep_reads/2026-10-26-2610.32023.md)  
   9/10 [daily]
 - [Partial Identification of Survival Prediction Performance under Dependent Right Censoring](deep_reads/2026-10-26-2610.32488.md)  
@@ -4298,6 +4300,8 @@
 
 - [Causal isotonic regression](deep_reads/2026-06-22-1810.03269.md)  
   9/10 [manual]
+- [Difference-in-Differences for Heterogeneous Effects of General Treatment Strategies Accounting for Time-Varying Covariates](deep_reads/2026-10-27-2610.22113.md)  
+  8/10 [manual]
 - [Optimal Inference of the Mean Outcome under Optimal Treatment Regime](deep_reads/2026-10-14-2509.09773.md)  
   8/10 [manual]
 - [Stochastic interventions, sensitivity analysis, and optimal transport](deep_reads/2026-08-31-2411.14285.md)  
@@ -8527,6 +8531,8 @@
 
 ### Daily
 
+- [Resampling-Based Inference for Incomplete Paired Functional Data](deep_reads/2026-10-27-2610.32777.md)  
+  6/10 [daily]
 - [Boot-AVT: Asymptotically Anytime-Valid Testing with Degenerate U-Statistics via Bootstrap](deep_reads/2026-10-23-2610.28931.md)  
   9/10 [daily]
 - [Third and Fourth Moment Phenomena for Monochromatic Edges and Applications to Graph-Based Two-Sample Tests](deep_reads/2026-10-23-2610.29215.md)  
@@ -13616,6 +13622,8 @@
 
 ### Daily
 
+- [Local Polynomial Estimation in Irregular Correlated Random Coefficient Panel Data Models](deep_reads/2026-10-27-2610.32846.md)  
+  7/10 [daily]
 - [Demand Estimation for Rationally Inattentive Consumers](deep_reads/2026-10-23-2610.29600.md)  
   6/10 [daily]
 - [Evidence-Based Policy Choice in Macroeconomics](deep_reads/2026-10-19-2610.27405.md)  
@@ -16497,6 +16505,36 @@
 
 ### Daily
 
+- [Bayesian Weak Commutativity Does Not Guarantee Attainability of the Nagaoka–Hayashi Bound](deep_reads/2026-10-27-hexagon_2610.00522.md)  
+  2/10 [daily]
+- [The regular pentagonal system and the Smith--Ward problem](deep_reads/2026-10-27-hexagon_2610.00567.md)  
+  1/10 [daily]
+- [Illumination of complex convex bodies](deep_reads/2026-10-27-hexagon_2610.00536.md)  
+  1/10 [daily]
+- [Perfect t-embeddings: existence](deep_reads/2026-10-27-hexagon_2610.00520.md)  
+  1/10 [daily]
+- [The continuum limit of three-dimensional SU(2) lattice Yang–Mills theory on a torus V: Short-distance and weak-coupling asymptotics](deep_reads/2026-10-27-hexagon_2610.00512.md)  
+  1/10 [daily]
+- [The continuum limit of three-dimensional SU(2) lattice Yang–Mills theory on a torus IV: Wilson flow and continuum measure](deep_reads/2026-10-27-hexagon_2610.00511.md)  
+  1/10 [daily]
+- [The continuum limit of three-dimensional SU(2) lattice Yang–Mills theory on a torus III: Regional renormalization and large-field control](deep_reads/2026-10-27-hexagon_2610.00510.md)  
+  1/10 [daily]
+- [The continuum limit of three-dimensional SU(2) lattice Yang–Mills theory on a torus II: Fluctuation integration and local reconstruction](deep_reads/2026-10-27-hexagon_2610.00509.md)  
+  1/10 [daily]
+- [The continuum limit of three-dimensional SU(2) lattice Yang–Mills theory on a torus I: Foundations and classical fields](deep_reads/2026-10-27-hexagon_2610.00506.md)  
+  1/10 [daily]
+- [Explicit Finite $p$-Group Counterexamples to the Amit--Ashurst Conjecture](deep_reads/2026-10-27-hexagon_2610.00563.md)  
+  0/10 [daily]
+- [A note of the Gorenstein symmetry conjecture (II)](deep_reads/2026-10-27-hexagon_2610.00540.md)  
+  0/10 [daily]
+- [A note of the Gorenstein symmetry conjecture (I)](deep_reads/2026-10-27-hexagon_2610.00539.md)  
+  0/10 [daily]
+- [A note of the Cartan determinant conjecture](deep_reads/2026-10-27-hexagon_2610.00537.md)  
+  0/10 [daily]
+- [A Counterexample to Huppert's Conjecture](deep_reads/2026-10-27-hexagon_2610.00529.md)  
+  0/10 [daily]
+- [$10/24/26$: Factoring a Pythagorean Date](deep_reads/2026-10-27-hexagon_2610.00528.md)  
+  0/10 [daily]
 - [Fitting Dynamic Conditional Densities to Cross-Sectional Returns with Persistent Tail Intensities](deep_reads/2026-10-26-2610.32011.md)  
   6/10 [daily]
 - [Image Reconstruction from Projections using Fourier Slice Theorem](deep_reads/2026-10-23-hexagon_2610.00344.md)  
