@@ -4,6 +4,18 @@
 
 ### Daily
 
+- [A Semiparametric Model Approach to Data Integration under Missing Not at Random](deep_reads/2026-10-30-2610.41937.md)  
+  8/10 [daily]
+- [Functional-Specific Information Borrowing under Limited Overlap](deep_reads/2026-10-30-2610.41753.md)  
+  8/10 [daily]
+- [Balancing Covariates for Continuous Treatments by Exploiting Continuity](deep_reads/2026-10-30-2610.41186.md)  
+  8/10 [daily]
+- [Uncertainty Quantification for Topological Treatment Effects](deep_reads/2026-10-30-2610.41593.md)  
+  7/10 [daily]
+- [Unifying Data-Adaptive Longitudinal Treatment-Effect Subgroup Discovery and Pretreatment Membership Prediction](deep_reads/2026-10-30-2610.41886.md)  
+  6/10 [daily]
+- [The Double Diagonal Estimator: Reducing Bias in Two-Sided Marketplace Experiments](deep_reads/2026-10-30-2610.41294.md)  
+  6/10 [daily]
 - [Inference for Causal Path-Specific Effects in Longitudinal Studies with Repeated Treatments and Multiple Mediators](deep_reads/2026-10-28-2610.34349.md)  
   9/10 [daily]
 - [Informative inference on the average treatment effect with instrumental variables](deep_reads/2026-10-28-2610.33254.md)  
@@ -4332,6 +4344,8 @@
 
 ### 其他
 
+- [Theory for identification and Inference with Synthetic Controls: A Proximal Causal Inference Framework](deep_reads/2026-11-03-2108.13935.md)  
+  9/10 [manual]
 - [Causal isotonic regression](deep_reads/2026-06-22-1810.03269.md)  
   9/10 [manual]
 - [Difference-in-Differences for Heterogeneous Effects of General Treatment Strategies Accounting for Time-Varying Covariates](deep_reads/2026-10-27-2610.22113.md)  
@@ -4369,6 +4383,12 @@
 
 ### Daily
 
+- [Smallest Gaps between Eigenvalues of Wigner Matrices without Smoothness Assumptions](deep_reads/2026-11-03-hexagon_2610.00675.md)  
+  8/10 [daily]
+- [Bethe Hessian Recovery through the Kesten-Stigum Regime](deep_reads/2026-10-30-2610.41802.md)  
+  7/10 [daily]
+- [Dynamics of the spherical Sherrington–Kirkpatrick model, Part I: Foundations and tools](deep_reads/2026-10-30-hexagon_2610.00609.md)  
+  3/10 [daily]
 - [Quantitative Resolvent Calculus for Sample Covariance Matrices](deep_reads/2026-10-28-2610.33087.md)  
   8/10 [daily]
 - [Nonparametric shrinkage estimation of high-dimensional variance component matrices](deep_reads/2026-10-28-2610.33431.md)  
@@ -5940,6 +5960,10 @@
 
 ### Daily
 
+- [Simultaneous inference for additive regression](deep_reads/2026-10-30-2610.41442.md)  
+  7/10 [daily]
+- [Improved estimation of differential entropy of a multivariate Gaussian distribution](deep_reads/2026-10-30-2610.41849.md)  
+  6/10 [daily]
 - [Minimax Rates for Conditional Generative Learning under Wasserstein Loss](deep_reads/2026-10-28-2610.35490.md)  
   8/10 [daily]
 - [Nonparametric Regression on the Circle with Applications to Climate and Environmental Science](deep_reads/2026-10-28-2610.34476.md)  
@@ -8162,6 +8186,8 @@
 
 ### Daily
 
+- [Valid GMM Inference with Non-parametrically Generated Discrete Type](deep_reads/2026-10-30-2610.42052.md)  
+  8/10 [daily]
 - [Debiased Machine Learning for Count Data: a Partially Linear Poisson Model Based on Neural Networks](deep_reads/2026-10-08-2610.07500.md)  
   8/10 [daily]
 - [Adaptive inference for functionals of M-estimands](deep_reads/2026-09-30-2609.39274.md)  
@@ -8581,6 +8607,18 @@
 
 ### Daily
 
+- [Global Testing of Gaussian Means by Combining Marginal and Conditional Evidence](deep_reads/2026-11-03-2610.40899.md)  
+  8/10 [daily]
+- [Co-sufficient weighting: leveraging sparsity for more powerful variable selection in the linear model](deep_reads/2026-10-30-2610.42122.md)  
+  7/10 [daily]
+- [Variance-adaptive Chernoff bounds: nonasymptotically valid, asymptotically sharp confidence sets for unbounded means](deep_reads/2026-10-30-2610.42058.md)  
+  7/10 [daily]
+- [Truthful and Admissible Principal--Agent Testing with Nuisance Parameters](deep_reads/2026-10-30-2610.41283.md)  
+  6/10 [daily]
+- [Dimension Changes the Scale-Signal Channel in Nearest-Neighbor Two-Sample Testing](deep_reads/2026-10-30-2610.41271.md)  
+  6/10 [daily]
+- [The sharp iid Berry–Esseen inequality: Analytic reductions and exact certificate proof](deep_reads/2026-10-30-hexagon_2610.00590.md)  
+  6/10 [daily]
 - [Near-boundary asymptotics for profile score statistics](deep_reads/2026-10-28-2610.33912.md)  
   7/10 [daily]
 - [Testing independence in contamination models](deep_reads/2026-10-28-2610.35028.md)  
@@ -11305,6 +11343,20 @@
 
 ### Daily
 
+- [A Sublinear Treewidth Exponent for Binary Constraint Satisfaction](deep_reads/2026-11-03-hexagon_2611.00004.md)  
+  6/10 [daily]
+- [Low-discrepancy quasi-uniform digital sequences in every dimension](deep_reads/2026-11-03-hexagon_2610.00664.md)  
+  6/10 [daily]
+- [The $p$-Bures–Wasserstein distance via $3\times3$ block matrices (with application to $p$-Bures–Wasserstein barycenters)](deep_reads/2026-11-03-hexagon_2610.00726.md)  
+  4/10 [daily]
+- [On Statistical-Computational Gaps in Graph Combinatorial Testing Problems](deep_reads/2026-10-30-2610.41995.md)  
+  8/10 [daily]
+- [Covariance Identification from Regression Residuals](deep_reads/2026-10-30-2610.41722.md)  
+  7/10 [daily]
+- [What Does the Refutation of the Exponential Time Hypothesis Mean for Learning Theory?](deep_reads/2026-10-30-hexagon_2610.00613.md)  
+  7/10 [daily]
+- [Stable and efficient covariance estimation for sample L-moments using Hájek projections](deep_reads/2026-10-30-2610.41640.md)  
+  6/10 [daily]
 - [Higher-Order Marginal Likelihood Approximation for Nonlinear State Space Models](deep_reads/2026-10-28-2610.34629.md)  
   6/10 [daily]
 - [Rare-Feature-Adaptive Subsampling for Big Data Regression](deep_reads/2026-10-23-2610.29083.md)  
@@ -12819,6 +12871,8 @@
 
 ### Daily
 
+- [Spectral Information Content of Diffraction-Limited Images](deep_reads/2026-10-30-2610.41092.md)  
+  6/10 [daily]
 - [Faint Companions to Hot Stars. Spectroscopic Detection Sensitivity and Implications for Survey Design](deep_reads/2026-10-28-2610.33225.md)  
   6/10 [daily]
 - [Reproducibility, Methodological Robustness, and Synthetic-Domain Selection Properties of AFINO for TESS Stellar-Flare QPP Analysis](deep_reads/2026-10-28-2610.34627.md)  
@@ -13704,6 +13758,12 @@
 
 ### Daily
 
+- [Weak Identification in Bunching Designs: Rare Events and Counterfactual Uncertainty](deep_reads/2026-11-03-2610.40719.md)  
+  7/10 [daily]
+- [Evaluating Maternity Leave Reforms When RD Fails](deep_reads/2026-10-30-2610.41881.md)  
+  7/10 [daily]
+- [Identification through Heteroskedasticity in One Lemma: Partial Identification, an Eigenvalue Construction, and a Caution on Rank Tests](deep_reads/2026-10-30-2610.41361.md)  
+  6/10 [daily]
 - [Approximate Quantile Factor Models](deep_reads/2026-10-28-2610.33461.md)  
   6/10 [daily]
 - [Local Polynomial Estimation in Irregular Correlated Random Coefficient Panel Data Models](deep_reads/2026-10-27-2610.32846.md)  
@@ -16589,6 +16649,60 @@
 
 ### Daily
 
+- [A Koteljanskii inequality for permanents](deep_reads/2026-11-03-hexagon_2610.00727.md)  
+  3/10 [daily]
+- [Cyclic reductions of elliptic curves at a positive proportion of primes](deep_reads/2026-11-03-hexagon_2610.00699.md)  
+  1/10 [daily]
+- [Local independent sets and colourings of triangle-free graphs](deep_reads/2026-11-03-hexagon_2610.00677.md)  
+  1/10 [daily]
+- [Nonunimodal Laurent coefficients of cluster monomials](deep_reads/2026-11-03-hexagon_2610.00670.md)  
+  1/10 [daily]
+- [Positive polytopes and the full Fock–Goncharov conjecture](deep_reads/2026-11-03-hexagon_2611.00015.md)  
+  0/10 [daily]
+- [Projected stated (SL_n)-skein algebras and the Huang–Wang conjectures](deep_reads/2026-11-03-hexagon_2611.00013.md)  
+  0/10 [daily]
+- [Improved and sharp bounds for illumination](deep_reads/2026-11-03-hexagon_2611.00011.md)  
+  0/10 [daily]
+- [Illumination of complex 1-unconditional convex bodies](deep_reads/2026-11-03-hexagon_2611.00010.md)  
+  0/10 [daily]
+- [Illumination of several families of complex convex bodies](deep_reads/2026-11-03-hexagon_2611.00007.md)  
+  0/10 [daily]
+- [Equality of the Mirković–Vilonen and theta bases](deep_reads/2026-11-03-hexagon_2611.00006.md)  
+  0/10 [daily]
+- [Rational limits in Markov–Euclid asymptotics](deep_reads/2026-11-03-hexagon_2611.00002.md)  
+  0/10 [daily]
+- [Counterexamples to log-concavity of cluster monomials and theta structure constants](deep_reads/2026-11-03-hexagon_2610.00668.md)  
+  0/10 [daily]
+- [Unidentified prediction-risk rankings under spatial sampling with fixed inclusion probabilities](deep_reads/2026-10-30-2610.41726.md)  
+  6/10 [daily]
+- [Dynamics of the spherical Sherrington–Kirkpatrick model, Part II: Mixing profiles and critical dynamics](deep_reads/2026-10-30-hexagon_2610.00610.md)  
+  5/10 [daily]
+- [Existence of the $q$-Colorability Threshold for Sparse Random Graphs](deep_reads/2026-10-30-hexagon_2610.00608.md)  
+  4/10 [daily]
+- [Automated Conjecturing: Generation, Selection and Evaluation](deep_reads/2026-10-30-hexagon_2610.00631.md)  
+  3/10 [daily]
+- [From Döblin to Aleksandrov](deep_reads/2026-10-30-hexagon_2610.00618.md)  
+  3/10 [daily]
+- [A Proof of McLeod's 1959 Conjecture on Complete Homogeneous Symmetric Ratios](deep_reads/2026-10-30-hexagon_2610.00622.md)  
+  2/10 [daily]
+- [Positive definite functions of noncommuting contractions, Hua-Bellman matrices, and a new distance metric](deep_reads/2026-10-30-hexagon_2610.00620.md)  
+  2/10 [daily]
+- [Factorial denominators of rank-two scattering coefficients](deep_reads/2026-10-30-hexagon_2610.00615.md)  
+  1/10 [daily]
+- [The Mirković–Vilonen basis and cluster pointedness](deep_reads/2026-10-30-hexagon_2610.00614.md)  
+  1/10 [daily]
+- [Biperfectness of the theta basis of a maximal unipotent subgroup](deep_reads/2026-10-30-hexagon_2610.00603.md)  
+  1/10 [daily]
+- [An improved zero-free half-plane for Hecke L-functions over number fields and Quasi-Riemann Hypothesis](deep_reads/2026-10-30-hexagon_2610.00655.md)  
+  0/10 [daily]
+- [Algebraicity of rank-two scattering wall functions](deep_reads/2026-10-30-hexagon_2610.00645.md)  
+  0/10 [daily]
+- [Laurent and g-vector counterexamples for quivers with homotopies](deep_reads/2026-10-30-hexagon_2610.00640.md)  
+  0/10 [daily]
+- [Asymptotic growth of rank-two scattering coefficients in the Badlands](deep_reads/2026-10-30-hexagon_2610.00639.md)  
+  0/10 [daily]
+- [A Boolean Lévy group with a free nonsingular action](deep_reads/2026-10-30-hexagon_2610.00635.md)  
+  0/10 [daily]
 - [Identification and curvature bias for shared inputs in multichannel dynamical models](deep_reads/2026-10-28-2610.33642.md)  
   6/10 [daily]
 - [On counting satisfying assignments via polynomial separation](deep_reads/2026-10-28-hexagon_2610.00574.md)  
