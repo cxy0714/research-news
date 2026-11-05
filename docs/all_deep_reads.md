@@ -4,6 +4,62 @@
 
 ### Daily
 
+- [Conformal Prediction at Performative Equilibrium: The Price of Performativity](deep_reads/2026-11-05-2611.05277.md)  
+  6/10 [daily]
+- [Estimating Average Treatment Effects with Projected Instrumental Variables](deep_reads/2026-11-04-2611.00705.md)  
+  9/10 [daily]
+- [A General Approach for Assessing Sensitivity to Violations of Causal Assumptions](deep_reads/2026-11-04-2611.02239.md)  
+  9/10 [daily]
+- [Vector incremental treatment effects](deep_reads/2026-11-04-2611.00417.md)  
+  8/10 [daily]
+- [Efficient Causal Survival Inference under Limited Surrogate Monitoring](deep_reads/2026-11-04-2611.00553.md)  
+  8/10 [daily]
+- [Sharp Design-based Inference for Quantiles of Individual Treatment Effects](deep_reads/2026-11-04-2611.00607.md)  
+  8/10 [daily]
+- [A Debiased Machine Learning Single-Imputation Framework for Item Nonresponse in Surveys](deep_reads/2026-11-04-2611.01485.md)  
+  8/10 [daily]
+- [Reference-based sensitivity analysis for bounded longitudinal outcomes](deep_reads/2026-11-04-2611.02642.md)  
+  8/10 [daily]
+- [Causal Mediation Analysis with High-Dimensional Surrogates: Identification, Estimation and Inference under Latent Factor Models](deep_reads/2026-11-04-2611.03167.md)  
+  8/10 [daily]
+- [Data integration using propensity score weighting under missing at random](deep_reads/2026-11-04-2611.03353.md)  
+  8/10 [daily]
+- [Causal Inference from Self-controlled Case Series](deep_reads/2026-11-04-2611.03531.md)  
+  8/10 [daily]
+- [Studentized inference in randomized experiments when a few units dominate the outcome variation](deep_reads/2026-11-04-2611.03561.md)  
+  8/10 [daily]
+- [Testing Exogeneity in Nonparametric Instrumental Variable Models](deep_reads/2026-11-04-2611.01806.md)  
+  8/10 [daily]
+- [Unconfoundedness as an Information Constraint](deep_reads/2026-11-04-2611.03550.md)  
+  8/10 [daily]
+- [Causal Record Linkage](deep_reads/2026-11-04-2611.00760.md)  
+  7/10 [daily]
+- [Deformed Q-learning for High-Dimensional Dynamic Treatment Regimes](deep_reads/2026-11-04-2611.00929.md)  
+  7/10 [daily]
+- [Selective inference for pruned interaction trees with known unequal variances in randomized trials](deep_reads/2026-11-04-2611.01134.md)  
+  7/10 [daily]
+- [Measurement Error and Nonlinear Confounding: Structural Equation Modeling Versus Double Machine Learning](deep_reads/2026-11-04-2611.01375.md)  
+  7/10 [daily]
+- [Partial Invariance for Classification under Structural Causal Models](deep_reads/2026-11-04-2611.02254.md)  
+  7/10 [daily]
+- [One-Sample Mendelian Randomization and Instrumental Variable Analyses in R and Stata: The OneSampleMR and ivonesamplemr Packages](deep_reads/2026-11-04-2611.02887.md)  
+  7/10 [daily]
+- [$P$-stationary structural equation modeling: Causal effect identification under temporally incomplete observations](deep_reads/2026-11-04-2611.02252.md)  
+  7/10 [daily]
+- [Looking Forward to Constructing Better Causal Comparisons](deep_reads/2026-11-04-2611.02061.md)  
+  7/10 [daily]
+- [Selective Randomization Inference for Interference](deep_reads/2026-11-04-2611.02443.md)  
+  7/10 [daily]
+- [Sharp Fr\'echet--Hoeffding Bounds under Selectively Incomplete Observation](deep_reads/2026-11-04-2611.03075.md)  
+  7/10 [daily]
+- [When Covariates Mask Pre-Trends](deep_reads/2026-11-04-2611.03079.md)  
+  7/10 [daily]
+- [Sharp Identification for Regression with Interval-Observed and Missing Covariates](deep_reads/2026-11-04-2611.03345.md)  
+  7/10 [daily]
+- [Characterizing Estimator-Regime Transitions in Adaptive Enrichment Trials](deep_reads/2026-11-04-2611.00549.md)  
+  6/10 [daily]
+- [Robustness of Median-based Splitting Rules for Causal Trees](deep_reads/2026-11-04-2611.00348.md)  
+  6/10 [daily]
 - [A Semiparametric Model Approach to Data Integration under Missing Not at Random](deep_reads/2026-10-30-2610.41937.md)  
   8/10 [daily]
 - [Functional-Specific Information Borrowing under Limited Overlap](deep_reads/2026-10-30-2610.41753.md)  
@@ -4383,6 +4439,12 @@
 
 ### Daily
 
+- [Robust Inference for Spiked Eigenspace under Elliptical Distributions](deep_reads/2026-11-04-2611.00538.md)  
+  8/10 [daily]
+- [Optimal spectral shrinkage via Krylov approximation](deep_reads/2026-11-04-2611.02122.md)  
+  8/10 [daily]
+- [Federated Estimation of Loading Spaces in Tensor Factor Models under Differential Privacy](deep_reads/2026-11-04-2611.01903.md)  
+  7/10 [daily]
 - [Smallest Gaps between Eigenvalues of Wigner Matrices without Smoothness Assumptions](deep_reads/2026-11-03-hexagon_2610.00675.md)  
   8/10 [daily]
 - [Bethe Hessian Recovery through the Kesten-Stigum Regime](deep_reads/2026-10-30-2610.41802.md)  
@@ -5960,6 +6022,26 @@
 
 ### Daily
 
+- [Minimax estimation of linear functionals in the Darcy inverse problem](deep_reads/2026-11-04-2611.01290.md)  
+  8/10 [daily]
+- [Transport for Conditional Sampling: Foundations and Applications](deep_reads/2026-11-04-2611.01436.md)  
+  7/10 [daily]
+- [Mutual Information Estimation via Triangular Transport Maps: Finite Sample Guarantees and Sample Allocation](deep_reads/2026-11-04-2611.00471.md)  
+  7/10 [daily]
+- [A semi-parametric Bernstein-von Mises theorem at rate $n^{-3/2}$ for frequency estimation](deep_reads/2026-11-04-2611.00821.md)  
+  7/10 [daily]
+- [Sharp Critical Rates for Locally Private Distribution Estimation](deep_reads/2026-11-04-2611.01289.md)  
+  7/10 [daily]
+- [Nonparametric Intensity Estimation for Covariate-Driven Poisson Processes Using Deep Learning](deep_reads/2026-11-04-2611.03552.md)  
+  7/10 [daily]
+- [Inference for conditional Fr\'echet means via Riemannian Robust Bias Correction](deep_reads/2026-11-04-2611.01857.md)  
+  6/10 [daily]
+- [Directional Nonlinear Principal Components: a measure transportation approach](deep_reads/2026-11-04-2611.02158.md)  
+  6/10 [daily]
+- [Joint Estimation and Grouping of Quantile Association Curves across Multiple Responses](deep_reads/2026-11-04-2611.02466.md)  
+  6/10 [daily]
+- [Conditional expectile-based value-at-risk: Semiparametric estimation and inference](deep_reads/2026-11-04-2611.02716.md)  
+  6/10 [daily]
 - [Simultaneous inference for additive regression](deep_reads/2026-10-30-2610.41442.md)  
   7/10 [daily]
 - [Improved estimation of differential entropy of a multivariate Gaussian distribution](deep_reads/2026-10-30-2610.41849.md)  
@@ -8186,6 +8268,8 @@
 
 ### Daily
 
+- [Robust Estimation of Prior Parameters in Normal-Normal Empirical Bayes](deep_reads/2026-11-04-2611.00326.md)  
+  6/10 [daily]
 - [Valid GMM Inference with Non-parametrically Generated Discrete Type](deep_reads/2026-10-30-2610.42052.md)  
   8/10 [daily]
 - [Debiased Machine Learning for Count Data: a Partially Linear Poisson Model Based on Neural Networks](deep_reads/2026-10-08-2610.07500.md)  
@@ -8607,6 +8691,44 @@
 
 ### Daily
 
+- [Minimax signal detection in regression under differential privacy](deep_reads/2026-11-05-2611.04064.md)  
+  8/10 [daily]
+- [Nuisance structure and the detection boundary for population size: how profiling can change a rate, not only a constant](deep_reads/2026-11-05-2611.04453.md)  
+  7/10 [daily]
+- [Martingalized U-statistics-based sequential inference: a blessing of degeneracy](deep_reads/2026-11-04-2611.00753.md)  
+  8/10 [daily]
+- [A Kernel-Based Test for Multi-Way Conditional Independence](deep_reads/2026-11-04-2611.01092.md)  
+  7/10 [daily]
+- [Graph-Based Testing of Conditional Mean Independence with Applications to Large Language Model Evaluation](deep_reads/2026-11-04-2611.01773.md)  
+  7/10 [daily]
+- [Conditional independence testing through marginal permutation](deep_reads/2026-11-04-2611.03255.md)  
+  7/10 [daily]
+- [Beyond least-favorable distribution pairs: asymptotically instance-optimal robust hypothesis testing](deep_reads/2026-11-04-2611.02130.md)  
+  7/10 [daily]
+- [A High-Dimensional LM Test for Cross-Sectional Independence with Serially Correlated Data](deep_reads/2026-11-04-2611.02308.md)  
+  7/10 [daily]
+- [Resolution Is Not Accessibility: Coupled Minimax Risk for Reduced Statistical Experiments](deep_reads/2026-11-04-2611.02914.md)  
+  7/10 [daily]
+- [A Note on the Finite-Exceedance Dependence Principle for Sum--Maximum Asymptotic Independence](deep_reads/2026-11-04-2611.03351.md)  
+  7/10 [daily]
+- [Finite-Sample Calibration and Power Benchmarks in Two-Sample Random-Integration Tests](deep_reads/2026-11-04-2611.00865.md)  
+  6/10 [daily]
+- [Second-Order Least Squares Method for Statistical Inference in Linear Models with Asymmetric Errors](deep_reads/2026-11-04-2611.01017.md)  
+  6/10 [daily]
+- [Minimax regret and monotone optimality in multiple testing](deep_reads/2026-11-04-2611.03155.md)  
+  6/10 [daily]
+- [Optimal Certified Multiple Testing with E-values](deep_reads/2026-11-04-2611.01333.md)  
+  6/10 [daily]
+- [Moment-Orthogonal Quadratic-Envelope E-Processes for Anytime-Valid Location Inference](deep_reads/2026-11-04-2611.01637.md)  
+  6/10 [daily]
+- [Randomized Adaptive Sequential Allocation and the Limits of Bounded Exposure to Inferior Treatments](deep_reads/2026-11-04-2611.02012.md)  
+  6/10 [daily]
+- [On the Conditional Consistency of the Bootstrap](deep_reads/2026-11-04-2611.02243.md)  
+  6/10 [daily]
+- [Exact Simes inequalities for two-sided Gaussian tests](deep_reads/2026-11-04-2611.02513.md)  
+  6/10 [daily]
+- [Statistics of the Shepp $p$-product](deep_reads/2026-11-04-2611.03282.md)  
+  6/10 [daily]
 - [Global Testing of Gaussian Means by Combining Marginal and Conditional Evidence](deep_reads/2026-11-03-2610.40899.md)  
   8/10 [daily]
 - [Co-sufficient weighting: leveraging sparsity for more powerful variable selection in the linear model](deep_reads/2026-10-30-2610.42122.md)  
@@ -11343,6 +11465,10 @@
 
 ### Daily
 
+- [Multi-modal Laplace-based sampling](deep_reads/2026-11-05-2611.03773.md)  
+  6/10 [daily]
+- [High-Frequency Estimation of the Leverage Effect under Rough Volatility with Microstructure Noise](deep_reads/2026-11-04-2611.00965.md)  
+  6/10 [daily]
 - [A Sublinear Treewidth Exponent for Binary Constraint Satisfaction](deep_reads/2026-11-03-hexagon_2611.00004.md)  
   6/10 [daily]
 - [Low-discrepancy quasi-uniform digital sequences in every dimension](deep_reads/2026-11-03-hexagon_2610.00664.md)  
@@ -12871,6 +12997,28 @@
 
 ### Daily
 
+- [GPUPhot: Kernel-Based Algorithms for Point-Source Detection and Photometry with a Spatially Variable PSF](deep_reads/2026-11-05-2611.03753.md)  
+  6/10 [daily]
+- [Latin hypercube sampling to reduce the variance in Monte Carlo integration: a practical guide and an application to gravitational-wave astronomy](deep_reads/2026-11-05-2611.04045.md)  
+  6/10 [daily]
+- [A semi-autonomous multi-agent pipeline for high-energy astrophysics research with enforced provenance and verifiable self-extension](deep_reads/2026-11-05-2611.05251.md)  
+  6/10 [daily]
+- [Deconvolved IXPE Polarization Maps of the Crab Nebula in a Maximum-a-Posteriori Framework](deep_reads/2026-11-04-2611.01820.md)  
+  7/10 [daily]
+- [Contrastive Astromer: Two-Stage Contrastive Representation Learning for Astronomical Light Curve Classification](deep_reads/2026-11-04-2611.00150.md)  
+  6/10 [daily]
+- [Shear Mapping in Python (SMPy): Modular, Extensible, and Accessible Dark Matter Mapping](deep_reads/2026-11-04-2611.00225.md)  
+  6/10 [daily]
+- [FiDeR: Denoising Astronomical Images at the Observational Resolution](deep_reads/2026-11-04-2611.01657.md)  
+  6/10 [daily]
+- [Aperture Photometric Accuracy of Point-spread-function-deconvolved Astronomical Images](deep_reads/2026-11-04-2611.01670.md)  
+  6/10 [daily]
+- [The Agentic Observer Hackathon: Autonomous Decision-making in Simulated Astronomical Surveys](deep_reads/2026-11-04-2611.01988.md)  
+  6/10 [daily]
+- [Characterisation Methodology for Persistence and Anti-persistence in IR Detectors for the Euclid and SVOM Space Missions](deep_reads/2026-11-04-2611.02860.md)  
+  6/10 [daily]
+- [Anomaly-ranked confirmation slows new-class learning](deep_reads/2026-11-04-2611.03250.md)  
+  6/10 [daily]
 - [Spectral Information Content of Diffraction-Limited Images](deep_reads/2026-10-30-2610.41092.md)  
   6/10 [daily]
 - [Faint Companions to Hot Stars. Spectroscopic Detection Sensitivity and Implications for Survey Design](deep_reads/2026-10-28-2610.33225.md)  
@@ -13758,6 +13906,12 @@
 
 ### Daily
 
+- [Regret-based Characterization, Information Limits, and the Sample Complexity of Auditing Adaptive Policies](deep_reads/2026-11-05-2611.05227.md)  
+  7/10 [daily]
+- [Specification LASSO and a Flexible Characteristics-Based Asset Pricing Model](deep_reads/2026-11-04-2611.03391.md)  
+  7/10 [daily]
+- [Does Calibration Pick the Right Model? Likelihood Evidence from Income Risk](deep_reads/2026-11-04-2611.02029.md)  
+  6/10 [daily]
 - [Weak Identification in Bunching Designs: Rare Events and Counterfactual Uncertainty](deep_reads/2026-11-03-2610.40719.md)  
   7/10 [daily]
 - [Evaluating Maternity Leave Reforms When RD Fails](deep_reads/2026-10-30-2610.41881.md)  
@@ -16649,6 +16803,36 @@
 
 ### Daily
 
+- [A Bayesian-Geometric Reading of Classical Model-Based Optimal Design](deep_reads/2026-11-05-2611.04450.md)  
+  6/10 [daily]
+- [Off-Diagonal Commonality of a Shorter Even Cycle and a Longer Odd Cycle](deep_reads/2026-11-05-hexagon_2611.00066.md)  
+  2/10 [daily]
+- [Log-concavity in the Newton basis and support of rank-two scattering coefficients](deep_reads/2026-11-05-hexagon_2611.00056.md)  
+  2/10 [daily]
+- [Selected character moments, zero-free half-planes for Hecke L-functions over number fields, and Quasi-Riemann Hypothesis](deep_reads/2026-11-05-hexagon_2611.00082.md)  
+  1/10 [daily]
+- [Nonpolynomial Hall numbers for tame and wild algebras](deep_reads/2026-11-05-hexagon_2611.00081.md)  
+  1/10 [daily]
+- [Landau--Siegel zeros over varying number fields](deep_reads/2026-11-05-hexagon_2611.00080.md)  
+  0/10 [daily]
+- [Cartan determinants for almost laura, quasi-laura, semilinear clannish and piecewise Bäckström algebras](deep_reads/2026-11-05-hexagon_2611.00062.md)  
+  0/10 [daily]
+- [Sharp upper and lower bounds on the variance of U-statistics](deep_reads/2026-11-04-2611.01690.md)  
+  9/10 [daily]
+- [A model-based adaptive sampling framework for infectious disease surveillance](deep_reads/2026-11-04-2611.01199.md)  
+  6/10 [daily]
+- [Soluble subgroup pairs in symmetric and alternating groups](deep_reads/2026-11-04-hexagon_2611.00042.md)  
+  0/10 [daily]
+- [A Bound Helium Dianion Does Not Exist](deep_reads/2026-11-04-hexagon_2611.00041.md)  
+  0/10 [daily]
+- [Hilton’s conjecture on cycle multiplicities](deep_reads/2026-11-04-hexagon_2611.00028.md)  
+  0/10 [daily]
+- [PARAMETER MONOTONICITY FOR GENERALIZED k-MARKOV NUMBERS](deep_reads/2026-11-04-hexagon_2611.00023.md)  
+  0/10 [daily]
+- [DEEP LOCI OF DOUBLE BOTT–SAMELSON VARIETIES](deep_reads/2026-11-04-hexagon_2611.00022.md)  
+  0/10 [daily]
+- [The dodecahedron web and its instanton homology](deep_reads/2026-11-04-hexagon_2611.00021.md)  
+  0/10 [daily]
 - [A Koteljanskii inequality for permanents](deep_reads/2026-11-03-hexagon_2610.00727.md)  
   3/10 [daily]
 - [Cyclic reductions of elliptic curves at a positive proportion of primes](deep_reads/2026-11-03-hexagon_2610.00699.md)  

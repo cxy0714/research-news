@@ -11,51 +11,43 @@
 - **[收藏](favorites.md)** — 登录后在各页点 ☆ 收藏的论文，自动汇总到这里（总收藏按类别分组、可切换按周；每篇可写评论，无需手动维护）。
 - **[模型测评](all_shootout.md)** — 不同 LLM 在同一批论文上的打分 / 解读对比。
 
-## 今日 · 2026-11-03
+## 今日 · 2026-11-05
 
 ### 每日 arXiv 速览
 
-[→ 查看完整报告](daily/2026-11-03.md)
+[→ 查看完整报告](daily/2026-11-05.md)
 
-### 精读论文（19 篇）
+### 精读论文（15 篇）
 
-- [Theory for identification and Inference with Synthetic Controls: A Proximal Causal Inference Framework](deep_reads/2026-11-03-2108.13935.md)  
-  `因果推断` · 相关性 9/10
-- [Global Testing of Gaussian Means by Combining Marginal and Conditional Evidence](deep_reads/2026-11-03-2610.40899.md)  
+- [Minimax signal detection in regression under differential privacy](deep_reads/2026-11-05-2611.04064.md)  
   `数理统计 / 假设检验` · 相关性 8/10
-- [Smallest Gaps between Eigenvalues of Wigner Matrices without Smoothness Assumptions](deep_reads/2026-11-03-hexagon_2610.00675.md)  
-  `高维统计 / 随机矩阵` · 相关性 8/10
-- [Weak Identification in Bunching Designs: Rare Events and Counterfactual Uncertainty](deep_reads/2026-11-03-2610.40719.md)  
+- [Nuisance structure and the detection boundary for population size: how profiling can change a rate, not only a constant](deep_reads/2026-11-05-2611.04453.md)  
+  `数理统计 / 假设检验` · 相关性 7/10
+- [Regret-based Characterization, Information Limits, and the Sample Complexity of Auditing Adaptive Policies](deep_reads/2026-11-05-2611.05227.md)  
   `经济理论 / 应用` · 相关性 7/10
-- [A Sublinear Treewidth Exponent for Binary Constraint Satisfaction](deep_reads/2026-11-03-hexagon_2611.00004.md)  
+- [Multi-modal Laplace-based sampling](deep_reads/2026-11-05-2611.03773.md)  
   `统计计算 / 算法` · 相关性 6/10
-- [Low-discrepancy quasi-uniform digital sequences in every dimension](deep_reads/2026-11-03-hexagon_2610.00664.md)  
-  `统计计算 / 算法` · 相关性 6/10
-- [The $p$-Bures–Wasserstein distance via $3\times3$ block matrices (with application to $p$-Bures–Wasserstein barycenters)](deep_reads/2026-11-03-hexagon_2610.00726.md)  
-  `统计计算 / 算法` · 相关性 4/10
-- [A Koteljanskii inequality for permanents](deep_reads/2026-11-03-hexagon_2610.00727.md)  
-  `其他` · 相关性 3/10
-- [Cyclic reductions of elliptic curves at a positive proportion of primes](deep_reads/2026-11-03-hexagon_2610.00699.md)  
+- [A Bayesian-Geometric Reading of Classical Model-Based Optimal Design](deep_reads/2026-11-05-2611.04450.md)  
+  `其他` · 相关性 6/10
+- [Conformal Prediction at Performative Equilibrium: The Price of Performativity](deep_reads/2026-11-05-2611.05277.md)  
+  `因果推断` · 相关性 6/10
+- [GPUPhot: Kernel-Based Algorithms for Point-Source Detection and Photometry with a Spatially Variable PSF](deep_reads/2026-11-05-2611.03753.md)  
+  `天体统计` · 相关性 6/10
+- [Latin hypercube sampling to reduce the variance in Monte Carlo integration: a practical guide and an application to gravitational-wave astronomy](deep_reads/2026-11-05-2611.04045.md)  
+  `天体统计` · 相关性 6/10
+- [A semi-autonomous multi-agent pipeline for high-energy astrophysics research with enforced provenance and verifiable self-extension](deep_reads/2026-11-05-2611.05251.md)  
+  `天体统计` · 相关性 6/10
+- [Off-Diagonal Commonality of a Shorter Even Cycle and a Longer Odd Cycle](deep_reads/2026-11-05-hexagon_2611.00066.md)  
+  `其他` · 相关性 2/10
+- [Log-concavity in the Newton basis and support of rank-two scattering coefficients](deep_reads/2026-11-05-hexagon_2611.00056.md)  
+  `其他` · 相关性 2/10
+- [Selected character moments, zero-free half-planes for Hecke L-functions over number fields, and Quasi-Riemann Hypothesis](deep_reads/2026-11-05-hexagon_2611.00082.md)  
   `其他` · 相关性 1/10
-- [Local independent sets and colourings of triangle-free graphs](deep_reads/2026-11-03-hexagon_2610.00677.md)  
+- [Nonpolynomial Hall numbers for tame and wild algebras](deep_reads/2026-11-05-hexagon_2611.00081.md)  
   `其他` · 相关性 1/10
-- [Nonunimodal Laurent coefficients of cluster monomials](deep_reads/2026-11-03-hexagon_2610.00670.md)  
-  `其他` · 相关性 1/10
-- [Positive polytopes and the full Fock–Goncharov conjecture](deep_reads/2026-11-03-hexagon_2611.00015.md)  
+- [Landau--Siegel zeros over varying number fields](deep_reads/2026-11-05-hexagon_2611.00080.md)  
   `其他` · 相关性 0/10
-- [Projected stated (SL_n)-skein algebras and the Huang–Wang conjectures](deep_reads/2026-11-03-hexagon_2611.00013.md)  
-  `其他` · 相关性 0/10
-- [Improved and sharp bounds for illumination](deep_reads/2026-11-03-hexagon_2611.00011.md)  
-  `其他` · 相关性 0/10
-- [Illumination of complex 1-unconditional convex bodies](deep_reads/2026-11-03-hexagon_2611.00010.md)  
-  `其他` · 相关性 0/10
-- [Illumination of several families of complex convex bodies](deep_reads/2026-11-03-hexagon_2611.00007.md)  
-  `其他` · 相关性 0/10
-- [Equality of the Mirković–Vilonen and theta bases](deep_reads/2026-11-03-hexagon_2611.00006.md)  
-  `其他` · 相关性 0/10
-- [Rational limits in Markov–Euclid asymptotics](deep_reads/2026-11-03-hexagon_2611.00002.md)  
-  `其他` · 相关性 0/10
-- [Counterexamples to log-concavity of cluster monomials and theta structure constants](deep_reads/2026-11-03-hexagon_2610.00668.md)  
+- [Cartan determinants for almost laura, quasi-laura, semilinear clannish and piecewise Bäckström algebras](deep_reads/2026-11-05-hexagon_2611.00062.md)  
   `其他` · 相关性 0/10
 
 ## 收藏
@@ -64,10 +56,10 @@
 
 ## 本周每日报告
 
+- [2026-11-04](daily/2026-11-04.md)
+- [2026-11-03](daily/2026-11-03.md)
 - [2026-10-30](daily/2026-10-30.md)
 - [2026-10-29](daily/2026-10-29.md)
-- [2026-10-28](daily/2026-10-28.md)
-- [2026-10-27](daily/2026-10-27.md)
 
 
 ---
