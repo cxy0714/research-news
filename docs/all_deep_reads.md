@@ -4,6 +4,16 @@
 
 ### Daily
 
+- [Debiased Conditional Independence Tests for Causal Effects](deep_reads/2026-11-06-2611.05608.md)  
+  9/10 [daily]
+- [Aggregating treatment effects across multiple outcomes](deep_reads/2026-11-06-2611.05456.md)  
+  8/10 [daily]
+- [Sensitivity Analysis in Population Shares](deep_reads/2026-11-06-2611.05584.md)  
+  8/10 [daily]
+- [Balance-Guided Forest for Causal Effect Estimation](deep_reads/2026-11-06-2611.05723.md)  
+  7/10 [daily]
+- [Doubly robust win statistics for hierarchical survival endpoints in individual- and cluster-randomized trials](deep_reads/2026-11-06-2611.05853.md)  
+  6/10 [daily]
 - [Conformal Prediction at Performative Equilibrium: The Price of Performativity](deep_reads/2026-11-05-2611.05277.md)  
   6/10 [daily]
 - [Estimating Average Treatment Effects with Projected Instrumental Variables](deep_reads/2026-11-04-2611.00705.md)  
@@ -8691,6 +8701,10 @@
 
 ### Daily
 
+- [Approximate minimax regret for conditionally similar tests](deep_reads/2026-11-06-2611.06557.md)  
+  7/10 [daily]
+- [Time-Varying Tails: Estimation, Inference, and Risk Measurement](deep_reads/2026-11-06-2611.06005.md)  
+  6/10 [daily]
 - [Minimax signal detection in regression under differential privacy](deep_reads/2026-11-05-2611.04064.md)  
   8/10 [daily]
 - [Nuisance structure and the detection boundary for population size: how profiling can change a rate, not only a constant](deep_reads/2026-11-05-2611.04453.md)  
@@ -12997,6 +13011,10 @@
 
 ### Daily
 
+- [Object-independent evaluation of small-data astronomical image classifiers: architecture, representation, and acquisition shortcuts](deep_reads/2026-11-06-2611.06484.md)  
+  7/10 [daily]
+- [Tracking turbulence for wind-driven halo removal using MagAO-X pyramid wavefront sensor images](deep_reads/2026-11-06-2611.06873.md)  
+  6/10 [daily]
 - [GPUPhot: Kernel-Based Algorithms for Point-Source Detection and Photometry with a Spatially Variable PSF](deep_reads/2026-11-05-2611.03753.md)  
   6/10 [daily]
 - [Latin hypercube sampling to reduce the variance in Monte Carlo integration: a practical guide and an application to gravitational-wave astronomy](deep_reads/2026-11-05-2611.04045.md)  
@@ -16803,6 +16821,14 @@
 
 ### Daily
 
+- [A new proof of van der Waerden's inequality, and beyond](deep_reads/2026-11-06-hexagon_2611.00118.md)  
+  6/10 [daily]
+- [The L'vov–Kaplansky conjecture for polynomials of degree four](deep_reads/2026-11-06-hexagon_2611.00119.md)  
+  1/10 [daily]
+- [Three-Relator Universal Group, Four-Relator Adian–Rabin Family, and Unrecognizability of $\#^2(S^2\times S^2)$](deep_reads/2026-11-06-hexagon_2611.00112.md)  
+  1/10 [daily]
+- [Voblint: End-to-End Soundness of a Context-Sensitive Goblint-Style Analyzer in Isabelle/HOL](deep_reads/2026-11-06-hexagon_2611.00109.md)  
+  1/10 [daily]
 - [A Bayesian-Geometric Reading of Classical Model-Based Optimal Design](deep_reads/2026-11-05-2611.04450.md)  
   6/10 [daily]
 - [Off-Diagonal Commonality of a Shorter Even Cycle and a Longer Odd Cycle](deep_reads/2026-11-05-hexagon_2611.00066.md)  

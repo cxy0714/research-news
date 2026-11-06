@@ -11,44 +11,40 @@
 - **[收藏](favorites.md)** — 登录后在各页点 ☆ 收藏的论文，自动汇总到这里（总收藏按类别分组、可切换按周；每篇可写评论，无需手动维护）。
 - **[模型测评](all_shootout.md)** — 不同 LLM 在同一批论文上的打分 / 解读对比。
 
-## 今日 · 2026-11-05
+## 今日 · 2026-11-06
 
 ### 每日 arXiv 速览
 
-[→ 查看完整报告](daily/2026-11-05.md)
+[→ 查看完整报告](daily/2026-11-06.md)
 
-### 精读论文（15 篇）
+### 精读论文（13 篇）
 
-- [Minimax signal detection in regression under differential privacy](deep_reads/2026-11-05-2611.04064.md)  
-  `数理统计 / 假设检验` · 相关性 8/10
-- [Nuisance structure and the detection boundary for population size: how profiling can change a rate, not only a constant](deep_reads/2026-11-05-2611.04453.md)  
+- [Debiased Conditional Independence Tests for Causal Effects](deep_reads/2026-11-06-2611.05608.md)  
+  `因果推断` · 相关性 9/10
+- [Aggregating treatment effects across multiple outcomes](deep_reads/2026-11-06-2611.05456.md)  
+  `因果推断` · 相关性 8/10
+- [Sensitivity Analysis in Population Shares](deep_reads/2026-11-06-2611.05584.md)  
+  `因果推断` · 相关性 8/10
+- [Balance-Guided Forest for Causal Effect Estimation](deep_reads/2026-11-06-2611.05723.md)  
+  `因果推断` · 相关性 7/10
+- [Approximate minimax regret for conditionally similar tests](deep_reads/2026-11-06-2611.06557.md)  
   `数理统计 / 假设检验` · 相关性 7/10
-- [Regret-based Characterization, Information Limits, and the Sample Complexity of Auditing Adaptive Policies](deep_reads/2026-11-05-2611.05227.md)  
-  `经济理论 / 应用` · 相关性 7/10
-- [Multi-modal Laplace-based sampling](deep_reads/2026-11-05-2611.03773.md)  
-  `统计计算 / 算法` · 相关性 6/10
-- [A Bayesian-Geometric Reading of Classical Model-Based Optimal Design](deep_reads/2026-11-05-2611.04450.md)  
-  `其他` · 相关性 6/10
-- [Conformal Prediction at Performative Equilibrium: The Price of Performativity](deep_reads/2026-11-05-2611.05277.md)  
+- [Object-independent evaluation of small-data astronomical image classifiers: architecture, representation, and acquisition shortcuts](deep_reads/2026-11-06-2611.06484.md)  
+  `天体统计` · 相关性 7/10
+- [Doubly robust win statistics for hierarchical survival endpoints in individual- and cluster-randomized trials](deep_reads/2026-11-06-2611.05853.md)  
   `因果推断` · 相关性 6/10
-- [GPUPhot: Kernel-Based Algorithms for Point-Source Detection and Photometry with a Spatially Variable PSF](deep_reads/2026-11-05-2611.03753.md)  
+- [Time-Varying Tails: Estimation, Inference, and Risk Measurement](deep_reads/2026-11-06-2611.06005.md)  
+  `数理统计 / 假设检验` · 相关性 6/10
+- [Tracking turbulence for wind-driven halo removal using MagAO-X pyramid wavefront sensor images](deep_reads/2026-11-06-2611.06873.md)  
   `天体统计` · 相关性 6/10
-- [Latin hypercube sampling to reduce the variance in Monte Carlo integration: a practical guide and an application to gravitational-wave astronomy](deep_reads/2026-11-05-2611.04045.md)  
-  `天体统计` · 相关性 6/10
-- [A semi-autonomous multi-agent pipeline for high-energy astrophysics research with enforced provenance and verifiable self-extension](deep_reads/2026-11-05-2611.05251.md)  
-  `天体统计` · 相关性 6/10
-- [Off-Diagonal Commonality of a Shorter Even Cycle and a Longer Odd Cycle](deep_reads/2026-11-05-hexagon_2611.00066.md)  
-  `其他` · 相关性 2/10
-- [Log-concavity in the Newton basis and support of rank-two scattering coefficients](deep_reads/2026-11-05-hexagon_2611.00056.md)  
-  `其他` · 相关性 2/10
-- [Selected character moments, zero-free half-planes for Hecke L-functions over number fields, and Quasi-Riemann Hypothesis](deep_reads/2026-11-05-hexagon_2611.00082.md)  
+- [A new proof of van der Waerden's inequality, and beyond](deep_reads/2026-11-06-hexagon_2611.00118.md)  
+  `其他` · 相关性 6/10
+- [The L'vov–Kaplansky conjecture for polynomials of degree four](deep_reads/2026-11-06-hexagon_2611.00119.md)  
   `其他` · 相关性 1/10
-- [Nonpolynomial Hall numbers for tame and wild algebras](deep_reads/2026-11-05-hexagon_2611.00081.md)  
+- [Three-Relator Universal Group, Four-Relator Adian–Rabin Family, and Unrecognizability of $\#^2(S^2\times S^2)$](deep_reads/2026-11-06-hexagon_2611.00112.md)  
   `其他` · 相关性 1/10
-- [Landau--Siegel zeros over varying number fields](deep_reads/2026-11-05-hexagon_2611.00080.md)  
-  `其他` · 相关性 0/10
-- [Cartan determinants for almost laura, quasi-laura, semilinear clannish and piecewise Bäckström algebras](deep_reads/2026-11-05-hexagon_2611.00062.md)  
-  `其他` · 相关性 0/10
+- [Voblint: End-to-End Soundness of a Context-Sensitive Goblint-Style Analyzer in Isabelle/HOL](deep_reads/2026-11-06-hexagon_2611.00109.md)  
+  `其他` · 相关性 1/10
 
 ## 收藏
 
@@ -56,10 +52,10 @@
 
 ## 本周每日报告
 
+- [2026-11-05](daily/2026-11-05.md)
 - [2026-11-04](daily/2026-11-04.md)
 - [2026-11-03](daily/2026-11-03.md)
 - [2026-10-30](daily/2026-10-30.md)
-- [2026-10-29](daily/2026-10-29.md)
 
 
 ---
