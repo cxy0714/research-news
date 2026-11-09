@@ -11479,6 +11479,8 @@
 
 ### Daily
 
+- [The Price of Bayes-Optimal In-Context Learning](deep_reads/2026-11-09-hexagon_2611.00133.md)  
+  6/10 [daily]
 - [Multi-modal Laplace-based sampling](deep_reads/2026-11-05-2611.03773.md)  
   6/10 [daily]
 - [High-Frequency Estimation of the Leverage Effect under Rough Volatility with Microstructure Noise](deep_reads/2026-11-04-2611.00965.md)  
@@ -16821,6 +16823,46 @@
 
 ### Daily
 
+- [Fast Attention after SETH: The Exact Exponent and the Hypotheses Behind It](deep_reads/2026-11-09-hexagon_2611.00132.md)  
+  6/10 [daily]
+- [Degree Transport and a Smaller Cubic Coefficient for Reset Thresholds](deep_reads/2026-11-09-hexagon_2611.00172.md)  
+  2/10 [daily]
+- [Undecidability of Quiver Mutation Equivalence](deep_reads/2026-11-09-hexagon_2611.00158.md)  
+  2/10 [daily]
+- [Non-Uniqueness of Leray-Hopf Solutions to the Unforced Three-Dimensional Navier-Stokes Equations](deep_reads/2026-11-09-hexagon_2611.00143.md)  
+  2/10 [daily]
+- [HOLOMORPHIC SECTIONAL CURVATURE OF FLAG MANIFOLDS VIA KÄHLER REDUCTION](deep_reads/2026-11-09-hexagon_2611.00168.md)  
+  1/10 [daily]
+- [Anomalous regularization of passive scalars up to the Obukhov-Corrsin exponent](deep_reads/2026-11-09-hexagon_2611.00165.md)  
+  1/10 [daily]
+- [Decidability of Mutation-Acyclicity](deep_reads/2026-11-09-hexagon_2611.00163.md)  
+  1/10 [daily]
+- [Schmeisser’s Conjecture in Large Degree](deep_reads/2026-11-09-hexagon_2611.00162.md)  
+  1/10 [daily]
+- [Equivalence of the Four-Variable Hessian and Planar Jacobian Conjectures](deep_reads/2026-11-09-hexagon_2611.00156.md)  
+  1/10 [daily]
+- [Disproof of minimum CAD existence for algebraic sets in dimensions \(n\ge4\)](deep_reads/2026-11-09-hexagon_2611.00131.md)  
+  1/10 [daily]
+- [Counterexamples in positive characteristics](deep_reads/2026-11-09-hexagon_2611.00204.md)  
+  0/10 [daily]
+- [Positivity of Canonical Basis Multiplication in Modified Quantum Groups](deep_reads/2026-11-09-hexagon_2611.00190.md)  
+  0/10 [daily]
+- [Counterexamples to Source–Sink Recursions for Denominator Vectors](deep_reads/2026-11-09-hexagon_2611.00186.md)  
+  0/10 [daily]
+- [Singleton Dominance Regions in Affine Cluster Algebras](deep_reads/2026-11-09-hexagon_2611.00185.md)  
+  0/10 [daily]
+- [Globally periodic rational difference equations of arbitrary order](deep_reads/2026-11-09-hexagon_2611.00183.md)  
+  0/10 [daily]
+- [Height-bounded mutation to acyclic quivers on four vertices](deep_reads/2026-11-09-hexagon_2611.00181.md)  
+  0/10 [daily]
+- [Complexity of Mutation-Acyclicity and Matrix Mutation Equivalence](deep_reads/2026-11-09-hexagon_2611.00180.md)  
+  0/10 [daily]
+- [The Lu–Wenzel Conjecture](deep_reads/2026-11-09-hexagon_2611.00179.md)  
+  0/10 [daily]
+- [Disproof of Xi’s conjecture on the representation dimension of idempotent corners](deep_reads/2026-11-09-hexagon_2611.00137.md)  
+  0/10 [daily]
+- [Deterministic Polynomial-Time Factorization over Finite Fields](deep_reads/2026-11-09-hexagon_2611.00135.md)  
+  0/10 [daily]
 - [A new proof of van der Waerden's inequality, and beyond](deep_reads/2026-11-06-hexagon_2611.00118.md)  
   6/10 [daily]
 - [The L'vov–Kaplansky conjecture for polynomials of degree four](deep_reads/2026-11-06-hexagon_2611.00119.md)  

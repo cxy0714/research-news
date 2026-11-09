@@ -11,40 +11,56 @@
 - **[收藏](favorites.md)** — 登录后在各页点 ☆ 收藏的论文，自动汇总到这里（总收藏按类别分组、可切换按周；每篇可写评论，无需手动维护）。
 - **[模型测评](all_shootout.md)** — 不同 LLM 在同一批论文上的打分 / 解读对比。
 
-## 今日 · 2026-11-06
+## 今日 · 2026-11-09
 
 ### 每日 arXiv 速览
 
-[→ 查看完整报告](daily/2026-11-06.md)
+[→ 查看完整报告](daily/2026-11-09.md)
 
-### 精读论文（13 篇）
+### 精读论文（21 篇）
 
-- [Debiased Conditional Independence Tests for Causal Effects](deep_reads/2026-11-06-2611.05608.md)  
-  `因果推断` · 相关性 9/10
-- [Aggregating treatment effects across multiple outcomes](deep_reads/2026-11-06-2611.05456.md)  
-  `因果推断` · 相关性 8/10
-- [Sensitivity Analysis in Population Shares](deep_reads/2026-11-06-2611.05584.md)  
-  `因果推断` · 相关性 8/10
-- [Balance-Guided Forest for Causal Effect Estimation](deep_reads/2026-11-06-2611.05723.md)  
-  `因果推断` · 相关性 7/10
-- [Approximate minimax regret for conditionally similar tests](deep_reads/2026-11-06-2611.06557.md)  
-  `数理统计 / 假设检验` · 相关性 7/10
-- [Object-independent evaluation of small-data astronomical image classifiers: architecture, representation, and acquisition shortcuts](deep_reads/2026-11-06-2611.06484.md)  
-  `天体统计` · 相关性 7/10
-- [Doubly robust win statistics for hierarchical survival endpoints in individual- and cluster-randomized trials](deep_reads/2026-11-06-2611.05853.md)  
-  `因果推断` · 相关性 6/10
-- [Time-Varying Tails: Estimation, Inference, and Risk Measurement](deep_reads/2026-11-06-2611.06005.md)  
-  `数理统计 / 假设检验` · 相关性 6/10
-- [Tracking turbulence for wind-driven halo removal using MagAO-X pyramid wavefront sensor images](deep_reads/2026-11-06-2611.06873.md)  
-  `天体统计` · 相关性 6/10
-- [A new proof of van der Waerden's inequality, and beyond](deep_reads/2026-11-06-hexagon_2611.00118.md)  
+- [The Price of Bayes-Optimal In-Context Learning](deep_reads/2026-11-09-hexagon_2611.00133.md)  
+  `统计计算 / 算法` · 相关性 6/10
+- [Fast Attention after SETH: The Exact Exponent and the Hypotheses Behind It](deep_reads/2026-11-09-hexagon_2611.00132.md)  
   `其他` · 相关性 6/10
-- [The L'vov–Kaplansky conjecture for polynomials of degree four](deep_reads/2026-11-06-hexagon_2611.00119.md)  
+- [Degree Transport and a Smaller Cubic Coefficient for Reset Thresholds](deep_reads/2026-11-09-hexagon_2611.00172.md)  
+  `其他` · 相关性 2/10
+- [Undecidability of Quiver Mutation Equivalence](deep_reads/2026-11-09-hexagon_2611.00158.md)  
+  `其他` · 相关性 2/10
+- [Non-Uniqueness of Leray-Hopf Solutions to the Unforced Three-Dimensional Navier-Stokes Equations](deep_reads/2026-11-09-hexagon_2611.00143.md)  
+  `其他` · 相关性 2/10
+- [HOLOMORPHIC SECTIONAL CURVATURE OF FLAG MANIFOLDS VIA KÄHLER REDUCTION](deep_reads/2026-11-09-hexagon_2611.00168.md)  
   `其他` · 相关性 1/10
-- [Three-Relator Universal Group, Four-Relator Adian–Rabin Family, and Unrecognizability of $\#^2(S^2\times S^2)$](deep_reads/2026-11-06-hexagon_2611.00112.md)  
+- [Anomalous regularization of passive scalars up to the Obukhov-Corrsin exponent](deep_reads/2026-11-09-hexagon_2611.00165.md)  
   `其他` · 相关性 1/10
-- [Voblint: End-to-End Soundness of a Context-Sensitive Goblint-Style Analyzer in Isabelle/HOL](deep_reads/2026-11-06-hexagon_2611.00109.md)  
+- [Decidability of Mutation-Acyclicity](deep_reads/2026-11-09-hexagon_2611.00163.md)  
   `其他` · 相关性 1/10
+- [Schmeisser’s Conjecture in Large Degree](deep_reads/2026-11-09-hexagon_2611.00162.md)  
+  `其他` · 相关性 1/10
+- [Equivalence of the Four-Variable Hessian and Planar Jacobian Conjectures](deep_reads/2026-11-09-hexagon_2611.00156.md)  
+  `其他` · 相关性 1/10
+- [Disproof of minimum CAD existence for algebraic sets in dimensions \(n\ge4\)](deep_reads/2026-11-09-hexagon_2611.00131.md)  
+  `其他` · 相关性 1/10
+- [Counterexamples in positive characteristics](deep_reads/2026-11-09-hexagon_2611.00204.md)  
+  `其他` · 相关性 0/10
+- [Positivity of Canonical Basis Multiplication in Modified Quantum Groups](deep_reads/2026-11-09-hexagon_2611.00190.md)  
+  `其他` · 相关性 0/10
+- [Counterexamples to Source–Sink Recursions for Denominator Vectors](deep_reads/2026-11-09-hexagon_2611.00186.md)  
+  `其他` · 相关性 0/10
+- [Singleton Dominance Regions in Affine Cluster Algebras](deep_reads/2026-11-09-hexagon_2611.00185.md)  
+  `其他` · 相关性 0/10
+- [Globally periodic rational difference equations of arbitrary order](deep_reads/2026-11-09-hexagon_2611.00183.md)  
+  `其他` · 相关性 0/10
+- [Height-bounded mutation to acyclic quivers on four vertices](deep_reads/2026-11-09-hexagon_2611.00181.md)  
+  `其他` · 相关性 0/10
+- [Complexity of Mutation-Acyclicity and Matrix Mutation Equivalence](deep_reads/2026-11-09-hexagon_2611.00180.md)  
+  `其他` · 相关性 0/10
+- [The Lu–Wenzel Conjecture](deep_reads/2026-11-09-hexagon_2611.00179.md)  
+  `其他` · 相关性 0/10
+- [Disproof of Xi’s conjecture on the representation dimension of idempotent corners](deep_reads/2026-11-09-hexagon_2611.00137.md)  
+  `其他` · 相关性 0/10
+- [Deterministic Polynomial-Time Factorization over Finite Fields](deep_reads/2026-11-09-hexagon_2611.00135.md)  
+  `其他` · 相关性 0/10
 
 ## 收藏
 
@@ -52,11 +68,11 @@
 
 ## 本周每日报告
 
+- [2026-11-06](daily/2026-11-06.md)
 - [2026-11-05](daily/2026-11-05.md)
 - [2026-11-04](daily/2026-11-04.md)
 - [2026-11-03](daily/2026-11-03.md)
 - [2026-11-02](daily/2026-11-02.md)
-- [2026-10-30](daily/2026-10-30.md)
 
 
 ---
