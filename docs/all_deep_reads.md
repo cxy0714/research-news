@@ -4,6 +4,14 @@
 
 ### Daily
 
+- [Minimax designs and estimators for causal inference under network interference](deep_reads/2026-11-10-2611.08560.md)  
+  8/10 [daily]
+- [Navigating Selection Bias in Genome-wide Association Studies (GWAS)](deep_reads/2026-11-10-2611.09429.md)  
+  7/10 [daily]
+- [M-Estimation in Censored Regression Model under Endogeneity](deep_reads/2026-11-10-2611.09539.md)  
+  7/10 [daily]
+- [Risk-set reconstruction balance: zero-targeted diagnostics for artificial censoring in clone-censor-weight analyses](deep_reads/2026-11-10-2611.09553.md)  
+  6/10 [daily]
 - [Debiased Conditional Independence Tests for Causal Effects](deep_reads/2026-11-06-2611.05608.md)  
   9/10 [daily]
 - [Aggregating treatment effects across multiple outcomes](deep_reads/2026-11-06-2611.05456.md)  
@@ -4449,6 +4457,14 @@
 
 ### Daily
 
+- [Supervised Factor-Augmented Matrix Regression with Weak Factors](deep_reads/2026-11-10-2611.08941.md)  
+  7/10 [daily]
+- [Debias Online Expectile Regression for High-Dimensional Stream Data and Statistic Inference](deep_reads/2026-11-10-2611.09431.md)  
+  7/10 [daily]
+- [Local Inference for High-dimensional Time Series](deep_reads/2026-11-10-2611.09676.md)  
+  6/10 [daily]
+- [Byzantine-Robust Distributed Sparse Softmax Regression](deep_reads/2026-11-10-2611.09110.md)  
+  6/10 [daily]
 - [Robust Inference for Spiked Eigenspace under Elliptical Distributions](deep_reads/2026-11-04-2611.00538.md)  
   8/10 [daily]
 - [Optimal spectral shrinkage via Krylov approximation](deep_reads/2026-11-04-2611.02122.md)  
@@ -6032,6 +6048,8 @@
 
 ### Daily
 
+- [Scalable Estimation and Inference for Varying Coefficient Expectile Regression with Streaming Data](deep_reads/2026-11-10-2611.09484.md)  
+  6/10 [daily]
 - [Minimax estimation of linear functionals in the Darcy inverse problem](deep_reads/2026-11-04-2611.01290.md)  
   8/10 [daily]
 - [Transport for Conditional Sampling: Foundations and Applications](deep_reads/2026-11-04-2611.01436.md)  
@@ -8701,6 +8719,10 @@
 
 ### Daily
 
+- [Power improvements and exact shortcuts for closed permutation maxT testing with discrete data](deep_reads/2026-11-10-2611.09231.md)  
+  6/10 [daily]
+- [Reweighting for Transfer Classification: Exact Risk Conversion and Minimax Adaptation](deep_reads/2026-11-10-2611.08876.md)  
+  6/10 [daily]
 - [Approximate minimax regret for conditionally similar tests](deep_reads/2026-11-06-2611.06557.md)  
   7/10 [daily]
 - [Time-Varying Tails: Estimation, Inference, and Risk Measurement](deep_reads/2026-11-06-2611.06005.md)  
@@ -11479,6 +11501,8 @@
 
 ### Daily
 
+- [Box-Cox Transformations of Correlation Matrices](deep_reads/2026-11-10-2611.09790.md)  
+  7/10 [daily]
 - [The Price of Bayes-Optimal In-Context Learning](deep_reads/2026-11-09-hexagon_2611.00133.md)  
   6/10 [daily]
 - [Multi-modal Laplace-based sampling](deep_reads/2026-11-05-2611.03773.md)  
@@ -16823,6 +16847,8 @@
 
 ### Daily
 
+- [On the Order of Privacy and Smoothing in Functional Mean Estimation](deep_reads/2026-11-10-2611.09799.md)  
+  6/10 [daily]
 - [Fast Attention after SETH: The Exact Exponent and the Hypotheses Behind It](deep_reads/2026-11-09-hexagon_2611.00132.md)  
   6/10 [daily]
 - [Degree Transport and a Smaller Cubic Coefficient for Reset Thresholds](deep_reads/2026-11-09-hexagon_2611.00172.md)  
