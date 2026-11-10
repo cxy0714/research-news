@@ -148,7 +148,11 @@ def _parse_page(text: str) -> tuple[list[Paper], list[Paper], bool]:
 
     digest_papers carry section info via a temporary ``_section`` attribute
     ('high'/'mid'); low_papers carry their score (for the threshold split)."""
-    lines = text.split("\n")
+    # Pages written on Windows land with CRLF; collapse only CRLF so the
+    # trailing CR doesn't end up inside the parsed title/summary (where it would
+    # re-render as an extra blank line). A bare CR *inside* a summary is data —
+    # the round-trip tests rely on it surviving — so it is left alone.
+    lines = text.replace("\r\n", "\n").split("\n")
     boundaries = sorted(
         {i for i, ln in enumerate(lines) if ln.startswith("#") or ln.strip() == "---"}
         | {len(lines)}

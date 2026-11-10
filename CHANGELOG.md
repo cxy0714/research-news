@@ -18,6 +18,18 @@
 
 ### Added
 
+- **AI 评测 / Benchmark 双轨（会议专题 + 每日雷达）**：新增
+  `research_news/scrapers/proceedings.py`（PMLR / ACL Anthology / CVF / AAAI OJS / NeurIPS 五个
+  开放获取适配器，纯 HTML 解析、无 API key）与 `research_news/benchmarks.py`
+  （`collect → 标题预过滤 → 打分 → 精摘 → 多页渲染 → daily`，全程幂等可续跑）。会议侧一届一个
+  分区，按 9 个评测子主题分页（超过 40 篇自动拆 `-2.md` / `-3.md`），产物
+  `docs/benchmarks/<venue>/{index,all,topics/*}.md`；每日侧从 arXiv `cs.CL` / `cs.LG` 当天提交里
+  筛评测论文，落 `docs/benchmarks/daily/<date>.md`。`run_daily.ps1/.sh` 在日报之后自动跑
+  daily 雷达（失败不阻塞统计日报的提交）。独立兴趣档 `config/interests.benchmark.yaml` + 站点
+  登记 `config/benchmarks.yaml`；`mkdocs.yml` 的「AI 评测」导航段由
+  `# BENCH-NAV-START/END` 自动维护，只放分区总览、主题页从总览进入。首批跑通
+  ICML 2026（PMLR v306，6,552 篇 → 605 候选）、ACL 2026（2,298 → 459）、EMNLP 2025
+  （1,810 → 315）与 AAAI 2026（6,498 → 134）；CVPR 2026（4,042 → 269）已抓取、待打分。
 - **XAGI 2026 会议精读（队列 + 共享锁）**：新增 `research_news/scrapers/xagi.py`（日程页确定性
   解析，14 场次 / 49 场报告，无 LLM、无 API key，落 `data/conferences/xagi2026/sessions.json`）与
   `research_news/xagi.py`（整条会议流水线）：①`match` 用 LLM 推断报告的英文论文题目 + OpenAlex /
@@ -65,6 +77,12 @@
 
 ### Changed
 
+- **`Paper` 增加多源字段**：`uid` / `track` / `arxiv_id` / `venue_id` / `venue_track` /
+  `proceedings_url` / `doi` / `session` / `openreview_id` / `code_url` / `citation_count` /
+  `bench_type` / `what_it_measures` / `also_in`，全部带默认值，统计侧无需改动。
+- **`llm.pipeline` 可换 rubric**：`score_papers(..., system_prompt=)` 与
+  `summarize_paper(..., system_prompt=, topics=)`，默认仍用统计档 prompt / topic 表；评测档改用
+  `llm/bench_prompts.py` 的「评测方法学」rubric 与 9 个主题，打分不再奖励榜单名次。
 - **每日页标题 `每日 arXiv 资讯` → `每日资讯`**（源已经不止 arXiv 一家：Hexagon 也在同一条日报里）。
   生成端两处（`render.markdown.render_daily`、`manual_requests._new_daily_page`）改掉，历史 111 个
   `docs/daily/*.md` 的 H1 一并原地重写——只动标题那一行、按字节改，行尾 CRLF 不受影响；首批
@@ -90,6 +108,9 @@
 
 ### Fixed
 
+- **`backfill_summaries._parse_page` 在 CRLF 页面上多插空行**：Windows 写出的页面行尾带 `\r`，
+  `split("\n")` 后 `\r` 混进标题 / 摘要，重渲染时变成额外空行，字节级自检因此失败。现在只折叠
+  `\r\n`，摘要内部有意保留的裸 `\r` 仍原样往返。
 - **JMLR 精读一直只读到摘要**：`highlights._pdf_url` 拼的是 `/papers/v27/<stem>.pdf`（404），
   真实路径是 `/papers/volume27/<stem>/<stem>.pdf`。
 - `oa_pdf.fetch_pdf` 只重试传输错误，不重试「响应不是 PDF」（重试也不会变成 PDF）。

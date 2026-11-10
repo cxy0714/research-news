@@ -60,6 +60,11 @@ try {
     # Fix any garbled / truncated summaries in today's report.
     python -m research_news.rerun --date $today
 
+    # AI evaluation / benchmark radar: a separate page (docs/benchmarks/daily/)
+    # built from today's cs.CL / cs.LG submissions. Non-fatal — a failed radar
+    # must never block the stats report from being committed.
+    python -m research_news.benchmarks daily
+
     # Deep-read papers the owner queued on the website (the gist 'queue': paste an
     # arXiv link -> default-favorite + queue). Fails open without GIST_TOKEN.
     python -m research_news.manual_requests --date $today

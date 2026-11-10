@@ -740,6 +740,90 @@ python -m research_news.xagi long --max 0 --model deepseek-chat
 Start-ScheduledTask -TaskName research-news-xagi   # 立刻跑一次
 ```
 
+## AI 评测 / Benchmark（会议专题 + 每日雷达）
+
+只做**一个**话题：AI 的评测 / benchmark。两条线共用一套词表、一套打分：
+
+- **会议专题**：从开放获取的 proceedings 里按标题筛出评测论文 → LLM 按「评测方法学」打分
+  → 高分写中文精摘 → 渲染成期刊式的分区页面（一届会议一个分区，按主题分多页）。
+- **每日雷达**：每天从 arXiv `cs.CL` / `cs.LG` 的提交里再筛一遍，同样打分 + 精摘。
+
+### 为什么单独一条线
+
+统计日报的阈值是按「每天 100–200 篇」调的；一届 ICML 有 6,500+ 篇，直接混进去会把统计
+信号冲掉。评测论文的价值标准也不同——看的是测量设计、构念覆盖、污染控制、人类基线、
+judge 验证、分数的统计可靠性，而不是方法学与统计兴趣的重叠。所以它有独立的兴趣档
+（`config/interests.benchmark.yaml`）、独立的阈值和独立的页面。
+
+### 会议专题
+
+```bash
+# 抓一届会议 + 标题预过滤（零 LLM；只对候选抓摘要）
+python -m research_news.benchmarks collect --venue icml2026
+
+# 打分（可断点续跑：已打分的跳过）
+python -m research_news.benchmarks score --venue icml2026 --max 400
+
+# 给高分论文写中文精摘（默认取兴趣档里的 max_summaries_per_venue）
+python -m research_news.benchmarks summarize --venue icml2026 --max 60
+
+# 渲染（venue 分区 + 主题分页 + 总览 + 导航）
+python -m research_news.benchmarks render --venue icml2026
+
+# 一条龙
+python -m research_news.benchmarks run --venue acl2026
+
+# 进度
+python -m research_news.benchmarks status
+```
+
+产物：
+
+- `docs/benchmarks/<venue>/index.md` — 分区总览：收录/打分/精摘计数、主题分布、必读 Top 20。
+- `docs/benchmarks/<venue>/topics/<topic>.md` — **一个主题一页**；超过 `page_size` 自动
+  拆成 `-2.md`、`-3.md`（这就是「一届会议分多个网页」）。
+- `docs/benchmarks/<venue>/all.md` — 全部已打分论文的紧凑表（150 篇/页）。
+- `data/benchmarks/<venue>/papers.json` — 抓取 + 打分 + 精摘的状态（重跑幂等）。
+- `mkdocs.yml` 的 `# BENCH-NAV-START/END` — 自动生成的导航段，只放分区总览。
+
+已接入的会议（都是开放获取、无需 key）：
+
+| venue id | 会议 | 适配器 | 备注 |
+|---|---|---|---|
+| `icml2026` | ICML 2026 | PMLR v306 | 卷页有标题/作者/OpenReview 链接；摘要逐篇抓 |
+| `acl2026` | ACL 2026 | ACL Anthology | 卷页**摘要内联**，一次请求拿全 |
+| `emnlp2025` | EMNLP 2025 | ACL Anthology | 同上 |
+| `cvpr2026` | CVPR 2026 | CVF Open Access | `?day=all` 列表 + 逐篇摘要 |
+| `aaai2026` | AAAI 2026 | AAAI OJS | 按 Technical Track issue 抓，逐篇摘要 |
+
+本轮实际抓取规模（全网开放页面，2026-11-10）：ICML 2026 **6,552 → 605** 候选（29 篇精摘）、
+ACL 2026 **2,298 → 459**（30 篇）、EMNLP 2025 **1,810 → 315**（35 篇）、AAAI 2026
+**6,498 → 134**（58 篇）、CVPR 2026 **4,042 → 269**（已抓取，待打分）。候选数 = 标题命中评测
+词表且拿到摘要的论文；之后才按分数排序、取高分精摘。
+
+> ICLR 2026 / NeurIPS 2025 暂未接入：OpenReview API 在本机被 Cloudflare 挑战拦截，
+> NeurIPS 2025 的 proceedings 目前只上线了 Creative AI Track（主会未出）。
+
+### 每日雷达
+
+```bash
+python -m research_news.benchmarks daily            # 今天的 cs.CL / cs.LG
+python -m research_news.benchmarks daily --date 2026-11-09
+python -m research_news.benchmarks daily --dry-run  # 只抓 + 预过滤，不调 LLM
+```
+
+产物：`docs/benchmarks/daily/<date>.md` + `docs/benchmarks/daily/index.md`。`run_daily.ps1` /
+`run_daily.sh` 已在日报之后自动调用它（失败不阻塞统计日报的提交）。
+
+### 预过滤口径（为什么只按标题）
+
+摘要过滤试过，被否掉了：NLP 会议的摘要几乎每篇都写 "we evaluate on …"，按摘要匹配会放进来
+60%+ 的论文（EMNLP 2025：1,130/1,810）。而 benchmark 论文通常在标题里就自报家门
+（benchmark / evaluation / leaderboard / judge / contamination / metric…），所以只按标题，
+把精度交给 LLM 打分。抓取侧：~1.2 秒/请求、带联系方式的 UA、只抓元数据与摘要，PDF 只在
+精读时单篇下载且不入 git。
+
+
 ## 账户与收藏（网页端）
 
 站点是纯静态的（GitHub Pages，无后端），但通过把状态存进你 GitHub 账号下的一个

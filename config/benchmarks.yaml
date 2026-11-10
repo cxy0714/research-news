@@ -1,0 +1,101 @@
+# AI evaluation / benchmark track — venues, prefilter, limits.
+#
+# One venue = one "issue" in the journal pipeline's sense: collect → prefilter
+# by title → score → summarize top N → render multi-page site section.
+#
+# Only open-access proceedings are listed. Sources that need auth/JS or are
+# Cloudflare-challenged from this network (OpenReview API, HF Papers) are
+# deliberately excluded for now.
+
+venues:
+  - id: icml2026
+    label: ICML 2026
+    adapter: pmlr
+    volume: "306"
+    track: Main
+    enabled: true
+
+  - id: acl2026
+    label: ACL 2026
+    adapter: acl
+    volumes:
+      - "2026.acl-long"
+      - "2026.acl-short"
+    enabled: true
+
+  - id: emnlp2025
+    label: EMNLP 2025
+    adapter: acl
+    volumes:
+      - "2025.emnlp-main"
+    enabled: true
+
+  - id: cvpr2026
+    label: CVPR 2026
+    adapter: cvf
+    conference: CVPR
+    year: 2026
+    enabled: true
+
+  - id: aaai2026
+    label: AAAI 2026
+    adapter: aaai
+    year: 2026
+    enabled: true
+
+# Title/abstract prefilter (zero LLM). Deliberately recall-oriented: the LLM
+# score does the precision filtering, this only keeps the request/LLM budget
+# sane for 4,000-6,500-paper venues.
+filter:
+  title_patterns:
+    - "\\bbench"
+    - "\\bbenchmark"
+    - "\\bevaluat"
+    - "\\beval\\b"
+    - "\\bleaderboard"
+    - "\\btestbed"
+    - "\\btest[ -](suite|bed|set)"
+    - "\\bmetric"
+    - "\\bjudge"
+    - "\\bmeta-evaluat"
+    - "\\bcontamination"
+    - "\\breproduc"
+    - "\\bdiagnostic"
+    - "\\barena"
+    - "\\bprobe"
+    - "\\bmeasur"
+    - "\\bcalibrat"
+    - "\\bvalidity"
+    - "\\breliab"
+    - "\\bhow (good|well|reliable)"
+    - "\\bare (we|llms|models)"
+    - "\\bsaturat"
+    - "\\bdifficulty"
+    - "\\bscaling (law|behavio)"
+  # Titles that look like evaluation but are about something else.
+  deny_title_patterns:
+    - "\\bmetric learning"
+    - "\\bevaluation of (treatment|policy|program)"
+    - "\\bbenchmarking (database|compiler|hardware)"
+  # ACL volumes carry abstracts inline, so they also match on the abstract.
+  abstract_patterns:
+    - "\\bbenchmark"
+    - "\\bevaluat"
+    - "\\bleaderboard"
+    - "\\bLLM-as-a-judge"
+    - "\\bcontamination"
+    - "\\bhuman baseline"
+
+limits:
+  # Safety caps per venue/run (the prefilter usually lands well below these).
+  max_candidates_per_venue: 900
+  max_summaries_per_venue: 90
+  page_size: 40
+
+daily:
+  # arXiv categories watched by `benchmarks daily`.
+  categories: [cs.CL, cs.LG]
+  max_candidates: 120
+  max_scored: 120
+  max_summarized: 10
+  max_shown: 12

@@ -55,6 +55,33 @@ class Paper:
     # Recorded per deep read as reference data for tuning the prompt later.
     n_references: int | None = None
 
+    # ── multi-source / benchmark track (all optional, default preserves the
+    # stats pipelines' behaviour) ────────────────────────────────────────────
+    # Canonical identity across arXiv / OpenReview / proceedings: "doi:...",
+    # "arxiv:...", "openreview:...", or "title:<hash>".
+    uid: str = ""
+    # "stats" (default) or "ai" (benchmark track).
+    track: str = "stats"
+    # Explicit arXiv id when the record came from a proceedings page.
+    arxiv_id: str = ""
+    # Proceedings venue id ("icml2026") and its internal track ("Main" /
+    # "Findings" / "D&B" / "Long"), filled by the benchmark pipeline.
+    venue_id: str = ""
+    venue_track: str = ""
+    # Landing page on the official proceedings site (publisher URL stays in url).
+    proceedings_url: str = ""
+    # Cross-source identifiers / session info, when the proceedings page has them.
+    doi: str = ""
+    session: str = ""
+    openreview_id: str = ""
+    code_url: str = ""
+    citation_count: int | None = None
+    # Benchmark-specific annotations (benchmark track only).
+    bench_type: str = ""        # benchmark | evaluation_method | meta_evaluation | dataset | analysis
+    what_it_measures: str = ""  # one line: what capability / failure mode it measures
+    # Other places the same work appeared (venue ids / "arxiv").
+    also_in: list[str] = field(default_factory=list)
+
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
 

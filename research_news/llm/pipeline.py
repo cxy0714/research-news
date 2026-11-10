@@ -65,6 +65,7 @@ def score_papers(
     *,
     batch_size: int = 8,   # smaller batches → shorter output → less risk of truncation
     model: str | None = None,
+    system_prompt: str = SCORE_SYSTEM,
 ) -> dict[str, tuple[float, str]]:
     """Returns {paper_id: (score, reason)}."""
     out: dict[str, tuple[float, str]] = {}
@@ -93,7 +94,7 @@ def score_papers(
         try:
             raw = client.chat(
                 [
-                    {"role": "system", "content": SCORE_SYSTEM},
+                    {"role": "system", "content": system_prompt},
                     {"role": "user", "content": user},
                 ],
                 model=model,
@@ -306,9 +307,16 @@ def summarize_paper(
     deep: bool = False,
     model: str | None = None,
     extra_body: str | None = None,
+    system_prompt: str = RICH_SUMMARY_SYSTEM,
+    topics: list[str] | None = None,
 ) -> dict:
     """Mutates `paper` with summary_zh / why_relevant / topic / key_techniques /
-    novelty_flag, and returns the parsed dict (for callers who want it raw)."""
+    novelty_flag, and returns the parsed dict (for callers who want it raw).
+
+    `system_prompt` / `topics` let other tracks (e.g. AI benchmarks) reuse the
+    same parse/repair machinery with their own rubric and topic vocabulary.
+    """
+    topic_vocab = TOPICS if topics is None else topics
     body = f"Abstract: {paper.abstract}"
     if extra_body:
         body += "\n\n" + extra_body
@@ -323,7 +331,7 @@ def summarize_paper(
     def _call(max_tokens: int) -> str:
         return client.chat(
             [
-                {"role": "system", "content": RICH_SUMMARY_SYSTEM},
+                {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user},
             ],
             deep=deep,
@@ -378,10 +386,17 @@ def summarize_paper(
     paper.summary_zh = (parsed.get("summary_zh") or "").strip()
     paper.why_relevant = (parsed.get("why_relevant") or "").strip()
     topic = (parsed.get("topic") or "").strip().lower()
-    paper.topic = topic if topic in TOPICS else "other"
+    paper.topic = topic if topic in topic_vocab else "other"
     kt = parsed.get("key_techniques")
     paper.key_techniques = [str(x).strip() for x in kt] if isinstance(kt, list) else []
     paper.novelty_flag = (parsed.get("novelty_flag") or "").strip() or None
+    # Benchmark-track annotations (ignored by the stats prompts, which don't emit them).
+    bt = (parsed.get("bench_type") or "").strip()
+    if bt:
+        paper.bench_type = bt
+    wm = (parsed.get("what_it_measures") or "").strip()
+    if wm:
+        paper.what_it_measures = wm
     return parsed
 
 

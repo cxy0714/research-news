@@ -23,6 +23,10 @@ python -m research_news.daily
 # blocks whose prose was cut off, and salvages clean prose for the rest.
 python -m research_news.rerun --date "$(date -I)"
 
+# AI evaluation / benchmark radar (separate page under docs/benchmarks/daily/).
+# Non-fatal: a failed radar must never block the stats report.
+python -m research_news.benchmarks daily || true
+
 # Deep-read papers the owner queued on the website (the gist 'queue': paste an
 # arXiv link → 默认收藏 + 排队) and slot them into today's '✍️ 手动录入' section.
 # Fails open: skips quietly when GIST_TOKEN isn't set, so this never blocks the run.
