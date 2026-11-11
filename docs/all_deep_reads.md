@@ -132,6 +132,8 @@
   7/10 [daily]
 - [Central Limit Theorems and Network-Free Inference for Heterogeneous Spatial Autoregressions on Sparse Graphons](deep_reads/2026-10-29-2610.40630.md)  
   7/10 [daily]
+- [Reference-based multiple imputation for longitudinal bounded discrete outcomes](deep_reads/2026-10-29-2610.39834.md)  
+  6/10 [daily]
 - [Inference for Causal Path-Specific Effects in Longitudinal Studies with Repeated Treatments and Multiple Mediators](deep_reads/2026-10-28-2610.34349.md)  
   9/10 [daily]
 - [Informative inference on the average treatment effect with instrumental variables](deep_reads/2026-10-28-2610.33254.md)  
@@ -8368,6 +8370,8 @@
   6/10 [daily]
 - [Valid GMM Inference with Non-parametrically Generated Discrete Type](deep_reads/2026-10-30-2610.42052.md)  
   8/10 [daily]
+- [Generalized Posterior Calibration via Infinitesimal-Jackknife Variance Matching](deep_reads/2026-10-29-2610.39684.md)  
+  6/10 [daily]
 - [Debiased Machine Learning for Count Data: a Partially Linear Poisson Model Based on Neural Networks](deep_reads/2026-10-08-2610.07500.md)  
   8/10 [daily]
 - [Adaptive inference for functionals of M-estimands](deep_reads/2026-09-30-2609.39274.md)  
@@ -11611,6 +11615,8 @@
   6/10 [daily]
 - [posterior-landscape: morphological feature finding in two-dimensional probability densities](deep_reads/2026-10-29-2610.40272.md)  
   7/10 [daily]
+- [Graphical Modeling from Marginal Information via Optimal Transport](deep_reads/2026-10-29-2610.40070.md)  
+  6/10 [daily]
 - [Higher-Order Marginal Likelihood Approximation for Nonlinear State Space Models](deep_reads/2026-10-28-2610.34629.md)  
   6/10 [daily]
 - [Rare-Feature-Adaptive Subsampling for Big Data Regression](deep_reads/2026-10-23-2610.29083.md)  
@@ -13163,6 +13169,8 @@
   7/10 [daily]
 - [Robust statistical significance for Gravitational Wave inference](deep_reads/2026-10-29-2610.39785.md)  
   7/10 [daily]
+- [Beyond $χ^2$: Ensemble null tests for reliable scientific discovery](deep_reads/2026-10-29-2610.40167.md)  
+  6/10 [daily]
 - [Faint Companions to Hot Stars. Spectroscopic Detection Sensitivity and Implications for Survey Design](deep_reads/2026-10-28-2610.33225.md)  
   6/10 [daily]
 - [Reproducibility, Methodological Robustness, and Synthetic-Domain Selection Properties of AFINO for TESS Stellar-Flare QPP Analysis](deep_reads/2026-10-28-2610.34627.md)  
@@ -15409,6 +15417,8 @@
 
 ### Daily
 
+- [Adaptive Sequential Surveillance of Infectious Diseases Under Limited Sampling Capacity](deep_reads/2026-10-29-2610.39932.md)  
+  6/10 [daily]
 - [Dynamic Amplification of Risk-Estimate Bias Through Differential Detection: A Markov Model for History-Based Covariates](deep_reads/2026-09-15-2609.12376.md)  
   7/10 [daily]
 - [Kalman Filtering and Smoothing for Improving Precision in Horvitz--Thompson Estimation of Infectious Disease Prevalence](deep_reads/2026-09-10-2609.09325.md)  
