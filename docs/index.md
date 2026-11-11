@@ -17,7 +17,7 @@
 
 [→ 查看完整报告](daily/2026-11-11.md)
 
-### 精读论文（15 篇）
+### 精读论文（20 篇）
 
 - [Weak-Instrument Inference and Model Diagnostics in Double Machine Learning for Linear Instrumental Variable Models](deep_reads/2026-11-11-2611.10863.md)  
   `因果推断` · 相关性 9/10
@@ -35,6 +35,16 @@
   `因果推断` · 相关性 8/10
 - [Proximal Difference-in-Differences for Causal Learning under Confounding and Outcome Drift](deep_reads/2026-11-11-2611.10310.md)  
   `因果推断` · 相关性 8/10
+- [Removing the floor from Hoeffding and Bernstein inequalities for finite-population U-statistics](deep_reads/2026-11-11-2611.10551.md)  
+  `其他` · 相关性 7/10
+- [Near-Purity Screening and Dominant-Atom Estimation in Softmax Mixtures and Their Ensembles](deep_reads/2026-11-11-2611.12647.md)  
+  `高维统计 / 随机矩阵` · 相关性 7/10
+- [Algorithm-aware Statistical Inference in High-dimensional Estimating Equations](deep_reads/2026-11-11-2611.12287.md)  
+  `数理统计 / 假设检验` · 相关性 7/10
+- [Characterizing Underrepresentation when Generalizing Causal Survival Estimates](deep_reads/2026-11-11-2611.11923.md)  
+  `因果推断` · 相关性 7/10
+- [Distribution-Free Symmetry Detection in Multi-Reference Alignment at Low SNR](deep_reads/2026-11-11-2611.11872.md)  
+  `数理统计 / 假设检验` · 相关性 7/10
 - [ATHOS: Agreement-based Testing of Hypotheses in Overlapping Subgroups](deep_reads/2026-11-11-2611.11676.md)  
   `数理统计 / 假设检验` · 相关性 7/10
 - [Causal Machine Learning for Multilevel Studies with Unmeasured Cluster-Level Covariates via Variational Autoencoders](deep_reads/2026-11-11-2611.11483.md)  

@@ -16,6 +16,8 @@
   8/10 [daily]
 - [Proximal Difference-in-Differences for Causal Learning under Confounding and Outcome Drift](deep_reads/2026-11-11-2611.10310.md)  
   8/10 [daily]
+- [Characterizing Underrepresentation when Generalizing Causal Survival Estimates](deep_reads/2026-11-11-2611.11923.md)  
+  7/10 [daily]
 - [Causal Machine Learning for Multilevel Studies with Unmeasured Cluster-Level Covariates via Variational Autoencoders](deep_reads/2026-11-11-2611.11483.md)  
   7/10 [daily]
 - [Sharp bounds for posterior causal attribution given complete factual records](deep_reads/2026-11-11-2611.11307.md)  
@@ -4477,6 +4479,8 @@
 
 ### Daily
 
+- [Near-Purity Screening and Dominant-Atom Estimation in Softmax Mixtures and Their Ensembles](deep_reads/2026-11-11-2611.12647.md)  
+  7/10 [daily]
 - [Supervised Factor-Augmented Matrix Regression with Weak Factors](deep_reads/2026-11-10-2611.08941.md)  
   7/10 [daily]
 - [Debias Online Expectile Regression for High-Dimensional Stream Data and Statistic Inference](deep_reads/2026-11-10-2611.09431.md)  
@@ -8745,6 +8749,10 @@
 
 ### Daily
 
+- [Algorithm-aware Statistical Inference in High-dimensional Estimating Equations](deep_reads/2026-11-11-2611.12287.md)  
+  7/10 [daily]
+- [Distribution-Free Symmetry Detection in Multi-Reference Alignment at Low SNR](deep_reads/2026-11-11-2611.11872.md)  
+  7/10 [daily]
 - [ATHOS: Agreement-based Testing of Hypotheses in Overlapping Subgroups](deep_reads/2026-11-11-2611.11676.md)  
   7/10 [daily]
 - [Power improvements and exact shortcuts for closed permutation maxT testing with discrete data](deep_reads/2026-11-10-2611.09231.md)  
@@ -16879,6 +16887,8 @@
 
 - [Uniform inference for $U$-statistics of exchangeable arrays under degeneracy](deep_reads/2026-11-11-2611.11388.md)  
   8/10 [daily]
+- [Removing the floor from Hoeffding and Bernstein inequalities for finite-population U-statistics](deep_reads/2026-11-11-2611.10551.md)  
+  7/10 [daily]
 - [On the Order of Privacy and Smoothing in Functional Mean Estimation](deep_reads/2026-11-10-2611.09799.md)  
   6/10 [daily]
 - [Fast Attention after SETH: The Exact Exponent and the Hypotheses Behind It](deep_reads/2026-11-09-hexagon_2611.00132.md)  
