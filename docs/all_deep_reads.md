@@ -4489,6 +4489,8 @@
 
 - [Near-Purity Screening and Dominant-Atom Estimation in Softmax Mixtures and Their Ensembles](deep_reads/2026-11-11-2611.12647.md)  
   7/10 [daily]
+- [Divide-and-Conquer is Tail- and Anomaly-Robust: Factor Model Estimation Without Moment Constraints](deep_reads/2026-11-11-2611.10358.md)  
+  6/10 [daily]
 - [Supervised Factor-Augmented Matrix Regression with Weak Factors](deep_reads/2026-11-10-2611.08941.md)  
   7/10 [daily]
 - [Debias Online Expectile Regression for High-Dimensional Stream Data and Statistic Inference](deep_reads/2026-11-10-2611.09431.md)  
@@ -6092,6 +6094,8 @@
   7/10 [daily]
 - [Efficient Estimation and Consistent Class Number Selection for Semiparametric Class-Specific Index Regression](deep_reads/2026-11-11-2611.10401.md)  
   7/10 [daily]
+- [Linear Functional Estimation under Multiplicative Measurement Error with Unknown Error Distribution](deep_reads/2026-11-11-2611.12516.md)  
+  6/10 [daily]
 - [Scalable Estimation and Inference for Varying Coefficient Expectile Regression with Streaming Data](deep_reads/2026-11-10-2611.09484.md)  
   6/10 [daily]
 - [Minimax estimation of linear functionals in the Darcy inverse problem](deep_reads/2026-11-04-2611.01290.md)  
@@ -8769,6 +8773,8 @@
   7/10 [daily]
 - [ATHOS: Agreement-based Testing of Hypotheses in Overlapping Subgroups](deep_reads/2026-11-11-2611.11676.md)  
   7/10 [daily]
+- [An iterated-logarithm price of anytime validity for log-optimal e-processes](deep_reads/2026-11-11-2611.11874.md)  
+  6/10 [daily]
 - [Conformal Prediction for Multi-Step Forecasting: Conditional Coverage and Sharp Score Calibration Rates](deep_reads/2026-11-11-2611.12004.md)  
   6/10 [daily]
 - [Optimal Radial Weighting for Robust Mutual Fund Selection](deep_reads/2026-11-11-2611.11762.md)  
@@ -14008,6 +14014,10 @@
 
 ### Daily
 
+- [Panel Local Projections with Missing Data](deep_reads/2026-11-11-2611.10372.md)  
+  6/10 [daily]
+- [Bayesian precision factor models for high-dimensional macroeconomic time series](deep_reads/2026-11-11-2611.12368.md)  
+  6/10 [daily]
 - [Regret-based Characterization, Information Limits, and the Sample Complexity of Auditing Adaptive Policies](deep_reads/2026-11-05-2611.05227.md)  
   7/10 [daily]
 - [Specification LASSO and a Flexible Characteristics-Based Asset Pricing Model](deep_reads/2026-11-04-2611.03391.md)  

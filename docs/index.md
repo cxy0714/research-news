@@ -17,7 +17,7 @@
 
 [→ 查看完整报告](daily/2026-11-11.md)
 
-### 精读论文（30 篇）
+### 精读论文（35 篇）
 
 - [Weak-Instrument Inference and Model Diagnostics in Double Machine Learning for Linear Instrumental Variable Models](deep_reads/2026-11-11-2611.10863.md)  
   `因果推断` · 相关性 9/10
@@ -65,6 +65,16 @@
   `因果推断` · 相关性 7/10
 - [Efficient Estimation and Consistent Class Number Selection for Semiparametric Class-Specific Index Regression](deep_reads/2026-11-11-2611.10401.md)  
   `非参数 / 半参数` · 相关性 7/10
+- [Panel Local Projections with Missing Data](deep_reads/2026-11-11-2611.10372.md)  
+  `经济理论 / 应用` · 相关性 6/10
+- [Linear Functional Estimation under Multiplicative Measurement Error with Unknown Error Distribution](deep_reads/2026-11-11-2611.12516.md)  
+  `非参数 / 半参数` · 相关性 6/10
+- [An iterated-logarithm price of anytime validity for log-optimal e-processes](deep_reads/2026-11-11-2611.11874.md)  
+  `数理统计 / 假设检验` · 相关性 6/10
+- [Divide-and-Conquer is Tail- and Anomaly-Robust: Factor Model Estimation Without Moment Constraints](deep_reads/2026-11-11-2611.10358.md)  
+  `高维统计 / 随机矩阵` · 相关性 6/10
+- [Bayesian precision factor models for high-dimensional macroeconomic time series](deep_reads/2026-11-11-2611.12368.md)  
+  `经济理论 / 应用` · 相关性 6/10
 - [Conformal Prediction for Multi-Step Forecasting: Conditional Coverage and Sharp Score Calibration Rates](deep_reads/2026-11-11-2611.12004.md)  
   `数理统计 / 假设检验` · 相关性 6/10
 - [Optimal Radial Weighting for Robust Mutual Fund Selection](deep_reads/2026-11-11-2611.11762.md)  
