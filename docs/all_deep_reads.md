@@ -8859,6 +8859,8 @@
   6/10 [daily]
 - [The sharp iid Berry–Esseen inequality: Analytic reductions and exact certificate proof](deep_reads/2026-10-30-hexagon_2610.00590.md)  
   6/10 [daily]
+- [Conformal ordering: Distribution-free predictive inference for orders and ranks](deep_reads/2026-10-29-2610.40340.md)  
+  6/10 [daily]
 - [Near-boundary asymptotics for profile score statistics](deep_reads/2026-10-28-2610.33912.md)  
   7/10 [daily]
 - [Testing independence in contamination models](deep_reads/2026-10-28-2610.35028.md)  
@@ -11607,6 +11609,8 @@
   7/10 [daily]
 - [Stable and efficient covariance estimation for sample L-moments using Hájek projections](deep_reads/2026-10-30-2610.41640.md)  
   6/10 [daily]
+- [posterior-landscape: morphological feature finding in two-dimensional probability densities](deep_reads/2026-10-29-2610.40272.md)  
+  7/10 [daily]
 - [Higher-Order Marginal Likelihood Approximation for Nonlinear State Space Models](deep_reads/2026-10-28-2610.34629.md)  
   6/10 [daily]
 - [Rare-Feature-Adaptive Subsampling for Big Data Regression](deep_reads/2026-10-23-2610.29083.md)  
@@ -13155,6 +13159,10 @@
   6/10 [daily]
 - [Spectral Information Content of Diffraction-Limited Images](deep_reads/2026-10-30-2610.41092.md)  
   6/10 [daily]
+- [Tabular Foundation Models Dramatically Outperform Bespoke Photometric Redshift Estimators](deep_reads/2026-10-29-2610.39332.md)  
+  7/10 [daily]
+- [Robust statistical significance for Gravitational Wave inference](deep_reads/2026-10-29-2610.39785.md)  
+  7/10 [daily]
 - [Faint Companions to Hot Stars. Spectroscopic Detection Sensitivity and Implications for Survey Design](deep_reads/2026-10-28-2610.33225.md)  
   6/10 [daily]
 - [Reproducibility, Methodological Robustness, and Synthetic-Domain Selection Properties of AFINO for TESS Stellar-Flare QPP Analysis](deep_reads/2026-10-28-2610.34627.md)  
@@ -17113,6 +17121,8 @@
   0/10 [daily]
 - [A Boolean Lévy group with a free nonsingular action](deep_reads/2026-10-30-hexagon_2610.00635.md)  
   0/10 [daily]
+- [Homogeneity Pursuit of Panel Data with Sparsity](deep_reads/2026-10-29-2610.40193.md)  
+  6/10 [daily]
 - [Identification and curvature bias for shared inputs in multichannel dynamical models](deep_reads/2026-10-28-2610.33642.md)  
   6/10 [daily]
 - [On counting satisfying assignments via polynomial separation](deep_reads/2026-10-28-hexagon_2610.00574.md)  
