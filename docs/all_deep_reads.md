@@ -126,6 +126,12 @@
   6/10 [daily]
 - [Nonlinear Sufficient Dimension Reduction for Causal Inference with Continuous Treatments](deep_reads/2026-10-29-2610.39422.md)  
   8/10 [daily]
+- [How Different are Different Differences-in-Differences? A Large-Scale Meta-Analysis](deep_reads/2026-10-29-2610.39995.md)  
+  7/10 [daily]
+- [Optimal Policy With Noisy Sufficient Statistics](deep_reads/2026-10-29-2610.40582.md)  
+  7/10 [daily]
+- [Central Limit Theorems and Network-Free Inference for Heterogeneous Spatial Autoregressions on Sparse Graphons](deep_reads/2026-10-29-2610.40630.md)  
+  7/10 [daily]
 - [Inference for Causal Path-Specific Effects in Longitudinal Studies with Repeated Treatments and Multiple Mediators](deep_reads/2026-10-28-2610.34349.md)  
   9/10 [daily]
 - [Informative inference on the average treatment effect with instrumental variables](deep_reads/2026-10-28-2610.33254.md)  
@@ -6132,6 +6138,10 @@
   8/10 [daily]
 - [Optimal Neural Estimation for High-Dimensional Nonparametric Regression under Multisource Covariate Shift](deep_reads/2026-10-29-2610.40331.md)  
   8/10 [daily]
+- [Self-regularization and structural adaptation of NPMLE for Gaussian mixture models in all dimensions](deep_reads/2026-10-29-2610.40566.md)  
+  7/10 [daily]
+- [Weighted Score Matching on Bounded Domains: Nonparametric Density Estimation and Interaction Graph Recovery](deep_reads/2026-10-29-2610.39335.md)  
+  7/10 [daily]
 - [Minimax Rates for Conditional Generative Learning under Wasserstein Loss](deep_reads/2026-10-28-2610.35490.md)  
   8/10 [daily]
 - [Nonparametric Regression on the Circle with Applications to Climate and Environmental Science](deep_reads/2026-10-28-2610.34476.md)  
