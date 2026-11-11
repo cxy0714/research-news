@@ -17,7 +17,7 @@
 
 [→ 查看完整报告](daily/2026-11-11.md)
 
-### 精读论文（35 篇）
+### 精读论文（40 篇）
 
 - [Weak-Instrument Inference and Model Diagnostics in Double Machine Learning for Linear Instrumental Variable Models](deep_reads/2026-11-11-2611.10863.md)  
   `因果推断` · 相关性 9/10
@@ -65,6 +65,16 @@
   `因果推断` · 相关性 7/10
 - [Efficient Estimation and Consistent Class Number Selection for Semiparametric Class-Specific Index Regression](deep_reads/2026-11-11-2611.10401.md)  
   `非参数 / 半参数` · 相关性 7/10
+- [{\AA}ngstr\"om Exponent Calculation Using Wide-Field Stellar Photometry](deep_reads/2026-11-11-2611.12704.md)  
+  `天体统计` · 相关性 6/10
+- [Particle Swarm Optimization Strategies for Lensed Gravitational Waves: Parameter Estimation, Source Classification, and Accelerated Sampling](deep_reads/2026-11-11-2611.12135.md)  
+  `天体统计` · 相关性 6/10
+- [Satellite Streaks in HETDEX: Spectra, Orbital Identification, and Survey Impact](deep_reads/2026-11-11-2611.10301.md)  
+  `天体统计` · 相关性 6/10
+- [Do Modern Difference-in-Differences Estimators Change Published Findings in Business Research?](deep_reads/2026-11-11-2611.11003.md)  
+  `因果推断` · 相关性 6/10
+- [Z-Estimation under Unignorably Large Clusters](deep_reads/2026-11-11-2611.10925.md)  
+  `因果推断` · 相关性 6/10
 - [Panel Local Projections with Missing Data](deep_reads/2026-11-11-2611.10372.md)  
   `经济理论 / 应用` · 相关性 6/10
 - [Linear Functional Estimation under Multiplicative Measurement Error with Unknown Error Distribution](deep_reads/2026-11-11-2611.12516.md)  

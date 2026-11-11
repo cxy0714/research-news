@@ -26,6 +26,10 @@
   7/10 [daily]
 - [Inference for Non-Probability Samples Using Error-Prone Auxiliary Information](deep_reads/2026-11-11-2611.10975.md)  
   7/10 [daily]
+- [Do Modern Difference-in-Differences Estimators Change Published Findings in Business Research?](deep_reads/2026-11-11-2611.11003.md)  
+  6/10 [daily]
+- [Z-Estimation under Unignorably Large Clusters](deep_reads/2026-11-11-2611.10925.md)  
+  6/10 [daily]
 - [Graph-regularized synthetic control for spatial panels with post-only treated locations](deep_reads/2026-11-11-2611.11496.md)  
   6/10 [daily]
 - [ZIO: Order-Based Structure Learning for Zero-Inflated Count Data under Data Heterogeneity](deep_reads/2026-11-11-2611.11448.md)  
@@ -13101,6 +13105,12 @@
 
 ### Daily
 
+- [{\AA}ngstr\"om Exponent Calculation Using Wide-Field Stellar Photometry](deep_reads/2026-11-11-2611.12704.md)  
+  6/10 [daily]
+- [Particle Swarm Optimization Strategies for Lensed Gravitational Waves: Parameter Estimation, Source Classification, and Accelerated Sampling](deep_reads/2026-11-11-2611.12135.md)  
+  6/10 [daily]
+- [Satellite Streaks in HETDEX: Spectra, Orbital Identification, and Survey Impact](deep_reads/2026-11-11-2611.10301.md)  
+  6/10 [daily]
 - [Object-independent evaluation of small-data astronomical image classifiers: architecture, representation, and acquisition shortcuts](deep_reads/2026-11-06-2611.06484.md)  
   7/10 [daily]
 - [Tracking turbulence for wind-driven halo removal using MagAO-X pyramid wavefront sensor images](deep_reads/2026-11-06-2611.06873.md)  
