@@ -192,6 +192,10 @@
   6/10 [daily]
 - [A Bayesian machine learning approach to direct and spillover effects in cluster-randomized trials with noncompliance](deep_reads/2026-10-20-2610.27425.md)  
   8/10 [daily]
+- [Rerandomization and high-dimensional adjustment with assignment-dependent auxiliary variables under network interference](deep_reads/2026-10-20-2610.27741.md)  
+  7/10 [daily]
+- [Data-Driven Learning of Directed Acyclic Graphs in Gaussian Linear Structural Equation Models with Latent Variables](deep_reads/2026-10-20-2610.27873.md)  
+  7/10 [daily]
 - [Interpretable subgroup identification across survival and generalized-linear outcomes](deep_reads/2026-10-20-2610.28379.md)  
   7/10 [daily]
 - [Minimax Slope Estimation and Support Recovery under Weak Gaussian Selection](deep_reads/2026-10-19-2610.24749.md)  
@@ -13179,6 +13183,10 @@
   7/10 [daily]
 - [Robust statistical significance for Gravitational Wave inference](deep_reads/2026-10-29-2610.39785.md)  
   7/10 [daily]
+- [Towards an Astronomical Use of New-Generation Geodetic Observations](deep_reads/2026-10-29-2610.39656.md)  
+  6/10 [daily]
+- [Model-Based Retrieval of Four Years of JWST/NIRCam Wavefronts](deep_reads/2026-10-29-2610.40187.md)  
+  6/10 [daily]
 - [Beyond $χ^2$: Ensemble null tests for reliable scientific discovery](deep_reads/2026-10-29-2610.40167.md)  
   6/10 [daily]
 - [Faint Companions to Hot Stars. Spectroscopic Detection Sensitivity and Implications for Survey Design](deep_reads/2026-10-28-2610.33225.md)  
@@ -14081,6 +14089,8 @@
 - [Evaluating Maternity Leave Reforms When RD Fails](deep_reads/2026-10-30-2610.41881.md)  
   7/10 [daily]
 - [Identification through Heteroskedasticity in One Lemma: Partial Identification, an Eigenvalue Construction, and a Caution on Rank Tests](deep_reads/2026-10-30-2610.41361.md)  
+  6/10 [daily]
+- [Threshold Regression with a Nearly Integrated Threshold Variable](deep_reads/2026-10-29-2610.39871.md)  
   6/10 [daily]
 - [Approximate Quantile Factor Models](deep_reads/2026-10-28-2610.33461.md)  
   6/10 [daily]
