@@ -11645,8 +11645,12 @@
   6/10 [daily]
 - [Rare-Feature-Adaptive Subsampling for Big Data Regression](deep_reads/2026-10-23-2610.29083.md)  
   6/10 [daily]
+- [Active Pilot Sampling for Multi-fidelity Estimation in Stochastic Optimization](deep_reads/2026-10-20-2610.27563.md)  
+  5/10 [daily]
 - [RECAP: Representation-Based Calibration with Amortized Pooling for Frequentist Simulation-Based Inference](deep_reads/2026-10-20-2610.28332.md)  
   5/10 [daily]
+- [Divide-and-Conquer Neural Bayes Estimation for Spatial and Spatiotemporal Point Process Models](deep_reads/2026-10-20-2610.27619.md)  
+  4/10 [daily]
 - [Quaternion Gaussian Probes for Tensor Frobenius-Norm Estimation](deep_reads/2026-10-13-2610.12534.md)  
   6/10 [daily]
 - [An efficient stochastic generalized method of moments estimator for nonlinear moment models](deep_reads/2026-10-12-2610.12873.md)  
@@ -17253,6 +17257,12 @@
   0/10 [daily]
 - [Exact Covariance Structure and Efficient Computation for L-Comoments](deep_reads/2026-10-20-2610.28387.md)  
   8/10 [daily]
+- [Structural equation modelling--based meta-analytic model for diagnostic test accuracy studies](deep_reads/2026-10-20-2610.27408.md)  
+  4/10 [daily]
+- [BARRR: Bidimensional Augmented Reduced Rank Regression for Multi-View Multi-Cohort Data](deep_reads/2026-10-20-2610.27647.md)  
+  4/10 [daily]
+- [Bayesian nonparametric mixtures of asymmetric Archimedean copulas](deep_reads/2026-10-20-2610.28260.md)  
+  4/10 [daily]
 - [Identifiability from Moments in Independent Component Analysis Mixture Models](deep_reads/2026-10-19-2610.23846.md)  
   7/10 [daily]
 - [Asymptotic Normality of the Hill Estimator in Linear Preferential Attachment](deep_reads/2026-10-19-2610.24413.md)  
