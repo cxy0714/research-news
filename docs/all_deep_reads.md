@@ -192,6 +192,8 @@
   6/10 [daily]
 - [A Bayesian machine learning approach to direct and spillover effects in cluster-randomized trials with noncompliance](deep_reads/2026-10-20-2610.27425.md)  
   8/10 [daily]
+- [Strong Simultaneous Inference for Restricted Mean Survival Time Processes in Multi-Arm Trials under Covariate-Adaptive Randomization](deep_reads/2026-10-20-2610.27466.md)  
+  7/10 [daily]
 - [Rerandomization and high-dimensional adjustment with assignment-dependent auxiliary variables under network interference](deep_reads/2026-10-20-2610.27741.md)  
   7/10 [daily]
 - [Data-Driven Learning of Directed Acyclic Graphs in Gaussian Linear Structural Equation Models with Latent Variables](deep_reads/2026-10-20-2610.27873.md)  
@@ -6170,6 +6172,10 @@
   9/10 [daily]
 - [Minimax Rates for imperfect Physics-Informed Regression](deep_reads/2026-10-23-2610.29532.md)  
   7/10 [daily]
+- [Central Limit Theorems for Optimal Transport Functionals](deep_reads/2026-10-20-2610.27857.md)  
+  7/10 [daily]
+- [Nonparametric In-Context Learning and Inference via Measure-Indexed Kernel Ridge Regression](deep_reads/2026-10-20-2610.28056.md)  
+  6/10 [daily]
 - [Robust Local Fréchet Regression: Nonasymptotic Theory and Minimax Optimality](deep_reads/2026-10-19-2610.23757.md)  
   8/10 [daily]
 - [Sieve-free ReLU Bayesian priors with near-minimax posterior contraction](deep_reads/2026-10-19-2610.23308.md)  
@@ -8908,6 +8914,8 @@
 - [Time-Uniform Dependent Central Limit Theory](deep_reads/2026-10-23-2610.29288.md)  
   7/10 [daily]
 - [Uniformly Improved Adaptive Filtering Procedures for Replicability Testing with FWER Control](deep_reads/2026-10-23-2610.29266.md)  
+  6/10 [daily]
+- [Likelihood-Based Confidence Curves for Bounded Parameters](deep_reads/2026-10-20-2610.28235.md)  
   6/10 [daily]
 - [Sample complexity of weak-signal latent-variable models](deep_reads/2026-10-19-2610.24770.md)  
   8/10 [daily]
@@ -13199,6 +13207,8 @@
   6/10 [daily]
 - [Data-driven characterisation of variable source light curves with multimodal representation learning](deep_reads/2026-10-23-2610.29412.md)  
   6/10 [daily]
+- [Gaussian process-based Bayesian imaging of bolometric (sub-)millimetre data](deep_reads/2026-10-20-2610.27733.md)  
+  7/10 [daily]
 - [First Experimental Results of Space Object Detection Using the InteRFeX Array](deep_reads/2026-10-13-2610.13537.md)  
   6/10 [daily]
 - [An empirical calibration of the spectral resolution of JWST NIRSpec PRISM](deep_reads/2026-10-12-2610.13492.md)  
