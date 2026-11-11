@@ -4525,6 +4525,8 @@
   7/10 [daily]
 - [Dynamics of the spherical Sherrington–Kirkpatrick model, Part I: Foundations and tools](deep_reads/2026-10-30-hexagon_2610.00609.md)  
   3/10 [daily]
+- [Rate-Optimal Spectral Likelihood-Ratio Clustering in Stochastic Block Models](deep_reads/2026-10-29-2610.40531.md)  
+  6/10 [daily]
 - [Quantitative Resolvent Calculus for Sample Covariance Matrices](deep_reads/2026-10-28-2610.33087.md)  
   8/10 [daily]
 - [Nonparametric shrinkage estimation of high-dimensional variance component matrices](deep_reads/2026-10-28-2610.33431.md)  
@@ -6144,6 +6146,10 @@
   7/10 [daily]
 - [Weighted Score Matching on Bounded Domains: Nonparametric Density Estimation and Interaction Graph Recovery](deep_reads/2026-10-29-2610.39335.md)  
   7/10 [daily]
+- [Fast rates for the classification of Ornstein-Uhlenbeck paths](deep_reads/2026-10-29-2610.39726.md)  
+  6/10 [daily]
+- [Model-assisted estimation of the finite population mean via local linear regression with associated kernels](deep_reads/2026-10-29-2610.40163.md)  
+  6/10 [daily]
 - [Minimax Rates for Conditional Generative Learning under Wasserstein Loss](deep_reads/2026-10-28-2610.35490.md)  
   8/10 [daily]
 - [Nonparametric Regression on the Circle with Applications to Climate and Environmental Science](deep_reads/2026-10-28-2610.34476.md)  
@@ -8862,6 +8868,8 @@
 - [Dimension Changes the Scale-Signal Channel in Nearest-Neighbor Two-Sample Testing](deep_reads/2026-10-30-2610.41271.md)  
   6/10 [daily]
 - [The sharp iid Berry–Esseen inequality: Analytic reductions and exact certificate proof](deep_reads/2026-10-30-hexagon_2610.00590.md)  
+  6/10 [daily]
+- [TwinPoSI: Statistical Twins for Powerful Post-Selection Inference on Population-Based Regression Coefficients](deep_reads/2026-10-29-2610.39274.md)  
   6/10 [daily]
 - [Conformal ordering: Distribution-free predictive inference for orders and ranks](deep_reads/2026-10-29-2610.40340.md)  
   6/10 [daily]
@@ -11615,6 +11623,8 @@
   6/10 [daily]
 - [posterior-landscape: morphological feature finding in two-dimensional probability densities](deep_reads/2026-10-29-2610.40272.md)  
   7/10 [daily]
+- [Marginal Composite Likelihood Estimation of Bergomi Models from High-Frequency Option Prices](deep_reads/2026-10-29-2610.40425.md)  
+  6/10 [daily]
 - [Graphical Modeling from Marginal Information via Optimal Transport](deep_reads/2026-10-29-2610.40070.md)  
   6/10 [daily]
 - [Higher-Order Marginal Likelihood Approximation for Nonlinear State Space Models](deep_reads/2026-10-28-2610.34629.md)  
