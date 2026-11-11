@@ -17,7 +17,7 @@
 
 [→ 查看完整报告](daily/2026-11-11.md)
 
-### 精读论文（45 篇）
+### 精读论文（50 篇）
 
 - [Weak-Instrument Inference and Model Diagnostics in Double Machine Learning for Linear Instrumental Variable Models](deep_reads/2026-11-11-2611.10863.md)  
   `因果推断` · 相关性 9/10
@@ -103,12 +103,22 @@
   `因果推断` · 相关性 6/10
 - [The Logical Anatomy of Optimization: Reverse Mathematics, Proof Mining, and the Price of Convergence](deep_reads/2026-11-11-hexagon_2611.00217.md)  
   `其他` · 相关性 4/10
+- [Structural Reductions for Lusztig’s Conjectures in Types (B_n), (\widetilde B_n), and (\widetilde C_n)](deep_reads/2026-11-11-hexagon_2611.00205.md)  
+  `其他` · 相关性 1/10
 - [The L’vov–Kaplansky Conjecture for Matrices of Sufficiently Large Order](deep_reads/2026-11-11-hexagon_2611.00206.md)  
   `其他` · 相关性 1/10
 - [A family of finite dimensional Hopf algebras over $\mathbb{C}$ with varying algebra structure](deep_reads/2026-11-11-hexagon_2611.00226.md)  
   `其他` · 相关性 1/10
 - [Non-computable derivatives of the fractional-part autocorrelation](deep_reads/2026-11-11-hexagon_2611.00243.md)  
   `其他` · 相关性 1/10
+- [A LOWER BOUND FOR THE FILLING AREA OF THE CIRCLE](deep_reads/2026-11-11-hexagon_2611.00218.md)  
+  `其他` · 相关性 0/10
+- [Monomial Immanants of Totally Nonnegative Matrices](deep_reads/2026-11-11-hexagon_2611.00219.md)  
+  `其他` · 相关性 0/10
+- [Another Proof of Laurent Positivity for Generalized Cluster Algebras](deep_reads/2026-11-11-hexagon_2611.00238.md)  
+  `其他` · 相关性 0/10
+- [Another proof of Laurent positivity for skew-symmetric quantum cluster algebras](deep_reads/2026-11-11-hexagon_2611.00239.md)  
+  `其他` · 相关性 0/10
 
 ## 收藏
 
