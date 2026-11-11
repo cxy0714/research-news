@@ -17,7 +17,7 @@
 
 [→ 查看完整报告](daily/2026-11-11.md)
 
-### 精读论文（20 篇）
+### 精读论文（25 篇）
 
 - [Weak-Instrument Inference and Model Diagnostics in Double Machine Learning for Linear Instrumental Variable Models](deep_reads/2026-11-11-2611.10863.md)  
   `因果推断` · 相关性 9/10
@@ -35,6 +35,12 @@
   `因果推断` · 相关性 8/10
 - [Proximal Difference-in-Differences for Causal Learning under Confounding and Outcome Drift](deep_reads/2026-11-11-2611.10310.md)  
   `因果推断` · 相关性 8/10
+- [Asymptotic Theory of Integrated Pairwise-Difference Functionals of Kernel Estimators, with Applications to Treatment Effect Heterogeneity](deep_reads/2026-11-11-2611.10383.md)  
+  `非参数 / 半参数` · 相关性 7/10
+- [On the Instance-Specific Sharp Rates for Constrained Least Squares Estimators in the Sequence Model](deep_reads/2026-11-11-2611.11959.md)  
+  `非参数 / 半参数` · 相关性 7/10
+- [Robust Gaussian process regression: posterior contraction](deep_reads/2026-11-11-2611.11582.md)  
+  `非参数 / 半参数` · 相关性 7/10
 - [Removing the floor from Hoeffding and Bernstein inequalities for finite-population U-statistics](deep_reads/2026-11-11-2611.10551.md)  
   `其他` · 相关性 7/10
 - [Near-Purity Screening and Dominant-Atom Estimation in Softmax Mixtures and Their Ensembles](deep_reads/2026-11-11-2611.12647.md)  
@@ -59,6 +65,10 @@
   `因果推断` · 相关性 7/10
 - [Efficient Estimation and Consistent Class Number Selection for Semiparametric Class-Specific Index Regression](deep_reads/2026-11-11-2611.10401.md)  
   `非参数 / 半参数` · 相关性 7/10
+- [Forecasting Replication Study Results from Meta-Analyses](deep_reads/2026-11-11-2611.10943.md)  
+  `因果推断` · 相关性 6/10
+- [A General Statistical Framework for Attention and Manipulation Checks](deep_reads/2026-11-11-2611.10515.md)  
+  `因果推断` · 相关性 6/10
 
 ## 收藏
 

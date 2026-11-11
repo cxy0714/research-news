@@ -26,6 +26,10 @@
   7/10 [daily]
 - [Inference for Non-Probability Samples Using Error-Prone Auxiliary Information](deep_reads/2026-11-11-2611.10975.md)  
   7/10 [daily]
+- [Forecasting Replication Study Results from Meta-Analyses](deep_reads/2026-11-11-2611.10943.md)  
+  6/10 [daily]
+- [A General Statistical Framework for Attention and Manipulation Checks](deep_reads/2026-11-11-2611.10515.md)  
+  6/10 [daily]
 - [Minimax designs and estimators for causal inference under network interference](deep_reads/2026-11-10-2611.08560.md)  
   8/10 [daily]
 - [Navigating Selection Bias in Genome-wide Association Studies (GWAS)](deep_reads/2026-11-10-2611.09429.md)  
@@ -6074,6 +6078,12 @@
 
 - [Coverage and shape of conformal highest-density sets: A minimax theory](deep_reads/2026-11-11-2611.11909.md)  
   8/10 [daily]
+- [Asymptotic Theory of Integrated Pairwise-Difference Functionals of Kernel Estimators, with Applications to Treatment Effect Heterogeneity](deep_reads/2026-11-11-2611.10383.md)  
+  7/10 [daily]
+- [On the Instance-Specific Sharp Rates for Constrained Least Squares Estimators in the Sequence Model](deep_reads/2026-11-11-2611.11959.md)  
+  7/10 [daily]
+- [Robust Gaussian process regression: posterior contraction](deep_reads/2026-11-11-2611.11582.md)  
+  7/10 [daily]
 - [Model-assisted semi-supervised estimation of the Mann-Whitney probability under right censoring](deep_reads/2026-11-11-2611.11456.md)  
   7/10 [daily]
 - [Efficient Estimation and Consistent Class Number Selection for Semiparametric Class-Specific Index Regression](deep_reads/2026-11-11-2611.10401.md)  
