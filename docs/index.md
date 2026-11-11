@@ -11,40 +11,24 @@
 - **[收藏](favorites.md)** — 登录后在各页点 ☆ 收藏的论文，自动汇总到这里（总收藏按类别分组、可切换按周；每篇可写评论，无需手动维护）。
 - **[模型测评](all_shootout.md)** — 不同 LLM 在同一批论文上的打分 / 解读对比。
 
-## 今日 · 2026-11-10
+## 今日 · 2026-11-11
 
 ### 每日 arXiv 速览
 
-[→ 查看完整报告](daily/2026-11-10.md)
+[→ 查看完整报告](daily/2026-11-11.md)
 
-### 精读论文（13 篇）
+### 精读论文（5 篇）
 
-- [Minimax designs and estimators for causal inference under network interference](deep_reads/2026-11-10-2611.08560.md)  
+- [Weak-Instrument Inference and Model Diagnostics in Double Machine Learning for Linear Instrumental Variable Models](deep_reads/2026-11-11-2611.10863.md)  
+  `因果推断` · 相关性 9/10
+- [Semiparametric causal mediation analysis in cluster-randomized trials with post-treatment confounding](deep_reads/2026-11-11-2611.11903.md)  
   `因果推断` · 相关性 8/10
-- [Supervised Factor-Augmented Matrix Regression with Weak Factors](deep_reads/2026-11-10-2611.08941.md)  
-  `高维统计 / 随机矩阵` · 相关性 7/10
-- [Navigating Selection Bias in Genome-wide Association Studies (GWAS)](deep_reads/2026-11-10-2611.09429.md)  
-  `因果推断` · 相关性 7/10
-- [Debias Online Expectile Regression for High-Dimensional Stream Data and Statistic Inference](deep_reads/2026-11-10-2611.09431.md)  
-  `高维统计 / 随机矩阵` · 相关性 7/10
-- [M-Estimation in Censored Regression Model under Endogeneity](deep_reads/2026-11-10-2611.09539.md)  
-  `因果推断` · 相关性 7/10
-- [Box-Cox Transformations of Correlation Matrices](deep_reads/2026-11-10-2611.09790.md)  
-  `统计计算 / 算法` · 相关性 7/10
-- [Power improvements and exact shortcuts for closed permutation maxT testing with discrete data](deep_reads/2026-11-10-2611.09231.md)  
-  `数理统计 / 假设检验` · 相关性 6/10
-- [Scalable Estimation and Inference for Varying Coefficient Expectile Regression with Streaming Data](deep_reads/2026-11-10-2611.09484.md)  
-  `非参数 / 半参数` · 相关性 6/10
-- [Risk-set reconstruction balance: zero-targeted diagnostics for artificial censoring in clone-censor-weight analyses](deep_reads/2026-11-10-2611.09553.md)  
-  `因果推断` · 相关性 6/10
-- [Local Inference for High-dimensional Time Series](deep_reads/2026-11-10-2611.09676.md)  
-  `高维统计 / 随机矩阵` · 相关性 6/10
-- [Reweighting for Transfer Classification: Exact Risk Conversion and Minimax Adaptation](deep_reads/2026-11-10-2611.08876.md)  
-  `数理统计 / 假设检验` · 相关性 6/10
-- [Byzantine-Robust Distributed Sparse Softmax Regression](deep_reads/2026-11-10-2611.09110.md)  
-  `高维统计 / 随机矩阵` · 相关性 6/10
-- [On the Order of Privacy and Smoothing in Functional Mean Estimation](deep_reads/2026-11-10-2611.09799.md)  
-  `其他` · 相关性 6/10
+- [Nonasymptotic causal structure learning in generalized linear DAGs with continuous optimization](deep_reads/2026-11-11-2611.11667.md)  
+  `因果推断` · 相关性 8/10
+- [Causal Outcome Learning with Noisy Proxies](deep_reads/2026-11-11-2611.10955.md)  
+  `因果推断` · 相关性 8/10
+- [Proximal Difference-in-Differences for Causal Learning under Confounding and Outcome Drift](deep_reads/2026-11-11-2611.10310.md)  
+  `因果推断` · 相关性 8/10
 
 ## 收藏
 
@@ -52,11 +36,11 @@
 
 ## 本周每日报告
 
+- [2026-11-10](daily/2026-11-10.md)
 - [2026-11-09](daily/2026-11-09.md)
 - [2026-11-06](daily/2026-11-06.md)
 - [2026-11-05](daily/2026-11-05.md)
 - [2026-11-04](daily/2026-11-04.md)
-- [2026-11-03](daily/2026-11-03.md)
 
 
 ---

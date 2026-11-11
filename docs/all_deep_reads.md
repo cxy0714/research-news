@@ -4,6 +4,16 @@
 
 ### Daily
 
+- [Weak-Instrument Inference and Model Diagnostics in Double Machine Learning for Linear Instrumental Variable Models](deep_reads/2026-11-11-2611.10863.md)  
+  9/10 [daily]
+- [Semiparametric causal mediation analysis in cluster-randomized trials with post-treatment confounding](deep_reads/2026-11-11-2611.11903.md)  
+  8/10 [daily]
+- [Nonasymptotic causal structure learning in generalized linear DAGs with continuous optimization](deep_reads/2026-11-11-2611.11667.md)  
+  8/10 [daily]
+- [Causal Outcome Learning with Noisy Proxies](deep_reads/2026-11-11-2611.10955.md)  
+  8/10 [daily]
+- [Proximal Difference-in-Differences for Causal Learning under Confounding and Outcome Drift](deep_reads/2026-11-11-2611.10310.md)  
+  8/10 [daily]
 - [Minimax designs and estimators for causal inference under network interference](deep_reads/2026-11-10-2611.08560.md)  
   8/10 [daily]
 - [Navigating Selection Bias in Genome-wide Association Studies (GWAS)](deep_reads/2026-11-10-2611.09429.md)  
@@ -9432,6 +9442,8 @@
 - [Statistical Unlearning of Distributions: A Hypothesis Testing Approach](deep_reads/2026-05-20-2605.16645.md)  
   9/10 [daily]
 - [Tests for the mean of high-dimensional data](deep_reads/2026-05-18-2605.16033.md)  
+  8/10 [daily]
+- [Asymptotic validity and finite-sample properties of approximate randomization tests](deep_reads/2026-05-16-10.1093_biomet_asaf085.md)  
   8/10 [daily]
 
 ### 期刊
