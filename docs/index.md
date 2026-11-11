@@ -17,7 +17,7 @@
 
 [→ 查看完整报告](daily/2026-11-11.md)
 
-### 精读论文（40 篇）
+### 精读论文（45 篇）
 
 - [Weak-Instrument Inference and Model Diagnostics in Double Machine Learning for Linear Instrumental Variable Models](deep_reads/2026-11-11-2611.10863.md)  
   `因果推断` · 相关性 9/10
@@ -65,6 +65,8 @@
   `因果推断` · 相关性 7/10
 - [Efficient Estimation and Consistent Class Number Selection for Semiparametric Class-Specific Index Regression](deep_reads/2026-11-11-2611.10401.md)  
   `非参数 / 半参数` · 相关性 7/10
+- [Propagation and Optimization of Low-Frequency Spectral Alignment in ReLU Networks on a Fixed Sample Graph](deep_reads/2026-11-11-hexagon_2611.00249.md)  
+  `其他` · 相关性 6/10
 - [{\AA}ngstr\"om Exponent Calculation Using Wide-Field Stellar Photometry](deep_reads/2026-11-11-2611.12704.md)  
   `天体统计` · 相关性 6/10
 - [Particle Swarm Optimization Strategies for Lensed Gravitational Waves: Parameter Estimation, Source Classification, and Accelerated Sampling](deep_reads/2026-11-11-2611.12135.md)  
@@ -99,6 +101,14 @@
   `因果推断` · 相关性 6/10
 - [A General Statistical Framework for Attention and Manipulation Checks](deep_reads/2026-11-11-2611.10515.md)  
   `因果推断` · 相关性 6/10
+- [The Logical Anatomy of Optimization: Reverse Mathematics, Proof Mining, and the Price of Convergence](deep_reads/2026-11-11-hexagon_2611.00217.md)  
+  `其他` · 相关性 4/10
+- [The L’vov–Kaplansky Conjecture for Matrices of Sufficiently Large Order](deep_reads/2026-11-11-hexagon_2611.00206.md)  
+  `其他` · 相关性 1/10
+- [A family of finite dimensional Hopf algebras over $\mathbb{C}$ with varying algebra structure](deep_reads/2026-11-11-hexagon_2611.00226.md)  
+  `其他` · 相关性 1/10
+- [Non-computable derivatives of the fractional-part autocorrelation](deep_reads/2026-11-11-hexagon_2611.00243.md)  
+  `其他` · 相关性 1/10
 
 ## 收藏
 

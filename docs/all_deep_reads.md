@@ -16929,6 +16929,16 @@
   8/10 [daily]
 - [Removing the floor from Hoeffding and Bernstein inequalities for finite-population U-statistics](deep_reads/2026-11-11-2611.10551.md)  
   7/10 [daily]
+- [Propagation and Optimization of Low-Frequency Spectral Alignment in ReLU Networks on a Fixed Sample Graph](deep_reads/2026-11-11-hexagon_2611.00249.md)  
+  6/10 [daily]
+- [The Logical Anatomy of Optimization: Reverse Mathematics, Proof Mining, and the Price of Convergence](deep_reads/2026-11-11-hexagon_2611.00217.md)  
+  4/10 [daily]
+- [The L’vov–Kaplansky Conjecture for Matrices of Sufficiently Large Order](deep_reads/2026-11-11-hexagon_2611.00206.md)  
+  1/10 [daily]
+- [A family of finite dimensional Hopf algebras over $\mathbb{C}$ with varying algebra structure](deep_reads/2026-11-11-hexagon_2611.00226.md)  
+  1/10 [daily]
+- [Non-computable derivatives of the fractional-part autocorrelation](deep_reads/2026-11-11-hexagon_2611.00243.md)  
+  1/10 [daily]
 - [On the Order of Privacy and Smoothing in Functional Mean Estimation](deep_reads/2026-11-10-2611.09799.md)  
   6/10 [daily]
 - [Fast Attention after SETH: The Exact Exponent and the Hypotheses Behind It](deep_reads/2026-11-09-hexagon_2611.00132.md)  
