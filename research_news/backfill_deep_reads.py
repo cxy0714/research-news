@@ -402,7 +402,12 @@ def _window_dates(window_days: int) -> list[str]:
 
 
 def manifest_pending(window_days: int = 0) -> list[tuple[str, dict]]:
-    """(run_date, manifest row) for highlights never deep-read, oldest first."""
+    """(run_date, manifest row) for highlights never deep-read.
+
+    Newest run date first (a missing page for this week's report is visible on the
+    site; the historical backlog is not linked from anywhere) — within a date,
+    highest score first.
+    """
     indexed = {e.get("paper_id") for e in load_index()}
     cutoff = ((date.today() - timedelta(days=window_days)).isoformat()
               if window_days and window_days > 0 else None)
@@ -416,8 +421,10 @@ def manifest_pending(window_days: int = 0) -> list[tuple[str, dict]]:
         if cutoff and d < cutoff:
             continue
         out.append((d, row))
-    # Oldest date first; within a date, highest score first.
-    out.sort(key=lambda dr: (dr[0], -(dr[1].get("score") or 0)))
+    # Highest score first, then newest date first (stable sort keeps score order
+    # inside each date).
+    out.sort(key=lambda dr: -(dr[1].get("score") or 0))
+    out.sort(key=lambda dr: dr[0], reverse=True)
     return out
 
 
