@@ -4545,6 +4545,8 @@
   7/10 [daily]
 - [When Standardization Spreads Factor Variation Across the Spectrum](deep_reads/2026-10-23-2610.30082.md)  
   7/10 [daily]
+- [On the Accuracy of Approximate Leave-One-Out with Blockwise Nonsmooth Regularization in High-dimensions](deep_reads/2026-10-20-2610.27502.md)  
+  0/10 [daily]
 - [Benign Overfitting Property of the Minimum $\ell_q$ -norm Interpolant Estimator in Regression Problem via Feature Space Decomposition](deep_reads/2026-10-19-2610.24350.md)  
   7/10 [daily]
 - [Detecting Random Geometric Graphs with General Kernel](deep_reads/2026-10-13-2610.12765.md)  
@@ -8919,6 +8921,8 @@
   6/10 [daily]
 - [Likelihood-Based Confidence Curves for Bounded Parameters](deep_reads/2026-10-20-2610.28235.md)  
   6/10 [daily]
+- [A multiplier bootstrap score test for Tobit specification](deep_reads/2026-10-20-2610.28169.md)  
+  0/10 [daily]
 - [Sample complexity of weak-signal latent-variable models](deep_reads/2026-10-19-2610.24770.md)  
   8/10 [daily]
 - [Tuning-Free Tests for Treatment Effect Heterogeneity via Expectile Processes](deep_reads/2026-10-19-2610.25986.md)  
@@ -11651,6 +11655,8 @@
   5/10 [daily]
 - [Divide-and-Conquer Neural Bayes Estimation for Spatial and Spatiotemporal Point Process Models](deep_reads/2026-10-20-2610.27619.md)  
   4/10 [daily]
+- [Control variates for dry friction under colored noise: variance rates for non-smooth observables](deep_reads/2026-10-20-2610.27765.md)  
+  3/10 [daily]
 - [Quaternion Gaussian Probes for Tensor Frobenius-Norm Estimation](deep_reads/2026-10-13-2610.12534.md)  
   6/10 [daily]
 - [An efficient stochastic generalized method of moments estimator for nonlinear moment models](deep_reads/2026-10-12-2610.12873.md)  
@@ -17263,6 +17269,10 @@
   4/10 [daily]
 - [Bayesian nonparametric mixtures of asymmetric Archimedean copulas](deep_reads/2026-10-20-2610.28260.md)  
   4/10 [daily]
+- [A Radiation-Hardened, Fault-Aware Quantized Neural Network That Self-Heals](deep_reads/2026-10-20-2610.27621.md)  
+  3/10 [daily]
+- [Community Lessons from builders of infrared multi-object spectrographs](deep_reads/2026-10-20-2610.28605.md)  
+  0/10 [daily]
 - [Identifiability from Moments in Independent Component Analysis Mixture Models](deep_reads/2026-10-19-2610.23846.md)  
   7/10 [daily]
 - [Asymptotic Normality of the Hill Estimator in Linear Preferential Attachment](deep_reads/2026-10-19-2610.24413.md)  
