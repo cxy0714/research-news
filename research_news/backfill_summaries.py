@@ -50,7 +50,7 @@ from .rerun import _paper_from_row, load_score_index
 
 log = logging.getLogger("research_news.backfill_summaries")
 
-DAILY_MODEL = os.environ.get("DAILY_MODEL", "glm-5.1")
+DAILY_MODEL = os.environ.get("DAILY_MODEL", "deepseek-chat")
 
 # Section markers + the paper/group headings render_daily emits.
 _SEC_HIGH, _SEC_MID, _SEC_LOW, _SEC_EVENTS = "## ⭐", "## 📌", "## 🗂", "## 📅"

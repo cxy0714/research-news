@@ -26,11 +26,11 @@ from .usage import report as report_token_usage
 
 log = logging.getLogger("research_news")
 
-# Model used by the daily pipeline (overridable via env). GLM-5.1 won the
-# in-house shootout vs DeepSeek V3.2 — see docs/shootout/.
+# Models used by the daily pipeline (overridable via env). Both default to the
+# fast deepseek-chat; the reasoning model times out on long deep-read payloads.
 import os
-DAILY_MODEL = os.environ.get("DAILY_MODEL", "glm-5.1")
-DEEP_READ_MODEL = os.environ.get("DEEP_READ_MODEL", "deepseek-reasoner")
+DAILY_MODEL = os.environ.get("DAILY_MODEL", "deepseek-chat")
+DEEP_READ_MODEL = os.environ.get("DEEP_READ_MODEL", "deepseek-chat")
 
 
 def _load_config() -> tuple[dict, str]:

@@ -2,6 +2,7 @@
 """Re-run deep-read for stub/incomplete deep-read files for a given date."""
 import json
 import logging
+import os
 import sys
 from datetime import date
 from dotenv import load_dotenv
@@ -17,6 +18,9 @@ from research_news.score_log import load_scored_for_date
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s: %(message)s")
 log = logging.getLogger("rerun_deep_reads")
+
+# Deep-read model: follow .env (fast model by default), overridable per run.
+MODEL = os.environ.get("DEEP_READ_MODEL", "deepseek-chat")
 
 
 def main():
@@ -45,7 +49,7 @@ def main():
 
     for p in stub_papers:
         log.info("deep reading %s ...", p.paper_id)
-        body = deep_read_paper(client, p, interests_text, model="deepseek-reasoner")
+        body = deep_read_paper(client, p, interests_text, model=MODEL)
         if body:
             out_path = DEEP_READS_DIR / f"{report_date.isoformat()}-{p.paper_id}.md"
             out_path.write_text(body, encoding="utf-8")
@@ -54,7 +58,7 @@ def main():
             log.warning("deep read FAILED for %s", p.paper_id)
 
     # Update index
-    generate_deep_read_report(stub_papers, client, interests_text, report_date, "daily", model="deepseek-reasoner")
+    generate_deep_read_report(stub_papers, client, interests_text, report_date, "daily", model=MODEL)
 
     log.info("done")
 

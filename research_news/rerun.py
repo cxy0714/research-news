@@ -206,7 +206,7 @@ def _regenerate_block(
     # the caller forced one via --model.
     if not offline and client is not None and paper is not None and paper.abstract:
         eff_model = model or (row.get("model") if row else None) \
-            or os.environ.get("DAILY_MODEL", "glm-5.1")
+            or os.environ.get("DAILY_MODEL", "deepseek-chat")
         try:
             _carry_over_from_block(paper, block_text)
             summarize_paper(client, paper, interests_text, model=eff_model)

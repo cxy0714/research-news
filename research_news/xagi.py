@@ -66,7 +66,7 @@ HOMEPAGE_URL = "https://cxy0714.github.io/"
 REPO_URL = "https://github.com/cxy0714/research-news"
 
 DEFAULT_READ_MODEL = os.environ.get("XAGI_READ_MODEL", os.environ.get("DEEP_READ_MODEL",
-                                                                    "deepseek-reasoner"))
+                                                                    "deepseek-chat"))
 DEFAULT_FAST_MODEL = os.environ.get("XAGI_FAST_MODEL", os.environ.get("DAILY_MODEL",
                                                                      "deepseek-chat"))
 MATCH_THRESHOLD = float(os.environ.get("XAGI_MATCH_THRESHOLD", "0.58"))

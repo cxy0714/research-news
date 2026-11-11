@@ -39,7 +39,7 @@ DEEP_READS_INDEX = Path("data/deep_reads_index.json")
 DOCS_DIR = Path("docs")
 SYNTHESIS_DIR = DOCS_DIR / "synthesis"
 SYNTHESIS_INDEX = Path("data/synthesis_index.json")
-DEFAULT_MODEL = os.environ.get("SYNTHESIS_MODEL", os.environ.get("DAILY_MODEL", "glm-5.1"))
+DEFAULT_MODEL = os.environ.get("SYNTHESIS_MODEL", os.environ.get("DAILY_MODEL", "deepseek-chat"))
 MIN_PAPERS = 3
 
 HOMEPAGE_URL = "https://cxy0714.github.io/"

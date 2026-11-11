@@ -57,7 +57,7 @@ from .rerun import _paper_from_row, _pick_row, load_score_index
 
 log = logging.getLogger("research_news.backfill")
 
-DAILY_MODEL = os.environ.get("DAILY_MODEL", "glm-5.1")
+DAILY_MODEL = os.environ.get("DAILY_MODEL", "deepseek-chat")
 
 
 def _default_threshold() -> float:

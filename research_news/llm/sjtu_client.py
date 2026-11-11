@@ -61,7 +61,7 @@ class SJTUClient:
             base_url=base, api_key=key, timeout=REQUEST_TIMEOUT, max_retries=0
         )
         self.model_fast = os.environ.get("SJTU_MODEL_FAST", "deepseek-chat")
-        self.model_deep = os.environ.get("SJTU_MODEL_DEEP", "deepseek-reasoner")
+        self.model_deep = os.environ.get("SJTU_MODEL_DEEP", "deepseek-chat")
         self.limiter = RateLimiter(max_per_minute=9)
         # Per-run accounting; keys are model names.
         self.usage: dict[str, dict[str, int]] = {}

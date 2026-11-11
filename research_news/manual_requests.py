@@ -69,8 +69,8 @@ from .scrapers import arxiv as arxiv_scraper
 
 log = logging.getLogger("research_news.manual")
 
-DAILY_MODEL = os.environ.get("DAILY_MODEL", "glm-5.1")
-DEEP_READ_MODEL = os.environ.get("DEEP_READ_MODEL", "deepseek-reasoner")
+DAILY_MODEL = os.environ.get("DAILY_MODEL", "deepseek-chat")
+DEEP_READ_MODEL = os.environ.get("DEEP_READ_MODEL", "deepseek-chat")
 
 # Published map (committed, like favorites_public.json) that reports the fate of
 # non-arXiv "lookup" requests back to the read-only browser client: which got an

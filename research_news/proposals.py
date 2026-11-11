@@ -58,7 +58,7 @@ HOMEPAGE_URL = "https://cxy0714.github.io/"
 REPO_URL = "https://github.com/cxy0714/research-news"
 
 DEFAULT_MODEL = os.environ.get(
-    "PROPOSALS_MODEL", os.environ.get("DEEP_READ_MODEL", "deepseek-reasoner")
+    "PROPOSALS_MODEL", os.environ.get("DEEP_READ_MODEL", "deepseek-chat")
 )
 
 # Pool gates.

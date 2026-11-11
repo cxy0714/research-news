@@ -5,7 +5,7 @@
 - **每日 arXiv + Hexagon**: 抓 stat.ME / stat.TH / math.ST / econ.EM / astro-ph.IM 新提交，外加 [Hexagon](https://hexagonmath.org)（常被称作"AI 时代的 arXiv"：数学 / 理论 CS 的预印本库，含 AI 生成文本与工具署名）的新收录，按个人兴趣评分，对高相关论文按主题分组生成中文摘要 + 下载 PDF + LLM 全文精读
 - **季度期刊**: 拉 JMLR / AoS / JASA / JRSSB / Biometrika 等最新一期（或近 N 期），同样的评分 + 摘要 + 主题分组 + 精读
 
-都用 SJTU LLM API（默认 GLM-5.1），渲染成 MkDocs Material 站点。
+都用 SJTU LLM API（默认 deepseek-chat），渲染成 MkDocs Material 站点。
 
 ## 快速开始（Windows 11 / PowerShell）
 

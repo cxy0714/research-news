@@ -36,7 +36,7 @@ SEASONS_DIR = DOCS / "talks" / "seasons"
 SEASONS_INDEX = Path("data/talk_seasons_index.json")
 TALKS_INDEX = Path("data/talks_index.json")
 TALKS_CONFIG = Path("config/talks.yaml")
-DEFAULT_MODEL = os.environ.get("TALK_OVERVIEW_MODEL", os.environ.get("DAILY_MODEL", "glm-5.1"))
+DEFAULT_MODEL = os.environ.get("TALK_OVERVIEW_MODEL", os.environ.get("DAILY_MODEL", "deepseek-chat"))
 
 HOMEPAGE_URL = "https://cxy0714.github.io/"
 REPO_URL = "https://github.com/cxy0714/research-news"

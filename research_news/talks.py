@@ -57,8 +57,9 @@ SLIDES_DIR = TRANSCRIPTS_DIR / "slides"
 # How much extracted slide text to feed the read (decks are usually short).
 MAX_SLIDES_CHARS = 20_000
 
-# Long structured read like a deep-read → default to the reasoning model.
-TALK_MODEL = os.environ.get("TALK_MODEL", os.environ.get("DEEP_READ_MODEL", "deepseek-reasoner"))
+# Long structured read like a deep-read → defaults to the fast model (the
+# reasoning model times out on long transcripts / full texts).
+TALK_MODEL = os.environ.get("TALK_MODEL", os.environ.get("DEEP_READ_MODEL", "deepseek-chat"))
 # ~240k chars ≈ 60k tokens; a 1.5h talk transcript is well under this.
 MAX_TRANSCRIPT_CHARS = 240_000
 TALK_READ_MAX_TOKENS = 24_000

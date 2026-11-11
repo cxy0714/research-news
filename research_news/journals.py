@@ -40,7 +40,7 @@ from .usage import report as report_token_usage
 log = logging.getLogger("research_news.journals")
 
 JOURNALS_MODEL = os.environ.get("JOURNALS_MODEL",
-                                os.environ.get("DAILY_MODEL", "glm-5.1"))
+                                os.environ.get("DAILY_MODEL", "deepseek-chat"))
 
 JOURNALS_CONFIG_PATH = Path("config/journals.yaml")
 

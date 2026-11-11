@@ -17,6 +17,9 @@ log = logging.getLogger("rerun_stubs")
 
 load_dotenv()
 
+# Deep-read model: follow .env (fast model by default).
+MODEL = os.environ.get("DEEP_READ_MODEL", "deepseek-chat")
+
 STUB_IDS = ["2606.11746", "2606.12184", "2606.11587", "2606.12324"]
 report_date = date(2026, 6, 12)
 interests_text = Path("config/interests.yaml").read_text(encoding="utf-8")
@@ -48,7 +51,7 @@ for entry in stub_entries:
     )
     
     log.info("deep reading %s (score=%.1f) ...", pid, paper.score)
-    body = deep_read_paper(client, paper, interests_text, model="deepseek-reasoner")
+    body = deep_read_paper(client, paper, interests_text, model=MODEL)
     
     if body:
         out_path = DEEP_READS_DIR / f"{report_date.isoformat()}-{pid}.md"
