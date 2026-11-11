@@ -17,10 +17,16 @@
 
 [→ 查看完整报告](daily/2026-11-11.md)
 
-### 精读论文（5 篇）
+### 精读论文（10 篇）
 
 - [Weak-Instrument Inference and Model Diagnostics in Double Machine Learning for Linear Instrumental Variable Models](deep_reads/2026-11-11-2611.10863.md)  
   `因果推断` · 相关性 9/10
+- [Coverage and shape of conformal highest-density sets: A minimax theory](deep_reads/2026-11-11-2611.11909.md)  
+  `非参数 / 半参数` · 相关性 8/10
+- [Uniform inference for $U$-statistics of exchangeable arrays under degeneracy](deep_reads/2026-11-11-2611.11388.md)  
+  `其他` · 相关性 8/10
+- [Average versus expected causal effects under interference: Modeling assumptions and estimation bottlenecks](deep_reads/2026-11-11-2611.12690.md)  
+  `因果推断` · 相关性 8/10
 - [Semiparametric causal mediation analysis in cluster-randomized trials with post-treatment confounding](deep_reads/2026-11-11-2611.11903.md)  
   `因果推断` · 相关性 8/10
 - [Nonasymptotic causal structure learning in generalized linear DAGs with continuous optimization](deep_reads/2026-11-11-2611.11667.md)  
@@ -29,6 +35,10 @@
   `因果推断` · 相关性 8/10
 - [Proximal Difference-in-Differences for Causal Learning under Confounding and Outcome Drift](deep_reads/2026-11-11-2611.10310.md)  
   `因果推断` · 相关性 8/10
+- [Inference for Non-Probability Samples Using Error-Prone Auxiliary Information](deep_reads/2026-11-11-2611.10975.md)  
+  `因果推断` · 相关性 7/10
+- [Efficient Estimation and Consistent Class Number Selection for Semiparametric Class-Specific Index Regression](deep_reads/2026-11-11-2611.10401.md)  
+  `非参数 / 半参数` · 相关性 7/10
 
 ## 收藏
 

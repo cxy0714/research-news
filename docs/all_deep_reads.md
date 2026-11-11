@@ -6,6 +6,8 @@
 
 - [Weak-Instrument Inference and Model Diagnostics in Double Machine Learning for Linear Instrumental Variable Models](deep_reads/2026-11-11-2611.10863.md)  
   9/10 [daily]
+- [Average versus expected causal effects under interference: Modeling assumptions and estimation bottlenecks](deep_reads/2026-11-11-2611.12690.md)  
+  8/10 [daily]
 - [Semiparametric causal mediation analysis in cluster-randomized trials with post-treatment confounding](deep_reads/2026-11-11-2611.11903.md)  
   8/10 [daily]
 - [Nonasymptotic causal structure learning in generalized linear DAGs with continuous optimization](deep_reads/2026-11-11-2611.11667.md)  
@@ -14,6 +16,8 @@
   8/10 [daily]
 - [Proximal Difference-in-Differences for Causal Learning under Confounding and Outcome Drift](deep_reads/2026-11-11-2611.10310.md)  
   8/10 [daily]
+- [Inference for Non-Probability Samples Using Error-Prone Auxiliary Information](deep_reads/2026-11-11-2611.10975.md)  
+  7/10 [daily]
 - [Minimax designs and estimators for causal inference under network interference](deep_reads/2026-11-10-2611.08560.md)  
   8/10 [daily]
 - [Navigating Selection Bias in Genome-wide Association Studies (GWAS)](deep_reads/2026-11-10-2611.09429.md)  
@@ -6058,6 +6062,10 @@
 
 ### Daily
 
+- [Coverage and shape of conformal highest-density sets: A minimax theory](deep_reads/2026-11-11-2611.11909.md)  
+  8/10 [daily]
+- [Efficient Estimation and Consistent Class Number Selection for Semiparametric Class-Specific Index Regression](deep_reads/2026-11-11-2611.10401.md)  
+  7/10 [daily]
 - [Scalable Estimation and Inference for Varying Coefficient Expectile Regression with Streaming Data](deep_reads/2026-11-10-2611.09484.md)  
   6/10 [daily]
 - [Minimax estimation of linear functionals in the Darcy inverse problem](deep_reads/2026-11-04-2611.01290.md)  
@@ -16859,6 +16867,8 @@
 
 ### Daily
 
+- [Uniform inference for $U$-statistics of exchangeable arrays under degeneracy](deep_reads/2026-11-11-2611.11388.md)  
+  8/10 [daily]
 - [On the Order of Privacy and Smoothing in Functional Mean Estimation](deep_reads/2026-11-10-2611.09799.md)  
   6/10 [daily]
 - [Fast Attention after SETH: The Exact Exponent and the Hypotheses Behind It](deep_reads/2026-11-09-hexagon_2611.00132.md)  
