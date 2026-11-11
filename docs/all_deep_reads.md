@@ -16,6 +16,12 @@
   8/10 [daily]
 - [Proximal Difference-in-Differences for Causal Learning under Confounding and Outcome Drift](deep_reads/2026-11-11-2611.10310.md)  
   8/10 [daily]
+- [Causal Machine Learning for Multilevel Studies with Unmeasured Cluster-Level Covariates via Variational Autoencoders](deep_reads/2026-11-11-2611.11483.md)  
+  7/10 [daily]
+- [Sharp bounds for posterior causal attribution given complete factual records](deep_reads/2026-11-11-2611.11307.md)  
+  7/10 [daily]
+- [Cause-specific structural nested cumulative survival time models for competing risks, with application to the Antibody Mediated Prevention trials](deep_reads/2026-11-11-2611.11008.md)  
+  7/10 [daily]
 - [Inference for Non-Probability Samples Using Error-Prone Auxiliary Information](deep_reads/2026-11-11-2611.10975.md)  
   7/10 [daily]
 - [Minimax designs and estimators for causal inference under network interference](deep_reads/2026-11-10-2611.08560.md)  
@@ -6064,6 +6070,8 @@
 
 - [Coverage and shape of conformal highest-density sets: A minimax theory](deep_reads/2026-11-11-2611.11909.md)  
   8/10 [daily]
+- [Model-assisted semi-supervised estimation of the Mann-Whitney probability under right censoring](deep_reads/2026-11-11-2611.11456.md)  
+  7/10 [daily]
 - [Efficient Estimation and Consistent Class Number Selection for Semiparametric Class-Specific Index Regression](deep_reads/2026-11-11-2611.10401.md)  
   7/10 [daily]
 - [Scalable Estimation and Inference for Varying Coefficient Expectile Regression with Streaming Data](deep_reads/2026-11-10-2611.09484.md)  
@@ -8737,6 +8745,8 @@
 
 ### Daily
 
+- [ATHOS: Agreement-based Testing of Hypotheses in Overlapping Subgroups](deep_reads/2026-11-11-2611.11676.md)  
+  7/10 [daily]
 - [Power improvements and exact shortcuts for closed permutation maxT testing with discrete data](deep_reads/2026-11-10-2611.09231.md)  
   6/10 [daily]
 - [Reweighting for Transfer Classification: Exact Risk Conversion and Minimax Adaptation](deep_reads/2026-11-10-2611.08876.md)  

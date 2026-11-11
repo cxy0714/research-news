@@ -17,7 +17,7 @@
 
 [→ 查看完整报告](daily/2026-11-11.md)
 
-### 精读论文（10 篇）
+### 精读论文（15 篇）
 
 - [Weak-Instrument Inference and Model Diagnostics in Double Machine Learning for Linear Instrumental Variable Models](deep_reads/2026-11-11-2611.10863.md)  
   `因果推断` · 相关性 9/10
@@ -35,6 +35,16 @@
   `因果推断` · 相关性 8/10
 - [Proximal Difference-in-Differences for Causal Learning under Confounding and Outcome Drift](deep_reads/2026-11-11-2611.10310.md)  
   `因果推断` · 相关性 8/10
+- [ATHOS: Agreement-based Testing of Hypotheses in Overlapping Subgroups](deep_reads/2026-11-11-2611.11676.md)  
+  `数理统计 / 假设检验` · 相关性 7/10
+- [Causal Machine Learning for Multilevel Studies with Unmeasured Cluster-Level Covariates via Variational Autoencoders](deep_reads/2026-11-11-2611.11483.md)  
+  `因果推断` · 相关性 7/10
+- [Model-assisted semi-supervised estimation of the Mann-Whitney probability under right censoring](deep_reads/2026-11-11-2611.11456.md)  
+  `非参数 / 半参数` · 相关性 7/10
+- [Sharp bounds for posterior causal attribution given complete factual records](deep_reads/2026-11-11-2611.11307.md)  
+  `因果推断` · 相关性 7/10
+- [Cause-specific structural nested cumulative survival time models for competing risks, with application to the Antibody Mediated Prevention trials](deep_reads/2026-11-11-2611.11008.md)  
+  `因果推断` · 相关性 7/10
 - [Inference for Non-Probability Samples Using Error-Prone Auxiliary Information](deep_reads/2026-11-11-2611.10975.md)  
   `因果推断` · 相关性 7/10
 - [Efficient Estimation and Consistent Class Number Selection for Semiparametric Class-Specific Index Regression](deep_reads/2026-11-11-2611.10401.md)  
