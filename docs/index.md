@@ -17,7 +17,7 @@
 
 [→ 查看完整报告](daily/2026-11-11.md)
 
-### 精读论文（50 篇）
+### 精读论文（55 篇）
 
 - [Weak-Instrument Inference and Model Diagnostics in Double Machine Learning for Linear Instrumental Variable Models](deep_reads/2026-11-11-2611.10863.md)  
   `因果推断` · 相关性 9/10
@@ -111,6 +111,16 @@
   `其他` · 相关性 1/10
 - [Non-computable derivatives of the fractional-part autocorrelation](deep_reads/2026-11-11-hexagon_2611.00243.md)  
   `其他` · 相关性 1/10
+- [The L’vov–Kaplansky conjecture in degrees three and four over arbitrary fields](deep_reads/2026-11-11-hexagon_2611.00195.md)  
+  `其他` · 相关性 0/10
+- [Lusztig's sharp bound for Hecke algebras](deep_reads/2026-11-11-hexagon_2611.00210.md)  
+  `其他` · 相关性 0/10
+- [Consecutive Divisors of Sums of Fibonacci Polynomials: a Luca–Marques Analogue in Finite-Field Polynomial Rings](deep_reads/2026-11-11-hexagon_2611.00212.md)  
+  `其他` · 相关性 0/10
+- [Monotonicity of Erdős sums](deep_reads/2026-11-11-hexagon_2611.00215.md)  
+  `其他` · 相关性 0/10
+- [Almost all $k$-Markov numbers are unique](deep_reads/2026-11-11-hexagon_2611.00216.md)  
+  `其他` · 相关性 0/10
 - [A LOWER BOUND FOR THE FILLING AREA OF THE CIRCLE](deep_reads/2026-11-11-hexagon_2611.00218.md)  
   `其他` · 相关性 0/10
 - [Monomial Immanants of Totally Nonnegative Matrices](deep_reads/2026-11-11-hexagon_2611.00219.md)  

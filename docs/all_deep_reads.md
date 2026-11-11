@@ -16941,6 +16941,16 @@
   1/10 [daily]
 - [Non-computable derivatives of the fractional-part autocorrelation](deep_reads/2026-11-11-hexagon_2611.00243.md)  
   1/10 [daily]
+- [The L’vov–Kaplansky conjecture in degrees three and four over arbitrary fields](deep_reads/2026-11-11-hexagon_2611.00195.md)  
+  0/10 [daily]
+- [Lusztig's sharp bound for Hecke algebras](deep_reads/2026-11-11-hexagon_2611.00210.md)  
+  0/10 [daily]
+- [Consecutive Divisors of Sums of Fibonacci Polynomials: a Luca–Marques Analogue in Finite-Field Polynomial Rings](deep_reads/2026-11-11-hexagon_2611.00212.md)  
+  0/10 [daily]
+- [Monotonicity of Erdős sums](deep_reads/2026-11-11-hexagon_2611.00215.md)  
+  0/10 [daily]
+- [Almost all $k$-Markov numbers are unique](deep_reads/2026-11-11-hexagon_2611.00216.md)  
+  0/10 [daily]
 - [A LOWER BOUND FOR THE FILLING AREA OF THE CIRCLE](deep_reads/2026-11-11-hexagon_2611.00218.md)  
   0/10 [daily]
 - [Monomial Immanants of Totally Nonnegative Matrices](deep_reads/2026-11-11-hexagon_2611.00219.md)  
