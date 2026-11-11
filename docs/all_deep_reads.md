@@ -124,6 +124,8 @@
   6/10 [daily]
 - [The Double Diagonal Estimator: Reducing Bias in Two-Sided Marketplace Experiments](deep_reads/2026-10-30-2610.41294.md)  
   6/10 [daily]
+- [Nonlinear Sufficient Dimension Reduction for Causal Inference with Continuous Treatments](deep_reads/2026-10-29-2610.39422.md)  
+  8/10 [daily]
 - [Inference for Causal Path-Specific Effects in Longitudinal Studies with Repeated Treatments and Multiple Mediators](deep_reads/2026-10-28-2610.34349.md)  
   9/10 [daily]
 - [Informative inference on the average treatment effect with instrumental variables](deep_reads/2026-10-28-2610.33254.md)  
@@ -6126,6 +6128,10 @@
   7/10 [daily]
 - [Improved estimation of differential entropy of a multivariate Gaussian distribution](deep_reads/2026-10-30-2610.41849.md)  
   6/10 [daily]
+- [Adaptive Bayesian Estimation of Conditional Densities Based on Orthogonal Polynomials](deep_reads/2026-10-29-2610.39177.md)  
+  8/10 [daily]
+- [Optimal Neural Estimation for High-Dimensional Nonparametric Regression under Multisource Covariate Shift](deep_reads/2026-10-29-2610.40331.md)  
+  8/10 [daily]
 - [Minimax Rates for Conditional Generative Learning under Wasserstein Loss](deep_reads/2026-10-28-2610.35490.md)  
   8/10 [daily]
 - [Nonparametric Regression on the Circle with Applications to Climate and Environmental Science](deep_reads/2026-10-28-2610.34476.md)  
@@ -16941,6 +16947,10 @@
   1/10 [daily]
 - [Non-computable derivatives of the fractional-part autocorrelation](deep_reads/2026-11-11-hexagon_2611.00243.md)  
   1/10 [daily]
+- [Self-injective dimensions under stable equivalences of Morita type](deep_reads/2026-11-11-hexagon_2611.00192.md)  
+  0/10 [daily]
+- [The singular-support characterization of Lusztig sheaves](deep_reads/2026-11-11-hexagon_2611.00194.md)  
+  0/10 [daily]
 - [The L’vov–Kaplansky conjecture in degrees three and four over arbitrary fields](deep_reads/2026-11-11-hexagon_2611.00195.md)  
   0/10 [daily]
 - [Lusztig's sharp bound for Hecke algebras](deep_reads/2026-11-11-hexagon_2611.00210.md)  

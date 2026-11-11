@@ -17,7 +17,7 @@
 
 [→ 查看完整报告](daily/2026-11-11.md)
 
-### 精读论文（55 篇）
+### 精读论文（57 篇）
 
 - [Weak-Instrument Inference and Model Diagnostics in Double Machine Learning for Linear Instrumental Variable Models](deep_reads/2026-11-11-2611.10863.md)  
   `因果推断` · 相关性 9/10
@@ -111,6 +111,10 @@
   `其他` · 相关性 1/10
 - [Non-computable derivatives of the fractional-part autocorrelation](deep_reads/2026-11-11-hexagon_2611.00243.md)  
   `其他` · 相关性 1/10
+- [Self-injective dimensions under stable equivalences of Morita type](deep_reads/2026-11-11-hexagon_2611.00192.md)  
+  `其他` · 相关性 0/10
+- [The singular-support characterization of Lusztig sheaves](deep_reads/2026-11-11-hexagon_2611.00194.md)  
+  `其他` · 相关性 0/10
 - [The L’vov–Kaplansky conjecture in degrees three and four over arbitrary fields](deep_reads/2026-11-11-hexagon_2611.00195.md)  
   `其他` · 相关性 0/10
 - [Lusztig's sharp bound for Hecke algebras](deep_reads/2026-11-11-hexagon_2611.00210.md)  
