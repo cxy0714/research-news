@@ -17,7 +17,7 @@
 
 [→ 查看完整报告](daily/2026-11-11.md)
 
-### 精读论文（25 篇）
+### 精读论文（30 篇）
 
 - [Weak-Instrument Inference and Model Diagnostics in Double Machine Learning for Linear Instrumental Variable Models](deep_reads/2026-11-11-2611.10863.md)  
   `因果推断` · 相关性 9/10
@@ -65,6 +65,16 @@
   `因果推断` · 相关性 7/10
 - [Efficient Estimation and Consistent Class Number Selection for Semiparametric Class-Specific Index Regression](deep_reads/2026-11-11-2611.10401.md)  
   `非参数 / 半参数` · 相关性 7/10
+- [Conformal Prediction for Multi-Step Forecasting: Conditional Coverage and Sharp Score Calibration Rates](deep_reads/2026-11-11-2611.12004.md)  
+  `数理统计 / 假设检验` · 相关性 6/10
+- [Optimal Radial Weighting for Robust Mutual Fund Selection](deep_reads/2026-11-11-2611.11762.md)  
+  `数理统计 / 假设检验` · 相关性 6/10
+- [Graph-regularized synthetic control for spatial panels with post-only treated locations](deep_reads/2026-11-11-2611.11496.md)  
+  `因果推断` · 相关性 6/10
+- [ZIO: Order-Based Structure Learning for Zero-Inflated Count Data under Data Heterogeneity](deep_reads/2026-11-11-2611.11448.md)  
+  `因果推断` · 相关性 6/10
+- [A Unified Framework for Robust Blinded Sample Size Re-estimation Based on Nuisance Parameters](deep_reads/2026-11-11-2611.10957.md)  
+  `数理统计 / 假设检验` · 相关性 6/10
 - [Forecasting Replication Study Results from Meta-Analyses](deep_reads/2026-11-11-2611.10943.md)  
   `因果推断` · 相关性 6/10
 - [A General Statistical Framework for Attention and Manipulation Checks](deep_reads/2026-11-11-2611.10515.md)  

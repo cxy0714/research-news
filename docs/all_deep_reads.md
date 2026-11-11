@@ -26,6 +26,10 @@
   7/10 [daily]
 - [Inference for Non-Probability Samples Using Error-Prone Auxiliary Information](deep_reads/2026-11-11-2611.10975.md)  
   7/10 [daily]
+- [Graph-regularized synthetic control for spatial panels with post-only treated locations](deep_reads/2026-11-11-2611.11496.md)  
+  6/10 [daily]
+- [ZIO: Order-Based Structure Learning for Zero-Inflated Count Data under Data Heterogeneity](deep_reads/2026-11-11-2611.11448.md)  
+  6/10 [daily]
 - [Forecasting Replication Study Results from Meta-Analyses](deep_reads/2026-11-11-2611.10943.md)  
   6/10 [daily]
 - [A General Statistical Framework for Attention and Manipulation Checks](deep_reads/2026-11-11-2611.10515.md)  
@@ -8765,6 +8769,12 @@
   7/10 [daily]
 - [ATHOS: Agreement-based Testing of Hypotheses in Overlapping Subgroups](deep_reads/2026-11-11-2611.11676.md)  
   7/10 [daily]
+- [Conformal Prediction for Multi-Step Forecasting: Conditional Coverage and Sharp Score Calibration Rates](deep_reads/2026-11-11-2611.12004.md)  
+  6/10 [daily]
+- [Optimal Radial Weighting for Robust Mutual Fund Selection](deep_reads/2026-11-11-2611.11762.md)  
+  6/10 [daily]
+- [A Unified Framework for Robust Blinded Sample Size Re-estimation Based on Nuisance Parameters](deep_reads/2026-11-11-2611.10957.md)  
+  6/10 [daily]
 - [Power improvements and exact shortcuts for closed permutation maxT testing with discrete data](deep_reads/2026-11-10-2611.09231.md)  
   6/10 [daily]
 - [Reweighting for Transfer Classification: Exact Risk Conversion and Minimax Adaptation](deep_reads/2026-11-10-2611.08876.md)  
