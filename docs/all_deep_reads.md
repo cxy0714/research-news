@@ -8915,6 +8915,8 @@
   7/10 [daily]
 - [Uniformly Improved Adaptive Filtering Procedures for Replicability Testing with FWER Control](deep_reads/2026-10-23-2610.29266.md)  
   6/10 [daily]
+- [Optimal aggregation in multiclass classification](deep_reads/2026-10-20-2610.28025.md)  
+  6/10 [daily]
 - [Likelihood-Based Confidence Curves for Bounded Parameters](deep_reads/2026-10-20-2610.28235.md)  
   6/10 [daily]
 - [Sample complexity of weak-signal latent-variable models](deep_reads/2026-10-19-2610.24770.md)  
@@ -11643,6 +11645,8 @@
   6/10 [daily]
 - [Rare-Feature-Adaptive Subsampling for Big Data Regression](deep_reads/2026-10-23-2610.29083.md)  
   6/10 [daily]
+- [RECAP: Representation-Based Calibration with Amortized Pooling for Frequentist Simulation-Based Inference](deep_reads/2026-10-20-2610.28332.md)  
+  5/10 [daily]
 - [Quaternion Gaussian Probes for Tensor Frobenius-Norm Estimation](deep_reads/2026-10-13-2610.12534.md)  
   6/10 [daily]
 - [An efficient stochastic generalized method of moments estimator for nonlinear moment models](deep_reads/2026-10-12-2610.12873.md)  
@@ -13209,6 +13213,8 @@
   6/10 [daily]
 - [Gaussian process-based Bayesian imaging of bolometric (sub-)millimetre data](deep_reads/2026-10-20-2610.27733.md)  
   7/10 [daily]
+- [Estimator Precision and Selection for Up-the-Ramp Sampling with a High-Read-Noise InGaAs Camera](deep_reads/2026-10-20-2610.27742.md)  
+  6/10 [daily]
 - [First Experimental Results of Space Object Detection Using the InteRFeX Array](deep_reads/2026-10-13-2610.13537.md)  
   6/10 [daily]
 - [An empirical calibration of the spectral resolution of JWST NIRSpec PRISM](deep_reads/2026-10-12-2610.13492.md)  
@@ -15449,6 +15455,10 @@
 
 - [Adaptive Sequential Surveillance of Infectious Diseases Under Limited Sampling Capacity](deep_reads/2026-10-29-2610.39932.md)  
   6/10 [daily]
+- [Variance estimation for generalized linear regression with binary outcome when using case-cohort data](deep_reads/2026-10-20-2610.27772.md)  
+  6/10 [daily]
+- [A general class of shared gamma frailty models for risk prediction, with application to breast cancer screening adherence](deep_reads/2026-10-20-2610.28548.md)  
+  5/10 [daily]
 - [Dynamic Amplification of Risk-Estimate Bias Through Differential Detection: A Markov Model for History-Based Covariates](deep_reads/2026-09-15-2609.12376.md)  
   7/10 [daily]
 - [Kalman Filtering and Smoothing for Improving Precision in Horvitz--Thompson Estimation of Infectious Disease Prevalence](deep_reads/2026-09-10-2609.09325.md)  
