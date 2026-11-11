@@ -38,7 +38,9 @@ import json
 import logging
 import os
 import re
-from datetime import date
+import sys
+import time
+from datetime import date, timedelta
 from pathlib import Path
 
 import yaml
@@ -334,6 +336,138 @@ def _dates_in_range(since: str, until: str) -> list[str]:
     return sorted(d for d in dates if d and since <= d <= until)
 
 
+# ── resident loop: one unit of pending work ───────────────────────────────────
+#
+# `--pending` is what run_deepread_loop.ps1 calls in a loop. One invocation does
+# ONE unit (default: one paper) and exits, so the loop can release the daily lock
+# and commit between units. Exit code 0 = did work, 7 = nothing pending (stop).
+
+# How long a failed page must sit untouched before the loop retries it: a failed
+# retry rewrites the stub (refreshing its mtime), so one bad paper can't spin the
+# loop forever — it gets picked up again on a later pass.
+STUB_COOLDOWN_MINUTES = int(os.environ.get("DEEPREAD_STUB_COOLDOWN_MIN", "120"))
+
+
+def _manifest_rows() -> list[dict]:
+    """Rows of data/highlights.json — the durable "selected for deep read" queue.
+
+    save_highlights() is called by daily for every paper it selects, *before* the
+    slow LLM step, so a manifest row without a deep-read page is a deep read that
+    was selected but never finished (shutdown, crash, timeout). That is the true
+    backlog — it also covers green-lit / popsci papers below the score gate.
+    """
+    path = Path("data/highlights.json")
+    if not path.exists():
+        return []
+    try:
+        rows = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return []
+    return [r for r in rows if isinstance(r, dict) and r.get("paper_id")]
+
+
+def _paper_from_highlight(row: dict) -> Paper:
+    """Rebuild a Paper from a highlights-manifest row (no score-log row needed)."""
+    p = Paper(
+        source=row.get("source") or "arxiv",
+        paper_id=row["paper_id"],
+        title=row.get("title") or "",
+        authors=list(row.get("authors") or []),
+        abstract="",
+        url=row.get("url") or "",
+        categories=list(row.get("categories") or []),
+        published=row.get("published"),
+        venue=row.get("venue"),
+    )
+    p.summary_zh = row.get("summary_zh")
+    p.why_relevant = row.get("why_relevant")
+    p.key_techniques = list(row.get("key_techniques") or [])
+    p.novelty_flag = row.get("novelty_flag")
+    p.pdf_path = row.get("pdf_path")
+    p.topic = row.get("topic")
+    if row.get("score") is not None:
+        p.score = float(row["score"])
+    return p
+
+
+def _window_dates(window_days: int) -> list[str]:
+    """Scored run dates within the window (0 = all history), ascending."""
+    dates = sorted({row.get("run_date")
+                    for rows in load_score_index().values() for row in rows
+                    if row.get("run_date")})
+    if window_days and window_days > 0:
+        cutoff = (date.today() - timedelta(days=window_days)).isoformat()
+        dates = [d for d in dates if d >= cutoff]
+    return dates
+
+
+def manifest_pending(window_days: int = 0) -> list[tuple[str, dict]]:
+    """(run_date, manifest row) for highlights never deep-read, oldest first."""
+    indexed = {e.get("paper_id") for e in load_index()}
+    cutoff = ((date.today() - timedelta(days=window_days)).isoformat()
+              if window_days and window_days > 0 else None)
+    out: list[tuple[str, dict]] = []
+    for row in _manifest_rows():
+        if row["paper_id"] in indexed:
+            continue
+        d = (row.get("first_seen") or "")[:10]
+        if not d:
+            continue
+        if cutoff and d < cutoff:
+            continue
+        out.append((d, row))
+    # Oldest date first; within a date, highest score first.
+    out.sort(key=lambda dr: (dr[0], -(dr[1].get("score") or 0)))
+    return out
+
+
+def _stub_attempted_recently(entry: dict) -> bool:
+    page = DEEP_READS_DIR / Path(entry.get("doc_path") or "").name
+    try:
+        return (page.exists()
+                and (time.time() - page.stat().st_mtime) < STUB_COOLDOWN_MINUTES * 60)
+    except OSError:
+        return False
+
+
+def pending_unit(
+    *,
+    limit: int = 1,
+    threshold: float | None = None,
+    window_days: int = 0,
+    sources: set[str] | None = None,
+) -> tuple[str, list[Paper]] | None:
+    """One unit of pending deep-read work — (run_date, papers) — or None.
+
+    Priority: (1) highlights manifest rows never deep-read (the real backlog,
+    incl. green-lit / popsci selections), (2) failed stubs past their cooldown,
+    (3) score-threshold backfill (catches papers scored >= threshold that never
+    entered the manifest).
+    """
+    threshold = threshold if threshold is not None else _default_threshold()
+
+    backlog = manifest_pending(window_days)
+    if backlog:
+        d = backlog[0][0]
+        return d, [_paper_from_highlight(r)
+                   for dd, r in backlog if dd == d][:limit]
+
+    stub_entries = [e for e in find_stub_entries() if not _stub_attempted_recently(e)]
+    if stub_entries:
+        stub_entries.sort(key=lambda e: e.get("date") or "")
+        d = stub_entries[0]["date"]
+        papers = stub_papers([e for e in stub_entries if e["date"] == d],
+                             load_score_index(), d)
+        if papers:
+            return d, papers[:limit]
+
+    for d in _window_dates(window_days):
+        papers = qualifying_papers(d, threshold, sources=sources)
+        if papers:
+            return d, papers[:limit]
+    return None
+
+
 def run(
     *,
     date_str: str | None = None,
@@ -346,11 +480,39 @@ def run(
     sources: set[str] | None = None,
     force: bool = False,
     retry_stubs_mode: bool = False,
+    pending_mode: bool = False,
+    window_days: int = 0,
 ) -> int:
-    """Backfill deep reads for one date or a date range. Returns total deep-read."""
+    """Backfill deep reads for one date, a date range, stubs, or one pending unit.
+
+    Returns the number of papers deep-read (0 = nothing was pending)."""
     load_dotenv()
     threshold = threshold if threshold is not None else _default_threshold()
     interests_text = _interests_text()
+
+    # Resident-loop mode: exactly one unit of work, then return.
+    if pending_mode:
+        unit = pending_unit(limit=limit or 1, threshold=threshold,
+                            window_days=window_days, sources=sources)
+        if unit is None:
+            log.info("pending: nothing left to deep-read")
+            return 0
+        unit_date, papers = unit
+        log.info("pending: %s -> %d paper(s)", unit_date, len(papers))
+        if dry_run:
+            for p in papers:
+                log.info("  would deep-read %s (score=%.0f)", p.paper_id, p.score or 0)
+            return 0
+        from .llm.sjtu_client import SJTUClient
+        client = SJTUClient()
+        total = _deep_read_papers(
+            papers, unit_date, client=client, interests_text=interests_text,
+            model=model or DAILY_MODEL, dry_run=False, verb="loop deep-read",
+        )
+        if total:
+            update_index()  # homepage / archive pages pick up the new pages
+            log.info("loop unit done: %d paper(s) deep-read; index refreshed", total)
+        return total
 
     # Stub recovery has its own paper selection (scan pages, not score threshold)
     # and date scope (all stub dates by default), so it branches early.
@@ -471,14 +633,22 @@ def main() -> None:
     ap.add_argument("--dry-run", action="store_true",
                     help="list what would be backfilled without calling the LLM "
                          "or downloading anything")
+    ap.add_argument("--pending", action="store_true",
+                    help="resident-loop mode: deep-read ONE unit of pending work "
+                         "(highlights backlog -> failed stubs -> score-threshold) "
+                         "and exit. Exit code 7 means nothing is pending, so a "
+                         "loop (run_deepread_loop.ps1) can stop. Unit size = "
+                         "--limit (default 1).")
+    ap.add_argument("--window-days", type=int, default=0, metavar="N",
+                    help="--pending: only look N days back (0 = all history)")
     args = ap.parse_args()
 
     if args.since and not args.until:
         ap.error("--since requires --until")
-    if not args.retry_stubs and not args.date and not args.since:
-        ap.error("specify --date, --since/--until, or --retry-stubs")
+    if not (args.retry_stubs or args.pending or args.date or args.since):
+        ap.error("specify --date, --since/--until, --retry-stubs, or --pending")
 
-    run(
+    total = run(
         date_str=args.date,
         since=args.since,
         until=args.until,
@@ -489,7 +659,13 @@ def main() -> None:
         sources=set(args.sources) if args.sources else None,
         force=args.force,
         retry_stubs_mode=args.retry_stubs,
+        pending_mode=args.pending,
+        window_days=args.window_days,
     )
+
+    if args.pending and not args.dry_run:
+        # 0 = did a unit, 7 = queue empty (the loop stops on 7).
+        sys.exit(0 if total else 7)
 
 
 if __name__ == "__main__":

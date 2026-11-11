@@ -32,6 +32,14 @@ import os
 DAILY_MODEL = os.environ.get("DAILY_MODEL", "deepseek-chat")
 DEEP_READ_MODEL = os.environ.get("DEEP_READ_MODEL", "deepseek-chat")
 
+# When set, daily still selects the deep-read candidates and saves their
+# highlights (PDF + manifest) but leaves the slow LLM deep reads to the resident
+# loop (run_deepread_loop.ps1), which grinds data/highlights.json one paper at a
+# time. This is what keeps a 50+ paper day from stretching the daily run for
+# hours (and getting killed by a shutdown mid-way).
+DEFER_DEEP_READS = os.environ.get("DAILY_DEFER_DEEP_READS", "").strip().lower() in (
+    "1", "true", "yes")
+
 
 def _load_config() -> tuple[dict, str]:
     sources = yaml.safe_load(Path("config/sources.yaml").read_text(encoding="utf-8"))
@@ -196,10 +204,16 @@ def run(dry_run: bool = False, for_date: date | None = None,
     if deep_read_papers:
         log.info("saving %d highlights (PDF + manifest)", len(deep_read_papers))
         save_highlights(deep_read_papers, run_date=report_date)
-        log.info("generating deep-read report for %d papers ...", len(deep_read_papers))
-        generate_deep_read_report(
-            deep_read_papers, client, interests_text, report_date, "daily", model=DEEP_READ_MODEL
-        )
+        if DEFER_DEEP_READS:
+            log.info(
+                "deep reads deferred to the resident loop (DAILY_DEFER_DEEP_READS=1): "
+                "%d paper(s) queued via data/highlights.json", len(deep_read_papers))
+        else:
+            log.info("generating deep-read report for %d papers ...", len(deep_read_papers))
+            generate_deep_read_report(
+                deep_read_papers, client, interests_text, report_date, "daily",
+                model=DEEP_READ_MODEL,
+            )
 
     update_index()
     # Every scored paper has already appeared on the page (digest or the

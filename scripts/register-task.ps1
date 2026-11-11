@@ -2,16 +2,19 @@
 # repo root. Registering tasks can require admin — if you get "Access denied",
 # re-run this from an ELEVATED PowerShell (Start menu -> Windows PowerShell ->
 # Run as administrator; then `cd <repo>; .\scripts\register-task.ps1`).
-#   .\scripts\register-task.ps1                          # daily + catch-up + journals + xagi loops
+#   .\scripts\register-task.ps1                          # daily + catch-up + journals + deepreads + xagi loops
 #   .\scripts\register-task.ps1 -Time "08:30"
-#   .\scripts\register-task.ps1 -NoCatchUp -NoJournals   # daily + xagi only
+#   .\scripts\register-task.ps1 -NoCatchUp -NoJournals   # daily + deepreads + xagi only
 #   .\scripts\register-task.ps1 -JournalMax 5            # journals: do 5 units then stop
+#   .\scripts\register-task.ps1 -NoDeepRead              # skip the resident deep-read loop
+#   .\scripts\register-task.ps1 -OnlyDeepRead            # register/refresh ONLY the deep-read loop
 #   .\scripts\register-task.ps1 -NoXagi                  # skip the XAGI conference loop
 
 param(
     [datetime]$Time = "09:10",
     [datetime]$JournalTime = "10:30",
     [datetime]$XagiTime = "11:30",
+    [datetime]$DeepReadTime = "08:30",
     [int]$JournalMax = 0,            # 0 = loop until the queue is empty
     [int]$XagiMax = 0,               # 0 = loop until the queue is empty
     [string]$XagiLongModel = "",     # e.g. deepseek-chat for the long-read phase
@@ -19,12 +22,21 @@ param(
     [string]$CatchUpTaskName = "research-news-catchup",
     [string]$JournalTaskName = "research-news-journals",
     [string]$XagiTaskName = "research-news-xagi",
+    [string]$DeepReadTaskName = "research-news-deepreads",
+    [switch]$OnlyDeepRead,
     [switch]$NoCatchUp,
     [switch]$NoJournals,
-    [switch]$NoXagi
+    [switch]$NoXagi,
+    [switch]$NoDeepRead
 )
 
 $repo = Split-Path -Parent $PSScriptRoot          # repo root (script is in scripts\)
+
+# Scope every logon trigger to the CURRENT user: an unscoped logon trigger means
+# "any user", which Windows only lets an elevated shell register. Scoping it to
+# our own account keeps `register-task.ps1` runnable without elevation (same as
+# the exported XML used by the /xml fallback).
+$logonUser = "$env:USERDOMAIN\$env:USERNAME"
 
 $isAdmin = ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
 if (-not $isAdmin) {
@@ -64,14 +76,16 @@ function Register-RnTask([string]$name, [string]$scriptFile, $trigger, [string]$
 # Daily report — weekdays at $Time.
 $dailyTrigger = New-ScheduledTaskTrigger -Weekly `
     -DaysOfWeek Monday, Tuesday, Wednesday, Thursday, Friday -At $Time
-if (Register-RnTask $TaskName "run_daily.ps1" $dailyTrigger "research-news daily pipeline") {
-    Write-Host "OK: '$TaskName' - weekdays at $($Time.ToString('HH:mm'))."
+if (-not $OnlyDeepRead) {
+    if (Register-RnTask $TaskName "run_daily.ps1" $dailyTrigger "research-news daily pipeline") {
+        Write-Host "OK: '$TaskName' - weekdays at $($Time.ToString('HH:mm'))."
+    }
 }
 
 # Catch-up — at logon (+10 min so the desktop settles). Only fills missing past
 # weekdays; today stays the daily task's job.
-if (-not $NoCatchUp) {
-    $logon = New-ScheduledTaskTrigger -AtLogOn
+if (-not $NoCatchUp -and -not $OnlyDeepRead) {
+    $logon = New-ScheduledTaskTrigger -AtLogOn -User $logonUser
     $logon.Delay = "PT10M"
     if (Register-RnTask $CatchUpTaskName "scripts\catch-up.ps1" $logon "research-news catch-up missed days") {
         Write-Host "OK: '$CatchUpTaskName' - at logon (+10 min)."
@@ -82,16 +96,35 @@ if (-not $NoCatchUp) {
 # units until ops\journal-backfill.md is empty, yielding to the daily run. Starts
 # at logon (desktop ~always on); a daily trigger restarts it if it had stopped.
 # IgnoreNew so only one loop runs; longer time limit since it can run a day or two.
-if (-not $NoJournals) {
+if (-not $NoJournals -and -not $OnlyDeepRead) {
     $journalSettings = New-ScheduledTaskSettingsSet `
         -StartWhenAvailable -MultipleInstances IgnoreNew `
         -ExecutionTimeLimit (New-TimeSpan -Days 30) `
         -DontStopIfGoingOnBatteries -AllowStartIfOnBatteries
-    $jLogon = New-ScheduledTaskTrigger -AtLogOn
+    $jLogon = New-ScheduledTaskTrigger -AtLogOn -User $logonUser
     $jDaily = New-ScheduledTaskTrigger -Daily -At $JournalTime
     if (Register-RnTask $JournalTaskName "run_journal_backfill.ps1" @($jLogon, $jDaily) `
             "research-news journal back-catalog backfill" "-Max $JournalMax" $journalSettings) {
         Write-Host "OK: '$JournalTaskName' - loop at logon (+ daily $($JournalTime.ToString('HH:mm')) restart)."
+    }
+}
+
+# Deep reads — a resident loop (run_deepread_loop.ps1) that grinds the
+# data/highlights.json backlog (papers daily selected but never deep-read, incl.
+# green-lit / popsci ones) one paper per lock hold, then retries failed stubs,
+# then falls back to score-threshold leftovers. daily defers its deep reads here
+# (DAILY_DEFER_DEEP_READS=1), so a 50+ paper day no longer stretches the daily
+# run for hours. Yields to daily; IgnoreNew keeps a single loop alive.
+if (-not $NoDeepRead) {
+    $drSettings = New-ScheduledTaskSettingsSet `
+        -StartWhenAvailable -MultipleInstances IgnoreNew `
+        -ExecutionTimeLimit (New-TimeSpan -Days 30) `
+        -DontStopIfGoingOnBatteries -AllowStartIfOnBatteries
+    $drLogon = New-ScheduledTaskTrigger -AtLogOn -User $logonUser
+    $drDaily = New-ScheduledTaskTrigger -Daily -At $DeepReadTime
+    if (Register-RnTask $DeepReadTaskName "run_deepread_loop.ps1" @($drLogon, $drDaily) `
+            "research-news resident deep-read loop (backlog + failed stubs)" "" $drSettings) {
+        Write-Host "OK: '$DeepReadTaskName' - loop at logon (+ daily $($DeepReadTime.ToString('HH:mm')) restart)."
     }
 }
 
@@ -100,12 +133,12 @@ if (-not $NoJournals) {
 # per lock hold for any that timed out, yielding to daily; exits when both are
 # done. Started at logon + restarted daily so it survives a reboot; IgnoreNew
 # keeps a single loop alive.
-if (-not $NoXagi) {
+if (-not $NoXagi -and -not $OnlyDeepRead) {
     $xagiSettings = New-ScheduledTaskSettingsSet `
         -StartWhenAvailable -MultipleInstances IgnoreNew `
         -ExecutionTimeLimit (New-TimeSpan -Days 30) `
         -DontStopIfGoingOnBatteries -AllowStartIfOnBatteries
-    $xLogon = New-ScheduledTaskTrigger -AtLogOn
+    $xLogon = New-ScheduledTaskTrigger -AtLogOn -User $logonUser
     $xDaily = New-ScheduledTaskTrigger -Daily -At $XagiTime
     # The long-read phase can be pointed at a faster model (the reasoning model
     # sometimes hits the request timeout on 160k-char full texts).

@@ -211,27 +211,32 @@ venv、`git pull --rebase --autostash`（先同步网页 / agent 合进来的改
 ```cron
 # 工作日 09:10，只留这一个执行者
 10 9 * * 1-5 /root/research-news/run_rn.sh >> /root/rn.log 2>&1
+
+# 精读常驻循环（daily 已把精读让给循环，见 DAILY_DEFER_DEEP_READS）：
+# 开机自启，逐篇消化 data/highlights.json 的欠账，队列空了会自己退出。
+@reboot cd /root/research-news && ./run_deepread_loop.sh >> /root/rn-deepread.log 2>&1
 ```
 
 放仓库外（如 `/root/run_rn.sh`）就设 `RN_REPO=/root/research-news`；放仓库里则自动定位。
 
 #### Windows：任务计划程序（Task Scheduler）
 
-台式机上一次性注册三个任务（详见 `scripts/register-task.ps1`）：
+台式机上一次性注册四个任务（详见 `scripts/register-task.ps1`）：
 
 ```powershell
 # 一次性注册：daily（工作日 09:10）+ catch-up（登录补齐缺天）+ journals（期刊回补循环）
+#             + deepreads（精读常驻循环，登录自启 / 每日 08:30 兜底重启）
 .\scripts\register-task.ps1
 ```
 
 日常操作：
 
 ```powershell
-# 查看三个任务的状态（Ready = 已启用待触发，Running = 正在跑，Disabled = 已暂停）
+# 查看任务状态（Ready = 已启用待触发，Running = 正在跑，Disabled = 已暂停）
 Get-ScheduledTask -TaskName 'research-news-*' | Select-Object TaskName, State
 
 # 手动立即跑某个任务（不必等到点）
-Start-ScheduledTask -TaskName 'research-news-daily'      # 或 -catchup / -journals
+Start-ScheduledTask -TaskName 'research-news-daily'      # 或 -catchup / -journals / -deepreads
 
 # 暂停 / 恢复某个任务（比如只想临时停掉期刊回补循环）
 Disable-ScheduledTask -TaskName 'research-news-journals'
@@ -241,9 +246,10 @@ Enable-ScheduledTask  -TaskName 'research-news-journals'
 Get-ScheduledTaskInfo -TaskName 'research-news-catchup'
 ```
 
-- `research-news-daily`：工作日 09:10 跑当天日报（完整管道 + 提交推送）。
+- `research-news-daily`：工作日 09:10 跑当天日报（完整管道 + 提交推送）。**精读已从这里拆出去**（`DAILY_DEFER_DEEP_READS=1`）：daily 只选题 + 存 PDF/清单，不再为几十篇精读拖上几小时。
 - `research-news-catchup`：登录后触发，把**关机期间漏掉的过去工作日**用 `daily --date <X>` 一次性补齐（今天留给 daily 任务；补跑日志写在**运行当天**日期的 `logs\<今天>-<机器名>.log` 里）。
 - `research-news-journals`：期刊往期回补的连续循环，登录自启 + 每日 10:30 兜底重启，给 daily 时段让路。
+- `research-news-deepreads`：**精读常驻循环**，登录自启 + 每日 08:30 兜底重启。一篇一个锁周期，按 `data/highlights.json` 里"daily 选过但没读完"的欠账逐篇消化（含绿通/popsci 的低分论文），再重试失败占位，最后兜底阈值补跑；每 5 篇提交推送一次。队列空了会自己退出，下次登录/重启再起来。
 
 各任务的完整日志在 `logs\`：控制台 transcript 是 `run-<日期>-<机器名>.log` / `catchup-…` / `journal-loop-…`，管道自身日志是 `<日期>-<机器名>.log`。
 
@@ -734,8 +740,9 @@ python -m research_news.xagi long --max 0 --model deepseek-chat
 注册成计划任务（与 daily / journals 同一个脚本）：
 
 ```powershell
-.\scripts\register-task.ps1                 # daily + catch-up + journals + xagi 四个任务
+.\scripts\register-task.ps1                 # daily + catch-up + journals + deepreads + xagi 五个任务
 .\scripts\register-task.ps1 -XagiMax 6      # XAGI 循环每次最多做 6 格就停
+.\scripts\register-task.ps1 -NoDeepRead     # 不要精读常驻循环
 .\scripts\register-task.ps1 -NoXagi         # 不要 XAGI 循环
 Start-ScheduledTask -TaskName research-news-xagi   # 立刻跑一次
 ```

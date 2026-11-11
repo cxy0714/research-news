@@ -1,6 +1,7 @@
 # Windows runner for the daily pipeline — invoke from Task Scheduler.
-# Mirrors run_daily.sh: single-instance lock -> sync -> daily -> fix garbled
-# summaries -> retry failed deep reads -> commit/push. A transcript of the whole
+# Mirrors run_daily.sh: single-instance lock -> sync -> daily (deep reads are
+# deferred to the resident loop, run_deepread_loop.ps1) -> fix garbled summaries
+# -> commit/push. A transcript of the whole
 # run is written to logs\run-<date>.log and pushed with git add -A (alongside the
 # pipeline's own logs\<date>.log).
 #
@@ -70,9 +71,10 @@ try {
     python -m research_news.manual_requests --date $today
 
     # Regenerate any deep reads whose LLM call failed today (the '精读失败' stubs).
-    # This must run after manual_requests: manual queue items are themselves
-    # deep-read in that step and can create a new failure stub.
-    python -m research_news.backfill_deep_reads --retry-stubs --date $today
+    # NOTE: with DAILY_DEFER_DEEP_READS=1 (set in .env) this whole deep-read tail
+    # — the generation itself and these stub retries — was moved to the resident
+    # loop (run_deepread_loop.ps1), which owns data/highlights.json. Keep the call
+    # below only if you want daily to retry today's stubs itself as well.
 }
 finally {
     $mutex.ReleaseMutex()
