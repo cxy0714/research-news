@@ -218,8 +218,12 @@
   6/10 [daily]
 - [On Local Inference for Functionals of Ill-Posed Inverse Problems](deep_reads/2026-10-16-2610.19350.md)  
   9/10 [daily]
+- [Randomization Inference for Dynamic Causal Effects in Short Panels with Autoregressive Instruments](deep_reads/2026-10-16-2610.19075.md)  
+  8/10 [daily]
 - [Generalized Odds for Ordinal Outcomes: A Causal Inference Framework Adjusting for Covariates](deep_reads/2026-10-16-2610.19747.md)  
   8/10 [daily]
+- [Testing for Peer Effects in Heteroskedastic Fixed-Effects Panels](deep_reads/2026-10-16-2610.20045.md)  
+  7/10 [daily]
 - [Simple Standard Errors for Complicated (Quasi-)Experimental Designs](deep_reads/2026-10-13-2610.12674.md)  
   8/10 [daily]
 - [Kernel-based External Validity of Experimental Studies](deep_reads/2026-10-13-2610.13625.md)  
@@ -6188,6 +6192,8 @@
   8/10 [daily]
 - [Nonparametric Dyadic Quantile Regression](deep_reads/2026-10-19-2610.25009.md)  
   8/10 [daily]
+- [Pointwise minimax lower bounds under a multi-index constraint: the price of an unknown orientation](deep_reads/2026-10-16-2610.19208.md)  
+  8/10 [daily]
 - [Minimax Rates for Estimating Powered Sliced Wasserstein Functionals](deep_reads/2026-10-13-2610.12740.md)  
   7/10 [daily]
 - [Scalable Nonparametric Change-Plane Regression with Random Features: Estimation and Inference](deep_reads/2026-10-12-2610.13290.md)  
@@ -8935,6 +8941,8 @@
   7/10 [daily]
 - [Dimension-free comparison inequalities between $f$-divergences for Gaussian location mixtures](deep_reads/2026-10-19-2610.25070.md)  
   6/10 [daily]
+- [Testing Conditional Distribution Equality Using Generative Models](deep_reads/2026-10-16-2610.20447.md)  
+  7/10 [daily]
 - [Beyond Discrepancy: Oracle Drift in Nonstationary Weighted Risk Minimization](deep_reads/2026-10-13-2610.13598.md)  
   6/10 [daily]
 - [How Many Significant LISA?: A multiple testing correction](deep_reads/2026-10-12-2610.13472.md)  
@@ -11661,6 +11669,8 @@
   4/10 [daily]
 - [Control variates for dry friction under colored noise: variance rates for non-smooth observables](deep_reads/2026-10-20-2610.27765.md)  
   3/10 [daily]
+- [Diameter-Free Pointwise Gaussian KDE in Near-Additive Query Time](deep_reads/2026-10-16-hexagon_2610.00272.md)  
+  7/10 [daily]
 - [Quaternion Gaussian Probes for Tensor Frobenius-Norm Estimation](deep_reads/2026-10-13-2610.12534.md)  
   6/10 [daily]
 - [An efficient stochastic generalized method of moments estimator for nonlinear moment models](deep_reads/2026-10-12-2610.12873.md)  
