@@ -216,6 +216,10 @@
   6/10 [daily]
 - [Persistence is not Independence: A structural Credibility Protocol for Distribution based Recovery in VARLiNGAM](deep_reads/2026-10-19-2610.25238.md)  
   6/10 [daily]
+- [On Local Inference for Functionals of Ill-Posed Inverse Problems](deep_reads/2026-10-16-2610.19350.md)  
+  9/10 [daily]
+- [Generalized Odds for Ordinal Outcomes: A Causal Inference Framework Adjusting for Covariates](deep_reads/2026-10-16-2610.19747.md)  
+  8/10 [daily]
 - [Simple Standard Errors for Complicated (Quasi-)Experimental Designs](deep_reads/2026-10-13-2610.12674.md)  
   8/10 [daily]
 - [Kernel-based External Validity of Experimental Studies](deep_reads/2026-10-13-2610.13625.md)  
@@ -13225,6 +13229,12 @@
   7/10 [daily]
 - [Estimator Precision and Selection for Up-the-Ramp Sampling with a High-Read-Noise InGaAs Camera](deep_reads/2026-10-20-2610.27742.md)  
   6/10 [daily]
+- [Revisiting the Unknown Unknowns in Transient Astrophysics with the SKA Telescopes](deep_reads/2026-10-20-2610.28347.md)  
+  0/10 [daily]
+- [The "Rubin 2036: Opportunities for Discovery" Workshop: A Community Roadmap for the Future of the Vera C. Rubin Observatory After the LSST](deep_reads/2026-10-20-2610.28482.md)  
+  0/10 [daily]
+- [A Solar Optical Clock](deep_reads/2026-10-20-2610.28485.md)  
+  0/10 [daily]
 - [First Experimental Results of Space Object Detection Using the InteRFeX Array](deep_reads/2026-10-13-2610.13537.md)  
   6/10 [daily]
 - [An empirical calibration of the spectral resolution of JWST NIRSpec PRISM](deep_reads/2026-10-12-2610.13492.md)  
