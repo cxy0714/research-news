@@ -13727,6 +13727,14 @@
   7/10 [daily]
 - [Statistical Issues Often Overlooked when Analyzing Astronomical Data](deep_reads/2026-05-24-10.3847_1538-4365_ae25eb.md)  
   9/10 [daily]
+- [The LIRA–Ising Model: Estimating the Boundaries of Irregularly Shaped X-Ray Sources](deep_reads/2026-05-24-10.3847_1538-4365_ae3716.md)  
+  8/10 [daily]
+- [Simulation-based inference pipeline of the ionization history from the 2D 21 cm power spectrum](deep_reads/2026-05-24-10.1093_mnras_stag577.md)  
+  8/10 [daily]
+- [Physically motivated priors in the local distance ladder significantly reduce the Hubble tension](deep_reads/2026-05-24-10.1093_mnras_stag724.md)  
+  8/10 [daily]
+- [Analytic marginalization over binary variables in physics data](deep_reads/2026-05-24-10.1093_mnras_stag791.md)  
+  8/10 [daily]
 
 ### 期刊
 
@@ -17752,6 +17760,8 @@
 - [Modified treatment policies that depend on the natural history of treatment](deep_reads/2026-05-26-2605.24167.md)  
   9/10 [daily]
 - [Using the target trial framework for combining information: external comparator analyses and other applications](deep_reads/2026-05-26-2605.24346.md)  
+  8/10 [daily]
+- [The Minimax Risk in Testing Uniformity Over Large Alphabets Under Missing-Ball Alternatives](deep_reads/2026-05-24-10.1109_tit.2025.3646804.md)  
   8/10 [daily]
 - [Sequential Sensitivity Analysis for Multiple Assumptions: A Framework for Understanding Racial Disparity in Police Use of Force](deep_reads/2026-05-22-2605.21893.md)  
   8/10 [daily]
