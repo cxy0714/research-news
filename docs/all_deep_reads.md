@@ -8829,6 +8829,8 @@
 
 ### Daily
 
+- [Pseudo-marginal Sampling for Selective Inference](deep_reads/2026-11-12-2611.13492.md)  
+  7/10 [daily]
 - [Algorithm-aware Statistical Inference in High-dimensional Estimating Equations](deep_reads/2026-11-11-2611.12287.md)  
   7/10 [daily]
 - [Distribution-Free Symmetry Detection in Multi-Reference Alignment at Low SNR](deep_reads/2026-11-11-2611.11872.md)  

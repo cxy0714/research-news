@@ -17,7 +17,7 @@
 
 [→ 查看完整报告](daily/2026-11-12.md)
 
-### 精读论文（5 篇）
+### 精读论文（6 篇）
 
 - [Semiparametric Inference in Panel Data with Interactive and High-dimensional Confounding](deep_reads/2026-11-12-2611.14385.md)  
   `因果推断` · 相关性 8/10
@@ -25,6 +25,8 @@
   `高维统计 / 随机矩阵` · 相关性 8/10
 - [Causal Learning with Invalid Instruments for High-dimensional Imaging Responses](deep_reads/2026-11-12-2611.13187.md)  
   `因果推断` · 相关性 8/10
+- [Pseudo-marginal Sampling for Selective Inference](deep_reads/2026-11-12-2611.13492.md)  
+  `数理统计 / 假设检验` · 相关性 7/10
 - [Causal mediation analysis for a time-to-event endpoint in the presence of competing events](deep_reads/2026-11-12-2611.13327.md)  
   `因果推断` · 相关性 7/10
 - [Ratio-of-mediator-probability weighting for causal mediation analysis: estimation, extensions, and practical guidance](deep_reads/2026-11-12-2611.13206.md)  
