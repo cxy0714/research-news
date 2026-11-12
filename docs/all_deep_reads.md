@@ -13759,6 +13759,14 @@
   8/10 [daily]
 - [Analytic marginalization over binary variables in physics data](deep_reads/2026-05-24-10.1093_mnras_stag791.md)  
   8/10 [daily]
+- [PANCAKE: A Python-based Numerical Color–Magnitude Diagram Analysis Package](deep_reads/2026-05-24-10.3847_1538-4365_add88c.md)  
+  7/10 [daily]
+- [Emission-line Stacking of 21 cm Intensity Maps with MeerKLASS: Inference Pipeline and Application to the <i>L</i>-band Deep-field Data](deep_reads/2026-05-24-10.3847_1538-4365_add897.md)  
+  7/10 [daily]
+- [An All-sky 3D Dust Map Based on Gaia and LAMOST](deep_reads/2026-05-24-10.3847_1538-4365_adea39.md)  
+  7/10 [daily]
+- [Microlensing Optical Depth, Event Rate, and Limits on Compact Objects in Dark Matter Based on 20 Yr of OGLE Observations of the Small Magellanic Cloud](deep_reads/2026-05-24-10.3847_1538-4365_adf842.md)  
+  7/10 [daily]
 - [Joint Inference of Population, Cosmology, and Neutron Star Equation of State from Gravitational Waves of Dark Binary Neutron Stars](deep_reads/2026-05-24-10.3847_1538-4365_ae0472.md)  
   7/10 [daily]
 - [Quantifying the Impact of LSST <i>u</i> -band Survey Strategy on Photometric Redshift Estimation and the Detection of Lyman-break Galaxies](deep_reads/2026-05-24-10.3847_1538-4365_ae14f0.md)  
@@ -13789,6 +13797,8 @@
   7/10 [daily]
 - [Bayesian model comparison and validation with Gaussian Process Regression for interferometric 21-cm signal recovery](deep_reads/2026-05-24-10.1093_mnras_stag878.md)  
   7/10 [daily]
+- [Investigating light pollution trends at astronomical observatories worldwide](deep_reads/2026-05-24-10.1093_mnras_stag121.md)  
+  6/10 [daily]
 
 ### 期刊
 
