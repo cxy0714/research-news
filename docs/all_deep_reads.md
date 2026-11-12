@@ -8941,8 +8941,12 @@
   7/10 [daily]
 - [Dimension-free comparison inequalities between $f$-divergences for Gaussian location mixtures](deep_reads/2026-10-19-2610.25070.md)  
   6/10 [daily]
+- [A Positive Dispersion Optimum for the Rounded Sample Mean: Sufficiency and Necessity of Finite Variance](deep_reads/2026-10-16-hexagon_2610.00230.md)  
+  7/10 [daily]
 - [Testing Conditional Distribution Equality Using Generative Models](deep_reads/2026-10-16-2610.20447.md)  
   7/10 [daily]
+- [Subdata Selection for Measurement-Constrained Linear Regression under Model Misspecification](deep_reads/2026-10-16-2610.19351.md)  
+  6/10 [daily]
 - [Beyond Discrepancy: Oracle Drift in Nonstationary Weighted Risk Minimization](deep_reads/2026-10-13-2610.13598.md)  
   6/10 [daily]
 - [How Many Significant LISA?: A multiple testing correction](deep_reads/2026-10-12-2610.13472.md)  
@@ -13245,6 +13249,10 @@
   0/10 [daily]
 - [A Solar Optical Clock](deep_reads/2026-10-20-2610.28485.md)  
   0/10 [daily]
+- [Identifying Planetary Nebulae Candidates from IPHAS and VPHAS+ Surveys via YOLO Deep Learning Models](deep_reads/2026-10-16-2610.19760.md)  
+  6/10 [daily]
+- [jax-SNANA: A GPU-accelerated Supernova Framework for the SBI Era](deep_reads/2026-10-16-2610.19000.md)  
+  6/10 [daily]
 - [First Experimental Results of Space Object Detection Using the InteRFeX Array](deep_reads/2026-10-13-2610.13537.md)  
   6/10 [daily]
 - [An empirical calibration of the spectral resolution of JWST NIRSpec PRISM](deep_reads/2026-10-12-2610.13492.md)  
@@ -17327,6 +17335,8 @@
   0/10 [daily]
 - [A fourteen-dimensional biperfect Lie bialgebra](deep_reads/2026-10-19-hexagon_2610.00284.md)  
   0/10 [daily]
+- [Common Signals, Spurious Cross-Excitation, and Identification in Multivariate Hawkes Processes](deep_reads/2026-10-16-2610.19428.md)  
+  6/10 [daily]
 - [Milne's rationality conjecture](deep_reads/2026-10-14-hexagon_2610.00226.md)  
   0/10 [daily]
 - [A seven-eighths zero-free half-plane for unitary Weil L-functions](deep_reads/2026-10-14-hexagon_2610.00216.md)  
