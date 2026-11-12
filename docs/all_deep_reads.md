@@ -13249,6 +13249,8 @@
   0/10 [daily]
 - [A Solar Optical Clock](deep_reads/2026-10-20-2610.28485.md)  
   0/10 [daily]
+- [RPCA: a Resolved PSF reconstruction method for undersampled images](deep_reads/2026-10-16-2610.19909.md)  
+  6/10 [daily]
 - [Identifying Planetary Nebulae Candidates from IPHAS and VPHAS+ Surveys via YOLO Deep Learning Models](deep_reads/2026-10-16-2610.19760.md)  
   6/10 [daily]
 - [jax-SNANA: A GPU-accelerated Supernova Framework for the SBI Era](deep_reads/2026-10-16-2610.19000.md)  
@@ -17337,6 +17339,14 @@
   0/10 [daily]
 - [Common Signals, Spurious Cross-Excitation, and Identification in Multivariate Hawkes Processes](deep_reads/2026-10-16-2610.19428.md)  
   6/10 [daily]
+- [An Arbor Polytope with Nonreal Ehrhart Roots](deep_reads/2026-10-16-hexagon_2610.00235.md)  
+  2/10 [daily]
+- [First Proof Third Batch](deep_reads/2026-10-16-hexagon_2610.00244.md)  
+  2/10 [daily]
+- [Marked Positive Handleslide Pentagons in Compression Bodies: Relative Coherence](deep_reads/2026-10-16-hexagon_2610.00227.md)  
+  1/10 [daily]
+- [A universal group with thirteen relators](deep_reads/2026-10-16-hexagon_2610.00278.md)  
+  1/10 [daily]
 - [Milne's rationality conjecture](deep_reads/2026-10-14-hexagon_2610.00226.md)  
   0/10 [daily]
 - [A seven-eighths zero-free half-plane for unitary Weil L-functions](deep_reads/2026-10-14-hexagon_2610.00216.md)  
