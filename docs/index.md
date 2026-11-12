@@ -17,7 +17,7 @@
 
 [→ 查看完整报告](daily/2026-11-12.md)
 
-### 精读论文（20 篇）
+### 精读论文（25 篇）
 
 - [Semiparametric Inference in Panel Data with Interactive and High-dimensional Confounding](deep_reads/2026-11-12-2611.14385.md)  
   `因果推断` · 相关性 8/10
@@ -57,6 +57,16 @@
   `因果推断` · 相关性 7/10
 - [Ratio-of-mediator-probability weighting for causal mediation analysis: estimation, extensions, and practical guidance](deep_reads/2026-11-12-2611.13206.md)  
   `因果推断` · 相关性 7/10
+- [One Curve, Different Weights: AUC, the Brier Score, Decision-Weighted AUC, and the Policy Youden Index](deep_reads/2026-11-12-2611.14465.md)  
+  `数理统计 / 假设检验` · 相关性 6/10
+- [Convergence and global optimality of Wasserstein--Fisher--Rao descent for Gaussian mixtures](deep_reads/2026-11-12-2611.14428.md)  
+  `统计计算 / 算法` · 相关性 6/10
+- [Harnessing collaborative networks for nonparametric quantile learning](deep_reads/2026-11-12-2611.13754.md)  
+  `非参数 / 半参数` · 相关性 6/10
+- [AdaFCP: Local Neural Functional Representations for Industrial Change Detection](deep_reads/2026-11-12-2611.13464.md)  
+  `数理统计 / 假设检验` · 相关性 6/10
+- [Sufficient Dimension Reduction with Multimodal Predictor Objects](deep_reads/2026-11-12-2611.13460.md)  
+  `非参数 / 半参数` · 相关性 6/10
 - [High-Dimensional Nonsparse Regression under Covariate Shift via Importance-Weighted Partial Least Squares](deep_reads/2026-11-12-2611.13423.md)  
   `高维统计 / 随机矩阵` · 相关性 6/10
 

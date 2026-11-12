@@ -6134,6 +6134,10 @@
   7/10 [daily]
 - [Adaptive local Fr\'echet regression with polyspherical predictors](deep_reads/2026-11-12-2611.13240.md)  
   7/10 [daily]
+- [Harnessing collaborative networks for nonparametric quantile learning](deep_reads/2026-11-12-2611.13754.md)  
+  6/10 [daily]
+- [Sufficient Dimension Reduction with Multimodal Predictor Objects](deep_reads/2026-11-12-2611.13460.md)  
+  6/10 [daily]
 - [Coverage and shape of conformal highest-density sets: A minimax theory](deep_reads/2026-11-11-2611.11909.md)  
   8/10 [daily]
 - [Asymptotic Theory of Integrated Pairwise-Difference Functionals of Kernel Estimators, with Applications to Treatment Effect Heterogeneity](deep_reads/2026-11-11-2611.10383.md)  
@@ -8847,6 +8851,10 @@
   7/10 [daily]
 - [Pseudo-marginal Sampling for Selective Inference](deep_reads/2026-11-12-2611.13492.md)  
   7/10 [daily]
+- [One Curve, Different Weights: AUC, the Brier Score, Decision-Weighted AUC, and the Policy Youden Index](deep_reads/2026-11-12-2611.14465.md)  
+  6/10 [daily]
+- [AdaFCP: Local Neural Functional Representations for Industrial Change Detection](deep_reads/2026-11-12-2611.13464.md)  
+  6/10 [daily]
 - [Algorithm-aware Statistical Inference in High-dimensional Estimating Equations](deep_reads/2026-11-11-2611.12287.md)  
   7/10 [daily]
 - [Distribution-Free Symmetry Detection in Multi-Reference Alignment at Low SNR](deep_reads/2026-11-11-2611.11872.md)  
@@ -11661,6 +11669,8 @@
 
 ### Daily
 
+- [Convergence and global optimality of Wasserstein--Fisher--Rao descent for Gaussian mixtures](deep_reads/2026-11-12-2611.14428.md)  
+  6/10 [daily]
 - [Box-Cox Transformations of Correlation Matrices](deep_reads/2026-11-10-2611.09790.md)  
   7/10 [daily]
 - [The Price of Bayes-Optimal In-Context Learning](deep_reads/2026-11-09-hexagon_2611.00133.md)  
