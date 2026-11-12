@@ -71,10 +71,16 @@ try {
     # we don't pay for ~40 LLM calls twice. Keeping the call here means a day
     # where the dedicated task never fires still gets a radar page.
     python -m research_news.benchmarks daily --if-missing
+    if ($LASTEXITCODE -ne 0) {
+        Write-Host "[$(Get-Date -Format o)] WARNING: AI-eval radar step failed (exit $LASTEXITCODE) - see logs\radar-ai-eval-*"
+    }
 
     # AI auto-research agent radar (docs/autoresearch/daily/): same arrangement,
     # own task at 10:15, this call is the fallback.
     python -m research_news.autoresearch daily --if-missing
+    if ($LASTEXITCODE -ne 0) {
+        Write-Host "[$(Get-Date -Format o)] WARNING: auto-research radar step failed (exit $LASTEXITCODE) - see logs\radar-autoresearch-*"
+    }
 
     # Deep-read papers the owner queued on the website (the gist 'queue': paste an
     # arXiv link -> default-favorite + queue). Fails open without GIST_TOKEN.
