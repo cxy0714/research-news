@@ -64,7 +64,17 @@ try {
     # AI evaluation / benchmark radar: a separate page (docs/benchmarks/daily/)
     # built from today's cs.CL / cs.LG submissions. Non-fatal — a failed radar
     # must never block the stats report from being committed.
-    python -m research_news.benchmarks daily
+    #
+    # This is now a FALLBACK: the radar also has its own scheduled task
+    # (research-news-ai-radar -> run_ai_radar.ps1, weekdays 10:05). Whichever
+    # runs first renders the page; --if-missing makes the other one a no-op so
+    # we don't pay for ~40 LLM calls twice. Keeping the call here means a day
+    # where the dedicated task never fires still gets a radar page.
+    python -m research_news.benchmarks daily --if-missing
+
+    # AI auto-research agent radar (docs/autoresearch/daily/): same arrangement,
+    # own task at 10:15, this call is the fallback.
+    python -m research_news.autoresearch daily --if-missing
 
     # Deep-read papers the owner queued on the website (the gist 'queue': paste an
     # arXiv link -> default-favorite + queue). Fails open without GIST_TOKEN.

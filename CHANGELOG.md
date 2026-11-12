@@ -18,6 +18,21 @@
 
 ### Added
 
+- **AI 自动科研（auto-research agent）每日雷达**：新增 `research_news/autoresearch.py` +
+  `research_news/llm/autoresearch_prompts.py` + `config/autoresearch.yaml` +
+  `config/interests.autoresearch.yaml`。每天从 arXiv `cs.CL` / `cs.LG` / `cs.AI` / `cs.MA` 的提交里
+  筛「AI 自己搞科研」的论文（端到端科研流水线、选题/假设生成、实验自动化/自驱动实验室、
+  文献调研 agent、以及这类系统的评测），标题为主 + 一小串高精度摘要短语做零 LLM 预过滤，
+  再按「自动化程度 + 证据质量」打分、取高分写中文精摘，落 `docs/autoresearch/daily/<date>.md`
+  （卡片多一个 `自动化程度` 标签：demo / assisted / semi_autonomous / autonomous）。
+  `mkdocs.yml` 的「AI 自动科研」导航段由 `# AUTORESEARCH-NAV-START/END` 自动维护。
+- **两条 AI 雷达各自独立成计划任务**：新增 `run_ai_radar.ps1`（`-Radar ai-eval|autoresearch`，
+  `-Date` 回补、`-Force` 重跑），自带日志 `logs/radar-<radar>-<date>-<host>.log`、
+  独立退出码、失败重试 2 次；`scripts/register-task.ps1` 新增 `research-news-ai-radar`
+  （工作日 10:05）与 `research-news-autoresearch`（工作日 10:15），并加 `-OnlyAiRadar`
+  只注册这两条。`benchmarks daily` / `autoresearch daily` 新增 `--if-missing`：daily 与独立任务
+  谁先跑出来页面，另一边直接 no-op，不重复烧 LLM 调用。
+
 - **AI 评测 / Benchmark 双轨（会议专题 + 每日雷达）**：新增
   `research_news/scrapers/proceedings.py`（PMLR / ACL Anthology / CVF / AAAI OJS / NeurIPS 五个
   开放获取适配器，纯 HTML 解析、无 API key）与 `research_news/benchmarks.py`

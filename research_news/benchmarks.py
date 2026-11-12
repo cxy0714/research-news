@@ -544,10 +544,21 @@ def _write_daily_index() -> Path:
 
 
 def daily(for_date: date | None = None, *, model: str | None = None,
-          dry_run: bool = False) -> Path | None:
+          dry_run: bool = False, skip_existing: bool = False) -> Path | None:
     cfg = load_config()
     dcfg = cfg.get("daily", {})
     when = for_date or date.today()
+
+    # Idempotency guard: the page can be produced by the daily wrapper
+    # (run_daily.ps1, fallback) or by the dedicated `research-news-ai-radar`
+    # task (run_ai_radar.ps1, primary). Whichever runs first wins; the other
+    # passes --if-missing so it does not spend ~40 LLM calls re-rendering a
+    # page that is already on disk (and already committed).
+    out_path = DAILY_DIR / f"{when.isoformat()}.md"
+    if skip_existing and out_path.exists():
+        log.info("[daily %s] page already exists (%s) — skipping", when, out_path)
+        return out_path
+
     arxiv_cfg = {
         "categories": dcfg.get("categories", ["cs.CL", "cs.LG"]),
         "include_cross_listed": False,
@@ -635,7 +646,7 @@ def daily(for_date: date | None = None, *, model: str | None = None,
                 f"{p.score:.0f} | {' · '.join(links) or '-'} |"
             )
         lines.append("")
-    out = _write(DAILY_DIR / f"{when.isoformat()}.md", lines)
+    out = _write(out_path, lines)
 
     _write_daily_index()
     usage_report(client, "benchmarks-daily")
@@ -701,6 +712,8 @@ def main(argv: list[str] | None = None) -> int:
     p_daily.add_argument("--date", default=None)
     p_daily.add_argument("--model", default=None)
     p_daily.add_argument("--dry-run", action="store_true")
+    p_daily.add_argument("--if-missing", action="store_true",
+                         help="skip when that day's page already exists")
 
     sub.add_parser("status", help="progress table")
 
@@ -731,7 +744,8 @@ def main(argv: list[str] | None = None) -> int:
         render_nav(cfg)
     elif args.cmd == "daily":
         when = date.fromisoformat(args.date) if args.date else None
-        daily(when, model=args.model, dry_run=args.dry_run)
+        daily(when, model=args.model, dry_run=args.dry_run,
+              skip_existing=args.if_missing)
     elif args.cmd == "status":
         print(status(cfg))
     return 0

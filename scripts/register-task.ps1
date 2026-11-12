@@ -2,19 +2,24 @@
 # repo root. Registering tasks can require admin — if you get "Access denied",
 # re-run this from an ELEVATED PowerShell (Start menu -> Windows PowerShell ->
 # Run as administrator; then `cd <repo>; .\scripts\register-task.ps1`).
-#   .\scripts\register-task.ps1                          # daily + catch-up + journals + deepreads + xagi loops
+#   .\scripts\register-task.ps1                          # daily + catch-up + journals + deepreads + xagi loops + AI radars
 #   .\scripts\register-task.ps1 -Time "08:30"
-#   .\scripts\register-task.ps1 -NoCatchUp -NoJournals   # daily + deepreads + xagi only
+#   .\scripts\register-task.ps1 -NoCatchUp -NoJournals   # daily + deepreads + xagi + AI radars
 #   .\scripts\register-task.ps1 -JournalMax 5            # journals: do 5 units then stop
 #   .\scripts\register-task.ps1 -NoDeepRead              # skip the resident deep-read loop
 #   .\scripts\register-task.ps1 -OnlyDeepRead            # register/refresh ONLY the deep-read loop
+#   .\scripts\register-task.ps1 -OnlyAiRadar             # register/refresh ONLY the two AI radars
 #   .\scripts\register-task.ps1 -NoXagi                  # skip the XAGI conference loop
+#   .\scripts\register-task.ps1 -NoAiRadar               # skip the AI evaluation / auto-research radars
+#   .\scripts\register-task.ps1 -AiEvalTime "10:05" -AutoResearchTime "10:15"
 
 param(
     [datetime]$Time = "09:10",
     [datetime]$JournalTime = "10:30",
     [datetime]$XagiTime = "11:30",
     [datetime]$DeepReadTime = "08:30",
+    [datetime]$AiEvalTime = "10:05",
+    [datetime]$AutoResearchTime = "10:15",
     [int]$JournalMax = 0,            # 0 = loop until the queue is empty
     [int]$XagiMax = 0,               # 0 = loop until the queue is empty
     [string]$XagiLongModel = "",     # e.g. deepseek-chat for the long-read phase
@@ -23,11 +28,15 @@ param(
     [string]$JournalTaskName = "research-news-journals",
     [string]$XagiTaskName = "research-news-xagi",
     [string]$DeepReadTaskName = "research-news-deepreads",
+    [string]$AiRadarTaskName = "research-news-ai-radar",
+    [string]$AutoResearchTaskName = "research-news-autoresearch",
     [switch]$OnlyDeepRead,
+    [switch]$OnlyAiRadar,
     [switch]$NoCatchUp,
     [switch]$NoJournals,
     [switch]$NoXagi,
-    [switch]$NoDeepRead
+    [switch]$NoDeepRead,
+    [switch]$NoAiRadar
 )
 
 $repo = Split-Path -Parent $PSScriptRoot          # repo root (script is in scripts\)
@@ -76,7 +85,7 @@ function Register-RnTask([string]$name, [string]$scriptFile, $trigger, [string]$
 # Daily report — weekdays at $Time.
 $dailyTrigger = New-ScheduledTaskTrigger -Weekly `
     -DaysOfWeek Monday, Tuesday, Wednesday, Thursday, Friday -At $Time
-if (-not $OnlyDeepRead) {
+if (-not $OnlyDeepRead -and -not $OnlyAiRadar) {
     if (Register-RnTask $TaskName "run_daily.ps1" $dailyTrigger "research-news daily pipeline") {
         Write-Host "OK: '$TaskName' - weekdays at $($Time.ToString('HH:mm'))."
     }
@@ -84,7 +93,7 @@ if (-not $OnlyDeepRead) {
 
 # Catch-up — at logon (+10 min so the desktop settles). Only fills missing past
 # weekdays; today stays the daily task's job.
-if (-not $NoCatchUp -and -not $OnlyDeepRead) {
+if (-not $NoCatchUp -and -not $OnlyDeepRead -and -not $OnlyAiRadar) {
     $logon = New-ScheduledTaskTrigger -AtLogOn -User $logonUser
     $logon.Delay = "PT10M"
     if (Register-RnTask $CatchUpTaskName "scripts\catch-up.ps1" $logon "research-news catch-up missed days") {
@@ -96,7 +105,7 @@ if (-not $NoCatchUp -and -not $OnlyDeepRead) {
 # units until ops\journal-backfill.md is empty, yielding to the daily run. Starts
 # at logon (desktop ~always on); a daily trigger restarts it if it had stopped.
 # IgnoreNew so only one loop runs; longer time limit since it can run a day or two.
-if (-not $NoJournals -and -not $OnlyDeepRead) {
+if (-not $NoJournals -and -not $OnlyDeepRead -and -not $OnlyAiRadar) {
     $journalSettings = New-ScheduledTaskSettingsSet `
         -StartWhenAvailable -MultipleInstances IgnoreNew `
         -ExecutionTimeLimit (New-TimeSpan -Days 30) `
@@ -115,7 +124,7 @@ if (-not $NoJournals -and -not $OnlyDeepRead) {
 # then falls back to score-threshold leftovers. daily defers its deep reads here
 # (DAILY_DEFER_DEEP_READS=1), so a 50+ paper day no longer stretches the daily
 # run for hours. Yields to daily; IgnoreNew keeps a single loop alive.
-if (-not $NoDeepRead) {
+if (-not $NoDeepRead -and -not $OnlyAiRadar) {
     $drSettings = New-ScheduledTaskSettingsSet `
         -StartWhenAvailable -MultipleInstances IgnoreNew `
         -ExecutionTimeLimit (New-TimeSpan -Days 30) `
@@ -133,7 +142,7 @@ if (-not $NoDeepRead) {
 # per lock hold for any that timed out, yielding to daily; exits when both are
 # done. Started at logon + restarted daily so it survives a reboot; IgnoreNew
 # keeps a single loop alive.
-if (-not $NoXagi -and -not $OnlyDeepRead) {
+if (-not $NoXagi -and -not $OnlyDeepRead -and -not $OnlyAiRadar) {
     $xagiSettings = New-ScheduledTaskSettingsSet `
         -StartWhenAvailable -MultipleInstances IgnoreNew `
         -ExecutionTimeLimit (New-TimeSpan -Days 30) `
@@ -150,6 +159,34 @@ if (-not $NoXagi -and -not $OnlyDeepRead) {
     }
 }
 
+# AI-track radars — AI 评测 (benchmarks daily) + AI auto-research (autoresearch
+# daily). Each is its OWN task because they used to be the last step of the daily
+# chain: when daily died early (e.g. 11-11) the radar skipped silently, produced
+# no page, and nothing in Task Scheduler showed a problem. Both tasks take the
+# same daily mutex, pass --if-missing (the daily wrapper calls them too, as a
+# fallback), and retry twice on failure so a transient lock/timeout self-heals.
+if (-not $NoAiRadar -and -not $OnlyDeepRead) {
+    $radarSettings = New-ScheduledTaskSettingsSet `
+        -StartWhenAvailable -MultipleInstances IgnoreNew `
+        -ExecutionTimeLimit (New-TimeSpan -Hours 3) `
+        -RestartCount 2 -RestartInterval (New-TimeSpan -Minutes 15) `
+        -DontStopIfGoingOnBatteries -AllowStartIfOnBatteries
+    $radars = @(
+        @{ Name = $AiRadarTaskName;      Time = $AiEvalTime;        Radar = "ai-eval";
+           Desc = "research-news AI evaluation / benchmark daily radar" },
+        @{ Name = $AutoResearchTaskName; Time = $AutoResearchTime;  Radar = "autoresearch";
+           Desc = "research-news AI auto-research agent daily radar" }
+    )
+    foreach ($r in $radars) {
+        $rt = New-ScheduledTaskTrigger -Weekly `
+            -DaysOfWeek Monday, Tuesday, Wednesday, Thursday, Friday -At $r.Time
+        if (Register-RnTask $r.Name "run_ai_radar.ps1" $rt $r.Desc "-Radar $($r.Radar)" $radarSettings) {
+            Write-Host "OK: '$($r.Name)' - weekdays at $($r.Time.ToString('HH:mm')) (-Radar $($r.Radar))."
+        }
+    }
+}
+
 Write-Host ""
 Write-Host "Test now:  Start-ScheduledTask -TaskName '$TaskName'"
+Write-Host "Test radar: .\run_ai_radar.ps1 -Radar autoresearch"
 Write-Host "List all:  Get-ScheduledTask -TaskName 'research-news-*'"

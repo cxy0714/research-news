@@ -740,10 +740,11 @@ python -m research_news.xagi long --max 0 --model deepseek-chat
 注册成计划任务（与 daily / journals 同一个脚本）：
 
 ```powershell
-.\scripts\register-task.ps1                 # daily + catch-up + journals + deepreads + xagi 五个任务
+.\scripts\register-task.ps1                 # daily + catch-up + journals + deepreads + xagi + 两条 AI 雷达（7 个任务）
 .\scripts\register-task.ps1 -XagiMax 6      # XAGI 循环每次最多做 6 格就停
 .\scripts\register-task.ps1 -NoDeepRead     # 不要精读常驻循环
 .\scripts\register-task.ps1 -NoXagi         # 不要 XAGI 循环
+.\scripts\register-task.ps1 -OnlyAiRadar    # 只加/刷新两条 AI 雷达任务
 Start-ScheduledTask -TaskName research-news-xagi   # 立刻跑一次
 ```
 
@@ -817,10 +818,18 @@ ACL 2026 **2,298 → 459**（30 篇）、EMNLP 2025 **1,810 → 315**（35 篇�
 python -m research_news.benchmarks daily            # 今天的 cs.CL / cs.LG
 python -m research_news.benchmarks daily --date 2026-11-09
 python -m research_news.benchmarks daily --dry-run  # 只抓 + 预过滤，不调 LLM
+python -m research_news.benchmarks daily --if-missing  # 当天页面已存在就跳过（幂等）
 ```
 
-产物：`docs/benchmarks/daily/<date>.md` + `docs/benchmarks/daily/index.md`。`run_daily.ps1` /
-`run_daily.sh` 已在日报之后自动调用它（失败不阻塞统计日报的提交）。
+产物：`docs/benchmarks/daily/<date>.md` + `docs/benchmarks/daily/index.md`。
+
+**定时执行（两条腿）**：这条雷达原先只是 `run_daily.ps1` 的倒数第二步，daily 链一旦中途断掉
+（例如 2026-11-11 那次），雷达就被静默跳过、页面缺失，而且在任务计划里看不出任何异常。现在：
+
+- **独立任务** `research-news-ai-radar`（工作日 10:05，`run_ai_radar.ps1 -Radar ai-eval`）：
+  自带日志 `logs/radar-ai-eval-<date>-<host>.log`、独立退出码、失败重试 2 次；
+- **daily 里保留一次回退调用**（`--if-missing`）：哪边先跑出来页面，另一边直接 no-op，
+  不会重复烧 ~40 次 LLM 调用。两条腿都拿同一把 `Global\research-news-daily` 锁。
 
 ### 预过滤口径（为什么只按标题）
 
@@ -830,6 +839,38 @@ python -m research_news.benchmarks daily --dry-run  # 只抓 + 预过滤，不�
 把精度交给 LLM 打分。抓取侧：~1.2 秒/请求、带联系方式的 UA、只抓元数据与摘要，PDF 只在
 精读时单篇下载且不入 git。
 
+
+## AI 自动科研（auto-research agent）雷达
+
+第二条 AI 每日雷达，只做**一个方向**：AI 自己搞科研——端到端科研流水线（AI Scientist /
+Agent Laboratory 这类）、选题与假设生成、实验自动化 / 自驱动实验室、文献调研 agent，
+以及「这类系统到底行不行」的评测。和「AI 评测」那条的分工是：评测线问*测量做得好不好*，
+这条线问*科研闭环自动化到了哪一步、证据撑不撑得住"自主"的说法*。
+
+```bash
+python -m research_news.autoresearch daily              # 今天
+python -m research_news.autoresearch daily --date 2026-11-10
+python -m research_news.autoresearch daily --dry-run    # 只抓 + 预过滤，不调 LLM
+python -m research_news.autoresearch daily --if-missing # 当天页面已存在就跳过
+python -m research_news.autoresearch render             # 只重建索引 + 导航
+```
+
+产物与配置：
+
+- `docs/autoresearch/daily/<date>.md` — 当天页面；`docs/autoresearch/daily/index.md` — 日期索引。
+- `config/autoresearch.yaml` — 抓取分类（`cs.CL` / `cs.LG` / `cs.AI` / `cs.MA`）、预过滤词表、条数上限。
+- `config/interests.autoresearch.yaml` — 本轨道独立的兴趣 / 打分档（阈值独立于统计线与评测线）。
+- `research_news/llm/autoresearch_prompts.py` — 打分与精摘 prompt；精摘里多一个**自动化程度**标签
+  （`demo` / `assisted` / `semi_autonomous` / `autonomous`），卡片上显示为「自动化了哪几环 + 人还负责什么」。
+- `mkdocs.yml` 的 `# AUTORESEARCH-NAV-START/END` — 自动维护的导航段（「AI 自动科研 → 每日雷达」）。
+
+定时：`research-news-autoresearch`（工作日 10:15，`run_ai_radar.ps1 -Radar autoresearch`），
+与评测雷达共用 `run_ai_radar.ps1`、同一把锁、同样的 `--if-missing` 幂等；`run_daily.ps1` 里
+保留一次回退调用，两条腿谁先跑出来谁算数。
+
+> 预过滤口径与评测线不同：auto-research 论文经常只在摘要里自报家门（"we build a research
+> pipeline that runs experiments end to end"），只按标题会漏掉一半，所以这里标题为主、摘要只加
+> 一小串高精度短语（不是评测线那种宽词表，否则会把整个 cs.CL 放进来）。
 
 ## 账户与收藏（网页端）
 
