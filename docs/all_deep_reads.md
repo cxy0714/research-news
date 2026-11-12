@@ -13583,6 +13583,12 @@
   1/10 [daily]
 - [GTLS: A GPU-accelerated method for periodic transit detection](deep_reads/2026-07-03-2607.00348.md)  
   6/10 [daily]
+- [Periodic Radio Technosignature Search toward 3I/ATLAS with FAST](deep_reads/2026-07-02-2607.01666.md)  
+  6/10 [daily]
+- [Mapping Stellar Heterogeneities with the Nautilus Space Observatory](deep_reads/2026-07-01-2606.30706.md)  
+  7/10 [daily]
+- [Deep Learning for Astrophysics: An Open Textbook from the NASA Cosmic Origins AI/ML Science and Technology Interest Group](deep_reads/2026-07-01-2606.30855.md)  
+  6/10 [daily]
 - [Gaussian processes on ray-guided transformed uniform grids for fast, flexible, and auto-differentiable adaptive source reconstruction in lens modelling](deep_reads/2026-06-30-2606.30620.md)  
   7/10 [daily]
 - [Multi-Scale Contrastive Attention for Light-Curve Representation Learning](deep_reads/2026-06-30-2606.31627.md)  
@@ -17681,6 +17687,8 @@
   6/10 [daily]
 - [Continuous-Time Bayesian Networks with Structured Shrinkage Priors for Modelling Multimorbidity Trajectories in Large-Scale Electronic Health Records](deep_reads/2026-07-02-2607.01549.md)  
   6/10 [daily]
+- [Transfert learning and adaptive LASSO quantile](deep_reads/2026-07-01-2607.00847.md)  
+  6/10 [daily]
 - [Multi-Source Transfer Learning of Sparse Single-Index Models](deep_reads/2026-06-30-2606.29658.md)  
   7/10 [daily]
 - [Parameter estimation in a fully coupled partially observed Ornstein-Uhlenbeck process](deep_reads/2026-06-30-2606.30443.md)  
@@ -17693,6 +17701,8 @@
   6/10 [daily]
 - [Multi-Source Transfer Learning of Sparse Single-Index Models](deep_reads/2026-06-29-2606.29658.md)  
   7/10 [daily]
+- [Beyond Local Independence: High-Dimensional Latent Class Graphical Models with Shared Block Structure](deep_reads/2026-06-29-2606.29631.md)  
+  6/10 [daily]
 - [On the optimal prediction of extreme events](deep_reads/2026-06-25-2606.26270.md)  
   7/10 [daily]
 - [Finite-sample bounds for regularized optimal transport](deep_reads/2026-06-25-2606.25947.md)  
