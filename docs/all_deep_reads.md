@@ -1474,6 +1474,8 @@
   8/10 [daily]
 - [Nonparametric inference for sublevel-set probabilities of conditional average treatment effect functions](deep_reads/2026-05-18-2605.15373.md)  
   9/10 [daily]
+- [Structural restrictions in local causal discovery: identifying direct causes of a target variable](deep_reads/2026-05-18-10.1093_biomet_asaf042.md)  
+  8/10 [daily]
 - [Re-examining and calibrating weighted survival analysis for causal inference](deep_reads/2026-05-18-2605.15702.md)  
   8/10 [daily]
 - [Proximal Causal Inference for Hidden Outcomes](deep_reads/2026-05-12-2605.09849.md)  
@@ -9691,6 +9693,8 @@
   9/10 [daily]
 - [Statistical Unlearning of Distributions: A Hypothesis Testing Approach](deep_reads/2026-05-20-2605.16645.md)  
   9/10 [daily]
+- [Robust universal inference for misspecified models](deep_reads/2026-05-18-10.1093_biomet_asaf070.md)  
+  8/10 [daily]
 - [Tests for the mean of high-dimensional data](deep_reads/2026-05-18-2605.16033.md)  
   8/10 [daily]
 - [Asymptotic validity and finite-sample properties of approximate randomization tests](deep_reads/2026-05-16-10.1093_biomet_asaf085.md)  
@@ -11929,6 +11933,8 @@
   7/10 [daily]
 - [A Neural Estimation Framework for Aggregated Relational Data under Intractable Likelihoods](deep_reads/2026-06-03-2606.03961.md)  
   6/10 [daily]
+- [Where Prior Learning Can and Can’t Work in Unsupervised Inverse Problems](deep_reads/2026-05-24-10.1109_tsp.2026.3684951.md)  
+  6/10 [daily]
 
 ### 期刊
 
@@ -13797,6 +13803,10 @@
   7/10 [daily]
 - [Bayesian model comparison and validation with Gaussian Process Regression for interferometric 21-cm signal recovery](deep_reads/2026-05-24-10.1093_mnras_stag878.md)  
   7/10 [daily]
+- [A Characteristic Optical Variability Timescale in Jetted Active Galactic Nuclei: A Large Gamma-Ray Emission Sample](deep_reads/2026-05-24-10.3847_1538-4365_add481.md)  
+  6/10 [daily]
+- [Identification of 30,000 White Dwarf–Main-sequence Binary Candidates from Gaia DR3 BP/RP (XP) Low-resolution Spectra](deep_reads/2026-05-24-10.3847_1538-4365_addf3a.md)  
+  6/10 [daily]
 - [Efficient Searches for Small Signals across Two-channel Noisy Data: A Challenge in Big-data Observations](deep_reads/2026-05-24-10.3847_1538-4365_adec9d.md)  
   6/10 [daily]
 - [Spectroscopic Ages for 4 Million Main-sequence Dwarf Stars from LAMOST DR10 Estimated with a Data-driven Approach](deep_reads/2026-05-24-10.3847_1538-4365_aded16.md)  
