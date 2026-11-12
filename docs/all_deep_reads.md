@@ -9107,6 +9107,8 @@
   8/10 [daily]
 - [FDR-Controlled Variable Selection for Generalized Linear Models and Cox Regression with Virtual Dummies](deep_reads/2026-09-24-2609.29335.md)  
   6/10 [daily]
+- [A Characterization of the $M$-tests Under Nearly Integrated Nearly White Noise](deep_reads/2026-09-24-2609.30504.md)  
+  4/10 [daily]
 - [Conditional Independence Is Not (Quite) Pointwise Testable](deep_reads/2026-09-23-2609.24221.md)  
   8/10 [daily]
 - [Consistent Order Selection under Non-Identifiability and Dependence](deep_reads/2026-09-23-2609.23220.md)  
@@ -9219,6 +9221,8 @@
   7/10 [daily]
 - [Asymptotics for Model Selection in Probabilistic Principal Component Analysis](deep_reads/2026-08-27-2608.23513.md)  
   7/10 [daily]
+- [The Sampling Distribution of the Log-Euclidean Distance Between Sample Correlation Matrices](deep_reads/2026-08-27-2608.25288.md)  
+  6/10 [daily]
 - [Uncertainty quantification for expectation-calibrated predictions](deep_reads/2026-08-27-2608.26703.md)  
   6/10 [daily]
 - [Wild Bootstrap and Efron's Bootstrap for Debiased Cox Regression](deep_reads/2026-08-27-2608.24230.md)  
@@ -11759,6 +11763,8 @@
   7/10 [daily]
 - [Smooth Information Criterion for Variable Selection in Generalised Linear Models](deep_reads/2026-09-24-2609.30174.md)  
   6/10 [daily]
+- [Phylodynamic inference with the bounded coalescent: a point process perspective](deep_reads/2026-09-24-2609.29035.md)  
+  0/10 [daily]
 - [Tensor Completion using Subspace Information](deep_reads/2026-09-23-2609.24501.md)  
   7/10 [daily]
 - [Regularized Estimation of Spatial Patterns](deep_reads/2026-09-17-2609.18951.md)  
@@ -15589,6 +15595,8 @@
   7/10 [daily]
 - [Kalman Filtering and Smoothing for Improving Precision in Horvitz--Thompson Estimation of Infectious Disease Prevalence](deep_reads/2026-09-10-2609.09325.md)  
   6/10 [daily]
+- [Pooling Mobility Obscures Epidemic Invasion Routes](deep_reads/2026-08-28-2608.25766.md)  
+  6/10 [daily]
 - [GENIE: Generative Neural Inference for Epidemics](deep_reads/2026-08-20-2608.20253.md)  
   6/10 [daily]
 - [Bayesian epidemic alignment for causal evaluation of seasonal infectious-disease interventions](deep_reads/2026-08-18-2608.16537.md)  
@@ -17517,6 +17525,8 @@
   6/10 [daily]
 - [A Proxy-likelihood Estimator for Multivariate Extremes Models with Intractable Likelihoods](deep_reads/2026-09-24-2609.30244.md)  
   6/10 [daily]
+- [Classical Sufficiency in Quantum Statistical Experiments](deep_reads/2026-09-24-2609.29348.md)  
+  3/10 [daily]
 - [Schedule optimization for tau-leaping in masked discrete diffusion](deep_reads/2026-09-22-2609.21960.md)  
   6/10 [daily]
 - [A Partial Fay-Herriot model for Small Area Estimation: Estimating district-level consumption in Mozambique](deep_reads/2026-09-21-2609.21701.md)  
