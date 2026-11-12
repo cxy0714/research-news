@@ -662,6 +662,8 @@
   7/10 [daily]
 - [Uniform Inference on Quantile Effects under Network Interference](deep_reads/2026-08-27-2608.22286.md)  
   7/10 [daily]
+- [DIRECT: Decomposing Audience Preference and Creative Effect in Visual Content Analytics](deep_reads/2026-08-27-2608.26584.md)  
+  6/10 [daily]
 - [A Unified Adaptive Enrichment Design for Power Enhancement](deep_reads/2026-08-27-2608.26558.md)  
   6/10 [daily]
 - [Evaluating the effects of policy interventions subject to early adoption: A case study of prescription drug monitoring programs and opioid dispensing](deep_reads/2026-08-26-2608.23472.md)  
@@ -792,6 +794,8 @@
   7/10 [daily]
 - [A Privacy Budgeting Framework for Online Experimentation](deep_reads/2026-08-20-2608.19944.md)  
   7/10 [daily]
+- [Distributional Extrapolation for Interactions](deep_reads/2026-08-20-2608.19849.md)  
+  6/10 [daily]
 - [A Causal Inference Approach for Evaluating Diagnostic Tests and AI-Enabled Medical Devices: From Effect Modification to Information-Augmented Decision-Making](deep_reads/2026-08-19-2608.19501.md)  
   8/10 [daily]
 - [Causal Generalization of Continuous Treatment Effects under Covariate Shift](deep_reads/2026-08-19-2608.19383.md)  
@@ -11789,6 +11793,8 @@
   6/10 [daily]
 - [When a neural surrogate cannot accelerate a solver: runtime share, closed-loop drift, and the economics of uncertainty gating in a stiff coupled simulation](deep_reads/2026-08-25-2608.23075.md)  
   6/10 [daily]
+- [Exact Rejection Sampling for Non-Gaussian State Space Models](deep_reads/2026-08-21-2608.21619.md)  
+  6/10 [daily]
 - [Information-Computation Inversion in Pseudo-Marginal MCMC](deep_reads/2026-08-20-2608.19718.md)  
   6/10 [daily]
 - [Algorithms for adaptive and heteroskedastic linear regression at the computational threshold](deep_reads/2026-08-19-2608.18402.md)  
@@ -17569,6 +17575,10 @@
   6/10 [daily]
 - [Systematic Bias in Green Patent Classification: Silent Green and False Green](deep_reads/2026-08-25-2608.23420.md)  
   2/10 [daily]
+- [A dual-polarization whitened-template trigger for real-time radio detection of extensive air showers](deep_reads/2026-08-24-2608.19898.md)  
+  6/10 [daily]
+- [Combining Concurrent and Historical Functional Linear Regression](deep_reads/2026-08-24-2608.19874.md)  
+  6/10 [daily]
 - [Trustworthy Decisions in Reliability Set Estimation under Insufficient Model Information](deep_reads/2026-08-20-2608.19815.md)  
   6/10 [daily]
 - [Limit Theory for U-Statistics under Clustered and Weakly Dependent Data](deep_reads/2026-08-19-2608.18443.md)  
