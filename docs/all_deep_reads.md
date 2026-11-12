@@ -13797,6 +13797,16 @@
   7/10 [daily]
 - [Bayesian model comparison and validation with Gaussian Process Regression for interferometric 21-cm signal recovery](deep_reads/2026-05-24-10.1093_mnras_stag878.md)  
   7/10 [daily]
+- [Foreground Removal in Ground-based CMB Observations Using a Transformer Model](deep_reads/2026-05-24-10.3847_1538-4365_ae12f1.md)  
+  6/10 [daily]
+- [Expanding the Ice Inventory of NGC 1333 IRAS 2A with INDRA Using JWST Observations: Tracing Organic Refractories and Beyond](deep_reads/2026-05-24-10.3847_1538-4365_ae112f.md)  
+  6/10 [daily]
+- [Searching for Dark Structures: A Comparison of Weak-lensing Convergence Maps and Lensing-weighted Galaxy Density Maps](deep_reads/2026-05-24-10.3847_1538-4365_ae1e7f.md)  
+  6/10 [daily]
+- [Can AI Dream of Unseen Galaxies? Conditional Diffusion Model for Galaxy Morphology Augmentation](deep_reads/2026-05-24-10.3847_1538-4365_ae1f10.md)  
+  6/10 [daily]
+- [QHSC: The Quasar Candidate Catalog for the Hyper Suprime-Cam Subaru Strategic Program](deep_reads/2026-05-24-10.3847_1538-4365_ae2099.md)  
+  6/10 [daily]
 - [Constraining the nHz Gravitational-wave Background with an X-Ray Pulsar-timing Array from NICER Observations](deep_reads/2026-05-24-10.3847_1538-4365_ae2ff5.md)  
   6/10 [daily]
 - [Comprehensive Analyses of Cumulative Frequency Distributions for Solar X-Ray Flares](deep_reads/2026-05-24-10.3847_1538-4365_ae2d16.md)  
