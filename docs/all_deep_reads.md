@@ -13759,6 +13759,16 @@
   8/10 [daily]
 - [Analytic marginalization over binary variables in physics data](deep_reads/2026-05-24-10.1093_mnras_stag791.md)  
   8/10 [daily]
+- [Joint Inference of Population, Cosmology, and Neutron Star Equation of State from Gravitational Waves of Dark Binary Neutron Stars](deep_reads/2026-05-24-10.3847_1538-4365_ae0472.md)  
+  7/10 [daily]
+- [Quantifying the Impact of LSST <i>u</i> -band Survey Strategy on Photometric Redshift Estimation and the Detection of Lyman-break Galaxies](deep_reads/2026-05-24-10.3847_1538-4365_ae14f0.md)  
+  7/10 [daily]
+- [An Information-based Metric for Observing Strategy Optimization, Demonstrated in the Context of Photometric Redshifts for LSST](deep_reads/2026-05-24-10.3847_1538-4365_ad7d07.md)  
+  7/10 [daily]
+- [Bayesian Model Comparison and Significance: Widespread Errors and How to Correct Them](deep_reads/2026-05-24-10.3847_1538-4365_ae0e71.md)  
+  7/10 [daily]
+- [Do We Have Sufficient Knowledge of the Galactic Foreground Emission in Cosmic Microwave Background Science?](deep_reads/2026-05-24-10.3847_1538-4365_ae4fb8.md)  
+  7/10 [daily]
 - [A Baseline Separation Paradigm for High-precision Wide-field Radio Interferometric Imaging on Heterogeneous Architectures](deep_reads/2026-05-24-10.3847_1538-4365_ae619f.md)  
   7/10 [daily]
 - [Ultraviolet atomic data assessment from astrophysical observations – I. A comparative study of evolutionary algorithms](deep_reads/2026-05-24-10.1093_mnras_stag601.md)  
