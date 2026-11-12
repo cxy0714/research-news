@@ -4795,6 +4795,8 @@
   8/10 [daily]
 - [Principal Covariate Regression with Nuclear Norm Penalty](deep_reads/2026-06-24-2606.23174.md)  
   7/10 [daily]
+- [High-dimensional sparse vine copula regression with application to genomic prediction](deep_reads/2026-06-24-10.1093_biomtc_ujad042.md)  
+  6/10 [daily]
 - [Non-asymptotic Tail Bounds for the Kostlan--Shub--Smale Field: Tensor PCA and Spherical $k$-Spin Complexity](deep_reads/2026-06-17-2606.17665.md)  
   8/10 [daily]
 - [Higher-order spectral perturbation expansions II: Kernel matrices and manifold learning](deep_reads/2026-06-17-2606.16373.md)  
@@ -6498,6 +6500,8 @@
   7/10 [daily]
 - [Kendall and Spearman bounds for Chatterjee's rank correlation under positive dependence](deep_reads/2026-06-24-2606.22074.md)  
   7/10 [daily]
+- [Penalized deep partially linear cox models with application to CT scans of lung cancer patients](deep_reads/2026-06-24-10.1093_biomtc_ujad024.md)  
+  6/10 [daily]
 - [Leveraging tails for adaptation](deep_reads/2026-06-22-2606.20480.md)  
   8/10 [daily]
 - [Optimal score function estimation via derivatives constraints](deep_reads/2026-06-19-2606.19084.md)  
@@ -6532,6 +6536,8 @@
   7/10 [daily]
 - [Posterior consistency of P\'olya trees for deconvolution under the linear model](deep_reads/2026-06-12-2606.11406.md)  
   7/10 [daily]
+- [A Likelihood Ratio Testing Approach for Interval-Censored Data](deep_reads/2026-06-12-2606.11439.md)  
+  6/10 [daily]
 - [Confidence Bands for the Gradient Lines of a Density Function](deep_reads/2026-06-12-2606.14087.md)  
   6/10 [daily]
 - [Bayesian Triangulation Splines: Spatial Adaptation on Irregular Domains](deep_reads/2026-06-12-2606.12296.md)  
@@ -13599,6 +13605,8 @@
   6/10 [daily]
 - [TOA_SP: A Multi-Strategy Framework for Single-Pulse Timing](deep_reads/2026-06-30-2606.28822.md)  
   6/10 [daily]
+- [A Covariance-Aware Framework for Spatially Resolved Exoplanet Biosignature Inference with the Solar Gravitational Lens](deep_reads/2026-06-29-2606.29138.md)  
+  6/10 [daily]
 - [Domain-Informed Multi-View Self-Distillation for Astronomical Light-Curve Representation Learning with JEPA](deep_reads/2026-06-26-2606.28446.md)  
   7/10 [daily]
 - [The Galaxy's Guide to the Tokenizer: A Benchmark for Scientific Foundation Models](deep_reads/2026-06-26-2606.25610.md)  
@@ -13665,6 +13673,8 @@
   7/10 [daily]
 - [Machine Learning for Event Reconstruction in Imaging Atmospheric Cherenkov Telescopes](deep_reads/2026-06-12-2606.11741.md)  
   7/10 [daily]
+- [Efficient Evaluation of Gravitational Lensing Amplification Factors: A Deep Learning Framework](deep_reads/2026-06-12-2606.14001.md)  
+  6/10 [daily]
 - [Multi-Variable Stellar Parameter Estimation Using Residual Multitask Neural Networks](deep_reads/2026-06-12-2606.13868.md)  
   6/10 [daily]
 - [Recalibration of SDSS photometric zero-points based on the InfraRed Flux Method temperature scale](deep_reads/2026-06-12-2606.11587.md)  
