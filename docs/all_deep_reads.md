@@ -17099,6 +17099,16 @@
   7/10 [daily]
 - [The Ultimate Matching Theorem](deep_reads/2026-11-12-hexagon_2611.00294.md)  
   6/10 [daily]
+- [Another proof of quantum Laurent positivity, II](deep_reads/2026-11-12-hexagon_2611.00279.md)  
+  1/10 [daily]
+- [Positive bases and polytopes for Laurent phenomenon algebras](deep_reads/2026-11-12-hexagon_2611.00284.md)  
+  1/10 [daily]
+- [Watkins's Conjecture for Elliptic Curves with Rational Two-Torsion](deep_reads/2026-11-12-hexagon_2611.00285.md)  
+  1/10 [daily]
+- [Positivity for Weighted Linear Laurent Phenomenon Algebras](deep_reads/2026-11-12-hexagon_2611.00289.md)  
+  1/10 [daily]
+- [The Benson-Etingof-Ostrik conjecture](deep_reads/2026-11-12-hexagon_2611.00301.md)  
+  1/10 [daily]
 - [Uniform inference for $U$-statistics of exchangeable arrays under degeneracy](deep_reads/2026-11-11-2611.11388.md)  
   8/10 [daily]
 - [Removing the floor from Hoeffding and Bernstein inequalities for finite-population U-statistics](deep_reads/2026-11-11-2611.10551.md)  

@@ -17,7 +17,7 @@
 
 [→ 查看完整报告](daily/2026-11-12.md)
 
-### 精读论文（30 篇）
+### 精读论文（35 篇）
 
 - [Semiparametric Inference in Panel Data with Interactive and High-dimensional Confounding](deep_reads/2026-11-12-2611.14385.md)  
   `因果推断` · 相关性 8/10
@@ -79,6 +79,16 @@
   `非参数 / 半参数` · 相关性 6/10
 - [High-Dimensional Nonsparse Regression under Covariate Shift via Importance-Weighted Partial Least Squares](deep_reads/2026-11-12-2611.13423.md)  
   `高维统计 / 随机矩阵` · 相关性 6/10
+- [Another proof of quantum Laurent positivity, II](deep_reads/2026-11-12-hexagon_2611.00279.md)  
+  `其他` · 相关性 1/10
+- [Positive bases and polytopes for Laurent phenomenon algebras](deep_reads/2026-11-12-hexagon_2611.00284.md)  
+  `其他` · 相关性 1/10
+- [Watkins's Conjecture for Elliptic Curves with Rational Two-Torsion](deep_reads/2026-11-12-hexagon_2611.00285.md)  
+  `其他` · 相关性 1/10
+- [Positivity for Weighted Linear Laurent Phenomenon Algebras](deep_reads/2026-11-12-hexagon_2611.00289.md)  
+  `其他` · 相关性 1/10
+- [The Benson-Etingof-Ostrik conjecture](deep_reads/2026-11-12-hexagon_2611.00301.md)  
+  `其他` · 相关性 1/10
 
 ## 收藏
 
