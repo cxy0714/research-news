@@ -396,6 +396,14 @@
   7/10 [daily]
 - [Summary-powered prediction under distribution shift](deep_reads/2026-09-25-2609.30908.md)  
   6/10 [daily]
+- [Kernel Balancing in Tree-based Methods](deep_reads/2026-09-24-2609.29440.md)  
+  8/10 [daily]
+- [First as Tragedy? Second as What? Estimating Dynamic Effects of Recurrent Events](deep_reads/2026-09-24-2609.30007.md)  
+  8/10 [daily]
+- [Estimating Heterogeneous Causal Effects with Tree-Based Methods under Imperfect Compliance](deep_reads/2026-09-24-2609.31769.md)  
+  8/10 [daily]
+- [Optimal sequential decision-making with initiation regimes](deep_reads/2026-09-24-2609.29844.md)  
+  8/10 [daily]
 - [Risk-Averse Welfare Maximization via Marginal Treatment Effects](deep_reads/2026-09-24-2609.30617.md)  
   8/10 [daily]
 - [When Do Surrogate Metrics Work? A Finite-Sample Comparison Under Realistic Failure Modes](deep_reads/2026-09-24-2609.30528.md)  
@@ -4603,6 +4611,8 @@
   7/10 [daily]
 - [Optimal Personalized Subspace Learning for Multi-view Tensor Observations](deep_reads/2026-09-25-2609.30720.md)  
   6/10 [daily]
+- [Double Descent for Random Fourier Series Models](deep_reads/2026-09-24-2609.30338.md)  
+  8/10 [daily]
 - [Streaming PCA: averaging from a geometric perspective](deep_reads/2026-09-23-2609.23332.md)  
   6/10 [daily]
 - [Structured Screen-and-Select for Ultra-High-Dimensional Variable Selection](deep_reads/2026-09-23-2609.24945.md)  
