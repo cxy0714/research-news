@@ -13797,6 +13797,16 @@
   7/10 [daily]
 - [Bayesian model comparison and validation with Gaussian Process Regression for interferometric 21-cm signal recovery](deep_reads/2026-05-24-10.1093_mnras_stag878.md)  
   7/10 [daily]
+- [Milky Way Mapper decoded abundances – I. Shared disc enrichment patterns](deep_reads/2026-05-24-10.1093_mnras_stag637.md)  
+  6/10 [daily]
+- [Breaking free seismic forward modelling from the surface effect](deep_reads/2026-05-24-10.1093_mnras_stag736.md)  
+  6/10 [daily]
+- [Sub-threshold post-merger gravitational waves can constrain the hot nuclear equation of state](deep_reads/2026-05-24-10.1093_mnras_stag750.md)  
+  6/10 [daily]
+- [<tt>pop-cosmos</tt> : star formation over 12 Gyr from generative modelling of a deep infrared-selected galaxy catalogue](deep_reads/2026-05-24-10.1093_mnras_stag764.md)  
+  6/10 [daily]
+- [Probing ionized bubbles around luminous sources during reionization with SKA 21-cm observations](deep_reads/2026-05-24-10.1093_mnras_stag799.md)  
+  6/10 [daily]
 - [Investigating light pollution trends at astronomical observatories worldwide](deep_reads/2026-05-24-10.1093_mnras_stag121.md)  
   6/10 [daily]
 
