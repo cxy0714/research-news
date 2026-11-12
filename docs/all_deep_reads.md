@@ -4,6 +4,14 @@
 
 ### Daily
 
+- [Semiparametric Inference in Panel Data with Interactive and High-dimensional Confounding](deep_reads/2026-11-12-2611.14385.md)  
+  8/10 [daily]
+- [Causal Learning with Invalid Instruments for High-dimensional Imaging Responses](deep_reads/2026-11-12-2611.13187.md)  
+  8/10 [daily]
+- [Causal mediation analysis for a time-to-event endpoint in the presence of competing events](deep_reads/2026-11-12-2611.13327.md)  
+  7/10 [daily]
+- [Ratio-of-mediator-probability weighting for causal mediation analysis: estimation, extensions, and practical guidance](deep_reads/2026-11-12-2611.13206.md)  
+  7/10 [daily]
 - [Weak-Instrument Inference and Model Diagnostics in Double Machine Learning for Linear Instrumental Variable Models](deep_reads/2026-11-11-2611.10863.md)  
   9/10 [daily]
 - [Average versus expected causal effects under interference: Modeling assumptions and estimation bottlenecks](deep_reads/2026-11-11-2611.12690.md)  
@@ -4515,6 +4523,8 @@
 
 ### Daily
 
+- [Projection-Based Partial Correlation Inference Beyond Sparsity](deep_reads/2026-11-12-2611.13657.md)  
+  8/10 [daily]
 - [Near-Purity Screening and Dominant-Atom Estimation in Softmax Mixtures and Their Ensembles](deep_reads/2026-11-11-2611.12647.md)  
   7/10 [daily]
 - [Divide-and-Conquer is Tail- and Anomaly-Robust: Factor Model Estimation Without Moment Constraints](deep_reads/2026-11-11-2611.10358.md)  
