@@ -17,7 +17,7 @@
 
 [→ 查看完整报告](daily/2026-11-12.md)
 
-### 精读论文（10 篇）
+### 精读论文（15 篇）
 
 - [Semiparametric Inference in Panel Data with Interactive and High-dimensional Confounding](deep_reads/2026-11-12-2611.14385.md)  
   `因果推断` · 相关性 8/10
@@ -25,6 +25,16 @@
   `高维统计 / 随机矩阵` · 相关性 8/10
 - [Causal Learning with Invalid Instruments for High-dimensional Imaging Responses](deep_reads/2026-11-12-2611.13187.md)  
   `因果推断` · 相关性 8/10
+- [Instrumental variables with treatment clusters](deep_reads/2026-11-12-2611.13313.md)  
+  `因果推断` · 相关性 7/10
+- [Identification, estimation, and robust inference of structural autoregressions for multidimensional data](deep_reads/2026-11-12-2611.13169.md)  
+  `经济理论 / 应用` · 相关性 7/10
+- [Nonparametric Maximum Likelihood Estimation for Mixtures of Logistic Regressions](deep_reads/2026-11-12-2611.14445.md)  
+  `非参数 / 半参数` · 相关性 7/10
+- [On the geometry of Gaussian Mean Shift Detection](deep_reads/2026-11-12-2611.14264.md)  
+  `数理统计 / 假设检验` · 相关性 7/10
+- [Asymptotic Bayes Optimality of Sparse Multiple Testing Procedures under One-Factor Dependence](deep_reads/2026-11-12-2611.13928.md)  
+  `数理统计 / 假设检验` · 相关性 7/10
 - [First-order asymptotic expansions for spectral convergence of normalized graph Laplacians constructed from samples on manifolds](deep_reads/2026-11-12-2611.13623.md)  
   `非参数 / 半参数` · 相关性 7/10
 - [Statistical Analysis of the Structure from Noise Phenomenon in Generalized Procrustes Problems](deep_reads/2026-11-12-2611.13546.md)  

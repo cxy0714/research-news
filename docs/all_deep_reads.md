@@ -8,6 +8,8 @@
   8/10 [daily]
 - [Causal Learning with Invalid Instruments for High-dimensional Imaging Responses](deep_reads/2026-11-12-2611.13187.md)  
   8/10 [daily]
+- [Instrumental variables with treatment clusters](deep_reads/2026-11-12-2611.13313.md)  
+  7/10 [daily]
 - [Causal mediation analysis for a time-to-event endpoint in the presence of competing events](deep_reads/2026-11-12-2611.13327.md)  
   7/10 [daily]
 - [Ratio-of-mediator-probability weighting for causal mediation analysis: estimation, extensions, and practical guidance](deep_reads/2026-11-12-2611.13206.md)  
@@ -6124,6 +6126,8 @@
 
 ### Daily
 
+- [Nonparametric Maximum Likelihood Estimation for Mixtures of Logistic Regressions](deep_reads/2026-11-12-2611.14445.md)  
+  7/10 [daily]
 - [First-order asymptotic expansions for spectral convergence of normalized graph Laplacians constructed from samples on manifolds](deep_reads/2026-11-12-2611.13623.md)  
   7/10 [daily]
 - [Adaptive local Fr\'echet regression with polyspherical predictors](deep_reads/2026-11-12-2611.13240.md)  
@@ -8833,6 +8837,10 @@
 
 ### Daily
 
+- [On the geometry of Gaussian Mean Shift Detection](deep_reads/2026-11-12-2611.14264.md)  
+  7/10 [daily]
+- [Asymptotic Bayes Optimality of Sparse Multiple Testing Procedures under One-Factor Dependence](deep_reads/2026-11-12-2611.13928.md)  
+  7/10 [daily]
 - [Pseudo-marginal Sampling for Selective Inference](deep_reads/2026-11-12-2611.13492.md)  
   7/10 [daily]
 - [Algorithm-aware Statistical Inference in High-dimensional Estimating Equations](deep_reads/2026-11-11-2611.12287.md)  
@@ -14146,6 +14154,8 @@
 
 ### Daily
 
+- [Identification, estimation, and robust inference of structural autoregressions for multidimensional data](deep_reads/2026-11-12-2611.13169.md)  
+  7/10 [daily]
 - [Panel Local Projections with Missing Data](deep_reads/2026-11-11-2611.10372.md)  
   6/10 [daily]
 - [Bayesian precision factor models for high-dimensional macroeconomic time series](deep_reads/2026-11-11-2611.12368.md)  
