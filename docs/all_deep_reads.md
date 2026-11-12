@@ -17343,10 +17343,20 @@
   2/10 [daily]
 - [First Proof Third Batch](deep_reads/2026-10-16-hexagon_2610.00244.md)  
   2/10 [daily]
+- [Unipotent tensor categories and pronilpotent Lie quasibialgebras](deep_reads/2026-10-16-hexagon_2610.00237.md)  
+  1/10 [daily]
+- [Stable Algebraic Families for $\mathbb{P}^2$](deep_reads/2026-10-16-hexagon_2610.00224.md)  
+  1/10 [daily]
 - [Marked Positive Handleslide Pentagons in Compression Bodies: Relative Coherence](deep_reads/2026-10-16-hexagon_2610.00227.md)  
   1/10 [daily]
 - [A universal group with thirteen relators](deep_reads/2026-10-16-hexagon_2610.00278.md)  
   1/10 [daily]
+- [Phase-Labeled Doubles and Disjoint Handleslide Cubes with Complete Markings](deep_reads/2026-10-16-hexagon_2610.00251.md)  
+  0/10 [daily]
+- [$C_2$-cofiniteness of logarithmic $W$-algebras](deep_reads/2026-10-16-hexagon_2610.00253.md)  
+  0/10 [daily]
+- [The Hodge Conjecture for CM abelian varieties](deep_reads/2026-10-16-hexagon_2610.00259.md)  
+  0/10 [daily]
 - [Milne's rationality conjecture](deep_reads/2026-10-14-hexagon_2610.00226.md)  
   0/10 [daily]
 - [A seven-eighths zero-free half-plane for unitary Weil L-functions](deep_reads/2026-10-14-hexagon_2610.00216.md)  
