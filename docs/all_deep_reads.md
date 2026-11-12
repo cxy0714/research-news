@@ -13797,6 +13797,16 @@
   7/10 [daily]
 - [Bayesian model comparison and validation with Gaussian Process Regression for interferometric 21-cm signal recovery](deep_reads/2026-05-24-10.1093_mnras_stag878.md)  
   7/10 [daily]
+- [Constraining the nHz Gravitational-wave Background with an X-Ray Pulsar-timing Array from NICER Observations](deep_reads/2026-05-24-10.3847_1538-4365_ae2ff5.md)  
+  6/10 [daily]
+- [Comprehensive Analyses of Cumulative Frequency Distributions for Solar X-Ray Flares](deep_reads/2026-05-24-10.3847_1538-4365_ae2d16.md)  
+  6/10 [daily]
+- [Uncovering Hidden Systematics in Extreme-precision Radial Velocity Measurements](deep_reads/2026-05-24-10.3847_1538-4365_ae3088.md)  
+  6/10 [daily]
+- [HyperAIRI: A Plug-and-play Algorithm for Precise Hyperspectral Image Reconstruction in Radio Interferometry](deep_reads/2026-05-24-10.3847_1538-4365_ae3149.md)  
+  6/10 [daily]
+- [Cold Dust Properties and Submillimeter Excess in 33 Nearby Spiral Galaxies](deep_reads/2026-05-24-10.3847_1538-4365_ae3750.md)  
+  6/10 [daily]
 - [RM-Tools: Software for Analyzing Polarized Radio Spectra](deep_reads/2026-05-24-10.3847_1538-4365_ae3dea.md)  
   6/10 [daily]
 - [Identification of Strongly Lensed Gravitational-wave Events Using Squeeze-and-excitation Multilayer Perceptron Data-efficient Image Transformer](deep_reads/2026-05-24-10.3847_1538-4365_ae4340.md)  
