@@ -6592,6 +6592,8 @@
   8/10 [daily]
 - [Identification and Estimation of Semiparametric Multilayered Sample Selection Models](deep_reads/2026-05-26-2605.25519.md)  
   9/10 [daily]
+- [On Minimax Empirical Bayes Predictive Densities](deep_reads/2026-05-24-10.1109_tit.2025.3648620.md)  
+  8/10 [daily]
 - [Bias Correction for Semiparametric Regression Models](deep_reads/2026-05-11-2605.08656.md)  
   8/10 [daily]
 
@@ -9660,6 +9662,10 @@
 - [On the Sample Complexity of Robust Binary Hypothesis Testing](deep_reads/2026-05-26-2605.24741.md)  
   8/10 [daily]
 - [Minimax Limits of k-Fold Cross-Validation via Majority](deep_reads/2026-05-26-2605.25859.md)  
+  8/10 [daily]
+- [Statistical Inference for Linear Functionals of Online Least-Squares SGD When <i>t</i> ≳ <i>d</i> <sup>1+δ</sup>](deep_reads/2026-05-24-10.1109_tit.2025.3635118.md)  
+  8/10 [daily]
+- [Robust Mean Change Point Testing in High-Dimensional Data With Heavy Tails](deep_reads/2026-05-24-10.1109_tit.2025.3634207.md)  
   8/10 [daily]
 - [Block-Independent Likelihood Ratio Testing for High-Dimensional Mean Vectors with Applications to Matrix-Variate Data](deep_reads/2026-05-22-2605.21848.md)  
   8/10 [daily]
@@ -17760,6 +17766,10 @@
 - [Modified treatment policies that depend on the natural history of treatment](deep_reads/2026-05-26-2605.24167.md)  
   9/10 [daily]
 - [Using the target trial framework for combining information: external comparator analyses and other applications](deep_reads/2026-05-26-2605.24346.md)  
+  8/10 [daily]
+- [Huber-Robust Likelihood Ratio Tests for Composite Nulls and Alternatives](deep_reads/2026-05-24-10.1109_tit.2025.3641166.md)  
+  8/10 [daily]
+- [Adaptive Monotonicity Testing in Sublinear Time](deep_reads/2026-05-24-10.1109_tit.2025.3646887.md)  
   8/10 [daily]
 - [The Minimax Risk in Testing Uniformity Over Large Alphabets Under Missing-Ball Alternatives](deep_reads/2026-05-24-10.1109_tit.2025.3646804.md)  
   8/10 [daily]
