@@ -13797,6 +13797,16 @@
   7/10 [daily]
 - [Bayesian model comparison and validation with Gaussian Process Regression for interferometric 21-cm signal recovery](deep_reads/2026-05-24-10.1093_mnras_stag878.md)  
   7/10 [daily]
+- [RM-Tools: Software for Analyzing Polarized Radio Spectra](deep_reads/2026-05-24-10.3847_1538-4365_ae3dea.md)  
+  6/10 [daily]
+- [Identification of Strongly Lensed Gravitational-wave Events Using Squeeze-and-excitation Multilayer Perceptron Data-efficient Image Transformer](deep_reads/2026-05-24-10.3847_1538-4365_ae4340.md)  
+  6/10 [daily]
+- [The <tt>democratic detrender</tt> : Ensemble-based Removal of the Nuisance Signal in Stellar Time-series Photometry](deep_reads/2026-05-24-10.3847_1538-4365_ae43c2.md)  
+  6/10 [daily]
+- [Beyond Colors: Probing Redshifts from Galaxy Morphology in Single-band Images with ViT-MDNz](deep_reads/2026-05-24-10.3847_1538-4365_ae4b3c.md)  
+  6/10 [daily]
+- [BayeSED-GALAXIES. II. Bayesian Full Spectrum Analysis of Galaxies and Application in the CSST Wide-field Slitless Spectroscopy Survey](deep_reads/2026-05-24-10.3847_1538-4365_ae497e.md)  
+  6/10 [daily]
 - [Detection and Classification of Astronomical Sources with Astro-RetinaNet in Crowded Stellar Fields](deep_reads/2026-05-24-10.3847_1538-4365_ae4a24.md)  
   6/10 [daily]
 - [A Statistical Study of the O’Connell Effect in Eclipsing Binaries from the ASAS-SN Survey](deep_reads/2026-05-24-10.3847_1538-4365_ae4ed5.md)  
