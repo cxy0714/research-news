@@ -1478,6 +1478,10 @@
   8/10 [daily]
 - [Re-examining and calibrating weighted survival analysis for causal inference](deep_reads/2026-05-18-2605.15702.md)  
   8/10 [daily]
+- [Efficient Nonparametric Inference for Mediation Analysis with Nonignorable Missing Confounders](deep_reads/2026-05-17-10.1080_01621459.2026.2654218.md)  
+  10/10 [daily]
+- [On the Identifying Power of Generalized Monotonicity for Average Treatment Effects](deep_reads/2026-05-17-10.1080_01621459.2026.2620141.md)  
+  9/10 [daily]
 - [Proximal Causal Inference for Hidden Outcomes](deep_reads/2026-05-12-2605.09849.md)  
   10/10 [daily]
 - [Proximal Path-Specific Inference](deep_reads/2026-05-12-2605.09462.md)  
@@ -8564,6 +8568,8 @@
   9/10 [daily]
 - [Statistical Inference for Smoothed Support Vector Machines in High Dimensions: From Offline to Online Data](deep_reads/2026-05-18-2605.15911.md)  
   9/10 [daily]
+- [Optimal convex M-estimation via score matching](deep_reads/2026-05-17-10.1214_25-aos2572.md)  
+  8/10 [daily]
 
 ### 期刊
 
@@ -9696,6 +9702,8 @@
 - [Robust universal inference for misspecified models](deep_reads/2026-05-18-10.1093_biomet_asaf070.md)  
   8/10 [daily]
 - [Tests for the mean of high-dimensional data](deep_reads/2026-05-18-2605.16033.md)  
+  8/10 [daily]
+- [Improving knockoffs with conditional calibration](deep_reads/2026-05-17-10.1214_25-aos2543.md)  
   8/10 [daily]
 - [Asymptotic validity and finite-sample properties of approximate randomization tests](deep_reads/2026-05-16-10.1093_biomet_asaf085.md)  
   8/10 [daily]
@@ -13878,6 +13886,8 @@
 - [Probing ionized bubbles around luminous sources during reionization with SKA 21-cm observations](deep_reads/2026-05-24-10.1093_mnras_stag799.md)  
   6/10 [daily]
 - [Investigating light pollution trends at astronomical observatories worldwide](deep_reads/2026-05-24-10.1093_mnras_stag121.md)  
+  6/10 [daily]
+- [Interpretable Solar Flare Forecasting via Matrix Profile Shapelet Mining](deep_reads/2026-05-18-10.3847_1538-4365_ae5c04.md)  
   6/10 [daily]
 
 ### 期刊
