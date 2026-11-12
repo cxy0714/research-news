@@ -17,7 +17,7 @@
 
 [→ 查看完整报告](daily/2026-11-12.md)
 
-### 精读论文（35 篇）
+### 精读论文（37 篇）
 
 - [Semiparametric Inference in Panel Data with Interactive and High-dimensional Confounding](deep_reads/2026-11-12-2611.14385.md)  
   `因果推断` · 相关性 8/10
@@ -79,6 +79,8 @@
   `非参数 / 半参数` · 相关性 6/10
 - [High-Dimensional Nonsparse Regression under Covariate Shift via Importance-Weighted Partial Least Squares](deep_reads/2026-11-12-2611.13423.md)  
   `高维统计 / 随机矩阵` · 相关性 6/10
+- [A Counterexample to the Subtraction-Free Conjecture for Bounded Ratios of Minors](deep_reads/2026-11-12-hexagon_2611.00266.md)  
+  `其他` · 相关性 1/10
 - [Another proof of quantum Laurent positivity, II](deep_reads/2026-11-12-hexagon_2611.00279.md)  
   `其他` · 相关性 1/10
 - [Positive bases and polytopes for Laurent phenomenon algebras](deep_reads/2026-11-12-hexagon_2611.00284.md)  
@@ -89,6 +91,8 @@
   `其他` · 相关性 1/10
 - [The Benson-Etingof-Ostrik conjecture](deep_reads/2026-11-12-hexagon_2611.00301.md)  
   `其他` · 相关性 1/10
+- [Broué's Abelian Defect Group Conjecture for 2-Blocks](deep_reads/2026-11-12-hexagon_2611.00288.md)  
+  `其他` · 相关性 0/10
 
 ## 收藏
 

@@ -9085,6 +9085,8 @@
   6/10 [daily]
 - [Bootstrap Inference for Dynamic Panel Data Models with Common Correlated Effects](deep_reads/2026-09-25-2609.31442.md)  
   6/10 [daily]
+- [High-dimensional Gaussian Graphical Model Testing for Long-Memory Time Series](deep_reads/2026-09-24-2609.30565.md)  
+  8/10 [daily]
 - [FDR-Controlled Variable Selection for Generalized Linear Models and Cox Regression with Virtual Dummies](deep_reads/2026-09-24-2609.29335.md)  
   6/10 [daily]
 - [Conditional Independence Is Not (Quite) Pointwise Testable](deep_reads/2026-09-23-2609.24221.md)  
@@ -13305,6 +13307,8 @@
   6/10 [daily]
 - [jax-SNANA: A GPU-accelerated Supernova Framework for the SBI Era](deep_reads/2026-10-16-2610.19000.md)  
   6/10 [daily]
+- [A truncation test of the DESI evolving dark energy signal: three supernova calibrations compared](deep_reads/2026-10-14-10.1093_mnras_stag1868.md)  
+  6/10 [daily]
 - [First Experimental Results of Space Object Detection Using the InteRFeX Array](deep_reads/2026-10-13-2610.13537.md)  
   6/10 [daily]
 - [An empirical calibration of the spectral resolution of JWST NIRSpec PRISM](deep_reads/2026-10-12-2610.13492.md)  
@@ -17099,6 +17103,8 @@
   7/10 [daily]
 - [The Ultimate Matching Theorem](deep_reads/2026-11-12-hexagon_2611.00294.md)  
   6/10 [daily]
+- [A Counterexample to the Subtraction-Free Conjecture for Bounded Ratios of Minors](deep_reads/2026-11-12-hexagon_2611.00266.md)  
+  1/10 [daily]
 - [Another proof of quantum Laurent positivity, II](deep_reads/2026-11-12-hexagon_2611.00279.md)  
   1/10 [daily]
 - [Positive bases and polytopes for Laurent phenomenon algebras](deep_reads/2026-11-12-hexagon_2611.00284.md)  
@@ -17109,6 +17115,8 @@
   1/10 [daily]
 - [The Benson-Etingof-Ostrik conjecture](deep_reads/2026-11-12-hexagon_2611.00301.md)  
   1/10 [daily]
+- [Broué's Abelian Defect Group Conjecture for 2-Blocks](deep_reads/2026-11-12-hexagon_2611.00288.md)  
+  0/10 [daily]
 - [Uniform inference for $U$-statistics of exchangeable arrays under degeneracy](deep_reads/2026-11-11-2611.11388.md)  
   8/10 [daily]
 - [Removing the floor from Hoeffding and Bernstein inequalities for finite-population U-statistics](deep_reads/2026-11-11-2611.10551.md)  
@@ -17421,6 +17429,8 @@
   1/10 [daily]
 - [A universal group with thirteen relators](deep_reads/2026-10-16-hexagon_2610.00278.md)  
   1/10 [daily]
+- [Every nonsquare integer not equal to $-1$ is a primitive root modulo a positive lower density of primes](deep_reads/2026-10-16-hexagon_2610.00228.md)  
+  0/10 [daily]
 - [Phase-Labeled Doubles and Disjoint Handleslide Cubes with Complete Markings](deep_reads/2026-10-16-hexagon_2610.00251.md)  
   0/10 [daily]
 - [$C_2$-cofiniteness of logarithmic $W$-algebras](deep_reads/2026-10-16-hexagon_2610.00253.md)  
