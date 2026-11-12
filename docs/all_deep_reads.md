@@ -13759,6 +13759,16 @@
   8/10 [daily]
 - [Analytic marginalization over binary variables in physics data](deep_reads/2026-05-24-10.1093_mnras_stag791.md)  
   8/10 [daily]
+- [A Baseline Separation Paradigm for High-precision Wide-field Radio Interferometric Imaging on Heterogeneous Architectures](deep_reads/2026-05-24-10.3847_1538-4365_ae619f.md)  
+  7/10 [daily]
+- [Ultraviolet atomic data assessment from astrophysical observations – I. A comparative study of evolutionary algorithms](deep_reads/2026-05-24-10.1093_mnras_stag601.md)  
+  7/10 [daily]
+- [Dynamic or systematic? Bayesian model selection between dark energy and supernova biases](deep_reads/2026-05-24-10.1093_mnras_stag615.md)  
+  7/10 [daily]
+- [How well does <scp>magphys</scp> recover galaxy properties? A test using <scp>eagle</scp> simulated star-forming galaxies](deep_reads/2026-05-24-10.1093_mnras_stag576.md)  
+  7/10 [daily]
+- [Fundamental properties of protoplanetary discs determined from simultaneous fits to thermal dust images and spectral energy distributions](deep_reads/2026-05-24-10.1093_mnras_stag628.md)  
+  7/10 [daily]
 - [A universal relationship between the variability time-scale and black hole mass in black hole jetted and non-jetted accreting systems](deep_reads/2026-05-24-10.1093_mnras_stag648.md)  
   7/10 [daily]
 - [Inferring hemispheric asymmetries of stellar active regions through the information content of astrometric signals](deep_reads/2026-05-24-10.1093_mnras_stag675.md)  
