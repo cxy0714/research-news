@@ -6134,6 +6134,8 @@
   7/10 [daily]
 - [Adaptive local Fr\'echet regression with polyspherical predictors](deep_reads/2026-11-12-2611.13240.md)  
   7/10 [daily]
+- [Lengthscale Estimation for the Gaussian Kernel and Deterministic Response Functions](deep_reads/2026-11-12-2611.13930.md)  
+  6/10 [daily]
 - [Harnessing collaborative networks for nonparametric quantile learning](deep_reads/2026-11-12-2611.13754.md)  
   6/10 [daily]
 - [Sufficient Dimension Reduction with Multimodal Predictor Objects](deep_reads/2026-11-12-2611.13460.md)  
@@ -8851,6 +8853,8 @@
   7/10 [daily]
 - [Pseudo-marginal Sampling for Selective Inference](deep_reads/2026-11-12-2611.13492.md)  
   7/10 [daily]
+- [Generalized Cram\'er-Rao Inequalities Associated with $(h,\tau)$-Divergence and $(h,\tau)$-Exponential Family](deep_reads/2026-11-12-2611.14346.md)  
+  6/10 [daily]
 - [One Curve, Different Weights: AUC, the Brier Score, Decision-Weighted AUC, and the Policy Youden Index](deep_reads/2026-11-12-2611.14465.md)  
   6/10 [daily]
 - [AdaFCP: Local Neural Functional Representations for Industrial Change Detection](deep_reads/2026-11-12-2611.13464.md)  
@@ -13227,6 +13231,10 @@
   7/10 [daily]
 - [ExoPlanetLab: Bayesian orbit fitting of Gaia-DR4 epoch astrometry, radial velocities and relative astrometry](deep_reads/2026-11-12-2611.13770.md)  
   7/10 [daily]
+- [SHINE: Shear inference environment - Generative forward modelling for radio weak gravitational lensing](deep_reads/2026-11-12-2611.14301.md)  
+  6/10 [daily]
+- [DustER: Dust Extinction with Photometric Red Galaxies](deep_reads/2026-11-12-2611.14280.md)  
+  6/10 [daily]
 - [{\AA}ngstr\"om Exponent Calculation Using Wide-Field Stellar Photometry](deep_reads/2026-11-11-2611.12704.md)  
   6/10 [daily]
 - [Particle Swarm Optimization Strategies for Lensed Gravitational Waves: Parameter Estimation, Source Classification, and Accelerated Sampling](deep_reads/2026-11-11-2611.12135.md)  
@@ -17089,6 +17097,8 @@
   7/10 [daily]
 - [Measuring Kaplan--Meier Overestimation Under Competing Risks: Event Ordering, Quantification, and Exact Inference](deep_reads/2026-11-12-2611.14457.md)  
   7/10 [daily]
+- [The Ultimate Matching Theorem](deep_reads/2026-11-12-hexagon_2611.00294.md)  
+  6/10 [daily]
 - [Uniform inference for $U$-statistics of exchangeable arrays under degeneracy](deep_reads/2026-11-11-2611.11388.md)  
   8/10 [daily]
 - [Removing the floor from Hoeffding and Bernstein inequalities for finite-population U-statistics](deep_reads/2026-11-11-2611.10551.md)  

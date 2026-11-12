@@ -17,7 +17,7 @@
 
 [→ 查看完整报告](daily/2026-11-12.md)
 
-### 精读论文（25 篇）
+### 精读论文（30 篇）
 
 - [Semiparametric Inference in Panel Data with Interactive and High-dimensional Confounding](deep_reads/2026-11-12-2611.14385.md)  
   `因果推断` · 相关性 8/10
@@ -57,6 +57,16 @@
   `因果推断` · 相关性 7/10
 - [Ratio-of-mediator-probability weighting for causal mediation analysis: estimation, extensions, and practical guidance](deep_reads/2026-11-12-2611.13206.md)  
   `因果推断` · 相关性 7/10
+- [The Ultimate Matching Theorem](deep_reads/2026-11-12-hexagon_2611.00294.md)  
+  `其他` · 相关性 6/10
+- [SHINE: Shear inference environment - Generative forward modelling for radio weak gravitational lensing](deep_reads/2026-11-12-2611.14301.md)  
+  `天体统计` · 相关性 6/10
+- [DustER: Dust Extinction with Photometric Red Galaxies](deep_reads/2026-11-12-2611.14280.md)  
+  `天体统计` · 相关性 6/10
+- [Generalized Cram\'er-Rao Inequalities Associated with $(h,\tau)$-Divergence and $(h,\tau)$-Exponential Family](deep_reads/2026-11-12-2611.14346.md)  
+  `数理统计 / 假设检验` · 相关性 6/10
+- [Lengthscale Estimation for the Gaussian Kernel and Deterministic Response Functions](deep_reads/2026-11-12-2611.13930.md)  
+  `非参数 / 半参数` · 相关性 6/10
 - [One Curve, Different Weights: AUC, the Brier Score, Decision-Weighted AUC, and the Policy Youden Index](deep_reads/2026-11-12-2611.14465.md)  
   `数理统计 / 假设检验` · 相关性 6/10
 - [Convergence and global optimality of Wasserstein--Fisher--Rao descent for Gaussian mixtures](deep_reads/2026-11-12-2611.14428.md)  
