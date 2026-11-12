@@ -6124,6 +6124,10 @@
 
 ### Daily
 
+- [First-order asymptotic expansions for spectral convergence of normalized graph Laplacians constructed from samples on manifolds](deep_reads/2026-11-12-2611.13623.md)  
+  7/10 [daily]
+- [Adaptive local Fr\'echet regression with polyspherical predictors](deep_reads/2026-11-12-2611.13240.md)  
+  7/10 [daily]
 - [Coverage and shape of conformal highest-density sets: A minimax theory](deep_reads/2026-11-11-2611.11909.md)  
   8/10 [daily]
 - [Asymptotic Theory of Integrated Pairwise-Difference Functionals of Kernel Estimators, with Applications to Treatment Effect Heterogeneity](deep_reads/2026-11-11-2611.10383.md)  
@@ -17051,6 +17055,10 @@
 
 ### Daily
 
+- [Statistical Analysis of the Structure from Noise Phenomenon in Generalized Procrustes Problems](deep_reads/2026-11-12-2611.13546.md)  
+  7/10 [daily]
+- [Measuring Kaplan--Meier Overestimation Under Competing Risks: Event Ordering, Quantification, and Exact Inference](deep_reads/2026-11-12-2611.14457.md)  
+  7/10 [daily]
 - [Uniform inference for $U$-statistics of exchangeable arrays under degeneracy](deep_reads/2026-11-11-2611.11388.md)  
   8/10 [daily]
 - [Removing the floor from Hoeffding and Bernstein inequalities for finite-population U-statistics](deep_reads/2026-11-11-2611.10551.md)  
