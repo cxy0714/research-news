@@ -13797,6 +13797,16 @@
   7/10 [daily]
 - [Bayesian model comparison and validation with Gaussian Process Regression for interferometric 21-cm signal recovery](deep_reads/2026-05-24-10.1093_mnras_stag878.md)  
   7/10 [daily]
+- [Efficient Searches for Small Signals across Two-channel Noisy Data: A Challenge in Big-data Observations](deep_reads/2026-05-24-10.3847_1538-4365_adec9d.md)  
+  6/10 [daily]
+- [Spectroscopic Ages for 4 Million Main-sequence Dwarf Stars from LAMOST DR10 Estimated with a Data-driven Approach](deep_reads/2026-05-24-10.3847_1538-4365_aded16.md)  
+  6/10 [daily]
+- [A Comprehensive All-sky Catalog of 3345 Molecular Clouds from Three-dimensional Dust Extinction](deep_reads/2026-05-24-10.3847_1538-4365_aded89.md)  
+  6/10 [daily]
+- [Accelerating the Fast Radio Burst Search: Data Set and Methods](deep_reads/2026-05-24-10.3847_1538-4365_adf42d.md)  
+  6/10 [daily]
+- [DarkAI: Reconstructing the Density, Velocity, and Tidal Fields of Dark Matter from a DESI-like Bright Galaxy Sample](deep_reads/2026-05-24-10.3847_1538-4365_adfa26.md)  
+  6/10 [daily]
 - [Discrete Fourier Transform and Minimum Variance Distortionless Response Beamforming Algorithms for Searching for Transients in Radio Interferometers that Experience Radio-frequency Interference](deep_reads/2026-05-24-10.3847_1538-4365_adfcbe.md)  
   6/10 [daily]
 - [A New Search Pipeline for Short Gamma-Ray Bursts in Fermi/GBM Data—A 50% Increase in the Number of Detections](deep_reads/2026-05-24-10.3847_1538-4365_ae0189.md)  
