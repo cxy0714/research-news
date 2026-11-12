@@ -1204,6 +1204,8 @@
   7/10 [daily]
 - [Post-selection inference for network structure](deep_reads/2026-07-03-2607.00312.md)  
   7/10 [daily]
+- [A condition for the identification of multivariate models with binary instruments -- with Corrigendum and Addendum](deep_reads/2026-07-02-2607.01429.md)  
+  8/10 [daily]
 - [From Subgroups to Population Composition: A Transportability Approach to Effect Heterogeneity](deep_reads/2026-07-02-2607.01717.md)  
   8/10 [daily]
 - [Distributed Prediction under Heterogeneity with Unidentifiable Parameter](deep_reads/2026-07-01-2607.00376.md)  
@@ -9503,6 +9505,10 @@
   6/10 [daily]
 - [MATCH: Multiplier-Assisted Tests for Conditional Hypotheses in Non-Euclidean Data](deep_reads/2026-07-02-2607.02295.md)  
   8/10 [daily]
+- [Aggregation with Exponential Weights is Optimal in Expectation](deep_reads/2026-07-02-2607.02247.md)  
+  7/10 [daily]
+- [Cross-Audit Projection for Model Risk Prediction](deep_reads/2026-07-02-2607.02328.md)  
+  7/10 [daily]
 - [High-Confidence Minimax Testing with Prescribed Errors](deep_reads/2026-06-30-2606.31593.md)  
   8/10 [daily]
 - [Testing hypotheses via orthogonalization](deep_reads/2026-06-30-2606.29732.md)  
@@ -11848,6 +11854,8 @@
 - [The logistic-normal integral and the moments of the logistic-normal distribution](deep_reads/2026-07-09-2607.07889.md)  
   6/10 [daily]
 - [Approximate Minimax Estimation of a Bounded Normal Mean via Stochastic Mirror Ascent](deep_reads/2026-07-08-2607.05350.md)  
+  7/10 [daily]
+- [Sequential Structure-Sensitive Residual Diagnostics for PDE Inverse Problems](deep_reads/2026-07-02-2607.02101.md)  
   7/10 [daily]
 - [Error bounds for simultaneous Wasserstein contractive adaptive increasingly rare MCMC](deep_reads/2026-06-30-2606.30018.md)  
   6/10 [daily]
@@ -14398,6 +14406,8 @@
   6/10 [daily]
 - [Variance Estimation for Saturated Fixed-Effect Specifications](deep_reads/2026-07-08-2607.05215.md)  
   6/10 [daily]
+- [Granular Instrumental Variables in Large Panels: Identification and Inference Across Strong, Nearly Weak, and Weak GIV](deep_reads/2026-07-02-2607.02095.md)  
+  8/10 [daily]
 - [Sensitivity, Informativeness, and Misspecification in GMM Estimation](deep_reads/2026-06-30-2606.29833.md)  
   7/10 [daily]
 - [Literature Review and Evidence Aggregation: a Toolkit for Applied Micro](deep_reads/2026-06-30-2606.28848.md)  
