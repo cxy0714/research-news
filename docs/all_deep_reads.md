@@ -4689,6 +4689,8 @@
   7/10 [daily]
 - [Generalized Linear Models for Extremes: Estimation and Inference in High Dimensions](deep_reads/2026-08-18-2608.16137.md)  
   6/10 [daily]
+- [The Bethe-Hessian down to the Percolation Threshold](deep_reads/2026-08-17-2608.16672.md)  
+  7/10 [daily]
 - [Change Point Detection and Localization in High-Dimensional Time Series](deep_reads/2026-08-14-2608.14344.md)  
   7/10 [daily]
 - [Sharp proper estimation of fixed-component Gaussian location mixtures in polynomial time](deep_reads/2026-08-13-2608.12701.md)  
