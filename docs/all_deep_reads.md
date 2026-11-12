@@ -13797,6 +13797,16 @@
   7/10 [daily]
 - [Bayesian model comparison and validation with Gaussian Process Regression for interferometric 21-cm signal recovery](deep_reads/2026-05-24-10.1093_mnras_stag878.md)  
   7/10 [daily]
+- [Detection and Classification of Astronomical Sources with Astro-RetinaNet in Crowded Stellar Fields](deep_reads/2026-05-24-10.3847_1538-4365_ae4a24.md)  
+  6/10 [daily]
+- [A Statistical Study of the O’Connell Effect in Eclipsing Binaries from the ASAS-SN Survey](deep_reads/2026-05-24-10.3847_1538-4365_ae4ed5.md)  
+  6/10 [daily]
+- [Sub-millimetre galaxies in hierarchical models: revisiting the need for a top-heavy stellar initial mass function with Bayesian optimization](deep_reads/2026-05-24-10.1093_mnras_stag564.md)  
+  6/10 [daily]
+- [A turbulence index independent framework for deriving solar wind speed and coronal electron density from radio spectral broadening](deep_reads/2026-05-24-10.1093_mnras_stag554.md)  
+  6/10 [daily]
+- [The radial component of the local Galactic magnetic field in 3D](deep_reads/2026-05-24-10.1093_mnras_stag640.md)  
+  6/10 [daily]
 - [Milky Way Mapper decoded abundances – I. Shared disc enrichment patterns](deep_reads/2026-05-24-10.1093_mnras_stag637.md)  
   6/10 [daily]
 - [Breaking free seismic forward modelling from the surface effect](deep_reads/2026-05-24-10.1093_mnras_stag736.md)  
