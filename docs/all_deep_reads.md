@@ -1208,6 +1208,8 @@
   8/10 [daily]
 - [From Subgroups to Population Composition: A Transportability Approach to Effect Heterogeneity](deep_reads/2026-07-02-2607.01717.md)  
   8/10 [daily]
+- [Conformal Bayes for Two-Sided Censored Gaussian Regression under Label Shift](deep_reads/2026-07-02-2607.02173.md)  
+  6/10 [daily]
 - [Distributed Prediction under Heterogeneity with Unidentifiable Parameter](deep_reads/2026-07-01-2607.00376.md)  
   7/10 [daily]
 - [Semiparametric Efficiency in Sequential Experiments: Characterization and Design via Average Propensity](deep_reads/2026-06-30-2606.31190.md)  
@@ -4779,6 +4781,8 @@
   6/10 [daily]
 - [Subgraph counting estimation for the $\beta$-model in sparse networks](deep_reads/2026-07-08-2607.05273.md)  
   7/10 [daily]
+- [A note on "The volume of random simplices from elliptical distributions in high dimension"](deep_reads/2026-07-02-2607.02169.md)  
+  6/10 [daily]
 - [Robust and Scalable Sure Screening of Fixed effects in Ultrahigh-dimensional Linear Mixed Models](deep_reads/2026-06-26-2606.27789.md)  
   6/10 [daily]
 - [Bayesian Estimation of the Eigenstructure in High-Dimensional Approximate Factor Models](deep_reads/2026-06-25-2606.24652.md)  
@@ -6459,6 +6463,8 @@
 - [Conditional Mean Independence and Global Sensitivity Analysis using Nearest Neighbor Graphs](deep_reads/2026-07-08-2607.04692.md)  
   7/10 [daily]
 - [Minimax prediction in the Functional Autoregressive Model](deep_reads/2026-07-08-2607.04823.md)  
+  7/10 [daily]
+- [Transferring supremum-norm rates and weak convergence of covariance kernel estimators to functional principal components](deep_reads/2026-07-02-2607.01931.md)  
   7/10 [daily]
 - [Beyond Degree: Rooted Motif Signatures for Latent Position Identifiability in Graphon Models](deep_reads/2026-07-02-2607.01358.md)  
   6/10 [daily]
@@ -9509,6 +9515,8 @@
   7/10 [daily]
 - [Cross-Audit Projection for Model Risk Prediction](deep_reads/2026-07-02-2607.02328.md)  
   7/10 [daily]
+- [Goodness of Fit Tests Based on Joint Densities of Multiple Sample Statistics](deep_reads/2026-07-02-2607.02285.md)  
+  6/10 [daily]
 - [High-Confidence Minimax Testing with Prescribed Errors](deep_reads/2026-06-30-2606.31593.md)  
   8/10 [daily]
 - [Testing hypotheses via orthogonalization](deep_reads/2026-06-30-2606.29732.md)  
@@ -17670,6 +17678,8 @@
 - [A Partially Functional Dynamic Structural Equation Model for Multi-Resolution Environmental Data](deep_reads/2026-07-08-2607.04641.md)  
   6/10 [daily]
 - [Distributed Prediction under Heterogeneity with Unidentifiable Parameter](deep_reads/2026-07-03-2607.00376.md)  
+  6/10 [daily]
+- [Continuous-Time Bayesian Networks with Structured Shrinkage Priors for Modelling Multimorbidity Trajectories in Large-Scale Electronic Health Records](deep_reads/2026-07-02-2607.01549.md)  
   6/10 [daily]
 - [Multi-Source Transfer Learning of Sparse Single-Index Models](deep_reads/2026-06-30-2606.29658.md)  
   7/10 [daily]
