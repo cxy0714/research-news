@@ -4833,6 +4833,12 @@
   7/10 [daily]
 - [Tensor Estimation With Structured Priors](deep_reads/2026-05-24-10.1109_jsait.2020.3040336.md)  
   9/10 [daily]
+- [Lower Bounds and a Near-Optimal Shrinkage Estimator for Least Squares Using Random Projections](deep_reads/2026-05-24-10.1109_jsait.2020.3039509.md)  
+  8/10 [daily]
+- [Information-Theoretic Limits for the Matrix Tensor Product](deep_reads/2026-05-24-10.1109_jsait.2020.3040598.md)  
+  8/10 [daily]
+- [Direct Estimation of Eigenvalues of Large Dimensional Precision Matrix](deep_reads/2026-05-24-10.1109_tsp.2025.3647215.md)  
+  8/10 [daily]
 - [A Large-dimensional Analysis of ESPRIT DoA Estimation: Inconsistency and a Correction via RMT](deep_reads/2026-05-24-10.1109_tsp.2026.3683673.md)  
   8/10 [daily]
 - [Information-Theoretic Thresholds for the Alignments of Partially Correlated Graphs](deep_reads/2026-05-24-10.1109_tit.2025.3619813.md)  
@@ -8550,6 +8556,8 @@
   10/10 [daily]
 - [Semiparametric Efficiency of Residual Correlation Testing under Gaussian Additive Noise Models](deep_reads/2026-06-02-2606.01011.md)  
   9/10 [daily]
+- [Fisher Information Under Local Differential Privacy](deep_reads/2026-05-24-10.1109_jsait.2020.3039461.md)  
+  8/10 [daily]
 - [Improving the Efficiency of Subgroup Analysis in Randomized Controlled Trials with TMLE](deep_reads/2026-05-18-2605.15483.md)  
   9/10 [daily]
 - [Statistical Inference for Smoothed Support Vector Machines in High Dimensions: From Offline to Online Data](deep_reads/2026-05-18-2605.15911.md)  
@@ -9666,6 +9674,8 @@
 - [On the Sample Complexity of Robust Binary Hypothesis Testing](deep_reads/2026-05-26-2605.24741.md)  
   8/10 [daily]
 - [Minimax Limits of k-Fold Cross-Validation via Majority](deep_reads/2026-05-26-2605.25859.md)  
+  8/10 [daily]
+- [Recovering Data Permutations From Noisy Observations: The Linear Regime](deep_reads/2026-05-24-10.1109_jsait.2020.3041697.md)  
   8/10 [daily]
 - [Uniform Variance Reduced Simultaneous Inference of Time-Varying Correlation Networks](deep_reads/2026-05-24-10.1109_tit.2025.3613143.md)  
   8/10 [daily]
