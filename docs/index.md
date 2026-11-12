@@ -17,7 +17,7 @@
 
 [→ 查看完整报告](daily/2026-11-12.md)
 
-### 精读论文（15 篇）
+### 精读论文（20 篇）
 
 - [Semiparametric Inference in Panel Data with Interactive and High-dimensional Confounding](deep_reads/2026-11-12-2611.14385.md)  
   `因果推断` · 相关性 8/10
@@ -25,6 +25,14 @@
   `高维统计 / 随机矩阵` · 相关性 8/10
 - [Causal Learning with Invalid Instruments for High-dimensional Imaging Responses](deep_reads/2026-11-12-2611.13187.md)  
   `因果推断` · 相关性 8/10
+- [Learning a model of non-stationary nuisances with non-local correlations for object detection](deep_reads/2026-11-12-2611.14479.md)  
+  `天体统计` · 相关性 7/10
+- [ExoPlanetLab: Bayesian orbit fitting of Gaia-DR4 epoch astrometry, radial velocities and relative astrometry](deep_reads/2026-11-12-2611.13770.md)  
+  `天体统计` · 相关性 7/10
+- [Hedging out the HEDGE Bias: Identifying Dynamic Partial-Equilibrium Effects with Panel LP-IV](deep_reads/2026-11-12-2611.14434.md)  
+  `经济理论 / 应用` · 相关性 7/10
+- [Backtesting High-Dimensional Expected Shortfall](deep_reads/2026-11-12-2611.13882.md)  
+  `效率理论 / Debiased ML` · 相关性 7/10
 - [Instrumental variables with treatment clusters](deep_reads/2026-11-12-2611.13313.md)  
   `因果推断` · 相关性 7/10
 - [Identification, estimation, and robust inference of structural autoregressions for multidimensional data](deep_reads/2026-11-12-2611.13169.md)  
@@ -49,6 +57,8 @@
   `因果推断` · 相关性 7/10
 - [Ratio-of-mediator-probability weighting for causal mediation analysis: estimation, extensions, and practical guidance](deep_reads/2026-11-12-2611.13206.md)  
   `因果推断` · 相关性 7/10
+- [High-Dimensional Nonsparse Regression under Covariate Shift via Importance-Weighted Partial Least Squares](deep_reads/2026-11-12-2611.13423.md)  
+  `高维统计 / 随机矩阵` · 相关性 6/10
 
 ## 收藏
 

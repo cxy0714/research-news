@@ -4527,6 +4527,8 @@
 
 - [Projection-Based Partial Correlation Inference Beyond Sparsity](deep_reads/2026-11-12-2611.13657.md)  
   8/10 [daily]
+- [High-Dimensional Nonsparse Regression under Covariate Shift via Importance-Weighted Partial Least Squares](deep_reads/2026-11-12-2611.13423.md)  
+  6/10 [daily]
 - [Near-Purity Screening and Dominant-Atom Estimation in Softmax Mixtures and Their Ensembles](deep_reads/2026-11-11-2611.12647.md)  
   7/10 [daily]
 - [Divide-and-Conquer is Tail- and Anomaly-Robust: Factor Model Estimation Without Moment Constraints](deep_reads/2026-11-11-2611.10358.md)  
@@ -8412,6 +8414,8 @@
 
 ### Daily
 
+- [Backtesting High-Dimensional Expected Shortfall](deep_reads/2026-11-12-2611.13882.md)  
+  7/10 [daily]
 - [Robust Estimation of Prior Parameters in Normal-Normal Empirical Bayes](deep_reads/2026-11-04-2611.00326.md)  
   6/10 [daily]
 - [Valid GMM Inference with Non-parametrically Generated Discrete Type](deep_reads/2026-10-30-2610.42052.md)  
@@ -13209,6 +13213,10 @@
 
 ### Daily
 
+- [Learning a model of non-stationary nuisances with non-local correlations for object detection](deep_reads/2026-11-12-2611.14479.md)  
+  7/10 [daily]
+- [ExoPlanetLab: Bayesian orbit fitting of Gaia-DR4 epoch astrometry, radial velocities and relative astrometry](deep_reads/2026-11-12-2611.13770.md)  
+  7/10 [daily]
 - [{\AA}ngstr\"om Exponent Calculation Using Wide-Field Stellar Photometry](deep_reads/2026-11-11-2611.12704.md)  
   6/10 [daily]
 - [Particle Swarm Optimization Strategies for Lensed Gravitational Waves: Parameter Estimation, Source Classification, and Accelerated Sampling](deep_reads/2026-11-11-2611.12135.md)  
@@ -14154,6 +14162,8 @@
 
 ### Daily
 
+- [Hedging out the HEDGE Bias: Identifying Dynamic Partial-Equilibrium Effects with Panel LP-IV](deep_reads/2026-11-12-2611.14434.md)  
+  7/10 [daily]
 - [Identification, estimation, and robust inference of structural autoregressions for multidimensional data](deep_reads/2026-11-12-2611.13169.md)  
   7/10 [daily]
 - [Panel Local Projections with Missing Data](deep_reads/2026-11-11-2611.10372.md)  
