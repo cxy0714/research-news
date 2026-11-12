@@ -13797,6 +13797,16 @@
   7/10 [daily]
 - [Bayesian model comparison and validation with Gaussian Process Regression for interferometric 21-cm signal recovery](deep_reads/2026-05-24-10.1093_mnras_stag878.md)  
   7/10 [daily]
+- [Discrete Fourier Transform and Minimum Variance Distortionless Response Beamforming Algorithms for Searching for Transients in Radio Interferometers that Experience Radio-frequency Interference](deep_reads/2026-05-24-10.3847_1538-4365_adfcbe.md)  
+  6/10 [daily]
+- [A New Search Pipeline for Short Gamma-Ray Bursts in Fermi/GBM Data—A 50% Increase in the Number of Detections](deep_reads/2026-05-24-10.3847_1538-4365_ae0189.md)  
+  6/10 [daily]
+- [The SPHEREx Sky Simulator: Science Data Modeling for the First All-sky Near-infrared Spectral Survey](deep_reads/2026-05-24-10.3847_1538-4365_ae04cc.md)  
+  6/10 [daily]
+- [Fast Reconstruction of Solar Wind Magnetohydrodynamic Parameters at 0.1 au with Machine Learning](deep_reads/2026-05-24-10.3847_1538-4365_ae13a2.md)  
+  6/10 [daily]
+- [Robust Forecasting and Physical Interpretability of Geomagnetic Storms Using XGBoost and SHAP](deep_reads/2026-05-24-10.3847_1538-4365_ae0b6b.md)  
+  6/10 [daily]
 - [Foreground Removal in Ground-based CMB Observations Using a Transformer Model](deep_reads/2026-05-24-10.3847_1538-4365_ae12f1.md)  
   6/10 [daily]
 - [Expanding the Ice Inventory of NGC 1333 IRAS 2A with INDRA Using JWST Observations: Tracing Organic Refractories and Beyond](deep_reads/2026-05-24-10.3847_1538-4365_ae112f.md)  
