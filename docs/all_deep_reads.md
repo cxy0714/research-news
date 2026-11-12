@@ -412,6 +412,8 @@
   7/10 [daily]
 - [When Do Surrogate Metrics Work? A Finite-Sample Comparison Under Realistic Failure Modes](deep_reads/2026-09-24-2609.30528.md)  
   7/10 [daily]
+- [Do Third-Party Web Traffic Estimates Preserve Causal Variation?](deep_reads/2026-09-24-2609.30481.md)  
+  6/10 [daily]
 - [Heterogeneous survivor average causal effects beyond monotonicity: Applications to a clinical trial evaluating mechanical ventilation strategies](deep_reads/2026-09-23-2609.23211.md)  
   8/10 [daily]
 - [Unbiased Treatment Effect Estimation under Network Interference via Neighborhood-Excluded Cross-Fitting](deep_reads/2026-09-23-2609.23284.md)  
@@ -11755,6 +11757,8 @@
   6/10 [daily]
 - [Truly optimal low rank thin plate spline smoothing using a truncated Demmler-Reinsch basis](deep_reads/2026-09-24-2609.30046.md)  
   7/10 [daily]
+- [Smooth Information Criterion for Variable Selection in Generalised Linear Models](deep_reads/2026-09-24-2609.30174.md)  
+  6/10 [daily]
 - [Tensor Completion using Subspace Information](deep_reads/2026-09-23-2609.24501.md)  
   7/10 [daily]
 - [Regularized Estimation of Spatial Patterns](deep_reads/2026-09-17-2609.18951.md)  
@@ -13365,6 +13369,12 @@
   6/10 [daily]
 - [A Probabilistic Method for Estimating VLBI Jet-Component Ejection Epochs. Application to MOJAVE 15 GHz VLBA Kinematics](deep_reads/2026-09-28-2609.33917.md)  
   6/10 [daily]
+- [Uber-calibration-based Two-level Radial-velocity Zero-point Correction for APOGEE](deep_reads/2026-09-24-2609.29012.md)  
+  6/10 [daily]
+- [FOTO: Figure-Level Semantic Search for Astronomy](deep_reads/2026-09-24-2609.30536.md)  
+  6/10 [daily]
+- [Simultaneous PSF Matching via Dual Kernel Optimization](deep_reads/2026-09-24-2609.29860.md)  
+  5/10 [daily]
 - [Scale-Vector Alignment: A Scale-Aware Framework for Spatially Resolved Morphological Similarity in Astronomical Images](deep_reads/2026-09-23-2609.24304.md)  
   6/10 [daily]
 - [Fast and accurate astronomical source deblending with Density-Peak Clustering](deep_reads/2026-09-23-2609.24318.md)  

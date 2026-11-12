@@ -1,0 +1,59 @@
+# AI auto-research track — the second daily arXiv radar.
+#
+# Topic: AI agents that do research itself ("AI auto-research agent"): end-to-end
+# research pipelines (AI Scientist / Agent Laboratory), idea & hypothesis
+# generation, experiment automation and self-driving labs, literature-review
+# agents, and the evaluation of such systems.
+#
+# Same shape as the AI-evaluation radar (`config/benchmarks.yaml` -> daily:) so
+# the two tracks can share the wrapper, the mutex and the render style:
+# fetch today's arXiv -> title/abstract prefilter (zero LLM) -> score -> annotate
+# the top N -> render one page per day under docs/autoresearch/daily/.
+
+daily:
+  # cs.AI / cs.MA included: research-agent papers often land there rather than
+  # in cs.CL / cs.LG. Keep the list short — every category costs an RSS fetch
+  # and widens the prefilter pool.
+  categories: [cs.CL, cs.LG, cs.AI, cs.MA]
+  max_per_category: 400
+  include_cross_listed: false
+  max_candidates: 120
+  max_shown: 12
+  max_summarized: 10
+
+# Recall-oriented keyword gate (zero LLM). The LLM score does the precision
+# filtering; this only keeps the per-day LLM budget at ~30-40 requests.
+filter:
+  title_patterns:
+    - "\\bauto[ -]?research"
+    - "\\bresearch agent"
+    - "\\bagentic (research|discovery|science|scientist)"
+    - "\\bai scientist"
+    - "\\bautonomous (research|scientist|discovery|experiment|lab)"
+    - "\\bself[ -]driving lab"
+    - "\\bautomated (research|scientific|experimentation|discovery)"
+    - "\\bscientific (discovery|agent|research automation)"
+    - "\\bhypothesis (generation|proposal|search)"
+    - "\\bidea (generation|search|proposal)"
+    - "\\b(co-?scientist|science copilot|research copilot)"
+    - "\\b(automated|agentic|llm)[ -](peer )?review"
+    - "\\bliterature (review|survey|search) agent"
+    - "\\bend[ -]to[ -]end (research|scientific|ml research)"
+    - "\\bresearch automation"
+    - "\\bpaper (writing|generation) agent"
+    - "\\bml research agent"
+    - "\\bauto[ -]?discovery"
+  # High-precision phrases that are unambiguous even in an abstract.
+  abstract_patterns:
+    - "\\bAI scientist"
+    - "\\bresearch agent"
+    - "\\bself[ -]driving lab"
+    - "\\bagentic research"
+    - "\\bautonomous (research|scientific discovery)"
+    - "\\bhypothesis generation (agent|pipeline|framework)"
+    - "\\bend[ -]to[ -]end research (pipeline|agent|framework)"
+  # Titles that read like auto-research but are about something else.
+  deny_title_patterns:
+    - "\\bautomated machine learning (tool|platform|library)"   # AutoML tooling, not research agents
+    - "\\bresearch on (students|teaching|education)"
+    - "\\bsurvey of (automl|automated machine learning)\\b"
