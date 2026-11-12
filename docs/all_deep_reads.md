@@ -396,6 +396,8 @@
   7/10 [daily]
 - [Summary-powered prediction under distribution shift](deep_reads/2026-09-25-2609.30908.md)  
   6/10 [daily]
+- [Generic Covariate Adjustment for Regression Discontinuity Designs](deep_reads/2026-09-24-2609.29249.md)  
+  8/10 [daily]
 - [Kernel Balancing in Tree-based Methods](deep_reads/2026-09-24-2609.29440.md)  
   8/10 [daily]
 - [First as Tragedy? Second as What? Estimating Dynamic Effects of Recurrent Events](deep_reads/2026-09-24-2609.30007.md)  
@@ -406,6 +408,8 @@
   8/10 [daily]
 - [Risk-Averse Welfare Maximization via Marginal Treatment Effects](deep_reads/2026-09-24-2609.30617.md)  
   8/10 [daily]
+- [An End-to-End Pipeline for Causal ML with Continuous Treatments: An Application to Financial Decision Making](deep_reads/2026-09-24-2609.30396.md)  
+  7/10 [daily]
 - [When Do Surrogate Metrics Work? A Finite-Sample Comparison Under Realistic Failure Modes](deep_reads/2026-09-24-2609.30528.md)  
   7/10 [daily]
 - [Heterogeneous survivor average causal effects beyond monotonicity: Applications to a clinical trial evaluating mechanical ventilation strategies](deep_reads/2026-09-23-2609.23211.md)  
@@ -6284,6 +6288,8 @@
   6/10 [daily]
 - [Wilcoxon Random Forests for Robust Distributional Prediction](deep_reads/2026-09-25-2609.31931.md)  
   6/10 [daily]
+- [Testing for point-impact effects in a spatial semi-functional linear regression model](deep_reads/2026-09-24-2609.30161.md)  
+  7/10 [daily]
 - [Choosing the penalty in nonparametric regression: short and long-range dependence](deep_reads/2026-09-24-2609.29231.md)  
   7/10 [daily]
 - [Inference for sparsely sampled Gauss-Markov processes under outcome-dependent dropout](deep_reads/2026-09-23-2609.23617.md)  
@@ -11747,6 +11753,8 @@
   6/10 [daily]
 - [Rate-Preserving Shrinking-Support Gaussian Process Prediction](deep_reads/2026-09-25-2609.31284.md)  
   6/10 [daily]
+- [Truly optimal low rank thin plate spline smoothing using a truncated Demmler-Reinsch basis](deep_reads/2026-09-24-2609.30046.md)  
+  7/10 [daily]
 - [Tensor Completion using Subspace Information](deep_reads/2026-09-23-2609.24501.md)  
   7/10 [daily]
 - [Regularized Estimation of Spatial Patterns](deep_reads/2026-09-17-2609.18951.md)  
@@ -17494,6 +17502,8 @@
 - [Adaptive LASSO Penalized Minimum Density Power Divergence Estimation through Least Squares Approximation: Application to Bone Mineral Density Data from the SWAN Study](deep_reads/2026-09-28-2609.34266.md)  
   6/10 [daily]
 - [Identifying the Predictable Drift of a Semimartingale from Marginal Laws](deep_reads/2026-09-28-2609.33372.md)  
+  6/10 [daily]
+- [Bagged Martingale Posteriors: Calibrated Uncertainty Quantification for Predictive Resampling](deep_reads/2026-09-24-2609.30622.md)  
   6/10 [daily]
 - [A Proxy-likelihood Estimator for Multivariate Extremes Models with Intractable Likelihoods](deep_reads/2026-09-24-2609.30244.md)  
   6/10 [daily]
