@@ -794,6 +794,8 @@
   7/10 [daily]
 - [A Privacy Budgeting Framework for Online Experimentation](deep_reads/2026-08-20-2608.19944.md)  
   7/10 [daily]
+- [Efficient Poisson Subsampling for the Partially Linear Additive Cox Model](deep_reads/2026-08-20-2608.19599.md)  
+  6/10 [daily]
 - [Distributional Extrapolation for Interactions](deep_reads/2026-08-20-2608.19849.md)  
   6/10 [daily]
 - [A Causal Inference Approach for Evaluating Diagnostic Tests and AI-Enabled Medical Devices: From Effect Modification to Information-Augmented Decision-Making](deep_reads/2026-08-19-2608.19501.md)  
