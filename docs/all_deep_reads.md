@@ -13759,6 +13759,16 @@
   8/10 [daily]
 - [Analytic marginalization over binary variables in physics data](deep_reads/2026-05-24-10.1093_mnras_stag791.md)  
   8/10 [daily]
+- [A universal relationship between the variability time-scale and black hole mass in black hole jetted and non-jetted accreting systems](deep_reads/2026-05-24-10.1093_mnras_stag648.md)  
+  7/10 [daily]
+- [Inferring hemispheric asymmetries of stellar active regions through the information content of astrometric signals](deep_reads/2026-05-24-10.1093_mnras_stag675.md)  
+  7/10 [daily]
+- [Implicit inference of the reionization history with higher-order statistics of the 21-cm signal](deep_reads/2026-05-24-10.1093_mnras_stag779.md)  
+  7/10 [daily]
+- [Differential velocity cumulative distribution (DVCD): an efficient statistical method for binary-star analysis in large stellar catalogues using radial velocities](deep_reads/2026-05-24-10.1093_mnras_stag575.md)  
+  7/10 [daily]
+- [Bayesian model comparison and validation with Gaussian Process Regression for interferometric 21-cm signal recovery](deep_reads/2026-05-24-10.1093_mnras_stag878.md)  
+  7/10 [daily]
 
 ### 期刊
 
