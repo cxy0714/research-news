@@ -1204,6 +1204,8 @@
   7/10 [daily]
 - [Post-selection inference for network structure](deep_reads/2026-07-03-2607.00312.md)  
   7/10 [daily]
+- [From Subgroups to Population Composition: A Transportability Approach to Effect Heterogeneity](deep_reads/2026-07-02-2607.01717.md)  
+  8/10 [daily]
 - [Distributed Prediction under Heterogeneity with Unidentifiable Parameter](deep_reads/2026-07-01-2607.00376.md)  
   7/10 [daily]
 - [Semiparametric Efficiency in Sequential Experiments: Characterization and Design via Average Propensity](deep_reads/2026-06-30-2606.31190.md)  
@@ -4695,6 +4697,8 @@
   7/10 [daily]
 - [Change Point Detection and Localization in High-Dimensional Time Series](deep_reads/2026-08-14-2608.14344.md)  
   7/10 [daily]
+- [Converse bounds for multiple graph alignment and correlation detection based on last matching](deep_reads/2026-08-14-2608.14450.md)  
+  6/10 [daily]
 - [Sharp proper estimation of fixed-component Gaussian location mixtures in polynomial time](deep_reads/2026-08-13-2608.12701.md)  
   9/10 [daily]
 - [Spectral phase transitions in Gaussian multi-index models](deep_reads/2026-08-13-2608.12183.md)  
@@ -9497,6 +9501,8 @@
   7/10 [daily]
 - [Power and Limits of Subset Selection in Statistical Estimation](deep_reads/2026-07-07-2607.03391.md)  
   6/10 [daily]
+- [MATCH: Multiplier-Assisted Tests for Conditional Hypotheses in Non-Euclidean Data](deep_reads/2026-07-02-2607.02295.md)  
+  8/10 [daily]
 - [High-Confidence Minimax Testing with Prescribed Errors](deep_reads/2026-06-30-2606.31593.md)  
   8/10 [daily]
 - [Testing hypotheses via orthogonalization](deep_reads/2026-06-30-2606.29732.md)  
@@ -11809,6 +11815,8 @@
   8/10 [daily]
 - [Hamiltonian dynamics for sampling on discrete spaces](deep_reads/2026-08-18-2608.17961.md)  
   5/10 [daily]
+- [Bootstrap Error Estimation and Sketch-Size Selection for Sketched Ridge Regression](deep_reads/2026-08-17-2608.15478.md)  
+  6/10 [daily]
 - [High-Dimensional Assisted Learning for Vertically Distributed Data with Blockwise Missingness](deep_reads/2026-08-17-2608.16337.md)  
   6/10 [daily]
 - [Tensor Covariance Estimation via Kronecker-Structured Sparse Inverse Cholesky](deep_reads/2026-08-14-2608.14887.md)  
@@ -13476,6 +13484,8 @@
 - [Galaxy Morphology Classification: Uncertainty Modeling and Out of Distribution Detection](deep_reads/2026-08-18-2608.16654.md)  
   6/10 [daily]
 - [Stress-Testing DANTE under Detector Domain Shift: a Representation-Coherent Reanalysis of LIGO O4a](deep_reads/2026-08-18-2608.15166.md)  
+  6/10 [daily]
+- [On the Acceleration of Pulsar Timing computations using Normalising Flows and Parallelisation](deep_reads/2026-08-14-2608.13991.md)  
   6/10 [daily]
 - [Don't Cut Corners: How Training Outside the Prior Makes Simulation-Based Inference More Robust](deep_reads/2026-08-13-2608.12470.md)  
   6/10 [daily]
