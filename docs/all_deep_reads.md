@@ -842,6 +842,8 @@
   6/10 [daily]
 - [Outcome Modeling in Design-Based Inference for Spatial Settings](deep_reads/2026-08-18-2608.15439.md)  
   6/10 [daily]
+- [Generalized Hierarchical Conformal Prediction](deep_reads/2026-08-17-2608.15500.md)  
+  6/10 [daily]
 - [Semi-supervised Concordance Learning for Optimal Individual Treatment Regimes](deep_reads/2026-08-14-2608.13945.md)  
   7/10 [daily]
 - [Handling covariate shift by model averaging](deep_reads/2026-08-14-2608.14025.md)  
@@ -6372,6 +6374,8 @@
   7/10 [daily]
 - [On the minimax-rate optimality of approximate Bayesian computation in nonparametric problems](deep_reads/2026-08-19-2608.15648.md)  
   8/10 [daily]
+- [On Finite Gaussian Mixtures: Finiteness of the Number of Modes and an Application to NPMLE](deep_reads/2026-08-17-2608.16675.md)  
+  6/10 [daily]
 - [A semiparametric approach for the estimation of covariate-adjusted area under the receiver operating characteristic curve](deep_reads/2026-08-14-2608.13859.md)  
   7/10 [daily]
 - [Semiparametric efficient estimation of the Cox regression coefficient when there can be ties](deep_reads/2026-08-13-2608.11399.md)  
@@ -11805,6 +11809,8 @@
   8/10 [daily]
 - [Hamiltonian dynamics for sampling on discrete spaces](deep_reads/2026-08-18-2608.17961.md)  
   5/10 [daily]
+- [High-Dimensional Assisted Learning for Vertically Distributed Data with Blockwise Missingness](deep_reads/2026-08-17-2608.16337.md)  
+  6/10 [daily]
 - [Tensor Covariance Estimation via Kronecker-Structured Sparse Inverse Cholesky](deep_reads/2026-08-14-2608.14887.md)  
   7/10 [daily]
 - [FastJM: An R Package for Efficient Implementation of Semiparametric Joint Models for Longitudinal and Survival Data](deep_reads/2026-08-14-2608.14127.md)  
