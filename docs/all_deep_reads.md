@@ -4831,6 +4831,8 @@
   7/10 [daily]
 - [Online Sparse Regression with Expanding Observables](deep_reads/2026-06-02-2606.00478.md)  
   7/10 [daily]
+- [Tensor Estimation With Structured Priors](deep_reads/2026-05-24-10.1109_jsait.2020.3040336.md)  
+  9/10 [daily]
 - [Optimal Spectral Algorithms for Correlated Two-view Models in High Dimensions](deep_reads/2026-05-21-2605.19364.md)  
   9/10 [daily]
 - [Fixed-order PCA: Theory for Overestimated Factor Models](deep_reads/2026-05-20-2605.18448.md)  
@@ -9595,6 +9597,8 @@
   7/10 [daily]
 - [The Generalized Fisher Transformation: Finite-Sample Properties and Inference](deep_reads/2026-06-12-2606.13864.md)  
   7/10 [daily]
+- [Scan Statistics for Nonhomogeneous Poisson Processes with Extreme-Value Calibration and Application to CNV Detection](deep_reads/2026-06-12-2606.13973.md)  
+  6/10 [daily]
 - [Rbreak: An R Package for Estimating Structural Breaks under Linear Restrictions with Application to Linear Model Tree](deep_reads/2026-06-12-2606.12261.md)  
   6/10 [daily]
 - [Estimating the local false discovery rate under an unknown symmetric null](deep_reads/2026-06-12-2606.11548.md)  
@@ -11889,6 +11893,8 @@
   7/10 [daily]
 - [ShrinkageTrees: An R Package for Bayesian Tree Ensembles for Survival Analysis and Causal Inference](deep_reads/2026-06-12-2606.12317.md)  
   7/10 [daily]
+- [A Discrete Cumulative Distribution Transform via Optimal Transport](deep_reads/2026-06-12-2606.12131.md)  
+  6/10 [daily]
 - [Data compression for fast dimension reduction and clustering of high-dimensional discrete data](deep_reads/2026-06-10-2606.10593.md)  
   6/10 [daily]
 - [CP-factorization for high dimensional tensor time series and double projection iterations](deep_reads/2026-06-09-2606.08560.md)  
@@ -13683,6 +13689,8 @@
   6/10 [daily]
 - [A data-driven method for measuring corner-clipping probabilities in segmented particle detectors](deep_reads/2026-06-11-2606.11097.md)  
   6/10 [daily]
+- [Commissioning of the Vera C. Rubin Observatory and Weak Gravitational Lensing](deep_reads/2026-06-10-2606.09938.md)  
+  7/10 [daily]
 - [Flux-cube reconstruction from slitless spectroscopy](deep_reads/2026-06-10-2606.09974.md)  
   6/10 [daily]
 - [Statistical Estimation and Correction of Model-Measurement Bias in Time-Dependent Correction Factors of KAGRA](deep_reads/2026-06-09-2606.09010.md)  
@@ -13717,6 +13725,8 @@
   6/10 [daily]
 - [A Markov-Chain-Monte-Carlo-based Hybrid Noise Inference for Continuous Wavelet Power Spectra: with Applications to Solar and Stellar Oscillatory Signals](deep_reads/2026-05-25-2605.23587.md)  
   7/10 [daily]
+- [Statistical Issues Often Overlooked when Analyzing Astronomical Data](deep_reads/2026-05-24-10.3847_1538-4365_ae25eb.md)  
+  9/10 [daily]
 
 ### 期刊
 
