@@ -1482,6 +1482,8 @@
   10/10 [daily]
 - [On the Identifying Power of Generalized Monotonicity for Average Treatment Effects](deep_reads/2026-05-17-10.1080_01621459.2026.2620141.md)  
   9/10 [daily]
+- [Learning When the Concept Shifts: Confounding, Invariance, and Dimension Reduction](deep_reads/2026-05-17-10.1080_01621459.2026.2656457.md)  
+  8/10 [daily]
 - [Proximal Causal Inference for Hidden Outcomes](deep_reads/2026-05-12-2605.09849.md)  
   10/10 [daily]
 - [Proximal Path-Specific Inference](deep_reads/2026-05-12-2605.09462.md)  
@@ -4857,6 +4859,8 @@
   8/10 [daily]
 - [Symmetry-Aware Convex Shrinkage for High-Dimensional Covariance Estimation](deep_reads/2026-05-19-2605.17111.md)  
   8/10 [daily]
+- [Structured matrix learning under arbitrary entrywise dependence and estimation of Markov transition kernel](deep_reads/2026-05-17-10.1214_25-aos2525.md)  
+  8/10 [daily]
 
 ### 期刊
 
@@ -6609,6 +6613,10 @@
 - [Identification and Estimation of Semiparametric Multilayered Sample Selection Models](deep_reads/2026-05-26-2605.25519.md)  
   9/10 [daily]
 - [On Minimax Empirical Bayes Predictive Densities](deep_reads/2026-05-24-10.1109_tit.2025.3648620.md)  
+  8/10 [daily]
+- [Identification and estimation of interaction effects in nonparametric additive regression](deep_reads/2026-05-17-10.1093_biomet_asaf074.md)  
+  8/10 [daily]
+- [Empirical likelihood for manifolds](deep_reads/2026-05-17-10.1093_jrsssb_qkaf043.md)  
   8/10 [daily]
 - [Bias Correction for Semiparametric Regression Models](deep_reads/2026-05-11-2605.08656.md)  
   8/10 [daily]
@@ -17926,6 +17934,8 @@
 - [Sequential Sensitivity Analysis for Multiple Assumptions: A Framework for Understanding Racial Disparity in Police Use of Force](deep_reads/2026-05-22-2605.21893.md)  
   8/10 [daily]
 - [Nearest-Neighbour Matching on Unbounded Supports and Covariate Shift Transfer](deep_reads/2026-05-18-2605.16027.md)  
+  8/10 [daily]
+- [Goodness-of-fit tests for high-dimensional Gaussian graphical models via exchangeable sampling](deep_reads/2026-05-17-10.1093_jrsssb_qkaf032.md)  
   8/10 [daily]
 
 ### 期刊
