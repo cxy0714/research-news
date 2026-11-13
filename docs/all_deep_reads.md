@@ -17395,6 +17395,8 @@
   1/10 [daily]
 - [Domino insertion and cells in type B](deep_reads/2026-11-13-hexagon_2611.00405.md)  
   1/10 [daily]
+- [Borel Ruziewicz problem](deep_reads/2026-11-13-hexagon_2611.00309.md)  
+  0/10 [daily]
 - [The Quantum Kazhdan–Lusztig Conjecture for Quantum Loop Algebras](deep_reads/2026-11-13-hexagon_2611.00322.md)  
   0/10 [daily]
 - [A Fibonacci Analogue of the Fifteen Theorem](deep_reads/2026-11-13-hexagon_2611.00357.md)  

@@ -17,7 +17,7 @@
 
 [→ 查看完整报告](daily/2026-11-13.md)
 
-### 精读论文（15 篇）
+### 精读论文（16 篇）
 
 - [Supersymmetric Analysis of a Random Band Matrix at Criticality, Volume II](deep_reads/2026-11-13-hexagon_2611.00367.md)  
   `高维统计 / 随机矩阵` · 相关性 8/10
@@ -39,6 +39,8 @@
   `其他` · 相关性 1/10
 - [Domino insertion and cells in type B](deep_reads/2026-11-13-hexagon_2611.00405.md)  
   `其他` · 相关性 1/10
+- [Borel Ruziewicz problem](deep_reads/2026-11-13-hexagon_2611.00309.md)  
+  `其他` · 相关性 0/10
 - [The Quantum Kazhdan–Lusztig Conjecture for Quantum Loop Algebras](deep_reads/2026-11-13-hexagon_2611.00322.md)  
   `其他` · 相关性 0/10
 - [A Fibonacci Analogue of the Fifteen Theorem](deep_reads/2026-11-13-hexagon_2611.00357.md)  
