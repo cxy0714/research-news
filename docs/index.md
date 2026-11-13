@@ -17,7 +17,7 @@
 
 [→ 查看完整报告](daily/2026-11-13.md)
 
-### 精读论文（7 篇）
+### 精读论文（8 篇）
 
 - [Supersymmetric Analysis of a Random Band Matrix at Criticality, Volume II](deep_reads/2026-11-13-hexagon_2611.00367.md)  
   `高维统计 / 随机矩阵` · 相关性 8/10
@@ -31,6 +31,8 @@
   `因果推断` · 相关性 6/10
 - [Optimal Packing of Eleven Unit Squares: The Formalized Voronoi-Cell Proof](deep_reads/2026-11-13-hexagon_2611.00359.md)  
   `其他` · 相关性 2/10
+- [Automorphic realization of Langlands parameters for split groups over global function fields, III. Classical groups](deep_reads/2026-11-13-hexagon_2611.00402.md)  
+  `其他` · 相关性 1/10
 - [Domino insertion and cells in type B](deep_reads/2026-11-13-hexagon_2611.00405.md)  
   `其他` · 相关性 1/10
 

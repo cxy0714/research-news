@@ -17387,6 +17387,8 @@
   6/10 [daily]
 - [Optimal Packing of Eleven Unit Squares: The Formalized Voronoi-Cell Proof](deep_reads/2026-11-13-hexagon_2611.00359.md)  
   2/10 [daily]
+- [Automorphic realization of Langlands parameters for split groups over global function fields, III. Classical groups](deep_reads/2026-11-13-hexagon_2611.00402.md)  
+  1/10 [daily]
 - [Domino insertion and cells in type B](deep_reads/2026-11-13-hexagon_2611.00405.md)  
   1/10 [daily]
 - [Statistical Analysis of the Structure from Noise Phenomenon in Generalized Procrustes Problems](deep_reads/2026-11-12-2611.13546.md)  
