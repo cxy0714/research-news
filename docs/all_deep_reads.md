@@ -8576,6 +8576,8 @@
   9/10 [daily]
 - [Statistical Inference for Smoothed Support Vector Machines in High Dimensions: From Offline to Online Data](deep_reads/2026-05-18-2605.15911.md)  
   9/10 [daily]
+- [Online statistical inference in decision-making with matrix context](deep_reads/2026-05-17-10.1214_25-aos2526.md)  
+  8/10 [daily]
 - [Optimal convex M-estimation via score matching](deep_reads/2026-05-17-10.1214_25-aos2572.md)  
   8/10 [daily]
 
