@@ -17,6 +17,19 @@
 
 [→ 查看完整报告](daily/2026-11-13.md)
 
+### 精读论文（5 篇）
+
+- [Supersymmetric Analysis of a Random Band Matrix at Criticality, Volume II](deep_reads/2026-11-13-hexagon_2611.00367.md)  
+  `高维统计 / 随机矩阵` · 相关性 8/10
+- [Supersymmetric Analysis of a Random Band Matrix at Criticality, Volume I](deep_reads/2026-11-13-hexagon_2611.00368.md)  
+  `高维统计 / 随机矩阵` · 相关性 8/10
+- [Certified lower bounds on the optimal-decoding threshold of the surface code](deep_reads/2026-11-13-hexagon_2611.00371.md)  
+  `其他` · 相关性 6/10
+- [Which Fine-Grained Lower Bounds Survive the Refutation of 3SUM and APSP?](deep_reads/2026-11-13-hexagon_2611.00388.md)  
+  `其他` · 相关性 6/10
+- [Causal prediction of rare recovery responses and the optimal scale of observation time](deep_reads/2026-11-13-hexagon_2611.00404.md)  
+  `因果推断` · 相关性 6/10
+
 ## 收藏
 
 - [→ 打开收藏](favorites.md) · 登录后在各页点 ☆ 收藏即可自动汇总

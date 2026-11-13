@@ -4,6 +4,8 @@
 
 ### Daily
 
+- [Causal prediction of rare recovery responses and the optimal scale of observation time](deep_reads/2026-11-13-hexagon_2611.00404.md)  
+  6/10 [daily]
 - [Semiparametric Inference in Panel Data with Interactive and High-dimensional Confounding](deep_reads/2026-11-12-2611.14385.md)  
   8/10 [daily]
 - [Causal Learning with Invalid Instruments for High-dimensional Imaging Responses](deep_reads/2026-11-12-2611.13187.md)  
@@ -4561,6 +4563,10 @@
 
 ### Daily
 
+- [Supersymmetric Analysis of a Random Band Matrix at Criticality, Volume II](deep_reads/2026-11-13-hexagon_2611.00367.md)  
+  8/10 [daily]
+- [Supersymmetric Analysis of a Random Band Matrix at Criticality, Volume I](deep_reads/2026-11-13-hexagon_2611.00368.md)  
+  8/10 [daily]
 - [Projection-Based Partial Correlation Inference Beyond Sparsity](deep_reads/2026-11-12-2611.13657.md)  
   8/10 [daily]
 - [High-Dimensional Nonsparse Regression under Covariate Shift via Importance-Weighted Partial Least Squares](deep_reads/2026-11-12-2611.13423.md)  
@@ -17375,6 +17381,10 @@
 
 ### Daily
 
+- [Certified lower bounds on the optimal-decoding threshold of the surface code](deep_reads/2026-11-13-hexagon_2611.00371.md)  
+  6/10 [daily]
+- [Which Fine-Grained Lower Bounds Survive the Refutation of 3SUM and APSP?](deep_reads/2026-11-13-hexagon_2611.00388.md)  
+  6/10 [daily]
 - [Statistical Analysis of the Structure from Noise Phenomenon in Generalized Procrustes Problems](deep_reads/2026-11-12-2611.13546.md)  
   7/10 [daily]
 - [Measuring Kaplan--Meier Overestimation Under Competing Risks: Event Ordering, Quantification, and Exact Inference](deep_reads/2026-11-12-2611.14457.md)  
