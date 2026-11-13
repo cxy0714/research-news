@@ -17395,6 +17395,16 @@
   1/10 [daily]
 - [Domino insertion and cells in type B](deep_reads/2026-11-13-hexagon_2611.00405.md)  
   1/10 [daily]
+- [The Quantum Kazhdan–Lusztig Conjecture for Quantum Loop Algebras](deep_reads/2026-11-13-hexagon_2611.00322.md)  
+  0/10 [daily]
+- [A Fibonacci Analogue of the Fifteen Theorem](deep_reads/2026-11-13-hexagon_2611.00357.md)  
+  0/10 [daily]
+- [The Humphreys support conjecture](deep_reads/2026-11-13-hexagon_2611.00364.md)  
+  0/10 [daily]
+- [Lusztig's Fourier matrix conjecture for finite noncrystallographic Coxeter groups](deep_reads/2026-11-13-hexagon_2611.00362.md)  
+  0/10 [daily]
+- [Automorphic realization of Langlands parameters for split groups over global function fields, I. Arithmetic foundations and the main theorems](deep_reads/2026-11-13-hexagon_2611.00398.md)  
+  0/10 [daily]
 - [Statistical Analysis of the Structure from Noise Phenomenon in Generalized Procrustes Problems](deep_reads/2026-11-12-2611.13546.md)  
   7/10 [daily]
 - [Measuring Kaplan--Meier Overestimation Under Competing Risks: Event Ordering, Quantification, and Exact Inference](deep_reads/2026-11-12-2611.14457.md)  
