@@ -17385,6 +17385,10 @@
   6/10 [daily]
 - [Which Fine-Grained Lower Bounds Survive the Refutation of 3SUM and APSP?](deep_reads/2026-11-13-hexagon_2611.00388.md)  
   6/10 [daily]
+- [Optimal Packing of Eleven Unit Squares: The Formalized Voronoi-Cell Proof](deep_reads/2026-11-13-hexagon_2611.00359.md)  
+  2/10 [daily]
+- [Domino insertion and cells in type B](deep_reads/2026-11-13-hexagon_2611.00405.md)  
+  1/10 [daily]
 - [Statistical Analysis of the Structure from Noise Phenomenon in Generalized Procrustes Problems](deep_reads/2026-11-12-2611.13546.md)  
   7/10 [daily]
 - [Measuring Kaplan--Meier Overestimation Under Competing Risks: Event Ordering, Quantification, and Exact Inference](deep_reads/2026-11-12-2611.14457.md)  
