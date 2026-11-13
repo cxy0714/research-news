@@ -17387,6 +17387,10 @@
   6/10 [daily]
 - [Optimal Packing of Eleven Unit Squares: The Formalized Voronoi-Cell Proof](deep_reads/2026-11-13-hexagon_2611.00359.md)  
   2/10 [daily]
+- [Laurent Phenomenon Algebras on Minuscule Grassmannians and their Mirrors](deep_reads/2026-11-13-hexagon_2611.00328.md)  
+  1/10 [daily]
+- [Automorphic realization of Langlands parameters for split groups over global function fields, II. The geometric construction](deep_reads/2026-11-13-hexagon_2611.00399.md)  
+  1/10 [daily]
 - [Automorphic realization of Langlands parameters for split groups over global function fields, III. Classical groups](deep_reads/2026-11-13-hexagon_2611.00402.md)  
   1/10 [daily]
 - [Domino insertion and cells in type B](deep_reads/2026-11-13-hexagon_2611.00405.md)  
