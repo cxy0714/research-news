@@ -11,88 +11,11 @@
 - **[收藏](favorites.md)** — 登录后在各页点 ☆ 收藏的论文，自动汇总到这里（总收藏按类别分组、可切换按周；每篇可写评论，无需手动维护）。
 - **[模型测评](all_shootout.md)** — 不同 LLM 在同一批论文上的打分 / 解读对比。
 
-## 今日 · 2026-11-12
+## 今日 · 2026-11-13
 
 ### 每日 arXiv 速览
 
-[→ 查看完整报告](daily/2026-11-12.md)
-
-### 精读论文（37 篇）
-
-- [Semiparametric Inference in Panel Data with Interactive and High-dimensional Confounding](deep_reads/2026-11-12-2611.14385.md)  
-  `因果推断` · 相关性 8/10
-- [Projection-Based Partial Correlation Inference Beyond Sparsity](deep_reads/2026-11-12-2611.13657.md)  
-  `高维统计 / 随机矩阵` · 相关性 8/10
-- [Causal Learning with Invalid Instruments for High-dimensional Imaging Responses](deep_reads/2026-11-12-2611.13187.md)  
-  `因果推断` · 相关性 8/10
-- [Learning a model of non-stationary nuisances with non-local correlations for object detection](deep_reads/2026-11-12-2611.14479.md)  
-  `天体统计` · 相关性 7/10
-- [ExoPlanetLab: Bayesian orbit fitting of Gaia-DR4 epoch astrometry, radial velocities and relative astrometry](deep_reads/2026-11-12-2611.13770.md)  
-  `天体统计` · 相关性 7/10
-- [Hedging out the HEDGE Bias: Identifying Dynamic Partial-Equilibrium Effects with Panel LP-IV](deep_reads/2026-11-12-2611.14434.md)  
-  `经济理论 / 应用` · 相关性 7/10
-- [Backtesting High-Dimensional Expected Shortfall](deep_reads/2026-11-12-2611.13882.md)  
-  `效率理论 / Debiased ML` · 相关性 7/10
-- [Instrumental variables with treatment clusters](deep_reads/2026-11-12-2611.13313.md)  
-  `因果推断` · 相关性 7/10
-- [Identification, estimation, and robust inference of structural autoregressions for multidimensional data](deep_reads/2026-11-12-2611.13169.md)  
-  `经济理论 / 应用` · 相关性 7/10
-- [Nonparametric Maximum Likelihood Estimation for Mixtures of Logistic Regressions](deep_reads/2026-11-12-2611.14445.md)  
-  `非参数 / 半参数` · 相关性 7/10
-- [On the geometry of Gaussian Mean Shift Detection](deep_reads/2026-11-12-2611.14264.md)  
-  `数理统计 / 假设检验` · 相关性 7/10
-- [Asymptotic Bayes Optimality of Sparse Multiple Testing Procedures under One-Factor Dependence](deep_reads/2026-11-12-2611.13928.md)  
-  `数理统计 / 假设检验` · 相关性 7/10
-- [First-order asymptotic expansions for spectral convergence of normalized graph Laplacians constructed from samples on manifolds](deep_reads/2026-11-12-2611.13623.md)  
-  `非参数 / 半参数` · 相关性 7/10
-- [Statistical Analysis of the Structure from Noise Phenomenon in Generalized Procrustes Problems](deep_reads/2026-11-12-2611.13546.md)  
-  `其他` · 相关性 7/10
-- [Adaptive local Fr\'echet regression with polyspherical predictors](deep_reads/2026-11-12-2611.13240.md)  
-  `非参数 / 半参数` · 相关性 7/10
-- [Measuring Kaplan--Meier Overestimation Under Competing Risks: Event Ordering, Quantification, and Exact Inference](deep_reads/2026-11-12-2611.14457.md)  
-  `其他` · 相关性 7/10
-- [Pseudo-marginal Sampling for Selective Inference](deep_reads/2026-11-12-2611.13492.md)  
-  `数理统计 / 假设检验` · 相关性 7/10
-- [Causal mediation analysis for a time-to-event endpoint in the presence of competing events](deep_reads/2026-11-12-2611.13327.md)  
-  `因果推断` · 相关性 7/10
-- [Ratio-of-mediator-probability weighting for causal mediation analysis: estimation, extensions, and practical guidance](deep_reads/2026-11-12-2611.13206.md)  
-  `因果推断` · 相关性 7/10
-- [The Ultimate Matching Theorem](deep_reads/2026-11-12-hexagon_2611.00294.md)  
-  `其他` · 相关性 6/10
-- [SHINE: Shear inference environment - Generative forward modelling for radio weak gravitational lensing](deep_reads/2026-11-12-2611.14301.md)  
-  `天体统计` · 相关性 6/10
-- [DustER: Dust Extinction with Photometric Red Galaxies](deep_reads/2026-11-12-2611.14280.md)  
-  `天体统计` · 相关性 6/10
-- [Generalized Cram\'er-Rao Inequalities Associated with $(h,\tau)$-Divergence and $(h,\tau)$-Exponential Family](deep_reads/2026-11-12-2611.14346.md)  
-  `数理统计 / 假设检验` · 相关性 6/10
-- [Lengthscale Estimation for the Gaussian Kernel and Deterministic Response Functions](deep_reads/2026-11-12-2611.13930.md)  
-  `非参数 / 半参数` · 相关性 6/10
-- [One Curve, Different Weights: AUC, the Brier Score, Decision-Weighted AUC, and the Policy Youden Index](deep_reads/2026-11-12-2611.14465.md)  
-  `数理统计 / 假设检验` · 相关性 6/10
-- [Convergence and global optimality of Wasserstein--Fisher--Rao descent for Gaussian mixtures](deep_reads/2026-11-12-2611.14428.md)  
-  `统计计算 / 算法` · 相关性 6/10
-- [Harnessing collaborative networks for nonparametric quantile learning](deep_reads/2026-11-12-2611.13754.md)  
-  `非参数 / 半参数` · 相关性 6/10
-- [AdaFCP: Local Neural Functional Representations for Industrial Change Detection](deep_reads/2026-11-12-2611.13464.md)  
-  `数理统计 / 假设检验` · 相关性 6/10
-- [Sufficient Dimension Reduction with Multimodal Predictor Objects](deep_reads/2026-11-12-2611.13460.md)  
-  `非参数 / 半参数` · 相关性 6/10
-- [High-Dimensional Nonsparse Regression under Covariate Shift via Importance-Weighted Partial Least Squares](deep_reads/2026-11-12-2611.13423.md)  
-  `高维统计 / 随机矩阵` · 相关性 6/10
-- [A Counterexample to the Subtraction-Free Conjecture for Bounded Ratios of Minors](deep_reads/2026-11-12-hexagon_2611.00266.md)  
-  `其他` · 相关性 1/10
-- [Another proof of quantum Laurent positivity, II](deep_reads/2026-11-12-hexagon_2611.00279.md)  
-  `其他` · 相关性 1/10
-- [Positive bases and polytopes for Laurent phenomenon algebras](deep_reads/2026-11-12-hexagon_2611.00284.md)  
-  `其他` · 相关性 1/10
-- [Watkins's Conjecture for Elliptic Curves with Rational Two-Torsion](deep_reads/2026-11-12-hexagon_2611.00285.md)  
-  `其他` · 相关性 1/10
-- [Positivity for Weighted Linear Laurent Phenomenon Algebras](deep_reads/2026-11-12-hexagon_2611.00289.md)  
-  `其他` · 相关性 1/10
-- [The Benson-Etingof-Ostrik conjecture](deep_reads/2026-11-12-hexagon_2611.00301.md)  
-  `其他` · 相关性 1/10
-- [Broué's Abelian Defect Group Conjecture for 2-Blocks](deep_reads/2026-11-12-hexagon_2611.00288.md)  
-  `其他` · 相关性 0/10
+[→ 查看完整报告](daily/2026-11-13.md)
 
 ## 收藏
 
@@ -100,11 +23,11 @@
 
 ## 本周每日报告
 
+- [2026-11-12](daily/2026-11-12.md)
 - [2026-11-11](daily/2026-11-11.md)
 - [2026-11-10](daily/2026-11-10.md)
 - [2026-11-09](daily/2026-11-09.md)
 - [2026-11-06](daily/2026-11-06.md)
-- [2026-11-05](daily/2026-11-05.md)
 
 
 ---
