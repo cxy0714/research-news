@@ -136,6 +136,8 @@
   6/10 [daily]
 - [The Double Diagonal Estimator: Reducing Bias in Two-Sided Marketplace Experiments](deep_reads/2026-10-30-2610.41294.md)  
   6/10 [daily]
+- [Weak Identification in Bunching Designs: Rare Events and Counterfactual Uncertainty](deep_reads/2026-10-29-2610.40719.md)  
+  8/10 [daily]
 - [Nonlinear Sufficient Dimension Reduction for Causal Inference with Continuous Treatments](deep_reads/2026-10-29-2610.39422.md)  
   8/10 [daily]
 - [How Different are Different Differences-in-Differences? A Large-Scale Meta-Analysis](deep_reads/2026-10-29-2610.39995.md)  
@@ -9019,6 +9021,8 @@
   6/10 [daily]
 - [The sharp iid Berry–Esseen inequality: Analytic reductions and exact certificate proof](deep_reads/2026-10-30-hexagon_2610.00590.md)  
   6/10 [daily]
+- [Global Testing of Gaussian Means by Combining Marginal and Conditional Evidence](deep_reads/2026-10-29-2610.40899.md)  
+  7/10 [daily]
 - [TwinPoSI: Statistical Twins for Powerful Post-Selection Inference on Population-Based Regression Coefficients](deep_reads/2026-10-29-2610.39274.md)  
   6/10 [daily]
 - [Conformal ordering: Distribution-free predictive inference for orders and ranks](deep_reads/2026-10-29-2610.40340.md)  
