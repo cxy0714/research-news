@@ -6417,18 +6417,17 @@
       "stat.ME"
     ],
     "score": 6.0,
-    "topic": "efficiency_dml",
+    "topic": "other",
     "key_techniques": [
-      "bounded influence function",
-      "empirical Bayes normal-normal model",
-      "marginal maximum likelihood",
+      "bounded influence estimation",
+      "empirical Bayes",
       "robust M-estimation",
-      "shrinkage estimation"
+      "downweighting"
     ],
-    "novelty_flag": "new_method",
-    "summary_zh": "本文研究 normal-normal empirical Bayes 模型中先验方差 τ² 的稳健估计问题：设定为 y_i | θ_i ~ N(θ_i, σ_i²)、θ_i ~ N(μ, τ²)，目标是估计 τ² 以支持大规模 A/B 测试中的收缩估计与上线决策。作者指出标准 MLE（即通过边际似然最大化 τ²）对少数极端观测高度敏感，因为边际似然对 τ² 的 score 函数在残差平方项上无界。提出的 BIMLE（bounded influence maximum likelihood estimator）通过对每个观测的 score 贡献施加有界影响函数（bounded influence function）来降权，权重与观测和模型的偏离程度成比例，且保留全样本而非硬截断。理论性质上，BIMLE 在无极端观测时与 MLE 重合，并具有有界影响函数所保证的稳健性（类似 Hampel 型稳健性）。在 Amazon A/B 测试数据上，BIMLE 将先验方差估计的不稳定性降低超过 50%，同时降权的观测不足 0.1%。对您可能有用：该文的有界影响函数构造与 semiparametric efficiency / debiased ML 中的 influence function 技术直接相关，可作为稳健化 one-step estimator 的入门案例。",
-    "why_relevant": "连接到 efficiency theory 中的 influence function 与稳健估计子方向：BIMLE 本质上是给 MLE 的 influence function 加界，这与 debiased ML / one-step estimator 中控制 influence function 尾部行为的思路同源。武器库中 very_familiar 的 estimation theory in causal inference 与 moderately_familiar 的 M-estimation theory 可直接攻这篇 paper 的口子——例如把有界影响函数思想搬到 proximal CI 的 negative-control 估计中，检验其是否仍保持 n^{-1/2}-CAN。follow-up 粗判：立即可做，用 M-estimation 与 influence function 的 very_familiar 工具即可复现并推广其稳健性论证。",
-    "pdf_path": "data\\highlights\\efficiency_dml\\2611.00326.pdf",
+    "novelty_flag": "application",
+    "summary_zh": "本文研究大规模A/B测试中常用的正态-正态经验贝叶斯模型，指出真实效应方差的极大似然估计对少数极端观测敏感。作者提出有界影响极大似然估计（BIMLE），按观测与模型的不一致程度降权，在保留全部样本的同时降低敏感性；无极端观测时退化为标准MLE。在Amazon的A/B测试数据上，BIMLE将先验方差的估计不稳定性降低超过50%，且仅降权不到0.1%的观测。该方法属于稳健统计与经验贝叶斯的交叉，但理论深度有限，主要贡献在于应用层面的稳健化处理。",
+    "why_relevant": "本文属于稳健统计与经验贝叶斯的应用，与您的主要兴趣（因果推断、高维统计、半参数理论）关联较弱，但其中对估计量敏感性的处理思路可能对您在高维或因果推断中处理异常值有启发。作为应用型论文，其方法学新颖性有限，但Amazon数据集和实际部署经验可能对您了解工业界统计实践有参考价值。",
+    "pdf_path": "data\\highlights\\other\\2611.00326.pdf",
     "first_seen": "2026-11-04"
   },
   {
@@ -6907,11 +6906,12 @@
       "MAD",
       "LMS",
       "MSD",
-      "infinitesimal jackknife"
+      "infinitesimal jackknife",
+      "Bootstrap of Little Bags"
     ],
     "novelty_flag": "application",
-    "summary_zh": "本文研究因果森林（Athey and Imbens, 2016）在结局分布存在异常值或重尾时的稳健性问题，目标是估计条件平均处理效应（CATE）。标准实现采用基于均值的分裂准则，在结局受污染时可能选出错误的树结构，导致CATE估计不可靠。作者系统比较了三种基于中位数的分裂准则：MAD、LMS和MSD，并通过蒙特卡洛实验和实证基准数据集评估其表现。结果显示，中位数准则在极端重尾噪声和非线性异质性场景下能降低敏感性，但收益依赖具体场景，并非始终优于标准因果森林。文章还考察了点态置信区间覆盖，使用Bootstrap of Little Bags和无穷小刀切法。对您而言，本文属于因果推断中异质性处理效应估计的稳健性方法研究，与您的causal inference兴趣直接相关。",
-    "why_relevant": "本文直接关联您的causal inference兴趣中的异质性处理效应估计（CATE）方向，且涉及稳健性这一您可能关注的估计性质。您可用very_familiar的估计理论（如M-estimation）分析中位数分裂准则的稳健性理论性质，或评估其有限样本表现。中期可做：需在semiparametric theory上加强以推导分裂准则的影响函数。",
+    "summary_zh": "本文系统研究因果森林（Athey & Imbens, 2016）在结局分布受污染（离群值、重尾）时的稳健性，目标是估计条件平均处理效应（CATE）。标准实现采用基于均值的分裂准则，对结局扰动敏感，可能导致树结构和效应估计不可靠。作者基于 Ma\\ssmann & Gliszczy\\'nska-Schroeder (2026) 提出的中位数分裂准则，实证比较了三种准则：MAD、LMS 和 MSD。通过蒙特卡洛实验和因果推断文献中的基准数据集，评估了这些方法与标准因果森林的性能，并考察了点态置信区间覆盖率（使用 Bootstrap of Little Bags 和无穷小刀切法）。结果表明，中位数分裂准则在特定场景（极端重尾噪声和非线性异质性）下能降低敏感性，但收益依赖场景，并非一致地提高 CATE 估计精度。对您而言，本文属于因果推断中异质性处理效应估计的稳健性方法研究，与您的估计理论兴趣相关，但方法学新颖性有限，主要是实证比较。",
+    "why_relevant": "本文直接关联您的因果推断兴趣中的异质性处理效应估计（CATE），且涉及稳健性这一您可能关注的估计理论问题。但作为实证比较论文，其方法学贡献有限；您可用 very_familiar 的估计理论工具（如 minimax 界）来评估中位数分裂准则的统计效率，但核心算法（因果森林）并非您的武器库重点，因此属于中期可做——需先熟悉因果森林的 splitting 机制。",
     "pdf_path": "data\\highlights\\causal_inference\\2611.00348.pdf",
     "first_seen": "2026-11-04"
   },
@@ -6991,14 +6991,14 @@
     "topic": "astrostats",
     "key_techniques": [
       "contrastive learning",
-      "self-supervised learning",
-      "supervised contrastive learning",
+      "self-supervised pretraining",
+      "supervised contrastive loss",
       "light curve classification",
       "representation learning"
     ],
     "novelty_flag": "application",
-    "summary_zh": "本文针对天文光变曲线分类中标签稀缺的问题，提出了一种两阶段对比表示学习方法 Contrastive Astromer。该方法不改变 ASTROMER 2 编码器架构，先利用单波段 MACHO 光变曲线进行无监督对比学习，使同一物体的增强视图表示更接近；随后利用带标签的 Alcock 样本进行监督对比学习，并辅以辅助分类损失，增强类别判别性。评估时冻结编码器并训练独立分类器，在 600 个物体的留出集上，每类 500 个标签时 macro-F1 达 0.7943，比复现的 ASTROMER 2 微调分类流程高 5.10 个百分点；在每类 20 和 100 个标签时也分别达到 0.7078 和 0.7704。嵌入空间分析表明监督适应提升了局部类别一致性和全局类别分离度。本文是应用型工作，方法学 novelty 有限，但展示了对比学习在低资源天文分类中的有效性。",
-    "why_relevant": "本文属于 astrostatistics 的 gateway reading：作为对天文数据不熟悉的统计学家，本文清晰展示了光变曲线数据的结构（时间序列、缺失、噪声）和分类任务，适合作为入门读物。武器库中的表示学习、分类器评估等常规统计工具足以理解本文方法，但本文方法学贡献不大，主要价值在于了解天文数据应用场景。值得花时间读全文以熟悉领域问题，但不必深究方法细节。",
+    "summary_zh": "本文针对天文光变曲线分类中标签稀缺的问题，提出两阶段对比学习框架 Contrastive Astromer。该方法在 ASTROMER 2 编码器架构不变的前提下，先利用单波段 MACHO 未标注数据做无监督对比学习，使同一目标的不同增广视图表征靠近；再用带标签的 Alcock 样本进行监督对比学习并辅以分类损失，增强类别判别性。评估时冻结编码器，仅训练下游分类器，在 600 个对象的留出集上，每类 500 个标注样本时 macro-F1 达 0.7943，比复现的 ASTROMER 2 微调分类流程高 5.10 个百分点；在每类 20 和 100 个样本时也分别达到 0.7078 和 0.7704。嵌入空间分析表明监督适应提升了局部类别一致性和全局类别分离度。对您而言，这是一篇数据与模型交代清楚的应用型论文，可作为进入天文光变曲线数据与表征学习领域的入门读物。",
+    "why_relevant": "本文属于 astrostatistics 的 gateway reading：它清晰展示了天文光变曲线的数据结构（噪声、不规则采样、类别不平衡）与建模流程（自监督预训练+下游分类），适合作为入门读物。您的武器库（如高维统计、非参数方法）足以理解其评估协议，但若要深入改进表征学习方法，可能需要补充深度学习训练技巧。值得花时间读全文，以了解天文数据的具体挑战。",
     "pdf_path": "data\\highlights\\astrostats\\2611.00150.pdf",
     "first_seen": "2026-11-04"
   },
@@ -7021,14 +7021,13 @@
     "key_techniques": [
       "Kaiser-Squires inversion",
       "aperture mass mapping",
-      "KS+ missing-data and border correction",
-      "reduced shear correction",
-      "convergence map reconstruction",
-      "open-source scientific software"
+      "KS+ algorithm",
+      "weak gravitational lensing",
+      "convergence map reconstruction"
     ],
     "novelty_flag": "application",
-    "summary_zh": "本文介绍 SMPy（Shear Mapping in Python），一个开源、模块化的弱引力透镜剪切制图软件包，目标是从星系形状剪切目录中重建收敛场 κ（投影面质量密度除以临界面密度）。方法上实现了三类映射器：经典 Kaiser-Squires (KS) 反演、aperture mass mapping，以及作者称为首个公开可用的完整 KS+ 算法实现——后者显式处理缺失数据（mask）、视场边界与 reduced shear 偏差。软件最初为 SuperBIT 超压气球望远镜设计，现已泛化为可处理一般宇宙学巡天弱透镜数据的通用工具。核心贡献是工程与可复现性层面的：标准化 API、文档、模块化扩展点，而非新的统计估计理论；对 κ 重建的噪声/边界偏差处理沿用已有 KS+ 思路。对您而言，这是一篇典型的 astrostatistics gateway reading：它清楚交代了数据侧（数千星系形状、剪切噪声、mask 与选择效应）与模型侧（KS 反演作为线性逆问题、aperture mass 作为滤波统计量），可作为进入弱透镜反问题这一统计逆问题领域的入门读物。",
-    "why_relevant": "(1) 属于 secondary interest 的 astrostatistics，且是 gateway-reading 范畴：本文对弱透镜剪切→κ 反问题的数据侧（星系形状噪声、mask、边界、reduced shear）与模型侧（KS 线性反演、aperture mass 滤波）交代清楚，适合作为统计学家进入该方向的入门读物。(2) 武器库支撑度：您 very_familiar 的 inverse problems with random noise 与 nonparametric statistics 足以理解 KS 反演作为线性逆问题的正则化结构，但本文不涉及新的 minimax 率或效率界，因此不构成方法学挑战。(3) 是否值得读全文：若您想了解弱透镜反问题的实际数据形态与软件工程实践，值得快速通读；若期待统计方法学新意，则 novelty 有限（novelty_flag = application/software），可只读摘要与 KS+ 部分。",
+    "summary_zh": "本文介绍了一个开源 Python 软件包 SMPy，用于从弱引力透镜星系剪切目录重建暗物质质量分布（即收敛图 κ）。该软件包实现了三种映射方法：经典的 Kaiser-Squires 反演、孔径质量映射，以及据作者所知首个公开可用的完整 KS+ 算法，后者能校正缺失数据、场边界和约化剪切效应。SMPy 最初为 SuperBIT 气球望远镜开发，现已发展为适用于大型巡天数据的通用工具。文章重点在于软件架构的模块化、可扩展性和易用性，而非新的统计方法。对您而言，这是一个了解天文弱透镜数据分析流程的入门级工具，其数据结构和重建方法可作为您进入天文统计方向的起点。",
+    "why_relevant": "本文属于天文统计方向的入门读物，清晰展示了弱透镜数据从剪切目录到质量图的标准流程。您的武器库（如非参数估计、逆问题）足以理解其核心反演方法，但无需深入。作为 gateway reading，它适合快速浏览以了解领域数据结构和常用工具，但方法学新颖性有限，不值得精读。",
     "pdf_path": "data\\highlights\\astrostats\\2611.00225.pdf",
     "first_seen": "2026-11-04"
   },
@@ -7631,14 +7630,14 @@
     "score": 0.0,
     "topic": "other",
     "key_techniques": [
+      "polytope criterion",
       "cluster varieties",
       "Fock–Goncharov conjecture",
-      "positive polytopes",
-      "Gross-Hacking-Keel-Kontsevich criterion"
+      "positive polytopes"
     ],
     "novelty_flag": "minor",
-    "summary_zh": "本文研究 Gross-Hacking-Keel-Kontsevich 的 polytope 判据在 origin-interior 形式下的成立性：在特征零域上，主系数 cluster variety 的 full Fock–Goncharov 猜想等价于存在一个有界、全维、包含原点于内部的 positive polytope。作者证明该等价关系成立，并指出若将“内部包含原点”弱化为“原点属于 polytope”，则判据不再成立。证明涉及 cluster 代数、表示论与组合几何的交叉，但未涉及统计推断或数据建模。对您而言，该论文与您的统计兴趣无直接关联，但其中 polytope 与组合结构的思想或可启发高维 U-统计量计算中的图论/张量网络视角，不过目前难以直接迁移。",
-    "why_relevant": "该论文属于纯数学（组合与表示论），与您的 primary interests（因果推断、高维统计、U-统计量等）无直接交集。作为 gateway reading 也不合适，因为其主题远离统计。不过，polytope 与组合结构可能对您在高阶 U-统计量计算中的 treewidth/张量收缩视角有间接启发，但当前武器库（如 einsum 复杂度）难以直接应用。因此，本文不值得深入阅读，仅可作为极边缘的参考。",
+    "summary_zh": "本文研究 Gross–Hacking–Keel–Kontsevich 提出的多面体判据的 origin-interior 形式，证明在特征零域上，主系数簇簇变量的 full Fock–Goncharov 猜想等价于存在一个包含原点于内部的有界全维正多面体。作者还指出，若将内部条件替换为原点属于多面体，则判据不成立。证明涉及正多面体、簇变量、以及组合与表示论中的技术。该结果属于纯数学（组合学与表示论），与统计推断、高维统计或计算复杂性无直接关联。",
+    "why_relevant": "本文主题为纯数学（组合学与表示论），与您的主要兴趣（因果推断、高维统计、半参数理论等）无直接交集。作为 gateway reading 也不合适，因为缺乏统计或数据建模维度。因此不推荐深入阅读。",
     "pdf_path": "data\\highlights\\other\\hexagon_2611.00015.pdf",
     "first_seen": "2026-11-03"
   },
