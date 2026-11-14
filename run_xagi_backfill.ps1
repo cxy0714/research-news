@@ -4,19 +4,26 @@
 # pattern as run_journal_backfill.ps1: start at logon on a mostly-always-on
 # desktop; it exits on its own when both phases are done.
 #
-#   Phase 1 — the queue: one talk per lock hold, tick it, commit + push.
+#   Phase 1 — the queue: one talk per lock hold, tick it, commit (pushed in
+#             batches — see -CommitMinutes).
 #   Phase 2 — long reads: papers whose long deep read timed out during phase 1
 #             (the short per-talk read is already written) are retried one at a
 #             time via `xagi long --max 1`, again committing each.
 #
-#   -Max N       : stop phase 1 after N units (default 0 = until the queue is empty)
-#   -MaxLong N   : stop phase 2 after N long reads (default 0 = until none missing)
-#   -LongModel M : model for phase 2 (default "" = the configured deep-read model;
-#                  `deepseek-chat` is much faster when the reasoning model times out)
-#   -DailyHour H : the daily run's hour (default 9). The loop pauses during
-#                  H:00–(H+5):00 on weekdays until today's report exists, so the
-#                  daily run gets the lock first (run_daily.ps1 also waits for
-#                  the lock, so daily is never skipped).
+#   -Max N           : stop phase 1 after N units (default 0 = until the queue is empty)
+#   -MaxLong N       : stop phase 2 after N long reads (default 0 = until none missing)
+#   -LongModel M     : model for phase 2 (default "" = the configured deep-read model;
+#                      `deepseek-chat` is much faster when the reasoning model times out)
+#   -DailyHour H     : the daily run's hour (default 9). The loop pauses during
+#                      H:00–(H+5):00 on weekdays until today's report exists, so the
+#                      daily run gets the lock first (run_daily.ps1 also waits for
+#                      the lock, so daily is never skipped).
+#   -CommitMinutes N : push at most once every N minutes (default 120; 0 = push
+#                      after every unit, the old behaviour). Each push costs a
+#                      ~7-min Pages build, so units are batched and the batch is
+#                      pushed when it is this old — always including the tail on
+#                      exit. `git pull --rebase --autostash` before each unit keeps
+#                      the unpushed batch safe.
 #
 # The queue itself (which cell is next, what is done) lives in git — see
 # ops\xagi2026-backfill.md — so this script holds no state and is safe to stop /
@@ -26,7 +33,8 @@ param(
     [int]$Max = 0,
     [int]$MaxLong = 0,
     [string]$LongModel = "",
-    [int]$DailyHour = 9
+    [int]$DailyHour = 9,
+    [int]$CommitMinutes = 120
 )
 
 $ErrorActionPreference = "Continue"
@@ -46,6 +54,9 @@ function Log($msg) {
 
 $venvActivate = Join-Path $PSScriptRoot ".venv\Scripts\Activate.ps1"
 if (Test-Path $venvActivate) { . $venvActivate }
+
+# When the current push batch started; -CommitMinutes throttles against this.
+$script:lastPush = Get-Date
 
 # During the weekday daily window, wait for today's report so daily runs first
 # (a wider H..H+5 window so a unit straddling 09:10 still yields).
@@ -88,8 +99,12 @@ function Invoke-LockedUnit([scriptblock]$body) {
         $mutex.Dispose()
     }
 
+    # Batched on a timer (see -CommitMinutes), not after every unit: each push
+    # starts a ~7-min Pages build and the queue is ground back to back.
+    $due = ($CommitMinutes -le 0) -or
+           (((Get-Date) - $script:lastPush).TotalMinutes -ge $CommitMinutes)
     $changes = git status --porcelain
-    if ($changes) {
+    if ($due -and $changes) {
         $null = git add -A 2>&1
         $null = git commit -m "xagi backfill $today" 2>&1
         for ($i = 1; $i -le 4; $i++) {
@@ -98,6 +113,7 @@ function Invoke-LockedUnit([scriptblock]$body) {
             Start-Sleep -Seconds ([math]::Pow(2, $i))
             $null = git pull --rebase --autostash 2>&1
         }
+        $script:lastPush = Get-Date
     }
     return $code
 }
@@ -132,5 +148,16 @@ while ($MaxLong -le 0 -or $longDone -lt $MaxLong) {
     }
     $longDone++
     Start-Sleep -Seconds 10
+}
+# Flush whatever is still pending, even if the last batch wasn't old enough yet.
+if (git status --porcelain) {
+    $null = git add -A 2>&1
+    $null = git commit -m "xagi backfill $today" 2>&1
+    for ($i = 1; $i -le 4; $i++) {
+        $null = git push 2>&1
+        if ($LASTEXITCODE -eq 0) { break }
+        Start-Sleep -Seconds ([math]::Pow(2, $i))
+        $null = git pull --rebase --autostash 2>&1
+    }
 }
 Log "xagi backfill loop done ($done unit(s), $longDone long read(s) this run)"

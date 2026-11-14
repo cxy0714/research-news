@@ -16,40 +16,60 @@ permissions:
   pages: write
   id-token: write
 
+# A build takes ~7 min (mkdocs ~2.5 + pagefind ~3.5 + upload ~0.5), and pushes
+# land every couple of hours, so cancelling the in-flight run buys nothing and
+# loses the whole deploy. It used to be `cancel-in-progress: true`, and superseded
+# runs died inside the Pagefind step — the longest one — before the artifact was
+# even uploaded: 8 consecutive runs on 2026-11-14 died that way and the site
+# stayed frozen at the 2026-11-13 deployment.
 concurrency:
   group: pages
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    # Hard cap. A killed Pagefind step used to leave the job hanging on the
+    # runner for 40-50 min after its last step finished (run 622: steps done
+    # 14:33, job "completed" 15:17), and that zombie held the single `pages`
+    # slot, so every later push queued up behind it and got cancelled in turn.
+    timeout-minutes: 25
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.11"
           cache: pip
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
-          node-version: "20"
+          node-version: "22"
       - name: Install MkDocs
-        run: pip install mkdocs mkdocs-material
+        # Pinned. `pip install mkdocs mkdocs-material` floated to whatever was
+        # newest on PyPI, so a release could change `--strict` behaviour (or a
+        # theme asset path) between two runs that should have been identical.
+        run: pip install "mkdocs==1.6.1" "mkdocs-material==9.7.6"
       - name: Build site
         run: mkdocs build --strict
       - name: Build Pagefind search index
         # Scans the built HTML in site/ and writes the sharded index +
         # search UI bundle into site/pagefind/, deployed alongside the site.
-        run: npx -y pagefind@^1 --site site
-      - uses: actions/upload-pages-artifact@v3
+        # Non-fatal on purpose: a broken or stale index must not cost us the
+        # whole deploy — the pages are what the site is for, and search just
+        # misses the newest content until the next run. (`pagefind` is pinned
+        # for the same reason as the pip pins above.)
+        continue-on-error: true
+        run: npx -y "pagefind@1.6.0" --site site
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: site
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5

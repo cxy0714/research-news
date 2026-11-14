@@ -120,6 +120,11 @@
   `text/html`，因此判据是「这页有没有 citation 元数据」，不是「有没有拿到 HTML」。
 - 期刊论文（DOI）过去一律没有 PDF、精读只喂摘要；`highlights.download_pdf` 现在会回落到 OA
   解析器，免费刊因此拿到真全文。`OA_PDF=0` 可关掉这层回落。
+- **三条常驻循环改为按时间批量推送（默认 120 分钟）**：`run_deepread_loop.ps1/.sh`、
+  `run_journal_backfill.ps1`、`run_xagi_backfill.ps1` 原来「每 5 篇」或「每格」就 commit + push，
+  一天能推 20+ 次，而每次推送都要跑一遍约 7 分钟的 Pages 构建——推送频率远高于部署吞吐，队列
+  只会互相踩。现在本地照常 commit，但一个批次不满 `-CommitMinutes`（sh 用 `COMMIT_MINUTES`）
+  就不推；循环退出时把尾巴一并推掉，`0` 恢复旧的「每格一推」。
 
 ### Fixed
 
@@ -139,6 +144,17 @@
   「跳过解析失败的行」，于是冲突标记 + 被拼接的记录直接变成「语料少了一半」，而且不报任何错。
   `extract_problems` 现在读文件时检测 `<<<<<<<` / `=======` / `>>>>>>>` 并打 ERROR，要求按
   `paper_id` union 解决后再用。
+- **Pages 部署连续失败：整站停更 26 小时**（2026-11-13 19:54Z 之后没有一次成功部署）。构建本身
+  是好的（`mkdocs build --strict` 本地 211s 零警告），死在它后面的 **Pagefind 步骤**：`concurrency`
+  的 `cancel-in-progress: true` 让后到的推送把在跑的 run 掐掉，而 pagefind 是最长的一步
+  （本地索引 9887 页要 354s，CI 里 3m33s），所以每次都在那儿被杀、`upload-pages-artifact` 和
+  `deploy` 全被 skipped。更糟的是被杀后 job 还在 runner 上赖 40-50 分钟（run 622 步骤 14:33
+  结束、job 15:17 才「完成」），僵尸占着 `pages` 这一个并发名额，后面的推送只能排队互相取消。
+  修法：`cancel-in-progress: false`（构建跑完就发布，Pages 部署本身幂等）、build job 加
+  `timeout-minutes: 25`（掐掉僵尸占位）、pagefind 改 `continue-on-error: true`（索引坏了不该
+  连站一起停更）。顺带把 `mkdocs==1.6.1` / `mkdocs-material==9.7.6` / `pagefind@1.6.0` 钉死
+  （原来浮动到最新版），action 升到 `checkout@v7` / `setup-python@v7` / `setup-node@v7` /
+  `upload-pages-artifact@v5` / `deploy-pages@v5` 消掉 Node 20 弃用告警。
 
 ---
 

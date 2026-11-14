@@ -4,14 +4,18 @@
 # selected but never deep-read — incl. green-lit / popsci ones) -> failed stubs
 # past their cooldown -> score-threshold leftovers.
 #
-# It releases the lock between units, yields to the daily run's window, and
-# commits/pushes every few units so the site picks pages up as they land. Starts
-# at logon on a mostly-always-on desktop; a daily trigger restarts it if it had
+# It releases the lock between units and yields to the daily run's window. It
+# commits locally as it goes but only PUSHES every CommitMinutes (default 120),
+# because each push triggers a ~7-min Pages build; a paper every 25 minutes used
+# to mean a deploy every 25 minutes, which starved the deploy queue. Starts at
+# logon on a mostly-always-on desktop; a daily trigger restarts it if it had
 # stopped. It exits on its own when nothing is pending.
 #
-#   -Max N         : stop after N units (default 0 = run until the queue is empty)
-#   -Limit N       : papers per unit (default 1 — one ~5-min deep read per lock hold)
-#   -CommitEvery N : commit + push every N units (default 5)
+#   -Max N           : stop after N units (default 0 = run until the queue is empty)
+#   -Limit N         : papers per unit (default 1 — one ~5-min deep read per lock hold)
+#   -CommitMinutes N : push at most once every N minutes (default 120; 0 = push
+#                      after every unit, the old behaviour). Remaining work is
+#                      always pushed when the loop exits.
 #   -DailyHour H   : the daily run's hour (default 9). The loop pauses during
 #                    H:00–(H+5):00 until today's report exists, so daily gets the
 #                    lock first. (run_daily.ps1 also waits for the lock, so daily
@@ -23,7 +27,7 @@
 param(
     [int]$Max = 0,
     [int]$Limit = 1,
-    [int]$CommitEvery = 5,
+    [int]$CommitMinutes = 120,
     [int]$DailyHour = 9
 )
 
@@ -62,9 +66,10 @@ function Push-Changes([string]$msg) {
 $venvActivate = Join-Path $PSScriptRoot ".venv\Scripts\Activate.ps1"
 if (Test-Path $venvActivate) { . $venvActivate }
 
-Log "deep-read loop start (Max=$Max, Limit=$Limit, CommitEvery=$CommitEvery)"
+Log "deep-read loop start (Max=$Max, Limit=$Limit, CommitMinutes=$CommitMinutes)"
 $done = 0
 $uncommitted = 0
+$lastPush = Get-Date
 while ($Max -le 0 -or $done -lt $Max) {
     # Yield to the daily run: while today's report isn't out yet and we're in the
     # daily window, pause (don't take the lock) so daily runs first. Weekday gate
@@ -110,8 +115,14 @@ while ($Max -le 0 -or $done -lt $Max) {
 
     $done++
     $uncommitted++
-    if ($CommitEvery -gt 0 -and $uncommitted -ge $CommitEvery) {
+    # Push on a timer rather than a unit count (see the header): every push costs
+    # a ~7-min Pages build, and the site doesn't need refreshing per paper.
+    # CommitMinutes 0 restores the old "push every unit" behaviour.
+    $due = ($CommitMinutes -le 0) -or
+           (((Get-Date) - $lastPush).TotalMinutes -ge $CommitMinutes)
+    if ($uncommitted -gt 0 -and $due) {
         Push-Changes "deep reads $(Get-Date -Format yyyy-MM-dd)"
+        $lastPush = Get-Date
         $uncommitted = 0
     }
     Start-Sleep -Seconds 10   # brief gap so a pending daily can grab the lock

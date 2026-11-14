@@ -3,16 +3,23 @@
 # lock between units and yielding to the daily run. Meant to start at logon on a
 # mostly-always-on desktop; it exits on its own when the queue is done.
 #
-#   -Max N       : stop after N units (default 0 = run until the queue is empty)
-#   -DailyHour H : the daily run's hour (default 9). The loop pauses during
-#                  H:00–(H+5):00 until today's report exists, so daily gets the
-#                  lock first. (run_daily.ps1 also waits for the lock, so daily
-#                  is never skipped even if a unit straddles the window; and a
-#                  rare skipped daily self-heals via catch-up the next day.)
+#   -Max N           : stop after N units (default 0 = run until the queue is empty)
+#   -DailyHour H     : the daily run's hour (default 9). The loop pauses during
+#                      H:00–(H+5):00 until today's report exists, so daily gets the
+#                      lock first. (run_daily.ps1 also waits for the lock, so daily
+#                      is never skipped even if a unit straddles the window; and a
+#                      rare skipped daily self-heals via catch-up the next day.)
+#   -CommitMinutes N : push at most once every N minutes (default 120; 0 = push
+#                      after every unit, the old behaviour). Units are written back
+#                      to back and each push costs a ~7-min Pages build, so the
+#                      batch is only pushed when it is this old — plus always on
+#                      exit. `git pull --rebase --autostash` before each unit keeps
+#                      the unpushed batch safe.
 
 param(
     [int]$Max = 0,
-    [int]$DailyHour = 9
+    [int]$DailyHour = 9,
+    [int]$CommitMinutes = 120
 )
 
 $ErrorActionPreference = "Continue"
@@ -35,8 +42,23 @@ function Log($msg) {
 $venvActivate = Join-Path $PSScriptRoot ".venv\Scripts\Activate.ps1"
 if (Test-Path $venvActivate) { . $venvActivate }
 
-Log "journal backfill loop start (Max=$Max)"
+# Commit + push the batch, self-healing a non-fast-forward push.
+function Push-Batch([string]$msg) {
+    if (-not (git status --porcelain)) { return }
+    git add -A
+    git commit -m $msg | Out-Null
+    for ($i = 1; $i -le 4; $i++) {
+        git push
+        if ($LASTEXITCODE -eq 0) { return }
+        Start-Sleep -Seconds ([math]::Pow(2, $i))
+        git pull --rebase --autostash
+    }
+    Log "push FAILED after 4 attempts - batch stays local-only"
+}
+
+Log "journal backfill loop start (Max=$Max, CommitMinutes=$CommitMinutes)"
 $done = 0
+$lastPush = Get-Date
 while ($Max -le 0 -or $done -lt $Max) {
     # Yield to the daily run: while today's report isn't out yet and we're in the
     # daily window, pause (don't take the lock) so daily runs first. A wide window
@@ -76,17 +98,14 @@ while ($Max -le 0 -or $done -lt $Max) {
         $mutex.Dispose()
     }
 
-    # Commit + push whatever the unit produced (journal pages, data, the ticked
-    # queue, the logs), self-healing a non-fast-forward push.
-    if (git status --porcelain) {
-        git add -A
-        git commit -m "journal backfill $today" | Out-Null
-        for ($i = 1; $i -le 4; $i++) {
-            git push
-            if ($LASTEXITCODE -eq 0) { break }
-            Start-Sleep -Seconds ([math]::Pow(2, $i))
-            git pull --rebase --autostash
-        }
+    # Commit + push whatever the units so far produced (journal pages, data, the
+    # ticked queue, the logs) — but only once the batch is CommitMinutes old, so
+    # the Pages deploy isn't retriggered every few minutes.
+    $due = ($CommitMinutes -le 0) -or
+           (((Get-Date) - $lastPush).TotalMinutes -ge $CommitMinutes)
+    if ($due) {
+        Push-Batch "journal backfill $today"
+        $lastPush = Get-Date
     }
 
     # Non-zero = no unit to do (queue empty) or the unit failed → stop the loop.
@@ -97,4 +116,5 @@ while ($Max -le 0 -or $done -lt $Max) {
     $done++
     Start-Sleep -Seconds 10   # brief gap so a pending daily can grab the lock
 }
+Push-Batch "journal backfill $today"   # never leave finished units unpushed
 Log "journal backfill loop done ($done unit(s) this run)"
