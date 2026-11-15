@@ -4855,6 +4855,12 @@
   7/10 [daily]
 - [Tensor Estimation With Structured Priors](deep_reads/2026-05-24-10.1109_jsait.2020.3040336.md)  
   9/10 [daily]
+- [Optimal Estimation of Shared Singular Subspaces Across Multiple Noisy Matrices](deep_reads/2026-05-24-10.1109_tit.2026.3667733.md)  
+  8/10 [daily]
+- [Information-Theoretic Limits and Vector Approximate Message-Passing for High-Dimensional Time Series](deep_reads/2026-05-24-10.1109_tit.2026.3665948.md)  
+  8/10 [daily]
+- [Simultaneous Inference for Covariance and Precision Matrices of Long-Range Dependent Time Series](deep_reads/2026-05-24-10.1109_tit.2026.3685246.md)  
+  8/10 [daily]
 - [Lower Bounds and a Near-Optimal Shrinkage Estimator for Least Squares Using Random Projections](deep_reads/2026-05-24-10.1109_jsait.2020.3039509.md)  
   8/10 [daily]
 - [Information-Theoretic Limits for the Matrix Tensor Product](deep_reads/2026-05-24-10.1109_jsait.2020.3040598.md)  
@@ -11981,6 +11987,8 @@
   7/10 [daily]
 - [A Neural Estimation Framework for Aggregated Relational Data under Intractable Likelihoods](deep_reads/2026-06-03-2606.03961.md)  
   6/10 [daily]
+- [A Computational Transition for Detecting Multivariate Shuffled Linear Regression by Low-Degree Polynomials](deep_reads/2026-05-24-10.1109_tit.2026.3659093.md)  
+  9/10 [daily]
 - [Where Prior Learning Can and Can’t Work in Unsupervised Inverse Problems](deep_reads/2026-05-24-10.1109_tsp.2026.3684951.md)  
   6/10 [daily]
 
@@ -13813,6 +13821,8 @@
   8/10 [daily]
 - [Analytic marginalization over binary variables in physics data](deep_reads/2026-05-24-10.1093_mnras_stag791.md)  
   8/10 [daily]
+- [Time delay measurements with broken power-law model](deep_reads/2026-05-24-10.1093_mnras_stag796.md)  
+  7/10 [daily]
 - [PANCAKE: A Python-based Numerical Color–Magnitude Diagram Analysis Package](deep_reads/2026-05-24-10.3847_1538-4365_add88c.md)  
   7/10 [daily]
 - [Emission-line Stacking of 21 cm Intensity Maps with MeerKLASS: Inference Pipeline and Application to the <i>L</i>-band Deep-field Data](deep_reads/2026-05-24-10.3847_1538-4365_add897.md)  
