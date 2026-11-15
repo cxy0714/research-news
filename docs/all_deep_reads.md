@@ -6638,6 +6638,8 @@
   9/10 [daily]
 - [On Minimax Empirical Bayes Predictive Densities](deep_reads/2026-05-24-10.1109_tit.2025.3648620.md)  
   8/10 [daily]
+- [Convergence Rates for Softmax Gating Mixture of Experts](deep_reads/2026-05-24-10.1109_tit.2025.3647061.md)  
+  6/10 [daily]
 - [Influence as soft sparsity: Estimation of monotone functions on $\{0,1\}^d$](deep_reads/2026-05-21-2605.19648.md)  
   6/10 [daily]
 - [Identification and estimation of interaction effects in nonparametric additive regression](deep_reads/2026-05-17-10.1093_biomet_asaf074.md)  
@@ -9747,6 +9749,8 @@
   7/10 [daily]
 - [Instance-Dependent Uniform Tail Bounds for Empirical Processes](deep_reads/2026-05-24-10.1109_tit.2026.3677108.md)  
   7/10 [daily]
+- [Estimating the Mixing Coefficients of Geometrically Ergodic Markov Processes](deep_reads/2026-05-24-10.1109_tit.2025.3639922.md)  
+  6/10 [daily]
 - [Block-Independent Likelihood Ratio Testing for High-Dimensional Mean Vectors with Applications to Matrix-Variate Data](deep_reads/2026-05-22-2605.21848.md)  
   8/10 [daily]
 - [Testing for Serial Independence via Auto Hilbert-Schmidt Independence Criterion](deep_reads/2026-05-22-2605.22025.md)  
@@ -12009,6 +12013,8 @@
   6/10 [daily]
 - [A Computational Transition for Detecting Multivariate Shuffled Linear Regression by Low-Degree Polynomials](deep_reads/2026-05-24-10.1109_tit.2026.3659093.md)  
   9/10 [daily]
+- [Neural Entropic Optimal Transport and Gromov–Wasserstein Alignment](deep_reads/2026-05-24-10.1109_tit.2026.3661439.md)  
+  6/10 [daily]
 - [Where Prior Learning Can and Can’t Work in Unsupervised Inverse Problems](deep_reads/2026-05-24-10.1109_tsp.2026.3684951.md)  
   6/10 [daily]
 
@@ -18035,6 +18041,10 @@
   8/10 [daily]
 - [The Minimax Risk in Testing Uniformity Over Large Alphabets Under Missing-Ball Alternatives](deep_reads/2026-05-24-10.1109_tit.2025.3646804.md)  
   8/10 [daily]
+- [From Bayesian Asymptotics to General Large-Scale MIMO Capacity](deep_reads/2026-05-24-10.1109_tit.2026.3667490.md)  
+  6/10 [daily]
+- [Nearly Tight Bounds for Testing Tree Tensor Network States](deep_reads/2026-05-24-10.1109_tit.2026.3670320.md)  
+  6/10 [daily]
 - [Sequential Sensitivity Analysis for Multiple Assumptions: A Framework for Understanding Racial Disparity in Police Use of Force](deep_reads/2026-05-22-2605.21893.md)  
   8/10 [daily]
 - [Nearest-Neighbour Matching on Unbounded Supports and Covariate Shift Transfer](deep_reads/2026-05-18-2605.16027.md)  
