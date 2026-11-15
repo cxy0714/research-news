@@ -1400,6 +1400,8 @@
   8/10 [daily]
 - [A Synthetic Control Approach to Conditional Distributional Treatment Effects](deep_reads/2026-06-09-2606.09625.md)  
   8/10 [daily]
+- [AI-Assisted Variance Reduction in Randomized Experiments](deep_reads/2026-06-09-2606.08853.md)  
+  7/10 [daily]
 - [One-step Outcome Imputation: An Alternative to Multiple Imputation](deep_reads/2026-06-08-2606.07174.md)  
   8/10 [daily]
 - [Causal inference of Plackett-Burman designs in applications](deep_reads/2026-06-08-2606.06961.md)  
@@ -9771,6 +9773,8 @@
   8/10 [daily]
 - [Tests for Independence of High-Dimensional Nonstationary Time Series](deep_reads/2026-06-09-2606.08498.md)  
   8/10 [daily]
+- [Causality versus Serial Correlation: an Asymmetric Portmanteau Test](deep_reads/2026-06-09-2606.07715.md)  
+  7/10 [daily]
 - [High Dimensional Change Point Models for Two-Directional Data](deep_reads/2026-06-09-2606.07816.md)  
   7/10 [daily]
 - [A Transferability Criterion for Null-Optimized Variance Reduction in Cumulant-Based Error-Independence Testing](deep_reads/2026-06-09-2606.08499.md)  
@@ -13955,6 +13959,8 @@
   6/10 [daily]
 - [Statistical Estimation and Correction of Model-Measurement Bias in Time-Dependent Correction Factors of KAGRA](deep_reads/2026-06-09-2606.09010.md)  
   8/10 [daily]
+- [Beyond Point Estimates: Benchmarking Uncertainty Quantification Methods on the AION-1 Astronomical Foundation Model](deep_reads/2026-06-09-2606.07771.md)  
+  7/10 [daily]
 - [Where Not to Look: A Parametric Avoidance Model for SETI Target Selection](deep_reads/2026-06-08-2606.06692.md)  
   7/10 [daily]
 - [Toward decision-aware AI for LSST-scale time-domain astronomy](deep_reads/2026-06-05-2606.05285.md)  
@@ -13973,6 +13979,8 @@
   7/10 [daily]
 - [Prospects for Astrobiology and Technosignature Searches with the Vera C. Rubin Observatory Legacy Survey of Space and Time](deep_reads/2026-06-02-2606.00574.md)  
   7/10 [daily]
+- [JAXtronomy: A JAX port of lenstronomy](deep_reads/2026-06-02-2606.01547.md)  
+  6/10 [daily]
 - [Refining the Gaia DR3 Parallax Zero-point: A Hybrid Approach Combining Global Parametric Correction with Local Refinement](deep_reads/2026-06-01-2605.31402.md)  
   8/10 [daily]
 - [Choosing the right MCMC sampler: a systematic benchmark of gradient-free methods](deep_reads/2026-06-01-2605.30412.md)  
@@ -14906,6 +14914,8 @@
   7/10 [daily]
 - [Random Set Quantile Estimation of Partially Identified Discrete Response Models](deep_reads/2026-06-02-2606.02200.md)  
   7/10 [daily]
+- [Digital Maturity and Technical Efficiency in NHS Acute Trusts: Cross-Sectional Evidence from England](deep_reads/2026-06-02-2606.01137.md)  
+  6/10 [daily]
 - [Quasi-Bayesian Local Projection Instrumental-Variables Method: Application to Renewable Energy and Electricity Prices](deep_reads/2026-05-18-2605.15966.md)  
   7/10 [daily]
 - [Tweedie's Formula, Variance Functions, and Score-Driven Updating](deep_reads/2026-05-18-2605.15902.md)  
