@@ -9727,6 +9727,8 @@
   8/10 [daily]
 - [Robust Mean Change Point Testing in High-Dimensional Data With Heavy Tails](deep_reads/2026-05-24-10.1109_tit.2025.3634207.md)  
   8/10 [daily]
+- [Instance-Dependent Uniform Tail Bounds for Empirical Processes](deep_reads/2026-05-24-10.1109_tit.2026.3677108.md)  
+  7/10 [daily]
 - [Block-Independent Likelihood Ratio Testing for High-Dimensional Mean Vectors with Applications to Matrix-Variate Data](deep_reads/2026-05-22-2605.21848.md)  
   8/10 [daily]
 - [Testing for Serial Independence via Auto Hilbert-Schmidt Independence Criterion](deep_reads/2026-05-22-2605.22025.md)  
@@ -13821,6 +13823,12 @@
   8/10 [daily]
 - [Analytic marginalization over binary variables in physics data](deep_reads/2026-05-24-10.1093_mnras_stag791.md)  
   8/10 [daily]
+- [Spectuner-D1: Spectral Line Fitting of Interstellar Molecules Using Deep Reinforcement Learning](deep_reads/2026-05-24-10.3847_1538-4365_ae3742.md)  
+  7/10 [daily]
+- [Uniform Rolling: An LSST Observing Cadence Offering Sufficient Survey Uniformity for Comprehensive Cosmological Analysis](deep_reads/2026-05-24-10.3847_1538-4365_ae6069.md)  
+  7/10 [daily]
+- [Comparative analysis of EMCEE, Gaussian process, and masked autoregressive flow in constraining the Hubble constant using cosmic chronometers data set](deep_reads/2026-05-24-10.1093_mnras_stag700.md)  
+  7/10 [daily]
 - [Time delay measurements with broken power-law model](deep_reads/2026-05-24-10.1093_mnras_stag796.md)  
   7/10 [daily]
 - [PANCAKE: A Python-based Numerical Color–Magnitude Diagram Analysis Package](deep_reads/2026-05-24-10.3847_1538-4365_add88c.md)  
