@@ -1468,6 +1468,8 @@
   8/10 [daily]
 - [Targeted maximum likelihood estimation of vaccine effectiveness and immune correlates in test-negative design studies with missing data](deep_reads/2026-05-22-2605.21793.md)  
   9/10 [daily]
+- [Substantive-Model-Compatible Multiple Imputation for Cox Regression with a Diverging Number of Covariates](deep_reads/2026-05-22-2605.21757.md)  
+  7/10 [daily]
 - [The Harmonic Synthetic Control Method](deep_reads/2026-05-21-2605.20359.md)  
   8/10 [daily]
 - [Endogenous Quantile Regression with Measurement Error in Dependent Variable](deep_reads/2026-05-21-2605.20601.md)  
@@ -6626,6 +6628,8 @@
   9/10 [daily]
 - [On Minimax Empirical Bayes Predictive Densities](deep_reads/2026-05-24-10.1109_tit.2025.3648620.md)  
   8/10 [daily]
+- [Influence as soft sparsity: Estimation of monotone functions on $\{0,1\}^d$](deep_reads/2026-05-21-2605.19648.md)  
+  6/10 [daily]
 - [Identification and estimation of interaction effects in nonparametric additive regression](deep_reads/2026-05-17-10.1093_biomet_asaf074.md)  
   8/10 [daily]
 - [Empirical likelihood for manifolds](deep_reads/2026-05-17-10.1093_jrsssb_qkaf043.md)  
@@ -9719,12 +9723,18 @@
   8/10 [daily]
 - [Block-Independent Likelihood Ratio Testing for High-Dimensional Mean Vectors with Applications to Matrix-Variate Data](deep_reads/2026-05-22-2605.21848.md)  
   8/10 [daily]
+- [Testing for Serial Independence via Auto Hilbert-Schmidt Independence Criterion](deep_reads/2026-05-22-2605.22025.md)  
+  7/10 [daily]
 - [Linear Functional Testing with General Loadings in Sparse Regression: Separation Rates and Computational Barriers](deep_reads/2026-05-21-2605.21360.md)  
   9/10 [daily]
+- [Testing Heteroskedasticity Under Measurement Error](deep_reads/2026-05-21-2605.20012.md)  
+  7/10 [daily]
 - [A Goodness-of-Fit Test for Independent Component Models in High Dimensions](deep_reads/2026-05-21-2605.20099.md)  
   7/10 [daily]
 - [Revisiting the Misspecified Cramér-Rao Bound](deep_reads/2026-05-21-2605.20739.md)  
   7/10 [daily]
+- [Robust Statistical Estimators with Bounded Empirical Sensitivity](deep_reads/2026-05-21-2605.21860.md)  
+  6/10 [daily]
 - [Statistical Unlearning of Distributions: A Hypothesis Testing Approach](deep_reads/2026-05-20-2605.16645.md)  
   9/10 [daily]
 - [Differentially private hypothesis testing in survival analysis](deep_reads/2026-05-20-2605.16906.md)  
