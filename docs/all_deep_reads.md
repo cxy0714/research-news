@@ -1462,6 +1462,8 @@
   9/10 [daily]
 - [Confidence intervals for causal effects in sequential decision making](deep_reads/2026-05-26-2605.25687.md)  
   9/10 [daily]
+- [Partial Identification of Causal Effects that Vary by Setting](deep_reads/2026-05-26-2605.25483.md)  
+  7/10 [daily]
 - [Optimal regimes for algorithm-assisted human decision-making](deep_reads/2026-05-26-10.1093_biomet_asae016.md)  
   7/10 [daily]
 - [A model-free variable screening method for optimal treatment regimes with high-dimensional survival data](deep_reads/2026-05-26-10.1093_biomet_asae022.md)  
@@ -1474,6 +1476,10 @@
   7/10 [daily]
 - [Harmonized estimation of subgroup-specific treatment effects in randomized trials: the use of external control data](deep_reads/2026-05-26-10.1093_jrsssb_qkaf045.md)  
   7/10 [daily]
+- [Communication-efficient Distributed Statistical Inference for Massive Data with Heterogeneous Auxiliary Information](deep_reads/2026-05-26-jmlr_v27_23-0440.md)  
+  6/10 [daily]
+- [Identifying Weight-Variant Latent Causal Models](deep_reads/2026-05-26-jmlr_v27_23-1023.md)  
+  6/10 [daily]
 - [Joint Estimation of Marginal and Heterogeneous Treatment Effects](deep_reads/2026-05-25-2605.23691.md)  
   8/10 [daily]
 - [Algorithm or Creative? A Three-Arm Experimental Design for Decomposing Algorithmic Bias in Platform A/B Tests](deep_reads/2026-05-25-2605.23706.md)  
@@ -6678,6 +6684,8 @@
   7/10 [daily]
 - [Error Analysis for Deep ReLU Feedforward Density-Ratio Estimation with Bregman Divergence](deep_reads/2026-05-26-jmlr_v27_23-0425.md)  
   7/10 [daily]
+- [Online Bernstein-von Mises theorem](deep_reads/2026-05-26-jmlr_v27_25-0989.md)  
+  6/10 [daily]
 - [On Minimax Empirical Bayes Predictive Densities](deep_reads/2026-05-24-10.1109_tit.2025.3648620.md)  
   8/10 [daily]
 - [Convergence Rates for Softmax Gating Mixture of Experts](deep_reads/2026-05-24-10.1109_tit.2025.3647061.md)  
@@ -9779,6 +9787,8 @@
   7/10 [daily]
 - [High-Dimensional Statistical Inference and Variable Selection Using Sufficient Dimension Association](deep_reads/2026-05-26-10.1080_01621459.2026.2632869.md)  
   7/10 [daily]
+- [Refined Risk Bounds for Unbounded Losses via Transductive Priors](deep_reads/2026-05-26-jmlr_v27_25-2745.md)  
+  6/10 [daily]
 - [Recovering Data Permutations From Noisy Observations: The Linear Regime](deep_reads/2026-05-24-10.1109_jsait.2020.3041697.md)  
   8/10 [daily]
 - [Uniform Variance Reduced Simultaneous Inference of Time-Varying Correlation Networks](deep_reads/2026-05-24-10.1109_tit.2025.3613143.md)  
