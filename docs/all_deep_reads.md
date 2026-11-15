@@ -13887,6 +13887,16 @@
   7/10 [daily]
 - [Bayesian model comparison and validation with Gaussian Process Regression for interferometric 21-cm signal recovery](deep_reads/2026-05-24-10.1093_mnras_stag878.md)  
   7/10 [daily]
+- [PISP: Projected-Space Inference of Stellar Parameters](deep_reads/2026-05-24-10.3847_1538-4365_ae4ed2.md)  
+  6/10 [daily]
+- [The Nova Synthetic Data Base: A Principal Component/AI Analysis of Novae Synoptic Spectra](deep_reads/2026-05-24-10.3847_1538-4365_ae5641.md)  
+  6/10 [daily]
+- [Efficient Evaluation of Gravitational Lensing Amplification Factors: A Deep Learning Framework](deep_reads/2026-05-24-10.3847_1538-4365_ae64e4.md)  
+  6/10 [daily]
+- [Mock Catalogs of Strongly Lensed Gravitational Waves via a Halo Model Approach with Ground-based Detectors](deep_reads/2026-05-24-10.3847_1538-4365_ae6117.md)  
+  6/10 [daily]
+- [Implementing a robust test of galaxy catalogue completeness for dark siren measurements of the Hubble constant](deep_reads/2026-05-24-10.1093_mnras_stag828.md)  
+  6/10 [daily]
 - [A Characteristic Optical Variability Timescale in Jetted Active Galactic Nuclei: A Large Gamma-Ray Emission Sample](deep_reads/2026-05-24-10.3847_1538-4365_add481.md)  
   6/10 [daily]
 - [Identification of 30,000 White Dwarf–Main-sequence Binary Candidates from Gaia DR3 BP/RP (XP) Low-resolution Spectra](deep_reads/2026-05-24-10.3847_1538-4365_addf3a.md)  
