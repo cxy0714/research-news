@@ -4720,15 +4720,15 @@
     "topic": "stat_computing",
     "key_techniques": [
       "Laplace approximation",
-      "Gaussian mixture",
-      "Hellinger distance bounds",
-      "importance sampling",
+      "Gaussian mixture proposal",
+      "self-normalised importance sampling",
       "independent Metropolis-Hastings",
-      "spectral gap analysis"
+      "spectral gap analysis",
+      "non-asymptotic bounds"
     ],
     "novelty_flag": "new_theory",
-    "summary_zh": "本文研究多模态 Laplace 近似，即用加权高斯混合（中心位于负对数密度的局部极小值）来采样随逆温度参数 n 增大而集中于有限个模态的概率测度，这类分布常见于小噪声或大数据贝叶斯推断。作者推导了多模态 Laplace 近似与集中后验之间 Hellinger 距离的显式非渐近界，该界以 n^{-1/2} 衰减，且常数仅随维度 d 多项式增长。进一步，他们将 Laplace 混合作为自归一化重要性采样和独立 Metropolis-Hastings (IMH) 的提议分布，并推导了 n→∞ 时有效样本量、平均接受概率、滞后一阶自相关和谱间隙的渐近结果。数值实验验证了理论发现。对您而言，该文提供了在高维集中测度下高斯混合近似的非渐近误差控制，与您统计计算和贝叶斯推断的兴趣相关，且其维度依赖分析可借鉴到您的高维统计工作中。",
-    "why_relevant": "本文属于统计计算方向，直接关联您的 primary interest 中的 statistical computing 和 Bayesian inference 设定。其非渐近 Hellinger 界和维度多项式依赖的分析，可启发您在高维统计中处理集中测度的近似问题。您可考虑用 very_familiar 的高维渐近工具验证其常数依赖，或探索将多模态 Laplace 近似应用于您熟悉的因果推断中的后验采样，属于立即可做的方向。",
+    "summary_zh": "本文研究多模态 Laplace 近似，即用负对数密度局部极小值处的高斯混合作为集中分布的采样提议分布，这类分布出现在小噪声或大数据贝叶斯推断中。作者推导了 Hellinger 距离的非渐近界，随 n 以 n^{-1/2} 衰减，且常数仅随维度 d 多项式增长。进一步分析了该混合作为自归一化重要性采样和独立 Metropolis-Hastings 提议分布的性能，给出了有效样本量、平均接受概率、滞后一自相关和谱间隙的渐近结果。数值实验验证了理论发现。对您而言，该文提供了在高维集中分布下采样方法的理论保证，与您对统计计算和算法数值方法的兴趣直接相关。",
+    "why_relevant": "本文属于统计计算方向，直接对应您的 primary interest 中的 statistical computing。它提供了多模态 Laplace 近似的非渐近理论保证，您可以用您 very_familiar 的软件开发和数值方法技能来复现实验或扩展算法。该文是 gateway reading，作为统计计算领域的入门读物，武器库足以支撑您理解并可能跟进。",
     "pdf_path": "data\\highlights\\stat_computing\\2611.03773.pdf",
     "first_seen": "2026-11-05"
   },
@@ -4815,15 +4815,15 @@
     "score": 6.0,
     "topic": "astrostats",
     "key_techniques": [
-      "spatially variable PSF principal-component eigenmodes",
-      "flux-conserving matched filter",
-      "kernel convolution decomposition",
-      "GPU full-frame element-wise operations",
-      "maximum-likelihood point-source photometry"
+      "GPU-accelerated convolution",
+      "spatially variable PSF modeling via principal components",
+      "matched filtering",
+      "maximum-likelihood photometry",
+      "pipeline parallelization"
     ],
     "novelty_flag": "application",
-    "summary_zh": "本文针对现代宽视场成像巡天中逐源迭代拟合光度测量无法映射到并行硬件的问题，提出将点源检测与测光全流程重构为 GPU 原生算法（GPUPhot）。核心设定是空间变化 PSF：用少量固定、保通量的主成分本征模及其位置相关系数描述场依赖 PSF，使空间变化匹配滤波精确分解为若干真实卷积，同时保留最大似然基础。所有阶段被统一为固定核卷积或全帧逐元素操作，从而天然并行。在强背景梯度和显著非均匀 PSF 的场中，亮源达到亚像素天体测量精度和几毫星等测光精度。该流水线已在 Teide 天文台投入生产，自 2023 年以来处理 370 万幅图像、1.2 PB 数据，150 Mpx 图像端到端低于 15 秒。作为统计学家入门读物，本文清楚交代了数据规模、噪声与 PSF 建模假设，并把估计问题（匹配滤波）与计算实现（卷积分解）分离，是理解天文测光数据-模型结构的良好入口。",
-    "why_relevant": "(1) 本文属于 astrostatistics gateway reading，不是方法迁移对象；它把空间变化 PSF 的匹配滤波写成少量卷积，对做统计计算与逆问题（inverse problems with random noise）的研究者是一个清晰的数据-模型 exposition。(2) 武器库中的 very_familiar 项『inverse problems with random noise』和『software development』足以支撑读懂其似然构造与卷积分解，不需要天文背景。(3) 值得花时间读全文：它展示了大规模成像巡天中估计问题如何被重构成可并行原语，对理解统计计算中的 kernel/卷积视角有直接帮助，但方法学 novelty 有限，属于工程化重构而非新统计理论。",
+    "summary_zh": "本文针对现代巡天数据量超过传统逐源迭代拟合光度测量流水线吞吐量的问题，提出一套完全在GPU上原生运行的恒星检测与测光算法，并实现为开源软件GPUPhot。其核心设计原则是将流水线的每个阶段都转化为固定核的卷积或全帧图的逐元素操作，从而适配并行硬件。对于空间变化的PSF，作者用少量保通量的主成分本征模及其位置依赖系数来描述，使得空间变化的匹配滤波器能精确分解为若干真正的卷积，同时保持最大似然估计的理论基础。在强背景梯度和明显非均匀PSF的场中，该方法对亮源实现了亚像素的天测精度和几毫星等的光度精度。该流水线已在特内里费天文台投入生产，自2023年以来处理了370万张图像（1.2 PB数据），端到端速率低于每张150 Mpx图像15秒。由于所有阶段共享相同的基本运算，各算法自包含且可推广到测光之外，为完整开源软件包奠定了基础。对您而言，这是一篇典型的gateway reading，展示了大规模天文图像处理中的计算瓶颈与算法设计思路，但方法学上以工程实现为主，统计新颖性有限。",
+    "why_relevant": "本文属于astrostatistics的gateway reading，适合作为了解天文图像处理数据流和计算挑战的入门读物。您的武器库（如卷积、主成分分析、最大似然估计）足以理解其核心算法，但本文没有涉及您擅长的深层统计推断或高维理论，因此作为方法学参考价值有限。若您想进入天文统计方向，本文可快速建立对数据规模和PSF建模问题的直观认识，但不必深读全文。",
     "pdf_path": "data\\highlights\\astrostats\\2611.03753.pdf",
     "first_seen": "2026-11-05"
   },
@@ -7158,7 +7158,7 @@
       "Qiyue Tang"
     ],
     "url": "https://hexagonmath.org/abs/2611.00042v1",
-    "venue": "Hexagon · 人机混合 · 人类理解：部分",
+    "venue": null,
     "published": "2026-11-03",
     "categories": [
       "math.GR"
@@ -7166,15 +7166,13 @@
     "score": 0.0,
     "topic": "other",
     "key_techniques": [
-      "finite group theory",
-      "soluble subgroups",
-      "conjugacy of subgroups",
-      "symmetric and alternating groups",
-      "Kourovka Notebook problem"
+      "finite group classification",
+      "solvable subgroup structure",
+      "conjugate intersection"
     ],
-    "novelty_flag": "new_theory",
-    "summary_zh": "本文研究对称群 S_n 与交错群 A_n 中可解子群的共轭交性质。作者证明当 n≥21 时，任意一对可解子群都存在共轭使得二者交为平凡。该结果回答了 Anagnostopoulou-Merkouri 与 Burness 在 Kourovka Notebook 问题 21.3 中提出的第二问。证明属于有限群论与置换群理论，核心工具可能涉及可解子群结构、共轭类分析以及极大子群分类。结论给出了明确的阈值 n≥21。本文与统计理论、因果推断、高维统计、U-统计量或效率理论没有直接关联。",
-    "why_relevant": "本文属于纯有限群论，与 primary_interests 中的 causal inference、high-dimensional statistics、higher-order U-statistics、efficiency theory 等无直接连接。technical_arsenal 中的 nonparametric statistics、minimax bounds、U-statistic tensor contraction 等工具无法用于攻本文的群论问题。follow-up 暂不可做，核心机器是有限群分类与可解群结构，不在当前武器库中。",
+    "novelty_flag": "minor",
+    "summary_zh": "本文研究对称群 S_n 与交错群 A_n 中可解子群对的共轭相交性质，证明了当 n≥21 时，任意两个可解子群总存在共轭使得其交集为平凡群。该结果回答了 Kourovka Notebook 中 Problem 21.3 的第二个问题，属于有限群论中关于子群对相交性的经典课题。证明依赖于有限群分类定理以及对可解子群结构的精细分析，涉及原始素数、子群阶的整除性等群论工具。该论文是纯数学群论方向，与统计推断、高维统计或计算复杂性等研究兴趣无直接关联。",
+    "why_relevant": "本文属于纯数学群论，与您的任何主要或次要兴趣（因果推断、高维统计、半参数理论、统计计算、天体统计等）均无直接联系。作为 gateway reading 也不合适，因为缺乏统计或数据建模维度。因此不值得投入时间阅读全文。",
     "pdf_path": "data\\highlights\\other\\hexagon_2611.00042.pdf",
     "first_seen": "2026-11-04"
   },
@@ -7187,7 +7185,7 @@
       "Daniel Tartakovsky"
     ],
     "url": "https://hexagonmath.org/abs/2611.00041v1",
-    "venue": "Hexagon · 人机混合 · 人类理解：部分 · 工具: Claude Fable",
+    "venue": null,
     "published": "2026-11-03",
     "categories": [
       "math-ph",
@@ -7196,15 +7194,15 @@
     "score": 0.0,
     "topic": "other",
     "key_techniques": [
-      "Lieb's identity",
       "Barta's inequality",
-      "interval arithmetic / computer-assisted proof",
-      "Schrodinger operator ground-state comparison",
-      "explicit function nonnegativity certification"
+      "Lieb's identity",
+      "computer-assisted proof",
+      "interval arithmetic",
+      "Schrodinger operator"
     ],
     "novelty_flag": "new_theory",
-    "summary_zh": "该论文研究非相对论氦原子（Z=2）最多能束缚多少个电子的问题，目标是证明束缚态氦双阴离子（He^{2-}）不存在。作者利用 Lieb 在 1984 年证明的 N<2Z+1 上界，进一步证明四电子与三电子氦哈密顿量的基态能量相等，从而将问题归结为某个显式两电子薛定谔算子 m 的非负性。通过 Barta 不等式，该非负性又等价于一个三元显式函数的逐点非负性。作者结合解析估计与区间算术的计算机辅助证明验证了该函数的非负性，并随论文公开了认证证书（certificate）。这是数学物理中少见的、以可验证计算完成严格证明的案例，对统计计算中 certified computation 与区间算术方法有一定的方法论参考价值。",
-    "why_relevant": "该论文与您的主要兴趣（因果推断、高维统计、U-统计量等）无直接交集，属于数学物理/谱理论方向。唯一可能的相关点是统计计算中的 certified computation：区间算术与计算机辅助证明的思路可用于数值算法的严格误差界（例如高维矩阵计算的验证），但核心工具（薛定谔算子谱理论、Barta 不等式）不在您的武器库中。作为 gateway reading 价值有限，不建议精读；若对'可验证计算'感兴趣，可仅浏览其证书发布方式。武器库中的 software development 技能可帮助复现其区间算术流程，但理论核心（谱理论）缺失，暂不可做。",
+    "summary_zh": "本文研究非相对论性原子的电子束缚数问题，目标是证明氦双阴离子（He^2-）不存在，即 Z=2 的氦核最多束缚三个电子。作者利用 Lieb 在 1984 年证明的 N<2Z+1 上界，但该上界并未排除 N=4 的情形；本文通过证明四电子与三电子氦哈密顿量的基态能量相等 E_4(Z=2)=E_3(Z=2) 来排除这一可能。方法上，作者将问题转化为一个显式两电子薛定谔算子 m 的非负性验证，并利用 Barta 不等式进一步归结为某个三元显式函数的逐点非负性。该非负性通过解析估计与区间算术的计算机辅助证明相结合的方式得到严格验证，并随论文公开了验证证书。",
+    "why_relevant": "本文属于数学物理中关于原子稳定性的严格证明，与您的统计兴趣无直接交集，但可作为跨学科阅读。其计算机辅助证明与区间算术的严格验证思路，对您熟悉的统计计算（软件与数值方法）有一定启发，但并非方法论迁移的入口。作为 gateway reading，本文对非物理背景的统计学家可读性一般，需要一定的量子力学基础，不建议作为入门读物。",
     "pdf_path": "data\\highlights\\other\\hexagon_2611.00041.pdf",
     "first_seen": "2026-11-04"
   },
@@ -7216,7 +7214,7 @@
       "Qiyue Tang"
     ],
     "url": "https://hexagonmath.org/abs/2611.00028v1",
-    "venue": "Hexagon · 人机混合 · 人类理解：部分",
+    "venue": null,
     "published": "2026-11-03",
     "categories": [
       "math.CO"
@@ -7224,14 +7222,13 @@
     "score": 0.0,
     "topic": "other",
     "key_techniques": [
-      "Hamiltonian graph theory",
-      "cycle multiplicity counting",
       "extremal graph theory",
-      "dense graph structure"
+      "Hamiltonian cycles",
+      "cycle multiplicity bounds"
     ],
     "novelty_flag": "new_theory",
-    "summary_zh": "本文证明 Hilton 关于稠密 Hamiltonian 图中各长度圈数目的猜想，该猜想由 A. J. W. Hilton 提出并由 Sheehan 于 1977 年记录。研究对象是满足一定边密度条件的 Hamiltonian 图，结论给出每个可能圈长对应的圈数下界或精确刻画。证明属于极值图论与结构图论范畴，核心工具涉及图的 Hamilton 分解、圈空间以及稠密图上的计数论证。该结果解决了一个悬置近五十年的组合猜想，但问题设定、证明方法与统计推断、高维概率或因果识别均无交集。",
-    "why_relevant": "与研究者全部兴趣（因果推断、高维统计、半参数效率、U-统计量、统计计算等）无任何交集；既非 gateway reading，也不涉及可迁移的统计方法或数据结构。无需展开阅读。",
+    "summary_zh": "本文证明了Hilton关于稠密哈密顿图中各长度圈数的猜想，该猜想由A. J.W. Hilton提出并于1977年被Sheehan记录。作者通过构造性的图论方法，对满足特定边密度条件的哈密顿图，给出了不同长度圈数的精确下界。该结果解决了图论中一个长期悬而未决的组合问题，但方法主要涉及极值图论和哈密顿圈的结构分析，与统计学无直接关联。对您而言，此论文属于纯数学领域，与您的主要或次要兴趣均无交集，仅可作为跨学科阅读的参考。",
+    "why_relevant": "本文属于纯数学（图论）领域，与您的主要兴趣（因果推断、高维统计、半参数理论等）和次要兴趣（天体统计、经济理论、流行病学）均无直接关联。武器库中的统计工具无法应用于此问题，且该主题不属于gateway-reading范畴，因此不推荐深入阅读。",
     "pdf_path": "data\\highlights\\other\\hexagon_2611.00028.pdf",
     "first_seen": "2026-11-04"
   },
