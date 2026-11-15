@@ -4871,6 +4871,10 @@
   8/10 [daily]
 - [Information-Theoretic Thresholds for the Alignments of Partially Correlated Graphs](deep_reads/2026-05-24-10.1109_tit.2025.3619813.md)  
   8/10 [daily]
+- [Rethinking Hard Thresholding Pursuit: Full Adaptation and Sharp Estimation](deep_reads/2026-05-24-10.1109_tit.2025.3603987.md)  
+  7/10 [daily]
+- [Information Limits of Joint Community Detection and Finite Group Synchronization](deep_reads/2026-05-24-10.1109_tit.2025.3619905.md)  
+  7/10 [daily]
 - [Optimal Spectral Algorithms for Correlated Two-view Models in High Dimensions](deep_reads/2026-05-21-2605.19364.md)  
   9/10 [daily]
 - [Fixed-order PCA: Theory for Overestimated Factor Models](deep_reads/2026-05-20-2605.18448.md)  
@@ -9727,6 +9731,12 @@
   8/10 [daily]
 - [Robust Mean Change Point Testing in High-Dimensional Data With Heavy Tails](deep_reads/2026-05-24-10.1109_tit.2025.3634207.md)  
   8/10 [daily]
+- [Einstein From Noise: Statistical Analysis](deep_reads/2026-05-24-10.1109_tsp.2026.3685712.md)  
+  7/10 [daily]
+- [A Unified Decision Rule for Generalized Out-of-Distribution Detection](deep_reads/2026-05-24-10.1109_tpami.2025.3642151.md)  
+  7/10 [daily]
+- [Minimax Hypothesis Testing for the Bradley–Terry–Luce Model](deep_reads/2026-05-24-10.1109_tit.2025.3605846.md)  
+  7/10 [daily]
 - [Instance-Dependent Uniform Tail Bounds for Empirical Processes](deep_reads/2026-05-24-10.1109_tit.2026.3677108.md)  
   7/10 [daily]
 - [Block-Independent Likelihood Ratio Testing for High-Dimensional Mean Vectors with Applications to Matrix-Variate Data](deep_reads/2026-05-22-2605.21848.md)  
