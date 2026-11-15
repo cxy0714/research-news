@@ -1438,6 +1438,8 @@
   7/10 [daily]
 - [Modeling Covariate Transition for Efficient Estimation of Longitudinal Treatment Effects in Randomized Experiments](deep_reads/2026-06-01-2605.31443.md)  
   8/10 [daily]
+- [Moment-Based Inference for Regression with Latent Dirichlet Covariates](deep_reads/2026-06-01-2605.30718.md)  
+  6/10 [daily]
 - [Identification and Inference for Structural Accelerated Failure Time Models via Instrument Interactions](deep_reads/2026-05-29-2605.28341.md)  
   9/10 [daily]
 - [IV regression with distribution-valued outcomes](deep_reads/2026-05-29-2605.28749.md)  
@@ -6688,6 +6690,8 @@
   7/10 [daily]
 - [Rectified Linear Unit Regression](deep_reads/2026-06-01-2605.30609.md)  
   8/10 [daily]
+- [Normal approximations in nonparametric empirical Bayes](deep_reads/2026-06-01-2605.31599.md)  
+  7/10 [daily]
 - [Robust Moment-Based Estimation via Spectral Gradient Reweighting](deep_reads/2026-05-29-2605.27718.md)  
   6/10 [daily]
 - [Bernstein-von Mises Theorem for Sparse Generalized Linear Model](deep_reads/2026-05-27-2605.27137.md)  
@@ -13951,6 +13955,10 @@
   6/10 [daily]
 - [Bayesian estimation of spectral parameters of the 6.7-GHz methanol maser G339.884-1.259 from GRAO observations](deep_reads/2026-06-02-2606.00768.md)  
   8/10 [daily]
+- [AstroSkyFlow: an astronomical sky image flow simulator for time domain survey validation and machine learning](deep_reads/2026-06-02-2606.02140.md)  
+  7/10 [daily]
+- [Prospects for Astrobiology and Technosignature Searches with the Vera C. Rubin Observatory Legacy Survey of Space and Time](deep_reads/2026-06-02-2606.00574.md)  
+  7/10 [daily]
 - [Refining the Gaia DR3 Parallax Zero-point: A Hybrid Approach Combining Global Parametric Correction with Local Refinement](deep_reads/2026-06-01-2605.31402.md)  
   8/10 [daily]
 - [Choosing the right MCMC sampler: a systematic benchmark of gradient-free methods](deep_reads/2026-06-01-2605.30412.md)  
@@ -14881,6 +14889,8 @@
 - [Network Time Series Models for Multivariate Volatility Forecasting](deep_reads/2026-06-03-2606.03828.md)  
   7/10 [daily]
 - [Sparse Tree-Based Aggregation for Time Series Regressions](deep_reads/2026-06-03-2606.03665.md)  
+  7/10 [daily]
+- [Random Set Quantile Estimation of Partially Identified Discrete Response Models](deep_reads/2026-06-02-2606.02200.md)  
   7/10 [daily]
 - [Quasi-Bayesian Local Projection Instrumental-Variables Method: Application to Renewable Energy and Electricity Prices](deep_reads/2026-05-18-2605.15966.md)  
   7/10 [daily]
