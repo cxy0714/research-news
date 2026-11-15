@@ -6692,6 +6692,12 @@
   7/10 [daily]
 - [Statistical Inference on Gradient Flows](deep_reads/2026-06-02-2606.01257.md)  
   7/10 [daily]
+- [Density Evolution: A Multiscale View of Density Estimation](deep_reads/2026-06-02-2606.00233.md)  
+  6/10 [daily]
+- [FlowSDR: Sufficient Dimension Reduction via Conditional Normalizing Flows](deep_reads/2026-06-02-2606.01346.md)  
+  6/10 [daily]
+- [Theoretical Analysis of Engression and Reverse Markov Engression](deep_reads/2026-06-02-2606.01002.md)  
+  6/10 [daily]
 - [Rectified Linear Unit Regression](deep_reads/2026-06-01-2605.30609.md)  
   8/10 [daily]
 - [Normal approximations in nonparametric empirical Bayes](deep_reads/2026-06-01-2605.31599.md)  
@@ -18174,6 +18180,10 @@
 - [Introducing precision-weighted bias as a performance measure to inform the inclusion of adaptive designs in meta-analysis](deep_reads/2026-06-12-2606.12015.md)  
   4/10 [daily]
 - [Correcting Variable Importance Scored by Random Forests](deep_reads/2026-06-11-2606.10770.md)  
+  6/10 [daily]
+- [Methods for adjusting for covariate measurement error in flexible modelling of functional form: designing a blinded, controlled neutral comparison simulation study](deep_reads/2026-06-02-2606.02130.md)  
+  6/10 [daily]
+- [LoopPerm-CPD: A Robust Loop Permutation Framework for Automatic Multiple Change-Point Detection in Longitudinal Data](deep_reads/2026-06-02-2606.01796.md)  
   6/10 [daily]
 - [Debiased inference for stochastic treatment interventions with survival outcomes](deep_reads/2026-06-01-2605.31130.md)  
   9/10 [daily]
