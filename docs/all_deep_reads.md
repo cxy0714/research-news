@@ -1470,6 +1470,10 @@
   9/10 [daily]
 - [The Harmonic Synthetic Control Method](deep_reads/2026-05-21-2605.20359.md)  
   8/10 [daily]
+- [Endogenous Quantile Regression with Measurement Error in Dependent Variable](deep_reads/2026-05-21-2605.20601.md)  
+  7/10 [daily]
+- [Correlated Random Coefficient Distributions in Linear Panel Models](deep_reads/2026-05-21-2605.21367.md)  
+  7/10 [daily]
 - [Double/Debiased Machine Learning for Continuous Treatment Effects in Panel Data with Endogeneity](deep_reads/2026-05-19-2605.17910.md)  
   9/10 [daily]
 - [Sensitivity analysis for causal mediation: bridge score, sharp sensitivity bounds, and calibration](deep_reads/2026-05-19-2605.18724.md)  
@@ -9717,8 +9721,14 @@
   8/10 [daily]
 - [Linear Functional Testing with General Loadings in Sparse Regression: Separation Rates and Computational Barriers](deep_reads/2026-05-21-2605.21360.md)  
   9/10 [daily]
+- [A Goodness-of-Fit Test for Independent Component Models in High Dimensions](deep_reads/2026-05-21-2605.20099.md)  
+  7/10 [daily]
+- [Revisiting the Misspecified Cramér-Rao Bound](deep_reads/2026-05-21-2605.20739.md)  
+  7/10 [daily]
 - [Statistical Unlearning of Distributions: A Hypothesis Testing Approach](deep_reads/2026-05-20-2605.16645.md)  
   9/10 [daily]
+- [Differentially private hypothesis testing in survival analysis](deep_reads/2026-05-20-2605.16906.md)  
+  7/10 [daily]
 - [Robust universal inference for misspecified models](deep_reads/2026-05-18-10.1093_biomet_asaf070.md)  
   8/10 [daily]
 - [Tests for the mean of high-dimensional data](deep_reads/2026-05-18-2605.16033.md)  
