@@ -4877,6 +4877,8 @@
   7/10 [daily]
 - [Information Limits of Joint Community Detection and Finite Group Synchronization](deep_reads/2026-05-24-10.1109_tit.2025.3619905.md)  
   7/10 [daily]
+- [The Limiting Poisson Law of Massive MIMO Detection With Box Relaxation](deep_reads/2026-05-24-10.1109_jsait.2020.3039964.md)  
+  6/10 [daily]
 - [Estimation of High-Dimensional Nonlinear Vector Autoregressive Models](deep_reads/2026-05-24-10.1109_tit.2025.3639191.md)  
   6/10 [daily]
 - [Optimal Spectral Algorithms for Correlated Two-view Models in High Dimensions](deep_reads/2026-05-21-2605.19364.md)  
@@ -9753,6 +9755,12 @@
   7/10 [daily]
 - [Instance-Dependent Uniform Tail Bounds for Empirical Processes](deep_reads/2026-05-24-10.1109_tit.2026.3677108.md)  
   7/10 [daily]
+- [Nonparametric Iterated-Logarithm Extensions of the Sequential Generalized Likelihood Ratio Test](deep_reads/2026-05-24-10.1109_jsait.2021.3081105.md)  
+  6/10 [daily]
+- [Theoretical Bounds in Decentralized Hypothesis Testing](deep_reads/2026-05-24-10.1109_tsp.2025.3541569.md)  
+  6/10 [daily]
+- [Asymptotically Optimal Search for a Change Point Anomaly under a Composite Hypothesis Model](deep_reads/2026-05-24-10.1109_tsp.2026.3685645.md)  
+  6/10 [daily]
 - [Online Multiple Changepoint Detection With False Discovery Rate Control](deep_reads/2026-05-24-10.1109_tit.2025.3610613.md)  
   6/10 [daily]
 - [Estimating the Mixing Coefficients of Geometrically Ergodic Markov Processes](deep_reads/2026-05-24-10.1109_tit.2025.3639922.md)  
@@ -12019,6 +12027,8 @@
   6/10 [daily]
 - [A Computational Transition for Detecting Multivariate Shuffled Linear Regression by Low-Degree Polynomials](deep_reads/2026-05-24-10.1109_tit.2026.3659093.md)  
   9/10 [daily]
+- [Orthogonal Approximate Message Passing for Double Linear Transformation Model](deep_reads/2026-05-24-10.1109_tsp.2026.3692526.md)  
+  6/10 [daily]
 - [Neural Entropic Optimal Transport and Gromov–Wasserstein Alignment](deep_reads/2026-05-24-10.1109_tit.2026.3661439.md)  
   6/10 [daily]
 - [Where Prior Learning Can and Can’t Work in Unsupervised Inverse Problems](deep_reads/2026-05-24-10.1109_tsp.2026.3684951.md)  
