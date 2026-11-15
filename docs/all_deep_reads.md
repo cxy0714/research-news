@@ -1462,6 +1462,12 @@
   9/10 [daily]
 - [Confidence intervals for causal effects in sequential decision making](deep_reads/2026-05-26-2605.25687.md)  
   9/10 [daily]
+- [Optimal regimes for algorithm-assisted human decision-making](deep_reads/2026-05-26-10.1093_biomet_asae016.md)  
+  7/10 [daily]
+- [A model-free variable screening method for optimal treatment regimes with high-dimensional survival data](deep_reads/2026-05-26-10.1093_biomet_asae022.md)  
+  7/10 [daily]
+- [Russian roulette: the need for stochastic potential outcomes when utilities depend on counterfactuals](deep_reads/2026-05-26-10.1093_biomet_asaf062.md)  
+  7/10 [daily]
 - [Structural restrictions in local causal discovery: identifying direct causes of a target variable](deep_reads/2026-05-26-10.1093_biomet_asaf042.md)  
   7/10 [daily]
 - [Model-free selective inference under covariate shift via weighted conformal <i>p</i> -values](deep_reads/2026-05-26-10.1093_biomet_asaf066.md)  
@@ -4860,6 +4866,8 @@
 - [Structural Change Detection in High-Dimensional Transformed Factor Models via Canonical Correlation Analysis](deep_reads/2026-06-02-2606.01553.md)  
   7/10 [daily]
 - [Online Sparse Regression with Expanding Observables](deep_reads/2026-06-02-2606.00478.md)  
+  7/10 [daily]
+- [Optimal Estimation of Discrete Multiview Distributions under Heteroskedastic Multinomial Sampling](deep_reads/2026-05-26-2605.24858.md)  
   7/10 [daily]
 - [A statistical view of column subset selection](deep_reads/2026-05-26-10.1093_jrsssb_qkaf023.md)  
   7/10 [daily]
@@ -9757,6 +9765,8 @@
   8/10 [daily]
 - [Minimax Limits of k-Fold Cross-Validation via Majority](deep_reads/2026-05-26-2605.25859.md)  
   8/10 [daily]
+- [High-Dimensional Change-Point Detection via Angular Kernel Statistics](deep_reads/2026-05-26-2605.25855.md)  
+  7/10 [daily]
 - [Leveraging external data for testing experimental therapies with biomarker interactions in randomized clinical trials](deep_reads/2026-05-26-10.1093_biomet_asaf047.md)  
   7/10 [daily]
 - [Higher criticism for rare and weak non-proportional hazard deviations in survival analysis](deep_reads/2026-05-26-10.1093_biomet_asaf075.md)  
