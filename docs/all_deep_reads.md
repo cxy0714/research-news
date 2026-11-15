@@ -9731,6 +9731,14 @@
   8/10 [daily]
 - [Robust Mean Change Point Testing in High-Dimensional Data With Heavy Tails](deep_reads/2026-05-24-10.1109_tit.2025.3634207.md)  
   8/10 [daily]
+- [Minimax Estimation of Divergences Between Discrete Distributions](deep_reads/2026-05-24-10.1109_jsait.2020.3041036.md)  
+  7/10 [daily]
+- [On the All-or-Nothing Behavior of Bernoulli Group Testing](deep_reads/2026-05-24-10.1109_jsait.2020.3039790.md)  
+  7/10 [daily]
+- [The $\mathcal{K}$-Score Test: A Model-Free Weighting Framework for Robust Parametric Detection](deep_reads/2026-05-24-10.1109_tsp.2026.3682439.md)  
+  7/10 [daily]
+- [Cram$\acute{\text{e}}$r-Rao Bounds for Laplacian Matrix Estimation](deep_reads/2026-05-24-10.1109_tsp.2025.3646236.md)  
+  7/10 [daily]
 - [Einstein From Noise: Statistical Analysis](deep_reads/2026-05-24-10.1109_tsp.2026.3685712.md)  
   7/10 [daily]
 - [A Unified Decision Rule for Generalized Out-of-Distribution Detection](deep_reads/2026-05-24-10.1109_tpami.2025.3642151.md)  
