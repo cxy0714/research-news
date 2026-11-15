@@ -1462,6 +1462,8 @@
   9/10 [daily]
 - [Confidence intervals for causal effects in sequential decision making](deep_reads/2026-05-26-2605.25687.md)  
   9/10 [daily]
+- [Harmonized estimation of subgroup-specific treatment effects in randomized trials: the use of external control data](deep_reads/2026-05-26-10.1093_jrsssb_qkaf045.md)  
+  7/10 [daily]
 - [Joint Estimation of Marginal and Heterogeneous Treatment Effects](deep_reads/2026-05-25-2605.23691.md)  
   8/10 [daily]
 - [Algorithm or Creative? A Three-Arm Experimental Design for Decomposing Algorithmic Bias in Platform A/B Tests](deep_reads/2026-05-25-2605.23706.md)  
@@ -4854,6 +4856,10 @@
 - [Structural Change Detection in High-Dimensional Transformed Factor Models via Canonical Correlation Analysis](deep_reads/2026-06-02-2606.01553.md)  
   7/10 [daily]
 - [Online Sparse Regression with Expanding Observables](deep_reads/2026-06-02-2606.00478.md)  
+  7/10 [daily]
+- [A statistical view of column subset selection](deep_reads/2026-05-26-10.1093_jrsssb_qkaf023.md)  
+  7/10 [daily]
+- [Pretraining and the lasso](deep_reads/2026-05-26-10.1093_jrsssb_qkaf050.md)  
   7/10 [daily]
 - [Structured matrix learning under arbitrary entrywise dependence and estimation of Markov transition kernel](deep_reads/2026-05-26-10.1214_25-aos2525.md)  
   7/10 [daily]
@@ -9745,6 +9751,10 @@
   8/10 [daily]
 - [Minimax Limits of k-Fold Cross-Validation via Majority](deep_reads/2026-05-26-2605.25859.md)  
   8/10 [daily]
+- [An optimal design framework for lasso sign recovery](deep_reads/2026-05-26-10.1093_jrsssb_qkaf026.md)  
+  7/10 [daily]
+- [Goodness-of-fit tests for high-dimensional Gaussian graphical models via exchangeable sampling](deep_reads/2026-05-26-10.1093_jrsssb_qkaf032.md)  
+  7/10 [daily]
 - [Robust detection of watermarks for large language models under human edits](deep_reads/2026-05-26-10.1093_jrsssb_qkaf056.md)  
   7/10 [daily]
 - [High-Dimensional Statistical Inference and Variable Selection Using Sufficient Dimension Association](deep_reads/2026-05-26-10.1080_01621459.2026.2632869.md)  
