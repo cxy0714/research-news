@@ -6642,6 +6642,16 @@
   8/10 [daily]
 - [Identification and Estimation of Semiparametric Multilayered Sample Selection Models](deep_reads/2026-05-26-2605.25519.md)  
   9/10 [daily]
+- [High-dimensional Hilbert–Schmidt linear regression with Hilbert manifold variables](deep_reads/2026-05-26-10.1214_25-aos2559.md)  
+  7/10 [daily]
+- [Optimal convex M-estimation via score matching](deep_reads/2026-05-26-10.1214_25-aos2572.md)  
+  7/10 [daily]
+- [Persistence Diagrams Estimation of Multivariate Piecewise Hölder-continuous Signals](deep_reads/2026-05-26-jmlr_v27_24-0456.md)  
+  7/10 [daily]
+- [Nonparametric Estimation of a Factorizable Density using Diffusion Models](deep_reads/2026-05-26-jmlr_v27_25-0121.md)  
+  7/10 [daily]
+- [Error Analysis for Deep ReLU Feedforward Density-Ratio Estimation with Bregman Divergence](deep_reads/2026-05-26-jmlr_v27_23-0425.md)  
+  7/10 [daily]
 - [On Minimax Empirical Bayes Predictive Densities](deep_reads/2026-05-24-10.1109_tit.2025.3648620.md)  
   8/10 [daily]
 - [Convergence Rates for Softmax Gating Mixture of Experts](deep_reads/2026-05-24-10.1109_tit.2025.3647061.md)  
