@@ -1462,6 +1462,10 @@
   9/10 [daily]
 - [Confidence intervals for causal effects in sequential decision making](deep_reads/2026-05-26-2605.25687.md)  
   9/10 [daily]
+- [Structural restrictions in local causal discovery: identifying direct causes of a target variable](deep_reads/2026-05-26-10.1093_biomet_asaf042.md)  
+  7/10 [daily]
+- [Model-free selective inference under covariate shift via weighted conformal <i>p</i> -values](deep_reads/2026-05-26-10.1093_biomet_asaf066.md)  
+  7/10 [daily]
 - [Harmonized estimation of subgroup-specific treatment effects in randomized trials: the use of external control data](deep_reads/2026-05-26-10.1093_jrsssb_qkaf045.md)  
   7/10 [daily]
 - [Joint Estimation of Marginal and Heterogeneous Treatment Effects](deep_reads/2026-05-25-2605.23691.md)  
@@ -6652,6 +6656,8 @@
   8/10 [daily]
 - [Identification and Estimation of Semiparametric Multilayered Sample Selection Models](deep_reads/2026-05-26-2605.25519.md)  
   9/10 [daily]
+- [Identification and estimation of interaction effects in nonparametric additive regression](deep_reads/2026-05-26-10.1093_biomet_asaf074.md)  
+  7/10 [daily]
 - [Inference for Deep Neural Network Estimators in Generalized Nonparametric Models](deep_reads/2026-05-26-10.1080_01621459.2026.2637894.md)  
   7/10 [daily]
 - [High-dimensional Hilbert–Schmidt linear regression with Hilbert manifold variables](deep_reads/2026-05-26-10.1214_25-aos2559.md)  
@@ -9751,6 +9757,10 @@
   8/10 [daily]
 - [Minimax Limits of k-Fold Cross-Validation via Majority](deep_reads/2026-05-26-2605.25859.md)  
   8/10 [daily]
+- [Leveraging external data for testing experimental therapies with biomarker interactions in randomized clinical trials](deep_reads/2026-05-26-10.1093_biomet_asaf047.md)  
+  7/10 [daily]
+- [Higher criticism for rare and weak non-proportional hazard deviations in survival analysis](deep_reads/2026-05-26-10.1093_biomet_asaf075.md)  
+  7/10 [daily]
 - [An optimal design framework for lasso sign recovery](deep_reads/2026-05-26-10.1093_jrsssb_qkaf026.md)  
   7/10 [daily]
 - [Goodness-of-fit tests for high-dimensional Gaussian graphical models via exchangeable sampling](deep_reads/2026-05-26-10.1093_jrsssb_qkaf032.md)  
