@@ -1466,6 +1466,8 @@
   8/10 [daily]
 - [Algorithm or Creative? A Three-Arm Experimental Design for Decomposing Algorithmic Bias in Platform A/B Tests](deep_reads/2026-05-25-2605.23706.md)  
   8/10 [daily]
+- [Dynamical Causality Under Latent Confounders for Biological Network Reconstruction](deep_reads/2026-05-24-10.1109_tpami.2026.3658839.md)  
+  6/10 [daily]
 - [Targeted maximum likelihood estimation of vaccine effectiveness and immune correlates in test-negative design studies with missing data](deep_reads/2026-05-22-2605.21793.md)  
   9/10 [daily]
 - [Substantive-Model-Compatible Multiple Imputation for Cox Regression with a Diverging Number of Covariates](deep_reads/2026-05-22-2605.21757.md)  
@@ -4875,6 +4877,8 @@
   7/10 [daily]
 - [Information Limits of Joint Community Detection and Finite Group Synchronization](deep_reads/2026-05-24-10.1109_tit.2025.3619905.md)  
   7/10 [daily]
+- [Estimation of High-Dimensional Nonlinear Vector Autoregressive Models](deep_reads/2026-05-24-10.1109_tit.2025.3639191.md)  
+  6/10 [daily]
 - [Optimal Spectral Algorithms for Correlated Two-view Models in High Dimensions](deep_reads/2026-05-21-2605.19364.md)  
   9/10 [daily]
 - [Fixed-order PCA: Theory for Overestimated Factor Models](deep_reads/2026-05-20-2605.18448.md)  
@@ -9749,6 +9753,8 @@
   7/10 [daily]
 - [Instance-Dependent Uniform Tail Bounds for Empirical Processes](deep_reads/2026-05-24-10.1109_tit.2026.3677108.md)  
   7/10 [daily]
+- [Online Multiple Changepoint Detection With False Discovery Rate Control](deep_reads/2026-05-24-10.1109_tit.2025.3610613.md)  
+  6/10 [daily]
 - [Estimating the Mixing Coefficients of Geometrically Ergodic Markov Processes](deep_reads/2026-05-24-10.1109_tit.2025.3639922.md)  
   6/10 [daily]
 - [Block-Independent Likelihood Ratio Testing for High-Dimensional Mean Vectors with Applications to Matrix-Variate Data](deep_reads/2026-05-22-2605.21848.md)  
@@ -18041,6 +18047,10 @@
   8/10 [daily]
 - [The Minimax Risk in Testing Uniformity Over Large Alphabets Under Missing-Ball Alternatives](deep_reads/2026-05-24-10.1109_tit.2025.3646804.md)  
   8/10 [daily]
+- [Graph Frequency-Domain Factor Modeling](deep_reads/2026-05-24-10.1109_tpami.2025.3634622.md)  
+  6/10 [daily]
+- [Adversarially Robust Clustering With Optimality Guarantees](deep_reads/2026-05-24-10.1109_tit.2025.3628160.md)  
+  6/10 [daily]
 - [From Bayesian Asymptotics to General Large-Scale MIMO Capacity](deep_reads/2026-05-24-10.1109_tit.2026.3667490.md)  
   6/10 [daily]
 - [Nearly Tight Bounds for Testing Tree Tensor Network States](deep_reads/2026-05-24-10.1109_tit.2026.3670320.md)  
