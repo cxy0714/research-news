@@ -1436,6 +1436,10 @@
   8/10 [daily]
 - [Topological Ignorability for Structural Causal Effects Beyond Means](deep_reads/2026-06-02-2606.01184.md)  
   7/10 [daily]
+- [Robust inference for risk heterogeneity under group imbalance](deep_reads/2026-06-02-2606.00797.md)  
+  6/10 [daily]
+- [Network knockoffs: controlling false discovery in dyadic space](deep_reads/2026-06-02-2606.00346.md)  
+  6/10 [daily]
 - [Modeling Covariate Transition for Efficient Estimation of Longitudinal Treatment Effects in Randomized Experiments](deep_reads/2026-06-01-2605.31443.md)  
   8/10 [daily]
 - [Moment-Based Inference for Regression with Latent Dirichlet Covariates](deep_reads/2026-06-01-2605.30718.md)  
@@ -9795,6 +9799,10 @@
   8/10 [daily]
 - [Comb Test: Histogram Uniformity Testing Based on Discrete Total Variation](deep_reads/2026-06-02-2606.01465.md)  
   7/10 [daily]
+- [Another Look at Bandwidth-free Inference: a Sample Splitting Approach](deep_reads/2026-06-02-2606.00864.md)  
+  6/10 [daily]
+- [Change-Point Detection for Object-valued Time Series](deep_reads/2026-06-02-2606.00858.md)  
+  6/10 [daily]
 - [Sharp minimax risks and phase transitions in sparse submatrix detection](deep_reads/2026-06-01-2605.31583.md)  
   9/10 [daily]
 - [The Nonparametric Kiefer-Weiss Problem](deep_reads/2026-06-01-2605.31465.md)  
