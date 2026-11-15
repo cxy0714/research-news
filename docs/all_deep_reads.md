@@ -1476,6 +1476,8 @@
   7/10 [daily]
 - [Harmonized estimation of subgroup-specific treatment effects in randomized trials: the use of external control data](deep_reads/2026-05-26-10.1093_jrsssb_qkaf045.md)  
   7/10 [daily]
+- [Online statistical inference in decision-making with matrix context](deep_reads/2026-05-26-10.1214_25-aos2526.md)  
+  6/10 [daily]
 - [Communication-efficient Distributed Statistical Inference for Massive Data with Heterogeneous Auxiliary Information](deep_reads/2026-05-26-jmlr_v27_23-0440.md)  
   6/10 [daily]
 - [Identifying Weight-Variant Latent Causal Models](deep_reads/2026-05-26-jmlr_v27_23-1023.md)  
@@ -4883,6 +4885,14 @@
   7/10 [daily]
 - [The empirical copula process in high dimensions: Stute’s representation and applications](deep_reads/2026-05-26-10.1214_25-aos2548.md)  
   7/10 [daily]
+- [The functional graphical lasso](deep_reads/2026-05-26-10.1214_25-aos2521.md)  
+  6/10 [daily]
+- [Fundamental limits of community detection from multi-view data: Multi-layer, dynamic and partially labeled block models](deep_reads/2026-05-26-10.1214_25-aos2562.md)  
+  6/10 [daily]
+- [Near optimal sample complexity for matrix and tensor normal models via geodesic convexity](deep_reads/2026-05-26-10.1214_25-aos2539.md)  
+  6/10 [daily]
+- [Inferring the dependence graph density of binary graphical models in high dimension](deep_reads/2026-05-26-10.1214_25-aos2592.md)  
+  6/10 [daily]
 - [Tensor Estimation With Structured Priors](deep_reads/2026-05-24-10.1109_jsait.2020.3040336.md)  
   9/10 [daily]
 - [Optimal Estimation of Shared Singular Subspaces Across Multiple Noisy Matrices](deep_reads/2026-05-24-10.1109_tit.2026.3667733.md)  
