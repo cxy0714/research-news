@@ -9801,6 +9801,16 @@
   7/10 [daily]
 - [High-Dimensional Statistical Inference and Variable Selection Using Sufficient Dimension Association](deep_reads/2026-05-26-10.1080_01621459.2026.2632869.md)  
   7/10 [daily]
+- [Exact selective inference with randomization](deep_reads/2026-05-26-10.1093_biomet_asae019.md)  
+  6/10 [daily]
+- [A rank-based sequential test of independence](deep_reads/2026-05-26-10.1093_biomet_asae023.md)  
+  6/10 [daily]
+- [Testing independence for sparse longitudinal data](deep_reads/2026-05-26-10.1093_biomet_asae035.md)  
+  6/10 [daily]
+- [Priors for second-order unbiased Bayes estimators](deep_reads/2026-05-26-10.1093_biomet_asaf068.md)  
+  6/10 [daily]
+- [Robust universal inference for misspecified models](deep_reads/2026-05-26-10.1093_biomet_asaf070.md)  
+  6/10 [daily]
 - [Asymptotic validity and finite-sample properties of approximate randomization tests](deep_reads/2026-05-26-10.1093_biomet_asaf085.md)  
   6/10 [daily]
 - [Improving the false coverage rate adjusted confidence intervals](deep_reads/2026-05-26-10.1093_jrsssb_qkaf024.md)  
