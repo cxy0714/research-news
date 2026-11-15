@@ -1476,6 +1476,8 @@
   7/10 [daily]
 - [Harmonized estimation of subgroup-specific treatment effects in randomized trials: the use of external control data](deep_reads/2026-05-26-10.1093_jrsssb_qkaf045.md)  
   7/10 [daily]
+- [Distributional Off-Policy Evaluation with Deep Quantile Process Regression](deep_reads/2026-05-26-10.1080_01621459.2026.2671449.md)  
+  6/10 [daily]
 - [Online statistical inference in decision-making with matrix context](deep_reads/2026-05-26-10.1214_25-aos2526.md)  
   6/10 [daily]
 - [Communication-efficient Distributed Statistical Inference for Massive Data with Heterogeneous Auxiliary Information](deep_reads/2026-05-26-jmlr_v27_23-0440.md)  
@@ -4885,6 +4887,8 @@
   7/10 [daily]
 - [The empirical copula process in high dimensions: Stute’s representation and applications](deep_reads/2026-05-26-10.1214_25-aos2548.md)  
   7/10 [daily]
+- [Optimal clustering by Lloyd’s algorithm for low-rank mixture model](deep_reads/2026-05-26-10.1093_jrsssb_qkaf041.md)  
+  6/10 [daily]
 - [The functional graphical lasso](deep_reads/2026-05-26-10.1214_25-aos2521.md)  
   6/10 [daily]
 - [Fundamental limits of community detection from multi-view data: Multi-layer, dynamic and partially labeled block models](deep_reads/2026-05-26-10.1214_25-aos2562.md)  
@@ -9797,6 +9801,10 @@
   7/10 [daily]
 - [High-Dimensional Statistical Inference and Variable Selection Using Sufficient Dimension Association](deep_reads/2026-05-26-10.1080_01621459.2026.2632869.md)  
   7/10 [daily]
+- [Asymptotic validity and finite-sample properties of approximate randomization tests](deep_reads/2026-05-26-10.1093_biomet_asaf085.md)  
+  6/10 [daily]
+- [Improving the false coverage rate adjusted confidence intervals](deep_reads/2026-05-26-10.1093_jrsssb_qkaf024.md)  
+  6/10 [daily]
 - [Refined Risk Bounds for Unbounded Losses via Transductive Priors](deep_reads/2026-05-26-jmlr_v27_25-2745.md)  
   6/10 [daily]
 - [Recovering Data Permutations From Noisy Observations: The Linear Regime](deep_reads/2026-05-24-10.1109_jsait.2020.3041697.md)  
@@ -18119,6 +18127,8 @@
   9/10 [daily]
 - [Using the target trial framework for combining information: external comparator analyses and other applications](deep_reads/2026-05-26-2605.24346.md)  
   8/10 [daily]
+- [Statistical exploration of the manifold hypothesis](deep_reads/2026-05-26-10.1093_jrsssb_qkag055.md)  
+  6/10 [daily]
 - [Some Facts About the Optimality of the LSE in the Gaussian Sequence Model With Convex Constraint](deep_reads/2026-05-24-10.1109_tit.2025.3605342.md)  
   8/10 [daily]
 - [Huber-Robust Likelihood Ratio Tests for Composite Nulls and Alternatives](deep_reads/2026-05-24-10.1109_tit.2025.3641166.md)  
