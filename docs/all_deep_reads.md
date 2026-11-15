@@ -4885,6 +4885,8 @@
   7/10 [daily]
 - [Online Sparse Regression with Expanding Observables](deep_reads/2026-06-02-2606.00478.md)  
   7/10 [daily]
+- [Free Energy Universality in Tensor Estimation via Generic Chaining](deep_reads/2026-06-01-2605.30636.md)  
+  7/10 [daily]
 - [Optimal Estimation of Discrete Multiview Distributions under Heteroskedastic Multinomial Sampling](deep_reads/2026-05-26-2605.24858.md)  
   7/10 [daily]
 - [A statistical view of column subset selection](deep_reads/2026-05-26-10.1093_jrsssb_qkaf023.md)  
@@ -6692,6 +6694,8 @@
   8/10 [daily]
 - [Estimating the logistic regression equation when the model is incorrect](deep_reads/2026-05-27-2605.26753.md)  
   7/10 [daily]
+- [Nonparametric Regression via Tree-Guided Feature Aggregation](deep_reads/2026-05-27-2605.26653.md)  
+  6/10 [daily]
 - [Identification and Estimation of Semiparametric Multilayered Sample Selection Models](deep_reads/2026-05-26-2605.25519.md)  
   9/10 [daily]
 - [Identification and estimation of interaction effects in nonparametric additive regression](deep_reads/2026-05-26-10.1093_biomet_asaf074.md)  
@@ -9791,10 +9795,16 @@
   9/10 [daily]
 - [The Nonparametric Kiefer-Weiss Problem](deep_reads/2026-06-01-2605.31465.md)  
   8/10 [daily]
+- [Strong log-concavity in probit regression](deep_reads/2026-06-01-2605.31218.md)  
+  7/10 [daily]
+- [M-estimation with e-statistics](deep_reads/2026-06-01-2605.30485.md)  
+  7/10 [daily]
 - [Admissibility of Adaptive Monotone Step-Down Multiple Testing Procedures Under Arbitrary Covariance Dependence](deep_reads/2026-05-29-2605.27625.md)  
   7/10 [daily]
 - [Marginal likelihoods for finite-support Huber contamination](deep_reads/2026-05-27-2605.26723.md)  
   7/10 [daily]
+- [An Entropy-Energy Identity for Predictive Kullback-Leibler Regret in Infinitely Divisible Location Models](deep_reads/2026-05-27-2605.27253.md)  
+  6/10 [daily]
 - [Rank-Based Tests for Mutual Independence of High-Dimensional Random Vectors via $L_q$ Norm](deep_reads/2026-05-26-2605.25380.md)  
   9/10 [daily]
 - [Adaptable High-Dimensional Change Point Detection via Ridge Regularization](deep_reads/2026-05-26-2605.24838.md)  
