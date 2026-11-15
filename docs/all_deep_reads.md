@@ -4855,6 +4855,10 @@
   7/10 [daily]
 - [Online Sparse Regression with Expanding Observables](deep_reads/2026-06-02-2606.00478.md)  
   7/10 [daily]
+- [Structured matrix learning under arbitrary entrywise dependence and estimation of Markov transition kernel](deep_reads/2026-05-26-10.1214_25-aos2525.md)  
+  7/10 [daily]
+- [The empirical copula process in high dimensions: Stute’s representation and applications](deep_reads/2026-05-26-10.1214_25-aos2548.md)  
+  7/10 [daily]
 - [Tensor Estimation With Structured Priors](deep_reads/2026-05-24-10.1109_jsait.2020.3040336.md)  
   9/10 [daily]
 - [Optimal Estimation of Shared Singular Subspaces Across Multiple Noisy Matrices](deep_reads/2026-05-24-10.1109_tit.2026.3667733.md)  
@@ -6642,6 +6646,8 @@
   8/10 [daily]
 - [Identification and Estimation of Semiparametric Multilayered Sample Selection Models](deep_reads/2026-05-26-2605.25519.md)  
   9/10 [daily]
+- [Inference for Deep Neural Network Estimators in Generalized Nonparametric Models](deep_reads/2026-05-26-10.1080_01621459.2026.2637894.md)  
+  7/10 [daily]
 - [High-dimensional Hilbert–Schmidt linear regression with Hilbert manifold variables](deep_reads/2026-05-26-10.1214_25-aos2559.md)  
   7/10 [daily]
 - [Optimal convex M-estimation via score matching](deep_reads/2026-05-26-10.1214_25-aos2572.md)  
@@ -9739,6 +9745,10 @@
   8/10 [daily]
 - [Minimax Limits of k-Fold Cross-Validation via Majority](deep_reads/2026-05-26-2605.25859.md)  
   8/10 [daily]
+- [Robust detection of watermarks for large language models under human edits](deep_reads/2026-05-26-10.1093_jrsssb_qkaf056.md)  
+  7/10 [daily]
+- [High-Dimensional Statistical Inference and Variable Selection Using Sufficient Dimension Association](deep_reads/2026-05-26-10.1080_01621459.2026.2632869.md)  
+  7/10 [daily]
 - [Recovering Data Permutations From Noisy Observations: The Linear Regime](deep_reads/2026-05-24-10.1109_jsait.2020.3041697.md)  
   8/10 [daily]
 - [Uniform Variance Reduced Simultaneous Inference of Time-Varying Correlation Networks](deep_reads/2026-05-24-10.1109_tit.2025.3613143.md)  
