@@ -1458,6 +1458,10 @@
   9/10 [daily]
 - [Learning a directed acyclic graph with additive heteroscedastic errors](deep_reads/2026-05-27-2605.26515.md)  
   8/10 [daily]
+- [Global Average Treatment Effects for Individualized Randomization Experiments with Aggregate Data](deep_reads/2026-05-27-2605.26532.md)  
+  7/10 [daily]
+- [Confounder Detection via Treatment Intent: A New Observational Study Design](deep_reads/2026-05-27-2605.26413.md)  
+  7/10 [daily]
 - [Geometry Adaptive Counterfactual Distribution Learning with Diffusion-Guided Smoothing](deep_reads/2026-05-26-2605.25811.md)  
   9/10 [daily]
 - [Confidence intervals for causal effects in sequential decision making](deep_reads/2026-05-26-2605.25687.md)  
@@ -1476,6 +1480,8 @@
   7/10 [daily]
 - [Harmonized estimation of subgroup-specific treatment effects in randomized trials: the use of external control data](deep_reads/2026-05-26-10.1093_jrsssb_qkaf045.md)  
   7/10 [daily]
+- [Synthetic Heterogeneous-Effects LASSO: A Fixed-effects Estimation Approach for High-dimensional Mixed-effects Models](deep_reads/2026-05-26-2605.24587.md)  
+  6/10 [daily]
 - [Distributional Off-Policy Evaluation with Deep Quantile Process Regression](deep_reads/2026-05-26-10.1080_01621459.2026.2671449.md)  
   6/10 [daily]
 - [Online statistical inference in decision-making with matrix context](deep_reads/2026-05-26-10.1214_25-aos2526.md)  
@@ -6698,6 +6704,10 @@
   7/10 [daily]
 - [Error Analysis for Deep ReLU Feedforward Density-Ratio Estimation with Bregman Divergence](deep_reads/2026-05-26-jmlr_v27_23-0425.md)  
   7/10 [daily]
+- [Nonparametric Estimation via Expected Order Statistics](deep_reads/2026-05-26-2605.25897.md)  
+  6/10 [daily]
+- [Deep Regression for Repeated Measurements under Covariate Shift](deep_reads/2026-05-26-2605.24854.md)  
+  6/10 [daily]
 - [Online Bernstein-von Mises theorem](deep_reads/2026-05-26-jmlr_v27_25-0989.md)  
   6/10 [daily]
 - [On Minimax Empirical Bayes Predictive Densities](deep_reads/2026-05-24-10.1109_tit.2025.3648620.md)  
