@@ -53,12 +53,26 @@ jobs:
       - name: Build Pagefind search index
         # Scans the built HTML in site/ and writes the sharded index +
         # search UI bundle into site/pagefind/, deployed alongside the site.
-        # Non-fatal on purpose: a broken or stale index must not cost us the
-        # whole deploy — the pages are what the site is for, and search just
-        # misses the newest content until the next run. (`pagefind` is pinned
-        # for the same reason as the pip pins above.)
+        #
+        # The indexed scope is deliberately bounded. Pagefind's peak RSS grows at
+        # ~2-3 MB per page, and the full corpus (~9.9k pages) needs ~19 GB — more
+        # than the 16 GB `ubuntu-latest` runner, so indexing everything got the
+        # job OOM-killed about a minute in (which GitHub surfaces only as
+        # "The operation was canceled."). That is what froze the site from
+        # 2026-11-14 to 2026-11-15.
+        #
+        # Scope: every section except the deep-read archive + the last three
+        # months of deep reads = ~3.6k pages / ~7.6 GB / ~55 s measured locally.
+        # Older deep reads stay published and browsable, they just do not appear
+        # in full-text search. The month list rolls automatically, so coverage
+        # does not silently age out.
         continue-on-error: true
-        run: npx -y "pagefind@1.6.0" --site site
+        run: |
+          months=$(for i in 0 1 2; do date -u -d "-$i month" +%Y-%m; done \
+                   | sed 's|^|deep_reads/|; s|$|*|' | paste -sd, -)
+          glob="{daily,journals,talks,conferences,benchmarks,autoresearch,proposals,synthesis,shootout,weekly,data,favorites,all_deep_reads,all_daily,all_journals,all_synthesis,all_shootout,all_talks,all_weekly,${months}}/**/*.html"
+          echo "pagefind glob: $glob"
+          npx -y "pagefind@1.6.0" --site site --glob "$glob"
       - uses: actions/upload-pages-artifact@v5
         with:
           path: site

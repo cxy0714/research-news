@@ -144,17 +144,22 @@
   「跳过解析失败的行」，于是冲突标记 + 被拼接的记录直接变成「语料少了一半」，而且不报任何错。
   `extract_problems` 现在读文件时检测 `<<<<<<<` / `=======` / `>>>>>>>` 并打 ERROR，要求按
   `paper_id` union 解决后再用。
-- **Pages 部署连续失败：整站停更 26 小时**（2026-11-13 19:54Z 之后没有一次成功部署）。构建本身
-  是好的（`mkdocs build --strict` 本地 211s 零警告），死在它后面的 **Pagefind 步骤**：`concurrency`
-  的 `cancel-in-progress: true` 让后到的推送把在跑的 run 掐掉，而 pagefind 是最长的一步
-  （本地索引 9887 页要 354s，CI 里 3m33s），所以每次都在那儿被杀、`upload-pages-artifact` 和
-  `deploy` 全被 skipped。更糟的是被杀后 job 还在 runner 上赖 40-50 分钟（run 622 步骤 14:33
-  结束、job 15:17 才「完成」），僵尸占着 `pages` 这一个并发名额，后面的推送只能排队互相取消。
-  修法：`cancel-in-progress: false`（构建跑完就发布，Pages 部署本身幂等）、build job 加
-  `timeout-minutes: 25`（掐掉僵尸占位）、pagefind 改 `continue-on-error: true`（索引坏了不该
-  连站一起停更）。顺带把 `mkdocs==1.6.1` / `mkdocs-material==9.7.6` / `pagefind@1.6.0` 钉死
-  （原来浮动到最新版），action 升到 `checkout@v7` / `setup-python@v7` / `setup-node@v7` /
-  `upload-pages-artifact@v5` / `deploy-pages@v5` 消掉 Node 20 弃用告警。
+- **Pages 部署连续失败：整站停更两天**（最后一次成功部署停在 2026-11-13 19:54Z）。构建本身是好的
+  （`mkdocs build --strict` 本地 211s 零警告），死在它后面的 **Pagefind 步骤**，而 GitHub 只给一句
+  `The operation was canceled.`，看起来像被并发取消。实际的根因是**内存**：Pagefind 的峰值 RSS 按
+  ~2–3 MB/页 线性增长，本机实测 9887 页要 **19 GB**（8 线程 15.2 GB、2 线程 18.9 GB，与线程数无关），
+  而 `ubuntu-latest` 只有 16 GB，于是索引建到一半就被 OOM，job 随之被标成 cancelled、
+  `upload-pages-artifact` 和 `deploy` 全被 skipped。语料在 11-14 越过 16 GB 这条线之后，每一次推送
+  都必然重演（11-13 那次是贴着上限勉强过的）。修法分两层：
+  - **索引划范围**：`--glob` 只索引「非 `deep_reads` 的全部栏目 + 最近 3 个月的精读」，实测
+    3630 页 / 7.56 GB / 53 s，在 16 GB runner 上有充足余量；月份列表由 `date -d "-N month"`
+    自动滚动，不会随月份推移悄悄失效。2026-09 以前的精读仍照常发布、可浏览，只是不进全文检索。
+  - **兜底**：`cancel-in-progress: false`（构建跑完就发布，Pages 部署本身幂等）、build job
+    `timeout-minutes: 25`（被杀后 job 曾在 runner 上赖 40–50 分钟，占住 `pages` 唯一名额）、
+    pagefind 改 `continue-on-error: true`（非 OOM 类失败不该连站一起停更）。顺带把
+    `mkdocs==1.6.1` / `mkdocs-material==9.7.6` / `pagefind@1.6.0` 钉死（原来浮动到最新版），
+    action 升到 `checkout@v7` / `setup-python@v7` / `setup-node@v7` / `upload-pages-artifact@v5` /
+    `deploy-pages@v5` 消掉 Node 20 弃用告警。
 
 ---
 
