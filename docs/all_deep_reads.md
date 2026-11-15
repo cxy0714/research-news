@@ -1458,6 +1458,8 @@
   9/10 [daily]
 - [Learning a directed acyclic graph with additive heteroscedastic errors](deep_reads/2026-05-27-2605.26515.md)  
   8/10 [daily]
+- [Causally-interpretable meta-analysis using aggregate data](deep_reads/2026-05-27-2605.27272.md)  
+  7/10 [daily]
 - [Global Average Treatment Effects for Individualized Randomization Experiments with Aggregate Data](deep_reads/2026-05-27-2605.26532.md)  
   7/10 [daily]
 - [Confounder Detection via Treatment Intent: A New Observational Study Design](deep_reads/2026-05-27-2605.26413.md)  
@@ -6688,6 +6690,8 @@
   6/10 [daily]
 - [Bernstein-von Mises Theorem for Sparse Generalized Linear Model](deep_reads/2026-05-27-2605.27137.md)  
   8/10 [daily]
+- [Estimating the logistic regression equation when the model is incorrect](deep_reads/2026-05-27-2605.26753.md)  
+  7/10 [daily]
 - [Identification and Estimation of Semiparametric Multilayered Sample Selection Models](deep_reads/2026-05-26-2605.25519.md)  
   9/10 [daily]
 - [Identification and estimation of interaction effects in nonparametric additive regression](deep_reads/2026-05-26-10.1093_biomet_asaf074.md)  
@@ -9788,6 +9792,8 @@
 - [The Nonparametric Kiefer-Weiss Problem](deep_reads/2026-06-01-2605.31465.md)  
   8/10 [daily]
 - [Admissibility of Adaptive Monotone Step-Down Multiple Testing Procedures Under Arbitrary Covariance Dependence](deep_reads/2026-05-29-2605.27625.md)  
+  7/10 [daily]
+- [Marginal likelihoods for finite-support Huber contamination](deep_reads/2026-05-27-2605.26723.md)  
   7/10 [daily]
 - [Rank-Based Tests for Mutual Independence of High-Dimensional Random Vectors via $L_q$ Norm](deep_reads/2026-05-26-2605.25380.md)  
   9/10 [daily]
@@ -13947,6 +13953,8 @@
   7/10 [daily]
 - [Unsupervised Morphological Characterization of Gravitational-Wave Glitches in LIGO O4a Using Frozen DINOv2 Features](deep_reads/2026-05-29-2605.28572.md)  
   6/10 [daily]
+- [A distributed resource-adaptive implementation of the widefield radio-interferometric measurement model for scalable image formation](deep_reads/2026-05-27-2605.26347.md)  
+  7/10 [daily]
 - [skysurvey: a pure python package to simulate the transient sky](deep_reads/2026-05-26-2605.25840.md)  
   6/10 [daily]
 - [A Markov-Chain-Monte-Carlo-based Hybrid Noise Inference for Continuous Wavelet Power Spectra: with Applications to Solar and Stellar Oscillatory Signals](deep_reads/2026-05-25-2605.23587.md)  
