@@ -848,6 +848,14 @@
   6/10 [daily]
 - [How Many Samples Are Needed to Determine Causal Direction? Sharp Minimax Bounds for Bivariate LiNGAM](deep_reads/2026-08-17-2608.15840.md)  
   9/10 [daily]
+- [Optimal Control Variates for Survey Sampling and Causal Inference](deep_reads/2026-08-17-2608.15333.md)  
+  8/10 [daily]
+- [Energy Balancing Weights for Mediation Analysis](deep_reads/2026-08-17-2608.15497.md)  
+  8/10 [daily]
+- [Doubly robust estimation of while-alive estimands in individually-randomized and cluster-randomized trials](deep_reads/2026-08-17-2608.15969.md)  
+  8/10 [daily]
+- [Randomization inference for treatment effects on survival outcomes](deep_reads/2026-08-17-2608.16529.md)  
+  8/10 [daily]
 - [Generalized Hierarchical Conformal Prediction](deep_reads/2026-08-17-2608.15500.md)  
   6/10 [daily]
 - [Semi-supervised Concordance Learning for Optimal Individual Treatment Regimes](deep_reads/2026-08-14-2608.13945.md)  
@@ -4803,6 +4811,10 @@
   7/10 [daily]
 - [Generalized Linear Models for Extremes: Estimation and Inference in High Dimensions](deep_reads/2026-08-18-2608.16137.md)  
   6/10 [daily]
+- [A Central Limit Theorem for Regularized M-Estimators](deep_reads/2026-08-17-2608.15034.md)  
+  8/10 [daily]
+- [Empirical Bayes linear regression in high dimensions: Method of moments and sub-linear sample complexity](deep_reads/2026-08-17-2608.16771.md)  
+  8/10 [daily]
 - [The Bethe-Hessian down to the Percolation Threshold](deep_reads/2026-08-17-2608.16672.md)  
   7/10 [daily]
 - [Change Point Detection and Localization in High-Dimensional Time Series](deep_reads/2026-08-14-2608.14344.md)  
@@ -6543,6 +6555,8 @@
 - [Non-asymptotic Analysis of Matérn Regression: The Roles of Target and Kernel Lengthscales](deep_reads/2026-08-25-2608.22553.md)  
   7/10 [daily]
 - [On the minimax-rate optimality of approximate Bayesian computation in nonparametric problems](deep_reads/2026-08-19-2608.15648.md)  
+  8/10 [daily]
+- [On the minimax-rate optimality of approximate Bayesian computation in nonparametric problems](deep_reads/2026-08-17-2608.15648.md)  
   8/10 [daily]
 - [On Finite Gaussian Mixtures: Finiteness of the Number of Modes and an Application to NPMLE](deep_reads/2026-08-17-2608.16675.md)  
   6/10 [daily]
