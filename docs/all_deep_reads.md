@@ -1294,6 +1294,8 @@
   6/10 [daily]
 - [Bounds for Standard Errors in Combined Data](deep_reads/2026-06-25-2606.24867.md)  
   6/10 [daily]
+- [Using instrumental variables to address unmeasured confounding in causal mediation analysis](deep_reads/2026-06-24-10.1093_biomtc_ujad037.md)  
+  9/10 [daily]
 - [Semi- and non-parametric approaches to individualized treatment regimes in the presence of causal mediation](deep_reads/2026-06-24-2606.21708.md)  
   9/10 [daily]
 - [Cumulative Natural Direct and Indirect Effects for Causal Mediation Analysis](deep_reads/2026-06-24-2606.22165.md)  
@@ -1364,6 +1366,8 @@
   7/10 [daily]
 - [Partial Identification from LLM Prompts](deep_reads/2026-06-17-2606.15031.md)  
   7/10 [daily]
+- [Bayesian joint modelling using semiparametric accelerated failure time approaches](deep_reads/2026-06-17-2606.16080.md)  
+  6/10 [daily]
 - [On Response-Adaptive Targeting Strategies for Multi-Treatment Experiments](deep_reads/2026-06-17-2606.17777.md)  
   6/10 [daily]
 - [Subgroup analysis in randomized controlled trials with binary outcomes: dilution and logic-respecting properties](deep_reads/2026-06-17-2606.17841.md)  
@@ -13931,6 +13935,10 @@
   6/10 [daily]
 - [Scalable Bayesian data curation for next-generation radio experiments](deep_reads/2026-06-17-2606.16525.md)  
   8/10 [daily]
+- [Graph Neural Networks Trained on Null Signal for Angle Reconstruction in X-ray Polarimetry](deep_reads/2026-06-17-2606.16922.md)  
+  6/10 [daily]
+- [Direct High-Resolution Imaging of Earth-like Exoplanets with the Solar Gravitational Lens](deep_reads/2026-06-17-2606.14899.md)  
+  6/10 [daily]
 - [On-sky binary source hypothesis testing beyond the diffraction limit using spatial mode demultiplexing based detection](deep_reads/2026-06-17-2606.18025.md)  
   6/10 [daily]
 - [Querying an astronomical database using large language models: the ALeRCE text-to-SQL system](deep_reads/2026-06-17-2606.18108.md)  
@@ -18192,6 +18200,8 @@
 - [What is your Prior Worth? Effective Sample Size and Sample Size Planning for Gaussian Graphical Models](deep_reads/2026-06-24-2606.22687.md)  
   6/10 [daily]
 - [Reformulation Invariance and the Axiomatic Foundations of Inference](deep_reads/2026-06-24-2606.21551.md)  
+  6/10 [daily]
+- [On the design distribution for predictive Bayesian regression](deep_reads/2026-06-12-2606.14544.md)  
   6/10 [daily]
 - [Testing Preferential Sampling](deep_reads/2026-06-12-2606.14615.md)  
   6/10 [daily]
