@@ -846,6 +846,8 @@
   6/10 [daily]
 - [Outcome Modeling in Design-Based Inference for Spatial Settings](deep_reads/2026-08-18-2608.15439.md)  
   6/10 [daily]
+- [How Many Samples Are Needed to Determine Causal Direction? Sharp Minimax Bounds for Bivariate LiNGAM](deep_reads/2026-08-17-2608.15840.md)  
+  9/10 [daily]
 - [Generalized Hierarchical Conformal Prediction](deep_reads/2026-08-17-2608.15500.md)  
   6/10 [daily]
 - [Semi-supervised Concordance Learning for Optimal Individual Treatment Regimes](deep_reads/2026-08-14-2608.13945.md)  
@@ -1214,6 +1216,10 @@
   8/10 [daily]
 - [Conformal Bayes for Two-Sided Censored Gaussian Regression under Label Shift](deep_reads/2026-07-02-2607.02173.md)  
   6/10 [daily]
+- [An Instrumental Variable Approach to Account for Informative Treatment Switching in Real-world Evidence](deep_reads/2026-07-01-2607.00980.md)  
+  8/10 [daily]
+- [Robust Estimation and Inference with Selective Borrowing in Hybrid Controlled Trials: A Tutorial with SelectiveIntegrative and intFRT](deep_reads/2026-07-01-2607.00350.md)  
+  7/10 [daily]
 - [Distributed Prediction under Heterogeneity with Unidentifiable Parameter](deep_reads/2026-07-01-2607.00376.md)  
   7/10 [daily]
 - [Semiparametric Efficiency in Sequential Experiments: Characterization and Design via Average Propensity](deep_reads/2026-06-30-2606.31190.md)  
@@ -8724,6 +8730,8 @@
   9/10 [daily]
 - [Outcome-adapted Automatic Debiased Machine Learning](deep_reads/2026-07-07-2607.03351.md)  
   8/10 [daily]
+- [Sensitivity, Informativeness, and Misspecification in GMM Estimation](deep_reads/2026-06-29-2606.29833.md)  
+  6/10 [daily]
 - [Semiparametric Efficiency Theory as Differential Calculus on a Space of Probability Distributions](deep_reads/2026-06-24-2606.22784.md)  
   9/10 [daily]
 - [On the Asymptotic Inadmissibility of Double Machine Learning Estimators Under Structure-Agnostic Models](deep_reads/2026-06-24-2606.22391.md)  
@@ -9739,6 +9747,8 @@
   7/10 [daily]
 - [Goodness of Fit Tests Based on Joint Densities of Multiple Sample Statistics](deep_reads/2026-07-02-2607.02285.md)  
   6/10 [daily]
+- [Post-selection inference for network structure](deep_reads/2026-07-01-2607.00312.md)  
+  7/10 [daily]
 - [High-Confidence Minimax Testing with Prescribed Errors](deep_reads/2026-06-30-2606.31593.md)  
   8/10 [daily]
 - [Testing hypotheses via orthogonalization](deep_reads/2026-06-30-2606.29732.md)  
@@ -13937,6 +13947,8 @@
   6/10 [daily]
 - [Mapping Stellar Heterogeneities with the Nautilus Space Observatory](deep_reads/2026-07-01-2606.30706.md)  
   7/10 [daily]
+- [GTLS: A GPU-accelerated method for periodic transit detection](deep_reads/2026-07-01-2607.00348.md)  
+  6/10 [daily]
 - [Deep Learning for Astrophysics: An Open Textbook from the NASA Cosmic Origins AI/ML Science and Technology Interest Group](deep_reads/2026-07-01-2606.30855.md)  
   6/10 [daily]
 - [Gaussian processes on ray-guided transformed uniform grids for fast, flexible, and auto-differentiable adaptive source reconstruction in lens modelling](deep_reads/2026-06-30-2606.30620.md)  
@@ -13951,6 +13963,8 @@
   6/10 [daily]
 - [Gaussian processes on ray-guided transformed uniform grids for fast, flexible, and auto-differentiable adaptive source reconstruction in lens modelling](deep_reads/2026-06-29-2606.30620.md)  
   7/10 [daily]
+- [PIE-ADA: Physics-Informed Ensemble with Adaptive Data Augmentation for Photometric Transient Classification](deep_reads/2026-06-29-2606.29367.md)  
+  6/10 [daily]
 - [A Covariance-Aware Framework for Spatially Resolved Exoplanet Biosignature Inference with the Solar Gravitational Lens](deep_reads/2026-06-29-2606.29138.md)  
   6/10 [daily]
 - [Domain-Informed Multi-View Self-Distillation for Astronomical Light-Curve Representation Learning with JEPA](deep_reads/2026-06-26-2606.28446.md)  
