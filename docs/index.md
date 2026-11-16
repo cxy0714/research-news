@@ -17,7 +17,7 @@
 
 [→ 查看完整报告](daily/2026-11-16.md)
 
-### 精读论文（16 篇）
+### 精读论文（20 篇）
 
 - [Sharp Poisson approximation and second-order correction for long multiplicative runs](deep_reads/2026-11-16-hexagon_2611.00447.md)  
   `其他` · 相关性 7/10
@@ -37,6 +37,14 @@
   `其他` · 相关性 1/10
 - [Towards a conformal field theory of critical percolation. I. The bulk stress tensor and Ward identities.](deep_reads/2026-11-16-hexagon_2611.00497.md)  
   `其他` · 相关性 1/10
+- [Joint marked moments and optimized zero-free half-planes for unitary Hecke L-functions](deep_reads/2026-11-16-hexagon_2611.00421.md)  
+  `其他` · 相关性 0/10
+- [Landau's problems through ratios of $L$-functions](deep_reads/2026-11-16-hexagon_2611.00423.md)  
+  `其他` · 相关性 0/10
+- [A proof of Brauer's $k(B)$-conjecture at the prime two](deep_reads/2026-11-16-hexagon_2611.00426.md)  
+  `其他` · 相关性 0/10
+- [A proof of the Hausel–Rodriguez-Villegas conjecture](deep_reads/2026-11-16-hexagon_2611.00427.md)  
+  `其他` · 相关性 0/10
 - [A proof of Lusztig’s conjectures for extended affine Weyl groups](deep_reads/2026-11-16-hexagon_2611.00411.md)  
   `其他` · 相关性 0/10
 - [A proof of Lusztig's connectedness conjecture in finite type](deep_reads/2026-11-16-hexagon_2611.00406.md)  
