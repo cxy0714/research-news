@@ -17,12 +17,14 @@
 
 [→ 查看完整报告](daily/2026-11-16.md)
 
-### 精读论文（3 篇）
+### 精读论文（4 篇）
 
 - [Sharp Poisson approximation and second-order correction for long multiplicative runs](deep_reads/2026-11-16-hexagon_2611.00447.md)  
   `其他` · 相关性 7/10
 - [An explicit determinantal formula for Sinkhorn limits of matrices and tensors](deep_reads/2026-11-16-hexagon_2611.00433.md)  
   `统计计算 / 算法` · 相关性 6/10
+- [Vieta invariants and Markoff–Hurwitz orbits](deep_reads/2026-11-16-hexagon_2611.00493.md)  
+  `其他` · 相关性 1/10
 - [Towards a conformal field theory of critical percolation. I. The bulk stress tensor and Ward identities.](deep_reads/2026-11-16-hexagon_2611.00497.md)  
   `其他` · 相关性 1/10
 
