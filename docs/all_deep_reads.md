@@ -1402,6 +1402,8 @@
   8/10 [daily]
 - [AI-Assisted Variance Reduction in Randomized Experiments](deep_reads/2026-06-09-2606.08853.md)  
   7/10 [daily]
+- [Divide-and-shrink: An efficient and heterogeneity-agnostic approach for transfer estimation using summary statistics](deep_reads/2026-06-09-2606.08981.md)  
+  6/10 [daily]
 - [One-step Outcome Imputation: An Alternative to Multiple Imputation](deep_reads/2026-06-08-2606.07174.md)  
   8/10 [daily]
 - [Causal inference of Plackett-Burman designs in applications](deep_reads/2026-06-08-2606.06961.md)  
@@ -6666,6 +6668,8 @@
   8/10 [daily]
 - [Constraint residuals, graph posteriors, and determinant-corrected full-space targets in Bayesian inverse problems](deep_reads/2026-06-09-2606.09594.md)  
   8/10 [daily]
+- [Inference for Balance in Dynamic Signed Networks](deep_reads/2026-06-09-2606.08786.md)  
+  6/10 [daily]
 - [A Temporal Spatial Minimax Rate for Smoothly-Varying Distributions in Wasserstein Space](deep_reads/2026-06-08-2606.07325.md)  
   9/10 [daily]
 - [Smooth Hard-Thresholding for Singular Values with Stein's Unbiased Risk Estimate](deep_reads/2026-06-08-2606.06632.md)  
@@ -9781,6 +9785,8 @@
   7/10 [daily]
 - [Revisiting the Behrens-Fisher Problem: Validity-First Optimality](deep_reads/2026-06-09-2606.07847.md)  
   7/10 [daily]
+- [Online change point detection under heavy-tailedness and contamination](deep_reads/2026-06-09-2606.09737.md)  
+  6/10 [daily]
 - [Sequential testing of conditionally constrained hypotheses](deep_reads/2026-06-08-2606.06769.md)  
   8/10 [daily]
 - [Testing Equality of Conditional Distributions via Generative Models](deep_reads/2026-06-08-2606.06930.md)  
@@ -13961,6 +13967,8 @@
   8/10 [daily]
 - [Beyond Point Estimates: Benchmarking Uncertainty Quantification Methods on the AION-1 Astronomical Foundation Model](deep_reads/2026-06-09-2606.07771.md)  
   7/10 [daily]
+- [Fast Astronomical Transients in Archival Photographic Plates: Using optical aberrations as a tool for discerning real images, from plate artifacts](deep_reads/2026-06-09-2606.08319.md)  
+  6/10 [daily]
 - [Where Not to Look: A Parametric Avoidance Model for SETI Target Selection](deep_reads/2026-06-08-2606.06692.md)  
   7/10 [daily]
 - [Toward decision-aware AI for LSST-scale time-domain astronomy](deep_reads/2026-06-05-2606.05285.md)  
@@ -18190,6 +18198,8 @@
 - [Introducing precision-weighted bias as a performance measure to inform the inclusion of adaptive designs in meta-analysis](deep_reads/2026-06-12-2606.12015.md)  
   4/10 [daily]
 - [Correcting Variable Importance Scored by Random Forests](deep_reads/2026-06-11-2606.10770.md)  
+  6/10 [daily]
+- [Robust high-dimensional Bayesian regression with non-Gaussian errors under global--local shrinkage priors](deep_reads/2026-06-09-2606.09307.md)  
   6/10 [daily]
 - [Methods for adjusting for covariate measurement error in flexible modelling of functional form: designing a blinded, controlled neutral comparison simulation study](deep_reads/2026-06-02-2606.02130.md)  
   6/10 [daily]
