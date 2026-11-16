@@ -17,12 +17,18 @@
 
 [→ 查看完整报告](daily/2026-11-16.md)
 
-### 精读论文（6 篇）
+### 精读论文（11 篇）
 
 - [Sharp Poisson approximation and second-order correction for long multiplicative runs](deep_reads/2026-11-16-hexagon_2611.00447.md)  
   `其他` · 相关性 7/10
 - [An explicit determinantal formula for Sinkhorn limits of matrices and tensors](deep_reads/2026-11-16-hexagon_2611.00433.md)  
   `统计计算 / 算法` · 相关性 6/10
+- [A proof of the scheme-theoretic Humphreys conjectures](deep_reads/2026-11-16-hexagon_2611.00408.md)  
+  `其他` · 相关性 1/10
+- [The Shapiro–Shapiro conjecture for ordered positive flags](deep_reads/2026-11-16-hexagon_2611.00409.md)  
+  `其他` · 相关性 1/10
+- [The inductive Alperin–McKay condition for $G_2(q)$ and ${}^3D_4(q)$](deep_reads/2026-11-16-hexagon_2611.00450.md)  
+  `其他` · 相关性 1/10
 - [Further cases of the inductive Alperin–McKay condition](deep_reads/2026-11-16-hexagon_2611.00451.md)  
   `其他` · 相关性 1/10
 - [Density-One Uniqueness for Markoff–Hurwitz Solutions](deep_reads/2026-11-16-hexagon_2611.00490.md)  
@@ -31,6 +37,10 @@
   `其他` · 相关性 1/10
 - [Towards a conformal field theory of critical percolation. I. The bulk stress tensor and Ward identities.](deep_reads/2026-11-16-hexagon_2611.00497.md)  
   `其他` · 相关性 1/10
+- [An Irredundant Test for Circular Positivity](deep_reads/2026-11-16-hexagon_2611.00488.md)  
+  `其他` · 相关性 0/10
+- [A Counterexample to the Realizability Conjecture for Surface Classes](deep_reads/2026-11-16-hexagon_2611.00489.md)  
+  `其他` · 相关性 0/10
 
 ## 收藏
 

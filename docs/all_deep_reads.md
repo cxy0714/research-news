@@ -17649,6 +17649,12 @@
 
 - [Sharp Poisson approximation and second-order correction for long multiplicative runs](deep_reads/2026-11-16-hexagon_2611.00447.md)  
   7/10 [daily]
+- [A proof of the scheme-theoretic Humphreys conjectures](deep_reads/2026-11-16-hexagon_2611.00408.md)  
+  1/10 [daily]
+- [The Shapiro–Shapiro conjecture for ordered positive flags](deep_reads/2026-11-16-hexagon_2611.00409.md)  
+  1/10 [daily]
+- [The inductive Alperin–McKay condition for $G_2(q)$ and ${}^3D_4(q)$](deep_reads/2026-11-16-hexagon_2611.00450.md)  
+  1/10 [daily]
 - [Further cases of the inductive Alperin–McKay condition](deep_reads/2026-11-16-hexagon_2611.00451.md)  
   1/10 [daily]
 - [Density-One Uniqueness for Markoff–Hurwitz Solutions](deep_reads/2026-11-16-hexagon_2611.00490.md)  
@@ -17657,6 +17663,10 @@
   1/10 [daily]
 - [Towards a conformal field theory of critical percolation. I. The bulk stress tensor and Ward identities.](deep_reads/2026-11-16-hexagon_2611.00497.md)  
   1/10 [daily]
+- [An Irredundant Test for Circular Positivity](deep_reads/2026-11-16-hexagon_2611.00488.md)  
+  0/10 [daily]
+- [A Counterexample to the Realizability Conjecture for Surface Classes](deep_reads/2026-11-16-hexagon_2611.00489.md)  
+  0/10 [daily]
 - [Certified lower bounds on the optimal-decoding threshold of the surface code](deep_reads/2026-11-13-hexagon_2611.00371.md)  
   6/10 [daily]
 - [Which Fine-Grained Lower Bounds Survive the Refutation of 3SUM and APSP?](deep_reads/2026-11-13-hexagon_2611.00388.md)  
