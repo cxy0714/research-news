@@ -84095,12 +84095,12 @@
       "orthogonal score",
       "spatial cross-fitting",
       "control function",
-      "near epoch dependence",
-      "spatial autoregression"
+      "SAR-IV/GMM",
+      "near epoch dependence"
     ],
     "novelty_flag": "new_method",
-    "summary_zh": "本文在空间自回归（SAR）模型中，针对空间权重矩阵 W 的未知函数形式问题，提出了双/去偏机器学习（DML）推断方法。传统 SAR 推断通常假设 W 已知，但实际中 W 由地理和社会经济特征的非线性函数生成，且这些特征可能存在内生性。作者通过非线性控制函数处理特征内生性，并构建了算子正交的 SAR-IV/GMM 得分函数，消除了估计 W 带来的一阶影响。结合缓冲空间交叉拟合（buffered spatial cross-fitting），在空间混合创新场的近邻依赖条件下，证明了估计量的渐近线性和根 n 正态性。蒙特卡洛模拟表明，在 W 函数形式误设、特征内生和空间依赖存在时，该方法相比非正交替代方法具有更好的有限样本推断表现。对美国糖尿病数据的应用显示，不同 W 设定和推断方法会导致结论差异，凸显了在 W 被学习时进行稳健推断的重要性。该工作将 DML 框架扩展到空间计量经济学，为因果推断中处理未知干扰结构提供了新思路，尤其适用于流行病学中空间混杂因素的敏感性分析。",
-    "why_relevant": "本文直接连接您对因果推断中 DML 和敏感性分析的兴趣，特别是处理未知干扰结构（如空间权重）时的正交得分构造。您武器库中'非参数统计'和'因果推断中的估计理论'可直接用于理解其正交化机制和渐近理论，而'空间交叉拟合'的 buffering 策略可能启发您在纵向或网络数据中设计类似的数据分割方案。中期可做：若想将类似思路推广到 proximal CI 中的负对照设定，需先在 moderately_familiar 的'因果推断中的识别理论'上深入理解空间内生性的控制函数识别条件。",
+    "summary_zh": "本文在空间自回归（SAR）模型中，针对空间权重矩阵 W 的设定不确定性，提出了一种双/去偏机器学习（DML）推断方法。传统 SAR 推断通常假定 W 已知，但实际中 W 的生成机制未知且可能依赖于内生特征，导致推断对 W 的设定敏感。作者将 W 视为由地理和社会经济特征的未知函数生成，并通过非线性控制函数处理特征内生性。由于学习到的 W 同时进入空间滞后项和空间变换工具变量，直接将其视为已知会产生一阶生成-W 效应；为此构造了算子正交的 SAR-IV/GMM 得分，并结合缓冲空间交叉拟合（buffered spatial cross-fitting）分离评估得分与 nuisance 训练数据。在空间混合创新场和近端点依赖条件下，估计量渐近线性且根号 n 正态。蒙特卡洛模拟显示，在交互函数误设、特征内生和空间依赖情形下，所提方法比非正交替代方法具有更好的有限样本推断性能。美国糖尿病应用表明 SAR 推断对 W 的选择敏感，且即使 W 相同，不同推断方法结果也不同，凸显了 W 学习时推断的重要性。",
+    "why_relevant": "本文直接关联因果推断中的 DML 与正交化方法，且其处理生成协变量（W）内生性的思路可迁移至您熟悉的 causal inference 子方向（如 IV 与 mediation）。您可用 very_familiar 的软件开发和估计理论工具复现其模拟，或用 moderately_familiar 的 semiparametric theory 审视其正交得分的效率性质。中期可做：将缓冲空间交叉拟合与您的 higher-order U-statistics 计算框架结合，分析其估计量的高阶性质。",
     "pdf_path": "data\\highlights\\causal_inference\\2608.22706.pdf",
     "first_seen": "2026-08-24"
   },
@@ -84147,17 +84147,43 @@
     "score": 8.0,
     "topic": "causal_inference",
     "key_techniques": [
-      "inverse probability weighting (IPW)",
+      "inverse probability weighting",
       "additive nonignorability",
       "generalized chi-squared distribution",
       "refreshment sample",
-      "parametric model",
-      "missing at random (MAR) test"
+      "parametric models"
     ],
     "novelty_flag": "new_method",
-    "summary_zh": "本文针对面板数据中因样本损耗（attrition / nonresponse）导致的缺失机制，提出了一种检验 MAR（selection on observables / missing at random）假设的统计方法。核心设定是：当存在 refreshment sample（即从同一总体中独立抽取的新横截面样本）时，MAR 假设变得可检验。方法构造了两个加权估计分布之间的距离：一个是标准 IPW 估计量（在 MAR 下有效），另一个是基于 Hirano et al. (2001) 的 additive nonignorability 假设的替代加权估计量。在输入分布为参数模型（parametric）的设定下，作者证明检验统计量在原假设下收敛到广义卡方分布（generalized chi-squared distribution），该极限分布可通过 Franguridi et al. (2026) 的递归公式计算。蒙特卡洛模拟验证了有限样本表现，并在 Understanding America Study (UAS) 数据上进行了实证应用。对您而言，本文属于因果推断中缺失数据假设检验的经典问题，与您 primary interest 中的 longitudinal / sensitivity analysis 直接相关，且检验框架可迁移至您熟悉的 M-estimation 理论框架下分析。",
-    "why_relevant": "本文直接连接您的 primary interest 中 longitudinal 因果推断的缺失数据问题（MAR 假设检验），属于 sensitivity analysis 的变体。技术层面，检验统计量的极限分布推导可被您的 M-estimation 理论（moderately_familiar）攻破——您可以用 influence function 视角重新推导该检验的局部 power 性质，或将其推广到半参数模型。中期可做：需先在 moderately_familiar 的 semiparametric theory 上长肌肉（具体为 influence function 在非参数模型下的收敛性），才能将本文的参数检验推广到非参数设定。",
+    "summary_zh": "本文研究面板数据中样本选择（如流失、无应答）下可忽略性假设（MAR）的检验问题。在存在 refreshment sample 的情况下，MAR 假设变得可检验。作者提出一种基于两个估计分布之间距离的检验统计量：一个是在 MAR 下有效的标准逆概率加权（IPW）估计，另一个是在 Hirano et al. (2001) 的加性不可忽略性（additive nonignorability）较弱假设下有效的替代加权估计。该检验隐式比较了流失期 IPW 加权样本分布与 refreshment sample 分布，若 MAR 成立则二者一致。作者证明，当输入分布为参数模型时，检验统计量在原假设下收敛到广义卡方分布，该极限分布可通过 Franguridi et al. (2026) 的递推公式估计。通过蒙特卡洛模拟验证了检验的性能，并应用于 Understanding America Study (UAS) 数据的子样本。",
+    "why_relevant": "该文直接关联您的主要兴趣——因果推断中的识别与假设检验，特别是 MAR 假设的可检验性，属于 longitudinal 设定下的敏感性问题。您可以用 very_familiar 的估计理论（如 IPW 的渐近性质）来审视其检验的有限样本表现，或用 moderately_familiar 的 semiparametric 理论来探讨其效率。中期可做：若想推广到非参数设定，需在 semiparametric 理论上加强。",
     "pdf_path": "data\\highlights\\causal_inference\\2608.23508.pdf",
+    "first_seen": "2026-08-24"
+  },
+  {
+    "paper_id": "2608.22605",
+    "source": "arxiv",
+    "title": "Closed-form estimation and uniform inference in additively separable triangular models with a nonseparable first stage",
+    "authors": [
+      "Keita Sunada"
+    ],
+    "url": "https://arxiv.org/abs/2608.22605",
+    "venue": null,
+    "published": "2026-08-23",
+    "categories": [],
+    "score": 8.0,
+    "topic": "causal_inference",
+    "key_techniques": [
+      "closed-form identification",
+      "plug-in estimation",
+      "minimax optimal rate",
+      "empirical bootstrap",
+      "uniform confidence band",
+      "nonseparable first stage"
+    ],
+    "novelty_flag": "new_method",
+    "summary_zh": "本文研究可加可分三角模型（additively separable triangular model）的非参数识别与估计，其中内生变量连续、工具变量连续，且允许第一阶段方程不可分。在工具变量与不可观测项独立的假设下，作者证明结果方程（outcome function）具有闭式表达式，可写成条件累积分布函数的泛函。由此构造的 plug-in 估计量无需正则化，收敛速度为 n^{-m/(2m+1)}，其中 m 为模型施加的光滑阶数，且该速率是最优的（没有估计量能更快收敛）。作者使用经验 bootstrap 构造均匀置信带，在紧集上同时覆盖结果方程。该工作为工具变量非参数估计提供了一种无需调参、速率最优的新途径，且理论证明清晰。对您而言，其闭式估计与最优收敛速率的结果可直接与您熟悉的非参数 minimax 理论对接，且其 bootstrap 均匀推断方法可迁移至您关注的因果推断中的敏感性分析或纵向设定。",
+    "why_relevant": "本文属于因果推断中 IV 方法的非参数识别与估计，直接对接您的 primary interest 中的 IV 子方向。其闭式估计量无需正则化，且收敛速率达到 minimax 最优，您可以用 very_familiar 的 minimax bounds 工具验证其速率紧性，并进一步探索其估计量的高阶性质（如用 higher-order U-statistics 视角分析其 bootstrap 的覆盖精度）。中期可做：若想将其推广到更复杂设定（如纵向或代理变量），需先在 moderately_familiar 的 semiparametric theory 上加强。",
+    "pdf_path": "data\\highlights\\causal_inference\\2608.22605.pdf",
     "first_seen": "2026-08-24"
   },
   {
@@ -84179,41 +84205,14 @@
     "key_techniques": [
       "synthetic control method",
       "interactive fixed effects model",
-      "staggered policy implementation",
       "no-anticipation assumption",
-      "potential outcomes framework"
+      "potential outcomes framework",
+      "two-stage residualization"
     ],
     "novelty_flag": "new_method",
-    "summary_zh": "本文在 staggered policy implementation 的潜在结果框架下，形式化了政策干预的 early adoption 现象——即在强制合规前自愿采用导致结果提前变化，从而违反合成控制方法（SCM）的 no-anticipation 假设。作者将总政策效应分解为 early adoption 效应和 mandate 效应两部分，并提出两阶段 SCM 程序：第一阶段利用 pre-mandate 数据通过交互固定效应模型估计 early adoption 效应，第二阶段对残差化后的结果应用 SCM 变体来估计 mandate 和总效应。模拟实验表明，即使在 early adoption 与潜在因子相关时，该方法相比传统 SCM 估计量也能减少偏差并改进不确定性量化。应用至州级 PDMP 政策与人均阿片类药物配发数据后，估计显示 PDMP 可用性和强制令后阿片类药物配发有所减少，但估计不精确且未达统计显著性。该工作为政策评估中常见的提前采纳问题提供了可操作的识别与估计框架，对您关注的纵向因果推断和敏感性分析方向有直接参考价值。",
-    "why_relevant": "直接连接到您 primary interest 中的纵向因果推断（longitudinal causal inference）和敏感性分析方向。本文的 early adoption 分解思路可视为一种对 SCM 假设的敏感性分析，您可以用 very_familiar 的 minimax bounds 工具来刻画该两阶段估计量的最优收敛速率，或用 moderately_familiar 的 identification theory 来检验 early adoption 效应是否在更弱假设下可识别。中期可做：需先在 moderately_familiar 的 semiparametric theory 上长肌肉，以推导该估计量的半参效率界。",
+    "summary_zh": "本文在潜在结果框架下形式化了政策分阶段实施中的早期采纳（early adoption）问题，指出这会违反合成控制法（SCM）的 no-anticipation 假设，导致政策效应估计有偏。作者将总政策效应分解为早期采纳效应和强制实施效应两部分，并提出一个两阶段、对早期采纳敏感的 SCM 程序：先用交互固定效应模型基于强制实施前数据估计早期采纳效应，再对结果进行残差化，然后应用 SCM 变体估计强制实施和总效应。模拟研究（包括早期采纳与潜在因子相关的设定）显示，相比传统 SCM 估计量，该方法降低了偏差并改善了不确定性量化。应用部分针对美国州级处方药监测计划（PDMP）与人均阿片类药物配药量，在调整早期采纳后，估计显示 PDMP 可用性和强制实施后配药量有所下降，但估计不精确且不显著。对您而言，该文将 SCM 的识别假设（no-anticipation）与纵向因果推断中的交错实施设定结合，是您 causal inference 子方向（纵向、政策评估）的一个具体延伸，且其两阶段残差化思路与您熟悉的估计理论有直接接口。",
+    "why_relevant": "该文直接关联您 primary interest 中的 causal inference 纵向设定，具体是政策交错实施下的 SCM 识别假设放松。您可用 very_familiar 的 estimation theory in causal inference 来审视其两阶段估计量的有限样本性质，或用 moderately_familiar 的 semiparametric theory 推导其影响函数以改进不确定性量化；中期可做，需先在 semiparametric theory 上加强以处理交互固定效应模型的非参数部分。",
     "pdf_path": "data\\highlights\\causal_inference\\2608.23472.pdf",
-    "first_seen": "2026-08-24"
-  },
-  {
-    "paper_id": "2608.22605",
-    "source": "arxiv",
-    "title": "Closed-form estimation and uniform inference in additively separable triangular models with a nonseparable first stage",
-    "authors": [
-      "Keita Sunada"
-    ],
-    "url": "https://arxiv.org/abs/2608.22605",
-    "venue": null,
-    "published": "2026-08-23",
-    "categories": [],
-    "score": 7.0,
-    "topic": "causal_inference",
-    "key_techniques": [
-      "additively separable triangular model",
-      "nonseparable first stage",
-      "closed-form plug-in estimator",
-      "minimax optimal rate",
-      "uniform confidence band",
-      "empirical bootstrap"
-    ],
-    "novelty_flag": "new_method",
-    "summary_zh": "本文研究可加可分三角模型（additively separable triangular model）中结果方程的非参数识别与估计，允许第一阶段方程不可分，且内生变量与工具变量均为连续型。在工具变量与不可观测项独立的假设下，作者证明结果函数可表示为条件累积分布函数的闭式泛函，从而得到无需正则化的plug-in估计量。该估计量收敛速度为 n^{-m/(2m+1)}，其中 m 为模型施加的光滑阶数，且该速率是极小极大最优的。作者进一步利用经验bootstrap构造了结果函数在紧集上同时一致的置信带。该工作为连续IV设定下的非参数估计提供了简洁、无需调参的替代方案，对您关注的因果推断中IV方法的识别与估计理论有直接参考价值。",
-    "why_relevant": "直接连接您 primary interest 中的 IV 因果推断方向，特别是连续IV的非参数识别与估计。该文的闭式估计量无需正则化，其极小极大最优速率可与您熟悉的 minimax bounds 工具直接对比验证。中期可做：若将方法推广到高维或多阶段设定，需先在 moderately_familiar 的 semiparametric theory 上加强（如 influence function 推导）。",
-    "pdf_path": "data\\highlights\\causal_inference\\2608.22605.pdf",
     "first_seen": "2026-08-24"
   },
   {
@@ -84264,13 +84263,12 @@
       "efficient influence function",
       "multiply robust estimation",
       "counterfactual cumulative incidence",
-      "multi-state model",
-      "treatment-induced confounding",
-      "hypothetical intervention"
+      "hypothetical interventions",
+      "multi-state survival model"
     ],
     "novelty_flag": "new_method",
-    "summary_zh": "本文针对临床试验中生存终点存在中间事件（如疾病进展）时的路径处理效应估计问题。中间事件作为治疗诱导的混杂因素，使得自然效应中的序贯可忽略性假设或可分离效应中的可忽略成分条件失效。作者提出对事件状态间的转移施加假设性干预来模拟治疗机制，从而调整通过中间事件的效应并边际化未观测的治疗诱导混杂。基于反事实累积发生率的有效影响函数，构建了多重稳健且半参数有效的路径处理效应估计量。该框架可检验每个转移、每个事件以及每条路径上的处理效应。通过LEADER试验数据分析，发现利拉鲁肽显著降低心血管和微血管事件风险，且全因死亡率的降低主要由其对扩展的主要不良心血管事件的影响介导。本文对您有用：它直接连接您对因果推断中纵向数据与中介分析的兴趣，且其多重稳健估计量构建与您的半参数效率理论武器库高度契合。",
-    "why_relevant": "本文直接关联您对因果推断中纵向数据与中介分析的兴趣，特别是处理诱导混杂下的路径效应识别。您的半参数效率理论（very_familiar）可直接用于验证其有效影响函数推导的紧性，而您的M估计理论（moderately_familiar）可进一步分析其多重稳健估计量的有限样本表现。中期可做：需先在HOIF（moderately_familiar）上长肌肉，以拓展至更高阶的路径效应分解。",
+    "summary_zh": "本文在生存分析框架下研究存在中间事件时，药物对终点事件的多路径处理效应估计问题。中间事件作为处理诱导的混杂因素，使得自然效应中的序贯可忽略性、可分离效应中的可忽略成分条件等识别假设失效。作者提出对事件状态之间的转移施加假设性干预，以模拟处理机制，从而调整中间事件路径的影响并边缘化未观测的处理诱导混杂。基于反事实累积发生率的有效影响函数，构造了多重稳健且半参数有效的路径处理效应估计量。通过LEADER试验数据分析，发现利拉鲁肽显著降低心血管和微血管事件风险，且全因死亡率的降低主要由其对扩展主要不良心血管事件的影响所介导。该方法为纵向因果推断中处理诱导混杂下的路径分解提供了新工具，与您的proximal CI和纵向因果推断兴趣直接相关。",
+    "why_relevant": "本文直接关联您的causal inference子方向（处理诱导混杂下的纵向/生存数据路径效应），且其有效影响函数和多重稳健估计与您的semiparametric efficiency理论及HOIF武器库高度契合。您可用very_familiar的semiparametric理论验证其效率界，或用moderately_familiar的HOIF思想扩展其高阶稳健性。中期可做：将proximal CI的negative control思想引入此框架以处理未观测混杂。",
     "pdf_path": "data\\highlights\\causal_inference\\2608.22608.pdf",
     "first_seen": "2026-08-24"
   },
@@ -84379,13 +84377,14 @@
     "key_techniques": [
       "local identification",
       "simultaneous confidence band",
-      "weak-instrument-robust confidence sets",
+      "weak identification robust confidence sets",
       "breakdown bounds",
-      "network measurement error model"
+      "exact size test",
+      "network measurement error"
     ],
     "novelty_flag": "new_method",
-    "summary_zh": "本文研究网络时间序列中，如何区分结果变化是由冲击传导强度变化引起，还是由网络连接结构变化引起。标准做法是将观测到的网络矩阵放入结果回归，但网络是潜变量、时变且测量有噪声时，该方法失效：强度变化和结构变化在单一时间点可产生相同的结果分布，且仅结构变化就能使总体系数移动。作者提出联合分析结果与网络重复噪声测量（如双边贸易流的配对报告）的模型，建立了局部可识别性的充要条件，并给出了强度和结构路径的估计量、强度路径的同时置信带、弱识别下保持精确的置信集、常见报告偏倚下的崩溃界，以及一个精确大小的检验来检测观测路径上的变化并归因于强度或结构。模拟评估了各方法在声称边界上的表现。在1995-2020年18个经济体的镜像报告贸易面板上，诊断标志恰好指向危机年份，且与欧盟成员国身份相关的结构坐标下降了约三分之二。估计目标是预测依赖，而非因果效应。",
-    "why_relevant": "本文直接连接您的因果推断兴趣中的纵向设定和测量误差问题，特别是网络结构变化与传导强度变化的可区分性——这是proximal CI中negative control思想的变体。您的武器库中'非参数统计'和'因果推断中的估计理论'可直接用于分析其识别条件是否可推广至更一般的潜变量网络模型；中期可做：若先熟悉'moderately_familiar中的识别理论'，可尝试将本文的局部识别框架与proximal g-formula结合，处理更复杂的时变混淆。",
+    "summary_zh": "本文研究带噪测量的时变网络时间序列中，如何区分结果变化源于传播强度变化还是网络结构（组成）变化。标准做法将观测网络放入结果回归，但网络潜变量、时变且有测量误差时，强度和组成变化在单期观测下不可区分。作者提出联合分析结果与重复噪声网络测量（如双边贸易流配对报告）的模型，建立局部可识别性的充要条件，并给出强度和组成路径的估计量、强度路径的同步置信带、弱识别下精确的置信集、共同报告偏差下的破坏界，以及一个精确大小的检验来归因变化来源。模拟验证各方法在边界条件下的表现；在1995-2020年18个经济体的镜像贸易面板上，诊断准确标记危机年份，且欧盟成员国对应的组成坐标下降约三分之二。估计目标为预测依赖而非因果效应。",
+    "why_relevant": "本文直接关联因果推断中网络测量误差与纵向设定下的识别问题，尤其适合您对proximal CI和纵向因果的兴趣；可用您very_familiar的估计理论（如M估计）来审视其估计量的有限样本性质，或中期用moderately_familiar的识别理论深化对弱识别置信集的理解。",
     "pdf_path": "data\\highlights\\causal_inference\\2608.23625.pdf",
     "first_seen": "2026-08-24"
   },
@@ -84435,12 +84434,12 @@
       "Fisher information matrix",
       "local search algorithm",
       "network interference",
-      "optimal experimental design",
-      "treatment effect estimation under interference"
+      "treatment allocation",
+      "causal effect estimation"
     ],
     "novelty_flag": "new_method",
-    "summary_zh": "本文研究网络干扰下的实验设计问题，目标是在存在干扰（interference）时优化处理分配以提升因果效应估计精度。现有方法多在小规模或简化网络上评估，缺乏可扩展性。作者提出一个基于Fisher信息矩阵的最优性准则，联合考虑分配平衡与网络拓扑结构，将设计问题转化为组合优化问题。为应对大规模网络，开发了一种高效的局部搜索算法。进一步，在干扰存在下研究了总效应、直接效应和间接效应的估计性质。在Erdős–Rényi、几何随机图、优先连接和随机块模型等多种随机图模型上的模拟实验表明，网络拓扑显著影响最优处理分配。在college housing和ego-Facebook网络上的应用展示了拓扑感知设计的实际优势。对您而言，本文连接了因果推断中的实验设计与网络干扰这一重要子方向，且其优化框架与您熟悉的非参数统计和估计理论有交集。",
-    "why_relevant": "本文直接连接您因果推断兴趣中的实验设计与网络干扰子方向。您熟悉的非参数统计和估计理论可用于分析其Fisher信息矩阵准则的渐近性质，而您在高维统计中的经验可帮助评估该局部搜索算法在大规模网络上的计算-统计权衡。中期可做：需先在identification theory in causal inference上长肌肉，以深入理解其效应估计在复杂干扰模式下的识别条件。",
+    "summary_zh": "本文研究网络干扰下的实验设计问题，目标是在存在干扰（interference）时，通过优化处理分配来改进对总效应、直接效应和间接效应的估计。作者提出一个基于 Fisher 信息矩阵的最优性准则，同时考虑分配平衡和网络拓扑结构，将设计问题转化为组合优化问题。为求解该问题，他们开发了一个高效的局部搜索算法，可扩展到大规模网络。模拟研究覆盖 Erdős–Rényi、几何随机图、优先连接和随机块模型等多种图模型，展示了网络拓扑对最优处理分配的影响。在大学生宿舍和 ego-Facebook 网络上的应用进一步说明了拓扑感知设计的实际优势。对您而言，该工作将实验设计与网络干扰下的因果推断结合，其基于信息矩阵的最优性准则和局部搜索算法可能对您关注的因果推断中的实验设计问题有启发。",
+    "why_relevant": "该论文直接关联您的主要兴趣之一——因果推断中的实验设计，特别是网络干扰下的处理分配问题。您可以用您非常熟悉的非参数统计和估计理论来审视其最优性准则的统计性质，例如检查其是否达到某种最优性（如 D-optimality）以及估计量的渐近行为。中期可做：若想深入，您可能需要补充网络模型和组合优化方面的知识（属于 moderately_familiar 之外的领域），但核心的因果推断框架您已具备。",
     "pdf_path": "data\\highlights\\causal_inference\\2608.22570.pdf",
     "first_seen": "2026-08-24"
   },
@@ -84468,6 +84467,33 @@
     "summary_zh": "本文研究非参数估计中方差对正则性不敏感这一经典现象在谱分析中的体现。具体设定为：给定n个i.i.d.样本来自Polish度量空间上的概率测度μ，在固定带宽h>0下，比较经验加权拉普拉斯算子Δ_{μ_n}^h与总体版本Δ_μ^h的特征值。在谱间隙条件下，对于阶数小于h^{-2}的特征值，相对误差被1/√(n v_μ(h))控制，其中v_μ(h)是半径为h的球的最小质量。该界仅需极弱的正则性条件：μ属于新引入的coarse PI测度类，包含度量图、具有足够规则边界/角点/分支点的空间，以及这些空间在O(h)尺度上的离散化或加厚。即使在流形上密度具有s>2正则性的已知情形，该结果也去掉了对数因子。对您而言，该工作展示了非参数谱估计中方差控制的通用技术，与您在高维统计和随机矩阵理论中的兴趣直接相关。",
     "why_relevant": "本文连接您对非参数/半参数理论和高维统计的兴趣，具体涉及谱方法在度量空间上的稳定性分析。您的技术武器库中'非参数统计'和'高维渐近'可以直接用于理解该文的核心界，但需要先熟悉coarse PI测度类这一新概念——属于中期可做：需在'非参数统计'上进一步巩固对度量空间上谱方法的理解。",
     "pdf_path": "data\\highlights\\nonparam_semipara\\2608.23150.pdf",
+    "first_seen": "2026-08-24"
+  },
+  {
+    "paper_id": "2608.23315",
+    "source": "arxiv",
+    "title": "Classification testing: A new framework for drawing qualitative conclusions from quantitative estimates",
+    "authors": [
+      "Andrew C. Eggers",
+      "Zikai Li"
+    ],
+    "url": "https://arxiv.org/abs/2608.23315",
+    "venue": null,
+    "published": "2026-08-24",
+    "categories": [],
+    "score": 7.0,
+    "topic": "hypothesis_testing",
+    "key_techniques": [
+      "classification testing",
+      "error control",
+      "decision theory",
+      "hypothesis testing",
+      "R package"
+    ],
+    "novelty_flag": "new_method",
+    "summary_zh": "本文提出一种新的统计推断框架“分类检验”（classification testing），旨在替代社会科学中常用的假设检验，用于在多个竞争性定性结论之间做出裁决。传统检验只针对单一假设，而分类检验要求研究者预先定义若干有实质意义的定性类别（如效应方向、大小区间），然后以类似传统检验的错误控制水平将估计量归入某一类，或宣布结果不确定。该方法的核心机制是构造一个决策规则，使得在给定显著性水平下，错误分类的概率受到控制，同时允许“不确定”作为输出，从而避免强制选择。作者论证了即使只有一个研究假设，分类检验也优于传统实践，因为它使该假设面临被证伪的风险。文章通过一个知名的媒体实验数据展示了该框架的应用，并提供了R软件包。对您而言，该框架与您对假设检验的兴趣直接相关，尤其涉及多重假设和决策理论的统计推断新视角，可能启发新的检验方法设计。",
+    "why_relevant": "该论文直接关联您的主要兴趣“数学统计与假设检验”，提出了一种替代传统假设检验的新框架，涉及决策理论和错误控制，可能为您的检验理论研究提供新视角。从技术武器库看，您熟悉的非参数统计和M估计理论可用于分析该框架的决策规则性质，但核心的决策理论框架可能需要补充。初步判断：中期可做，需在决策理论或统计决策方面加强。",
+    "pdf_path": "data\\highlights\\hypothesis_testing\\2608.23315.pdf",
     "first_seen": "2026-08-24"
   },
   {
@@ -84552,32 +84578,6 @@
     "summary_zh": "本文研究广义距离协方差（distance covariance）零分布的高效近似方法。传统方法依赖置换检验（计算成本高）或矩匹配（尾部精度差），而该文提出直接通过双重中心距离矩阵的谱来近似极限分布（加权卡方和），并首次严格证明在可分度量空间上对一类负型距离，经验谱能一致地近似零分布，从而给出渐近有效的检验。该方法涵盖 Hilbert-Schmidt 独立性准则（HSIC）作为特例。计算上，作者设计了自适应算法，通过部分特征分解将复杂度从 O(n³) 降至 O(k n²)，并引入收缩校正以匹配前两阶矩。模拟表明，该方法是唯一经验第一类错误收敛到名义水平的非蒙特卡洛程序。对您而言，该工作直接关联假设检验与高维统计中的谱方法，且其谱近似思路可迁移至您熟悉的 U-统计量或随机矩阵理论框架下的检验问题。",
     "why_relevant": "本文直接命中您 primary interests 中的 hypothesis testing 和 high-dimensional statistics（随机矩阵理论），其核心是谱近似零分布，与您熟悉的 minimax bounds 和 high-dimensional asymptotics 武器库高度匹配。具体而言，您可以用 very_familiar 的高维渐近工具验证其谱估计的收敛速率是否最优，或用 moderately_familiar 的 U-统计量理论分析距离协方差作为高阶 U-统计量的计算复杂度（treewidth / einsum 视角）。结论：**立即可做**——用 very_familiar 的高维渐近和 U-统计量计算工具即可深入分析其算法效率或提出改进。",
     "pdf_path": "data\\highlights\\hypothesis_testing\\2608.23793.pdf",
-    "first_seen": "2026-08-24"
-  },
-  {
-    "paper_id": "2608.23315",
-    "source": "arxiv",
-    "title": "Classification testing: A new framework for drawing qualitative conclusions from quantitative estimates",
-    "authors": [
-      "Andrew C. Eggers",
-      "Zikai Li"
-    ],
-    "url": "https://arxiv.org/abs/2608.23315",
-    "venue": null,
-    "published": "2026-08-24",
-    "categories": [],
-    "score": 6.0,
-    "topic": "hypothesis_testing",
-    "key_techniques": [
-      "classification testing",
-      "equivalence testing",
-      "confidence interval",
-      "hypothesis testing framework"
-    ],
-    "novelty_flag": "application",
-    "summary_zh": "本文提出“分类检验”（classification testing）框架，作为传统假设检验的替代方案。传统检验针对单一零假设设计，而分类检验允许研究者事先定义若干有实质意义的定性类别（如“效应为正”、“效应为负”、“效应可忽略”），然后根据估计值及其不确定性将待估参数归入某一类，同时控制分类错误率（类似传统检验的显著性水平），若数据不足以做出可靠分类则声明“无结论”。该方法的核心机制是：将点估计和置信区间与类别边界进行比较，并引入一种类似于“等价性检验”的逻辑来保护研究者免受“仅因未拒绝零假设就接受零假设”的谬误。作者通过一个著名的媒体实验数据展示了该框架的应用，并提供了R包。本文本质上是对假设检验实践的一种方法论反思，而非提出新的统计理论或渐近结果。对您而言，本文属于 hypothesis testing 方向的非标准视角，可作为教学或审稿时的参考，但方法学新颖性有限（本质上是将 equivalence testing 和区间估计的思想系统化），不直接涉及您核心兴趣中的高维、U-统计或效率理论。",
-    "why_relevant": "本文属于 hypothesis testing 方向的实践性反思，与您的 primary interest 中的“mathematical statistics (hypothesis testing)”有直接关联，但更偏向应用方法论而非理论创新。您的武器库中“nonparametric statistics”和“minimax bounds”可用于分析该框架下分类错误率的渐近最优性（例如类别边界的最优选择问题），但本文本身不涉及这些技术。**暂不可做**：核心机器（分类错误率的形式化控制、与多重比较的衔接）不在您的武器库中，且您对该方向的兴趣更偏向理论检验而非实践框架设计。",
-    "pdf_path": "data\\highlights\\hypothesis_testing\\2608.23315.pdf",
     "first_seen": "2026-08-24"
   },
   {
@@ -85333,16 +85333,15 @@
     "score": 8.0,
     "topic": "causal_inference",
     "key_techniques": [
-      "rational causal estimator",
       "Wishart pivot",
-      "nested covariance minors",
+      "covariance minors",
       "weak identification",
-      "linear structural equation model",
-      "factor-and-rank criterion"
+      "rational causal estimators",
+      "Wald inference"
     ],
     "novelty_flag": "new_theory",
-    "summary_zh": "本文研究线性结构方程模型中理性因果估计量的分母行为，即估计量形如协方差多项式之比。在Gaussian抽样下，某些分母的一阶抽样变异与其大小成正比，因此标准化分母在每一样本中为常数，不会出现弱识别问题。嵌套协方差子式的幂乘积具有此性质，且存在精确的Wishart枢轴量。在二维情形下该刻画是完备的；三维情形下存在一个混合族尚未解决，但一个因子-秩准则可分类所有含线性或二次无行列式因子的分母，覆盖了工具变量、前门和近端公式。对于线性前门调整，即使中介残差方差以任意速率趋于零，只要处理-中介系数非零，Wald推断仍渐近有效。模拟显示近端Wald覆盖率随朴素处理-代理诊断增强而下降，而前门覆盖率保持名义水平，右心导管数据区分了朴素诊断与分母相关诊断。该工作对您在高维因果推断中处理弱识别问题有直接参考价值，特别是其精确有限样本结果可启发新的敏感性分析方法。",
-    "why_relevant": "本文直接关联您的主要兴趣——因果推断中的识别与估计，特别是弱识别问题。技术层面，其精确Wishart枢轴量分析可与您非常熟悉的非参数统计和高维渐近工具结合，用于检验分母诊断的有限样本性质。中期可做：将因子-秩准则推广到非参数或高维设定，需先在中等熟悉的半参数理论上提升。",
+    "summary_zh": "本文研究线性结构方程模型中理性因果估计量（如 IV、前门、proximal 公式）的弱识别问题，其形式为两个协方差多项式的比值。作者证明在高斯抽样下，某些分母的一阶抽样变异与其大小成正比，因此标准化分母在样本中恒定，不会进入弱识别区域；这类分母是嵌套协方差子式的幂积，且存在精确的 Wishart 枢轴量。在二维情形给出了完整刻画，三维情形除一个混合族外，用因子-秩准则分类了所有含线性或二次无行列式因子的分母。对于线性前门调整，即使中介残差方差以任意速率趋于零，只要处理-中介系数非零，Wald 推断仍渐近有效。模拟显示 proximal 的 Wald 覆盖率随朴素处理-代理诊断增强而下降，而前门保持名义水平；右心导管数据区分了朴素与分母相关的诊断。",
+    "why_relevant": "直接关联因果推断中的弱识别与敏感性分析，特别是 proximal CI 和 IV 的有限样本行为；可用您非常熟悉的非参数统计和估计理论来验证其渐近论证，或扩展至高斯假设之外；属于立即可做的理论跟进方向。",
     "pdf_path": "data\\highlights\\causal_inference\\2608.20223.pdf",
     "first_seen": "2026-08-20"
   },
@@ -85362,15 +85361,15 @@
     "score": 7.0,
     "topic": "causal_inference",
     "key_techniques": [
-      "policy learning",
       "counterfactual harm",
+      "policy learning",
       "lexicographic optimization",
-      "conditional average treatment effect",
-      "priority score"
+      "conditional optimal treatment",
+      "copula models"
     ],
     "novelty_flag": "new_method",
-    "summary_zh": "本文研究在政策干预中考虑反事实伤害的优化问题，目标是在从基线政策过渡时，在控制个体伤害概率或期望不超过指定阈值的前提下最大化整体福利。作者建立了最优政策过渡具有词典式跳跃结构（lexical leapfrogging）的充分条件：由协变量和当前治疗定义的子群按优先级得分排序，任何治疗变更直接将其移至条件最优治疗。该优先级得分在多种潜在结果依赖模型下被推导出来。方法上，本文属于政策学习（policy learning）的变体，将伦理约束（'first do no harm'）形式化为可操作的优化准则。实证部分重新分析了I-SPY2乳腺癌平台试验，展示了考虑反事实伤害如何导致与仅关注平均效果不同的治疗-子群对优先级结论。对您而言，本文连接了因果推断中的政策学习与敏感性分析子方向，且其词典式结构可能通过您熟悉的higher-order U-statistics或einsum框架进行计算效率分析。",
-    "why_relevant": "本文直接连接您的primary interest中的因果推断（政策学习与敏感性分析），且其词典式跳跃结构可能通过您very_familiar的higher-order U-statistics（treewidth/tensor contraction/einsum）进行计算成本分析——例如评估优先级得分的排序复杂度或子群划分的统计精度。中期可做：需先在moderately_familiar的identification theory上巩固对反事实伤害的识别假设（如单调性、无混淆性），但核心优化框架本身可立即用您已有的非参数统计和因果推断工具复现或扩展。",
+    "summary_zh": "本文研究在政策干预中考虑反事实伤害的优化问题，目标是设计从基线政策到新政策的转变，在控制最坏情况下个体伤害概率或期望不超过给定限度的同时，最大化总体福利。作者建立了最优政策转变具有词典式跳跃（lexical leapfrogging）结构的充分条件：由协变量和当前治疗定义的群体按优先级得分排序，任何治疗改变都直接转向条件最优治疗。该得分在多种潜在结果依赖模型下被推导，包括基于copula或因子结构的模型。方法通过重新分析I-SPY2乳腺癌平台试验进行演示，表明考虑反事实伤害可能导致关于哪些治疗-亚组对应被降级的不同结论。对您而言，本文连接了因果推断中的政策学习与个体化治疗规则，其词典式优化框架和反事实伤害度量可能为您的因果推断研究提供新的视角。",
+    "why_relevant": "本文属于因果推断中的政策学习子方向，直接关联您的primary interest中的causal inference。您可以用very_familiar的估计理论（如非参数估计）来验证其优先级得分的估计性质，或用moderately_familiar的识别理论来检查其反事实伤害的可识别性。中期可做：需在copula或依赖建模上补充知识（属于moderately_familiar之外），但核心框架可立即用于您熟悉的因果推断设定。",
     "pdf_path": "data\\highlights\\causal_inference\\2608.20505.pdf",
     "first_seen": "2026-08-20"
   },
@@ -85396,15 +85395,15 @@
     "topic": "causal_inference",
     "key_techniques": [
       "propensity score",
-      "case-control design",
-      "inverse probability of treatment weighting",
+      "case-control sampling",
+      "inverse probability weighting",
       "doubly robust estimation",
       "caliper matching",
-      "control exchangeability"
+      "overlap diagnostics"
     ],
     "novelty_flag": "application",
-    "summary_zh": "本文聚焦于病例对照研究（case-control study）中基于倾向性评分（propensity score）的因果推断方法。在 outcome-dependent sampling 设计下，标准倾向性评分方法需调整：利用“对照可交换性”（control exchangeability）假设，即对照组的暴露条件分布可代表源人群，从而仅用对照数据拟合倾向性评分模型。作者证明在此设定下，因果风险比（risk ratio）等相对效应是可识别的。方法上，他们借用了逆概率加权（IPTW）和高效双稳健估计量，并针对病例对照设计提出了一种新颖的两步倾向性评分卡钳匹配（caliper-matching）流程。同时，引入了两种新的重叠诊断工具来验证必要的重叠条件。通过模拟和一项关于阿司匹林与卵巢癌风险的实证研究，对比了各估计量的表现。该工作为流行病学中常见的病例对照设计提供了系统的因果推断工具，对您关注的流行病学应用和因果推断方法均有直接参考价值。",
-    "why_relevant": "直接连接您的流行病学（病例对照设计）和因果推断（倾向性评分）兴趣。本文的 caliper-matching 和双稳健估计量可用您非常熟悉的因果推断估计理论来审视其有限样本性质；中期可做：若想将匹配方法推广到更复杂的识别设定（如 proximal CI），需先在 moderately_familiar 的 identification theory 上加强。",
+    "summary_zh": "本文研究病例对照研究（outcome-dependent sampling）中基于倾向得分的因果推断方法。在对照可交换性假设下，利用对照数据拟合倾向得分模型，可识别因果风险比等相对效应。作者将逆概率加权和高效双稳健估计量适配到三种病例对照设计变体，并提出一种新颖的两步倾向得分卡钳匹配程序。同时引入新的诊断工具来验证两种必要的重叠假设。通过模拟数据对比各估计量性能，并应用于规律使用阿司匹林与卵巢癌风险的关联研究。对您而言，该文将因果推断方法扩展到病例对照设计，与您的流行病学应用兴趣直接相关，且其双稳健估计量的效率性质值得关注。",
+    "why_relevant": "(1) 直接连接流行病学中病例对照设计的因果推断应用，属于您的 secondary interest 中的流行病学方向；(2) 可用您 very_familiar 的估计理论（如 M-estimation）分析其双稳健估计量的渐近性质，或用 semiparametric theory 检验其效率声明；(3) 立即可做：基于现有武器库即可理解并复现其模拟，中期可做：若想深入理论效率界，需在 semiparametric efficiency 上稍加巩固（moderately_familiar）。",
     "pdf_path": "data\\highlights\\causal_inference\\2608.20080.pdf",
     "first_seen": "2026-08-20"
   },
@@ -86550,14 +86549,13 @@
     "key_techniques": [
       "within-version causal estimator",
       "errors-in-variables disattenuation",
-      "test-retest reliability",
       "permutation test",
-      "sensitivity analysis",
-      "synthetic data validation"
+      "synthetic data validation",
+      "sensitivity analysis"
     ],
     "novelty_flag": "application",
-    "summary_zh": "本文针对 LLM 部署后用户参与度提升的因果归因难题，提出一种利用同一模型版本内不同能力维度改进不均匀性的新型因果估计方法。核心设定是：不同任务分布的用户因能力改进差异而经历不同的质量变化，从而提供因果识别信号。方法上，作者构建了基于版本内质量变化的估计量，并采用 errors-in-variables 去衰减调整（利用重测信度比均值 0.861）来校正使用量测量误差。在合成数据上，原始估计量恢复真实效应的 81%-88%，校正后估计值达 1.017（bootstrap 95% CI: 0.915-1.109），而朴素方法仅恢复 62%-63%。置换检验确认框架能区分真实因果效应与噪声；敏感性分析显示，随着前周期长度从 3 周增至 7 周，恢复率从 78% 单调提升至 87%，揭示了样本时长与估计精度的权衡。对您而言，该文提供了一个在纵向部署场景中利用自然变异进行因果推断的实例，可连接到您对 longitudinal causal inference 和 sensitivity analysis 的兴趣。",
-    "why_relevant": "该文属于因果推断在真实产品部署中的应用，直接关联您 primary interest 中的 longitudinal causal inference 和 sensitivity analysis。您可以用 very_familiar 的 estimation theory in causal inference 来审视其识别假设（如能力改进外生性）和估计量的偏差来源；也可用 moderately_familiar 的 identification theory 来评估其因果解释的严谨性。中期可做：若想深入，需在 measurement error 模型上加强（moderately_familiar 中未明确列出，但可归入 estimation theory）。总体而言，这是一篇应用导向的论文，方法学 novelty 有限，但提供了可迁移的分析框架。",
+    "summary_zh": "本文针对 LLM 部署后用户参与度提升的因果效应识别问题，提出一种利用同一模型版本内不同能力维度非均匀改进的因果估计方法。核心设定是：不同任务分布的用户经历的质量提升不同，从而提供因果信号。方法上，作者构建了基于用户任务分布的加权估计量，并采用 errors-in-variables 去衰减调整（利用 test-retest 信度比 0.861）来校正使用量测量误差。在合成数据上，原始估计量恢复真实效应的 81%-88%，校正后估计值接近 1（95% CI 包含 1），而朴素方法仅恢复 62%-63%。置换检验确认框架能区分真实效应与噪声，敏感性分析显示前周期长度从 3 周增至 7 周时恢复率单调提升至 87%。该工作对您可能有用：其利用非均匀处理强度的识别思路可迁移至您关注的纵向因果推断或 mediation 分析中，作为处理强度异质性的一种新来源。",
+    "why_relevant": "该论文属于因果推断的应用型工作，直接关联您 primary interest 中的因果推断（identification 与 estimation）。其核心创新在于利用模型版本内能力非均匀改进作为自然实验，这为处理强度异质性提供了新视角。从技术武器库看，您 very_familiar 的 estimation theory in causal inference 足以理解其估计量构造，而 moderately_familiar 的 identification theory 可帮助评估其识别假设的合理性。可立即尝试：用您的非参数统计工具检验其估计量的有限样本性质，或将其思路形式化为一个更一般的处理强度异质性模型。",
     "pdf_path": "data\\highlights\\causal_inference\\2608.17187.pdf",
     "first_seen": "2026-08-17"
   },

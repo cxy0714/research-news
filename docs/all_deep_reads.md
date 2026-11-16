@@ -760,6 +760,14 @@
   9/10 [daily]
 - [Heterogeneous Effects of Continuous Treatments via Conditional Modified Treatment Policies](deep_reads/2026-08-24-2608.20744.md)  
   9/10 [daily]
+- [Closed-form estimation and uniform inference in additively separable triangular models with a nonseparable first stage](deep_reads/2026-08-24-2608.22605.md)  
+  8/10 [daily]
+- [Double/Debiased Machine Learning for Functional-Form-Robust Spatial Autoregression](deep_reads/2026-08-24-2608.22706.md)  
+  8/10 [daily]
+- [Testing selection on observables in parametric models with refreshment samples](deep_reads/2026-08-24-2608.23508.md)  
+  8/10 [daily]
+- [Self-Normalizing Denominators in Rational Causal Estimation](deep_reads/2026-08-24-2608.20223.md)  
+  8/10 [daily]
 - [Testing the Validity of Instrumental Variable Sets in Causal Additive Models with Non-Constant Effects](deep_reads/2026-08-24-2608.19771.md)  
   8/10 [daily]
 - [Multi-Method Causal Evidence Synthesis: Ranking Candidate Drivers by Convergent Cross-Method Evidence from Observational Data](deep_reads/2026-08-24-2608.20187.md)  
@@ -776,6 +784,18 @@
   8/10 [daily]
 - [Optimal Variance Reduction in Randomized Experiments](deep_reads/2026-08-24-2608.23615.md)  
   8/10 [daily]
+- [Separating Time-Varying Network Composition from Predictive Dependence under Noisy Network Measurement](deep_reads/2026-08-24-2608.23625.md)  
+  7/10 [daily]
+- [Optimal Experimental Design for Network Experiments under Interference](deep_reads/2026-08-24-2608.22570.md)  
+  7/10 [daily]
+- [Estimating Pathway Treatment Effects in the Presence of Intermediate Events with Multi-State Data](deep_reads/2026-08-24-2608.22608.md)  
+  7/10 [daily]
+- [Evaluating the effects of policy interventions subject to early adoption: A case study of prescription drug monitoring programs and opioid dispensing](deep_reads/2026-08-24-2608.23472.md)  
+  7/10 [daily]
+- [Causal inference via propensity scores for case-control studies](deep_reads/2026-08-24-2608.20080.md)  
+  7/10 [daily]
+- [Counterfactual Optimization of Policy Interventions: Lexical Ordering and Leapfrogging](deep_reads/2026-08-24-2608.20505.md)  
+  7/10 [daily]
 - [From Cumulative Weights to Marginal Density Ratios: Per-Protocol Estimation in Sequential Target Trial Emulation](deep_reads/2026-08-21-2608.20976.md)  
   8/10 [daily]
 - [Heterogeneous Effects of Continuous Treatments via Conditional Modified Treatment Policies](deep_reads/2026-08-21-2608.20744.md)  
@@ -9577,6 +9597,8 @@
   6/10 [daily]
 - [Fast high-dimensional mean testing via logistic regression](deep_reads/2026-08-24-2608.20286.md)  
   8/10 [daily]
+- [Classification testing: A new framework for drawing qualitative conclusions from quantitative estimates](deep_reads/2026-08-24-2608.23315.md)  
+  7/10 [daily]
 - [Outlier Impact: Detection by Consequences](deep_reads/2026-08-21-2608.21557.md)  
   7/10 [daily]
 - [Further Results on Controlling the False Discovery Rate in Two-Sided Gaussian Mean Testing](deep_reads/2026-08-21-2608.21267.md)  
