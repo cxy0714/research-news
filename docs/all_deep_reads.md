@@ -1304,6 +1304,8 @@
   9/10 [daily]
 - [Sensitivity Analysis for the Average Treatment Effect under Discrete Unobserved Confounders](deep_reads/2026-06-24-2606.22255.md)  
   9/10 [daily]
+- [Principal stratification analysis of noncompliance with time-to-event outcomes](deep_reads/2026-06-24-10.1093_biomtc_ujad016.md)  
+  8/10 [daily]
 - [Bayesian nonparametric for causal inference and missing data by Michael J. Daniels, Antonio Linero, and Jason Roy, CRC Press, 2023 ISBN-13: 978-0367341008, https://www.routledge.com/Bayesian-Nonparametrics-for-Causal-Inference-and-Missing-Data/Daniels-Linero-Roy/p/book/9780367341008](deep_reads/2026-06-24-10.1093_biomtc_ujad026.md)  
   8/10 [daily]
 - [A Test for Treatment Heterogeneity under a Distributional Difference-in-Difference Framework](deep_reads/2026-06-24-2606.21840.md)  
@@ -1314,6 +1316,8 @@
   8/10 [daily]
 - [Distributional Granger Causality: Identification, Sequential Inference, and Adaptive Testing](deep_reads/2026-06-24-2606.22230.md)  
   8/10 [daily]
+- [Bias correction models for electronic health records data in the presence of non-random sampling](deep_reads/2026-06-24-10.1093_biomtc_ujae014.md)  
+  7/10 [daily]
 - [On the use of auxiliary variables in multiple imputation when estimating the average causal effect with missing data](deep_reads/2026-06-24-2606.22016.md)  
   7/10 [daily]
 - [A Bias-Corrected Two-Stage Approach for Joint Modelling of Multidimensional Longitudinal HRQoL and Survival Data](deep_reads/2026-06-24-2606.23146.md)  
@@ -4863,6 +4867,8 @@
   7/10 [daily]
 - [Estimation of High Dimensional Bounded Discrete Graphical Models via Regularized Generalized Score Matching](deep_reads/2026-06-25-2606.27142.md)  
   6/10 [daily]
+- [Multiple augmented reduced rank regression for pan-cancer analysis](deep_reads/2026-06-24-10.1093_biomtc_ujad002.md)  
+  8/10 [daily]
 - [Variance or Standard Deviation? Shell Geometry and Global-Scale Priors in High-Dimensional Shrinkage](deep_reads/2026-06-24-2606.23509.md)  
   8/10 [daily]
 - [Principal Covariate Regression with Nuclear Norm Penalty](deep_reads/2026-06-24-2606.23174.md)  
@@ -6608,6 +6614,8 @@
   6/10 [daily]
 - [Generalized nonparametric regression in reproducing kernel Hilbert spaces: Consistency and rates of convergence](deep_reads/2026-06-24-2606.22993.md)  
   8/10 [daily]
+- [Longitudinal varying coefficient single-index model with censored covariates](deep_reads/2026-06-24-10.1093_biomtc_ujad006.md)  
+  7/10 [daily]
 - [kNN estimation in semi-functional partial linear regression with missing responses at random](deep_reads/2026-06-24-2606.20930.md)  
   7/10 [daily]
 - [Quasi-Bayes empirical Bayes estimation of sums of random variables](deep_reads/2026-06-24-2606.21707.md)  
@@ -8688,6 +8696,8 @@
   9/10 [daily]
 - [On the Asymptotic Inadmissibility of Double Machine Learning Estimators Under Structure-Agnostic Models](deep_reads/2026-06-24-2606.22391.md)  
   9/10 [daily]
+- [Fitting the Cox proportional hazards model to big data](deep_reads/2026-06-24-10.1093_biomtc_ujae018.md)  
+  8/10 [daily]
 - [Multi-Source Prediction-Powered Inference](deep_reads/2026-06-24-2606.21232.md)  
   7/10 [daily]
 - [Bias-Aware External-Model-Assisted Inference in High-Dimensional Regression](deep_reads/2026-06-17-2606.15602.md)  
