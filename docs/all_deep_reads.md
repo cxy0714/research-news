@@ -17649,6 +17649,10 @@
 
 - [Sharp Poisson approximation and second-order correction for long multiplicative runs](deep_reads/2026-11-16-hexagon_2611.00447.md)  
   7/10 [daily]
+- [Further cases of the inductive Alperin–McKay condition](deep_reads/2026-11-16-hexagon_2611.00451.md)  
+  1/10 [daily]
+- [Density-One Uniqueness for Markoff–Hurwitz Solutions](deep_reads/2026-11-16-hexagon_2611.00490.md)  
+  1/10 [daily]
 - [Vieta invariants and Markoff–Hurwitz orbits](deep_reads/2026-11-16-hexagon_2611.00493.md)  
   1/10 [daily]
 - [Towards a conformal field theory of critical percolation. I. The bulk stress tensor and Ward identities.](deep_reads/2026-11-16-hexagon_2611.00497.md)  
