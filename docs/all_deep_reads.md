@@ -12009,6 +12009,8 @@
 
 ### Daily
 
+- [An explicit determinantal formula for Sinkhorn limits of matrices and tensors](deep_reads/2026-11-16-hexagon_2611.00433.md)  
+  6/10 [daily]
 - [Convergence and global optimality of Wasserstein--Fisher--Rao descent for Gaussian mixtures](deep_reads/2026-11-12-2611.14428.md)  
   6/10 [daily]
 - [Box-Cox Transformations of Correlation Matrices](deep_reads/2026-11-10-2611.09790.md)  
@@ -17647,6 +17649,8 @@
 
 - [Sharp Poisson approximation and second-order correction for long multiplicative runs](deep_reads/2026-11-16-hexagon_2611.00447.md)  
   7/10 [daily]
+- [Towards a conformal field theory of critical percolation. I. The bulk stress tensor and Ward identities.](deep_reads/2026-11-16-hexagon_2611.00497.md)  
+  1/10 [daily]
 - [Certified lower bounds on the optimal-decoding threshold of the surface code](deep_reads/2026-11-13-hexagon_2611.00371.md)  
   6/10 [daily]
 - [Which Fine-Grained Lower Bounds Survive the Refutation of 3SUM and APSP?](deep_reads/2026-11-13-hexagon_2611.00388.md)  
