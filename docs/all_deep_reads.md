@@ -856,6 +856,20 @@
   8/10 [daily]
 - [Randomization inference for treatment effects on survival outcomes](deep_reads/2026-08-17-2608.16529.md)  
   8/10 [daily]
+- [Trading Scope for Credibility in Difference-in-Differences](deep_reads/2026-08-17-2608.16867.md)  
+  7/10 [daily]
+- [Outcome Modeling in Design-Based Inference for Spatial Settings](deep_reads/2026-08-17-2608.15439.md)  
+  7/10 [daily]
+- [Causal mediation analysis for zero-inflated longitudinal data in the presence of treatment non-compliance and multiple mediators](deep_reads/2026-08-17-2608.15775.md)  
+  7/10 [daily]
+- [Mixed-effects Outcome-Adaptive Lasso for Propensity Score Estimation under Partial Interference](deep_reads/2026-08-17-2608.16365.md)  
+  7/10 [daily]
+- [Identifying Model Quality Effects on User Engagement: A Within-Version Causal Estimator with Synthetic Data Validation](deep_reads/2026-08-17-2608.17187.md)  
+  7/10 [daily]
+- [Estimation and Inference for Peer Effects under Conditional Random Assignment](deep_reads/2026-08-17-2608.16468.md)  
+  6/10 [daily]
+- [Toward Efficient Estimation of Regional Treatment Effects in Multi-Regional Clinical Trials](deep_reads/2026-08-17-2608.15450.md)  
+  6/10 [daily]
 - [Generalized Hierarchical Conformal Prediction](deep_reads/2026-08-17-2608.15500.md)  
   6/10 [daily]
 - [Semi-supervised Concordance Learning for Optimal Individual Treatment Regimes](deep_reads/2026-08-14-2608.13945.md)  
@@ -4815,6 +4829,8 @@
   8/10 [daily]
 - [Empirical Bayes linear regression in high dimensions: Method of moments and sub-linear sample complexity](deep_reads/2026-08-17-2608.16771.md)  
   8/10 [daily]
+- [Multiplier Bootstrap and Edge Phase Transitions of High-Dimensional Covariance Matrices](deep_reads/2026-08-17-2608.15053.md)  
+  7/10 [daily]
 - [The Bethe-Hessian down to the Percolation Threshold](deep_reads/2026-08-17-2608.16672.md)  
   7/10 [daily]
 - [Change Point Detection and Localization in High-Dimensional Time Series](deep_reads/2026-08-14-2608.14344.md)  
@@ -13875,6 +13891,8 @@
   6/10 [daily]
 - [Stress-Testing DANTE under Detector Domain Shift: a Representation-Coherent Reanalysis of LIGO O4a](deep_reads/2026-08-18-2608.15166.md)  
   6/10 [daily]
+- [Galaxy Morphology Classification: Uncertainty Modeling and Out of Distribution Detection](deep_reads/2026-08-17-2608.16654.md)  
+  6/10 [daily]
 - [On the Acceleration of Pulsar Timing computations using Normalising Flows and Parallelisation](deep_reads/2026-08-14-2608.13991.md)  
   6/10 [daily]
 - [Don't Cut Corners: How Training Outside the Prior Makes Simulation-Based Inference More Robust](deep_reads/2026-08-13-2608.12470.md)  
@@ -16200,6 +16218,8 @@
 - [GENIE: Generative Neural Inference for Epidemics](deep_reads/2026-08-20-2608.20253.md)  
   6/10 [daily]
 - [Bayesian epidemic alignment for causal evaluation of seasonal infectious-disease interventions](deep_reads/2026-08-18-2608.16537.md)  
+  7/10 [daily]
+- [Bayesian epidemic alignment for causal evaluation of seasonal infectious-disease interventions](deep_reads/2026-08-17-2608.16537.md)  
   7/10 [daily]
 - [Inverse probability weighting for auxiliary variable dependent sampling in observational studies of Long COVID](deep_reads/2026-08-07-2608.04918.md)  
   7/10 [daily]
