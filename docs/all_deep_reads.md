@@ -750,12 +750,20 @@
   6/10 [daily]
 - [Repairing Locally Misspecified GMM: An Empirical Bayes Approach](deep_reads/2026-08-25-2608.23925.md)  
   6/10 [daily]
+- [Candidate Set Size and Voting Behavior: A Front-Door Approach to Causal Moderation](deep_reads/2026-08-24-2608.20779.md)  
+  9/10 [daily]
+- [Causal Survival Forests with Negative Controls](deep_reads/2026-08-24-2608.19749.md)  
+  9/10 [daily]
 - [Partial Identification Learning with Categorical Treatments for Individualized Treatment Rules](deep_reads/2026-08-24-2608.19853.md)  
   9/10 [daily]
 - [Targeted Deep Survival Contrasts: Valid Inference for Treatment-Specific Survival Benefit with Neural Networks](deep_reads/2026-08-24-2608.20598.md)  
   9/10 [daily]
 - [Heterogeneous Effects of Continuous Treatments via Conditional Modified Treatment Policies](deep_reads/2026-08-24-2608.20744.md)  
   9/10 [daily]
+- [Testing the Validity of Instrumental Variable Sets in Causal Additive Models with Non-Constant Effects](deep_reads/2026-08-24-2608.19771.md)  
+  8/10 [daily]
+- [Multi-Method Causal Evidence Synthesis: Ranking Candidate Drivers by Convergent Cross-Method Evidence from Observational Data](deep_reads/2026-08-24-2608.20187.md)  
+  8/10 [daily]
 - [Let Time Tell: Identification and Gaussian Process Estimation for Interrupted Time Series](deep_reads/2026-08-24-2608.20610.md)  
   8/10 [daily]
 - [From Cumulative Weights to Marginal Density Ratios: Per-Protocol Estimation in Sequential Target Trial Emulation](deep_reads/2026-08-24-2608.20976.md)  
@@ -12203,6 +12211,8 @@
   6/10 [daily]
 - [Algorithms for adaptive and heteroskedastic linear regression at the computational threshold](deep_reads/2026-08-19-2608.18402.md)  
   8/10 [daily]
+- [Bootstrap Error Estimation and Sketch-Size Selection for Sketched Ridge Regression](deep_reads/2026-08-19-2608.15478.md)  
+  6/10 [daily]
 - [Hamiltonian dynamics for sampling on discrete spaces](deep_reads/2026-08-18-2608.17961.md)  
   5/10 [daily]
 - [Bootstrap Error Estimation and Sketch-Size Selection for Sketched Ridge Regression](deep_reads/2026-08-17-2608.15478.md)  
@@ -13883,6 +13893,10 @@
   6/10 [daily]
 - [Spatially Scanned STIS Spectra of the Exoplanet Host Star 55 Cnc](deep_reads/2026-08-25-2608.25184.md)  
   1/10 [daily]
+- [Radio Galaxies detection and characterization using deep learning techniques](deep_reads/2026-08-21-2608.21474.md)  
+  6/10 [daily]
+- [NestyNet. III. Symbolic Regression from Analytic Neural Surrogates](deep_reads/2026-08-21-2608.21051.md)  
+  6/10 [daily]
 - [Towards independent event horizon imaging of the supermassive black holes in M87 and the Milky Way](deep_reads/2026-08-20-2608.19675.md)  
   6/10 [daily]
 - [Microlensify: a Transformer Based Machine Learning Classifier for Microlensing Events Trained on TESS Light Curves](deep_reads/2026-08-19-2608.19419.md)  
@@ -13890,6 +13904,8 @@
 - [Galaxy Morphology Classification: Uncertainty Modeling and Out of Distribution Detection](deep_reads/2026-08-18-2608.16654.md)  
   6/10 [daily]
 - [Stress-Testing DANTE under Detector Domain Shift: a Representation-Coherent Reanalysis of LIGO O4a](deep_reads/2026-08-18-2608.15166.md)  
+  6/10 [daily]
+- [Stress-Testing DANTE under Detector Domain Shift: a Representation-Coherent Reanalysis of LIGO O4a](deep_reads/2026-08-17-2608.15166.md)  
   6/10 [daily]
 - [Galaxy Morphology Classification: Uncertainty Modeling and Out of Distribution Detection](deep_reads/2026-08-17-2608.16654.md)  
   6/10 [daily]
