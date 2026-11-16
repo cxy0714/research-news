@@ -17663,6 +17663,16 @@
   1/10 [daily]
 - [Towards a conformal field theory of critical percolation. I. The bulk stress tensor and Ward identities.](deep_reads/2026-11-16-hexagon_2611.00497.md)  
   1/10 [daily]
+- [A proof of Lusztig’s conjectures for extended affine Weyl groups](deep_reads/2026-11-16-hexagon_2611.00411.md)  
+  0/10 [daily]
+- [A proof of Lusztig's connectedness conjecture in finite type](deep_reads/2026-11-16-hexagon_2611.00406.md)  
+  0/10 [daily]
+- [A proof of the HLRV conjecture](deep_reads/2026-11-16-hexagon_2611.00441.md)  
+  0/10 [daily]
+- [Schur Nonnegativity of Double-Wiring Cluster Variables](deep_reads/2026-11-16-hexagon_2611.00486.md)  
+  0/10 [daily]
+- [Unramified multiplicity one spherical pairs](deep_reads/2026-11-16-hexagon_2611.00487.md)  
+  0/10 [daily]
 - [An Irredundant Test for Circular Positivity](deep_reads/2026-11-16-hexagon_2611.00488.md)  
   0/10 [daily]
 - [A Counterexample to the Realizability Conjecture for Surface Classes](deep_reads/2026-11-16-hexagon_2611.00489.md)  

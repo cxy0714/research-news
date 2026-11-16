@@ -17,7 +17,7 @@
 
 [→ 查看完整报告](daily/2026-11-16.md)
 
-### 精读论文（11 篇）
+### 精读论文（16 篇）
 
 - [Sharp Poisson approximation and second-order correction for long multiplicative runs](deep_reads/2026-11-16-hexagon_2611.00447.md)  
   `其他` · 相关性 7/10
@@ -37,6 +37,16 @@
   `其他` · 相关性 1/10
 - [Towards a conformal field theory of critical percolation. I. The bulk stress tensor and Ward identities.](deep_reads/2026-11-16-hexagon_2611.00497.md)  
   `其他` · 相关性 1/10
+- [A proof of Lusztig’s conjectures for extended affine Weyl groups](deep_reads/2026-11-16-hexagon_2611.00411.md)  
+  `其他` · 相关性 0/10
+- [A proof of Lusztig's connectedness conjecture in finite type](deep_reads/2026-11-16-hexagon_2611.00406.md)  
+  `其他` · 相关性 0/10
+- [A proof of the HLRV conjecture](deep_reads/2026-11-16-hexagon_2611.00441.md)  
+  `其他` · 相关性 0/10
+- [Schur Nonnegativity of Double-Wiring Cluster Variables](deep_reads/2026-11-16-hexagon_2611.00486.md)  
+  `其他` · 相关性 0/10
+- [Unramified multiplicity one spherical pairs](deep_reads/2026-11-16-hexagon_2611.00487.md)  
+  `其他` · 相关性 0/10
 - [An Irredundant Test for Circular Positivity](deep_reads/2026-11-16-hexagon_2611.00488.md)  
   `其他` · 相关性 0/10
 - [A Counterexample to the Realizability Conjecture for Surface Classes](deep_reads/2026-11-16-hexagon_2611.00489.md)  
