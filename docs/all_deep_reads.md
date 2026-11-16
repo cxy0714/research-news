@@ -1252,6 +1252,8 @@
   9/10 [daily]
 - [Cross-Fitted Survey-Weighted TMLE with Design-Based Variance for Causal Machine Learning](deep_reads/2026-06-29-2606.30918.md)  
   9/10 [daily]
+- [Learning heterogeneous treatment effects under principal stratification](deep_reads/2026-06-29-2606.29076.md)  
+  8/10 [daily]
 - [Residual-on-Residual Regression as a Tool for Effect Estimation in Observational Data](deep_reads/2026-06-29-2606.30976.md)  
   8/10 [daily]
 - [Generated outcomes as generated regressors: Equivalences in recursive causal estimation](deep_reads/2026-06-29-2606.29009.md)  
@@ -6628,6 +6630,12 @@
   6/10 [daily]
 - [Posterior concentration and adaptation of the mixing measure in Dirichlet process mixtures](deep_reads/2026-06-30-2606.29109.md)  
   6/10 [daily]
+- [Posterior concentration and adaptation of the mixing measure in Dirichlet process mixtures](deep_reads/2026-06-29-2606.29109.md)  
+  7/10 [daily]
+- [Adaptive nonparametric regression from repeated measurements under common noise](deep_reads/2026-06-29-2606.30000.md)  
+  7/10 [daily]
+- [Analysis of gradual changes in nonparametric regression based on a new optimization method in the non-unique case](deep_reads/2026-06-29-2606.30864.md)  
+  6/10 [daily]
 - [Revisiting local regression: shape regularity, uniform rates, and the limits of random splits](deep_reads/2026-06-26-2606.28641.md)  
   7/10 [daily]
 - [Explicit confidence bands and intervals for distribution functions and their derivatives via random Weierstrass-type operators](deep_reads/2026-06-25-2606.24345.md)  
@@ -9747,6 +9755,16 @@
   6/10 [daily]
 - [A data-dependent DKW inequality for regenerative Markov chains](deep_reads/2026-06-30-2606.30866.md)  
   6/10 [daily]
+- [Multiple testing with the horseshoe](deep_reads/2026-06-29-2606.30375.md)  
+  7/10 [daily]
+- [Testing hypotheses via orthogonalization](deep_reads/2026-06-29-2606.29732.md)  
+  7/10 [daily]
+- [A data-dependent DKW inequality for regenerative Markov chains](deep_reads/2026-06-29-2606.30866.md)  
+  6/10 [daily]
+- [Beta-trees for testing multivariate goodness-of-fit and localizing deviations from a model](deep_reads/2026-06-29-2606.29021.md)  
+  6/10 [daily]
+- [Universal Inference for model selection on networks](deep_reads/2026-06-29-2606.30981.md)  
+  6/10 [daily]
 - [Simultaneous confidence bands for cumulative hazard via exchangeable bootstrap and box calibration](deep_reads/2026-06-29-2606.30982.md)  
   6/10 [daily]
 - [Optimal Estimators for Heavy-Tailed Mean Estimation via Convex Analysis](deep_reads/2026-06-26-2606.27899.md)  
@@ -12185,6 +12203,8 @@
   7/10 [daily]
 - [Error bounds for simultaneous Wasserstein contractive adaptive increasingly rare MCMC](deep_reads/2026-06-30-2606.30018.md)  
   6/10 [daily]
+- [Error bounds for simultaneous Wasserstein contractive adaptive increasingly rare MCMC](deep_reads/2026-06-29-2606.30018.md)  
+  6/10 [daily]
 - [Incomplete Matrix Regression](deep_reads/2026-06-25-2606.26325.md)  
   6/10 [daily]
 - [Hierarchical Bayesian Estimation of Covariance Matrices](deep_reads/2026-06-25-2606.24751.md)  
@@ -13929,6 +13949,8 @@
   6/10 [daily]
 - [TOA_SP: A Multi-Strategy Framework for Single-Pulse Timing](deep_reads/2026-06-30-2606.28822.md)  
   6/10 [daily]
+- [Gaussian processes on ray-guided transformed uniform grids for fast, flexible, and auto-differentiable adaptive source reconstruction in lens modelling](deep_reads/2026-06-29-2606.30620.md)  
+  7/10 [daily]
 - [A Covariance-Aware Framework for Spatially Resolved Exoplanet Biosignature Inference with the Solar Gravitational Lens](deep_reads/2026-06-29-2606.29138.md)  
   6/10 [daily]
 - [Domain-Informed Multi-View Self-Distillation for Astronomical Light-Curve Representation Learning with JEPA](deep_reads/2026-06-26-2606.28446.md)  
