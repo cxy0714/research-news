@@ -209,8 +209,8 @@ venv、`git pull --rebase --autostash`（先同步网页 / agent 合进来的改
 控制），`run_rn.sh` 这层基本不用动。
 
 ```cron
-# 工作日 09:10，只留这一个执行者
-10 9 * * 1-5 /root/research-news/run_rn.sh >> /root/rn.log 2>&1
+# 工作日 10:40，只留这一个执行者
+40 10 * * 1-5 /root/research-news/run_rn.sh >> /root/rn.log 2>&1
 
 # 精读常驻循环（daily 已把精读让给循环，见 DAILY_DEFER_DEEP_READS）：
 # 开机自启，逐篇消化 data/highlights.json 的欠账，队列空了会自己退出。
@@ -224,7 +224,7 @@ venv、`git pull --rebase --autostash`（先同步网页 / agent 合进来的改
 台式机上一次性注册四个任务（详见 `scripts/register-task.ps1`）：
 
 ```powershell
-# 一次性注册：daily（工作日 09:10）+ catch-up（登录补齐缺天）+ journals（期刊回补循环）
+# 一次性注册：daily（工作日 10:40）+ catch-up（登录补齐缺天）+ journals（期刊回补循环）
 #             + deepreads（精读常驻循环，登录自启 / 每日 08:30 兜底重启）
 .\scripts\register-task.ps1
 ```
@@ -246,7 +246,7 @@ Enable-ScheduledTask  -TaskName 'research-news-journals'
 Get-ScheduledTaskInfo -TaskName 'research-news-catchup'
 ```
 
-- `research-news-daily`：工作日 09:10 跑当天日报（完整管道 + 提交推送）。**精读已从这里拆出去**（`DAILY_DEFER_DEEP_READS=1`）：daily 只选题 + 存 PDF/清单，不再为几十篇精读拖上几小时。
+- `research-news-daily`：工作日 **10:40** 跑当天日报（完整管道 + 提交推送）。**别改回 09:10**：arXiv 每天 20:00 ET（冬令时=北京时间 09:00）出新榜，09:10 正好卡在换榜那一刻，`rss.arxiv.org` 还是旧（空）榜、搜索 API 同一分钟也返回空或 429，两条路都 0 篇，当天日报就只剩 Hexagon（11-09 / 11-13 / 11-16 都是这么挂的）。**精读已从这里拆出去**（`DAILY_DEFER_DEEP_READS=1`）：daily 只选题 + 存 PDF/清单，不再为几十篇精读拖上几小时。
 - `research-news-catchup`：登录后触发，把**关机期间漏掉的过去工作日**用 `daily --date <X>` 一次性补齐（今天留给 daily 任务；补跑日志写在**运行当天**日期的 `logs\<今天>-<机器名>.log` 里）。
 - `research-news-journals`：期刊往期回补的连续循环，登录自启 + 每日 10:30 兜底重启，给 daily 时段让路。
 - `research-news-deepreads`：**精读常驻循环**，登录自启 + 每日 08:30 兜底重启。一篇一个锁周期，按 `data/highlights.json` 里"daily 选过但没读完"的欠账逐篇消化（含绿通/popsci 的低分论文），再重试失败占位，最后兜底阈值补跑；每 5 篇提交推送一次。队列空了会自己退出，下次登录/重启再起来。
@@ -1055,7 +1055,7 @@ daily 全流程交给 Windows 任务计划程序跑 `run_daily.ps1` 即可，**�
 **一条命令注册任务**（仓库根目录、PowerShell 里跑一次；提示权限不足就用管理员 PowerShell）：
 
 ```powershell
-.\scripts\register-task.ps1                 # 工作日 09:10 的 daily + 登录时的 catch-up
+.\scripts\register-task.ps1                 # 工作日 10:40 的 daily + 登录时的 catch-up
 .\scripts\register-task.ps1 -Time "08:30"   # 换时间
 .\scripts\register-task.ps1 -NoCatchUp      # 只注册 daily，不要 catch-up
 Start-ScheduledTask -TaskName research-news-daily   # 立刻测一次
@@ -1064,10 +1064,11 @@ Start-ScheduledTask -TaskName research-news-daily   # 立刻测一次
 它注册**四个**任务，都勾好关键项（**错过自动补跑** `-StartWhenAvailable`、**绝不并行**
 `-MultipleInstances IgnoreNew`、电池不挡）：
 
-- `research-news-daily`：工作日 09:10 跑 `run_daily.ps1`。
+- `research-news-daily`：工作日 **10:40** 跑 `run_daily.ps1`（别改回 09:10——那是 arXiv 20:00 ET
+  换榜的北京时刻，RSS 与 API 兜底会同时空手，详见上文「Windows：任务计划程序」）。
 - `research-news-catchup`：**登录时**（+10 分钟）跑 `scripts\catch-up.ps1`——台式机不会 24 小时开，
   开机后它会看最后一份日报是哪天，把**关机错过的工作日**用 `python -m research_news.daily --date <X>`
-  一次性补齐（跳过周末，今天留给 09:10 那个任务）。默认最多往前补 14 天（`-MaxDays` 调），手动跑：
+  一次性补齐（跳过周末，今天留给 10:40 那个任务）。默认最多往前补 14 天（`-MaxDays` 调），手动跑：
   `.\scripts\catch-up.ps1`。
 - `research-news-journals`：**登录时启动一个连续循环** `run_journal_backfill.ps1`，按
   `ops\journal-backfill.md` 的队列一格接一格补期刊往期、**直到队列空才退出**（每天 10:30 还有个
@@ -1080,13 +1081,13 @@ Start-ScheduledTask -TaskName research-news-daily   # 立刻测一次
 四个任务**共用同一把锁**，所以绝不并行；期刊 / XAGI 循环都会给 daily 让路，daily 也改成**等锁不
 跳过**——所以 daily 永不被挤掉，且有重跑保护、已存在的报告不会被覆盖。
 
-> 手动建任务的话：创建任务 → 触发器 周一至周五 09:10 → 操作
+> 手动建任务的话：创建任务 → 触发器 周一至周五 10:40 → 操作
 > `powershell.exe -NoProfile -ExecutionPolicy Bypass -File "C:\path\to\research-news\run_daily.ps1"`
 > 起始于仓库目录 → 设置里勾「错过尽快运行」、「已在运行则不启动新实例」。
 
 落地前提：
 
-- 机器在 09:10 前后**开着、联网**；睡眠中错过没关系（开机后 daily 补跑当天、catch-up 补齐之前
+- 机器在 10:40 前后**开着、联网**；睡眠中错过没关系（开机后 daily 补跑当天、catch-up 补齐之前
   错过的工作日）。
 - 仓库目录里有 `.env`（`SJTU_API_KEY`）和 `.venv`。
 - **先手动 `git push` 一次**，让 Git Credential Manager（或 SSH key）缓存凭证——计划任务是

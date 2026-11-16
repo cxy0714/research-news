@@ -2,7 +2,7 @@
 #
 # Finds the newest docs\daily\<date>.md, then runs `daily --date <X>` for every
 # missing WEEKDAY from there up to *yesterday* (today is left to the scheduled
-# 09:10 task / its "run if missed" catch-up). arXiv only announces on weekdays,
+# 10:40 task / its "run if missed" catch-up). arXiv only announces on weekdays,
 # so weekends are skipped. Safe + idempotent: the daily re-run guard skips any
 # date that already has a report, and it shares the daily lock so it never runs
 # in parallel with the scheduled run (it waits for it instead).

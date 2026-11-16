@@ -1248,6 +1248,12 @@
   6/10 [daily]
 - [Hierarchical Clustering As a Novel Solution to the Notorious Multicollinearity Problem in Observational Causal Inference](deep_reads/2026-06-30-2606.30992.md)  
   6/10 [daily]
+- [Inferring Comprehensive Cohort Causal Effects in the Presence of Unmeasured Confounding and Missing Outcomes](deep_reads/2026-06-29-2606.28741.md)  
+  9/10 [daily]
+- [Cross-Fitted Survey-Weighted TMLE with Design-Based Variance for Causal Machine Learning](deep_reads/2026-06-29-2606.30918.md)  
+  9/10 [daily]
+- [Residual-on-Residual Regression as a Tool for Effect Estimation in Observational Data](deep_reads/2026-06-29-2606.30976.md)  
+  8/10 [daily]
 - [Generated outcomes as generated regressors: Equivalences in recursive causal estimation](deep_reads/2026-06-29-2606.29009.md)  
   8/10 [daily]
 - [Causal Inference Using Factor Models](deep_reads/2026-06-29-2606.29691.md)  
@@ -1316,12 +1322,28 @@
   8/10 [daily]
 - [Distributional Granger Causality: Identification, Sequential Inference, and Adaptive Testing](deep_reads/2026-06-24-2606.22230.md)  
   8/10 [daily]
+- [Multiobjective tree-based reinforcement learning for estimating tolerant dynamic treatment regimes](deep_reads/2026-06-24-10.1093_biomtc_ujad017.md)  
+  7/10 [daily]
+- [Efficient designs and analysis of two-phase studies with longitudinal binary data](deep_reads/2026-06-24-10.1093_biomtc_ujad010.md)  
+  7/10 [daily]
+- [Estimating the effect of latent time-varying count exposures using multiple lists](deep_reads/2026-06-24-10.1093_biomtc_ujad027.md)  
+  7/10 [daily]
+- [Inferring a directed acyclic graph of phenotypes from GWAS summary statistics](deep_reads/2026-06-24-10.1093_biomtc_ujad039.md)  
+  7/10 [daily]
 - [Bias correction models for electronic health records data in the presence of non-random sampling](deep_reads/2026-06-24-10.1093_biomtc_ujae014.md)  
   7/10 [daily]
 - [On the use of auxiliary variables in multiple imputation when estimating the average causal effect with missing data](deep_reads/2026-06-24-2606.22016.md)  
   7/10 [daily]
 - [A Bias-Corrected Two-Stage Approach for Joint Modelling of Multidimensional Longitudinal HRQoL and Survival Data](deep_reads/2026-06-24-2606.23146.md)  
   7/10 [daily]
+- [Efficient estimation for left-truncated competing risks regression for case-cohort studies](deep_reads/2026-06-24-10.1093_biomtc_ujad008.md)  
+  6/10 [daily]
+- [Individualized treatment rule characterization via a value function surrogate](deep_reads/2026-06-24-10.1093_biomtc_ujad012.md)  
+  6/10 [daily]
+- [Incorporating participants’ welfare into sequential multiple assignment randomized trials](deep_reads/2026-06-24-10.1093_biomtc_ujad004.md)  
+  6/10 [daily]
+- [Robust data integration from multiple external sources for generalized linear models with binary outcomes](deep_reads/2026-06-24-10.1093_biomtc_ujad005.md)  
+  6/10 [daily]
 - [What's the Magic Formula Instrument?](deep_reads/2026-06-23-2606.21569.md)  
   9/10 [daily]
 - [Uniform Confidence Bands for Infinite-Dimensional Partially Identified Parameters](deep_reads/2026-06-23-2606.21224.md)  
@@ -6614,6 +6636,8 @@
   6/10 [daily]
 - [Generalized nonparametric regression in reproducing kernel Hilbert spaces: Consistency and rates of convergence](deep_reads/2026-06-24-2606.22993.md)  
   8/10 [daily]
+- [Nonparametric predictive model for sparse and irregular longitudinal data](deep_reads/2026-06-24-10.1093_biomtc_ujad023.md)  
+  7/10 [daily]
 - [Longitudinal varying coefficient single-index model with censored covariates](deep_reads/2026-06-24-10.1093_biomtc_ujad006.md)  
   7/10 [daily]
 - [kNN estimation in semi-functional partial linear regression with missing responses at random](deep_reads/2026-06-24-2606.20930.md)  
@@ -9751,6 +9775,8 @@
   6/10 [daily]
 - [An Optimal Transportation Approach for Improved Confidence Intervals](deep_reads/2026-06-24-2606.22008.md)  
   7/10 [daily]
+- [Asymptotic uncertainty of false discovery proportion](deep_reads/2026-06-24-10.1093_biomtc_ujae015.md)  
+  6/10 [daily]
 - [Bayesian Model Pursuit and Near-Oracle Sparse Signal Discovery Under Dependence](deep_reads/2026-06-24-2606.22490.md)  
   6/10 [daily]
 - [Hypergraph Variable Selection with False Discovery Rate Control](deep_reads/2026-06-22-2606.20514.md)  
@@ -16143,6 +16169,10 @@
   7/10 [daily]
 - [Empirical prior distributions for treatment-by-subgroup interaction heterogeneity in random-effects meta-analysis](deep_reads/2026-06-25-2606.23968.md)  
   6/10 [daily]
+- [A scalar-on-quantile-function approach for estimating short-term health effects of environmental exposures](deep_reads/2026-06-24-10.1093_biomtc_ujae008.md)  
+  7/10 [daily]
+- [Two-phase designs with failure time processes subject to nonsusceptibility](deep_reads/2026-06-24-10.1093_biomtc_ujad038.md)  
+  6/10 [daily]
 - [Built-in Selection Bias in Proportional Hazards Models with Omitted Covariates: Simulation Evidence and Alternative Approaches](deep_reads/2026-06-22-2606.19982.md)  
   7/10 [daily]
 - [Applying the Weibull Shape Parameter test for signal detection in pharmacovigilance using the R package WSPsignal](deep_reads/2026-06-19-2606.18809.md)  
@@ -18253,6 +18283,8 @@
   6/10 [daily]
 - [Unbiased estimation of normalized scale-invariant indices under the gamma distribution](deep_reads/2026-06-24-2606.22712.md)  
   7/10 [daily]
+- [Simultaneous variable selection and estimation in semiparametric regression of mixed panel count data](deep_reads/2026-06-24-10.1093_biomtc_ujad041.md)  
+  6/10 [daily]
 - [What is your Prior Worth? Effective Sample Size and Sample Size Planning for Gaussian Graphical Models](deep_reads/2026-06-24-2606.22687.md)  
   6/10 [daily]
 - [Reformulation Invariance and the Axiomatic Foundations of Inference](deep_reads/2026-06-24-2606.21551.md)  

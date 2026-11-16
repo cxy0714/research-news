@@ -394,10 +394,15 @@ def fetch_all(cfg: dict, for_date: date | None = None) -> list[Paper]:
             )
 
     # arXiv's RSS feed lags some mornings — notably Mondays, when the Sunday-ET
-    # announcement isn't in rss.arxiv.org yet at our ~09:10 run, so every category
-    # comes back empty. The search API queries submittedDate and is more reliable,
-    # so fall back to it for the same date when the RSS gave nothing. dedup
+    # announcement isn't in rss.arxiv.org yet at our run, so every category comes
+    # back empty. The search API queries submittedDate and is more reliable, so
+    # fall back to it for the same date when the RSS gave nothing. dedup
     # (seen_papers.json) filters the older papers the wider window also pulls in.
+    #
+    # NB (2026-11-16): right at the 20:00 ET announcement (= 09:00 Beijing) BOTH
+    # paths can come back empty — the RSS still serves the previous list while the
+    # API returns an empty feed or 429s out. The daily task now runs at 10:40 to
+    # sit clear of that boundary; do not move it back to 09:10.
     if not use_api and not papers:
         target = for_date or today
         log.warning("arXiv RSS returned 0 papers for %s — falling back to the search API",

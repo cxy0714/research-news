@@ -45,7 +45,9 @@ if [[ -n "$(git status --porcelain)" ]]; then
   git push || { git pull --rebase --autostash && git push; }
 fi
 
-# Crontab example (run every weekday at 09:10) — use ONE executor only, either
+# Crontab example (run every weekday at 10:40) — use ONE executor only, either
 # the system crontab below OR an agent cron, not both (the lock makes a double
-# fire safe, but a single trigger is cleaner):
-#   10 9 * * 1-5 /path/to/research-news/run_daily.sh >> /tmp/research-news.log 2>&1
+# fire safe, but a single trigger is cleaner). 10:40, not 09:10: arXiv announces
+# at 20:00 ET (09:00 Beijing), so a 09:10 run finds both the RSS and its API
+# fallback empty and renders a Hexagon-only report.
+#   40 10 * * 1-5 /path/to/research-news/run_daily.sh >> /tmp/research-news.log 2>&1

@@ -150,7 +150,9 @@ Add-Content -LiteralPath "logs\run-$today-$hostTag.log" -Value $pushLog.ToArray(
 #   2. General  : name it; "Run only when user is logged on" is simplest (no
 #                 stored password). Tick "Run with highest privileges" only if
 #                 you hit permission issues.
-#   3. Triggers : Weekly, Mon-Fri, 09:10.
+#   3. Triggers : Weekly, Mon-Fri, 10:40. (Not 09:10 — that is arXiv's 20:00 ET
+#                 announcement boundary in Beijing time, where both the RSS and
+#                 its API fallback come back empty.)
 #   4. Actions  : Start a program
 #        Program/script : powershell.exe
 #        Arguments      : -NoProfile -ExecutionPolicy Bypass -File "C:\path\to\research-news\run_daily.ps1"

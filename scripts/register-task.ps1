@@ -14,7 +14,14 @@
 #   .\scripts\register-task.ps1 -AiEvalTime "10:05" -AutoResearchTime "10:15"
 
 param(
-    [datetime]$Time = "09:10",
+    # 09:10 -> 10:40 (2026-11-16): arXiv announces new submissions at 20:00 ET,
+    # i.e. 09:00 Beijing in winter. The old 09:10 start landed *inside* the
+    # announcement switch-over: rss.arxiv.org still served the previous (empty)
+    # list and the search API returned an empty feed / 429 at that same minute,
+    # so both the RSS path and its API fallback collected 0 papers and the day
+    # rendered Hexagon-only (11-09, 11-13, 11-16 all died this way). 10:40 leaves
+    # the RSS time to catch up and clears the 10:05 / 10:15 AI radars.
+    [datetime]$Time = "10:40",
     [datetime]$JournalTime = "10:30",
     [datetime]$XagiTime = "11:30",
     [datetime]$DeepReadTime = "08:30",
