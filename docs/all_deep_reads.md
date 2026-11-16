@@ -1294,6 +1294,8 @@
   6/10 [daily]
 - [Bounds for Standard Errors in Combined Data](deep_reads/2026-06-25-2606.24867.md)  
   6/10 [daily]
+- [Adaptive selection of the optimal strategy to improve precision and power in randomized trials](deep_reads/2026-06-24-10.1093_biomtc_ujad034.md)  
+  9/10 [daily]
 - [Using instrumental variables to address unmeasured confounding in causal mediation analysis](deep_reads/2026-06-24-10.1093_biomtc_ujad037.md)  
   9/10 [daily]
 - [Semi- and non-parametric approaches to individualized treatment regimes in the presence of causal mediation](deep_reads/2026-06-24-2606.21708.md)  
@@ -1302,6 +1304,8 @@
   9/10 [daily]
 - [Sensitivity Analysis for the Average Treatment Effect under Discrete Unobserved Confounders](deep_reads/2026-06-24-2606.22255.md)  
   9/10 [daily]
+- [Bayesian nonparametric for causal inference and missing data by Michael J. Daniels, Antonio Linero, and Jason Roy, CRC Press, 2023 ISBN-13: 978-0367341008, https://www.routledge.com/Bayesian-Nonparametrics-for-Causal-Inference-and-Missing-Data/Daniels-Linero-Roy/p/book/9780367341008](deep_reads/2026-06-24-10.1093_biomtc_ujad026.md)  
+  8/10 [daily]
 - [A Test for Treatment Heterogeneity under a Distributional Difference-in-Difference Framework](deep_reads/2026-06-24-2606.21840.md)  
   8/10 [daily]
 - [A generalized multiple-intervention stepped wedge design framework for treatment effect estimation in the presence of non-uniform cluster-period correlation structures](deep_reads/2026-06-24-2606.23499.md)  
@@ -12147,6 +12151,8 @@
   6/10 [daily]
 - [Hierarchical Bayesian Estimation of Covariance Matrices](deep_reads/2026-06-25-2606.24751.md)  
   6/10 [daily]
+- [Efficient computation of high-dimensional penalized generalized linear mixed models by latent factor modeling of the random effects](deep_reads/2026-06-24-10.1093_biomtc_ujae016.md)  
+  8/10 [daily]
 - [Target-Aware Linear Regression Under Distribution Shift](deep_reads/2026-06-24-2606.22775.md)  
   6/10 [daily]
 - [A Polyak-Ruppert Central Limit Theorem for SA-Adam with Momentum and Non-Convergent Adaptive Preconditioning](deep_reads/2026-06-17-2606.17364.md)  
