@@ -784,6 +784,12 @@
   8/10 [daily]
 - [Optimal Variance Reduction in Randomized Experiments](deep_reads/2026-08-24-2608.23615.md)  
   8/10 [daily]
+- [Uniform Inference on Quantile Effects under Network Interference](deep_reads/2026-08-24-2608.22286.md)  
+  7/10 [daily]
+- [Estimating the True Effect Size Distribution with SIMEX](deep_reads/2026-08-24-2608.23612.md)  
+  7/10 [daily]
+- [Barycentric Fused Gromov-Wasserstein Balancing for Causal Inference under Multiple Treatments](deep_reads/2026-08-24-2608.22024.md)  
+  7/10 [daily]
 - [Separating Time-Varying Network Composition from Predictive Dependence under Noisy Network Measurement](deep_reads/2026-08-24-2608.23625.md)  
   7/10 [daily]
 - [Optimal Experimental Design for Network Experiments under Interference](deep_reads/2026-08-24-2608.22570.md)  
@@ -796,6 +802,8 @@
   7/10 [daily]
 - [Counterfactual Optimization of Policy Interventions: Lexical Ordering and Leapfrogging](deep_reads/2026-08-24-2608.20505.md)  
   7/10 [daily]
+- [Distributional Extrapolation for Interactions](deep_reads/2026-08-24-2608.19849.md)  
+  6/10 [daily]
 - [From Cumulative Weights to Marginal Density Ratios: Per-Protocol Estimation in Sequential Target Trial Emulation](deep_reads/2026-08-21-2608.20976.md)  
   8/10 [daily]
 - [Heterogeneous Effects of Continuous Treatments via Conditional Modified Treatment Policies](deep_reads/2026-08-21-2608.20744.md)  
@@ -6598,6 +6606,12 @@
   7/10 [daily]
 - [Non-asymptotic Analysis of Matérn Regression: The Roles of Target and Kernel Lengthscales](deep_reads/2026-08-25-2608.22553.md)  
   7/10 [daily]
+- [Robust Scale Estimation in Additive Noise via Weighted Order Statistics](deep_reads/2026-08-24-2608.22165.md)  
+  7/10 [daily]
+- [Non-asymptotic Analysis of Matérn Regression: The Roles of Target and Kernel Lengthscales](deep_reads/2026-08-24-2608.22553.md)  
+  7/10 [daily]
+- [Trustworthy Decisions in Reliability Set Estimation under Insufficient Model Information](deep_reads/2026-08-24-2608.19815.md)  
+  6/10 [daily]
 - [On the minimax-rate optimality of approximate Bayesian computation in nonparametric problems](deep_reads/2026-08-19-2608.15648.md)  
   8/10 [daily]
 - [On the minimax-rate optimality of approximate Bayesian computation in nonparametric problems](deep_reads/2026-08-17-2608.15648.md)  
@@ -9597,8 +9611,16 @@
   6/10 [daily]
 - [Fast high-dimensional mean testing via logistic regression](deep_reads/2026-08-24-2608.20286.md)  
   8/10 [daily]
+- [Asymptotics for Model Selection in Probabilistic Principal Component Analysis](deep_reads/2026-08-24-2608.23513.md)  
+  7/10 [daily]
 - [Classification testing: A new framework for drawing qualitative conclusions from quantitative estimates](deep_reads/2026-08-24-2608.23315.md)  
   7/10 [daily]
+- [Further Results on Controlling the False Discovery Rate in Two-Sided Gaussian Mean Testing](deep_reads/2026-08-24-2608.21267.md)  
+  6/10 [daily]
+- [Outlier Impact: Detection by Consequences](deep_reads/2026-08-24-2608.21557.md)  
+  6/10 [daily]
+- [Large Sample Properties of Higher Order Markov Models](deep_reads/2026-08-24-2608.20321.md)  
+  6/10 [daily]
 - [Outlier Impact: Detection by Consequences](deep_reads/2026-08-21-2608.21557.md)  
   7/10 [daily]
 - [Further Results on Controlling the False Discovery Rate in Two-Sided Gaussian Mean Testing](deep_reads/2026-08-21-2608.21267.md)  
@@ -13915,6 +13937,8 @@
   6/10 [daily]
 - [Spatially Scanned STIS Spectra of the Exoplanet Host Star 55 Cnc](deep_reads/2026-08-25-2608.25184.md)  
   1/10 [daily]
+- [Strong Lensing Cosmology with Population-level Calibrated Neural Ratio Estimation](deep_reads/2026-08-24-2608.23534.md)  
+  7/10 [daily]
 - [Radio Galaxies detection and characterization using deep learning techniques](deep_reads/2026-08-21-2608.21474.md)  
   6/10 [daily]
 - [NestyNet. III. Symbolic Regression from Analytic Neural Surrogates](deep_reads/2026-08-21-2608.21051.md)  
@@ -16252,6 +16276,8 @@
 - [Kalman Filtering and Smoothing for Improving Precision in Horvitz--Thompson Estimation of Infectious Disease Prevalence](deep_reads/2026-09-10-2609.09325.md)  
   6/10 [daily]
 - [Pooling Mobility Obscures Epidemic Invasion Routes](deep_reads/2026-08-28-2608.25766.md)  
+  6/10 [daily]
+- [GENIE: Generative Neural Inference for Epidemics](deep_reads/2026-08-24-2608.20253.md)  
   6/10 [daily]
 - [GENIE: Generative Neural Inference for Epidemics](deep_reads/2026-08-20-2608.20253.md)  
   6/10 [daily]
