@@ -17,6 +17,11 @@
 
 [→ 查看完整报告](daily/2026-11-16.md)
 
+### 精读论文（1 篇）
+
+- [Sharp Poisson approximation and second-order correction for long multiplicative runs](deep_reads/2026-11-16-hexagon_2611.00447.md)  
+  `其他` · 相关性 7/10
+
 ## 收藏
 
 - [→ 打开收藏](favorites.md) · 登录后在各页点 ☆ 收藏即可自动汇总

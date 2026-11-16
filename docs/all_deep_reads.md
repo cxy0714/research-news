@@ -17645,6 +17645,8 @@
 
 ### Daily
 
+- [Sharp Poisson approximation and second-order correction for long multiplicative runs](deep_reads/2026-11-16-hexagon_2611.00447.md)  
+  7/10 [daily]
 - [Certified lower bounds on the optimal-decoding threshold of the surface code](deep_reads/2026-11-13-hexagon_2611.00371.md)  
   6/10 [daily]
 - [Which Fine-Grained Lower Bounds Survive the Refutation of 3SUM and APSP?](deep_reads/2026-11-13-hexagon_2611.00388.md)  
