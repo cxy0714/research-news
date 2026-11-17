@@ -138,6 +138,12 @@
   6/10 [daily]
 - [Robustness of Median-based Splitting Rules for Causal Trees](deep_reads/2026-11-04-2611.00348.md)  
   6/10 [daily]
+- [Causal Mediation Analysis with High-Dimensional Surrogates: Identification, Estimation and Inference under Latent Factor Models](deep_reads/2026-11-02-2611.03167.md)  
+  9/10 [daily]
+- [A General Approach for Assessing Sensitivity to Violations of Causal Assumptions](deep_reads/2026-11-02-2611.02239.md)  
+  9/10 [daily]
+- [Identification through Heteroskedasticity in One Lemma: Partial Identification, an Eigenvalue Construction, and a Caution on Rank Tests](deep_reads/2026-11-02-2610.41361.md)  
+  8/10 [daily]
 - [A Semiparametric Model Approach to Data Integration under Missing Not at Random](deep_reads/2026-10-30-2610.41937.md)  
   8/10 [daily]
 - [Functional-Specific Information Borrowing under Limited Overlap](deep_reads/2026-10-30-2610.41753.md)  
@@ -4774,6 +4780,10 @@
 - [Federated Estimation of Loading Spaces in Tensor Factor Models under Differential Privacy](deep_reads/2026-11-04-2611.01903.md)  
   7/10 [daily]
 - [Smallest Gaps between Eigenvalues of Wigner Matrices without Smoothness Assumptions](deep_reads/2026-11-03-hexagon_2610.00675.md)  
+  8/10 [daily]
+- [On Statistical-Computational Gaps in Graph Combinatorial Testing Problems](deep_reads/2026-11-02-2610.41995.md)  
+  9/10 [daily]
+- [Smallest Gaps between Eigenvalues of Wigner Matrices without Smoothness Assumptions](deep_reads/2026-11-02-hexagon_2610.00675.md)  
   8/10 [daily]
 - [Bethe Hessian Recovery through the Kesten-Stigum Regime](deep_reads/2026-10-30-2610.41802.md)  
   7/10 [daily]
@@ -18155,6 +18165,10 @@
   0/10 [daily]
 - [Counterexamples to log-concavity of cluster monomials and theta structure constants](deep_reads/2026-11-03-hexagon_2610.00668.md)  
   0/10 [daily]
+- [Sharp upper and lower bounds on the variance of U-statistics](deep_reads/2026-11-02-2611.01690.md)  
+  9/10 [daily]
+- [Martingalized U-statistics-based sequential inference: a blessing of degeneracy](deep_reads/2026-11-02-2611.00753.md)  
+  9/10 [daily]
 - [Unidentified prediction-risk rankings under spatial sampling with fixed inclusion probabilities](deep_reads/2026-10-30-2610.41726.md)  
   6/10 [daily]
 - [Dynamics of the spherical Sherrington–Kirkpatrick model, Part II: Mixing profiles and critical dynamics](deep_reads/2026-10-30-hexagon_2610.00610.md)  
