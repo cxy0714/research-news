@@ -160,6 +160,16 @@
   8/10 [daily]
 - [Identification through Heteroskedasticity in One Lemma: Partial Identification, an Eigenvalue Construction, and a Caution on Rank Tests](deep_reads/2026-11-02-2610.41361.md)  
   8/10 [daily]
+- [When Covariates Mask Pre-Trends](deep_reads/2026-11-02-2611.03079.md)  
+  7/10 [daily]
+- [Sharp Fréchet--Hoeffding Bounds under Selectively Incomplete Observation](deep_reads/2026-11-02-2611.03075.md)  
+  7/10 [daily]
+- [Selective Randomization Inference for Interference](deep_reads/2026-11-02-2611.02443.md)  
+  7/10 [daily]
+- [Looking Forward to Constructing Better Causal Comparisons](deep_reads/2026-11-02-2611.02061.md)  
+  7/10 [daily]
+- [Robustness of Median-based Splitting Rules for Causal Trees](deep_reads/2026-11-02-2611.00348.md)  
+  7/10 [daily]
 - [$P$-stationary structural equation modeling: Causal effect identification under temporally incomplete observations](deep_reads/2026-11-02-2611.02252.md)  
   7/10 [daily]
 - [One-Sample Mendelian Randomization and Instrumental Variable Analyses in R and Stata: The OneSampleMR and ivonesamplemr Packages](deep_reads/2026-11-02-2611.02887.md)  
@@ -182,6 +192,8 @@
   7/10 [daily]
 - [Valid GMM Inference with Non-parametrically Generated Discrete Type](deep_reads/2026-11-02-2610.42052.md)  
   7/10 [daily]
+- [Time-Specific Multinomial Logistic Regression for Competing Risks](deep_reads/2026-11-02-2611.00488.md)  
+  6/10 [daily]
 - [A Semiparametric Model Approach to Data Integration under Missing Not at Random](deep_reads/2026-10-30-2610.41937.md)  
   8/10 [daily]
 - [Functional-Specific Information Borrowing under Limited Overlap](deep_reads/2026-10-30-2610.41753.md)  
@@ -4827,6 +4839,8 @@
   8/10 [daily]
 - [Bethe Hessian Recovery through the Kesten-Stigum Regime](deep_reads/2026-11-02-2610.41802.md)  
   7/10 [daily]
+- [Beyond Small Balls: A Determinant Inequality for Functions of Matrix Gaussian Series](deep_reads/2026-11-02-hexagon_2610.00718.md)  
+  6/10 [daily]
 - [Bethe Hessian Recovery through the Kesten-Stigum Regime](deep_reads/2026-10-30-2610.41802.md)  
   7/10 [daily]
 - [Dynamics of the spherical Sherrington–Kirkpatrick model, Part I: Foundations and tools](deep_reads/2026-10-30-hexagon_2610.00609.md)  
@@ -6528,6 +6542,8 @@
   8/10 [daily]
 - [A semi-parametric Bernstein-von Mises theorem at rate $n^{-3/2}$ for frequency estimation](deep_reads/2026-11-02-2611.00821.md)  
   8/10 [daily]
+- [Conditional expectile-based value-at-risk: Semiparametric estimation and inference](deep_reads/2026-11-02-2611.02716.md)  
+  7/10 [daily]
 - [Nonparametric Intensity Estimation for Covariate-Driven Poisson Processes Using Deep Learning](deep_reads/2026-11-02-2611.03552.md)  
   7/10 [daily]
 - [Specification LASSO and a Flexible Characteristics-Based Asset Pricing Model](deep_reads/2026-11-02-2611.03391.md)  
@@ -6536,6 +6552,10 @@
   7/10 [daily]
 - [Simultaneous inference for additive regression](deep_reads/2026-11-02-2610.41442.md)  
   7/10 [daily]
+- [Joint Estimation and Grouping of Quantile Association Curves across Multiple Responses](deep_reads/2026-11-02-2611.02466.md)  
+  6/10 [daily]
+- [Inference for conditional Fréchet means via Riemannian Robust Bias Correction](deep_reads/2026-11-02-2611.01857.md)  
+  6/10 [daily]
 - [Simultaneous inference for additive regression](deep_reads/2026-10-30-2610.41442.md)  
   7/10 [daily]
 - [Improved estimation of differential entropy of a multivariate Gaussian distribution](deep_reads/2026-10-30-2610.41849.md)  
@@ -9399,6 +9419,12 @@
   7/10 [daily]
 - [Variance-adaptive Chernoff bounds: nonasymptotically valid, asymptotically sharp confidence sets for unbounded means](deep_reads/2026-11-02-2610.42058.md)  
   7/10 [daily]
+- [Second-Order Least Squares Method for Statistical Inference in Linear Models with Asymmetric Errors](deep_reads/2026-11-02-2611.01017.md)  
+  6/10 [daily]
+- [Dimension Changes the Scale-Signal Channel in Nearest-Neighbor Two-Sample Testing](deep_reads/2026-11-02-2610.41271.md)  
+  6/10 [daily]
+- [Improved estimation of differential entropy of a multivariate Gaussian distribution](deep_reads/2026-11-02-2610.41849.md)  
+  6/10 [daily]
 - [Co-sufficient weighting: leveraging sparsity for more powerful variable selection in the linear model](deep_reads/2026-10-30-2610.42122.md)  
   7/10 [daily]
 - [Variance-adaptive Chernoff bounds: nonasymptotically valid, asymptotically sharp confidence sets for unbounded means](deep_reads/2026-10-30-2610.42058.md)  
@@ -12331,6 +12357,8 @@
   4/10 [daily]
 - [Optimal spectral shrinkage via Krylov approximation](deep_reads/2026-11-02-2611.02122.md)  
   7/10 [daily]
+- [Low-discrepancy quasi-uniform digital sequences in every dimension](deep_reads/2026-11-02-hexagon_2610.00664.md)  
+  6/10 [daily]
 - [On Statistical-Computational Gaps in Graph Combinatorial Testing Problems](deep_reads/2026-10-30-2610.41995.md)  
   8/10 [daily]
 - [Covariance Identification from Regression Residuals](deep_reads/2026-10-30-2610.41722.md)  
@@ -13949,6 +13977,10 @@
   6/10 [daily]
 - [Anomaly-ranked confirmation slows new-class learning](deep_reads/2026-11-04-2611.03250.md)  
   6/10 [daily]
+- [Latin hypercube sampling to reduce the variance in Monte Carlo integration: a practical guide and an application to gravitational-wave astronomy](deep_reads/2026-11-02-2611.04045.md)  
+  7/10 [daily]
+- [Spectral Information Content of Diffraction-Limited Images](deep_reads/2026-11-02-2610.41092.md)  
+  6/10 [daily]
 - [Spectral Information Content of Diffraction-Limited Images](deep_reads/2026-10-30-2610.41092.md)  
   6/10 [daily]
 - [Tabular Foundation Models Dramatically Outperform Bespoke Photometric Redshift Estimators](deep_reads/2026-10-29-2610.39332.md)  
@@ -15086,6 +15118,8 @@
   6/10 [daily]
 - [Weak Identification in Bunching Designs: Rare Events and Counterfactual Uncertainty](deep_reads/2026-11-03-2610.40719.md)  
   7/10 [daily]
+- [xtlp: A new Stata command for panel local projection](deep_reads/2026-11-02-2610.41428.md)  
+  6/10 [daily]
 - [Evaluating Maternity Leave Reforms When RD Fails](deep_reads/2026-10-30-2610.41881.md)  
   7/10 [daily]
 - [Identification through Heteroskedasticity in One Lemma: Partial Identification, an Eigenvalue Construction, and a Caution on Rank Tests](deep_reads/2026-10-30-2610.41361.md)  
@@ -18255,6 +18289,10 @@
   7/10 [daily]
 - [Robust Estimation of Prior Parameters in Normal-Normal Empirical Bayes](deep_reads/2026-11-02-2611.00326.md)  
   7/10 [daily]
+- [Model-Based Co-Clustering for Censored Data](deep_reads/2026-11-02-2611.01253.md)  
+  6/10 [daily]
+- [Penalized Likelihood Inference in Highly Multivariate Sparse Spectral Graphical Gaussian Processes](deep_reads/2026-11-02-2611.00467.md)  
+  6/10 [daily]
 - [Unidentified prediction-risk rankings under spatial sampling with fixed inclusion probabilities](deep_reads/2026-10-30-2610.41726.md)  
   6/10 [daily]
 - [Dynamics of the spherical Sherrington–Kirkpatrick model, Part II: Mixing profiles and critical dynamics](deep_reads/2026-10-30-hexagon_2610.00610.md)  
