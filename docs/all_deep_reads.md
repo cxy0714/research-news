@@ -160,6 +160,20 @@
   8/10 [daily]
 - [Identification through Heteroskedasticity in One Lemma: Partial Identification, an Eigenvalue Construction, and a Caution on Rank Tests](deep_reads/2026-11-02-2610.41361.md)  
   8/10 [daily]
+- [$P$-stationary structural equation modeling: Causal effect identification under temporally incomplete observations](deep_reads/2026-11-02-2611.02252.md)  
+  7/10 [daily]
+- [One-Sample Mendelian Randomization and Instrumental Variable Analyses in R and Stata: The OneSampleMR and ivonesamplemr Packages](deep_reads/2026-11-02-2611.02887.md)  
+  7/10 [daily]
+- [Improving the selection-function-based sensitivity analysis for publication bias with restricted maximum likelihood](deep_reads/2026-11-02-2611.02665.md)  
+  7/10 [daily]
+- [Reference-based sensitivity analysis for bounded longitudinal outcomes](deep_reads/2026-11-02-2611.02642.md)  
+  7/10 [daily]
+- [Partial Invariance for Classification under Structural Causal Models](deep_reads/2026-11-02-2611.02254.md)  
+  7/10 [daily]
+- [A Debiased Machine Learning Single-Imputation Framework for Item Nonresponse in Surveys](deep_reads/2026-11-02-2611.01485.md)  
+  7/10 [daily]
+- [Selective inference for pruned interaction trees with known unequal variances in randomized trials](deep_reads/2026-11-02-2611.01134.md)  
+  7/10 [daily]
 - [Characterizing Estimator-Regime Transitions in Adaptive Enrichment Trials](deep_reads/2026-11-02-2611.00549.md)  
   7/10 [daily]
 - [The Double Diagonal Estimator: Reducing Bias in Two-Sided Marketplace Experiments](deep_reads/2026-11-02-2610.41294.md)  
@@ -6514,6 +6528,12 @@
   8/10 [daily]
 - [A semi-parametric Bernstein-von Mises theorem at rate $n^{-3/2}$ for frequency estimation](deep_reads/2026-11-02-2611.00821.md)  
   8/10 [daily]
+- [Nonparametric Intensity Estimation for Covariate-Driven Poisson Processes Using Deep Learning](deep_reads/2026-11-02-2611.03552.md)  
+  7/10 [daily]
+- [Specification LASSO and a Flexible Characteristics-Based Asset Pricing Model](deep_reads/2026-11-02-2611.03391.md)  
+  7/10 [daily]
+- [Mutual Information Estimation via Triangular Transport Maps: Finite Sample Guarantees and Sample Allocation](deep_reads/2026-11-02-2611.00471.md)  
+  7/10 [daily]
 - [Simultaneous inference for additive regression](deep_reads/2026-11-02-2610.41442.md)  
   7/10 [daily]
 - [Simultaneous inference for additive regression](deep_reads/2026-10-30-2610.41442.md)  
@@ -9363,6 +9383,18 @@
   8/10 [daily]
 - [Conditional independence testing through marginal permutation](deep_reads/2026-11-02-2611.03255.md)  
   8/10 [daily]
+- [Exact Simes inequalities for two-sided Gaussian tests](deep_reads/2026-11-02-2611.02513.md)  
+  7/10 [daily]
+- [A High-Dimensional LM Test for Cross-Sectional Independence with Serially Correlated Data](deep_reads/2026-11-02-2611.02308.md)  
+  7/10 [daily]
+- [Sharp Critical Rates for Locally Private Distribution Estimation](deep_reads/2026-11-02-2611.01289.md)  
+  7/10 [daily]
+- [Minimax regret and monotone optimality in multiple testing](deep_reads/2026-11-02-2611.03155.md)  
+  7/10 [daily]
+- [Graph-Based Testing of Conditional Mean Independence with Applications to Large Language Model Evaluation](deep_reads/2026-11-02-2611.01773.md)  
+  7/10 [daily]
+- [A Kernel-Based Test for Multi-Way Conditional Independence](deep_reads/2026-11-02-2611.01092.md)  
+  7/10 [daily]
 - [Covariance Identification from Regression Residuals](deep_reads/2026-11-02-2610.41722.md)  
   7/10 [daily]
 - [Variance-adaptive Chernoff bounds: nonasymptotically valid, asymptotically sharp confidence sets for unbounded means](deep_reads/2026-11-02-2610.42058.md)  
@@ -12297,6 +12329,8 @@
   6/10 [daily]
 - [The $p$-Bures–Wasserstein distance via $3\times3$ block matrices (with application to $p$-Bures–Wasserstein barycenters)](deep_reads/2026-11-03-hexagon_2610.00726.md)  
   4/10 [daily]
+- [Optimal spectral shrinkage via Krylov approximation](deep_reads/2026-11-02-2611.02122.md)  
+  7/10 [daily]
 - [On Statistical-Computational Gaps in Graph Combinatorial Testing Problems](deep_reads/2026-10-30-2610.41995.md)  
   8/10 [daily]
 - [Covariance Identification from Regression Residuals](deep_reads/2026-10-30-2610.41722.md)  
@@ -18217,6 +18251,8 @@
   9/10 [daily]
 - [Resolution Is Not Accessibility: Coupled Minimax Risk for Reduced Statistical Experiments](deep_reads/2026-11-02-2611.02914.md)  
   8/10 [daily]
+- [Inference in an interactive multi-type branching network](deep_reads/2026-11-02-2611.00152.md)  
+  7/10 [daily]
 - [Robust Estimation of Prior Parameters in Normal-Normal Empirical Bayes](deep_reads/2026-11-02-2611.00326.md)  
   7/10 [daily]
 - [Unidentified prediction-risk rankings under spatial sampling with fixed inclusion probabilities](deep_reads/2026-10-30-2610.41726.md)  
