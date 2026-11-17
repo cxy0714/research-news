@@ -142,6 +142,8 @@
   9/10 [daily]
 - [A General Approach for Assessing Sensitivity to Violations of Causal Assumptions](deep_reads/2026-11-02-2611.02239.md)  
   9/10 [daily]
+- [Unconfoundedness as an Information Constraint](deep_reads/2026-11-02-2611.03550.md)  
+  8/10 [daily]
 - [Sharp Identification for Regressions with Interval-Observed and Missing Covariates](deep_reads/2026-11-02-2611.03345.md)  
   8/10 [daily]
 - [Testing Exogeneity in Nonparametric Instrumental Variable Models](deep_reads/2026-11-02-2611.01806.md)  
@@ -158,6 +160,14 @@
   8/10 [daily]
 - [Identification through Heteroskedasticity in One Lemma: Partial Identification, an Eigenvalue Construction, and a Caution on Rank Tests](deep_reads/2026-11-02-2610.41361.md)  
   8/10 [daily]
+- [Characterizing Estimator-Regime Transitions in Adaptive Enrichment Trials](deep_reads/2026-11-02-2611.00549.md)  
+  7/10 [daily]
+- [The Double Diagonal Estimator: Reducing Bias in Two-Sided Marketplace Experiments](deep_reads/2026-11-02-2610.41294.md)  
+  7/10 [daily]
+- [Evaluating Maternity Leave Reforms When RD Fails](deep_reads/2026-11-02-2610.41881.md)  
+  7/10 [daily]
+- [Valid GMM Inference with Non-parametrically Generated Discrete Type](deep_reads/2026-11-02-2610.42052.md)  
+  7/10 [daily]
 - [A Semiparametric Model Approach to Data Integration under Missing Not at Random](deep_reads/2026-10-30-2610.41937.md)  
   8/10 [daily]
 - [Functional-Specific Information Borrowing under Limited Overlap](deep_reads/2026-10-30-2610.41753.md)  
@@ -4801,6 +4811,8 @@
   8/10 [daily]
 - [Smallest Gaps between Eigenvalues of Wigner Matrices without Smoothness Assumptions](deep_reads/2026-11-02-hexagon_2610.00675.md)  
   8/10 [daily]
+- [Bethe Hessian Recovery through the Kesten-Stigum Regime](deep_reads/2026-11-02-2610.41802.md)  
+  7/10 [daily]
 - [Bethe Hessian Recovery through the Kesten-Stigum Regime](deep_reads/2026-10-30-2610.41802.md)  
   7/10 [daily]
 - [Dynamics of the spherical Sherrington–Kirkpatrick model, Part I: Foundations and tools](deep_reads/2026-10-30-hexagon_2610.00609.md)  
@@ -6502,6 +6514,8 @@
   8/10 [daily]
 - [A semi-parametric Bernstein-von Mises theorem at rate $n^{-3/2}$ for frequency estimation](deep_reads/2026-11-02-2611.00821.md)  
   8/10 [daily]
+- [Simultaneous inference for additive regression](deep_reads/2026-11-02-2610.41442.md)  
+  7/10 [daily]
 - [Simultaneous inference for additive regression](deep_reads/2026-10-30-2610.41442.md)  
   7/10 [daily]
 - [Improved estimation of differential entropy of a multivariate Gaussian distribution](deep_reads/2026-10-30-2610.41849.md)  
@@ -9341,12 +9355,18 @@
   6/10 [daily]
 - [Global Testing of Gaussian Means by Combining Marginal and Conditional Evidence](deep_reads/2026-11-03-2610.40899.md)  
   8/10 [daily]
+- [Minimax signal detection in regression under differential privacy](deep_reads/2026-11-02-2611.04064.md)  
+  8/10 [daily]
 - [Studentized inference in randomized experiments when a few units dominate the outcome variation](deep_reads/2026-11-02-2611.03561.md)  
   8/10 [daily]
 - [Beyond least-favorable distribution pairs: asymptotically instance-optimal robust hypothesis testing](deep_reads/2026-11-02-2611.02130.md)  
   8/10 [daily]
 - [Conditional independence testing through marginal permutation](deep_reads/2026-11-02-2611.03255.md)  
   8/10 [daily]
+- [Covariance Identification from Regression Residuals](deep_reads/2026-11-02-2610.41722.md)  
+  7/10 [daily]
+- [Variance-adaptive Chernoff bounds: nonasymptotically valid, asymptotically sharp confidence sets for unbounded means](deep_reads/2026-11-02-2610.42058.md)  
+  7/10 [daily]
 - [Co-sufficient weighting: leveraging sparsity for more powerful variable selection in the linear model](deep_reads/2026-10-30-2610.42122.md)  
   7/10 [daily]
 - [Variance-adaptive Chernoff bounds: nonasymptotically valid, asymptotically sharp confidence sets for unbounded means](deep_reads/2026-10-30-2610.42058.md)  
@@ -18197,6 +18217,8 @@
   9/10 [daily]
 - [Resolution Is Not Accessibility: Coupled Minimax Risk for Reduced Statistical Experiments](deep_reads/2026-11-02-2611.02914.md)  
   8/10 [daily]
+- [Robust Estimation of Prior Parameters in Normal-Normal Empirical Bayes](deep_reads/2026-11-02-2611.00326.md)  
+  7/10 [daily]
 - [Unidentified prediction-risk rankings under spatial sampling with fixed inclusion probabilities](deep_reads/2026-10-30-2610.41726.md)  
   6/10 [daily]
 - [Dynamics of the spherical Sherrington–Kirkpatrick model, Part II: Mixing profiles and critical dynamics](deep_reads/2026-10-30-hexagon_2610.00610.md)  
