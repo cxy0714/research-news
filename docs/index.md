@@ -17,10 +17,44 @@
 
 [→ 查看完整报告](daily/2026-11-17.md)
 
-### 精读论文（1 篇）
+### 精读论文（18 篇）
 
+- [Estimating a Rational Inattention Discrete Choice Model: A Semiparametric Approach](deep_reads/2026-11-17-2611.18479.md)  
+  `经济理论 / 应用` · 相关性 8/10
+- [Positive Weights Do Not Certify TWFE Inference: A Design Diagnostic under Treatment-Effect Heterogeneity](deep_reads/2026-11-17-2611.18116.md)  
+  `因果推断` · 相关性 8/10
 - [Orthogonal Scores and Double/Debiased Machine Learning for Possibly Misspecified GMM](deep_reads/2026-11-17-2611.17578.md)  
   `因果推断` · 相关性 8/10
+- [The planar data-selection constants $F(2,n)=2n/(2n-1)$, including $F(2,3)=6/5$ and $F(2,2)=4/3$](deep_reads/2026-11-17-hexagon_2611.00511.md)  
+  `其他` · 相关性 7/10
+- [Extended Bayesian Estimation for In-flight Calibration of Space-based Instruments](deep_reads/2026-11-17-2611.18241.md)  
+  `天体统计` · 相关性 7/10
+- [Broken Adaptive Ridge in High-Dimensional Vector Autoregressions](deep_reads/2026-11-17-2611.18227.md)  
+  `高维统计 / 随机矩阵` · 相关性 7/10
+- [Identification and Inference of Bi-directional Causal Effects in Mendelian Randomization without Instrument Selection](deep_reads/2026-11-17-2611.18291.md)  
+  `因果推断` · 相关性 7/10
+- [Cross-Fitted Doubly Robust Estimation with Student-t Outcome Engines: ECM Algorithms, Monte Carlo Evidence and Schistosomiasis Programme Data from the Democratic Republic of the Congo](deep_reads/2026-11-17-2611.18128.md)  
+  `因果推断` · 相关性 7/10
+- [Interpretable confidence regions for causal discovery](deep_reads/2026-11-17-2611.17771.md)  
+  `因果推断` · 相关性 7/10
+- [bihalofit-JAX: A Differentiable Code for the Nonlinear Matter Bispectrum and its Projected Statistics](deep_reads/2026-11-17-2611.18281.md)  
+  `天体统计` · 相关性 6/10
+- [Constrained Stochastic Policy Targeting under Heterogeneous Partial Interference](deep_reads/2026-11-17-2611.18444.md)  
+  `因果推断` · 相关性 6/10
+- [A fast and sound algorithm to simplify summations in interventional queries expressions](deep_reads/2026-11-17-2611.18416.md)  
+  `因果推断` · 相关性 6/10
+- [Homogeneous pursuit in $\beta$ model](deep_reads/2026-11-17-2611.17609.md)  
+  `数理统计 / 假设检验` · 相关性 6/10
+- [Bayesian Semiparametric Regression for Count Data Using Zero Altered Moment Models](deep_reads/2026-11-17-2611.17518.md)  
+  `非参数 / 半参数` · 相关性 6/10
+- [The relations of a Lie subalgebra considered by Tao: a complete presentation](deep_reads/2026-11-17-hexagon_2611.00542.md)  
+  `其他` · 相关性 1/10
+- [Orthogonal bases of symmetric unitary matrices in odd dimensions and the mixed-unitary rank of the symmetric Werner–Holevo channel](deep_reads/2026-11-17-hexagon_2611.00505.md)  
+  `其他` · 相关性 1/10
+- [Three Properties of Markov–Hurwitz Equations](deep_reads/2026-11-17-hexagon_2611.00529.md)  
+  `其他` · 相关性 0/10
+- [Smooth isometric bending of a closed sphere](deep_reads/2026-11-17-hexagon_2611.00534.md)  
+  `其他` · 相关性 0/10
 
 ## 收藏
 

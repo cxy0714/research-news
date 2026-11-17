@@ -4,8 +4,20 @@
 
 ### Daily
 
+- [Positive Weights Do Not Certify TWFE Inference: A Design Diagnostic under Treatment-Effect Heterogeneity](deep_reads/2026-11-17-2611.18116.md)  
+  8/10 [daily]
 - [Orthogonal Scores and Double/Debiased Machine Learning for Possibly Misspecified GMM](deep_reads/2026-11-17-2611.17578.md)  
   8/10 [daily]
+- [Identification and Inference of Bi-directional Causal Effects in Mendelian Randomization without Instrument Selection](deep_reads/2026-11-17-2611.18291.md)  
+  7/10 [daily]
+- [Cross-Fitted Doubly Robust Estimation with Student-t Outcome Engines: ECM Algorithms, Monte Carlo Evidence and Schistosomiasis Programme Data from the Democratic Republic of the Congo](deep_reads/2026-11-17-2611.18128.md)  
+  7/10 [daily]
+- [Interpretable confidence regions for causal discovery](deep_reads/2026-11-17-2611.17771.md)  
+  7/10 [daily]
+- [Constrained Stochastic Policy Targeting under Heterogeneous Partial Interference](deep_reads/2026-11-17-2611.18444.md)  
+  6/10 [daily]
+- [A fast and sound algorithm to simplify summations in interventional queries expressions](deep_reads/2026-11-17-2611.18416.md)  
+  6/10 [daily]
 - [Causal prediction of rare recovery responses and the optimal scale of observation time](deep_reads/2026-11-13-hexagon_2611.00404.md)  
   6/10 [daily]
 - [Semiparametric Inference in Panel Data with Interactive and High-dimensional Confounding](deep_reads/2026-11-12-2611.14385.md)  
@@ -4727,6 +4739,8 @@
 
 ### Daily
 
+- [Broken Adaptive Ridge in High-Dimensional Vector Autoregressions](deep_reads/2026-11-17-2611.18227.md)  
+  7/10 [daily]
 - [Supersymmetric Analysis of a Random Band Matrix at Criticality, Volume II](deep_reads/2026-11-13-hexagon_2611.00367.md)  
   8/10 [daily]
 - [Supersymmetric Analysis of a Random Band Matrix at Criticality, Volume I](deep_reads/2026-11-13-hexagon_2611.00368.md)  
@@ -6402,6 +6416,8 @@
 
 ### Daily
 
+- [Bayesian Semiparametric Regression for Count Data Using Zero Altered Moment Models](deep_reads/2026-11-17-2611.17518.md)  
+  6/10 [daily]
 - [Nonparametric Maximum Likelihood Estimation for Mixtures of Logistic Regressions](deep_reads/2026-11-12-2611.14445.md)  
   7/10 [daily]
 - [First-order asymptotic expansions for spectral convergence of normalized graph Laplacians constructed from samples on manifolds](deep_reads/2026-11-12-2611.13623.md)  
@@ -9211,6 +9227,8 @@
 
 ### Daily
 
+- [Homogeneous pursuit in $\beta$ model](deep_reads/2026-11-17-2611.17609.md)  
+  6/10 [daily]
 - [On the geometry of Gaussian Mean Shift Detection](deep_reads/2026-11-12-2611.14264.md)  
   7/10 [daily]
 - [Asymptotic Bayes Optimality of Sparse Multiple Testing Procedures under One-Factor Dependence](deep_reads/2026-11-12-2611.13928.md)  
@@ -13783,6 +13801,10 @@
 
 ### Daily
 
+- [Extended Bayesian Estimation for In-flight Calibration of Space-based Instruments](deep_reads/2026-11-17-2611.18241.md)  
+  7/10 [daily]
+- [bihalofit-JAX: A Differentiable Code for the Nonlinear Matter Bispectrum and its Projected Statistics](deep_reads/2026-11-17-2611.18281.md)  
+  6/10 [daily]
 - [Learning a model of non-stationary nuisances with non-local correlations for object detection](deep_reads/2026-11-12-2611.14479.md)  
   7/10 [daily]
 - [ExoPlanetLab: Bayesian orbit fitting of Gaia-DR4 epoch astrometry, radial velocities and relative astrometry](deep_reads/2026-11-12-2611.13770.md)  
@@ -14936,6 +14958,8 @@
 
 ### Daily
 
+- [Estimating a Rational Inattention Discrete Choice Model: A Semiparametric Approach](deep_reads/2026-11-17-2611.18479.md)  
+  8/10 [daily]
 - [Hedging out the HEDGE Bias: Identifying Dynamic Partial-Equilibrium Effects with Panel LP-IV](deep_reads/2026-11-12-2611.14434.md)  
   7/10 [daily]
 - [Identification, estimation, and robust inference of structural autoregressions for multidimensional data](deep_reads/2026-11-12-2611.13169.md)  
@@ -17867,6 +17891,16 @@
 
 ### Daily
 
+- [The planar data-selection constants $F(2,n)=2n/(2n-1)$, including $F(2,3)=6/5$ and $F(2,2)=4/3$](deep_reads/2026-11-17-hexagon_2611.00511.md)  
+  7/10 [daily]
+- [The relations of a Lie subalgebra considered by Tao: a complete presentation](deep_reads/2026-11-17-hexagon_2611.00542.md)  
+  1/10 [daily]
+- [Orthogonal bases of symmetric unitary matrices in odd dimensions and the mixed-unitary rank of the symmetric Werner–Holevo channel](deep_reads/2026-11-17-hexagon_2611.00505.md)  
+  1/10 [daily]
+- [Three Properties of Markov–Hurwitz Equations](deep_reads/2026-11-17-hexagon_2611.00529.md)  
+  0/10 [daily]
+- [Smooth isometric bending of a closed sphere](deep_reads/2026-11-17-hexagon_2611.00534.md)  
+  0/10 [daily]
 - [Sharp Poisson approximation and second-order correction for long multiplicative runs](deep_reads/2026-11-16-hexagon_2611.00447.md)  
   7/10 [daily]
 - [A proof of the scheme-theoretic Humphreys conjectures](deep_reads/2026-11-16-hexagon_2611.00408.md)  
