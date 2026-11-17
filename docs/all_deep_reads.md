@@ -204,6 +204,14 @@
   6/10 [daily]
 - [Online Augmented Plug-in Inference for Multi-group Fair Prediction](deep_reads/2026-10-23-2610.29099.md)  
   6/10 [daily]
+- [More efficient transportation of causal effects using mediators](deep_reads/2026-10-22-2610.31568.md)  
+  9/10 [daily]
+- [Estimating Group Average Treatment Effects in High-Risk Populations with Unobserved Target Membership](deep_reads/2026-10-22-2610.30709.md)  
+  8/10 [daily]
+- [Semiparametric inference for a Target Outcome Leveraging Heterogeneous External Summaries of Auxiliary Outcomes](deep_reads/2026-10-22-2610.31928.md)  
+  8/10 [daily]
+- [Parallel Trends as a Spectrum](deep_reads/2026-10-22-2610.31978.md)  
+  7/10 [daily]
 - [Where the Data End and the Mechanism Begins: Doubly Robust Causal Digital Twins for Treatment Strategies](deep_reads/2026-10-21-2610.31706.md)  
   8/10 [daily]
 - [A Bayesian machine learning approach to direct and spillover effects in cluster-randomized trials with noncompliance](deep_reads/2026-10-20-2610.27425.md)  
@@ -6472,6 +6480,8 @@
   9/10 [daily]
 - [Minimax Rates for imperfect Physics-Informed Regression](deep_reads/2026-10-23-2610.29532.md)  
   7/10 [daily]
+- [A Bayesian Copula Dirichlet Process GLM for Longitudinal Data](deep_reads/2026-10-21-2610.30467.md)  
+  6/10 [daily]
 - [Central Limit Theorems for Optimal Transport Functionals](deep_reads/2026-10-20-2610.27857.md)  
   7/10 [daily]
 - [Nonparametric In-Context Learning and Inference via Measure-Indexed Kernel Ridge Regression](deep_reads/2026-10-20-2610.28056.md)  
@@ -9321,6 +9331,8 @@
   7/10 [daily]
 - [Uniformly Improved Adaptive Filtering Procedures for Replicability Testing with FWER Control](deep_reads/2026-10-23-2610.29266.md)  
   6/10 [daily]
+- [An F-Type Normal-Reference Calibration for High-Dimensional Covariance Testing](deep_reads/2026-10-21-2610.30497.md)  
+  8/10 [daily]
 - [Optimal aggregation in multiclass classification](deep_reads/2026-10-20-2610.28025.md)  
   6/10 [daily]
 - [Likelihood-Based Confidence Curves for Bounded Parameters](deep_reads/2026-10-20-2610.28235.md)  
@@ -18189,6 +18201,8 @@
   0/10 [daily]
 - [Durfee inequalities for quasihomogeneous complete intersections of codimension two](deep_reads/2026-10-23-hexagon_2610.00363.md)  
   0/10 [daily]
+- [Image Reconstruction from Projections using Fourier Slice Theorem](deep_reads/2026-10-22-hexagon_2610.00344.md)  
+  7/10 [daily]
 - [Exact Covariance Structure and Efficient Computation for L-Comoments](deep_reads/2026-10-20-2610.28387.md)  
   8/10 [daily]
 - [Structural equation modelling--based meta-analytic model for diagnostic test accuracy studies](deep_reads/2026-10-20-2610.27408.md)  
