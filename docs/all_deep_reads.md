@@ -142,6 +142,10 @@
   9/10 [daily]
 - [A General Approach for Assessing Sensitivity to Violations of Causal Assumptions](deep_reads/2026-11-02-2611.02239.md)  
   9/10 [daily]
+- [Sharp Identification for Regressions with Interval-Observed and Missing Covariates](deep_reads/2026-11-02-2611.03345.md)  
+  8/10 [daily]
+- [Testing Exogeneity in Nonparametric Instrumental Variable Models](deep_reads/2026-11-02-2611.01806.md)  
+  8/10 [daily]
 - [Causal Inference from Self-controlled Case Series](deep_reads/2026-11-02-2611.03531.md)  
   8/10 [daily]
 - [Data integration using propensity score weighting under missing at random](deep_reads/2026-11-02-2611.03353.md)  
@@ -6494,6 +6498,8 @@
   6/10 [daily]
 - [Conditional expectile-based value-at-risk: Semiparametric estimation and inference](deep_reads/2026-11-04-2611.02716.md)  
   6/10 [daily]
+- [Minimax estimation of linear functionals in the Darcy inverse problem](deep_reads/2026-11-02-2611.01290.md)  
+  8/10 [daily]
 - [A semi-parametric Bernstein-von Mises theorem at rate $n^{-3/2}$ for frequency estimation](deep_reads/2026-11-02-2611.00821.md)  
   8/10 [daily]
 - [Simultaneous inference for additive regression](deep_reads/2026-10-30-2610.41442.md)  
@@ -9334,6 +9340,10 @@
 - [Statistics of the Shepp $p$-product](deep_reads/2026-11-04-2611.03282.md)  
   6/10 [daily]
 - [Global Testing of Gaussian Means by Combining Marginal and Conditional Evidence](deep_reads/2026-11-03-2610.40899.md)  
+  8/10 [daily]
+- [Studentized inference in randomized experiments when a few units dominate the outcome variation](deep_reads/2026-11-02-2611.03561.md)  
+  8/10 [daily]
+- [Beyond least-favorable distribution pairs: asymptotically instance-optimal robust hypothesis testing](deep_reads/2026-11-02-2611.02130.md)  
   8/10 [daily]
 - [Conditional independence testing through marginal permutation](deep_reads/2026-11-02-2611.03255.md)  
   8/10 [daily]
@@ -18185,6 +18195,8 @@
   9/10 [daily]
 - [Martingalized U-statistics-based sequential inference: a blessing of degeneracy](deep_reads/2026-11-02-2611.00753.md)  
   9/10 [daily]
+- [Resolution Is Not Accessibility: Coupled Minimax Risk for Reduced Statistical Experiments](deep_reads/2026-11-02-2611.02914.md)  
+  8/10 [daily]
 - [Unidentified prediction-risk rankings under spatial sampling with fixed inclusion probabilities](deep_reads/2026-10-30-2610.41726.md)  
   6/10 [daily]
 - [Dynamics of the spherical Sherrington–Kirkpatrick model, Part II: Mixing profiles and critical dynamics](deep_reads/2026-10-30-hexagon_2610.00610.md)  
