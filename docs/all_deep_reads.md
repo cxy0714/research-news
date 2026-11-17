@@ -142,6 +142,16 @@
   9/10 [daily]
 - [A General Approach for Assessing Sensitivity to Violations of Causal Assumptions](deep_reads/2026-11-02-2611.02239.md)  
   9/10 [daily]
+- [Causal Inference from Self-controlled Case Series](deep_reads/2026-11-02-2611.03531.md)  
+  8/10 [daily]
+- [Data integration using propensity score weighting under missing at random](deep_reads/2026-11-02-2611.03353.md)  
+  8/10 [daily]
+- [Measurement Error and Nonlinear Confounding: Structural Equation Modeling Versus Double Machine Learning](deep_reads/2026-11-02-2611.01375.md)  
+  8/10 [daily]
+- [Efficient Causal Survival Inference under Limited Surrogate Monitoring](deep_reads/2026-11-02-2611.00553.md)  
+  8/10 [daily]
+- [Vector incremental treatment effects](deep_reads/2026-11-02-2611.00417.md)  
+  8/10 [daily]
 - [Identification through Heteroskedasticity in One Lemma: Partial Identification, an Eigenvalue Construction, and a Caution on Rank Tests](deep_reads/2026-11-02-2610.41361.md)  
   8/10 [daily]
 - [A Semiparametric Model Approach to Data Integration under Missing Not at Random](deep_reads/2026-10-30-2610.41937.md)  
@@ -4783,6 +4793,8 @@
   8/10 [daily]
 - [On Statistical-Computational Gaps in Graph Combinatorial Testing Problems](deep_reads/2026-11-02-2610.41995.md)  
   9/10 [daily]
+- [Robust Inference for Spiked Eigenspace under Elliptical Distributions](deep_reads/2026-11-02-2611.00538.md)  
+  8/10 [daily]
 - [Smallest Gaps between Eigenvalues of Wigner Matrices without Smoothness Assumptions](deep_reads/2026-11-02-hexagon_2610.00675.md)  
   8/10 [daily]
 - [Bethe Hessian Recovery through the Kesten-Stigum Regime](deep_reads/2026-10-30-2610.41802.md)  
@@ -6482,6 +6494,8 @@
   6/10 [daily]
 - [Conditional expectile-based value-at-risk: Semiparametric estimation and inference](deep_reads/2026-11-04-2611.02716.md)  
   6/10 [daily]
+- [A semi-parametric Bernstein-von Mises theorem at rate $n^{-3/2}$ for frequency estimation](deep_reads/2026-11-02-2611.00821.md)  
+  8/10 [daily]
 - [Simultaneous inference for additive regression](deep_reads/2026-10-30-2610.41442.md)  
   7/10 [daily]
 - [Improved estimation of differential entropy of a multivariate Gaussian distribution](deep_reads/2026-10-30-2610.41849.md)  
@@ -9320,6 +9334,8 @@
 - [Statistics of the Shepp $p$-product](deep_reads/2026-11-04-2611.03282.md)  
   6/10 [daily]
 - [Global Testing of Gaussian Means by Combining Marginal and Conditional Evidence](deep_reads/2026-11-03-2610.40899.md)  
+  8/10 [daily]
+- [Conditional independence testing through marginal permutation](deep_reads/2026-11-02-2611.03255.md)  
   8/10 [daily]
 - [Co-sufficient weighting: leveraging sparsity for more powerful variable selection in the linear model](deep_reads/2026-10-30-2610.42122.md)  
   7/10 [daily]
