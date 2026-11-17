@@ -6504,6 +6504,8 @@
   9/10 [daily]
 - [Minimax Rates for imperfect Physics-Informed Regression](deep_reads/2026-10-23-2610.29532.md)  
   7/10 [daily]
+- [On the Calibration of Isotonic Distributional Regression](deep_reads/2026-10-22-2610.31258.md)  
+  6/10 [daily]
 - [A Bayesian Copula Dirichlet Process GLM for Longitudinal Data](deep_reads/2026-10-21-2610.30467.md)  
   6/10 [daily]
 - [Central Limit Theorems for Optimal Transport Functionals](deep_reads/2026-10-20-2610.27857.md)  
@@ -9319,6 +9321,8 @@
   6/10 [daily]
 - [The sharp iid Berry–Esseen inequality: Analytic reductions and exact certificate proof](deep_reads/2026-10-30-hexagon_2610.00590.md)  
   6/10 [daily]
+- [The sharp iid Berry–Esseen inequality: Analytic reductions and exact certificate proof](deep_reads/2026-10-29-hexagon_2610.00590.md)  
+  7/10 [daily]
 - [Global Testing of Gaussian Means by Combining Marginal and Conditional Evidence](deep_reads/2026-10-29-2610.40899.md)  
   7/10 [daily]
 - [TwinPoSI: Statistical Twins for Powerful Post-Selection Inference on Population-Based Regression Coefficients](deep_reads/2026-10-29-2610.39274.md)  
@@ -9357,6 +9361,8 @@
   7/10 [daily]
 - [Uniformly Improved Adaptive Filtering Procedures for Replicability Testing with FWER Control](deep_reads/2026-10-23-2610.29266.md)  
   6/10 [daily]
+- [Robust M-Estimation for Spliced Power-Law Models Under Cusp-Type Non-Regularity](deep_reads/2026-10-22-2610.30624.md)  
+  7/10 [daily]
 - [An F-Type Normal-Reference Calibration for High-Dimensional Covariance Testing](deep_reads/2026-10-21-2610.30497.md)  
   8/10 [daily]
 - [Optimal aggregation in multiclass classification](deep_reads/2026-10-20-2610.28025.md)  
@@ -12245,6 +12251,8 @@
   6/10 [daily]
 - [posterior-landscape: morphological feature finding in two-dimensional probability densities](deep_reads/2026-10-29-2610.40272.md)  
   7/10 [daily]
+- [What Does the Refutation of the Exponential Time Hypothesis Mean for Learning Theory?](deep_reads/2026-10-29-hexagon_2610.00613.md)  
+  6/10 [daily]
 - [Marginal Composite Likelihood Estimation of Bergomi Models from High-Frequency Option Prices](deep_reads/2026-10-29-2610.40425.md)  
   6/10 [daily]
 - [Graphical Modeling from Marginal Information via Optimal Transport](deep_reads/2026-10-29-2610.40070.md)  
@@ -13872,6 +13880,12 @@
 - [Comparison of Hybrid and Standard Reconstruction Methods on IXPE Astrophysical Data](deep_reads/2026-10-28-2610.35087.md)  
   6/10 [daily]
 - [Data-driven characterisation of variable source light curves with multimodal representation learning](deep_reads/2026-10-23-2610.29412.md)  
+  6/10 [daily]
+- [Photometric classification and out-of-taxonomy detection of ZTF transients with FLARE](deep_reads/2026-10-22-2610.30656.md)  
+  7/10 [daily]
+- [Simulation-based inference of profile evolution for high-precision pulsar timing](deep_reads/2026-10-22-2610.31450.md)  
+  7/10 [daily]
+- [Physics-Informed Neural Networks vs U-Net: Application to thermal dust emission recovery in the microwave](deep_reads/2026-10-22-2610.31813.md)  
   6/10 [daily]
 - [Gaussian process-based Bayesian imaging of bolometric (sub-)millimetre data](deep_reads/2026-10-20-2610.27733.md)  
   7/10 [daily]
