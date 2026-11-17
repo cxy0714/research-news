@@ -17,6 +17,11 @@
 
 [→ 查看完整报告](daily/2026-11-17.md)
 
+### 精读论文（1 篇）
+
+- [Orthogonal Scores and Double/Debiased Machine Learning for Possibly Misspecified GMM](deep_reads/2026-11-17-2611.17578.md)  
+  `因果推断` · 相关性 8/10
+
 ## 收藏
 
 - [→ 打开收藏](favorites.md) · 登录后在各页点 ☆ 收藏即可自动汇总

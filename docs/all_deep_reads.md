@@ -4,6 +4,8 @@
 
 ### Daily
 
+- [Orthogonal Scores and Double/Debiased Machine Learning for Possibly Misspecified GMM](deep_reads/2026-11-17-2611.17578.md)  
+  8/10 [daily]
 - [Causal prediction of rare recovery responses and the optimal scale of observation time](deep_reads/2026-11-13-hexagon_2611.00404.md)  
   6/10 [daily]
 - [Semiparametric Inference in Panel Data with Interactive and High-dimensional Confounding](deep_reads/2026-11-12-2611.14385.md)  
