@@ -224,6 +224,12 @@
   8/10 [daily]
 - [Semiparametric inference for a Target Outcome Leveraging Heterogeneous External Summaries of Auxiliary Outcomes](deep_reads/2026-10-22-2610.31928.md)  
   8/10 [daily]
+- [Operationalising Weaker Faithfulness: Recovery, Ambiguity and Computational Limits](deep_reads/2026-10-22-2610.31724.md)  
+  7/10 [daily]
+- [A Subjective Bayesian Approach to Address Unchecked Assumptions in a Causal Analysis](deep_reads/2026-10-22-2610.31587.md)  
+  7/10 [daily]
+- [Bayesian Propensity Score Predictive Inference for Extending Trial Findings to Target Populations](deep_reads/2026-10-22-2610.31915.md)  
+  7/10 [daily]
 - [Parallel Trends as a Spectrum](deep_reads/2026-10-22-2610.31978.md)  
   7/10 [daily]
 - [Where the Data End and the Mechanism Begins: Doubly Robust Causal Digital Twins for Treatment Strategies](deep_reads/2026-10-21-2610.31706.md)  
@@ -17897,6 +17903,14 @@
   1/10 [daily]
 - [Orthogonal bases of symmetric unitary matrices in odd dimensions and the mixed-unitary rank of the symmetric Werner–Holevo channel](deep_reads/2026-11-17-hexagon_2611.00505.md)  
   1/10 [daily]
+- [Spherical space forms in K3: an instanton parity argument](deep_reads/2026-11-17-hexagon_2611.00502.md)  
+  0/10 [daily]
+- [A uniform 7/48 cubic upper bound for reset thresholds](deep_reads/2026-11-17-hexagon_2611.00506.md)  
+  0/10 [daily]
+- [Pair correlation of $L$-zeros and Hooley's conjecture](deep_reads/2026-11-17-hexagon_2611.00509.md)  
+  0/10 [daily]
+- [A DETAILED FINITE-CARRY PROOF OF A CONJECTURE ON PERMUTATION BINOMIALS IN CHARACTERISTIC TWO](deep_reads/2026-11-17-hexagon_2611.00510.md)  
+  0/10 [daily]
 - [Three Properties of Markov–Hurwitz Equations](deep_reads/2026-11-17-hexagon_2611.00529.md)  
   0/10 [daily]
 - [Smooth isometric bending of a closed sphere](deep_reads/2026-11-17-hexagon_2611.00534.md)  

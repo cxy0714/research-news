@@ -17,7 +17,7 @@
 
 [→ 查看完整报告](daily/2026-11-17.md)
 
-### 精读论文（18 篇）
+### 精读论文（22 篇）
 
 - [Estimating a Rational Inattention Discrete Choice Model: A Semiparametric Approach](deep_reads/2026-11-17-2611.18479.md)  
   `经济理论 / 应用` · 相关性 8/10
@@ -51,6 +51,14 @@
   `其他` · 相关性 1/10
 - [Orthogonal bases of symmetric unitary matrices in odd dimensions and the mixed-unitary rank of the symmetric Werner–Holevo channel](deep_reads/2026-11-17-hexagon_2611.00505.md)  
   `其他` · 相关性 1/10
+- [Spherical space forms in K3: an instanton parity argument](deep_reads/2026-11-17-hexagon_2611.00502.md)  
+  `其他` · 相关性 0/10
+- [A uniform 7/48 cubic upper bound for reset thresholds](deep_reads/2026-11-17-hexagon_2611.00506.md)  
+  `其他` · 相关性 0/10
+- [Pair correlation of $L$-zeros and Hooley's conjecture](deep_reads/2026-11-17-hexagon_2611.00509.md)  
+  `其他` · 相关性 0/10
+- [A DETAILED FINITE-CARRY PROOF OF A CONJECTURE ON PERMUTATION BINOMIALS IN CHARACTERISTIC TWO](deep_reads/2026-11-17-hexagon_2611.00510.md)  
+  `其他` · 相关性 0/10
 - [Three Properties of Markov–Hurwitz Equations](deep_reads/2026-11-17-hexagon_2611.00529.md)  
   `其他` · 相关性 0/10
 - [Smooth isometric bending of a closed sphere](deep_reads/2026-11-17-hexagon_2611.00534.md)  
