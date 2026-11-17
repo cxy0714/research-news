@@ -204,6 +204,8 @@
   6/10 [daily]
 - [Online Augmented Plug-in Inference for Multi-group Fair Prediction](deep_reads/2026-10-23-2610.29099.md)  
   6/10 [daily]
+- [Where the Data End and the Mechanism Begins: Doubly Robust Causal Digital Twins for Treatment Strategies](deep_reads/2026-10-21-2610.31706.md)  
+  8/10 [daily]
 - [A Bayesian machine learning approach to direct and spillover effects in cluster-randomized trials with noncompliance](deep_reads/2026-10-20-2610.27425.md)  
   8/10 [daily]
 - [Strong Simultaneous Inference for Restricted Mean Survival Time Processes in Multi-Arm Trials under Covariate-Adaptive Randomization](deep_reads/2026-10-20-2610.27466.md)  
@@ -674,6 +676,8 @@
   9/10 [daily]
 - [Endogenous Selection and Spillovers: Bayesian Inference for Policy-Relevant Causal Effects](deep_reads/2026-08-26-2608.25720.md)  
   9/10 [daily]
+- [Orthogonal double residual learning for optimal individualized treatment rules](deep_reads/2026-08-26-2608.24085.md)  
+  8/10 [daily]
 - [Causal Effects of Modified Treatment Policies under Positivity Violations: A Partial Identification Approach](deep_reads/2026-08-26-2608.23971.md)  
   8/10 [daily]
 - [Transporting Randomized Trial Effects to Real-World Populations via Riesz-Calibrated Optimal Transport](deep_reads/2026-08-26-2608.23453.md)  
@@ -6596,6 +6600,8 @@
   6/10 [daily]
 - [Non-asymptotic Analysis of Matérn Regression: The Roles of Target and Kernel Lengthscales](deep_reads/2026-08-27-2608.22553.md)  
   6/10 [daily]
+- [Spectral stability of empirical metric-measure Laplacians](deep_reads/2026-08-26-2608.23150.md)  
+  7/10 [daily]
 - [Functional linear regression from sparse to dense designs: a pooling-ridge method and minimax optimality](deep_reads/2026-08-26-2608.25468.md)  
   7/10 [daily]
 - [Non-asymptotic Analysis of Matérn Regression: The Roles of Target and Kernel Lengthscales](deep_reads/2026-08-26-2608.22553.md)  
@@ -6610,6 +6616,8 @@
   7/10 [daily]
 - [Non-asymptotic Analysis of Matérn Regression: The Roles of Target and Kernel Lengthscales](deep_reads/2026-08-24-2608.22553.md)  
   7/10 [daily]
+- [Spectral stability of empirical metric-measure Laplacians](deep_reads/2026-08-24-2608.23150.md)  
+  6/10 [daily]
 - [Trustworthy Decisions in Reliability Set Estimation under Insufficient Model Information](deep_reads/2026-08-24-2608.19815.md)  
   6/10 [daily]
 - [On the minimax-rate optimality of approximate Bayesian computation in nonparametric problems](deep_reads/2026-08-19-2608.15648.md)  
@@ -8788,6 +8796,8 @@
   8/10 [daily]
 - [On efficiency gains via augmenting a tiny sample with a massive auxiliary sample](deep_reads/2026-08-27-2608.26610.md)  
   7/10 [daily]
+- [Toward a Semiparametric Efficiency Theory under Equality Constraints in Nested Markov Models](deep_reads/2026-08-26-2608.24602.md)  
+  9/10 [daily]
 - [The Debiased Score Test: Hunt-and-test for Semiparametric Hypotheses](deep_reads/2026-08-03-2607.28861.md)  
   8/10 [daily]
 - [A Characterization of the Orthocomplement of the Tangent Space of Semiparametric Markov Models](deep_reads/2026-07-28-2607.23439.md)  
@@ -9523,6 +9533,8 @@
   7/10 [daily]
 - [Conformal Prediction Through the Lens of Hypothesis Testing: Universality, Impossibility, and Optimality](deep_reads/2026-08-28-2608.27310.md)  
   7/10 [daily]
+- [Connecting Riemannian Geometry and Statistical Inference for Correlation Matrices](deep_reads/2026-08-28-2608.27209.md)  
+  6/10 [daily]
 - [Uncertainty quantification for expectation-calibrated predictions](deep_reads/2026-08-28-2608.26703.md)  
   6/10 [daily]
 - [Wild Bootstrap and Efron's Bootstrap for Debiased Cox Regression](deep_reads/2026-08-28-2608.24230.md)  
@@ -9547,6 +9559,8 @@
   7/10 [daily]
 - [Asymptotics for Model Selection in Probabilistic Principal Component Analysis](deep_reads/2026-08-27-2608.23513.md)  
   7/10 [daily]
+- [Connecting Riemannian Geometry and Statistical Inference for Correlation Matrices](deep_reads/2026-08-27-2608.27209.md)  
+  6/10 [daily]
 - [The Sampling Distribution of the Log-Euclidean Distance Between Sample Correlation Matrices](deep_reads/2026-08-27-2608.25288.md)  
   6/10 [daily]
 - [Uncertainty quantification for expectation-calibrated predictions](deep_reads/2026-08-27-2608.26703.md)  
@@ -9575,6 +9589,8 @@
   7/10 [daily]
 - [Robust Scale Estimation in Additive Noise via Weighted Order Statistics](deep_reads/2026-08-26-2608.22165.md)  
   7/10 [daily]
+- [How Replicable Are Statistically Significant Findings?](deep_reads/2026-08-26-2608.23257.md)  
+  6/10 [daily]
 - [Random Invariance Testing on Quadratic Form Statistics with Application to Autocorrelation](deep_reads/2026-08-26-2608.25918.md)  
   6/10 [daily]
 - [Exact grid-free confidence-region computation from dependent p-value functions under arbitrary dependence](deep_reads/2026-08-26-2608.22265.md)  
@@ -9615,6 +9631,14 @@
   7/10 [daily]
 - [Classification testing: A new framework for drawing qualitative conclusions from quantitative estimates](deep_reads/2026-08-24-2608.23315.md)  
   7/10 [daily]
+- [Gaussian-efficient testing by betting on the mean of bounded data](deep_reads/2026-08-24-2608.21694.md)  
+  6/10 [daily]
+- [Exact grid-free confidence-region computation from dependent p-value functions under arbitrary dependence](deep_reads/2026-08-24-2608.22265.md)  
+  6/10 [daily]
+- [Approximating the null distribution of generalized distance covariance](deep_reads/2026-08-24-2608.23793.md)  
+  6/10 [daily]
+- [A Multiscale Ball Test for Conditional Mean Independence](deep_reads/2026-08-24-2608.20727.md)  
+  6/10 [daily]
 - [Further Results on Controlling the False Discovery Rate in Two-Sided Gaussian Mean Testing](deep_reads/2026-08-24-2608.21267.md)  
   6/10 [daily]
 - [Outlier Impact: Detection by Consequences](deep_reads/2026-08-24-2608.21557.md)  
@@ -12245,9 +12269,13 @@
   6/10 [daily]
 - [Personalized Federated Learning for Tensor Regression](deep_reads/2026-08-31-2608.27191.md)  
   6/10 [daily]
+- [When a neural surrogate cannot accelerate a solver: runtime share, closed-loop drift, and the economics of uncertainty gating in a stiff coupled simulation](deep_reads/2026-08-28-2608.23075.md)  
+  6/10 [daily]
 - [When a neural surrogate cannot accelerate a solver: runtime share, closed-loop drift, and the economics of uncertainty gating in a stiff coupled simulation](deep_reads/2026-08-26-2608.23075.md)  
   6/10 [daily]
 - [When a neural surrogate cannot accelerate a solver: runtime share, closed-loop drift, and the economics of uncertainty gating in a stiff coupled simulation](deep_reads/2026-08-25-2608.23075.md)  
+  6/10 [daily]
+- [When a neural surrogate cannot accelerate a solver: runtime share, closed-loop drift, and the economics of uncertainty gating in a stiff coupled simulation](deep_reads/2026-08-24-2608.23075.md)  
   6/10 [daily]
 - [Exact Rejection Sampling for Non-Gaussian State Space Models](deep_reads/2026-08-21-2608.21619.md)  
   6/10 [daily]
@@ -13939,6 +13967,8 @@
   1/10 [daily]
 - [Strong Lensing Cosmology with Population-level Calibrated Neural Ratio Estimation](deep_reads/2026-08-24-2608.23534.md)  
   7/10 [daily]
+- [Radio Galaxies detection and characterization using deep learning techniques](deep_reads/2026-08-24-2608.21474.md)  
+  6/10 [daily]
 - [Radio Galaxies detection and characterization using deep learning techniques](deep_reads/2026-08-21-2608.21474.md)  
   6/10 [daily]
 - [NestyNet. III. Symbolic Regression from Analytic Neural Surrogates](deep_reads/2026-08-21-2608.21051.md)  
@@ -14954,6 +14984,8 @@
   6/10 [daily]
 - [Causal Non-causal State Space Models and the Modelling of Financial Bubbles](deep_reads/2026-08-31-2608.28115.md)  
   7/10 [daily]
+- [Repairing Locally Misspecified GMM: An Empirical Bayes Approach](deep_reads/2026-08-28-2608.23925.md)  
+  6/10 [daily]
 - [Dynamic Discrete Choice and Inverse Reinforcement Learning: Inferring Preferences and Beliefs From Human Behavior](deep_reads/2026-08-28-2608.24362.md)  
   6/10 [daily]
 - [Estimation of Random-Coefficient Dynamic Panel Data Models with a Fixed T](deep_reads/2026-08-28-2608.23988.md)  
