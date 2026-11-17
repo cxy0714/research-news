@@ -92,6 +92,16 @@
 
 ### Changed
 
+- **daily 的定时从工作日 09:10 挪到 10:40**：arXiv 每天 20:00 ET 出新榜 = 北京时间 09:00
+  （冬令时），09:10 出发的日报正好卡在换榜那一刻——`rss.arxiv.org` 还在发旧的空榜、搜索 API
+  同一分钟也返回空 feed 或 429，于是 RSS 与 API 兜底双双 0 篇，当天日报只剩 Hexagon
+  （11-09 / 11-13 / 11-16 三天都是这么挂的：11-16 那页 88 篇全是 `hexagon:*`，论文卡片 0 张
+  arXiv）。改 `scripts/register-task.ps1` 的 `-Time` 默认值为 `10:40`，`README` / `run_daily.ps1`
+  / `run_daily.sh` 的 crontab 例子 / `arxiv.py` 兜底注释 / `catch-up.ps1` 注释同步更新；三个常驻
+  循环的让路窗口是 `-DailyHour`（默认 9）..+5h，10:40 仍落在窗口内，参数不用改。**遗留**：
+  `daily` 的重跑守卫是「页面含论文即视为当天完成」，Hexagon 常驻后 arXiv 全空的页面不再可
+  重跑（以前纯 arXiv 时是空页，守卫会允许重生成），所以这个时间修复只保证 11-17 起不再复现，
+  11-09 / 11-13 / 11-16 仍需手动 `--force` 补。
 - **`Paper` 增加多源字段**：`uid` / `track` / `arxiv_id` / `venue_id` / `venue_track` /
   `proceedings_url` / `doi` / `session` / `openreview_id` / `code_url` / `citation_count` /
   `bench_type` / `what_it_measures` / `also_in`，全部带默认值，统计侧无需改动。
