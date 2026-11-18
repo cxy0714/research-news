@@ -18139,6 +18139,8 @@
   7/10 [daily]
 - [Measuring Kaplan--Meier Overestimation Under Competing Risks: Event Ordering, Quantification, and Exact Inference](deep_reads/2026-11-12-2611.14457.md)  
   7/10 [daily]
+- [The Logical Anatomy of Optimization: Reverse Mathematics, Proof Mining, and the Price of Convergence](deep_reads/2026-11-12-hexagon_2611.00217.md)  
+  6/10 [daily]
 - [Propagation and Optimization of Low-Frequency Spectral Alignment in ReLU Networks on a Fixed Sample Graph](deep_reads/2026-11-12-hexagon_2611.00249.md)  
   6/10 [daily]
 - [The Ultimate Matching Theorem](deep_reads/2026-11-12-hexagon_2611.00294.md)  
