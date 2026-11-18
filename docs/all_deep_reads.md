@@ -192,6 +192,10 @@
   7/10 [daily]
 - [Valid GMM Inference with Non-parametrically Generated Discrete Type](deep_reads/2026-11-02-2610.42052.md)  
   7/10 [daily]
+- [Exploiting Locally Exogeneous Variation in Spatial Data: Linear Regression with Many Small Units](deep_reads/2026-11-02-2611.01854.md)  
+  6/10 [daily]
+- [When Does $N$ Buy Precision? Heterogeneous Responses to Aggregate Shocks in Micro Panels](deep_reads/2026-11-02-2611.00677.md)  
+  6/10 [daily]
 - [Time-Specific Multinomial Logistic Regression for Competing Risks](deep_reads/2026-11-02-2611.00488.md)  
   6/10 [daily]
 - [A Semiparametric Model Approach to Data Integration under Missing Not at Random](deep_reads/2026-10-30-2610.41937.md)  
@@ -4839,6 +4843,8 @@
   8/10 [daily]
 - [Bethe Hessian Recovery through the Kesten-Stigum Regime](deep_reads/2026-11-02-2610.41802.md)  
   7/10 [daily]
+- [Features Extraction Across Multi-Source Heterogeneous Data](deep_reads/2026-11-02-2611.03001.md)  
+  6/10 [daily]
 - [Beyond Small Balls: A Determinant Inequality for Functions of Matrix Gaussian Series](deep_reads/2026-11-02-hexagon_2610.00718.md)  
   6/10 [daily]
 - [Bethe Hessian Recovery through the Kesten-Stigum Regime](deep_reads/2026-10-30-2610.41802.md)  
@@ -9419,6 +9425,14 @@
   7/10 [daily]
 - [Variance-adaptive Chernoff bounds: nonasymptotically valid, asymptotically sharp confidence sets for unbounded means](deep_reads/2026-11-02-2610.42058.md)  
   7/10 [daily]
+- [A Note on the Finite-Exceedance Dependence Principle for Sum--Maximum Asymptotic Independence](deep_reads/2026-11-02-2611.03351.md)  
+  6/10 [daily]
+- [On the Conditional Consistency of the Bootstrap](deep_reads/2026-11-02-2611.02243.md)  
+  6/10 [daily]
+- [Moment-Orthogonal Quadratic-Envelope E-Processes for Anytime-Valid Location Inference](deep_reads/2026-11-02-2611.01637.md)  
+  6/10 [daily]
+- [Unlikely likelihoods: likelihood analysis for the triangular and random histogram models](deep_reads/2026-11-02-2611.01030.md)  
+  6/10 [daily]
 - [Second-Order Least Squares Method for Statistical Inference in Linear Models with Asymmetric Errors](deep_reads/2026-11-02-2611.01017.md)  
   6/10 [daily]
 - [Dimension Changes the Scale-Signal Channel in Nearest-Neighbor Two-Sample Testing](deep_reads/2026-11-02-2610.41271.md)  
@@ -13979,6 +13993,8 @@
   6/10 [daily]
 - [Latin hypercube sampling to reduce the variance in Monte Carlo integration: a practical guide and an application to gravitational-wave astronomy](deep_reads/2026-11-02-2611.04045.md)  
   7/10 [daily]
+- [Contrastive Astromer: Two-Stage Contrastive Representation Learning for Astronomical Light Curve Classification](deep_reads/2026-11-02-2611.00150.md)  
+  6/10 [daily]
 - [Spectral Information Content of Diffraction-Limited Images](deep_reads/2026-11-02-2610.41092.md)  
   6/10 [daily]
 - [Spectral Information Content of Diffraction-Limited Images](deep_reads/2026-10-30-2610.41092.md)  
@@ -15118,6 +15134,8 @@
   6/10 [daily]
 - [Weak Identification in Bunching Designs: Rare Events and Counterfactual Uncertainty](deep_reads/2026-11-03-2610.40719.md)  
   7/10 [daily]
+- [Does Calibration Pick the Right Model? Likelihood Evidence from Income Risk](deep_reads/2026-11-02-2611.02029.md)  
+  6/10 [daily]
 - [xtlp: A new Stata command for panel local projection](deep_reads/2026-11-02-2610.41428.md)  
   6/10 [daily]
 - [Evaluating Maternity Leave Reforms When RD Fails](deep_reads/2026-10-30-2610.41881.md)  
@@ -18121,6 +18139,8 @@
   7/10 [daily]
 - [Measuring Kaplan--Meier Overestimation Under Competing Risks: Event Ordering, Quantification, and Exact Inference](deep_reads/2026-11-12-2611.14457.md)  
   7/10 [daily]
+- [Propagation and Optimization of Low-Frequency Spectral Alignment in ReLU Networks on a Fixed Sample Graph](deep_reads/2026-11-12-hexagon_2611.00249.md)  
+  6/10 [daily]
 - [The Ultimate Matching Theorem](deep_reads/2026-11-12-hexagon_2611.00294.md)  
   6/10 [daily]
 - [A Counterexample to the Subtraction-Free Conjecture for Bounded Ratios of Minors](deep_reads/2026-11-12-hexagon_2611.00266.md)  
@@ -18289,6 +18309,8 @@
   7/10 [daily]
 - [Robust Estimation of Prior Parameters in Normal-Normal Empirical Bayes](deep_reads/2026-11-02-2611.00326.md)  
   7/10 [daily]
+- [Multi-modal Laplace-based sampling](deep_reads/2026-11-02-2611.03773.md)  
+  6/10 [daily]
 - [Model-Based Co-Clustering for Censored Data](deep_reads/2026-11-02-2611.01253.md)  
   6/10 [daily]
 - [Penalized Likelihood Inference in Highly Multivariate Sparse Spectral Graphical Gaussian Processes](deep_reads/2026-11-02-2611.00467.md)  
