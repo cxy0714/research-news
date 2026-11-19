@@ -4,6 +4,8 @@
 
 ### Daily
 
+- [A mechanistic characterization of missingness at random](deep_reads/2026-11-19-2611.22022.md)  
+  8/10 [daily]
 - [Maximum Scores and Treatment Feedback in Regression Discontinuity Designs](deep_reads/2026-11-18-2611.20322.md)  
   8/10 [daily]
 - [Limited Follow Up Overlap in Causal Survival Analysis: Censoring-Adjusted Weighting for Restricted Mean Survival Time](deep_reads/2026-11-18-2611.19743.md)  

@@ -17,6 +17,11 @@
 
 [→ 查看完整报告](daily/2026-11-19.md)
 
+### 精读论文（1 篇）
+
+- [A mechanistic characterization of missingness at random](deep_reads/2026-11-19-2611.22022.md)  
+  `因果推断` · 相关性 8/10
+
 ## 收藏
 
 - [→ 打开收藏](favorites.md) · 登录后在各页点 ☆ 收藏即可自动汇总
