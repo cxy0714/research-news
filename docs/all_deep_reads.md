@@ -22,6 +22,10 @@
   8/10 [daily]
 - [Limited Follow Up Overlap in Causal Survival Analysis: Censoring-Adjusted Weighting for Restricted Mean Survival Time](deep_reads/2026-11-18-2611.19743.md)  
   8/10 [daily]
+- [Causality and order restricted inference in the Aalen additive hasard model](deep_reads/2026-11-18-2611.20155.md)  
+  7/10 [daily]
+- [A General Theory of Nonparametric Response-Adaptive Randomization](deep_reads/2026-11-18-2611.20965.md)  
+  7/10 [daily]
 - [RADISH: A Robust Covariate-Adaptive Trial Design with Historical Control Borrowing](deep_reads/2026-11-18-2611.19968.md)  
   7/10 [daily]
 - [Positive Weights Do Not Certify TWFE Inference: A Design Diagnostic under Treatment-Effect Heterogeneity](deep_reads/2026-11-17-2611.18116.md)  
@@ -6530,6 +6534,10 @@
   6/10 [daily]
 - [Greedy Empirical Bayes for Density Estimation](deep_reads/2026-11-19-2611.22796.md)  
   6/10 [daily]
+- [Nonparametric Classification under Adversarial Attacks: Decision-Boundary Geometry and Optimal Rates](deep_reads/2026-11-18-2611.19347.md)  
+  7/10 [daily]
+- [Semiparametric regression with stagewise empirical risk minimization](deep_reads/2026-11-18-2611.20642.md)  
+  7/10 [daily]
 - [Bayesian Semiparametric Regression for Count Data Using Zero Altered Moment Models](deep_reads/2026-11-17-2611.17518.md)  
   6/10 [daily]
 - [Nonparametric Maximum Likelihood Estimation for Mixtures of Logistic Regressions](deep_reads/2026-11-12-2611.14445.md)  
@@ -9379,6 +9387,16 @@
   8/10 [daily]
 - [Log-optimal two-sample testing by betting](deep_reads/2026-11-18-2611.19062.md)  
   8/10 [daily]
+- [The random analyst](deep_reads/2026-11-18-2611.21081.md)  
+  7/10 [daily]
+- [Weighted conformal prediction under covariate shift: process limits, estimated weights and efficiency](deep_reads/2026-11-18-2611.20052.md)  
+  7/10 [daily]
+- [Local asymptotic normality for Cox-Ingersoll-Ross drift parameters under high-frequency sampling and the strict Feller condition](deep_reads/2026-11-18-2611.19479.md)  
+  7/10 [daily]
+- [Variance-adaptive confidence regions for fixed-benchmark binomial mixtures, with application to LLM evaluation](deep_reads/2026-11-18-2611.21266.md)  
+  7/10 [daily]
+- [Honest confidence sets under experiment-level failure](deep_reads/2026-11-18-2611.20079.md)  
+  7/10 [daily]
 - [The stable false discovery rate](deep_reads/2026-11-18-2611.19585.md)  
   7/10 [daily]
 - [Homogeneous pursuit in $\beta$ model](deep_reads/2026-11-17-2611.17609.md)  
@@ -12408,6 +12426,8 @@
 ### Daily
 
 - [Simultaneous analysis of approximate leave-one-out cross-validation and mean-field inference II: General convex penalties](deep_reads/2026-11-19-2611.21877.md)  
+  7/10 [daily]
+- [Certified Algorithms for Gaussian Location Mixture NPMLEs via Discretized Gradient Flows](deep_reads/2026-11-18-2611.19882.md)  
   7/10 [daily]
 - [An explicit determinantal formula for Sinkhorn limits of matrices and tensors](deep_reads/2026-11-16-hexagon_2611.00433.md)  
   6/10 [daily]
@@ -18119,6 +18139,8 @@
   1/10 [daily]
 - [Uniform Spectral Gap for the AKLT Model on the Square Lattice](deep_reads/2026-11-19-hexagon_2611.00580.md)  
   1/10 [daily]
+- [Support recovery of diffusion models under the manifold hypothesis](deep_reads/2026-11-18-2611.18738.md)  
+  7/10 [daily]
 - [The planar data-selection constants $F(2,n)=2n/(2n-1)$, including $F(2,3)=6/5$ and $F(2,2)=4/3$](deep_reads/2026-11-17-hexagon_2611.00511.md)  
   7/10 [daily]
 - [The relations of a Lie subalgebra considered by Tao: a complete presentation](deep_reads/2026-11-17-hexagon_2611.00542.md)  
