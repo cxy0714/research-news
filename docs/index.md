@@ -11,20 +11,11 @@
 - **[收藏](favorites.md)** — 登录后在各页点 ☆ 收藏的论文，自动汇总到这里（总收藏按类别分组、可切换按周；每篇可写评论，无需手动维护）。
 - **[模型测评](all_shootout.md)** — 不同 LLM 在同一批论文上的打分 / 解读对比。
 
-## 今日 · 2026-11-18
+## 今日 · 2026-11-19
 
 ### 每日 arXiv 速览
 
-[→ 查看完整报告](daily/2026-11-18.md)
-
-### 精读论文（3 篇）
-
-- [Log-optimal two-sample testing by betting](deep_reads/2026-11-18-2611.19062.md)  
-  `数理统计 / 假设检验` · 相关性 8/10
-- [Maximum Scores and Treatment Feedback in Regression Discontinuity Designs](deep_reads/2026-11-18-2611.20322.md)  
-  `因果推断` · 相关性 8/10
-- [Limited Follow Up Overlap in Causal Survival Analysis: Censoring-Adjusted Weighting for Restricted Mean Survival Time](deep_reads/2026-11-18-2611.19743.md)  
-  `因果推断` · 相关性 8/10
+[→ 查看完整报告](daily/2026-11-19.md)
 
 ## 收藏
 
@@ -32,11 +23,11 @@
 
 ## 本周每日报告
 
+- [2026-11-18](daily/2026-11-18.md)
 - [2026-11-17](daily/2026-11-17.md)
 - [2026-11-16](daily/2026-11-16.md)
 - [2026-11-13](daily/2026-11-13.md)
 - [2026-11-12](daily/2026-11-12.md)
-- [2026-11-11](daily/2026-11-11.md)
 
 
 ---
