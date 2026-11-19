@@ -16,10 +16,14 @@
   7/10 [daily]
 - [A {\delta}-adjusted Method for Tipping Point Sensitivity Analysis for a Binary Outcome with Missing Values](deep_reads/2026-11-19-2611.21939.md)  
   7/10 [daily]
+- [Learning the Average Dose-Response Function with a Right-Censored Treatment](deep_reads/2026-11-18-2611.19204.md)  
+  8/10 [daily]
 - [Maximum Scores and Treatment Feedback in Regression Discontinuity Designs](deep_reads/2026-11-18-2611.20322.md)  
   8/10 [daily]
 - [Limited Follow Up Overlap in Causal Survival Analysis: Censoring-Adjusted Weighting for Restricted Mean Survival Time](deep_reads/2026-11-18-2611.19743.md)  
   8/10 [daily]
+- [RADISH: A Robust Covariate-Adaptive Trial Design with Historical Control Borrowing](deep_reads/2026-11-18-2611.19968.md)  
+  7/10 [daily]
 - [Positive Weights Do Not Certify TWFE Inference: A Design Diagnostic under Treatment-Effect Heterogeneity](deep_reads/2026-11-17-2611.18116.md)  
   8/10 [daily]
 - [Orthogonal Scores and Double/Debiased Machine Learning for Possibly Misspecified GMM](deep_reads/2026-11-17-2611.17578.md)  
@@ -4821,6 +4825,10 @@
 
 ### Daily
 
+- [Dimension-free spectral laws and the risk of spectral filters](deep_reads/2026-11-18-2611.21254.md)  
+  8/10 [daily]
+- [Phase Transitions in Heavy-Tailed Mean Estimation under $\ell_p$ Norms](deep_reads/2026-11-18-2611.20176.md)  
+  8/10 [daily]
 - [Broken Adaptive Ridge in High-Dimensional Vector Autoregressions](deep_reads/2026-11-17-2611.18227.md)  
   7/10 [daily]
 - [Supersymmetric Analysis of a Random Band Matrix at Criticality, Volume II](deep_reads/2026-11-13-hexagon_2611.00367.md)  
@@ -6518,6 +6526,10 @@
   7/10 [daily]
 - [Locally Linear Generalized Single Index Regression](deep_reads/2026-11-19-2611.22011.md)  
   7/10 [daily]
+- [Training Neural Networks to be Locally Adaptive](deep_reads/2026-11-19-2611.22198.md)  
+  6/10 [daily]
+- [Greedy Empirical Bayes for Density Estimation](deep_reads/2026-11-19-2611.22796.md)  
+  6/10 [daily]
 - [Bayesian Semiparametric Regression for Count Data Using Zero Altered Moment Models](deep_reads/2026-11-17-2611.17518.md)  
   6/10 [daily]
 - [Nonparametric Maximum Likelihood Estimation for Mixtures of Logistic Regressions](deep_reads/2026-11-12-2611.14445.md)  
@@ -9355,8 +9367,20 @@
   7/10 [daily]
 - [Sequential Conditional Paired-Sample Testing with Applications to Online Monitoring](deep_reads/2026-11-19-2611.22886.md)  
   7/10 [daily]
+- [Testing the Pareto law through a Stein-Laplace characterization](deep_reads/2026-11-19-2611.22932.md)  
+  6/10 [daily]
+- [Fold Weighting for Cross-Validation Under Continuous Distributional Drift](deep_reads/2026-11-19-2611.23184.md)  
+  6/10 [daily]
+- [Inference after coding agents](deep_reads/2026-11-19-2611.23174.md)  
+  6/10 [daily]
+- [COSI: A Framework for Robustly Valid Inference](deep_reads/2026-11-19-2611.22096.md)  
+  6/10 [daily]
+- [Sharp High-Dimensional Gaussian Approximations over Rectangles without Covariance Restrictions](deep_reads/2026-11-18-2611.21474.md)  
+  8/10 [daily]
 - [Log-optimal two-sample testing by betting](deep_reads/2026-11-18-2611.19062.md)  
   8/10 [daily]
+- [The stable false discovery rate](deep_reads/2026-11-18-2611.19585.md)  
+  7/10 [daily]
 - [Homogeneous pursuit in $\beta$ model](deep_reads/2026-11-17-2611.17609.md)  
   6/10 [daily]
 - [On the geometry of Gaussian Mean Shift Detection](deep_reads/2026-11-12-2611.14264.md)  
@@ -18087,6 +18111,14 @@
 
 ### Daily
 
+- [Hybrid Quantum Algorithms for Summary Statistics of Nonlinear PDEs with Random Initial Data](deep_reads/2026-11-19-hexagon_2611.00575.md)  
+  6/10 [daily]
+- [Kernel Tuning for the HSIC-Based Global Sensitivity Analysis of High-Dimensional Models](deep_reads/2026-11-19-2611.21854.md)  
+  6/10 [daily]
+- [On meromorphic functions sharing three values IM and one value CM](deep_reads/2026-11-19-hexagon_2611.00568.md)  
+  1/10 [daily]
+- [Uniform Spectral Gap for the AKLT Model on the Square Lattice](deep_reads/2026-11-19-hexagon_2611.00580.md)  
+  1/10 [daily]
 - [The planar data-selection constants $F(2,n)=2n/(2n-1)$, including $F(2,3)=6/5$ and $F(2,2)=4/3$](deep_reads/2026-11-17-hexagon_2611.00511.md)  
   7/10 [daily]
 - [The relations of a Lie subalgebra considered by Tao: a complete presentation](deep_reads/2026-11-17-hexagon_2611.00542.md)  
