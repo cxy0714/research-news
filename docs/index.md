@@ -17,10 +17,36 @@
 
 [→ 查看完整报告](daily/2026-11-19.md)
 
-### 精读论文（1 篇）
+### 精读论文（14 篇）
 
+- [Distributional change point analysis: high dimensionality, nonstationary dependence, and computational constraints](deep_reads/2026-11-19-2611.22422.md)  
+  `数理统计 / 假设检验` · 相关性 8/10
+- [Small Area Causal Inference](deep_reads/2026-11-19-2611.22339.md)  
+  `因果推断` · 相关性 8/10
 - [A mechanistic characterization of missingness at random](deep_reads/2026-11-19-2611.22022.md)  
   `因果推断` · 相关性 8/10
+- [Identifiability of latent variable models with flexible latent distributions](deep_reads/2026-11-19-2611.23052.md)  
+  `非参数 / 半参数` · 相关性 7/10
+- [Anytime-valid inference for conditional hazard and survival functions with streaming data](deep_reads/2026-11-19-2611.22477.md)  
+  `非参数 / 半参数` · 相关性 7/10
+- [Simultaneous analysis of approximate leave-one-out cross-validation and mean-field inference II: General convex penalties](deep_reads/2026-11-19-2611.21877.md)  
+  `统计计算 / 算法` · 相关性 7/10
+- [When Is Membership Graded? Identifiability and Resolution Limits of a Graded Gaussian Mixture Model](deep_reads/2026-11-19-2611.21863.md)  
+  `数理统计 / 假设检验` · 相关性 7/10
+- [Inference for Heterogeneous Treatment Effects with Deep Survival Learners](deep_reads/2026-11-19-2611.23090.md)  
+  `因果推断` · 相关性 7/10
+- [Sequential Conditional Paired-Sample Testing with Applications to Online Monitoring](deep_reads/2026-11-19-2611.22886.md)  
+  `数理统计 / 假设检验` · 相关性 7/10
+- [Randomization-Based Nonparanormal Adjusted Marginal Inference](deep_reads/2026-11-19-2611.22542.md)  
+  `因果推断` · 相关性 7/10
+- [Finite-Smoothing Efficiency and Inference in Single-Index Models](deep_reads/2026-11-19-2611.22384.md)  
+  `非参数 / 半参数` · 相关性 7/10
+- [Locally Linear Generalized Single Index Regression](deep_reads/2026-11-19-2611.22011.md)  
+  `非参数 / 半参数` · 相关性 7/10
+- [Robust Decision Curve Analysis for Survival Risk Prediction Models in the Presence of Informative Censoring](deep_reads/2026-11-19-2611.21953.md)  
+  `因果推断` · 相关性 7/10
+- [A {\delta}-adjusted Method for Tipping Point Sensitivity Analysis for a Binary Outcome with Missing Values](deep_reads/2026-11-19-2611.21939.md)  
+  `因果推断` · 相关性 7/10
 
 ## 收藏
 

@@ -4,8 +4,18 @@
 
 ### Daily
 
+- [Small Area Causal Inference](deep_reads/2026-11-19-2611.22339.md)  
+  8/10 [daily]
 - [A mechanistic characterization of missingness at random](deep_reads/2026-11-19-2611.22022.md)  
   8/10 [daily]
+- [Inference for Heterogeneous Treatment Effects with Deep Survival Learners](deep_reads/2026-11-19-2611.23090.md)  
+  7/10 [daily]
+- [Randomization-Based Nonparanormal Adjusted Marginal Inference](deep_reads/2026-11-19-2611.22542.md)  
+  7/10 [daily]
+- [Robust Decision Curve Analysis for Survival Risk Prediction Models in the Presence of Informative Censoring](deep_reads/2026-11-19-2611.21953.md)  
+  7/10 [daily]
+- [A {\delta}-adjusted Method for Tipping Point Sensitivity Analysis for a Binary Outcome with Missing Values](deep_reads/2026-11-19-2611.21939.md)  
+  7/10 [daily]
 - [Maximum Scores and Treatment Feedback in Regression Discontinuity Designs](deep_reads/2026-11-18-2611.20322.md)  
   8/10 [daily]
 - [Limited Follow Up Overlap in Causal Survival Analysis: Censoring-Adjusted Weighting for Restricted Mean Survival Time](deep_reads/2026-11-18-2611.19743.md)  
@@ -6500,6 +6510,14 @@
 
 ### Daily
 
+- [Identifiability of latent variable models with flexible latent distributions](deep_reads/2026-11-19-2611.23052.md)  
+  7/10 [daily]
+- [Anytime-valid inference for conditional hazard and survival functions with streaming data](deep_reads/2026-11-19-2611.22477.md)  
+  7/10 [daily]
+- [Finite-Smoothing Efficiency and Inference in Single-Index Models](deep_reads/2026-11-19-2611.22384.md)  
+  7/10 [daily]
+- [Locally Linear Generalized Single Index Regression](deep_reads/2026-11-19-2611.22011.md)  
+  7/10 [daily]
 - [Bayesian Semiparametric Regression for Count Data Using Zero Altered Moment Models](deep_reads/2026-11-17-2611.17518.md)  
   6/10 [daily]
 - [Nonparametric Maximum Likelihood Estimation for Mixtures of Logistic Regressions](deep_reads/2026-11-12-2611.14445.md)  
@@ -9331,6 +9349,12 @@
 
 ### Daily
 
+- [Distributional change point analysis: high dimensionality, nonstationary dependence, and computational constraints](deep_reads/2026-11-19-2611.22422.md)  
+  8/10 [daily]
+- [When Is Membership Graded? Identifiability and Resolution Limits of a Graded Gaussian Mixture Model](deep_reads/2026-11-19-2611.21863.md)  
+  7/10 [daily]
+- [Sequential Conditional Paired-Sample Testing with Applications to Online Monitoring](deep_reads/2026-11-19-2611.22886.md)  
+  7/10 [daily]
 - [Log-optimal two-sample testing by betting](deep_reads/2026-11-18-2611.19062.md)  
   8/10 [daily]
 - [Homogeneous pursuit in $\beta$ model](deep_reads/2026-11-17-2611.17609.md)  
@@ -12359,6 +12383,8 @@
 
 ### Daily
 
+- [Simultaneous analysis of approximate leave-one-out cross-validation and mean-field inference II: General convex penalties](deep_reads/2026-11-19-2611.21877.md)  
+  7/10 [daily]
 - [An explicit determinantal formula for Sinkhorn limits of matrices and tensors](deep_reads/2026-11-16-hexagon_2611.00433.md)  
   6/10 [daily]
 - [Convergence and global optimality of Wasserstein--Fisher--Rao descent for Gaussian mixtures](deep_reads/2026-11-12-2611.14428.md)  
