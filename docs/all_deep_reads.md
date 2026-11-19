@@ -22,12 +22,20 @@
   8/10 [daily]
 - [Limited Follow Up Overlap in Causal Survival Analysis: Censoring-Adjusted Weighting for Restricted Mean Survival Time](deep_reads/2026-11-18-2611.19743.md)  
   8/10 [daily]
+- [Never too LATE: Exploiting restrictions for inference on the Local Average Treatment Effect](deep_reads/2026-11-18-2611.21496.md)  
+  7/10 [daily]
+- [Comparing Two-Sample IV Estimators under Weak Instruments](deep_reads/2026-11-18-2611.19690.md)  
+  7/10 [daily]
+- [Unit-Level Conformal Inference for Panel Counterfactuals](deep_reads/2026-11-18-2611.19209.md)  
+  7/10 [daily]
 - [Causality and order restricted inference in the Aalen additive hasard model](deep_reads/2026-11-18-2611.20155.md)  
   7/10 [daily]
 - [A General Theory of Nonparametric Response-Adaptive Randomization](deep_reads/2026-11-18-2611.20965.md)  
   7/10 [daily]
 - [RADISH: A Robust Covariate-Adaptive Trial Design with Historical Control Borrowing](deep_reads/2026-11-18-2611.19968.md)  
   7/10 [daily]
+- [Randomization protects the average, not the trial: chance covariate imbalance and a calibration of balance $P$ values at the design stage](deep_reads/2026-11-18-2611.21425.md)  
+  6/10 [daily]
 - [Positive Weights Do Not Certify TWFE Inference: A Design Diagnostic under Treatment-Effect Heterogeneity](deep_reads/2026-11-17-2611.18116.md)  
   8/10 [daily]
 - [Orthogonal Scores and Double/Debiased Machine Learning for Possibly Misspecified GMM](deep_reads/2026-11-17-2611.17578.md)  
@@ -6534,10 +6542,22 @@
   6/10 [daily]
 - [Greedy Empirical Bayes for Density Estimation](deep_reads/2026-11-19-2611.22796.md)  
   6/10 [daily]
+- [Nonparametric Instrumental Kernel Regression: The Well- and Misspecified Setting Under General Link Conditions](deep_reads/2026-11-18-2611.21391.md)  
+  7/10 [daily]
 - [Nonparametric Classification under Adversarial Attacks: Decision-Boundary Geometry and Optimal Rates](deep_reads/2026-11-18-2611.19347.md)  
   7/10 [daily]
 - [Semiparametric regression with stagewise empirical risk minimization](deep_reads/2026-11-18-2611.20642.md)  
   7/10 [daily]
+- [FARCH: A Functional ARCH Model for Calibrated Prediction Bands](deep_reads/2026-11-18-2611.20972.md)  
+  6/10 [daily]
+- [Renewable Estimation for Generalized Nonparametric Regression with Dynamic Spline Bases and Likelihood Pullback](deep_reads/2026-11-18-2611.20904.md)  
+  6/10 [daily]
+- [A conic optimization framework for shape-constrained functional regression analysis](deep_reads/2026-11-18-2611.20825.md)  
+  6/10 [daily]
+- [Functional Principal Component Analysis for Ordinal Functional Data with Application in Diabetes Intervention](deep_reads/2026-11-18-2611.20217.md)  
+  6/10 [daily]
+- [Deep Nonlinear Sufficient Dimension Reduction for Discretely Observed Functional Data](deep_reads/2026-11-18-2611.19468.md)  
+  6/10 [daily]
 - [Bayesian Semiparametric Regression for Count Data Using Zero Altered Moment Models](deep_reads/2026-11-17-2611.17518.md)  
   6/10 [daily]
 - [Nonparametric Maximum Likelihood Estimation for Mixtures of Logistic Regressions](deep_reads/2026-11-12-2611.14445.md)  
@@ -9399,6 +9419,14 @@
   7/10 [daily]
 - [The stable false discovery rate](deep_reads/2026-11-18-2611.19585.md)  
   7/10 [daily]
+- [Almost Controlled: The FDR of Benjamini-Hochberg on Weighted Conformal p-Values](deep_reads/2026-11-18-2611.21509.md)  
+  6/10 [daily]
+- [False Discovery Rate Control in Ordered Sequential Testing: Rejection-Count and Fallback Procedures](deep_reads/2026-11-18-2611.20490.md)  
+  6/10 [daily]
+- [Testing Cross-Sectional Dependence in Clustered Data](deep_reads/2026-11-18-2611.20009.md)  
+  6/10 [daily]
+- [A rank-associated measure of population heterogeneity based on order statistics](deep_reads/2026-11-18-2611.19303.md)  
+  6/10 [daily]
 - [Homogeneous pursuit in $\beta$ model](deep_reads/2026-11-17-2611.17609.md)  
   6/10 [daily]
 - [On the geometry of Gaussian Mean Shift Detection](deep_reads/2026-11-12-2611.14264.md)  
@@ -14025,6 +14053,8 @@
 
 ### Daily
 
+- [Faster $\chi^2$ periodogram: Accelerating linear algebra with fast Toeplitz solvers](deep_reads/2026-11-18-2611.20300.md)  
+  7/10 [daily]
 - [Extended Bayesian Estimation for In-flight Calibration of Space-based Instruments](deep_reads/2026-11-17-2611.18241.md)  
   7/10 [daily]
 - [bihalofit-JAX: A Differentiable Code for the Nonlinear Matter Bispectrum and its Projected Statistics](deep_reads/2026-11-17-2611.18281.md)  
