@@ -4841,6 +4841,8 @@
   8/10 [daily]
 - [Phase Transitions in Heavy-Tailed Mean Estimation under $\ell_p$ Norms](deep_reads/2026-11-18-2611.20176.md)  
   8/10 [daily]
+- [Adaptive Sparsity-Aware Projection-Assisted Spectral Embedding for High-Dimensional Noisy Data with Nonlinear Structures](deep_reads/2026-11-18-2611.21525.md)  
+  6/10 [daily]
 - [Broken Adaptive Ridge in High-Dimensional Vector Autoregressions](deep_reads/2026-11-17-2611.18227.md)  
   7/10 [daily]
 - [Supersymmetric Analysis of a Random Band Matrix at Criticality, Volume II](deep_reads/2026-11-13-hexagon_2611.00367.md)  
@@ -6548,6 +6550,8 @@
   7/10 [daily]
 - [Semiparametric regression with stagewise empirical risk minimization](deep_reads/2026-11-18-2611.20642.md)  
   7/10 [daily]
+- [Sharp Local Entropy Bounds in the Wasserstein Space](deep_reads/2026-11-18-2611.20685.md)  
+  6/10 [daily]
 - [FARCH: A Functional ARCH Model for Calibrated Prediction Bands](deep_reads/2026-11-18-2611.20972.md)  
   6/10 [daily]
 - [Renewable Estimation for Generalized Nonparametric Regression with Dynamic Spline Bases and Likelihood Pullback](deep_reads/2026-11-18-2611.20904.md)  
@@ -9419,6 +9423,8 @@
   7/10 [daily]
 - [The stable false discovery rate](deep_reads/2026-11-18-2611.19585.md)  
   7/10 [daily]
+- [On the false discovery rate of one-sided p-values under Gaussian dependence](deep_reads/2026-11-18-2611.19589.md)  
+  6/10 [daily]
 - [Almost Controlled: The FDR of Benjamini-Hochberg on Weighted Conformal p-Values](deep_reads/2026-11-18-2611.21509.md)  
   6/10 [daily]
 - [False Discovery Rate Control in Ordered Sequential Testing: Rejection-Count and Fallback Procedures](deep_reads/2026-11-18-2611.20490.md)  
@@ -14055,6 +14061,8 @@
 
 - [Faster $\chi^2$ periodogram: Accelerating linear algebra with fast Toeplitz solvers](deep_reads/2026-11-18-2611.20300.md)  
   7/10 [daily]
+- [Gaia as a 0.1 arcsec point-source survey across the sky: dynamical scene reconstruction from one-dimensional scans](deep_reads/2026-11-18-2611.21510.md)  
+  6/10 [daily]
 - [Extended Bayesian Estimation for In-flight Calibration of Space-based Instruments](deep_reads/2026-11-17-2611.18241.md)  
   7/10 [daily]
 - [bihalofit-JAX: A Differentiable Code for the Nonlinear Matter Bispectrum and its Projected Statistics](deep_reads/2026-11-17-2611.18281.md)  
@@ -15224,6 +15232,12 @@
 
 ### Daily
 
+- [Shrink Responsibly: Empirical Bayes in Economics](deep_reads/2026-11-18-2611.21230.md)  
+  6/10 [daily]
+- [High-Dimensional Approximate Factor Models with Score-Driven Dynamics: Estimation and Inference](deep_reads/2026-11-18-2611.20030.md)  
+  6/10 [daily]
+- [Cluster-Robust Inference in Small Samples Using Bias Corrections](deep_reads/2026-11-18-2611.19432.md)  
+  6/10 [daily]
 - [Estimating a Rational Inattention Discrete Choice Model: A Semiparametric Approach](deep_reads/2026-11-17-2611.18479.md)  
   8/10 [daily]
 - [Hedging out the HEDGE Bias: Identifying Dynamic Partial-Equilibrium Effects with Panel LP-IV](deep_reads/2026-11-12-2611.14434.md)  
@@ -18171,6 +18185,8 @@
   1/10 [daily]
 - [Support recovery of diffusion models under the manifold hypothesis](deep_reads/2026-11-18-2611.18738.md)  
   7/10 [daily]
+- [Asymptotic efficiency of tests for quantum statistical models](deep_reads/2026-11-18-2611.19141.md)  
+  6/10 [daily]
 - [The planar data-selection constants $F(2,n)=2n/(2n-1)$, including $F(2,3)=6/5$ and $F(2,2)=4/3$](deep_reads/2026-11-17-hexagon_2611.00511.md)  
   7/10 [daily]
 - [The relations of a Lie subalgebra considered by Tao: a complete presentation](deep_reads/2026-11-17-hexagon_2611.00542.md)  
