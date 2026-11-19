@@ -17,6 +17,15 @@
 
 [→ 查看完整报告](daily/2026-11-18.md)
 
+### 精读论文（3 篇）
+
+- [Log-optimal two-sample testing by betting](deep_reads/2026-11-18-2611.19062.md)  
+  `数理统计 / 假设检验` · 相关性 8/10
+- [Maximum Scores and Treatment Feedback in Regression Discontinuity Designs](deep_reads/2026-11-18-2611.20322.md)  
+  `因果推断` · 相关性 8/10
+- [Limited Follow Up Overlap in Causal Survival Analysis: Censoring-Adjusted Weighting for Restricted Mean Survival Time](deep_reads/2026-11-18-2611.19743.md)  
+  `因果推断` · 相关性 8/10
+
 ## 收藏
 
 - [→ 打开收藏](favorites.md) · 登录后在各页点 ☆ 收藏即可自动汇总

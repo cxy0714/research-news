@@ -4,6 +4,10 @@
 
 ### Daily
 
+- [Maximum Scores and Treatment Feedback in Regression Discontinuity Designs](deep_reads/2026-11-18-2611.20322.md)  
+  8/10 [daily]
+- [Limited Follow Up Overlap in Causal Survival Analysis: Censoring-Adjusted Weighting for Restricted Mean Survival Time](deep_reads/2026-11-18-2611.19743.md)  
+  8/10 [daily]
 - [Positive Weights Do Not Certify TWFE Inference: A Design Diagnostic under Treatment-Effect Heterogeneity](deep_reads/2026-11-17-2611.18116.md)  
   8/10 [daily]
 - [Orthogonal Scores and Double/Debiased Machine Learning for Possibly Misspecified GMM](deep_reads/2026-11-17-2611.17578.md)  
@@ -9325,6 +9329,8 @@
 
 ### Daily
 
+- [Log-optimal two-sample testing by betting](deep_reads/2026-11-18-2611.19062.md)  
+  8/10 [daily]
 - [Homogeneous pursuit in $\beta$ model](deep_reads/2026-11-17-2611.17609.md)  
   6/10 [daily]
 - [On the geometry of Gaussian Mean Shift Detection](deep_reads/2026-11-12-2611.14264.md)  
