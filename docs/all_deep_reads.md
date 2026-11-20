@@ -4849,6 +4849,8 @@
 
 ### Daily
 
+- [Spectral outliers of self-coupled covariance matrices with exact zero weights](deep_reads/2026-11-20-hexagon_2611.00662.md)  
+  7/10 [daily]
 - [Dimension-free spectral laws and the risk of spectral filters](deep_reads/2026-11-18-2611.21254.md)  
   8/10 [daily]
 - [Phase Transitions in Heavy-Tailed Mean Estimation under $\ell_p$ Norms](deep_reads/2026-11-18-2611.20176.md)  
@@ -9415,6 +9417,12 @@
   8/10 [daily]
 - [Anytime-valid goodness-of-fit test by $e$-spacings](deep_reads/2026-11-20-2611.23775.md)  
   7/10 [daily]
+- [Finite-resolution information about a common clock: alias depth, holding-time loss, and the sampled Ehrenfest chain](deep_reads/2026-11-20-hexagon_2611.00663.md)  
+  6/10 [daily]
+- [Federated Differential Privacy with Batch Contamination](deep_reads/2026-11-20-2611.23551.md)  
+  6/10 [daily]
+- [A Local False Discovery Rate Framework for Compound p-values](deep_reads/2026-11-20-2611.24555.md)  
+  6/10 [daily]
 - [Distributional change point analysis: high dimensionality, nonstationary dependence, and computational constraints](deep_reads/2026-11-19-2611.22422.md)  
   8/10 [daily]
 - [When Is Membership Graded? Identifiability and Resolution Limits of a Graded Gaussian Mixture Model](deep_reads/2026-11-19-2611.21863.md)  
@@ -14081,6 +14089,8 @@
 
 ### Daily
 
+- [Redrock: Spectroscopic Classification and Redshift Fitting for the Dark Energy Spectroscopic Instrument](deep_reads/2026-11-20-2611.23636.md)  
+  6/10 [daily]
 - [Faster $\chi^2$ periodogram: Accelerating linear algebra with fast Toeplitz solvers](deep_reads/2026-11-18-2611.20300.md)  
   7/10 [daily]
 - [Gaia as a 0.1 arcsec point-source survey across the sky: dynamical scene reconstruction from one-dimensional scans](deep_reads/2026-11-18-2611.21510.md)  
@@ -15254,6 +15264,10 @@
 
 ### Daily
 
+- [A Tail-Geometric Approach to Kotlarski's Lemma with Order Statistics](deep_reads/2026-11-20-2611.23642.md)  
+  7/10 [daily]
+- [Exploiting Common Volatility Dynamics in High-Dimensional Portfolio Selection](deep_reads/2026-11-20-2611.23952.md)  
+  6/10 [daily]
 - [Shrink Responsibly: Empirical Bayes in Economics](deep_reads/2026-11-18-2611.21230.md)  
   6/10 [daily]
 - [High-Dimensional Approximate Factor Models with Score-Driven Dynamics: Estimation and Inference](deep_reads/2026-11-18-2611.20030.md)  
@@ -18197,6 +18211,18 @@
 
 ### Daily
 
+- [Worst-case bias of the independence assumption for functions of two ordinal variables](deep_reads/2026-11-20-2611.24439.md)  
+  6/10 [daily]
+- [Circle configurations and the hardness of promise graph and hypergraph coloring](deep_reads/2026-11-20-hexagon_2611.00619.md)  
+  2/10 [daily]
+- [Towards a conformal field theory of critical percolation. II. Scalar responses and null identities](deep_reads/2026-11-20-hexagon_2611.00651.md)  
+  2/10 [daily]
+- [Vertex operator algebras from Flohr's second family realising doubles of near-group categories $\mathbb{Z}_n+n$ for even $n$](deep_reads/2026-11-20-hexagon_2611.00640.md)  
+  0/10 [daily]
+- [A counterexample to a stability question for unramified multiplicity one symmetric pairs](deep_reads/2026-11-20-hexagon_2611.00664.md)  
+  0/10 [daily]
+- [Schubert Cox Rings and Root Operators](deep_reads/2026-11-20-hexagon_2611.00668.md)  
+  0/10 [daily]
 - [Hybrid Quantum Algorithms for Summary Statistics of Nonlinear PDEs with Random Initial Data](deep_reads/2026-11-19-hexagon_2611.00575.md)  
   6/10 [daily]
 - [Kernel Tuning for the HSIC-Based Global Sensitivity Analysis of High-Dimensional Models](deep_reads/2026-11-19-2611.21854.md)  
