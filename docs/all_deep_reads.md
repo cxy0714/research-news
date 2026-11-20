@@ -4,6 +4,8 @@
 
 ### Daily
 
+- [Confounding Heterogeneity in Multivariate Sensitivity Analysis for Observational Studies](deep_reads/2026-11-20-2611.23568.md)  
+  8/10 [daily]
 - [Small Area Causal Inference](deep_reads/2026-11-19-2611.22339.md)  
   8/10 [daily]
 - [A mechanistic characterization of missingness at random](deep_reads/2026-11-19-2611.22022.md)  
