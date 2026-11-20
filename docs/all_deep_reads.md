@@ -4,8 +4,18 @@
 
 ### Daily
 
+- [Design-Based Inference for Fuzzy Difference-in-Differences](deep_reads/2026-11-20-2611.24402.md)  
+  8/10 [daily]
+- [On the Validity of Fisher Randomization Tests under the Weak Null](deep_reads/2026-11-20-2611.24821.md)  
+  8/10 [daily]
 - [Confounding Heterogeneity in Multivariate Sensitivity Analysis for Observational Studies](deep_reads/2026-11-20-2611.23568.md)  
   8/10 [daily]
+- [Plausibly Exogenous Instruments in Probit Models: Sensitivity Bounds for Average Partial and Interaction Effects](deep_reads/2026-11-20-2611.23438.md)  
+  7/10 [daily]
+- [Fill-Distance-Guided Active Learning for Causal Function Recovery under Network Interference](deep_reads/2026-11-20-2611.24143.md)  
+  7/10 [daily]
+- [Balancing Partition Forest for Causal Weighting](deep_reads/2026-11-20-2611.23524.md)  
+  7/10 [daily]
 - [Small Area Causal Inference](deep_reads/2026-11-19-2611.22339.md)  
   8/10 [daily]
 - [A mechanistic characterization of missingness at random](deep_reads/2026-11-19-2611.22022.md)  
@@ -6534,6 +6544,12 @@
 
 ### Daily
 
+- [Functional Principal Component Analysis: Minimax Optimality from Sparse to Dense Designs and Beyond](deep_reads/2026-11-20-2611.24228.md)  
+  8/10 [daily]
+- [Minimax estimation for simultaneous deconvolution model in random design using wavelets](deep_reads/2026-11-20-2611.23439.md)  
+  8/10 [daily]
+- [Spectral Stability and Convergence of the Unnormalized Graph Laplacian on Noisy Point Clouds](deep_reads/2026-11-20-2611.23573.md)  
+  7/10 [daily]
 - [Identifiability of latent variable models with flexible latent distributions](deep_reads/2026-11-19-2611.23052.md)  
   7/10 [daily]
 - [Anytime-valid inference for conditional hazard and survival functions with streaming data](deep_reads/2026-11-19-2611.22477.md)  
@@ -9395,6 +9411,10 @@
 
 ### Daily
 
+- [The exact FDR–FNR frontier and a separable gap under one-factor Gaussian dependence](deep_reads/2026-11-20-hexagon_2611.00659.md)  
+  8/10 [daily]
+- [Anytime-valid goodness-of-fit test by $e$-spacings](deep_reads/2026-11-20-2611.23775.md)  
+  7/10 [daily]
 - [Distributional change point analysis: high dimensionality, nonstationary dependence, and computational constraints](deep_reads/2026-11-19-2611.22422.md)  
   8/10 [daily]
 - [When Is Membership Graded? Identifiability and Resolution Limits of a Graded Gaussian Mixture Model](deep_reads/2026-11-19-2611.21863.md)  

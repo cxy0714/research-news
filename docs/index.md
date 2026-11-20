@@ -17,10 +17,30 @@
 
 [→ 查看完整报告](daily/2026-11-20.md)
 
-### 精读论文（1 篇）
+### 精读论文（11 篇）
 
+- [The exact FDR–FNR frontier and a separable gap under one-factor Gaussian dependence](deep_reads/2026-11-20-hexagon_2611.00659.md)  
+  `数理统计 / 假设检验` · 相关性 8/10
+- [Design-Based Inference for Fuzzy Difference-in-Differences](deep_reads/2026-11-20-2611.24402.md)  
+  `因果推断` · 相关性 8/10
+- [Functional Principal Component Analysis: Minimax Optimality from Sparse to Dense Designs and Beyond](deep_reads/2026-11-20-2611.24228.md)  
+  `非参数 / 半参数` · 相关性 8/10
+- [Minimax estimation for simultaneous deconvolution model in random design using wavelets](deep_reads/2026-11-20-2611.23439.md)  
+  `非参数 / 半参数` · 相关性 8/10
+- [On the Validity of Fisher Randomization Tests under the Weak Null](deep_reads/2026-11-20-2611.24821.md)  
+  `因果推断` · 相关性 8/10
 - [Confounding Heterogeneity in Multivariate Sensitivity Analysis for Observational Studies](deep_reads/2026-11-20-2611.23568.md)  
   `因果推断` · 相关性 8/10
+- [Plausibly Exogenous Instruments in Probit Models: Sensitivity Bounds for Average Partial and Interaction Effects](deep_reads/2026-11-20-2611.23438.md)  
+  `因果推断` · 相关性 7/10
+- [Spectral Stability and Convergence of the Unnormalized Graph Laplacian on Noisy Point Clouds](deep_reads/2026-11-20-2611.23573.md)  
+  `非参数 / 半参数` · 相关性 7/10
+- [Fill-Distance-Guided Active Learning for Causal Function Recovery under Network Interference](deep_reads/2026-11-20-2611.24143.md)  
+  `因果推断` · 相关性 7/10
+- [Anytime-valid goodness-of-fit test by $e$-spacings](deep_reads/2026-11-20-2611.23775.md)  
+  `数理统计 / 假设检验` · 相关性 7/10
+- [Balancing Partition Forest for Causal Weighting](deep_reads/2026-11-20-2611.23524.md)  
+  `因果推断` · 相关性 7/10
 
 ## 收藏
 
