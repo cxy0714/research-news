@@ -9413,6 +9413,10 @@
 
 ### Daily
 
+- [The exact Poisson–binomial comparison in every dimension](deep_reads/2026-11-23-hexagon_2611.00708.md)  
+  6/10 [daily]
+- [Separate fits and joint compatibility in heterogeneous coverage: finite-label models with shared calibration](deep_reads/2026-11-23-hexagon_2611.00802.md)  
+  6/10 [daily]
 - [The exact FDR–FNR frontier and a separable gap under one-factor Gaussian dependence](deep_reads/2026-11-20-hexagon_2611.00659.md)  
   8/10 [daily]
 - [Anytime-valid goodness-of-fit test by $e$-spacings](deep_reads/2026-11-20-2611.23775.md)  
@@ -18213,6 +18217,20 @@
 
 ### Daily
 
+- [Extremizers of the expected missing mass under an entropy constraint](deep_reads/2026-11-23-hexagon_2611.00732.md)  
+  6/10 [daily]
+- [The maximum likelihood degree of no-three-way interaction models](deep_reads/2026-11-23-hexagon_2611.00734.md)  
+  5/10 [daily]
+- [Reconstructing the Simulmatics 1960 Simulation: Mathematics, Methods and a Partial Replication](deep_reads/2026-11-23-hexagon_2611.00825.md)  
+  4/10 [daily]
+- [Rational points on Baxter's curve and roots of unity in the eight-vertex model](deep_reads/2026-11-23-hexagon_2611.00791.md)  
+  2/10 [daily]
+- [Crystal Structures on Theta Bases](deep_reads/2026-11-23-hexagon_2611.00790.md)  
+  1/10 [daily]
+- [On finite-time blow-up of the 2D inviscid Boussinesq equations](deep_reads/2026-11-23-hexagon_2611.00792.md)  
+  1/10 [daily]
+- [The maximal rank of an even hyperbolic lattice with nonzero exceptional lattice](deep_reads/2026-11-23-hexagon_2611.00821.md)  
+  1/10 [daily]
 - [Worst-case bias of the independence assumption for functions of two ordinal variables](deep_reads/2026-11-20-2611.24439.md)  
   6/10 [daily]
 - [Circle configurations and the hardness of promise graph and hypergraph coloring](deep_reads/2026-11-20-hexagon_2611.00619.md)  

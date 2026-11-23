@@ -17,10 +17,28 @@
 
 [→ 查看完整报告](daily/2026-11-23.md)
 
-### 精读论文（1 篇）
+### 精读论文（10 篇）
 
 - [An explicit determinantal formula for limits of iterative proportional fitting with a binary variable](deep_reads/2026-11-23-hexagon_2611.00705.md)  
   `统计计算 / 算法` · 相关性 7/10
+- [The exact Poisson–binomial comparison in every dimension](deep_reads/2026-11-23-hexagon_2611.00708.md)  
+  `数理统计 / 假设检验` · 相关性 6/10
+- [Extremizers of the expected missing mass under an entropy constraint](deep_reads/2026-11-23-hexagon_2611.00732.md)  
+  `其他` · 相关性 6/10
+- [Separate fits and joint compatibility in heterogeneous coverage: finite-label models with shared calibration](deep_reads/2026-11-23-hexagon_2611.00802.md)  
+  `数理统计 / 假设检验` · 相关性 6/10
+- [The maximum likelihood degree of no-three-way interaction models](deep_reads/2026-11-23-hexagon_2611.00734.md)  
+  `其他` · 相关性 5/10
+- [Reconstructing the Simulmatics 1960 Simulation: Mathematics, Methods and a Partial Replication](deep_reads/2026-11-23-hexagon_2611.00825.md)  
+  `其他` · 相关性 4/10
+- [Rational points on Baxter's curve and roots of unity in the eight-vertex model](deep_reads/2026-11-23-hexagon_2611.00791.md)  
+  `其他` · 相关性 2/10
+- [Crystal Structures on Theta Bases](deep_reads/2026-11-23-hexagon_2611.00790.md)  
+  `其他` · 相关性 1/10
+- [On finite-time blow-up of the 2D inviscid Boussinesq equations](deep_reads/2026-11-23-hexagon_2611.00792.md)  
+  `其他` · 相关性 1/10
+- [The maximal rank of an even hyperbolic lattice with nonzero exceptional lattice](deep_reads/2026-11-23-hexagon_2611.00821.md)  
+  `其他` · 相关性 1/10
 
 ## 收藏
 
