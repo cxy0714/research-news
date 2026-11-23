@@ -17,6 +17,11 @@
 
 [→ 查看完整报告](daily/2026-11-23.md)
 
+### 精读论文（1 篇）
+
+- [An explicit determinantal formula for limits of iterative proportional fitting with a binary variable](deep_reads/2026-11-23-hexagon_2611.00705.md)  
+  `统计计算 / 算法` · 相关性 7/10
+
 ## 收藏
 
 - [→ 打开收藏](favorites.md) · 登录后在各页点 ☆ 收藏即可自动汇总

@@ -12489,6 +12489,8 @@
 
 ### Daily
 
+- [An explicit determinantal formula for limits of iterative proportional fitting with a binary variable](deep_reads/2026-11-23-hexagon_2611.00705.md)  
+  7/10 [daily]
 - [Simultaneous analysis of approximate leave-one-out cross-validation and mean-field inference II: General convex penalties](deep_reads/2026-11-19-2611.21877.md)  
   7/10 [daily]
 - [Certified Algorithms for Gaussian Location Mixture NPMLEs via Discretized Gradient Flows](deep_reads/2026-11-18-2611.19882.md)  
