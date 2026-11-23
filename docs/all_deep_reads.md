@@ -18225,12 +18225,22 @@
   4/10 [daily]
 - [Rational points on Baxter's curve and roots of unity in the eight-vertex model](deep_reads/2026-11-23-hexagon_2611.00791.md)  
   2/10 [daily]
+- [Mixed character moments and a zero-free half-plane for unitary Hecke L-functions](deep_reads/2026-11-23-hexagon_2611.00741.md)  
+  1/10 [daily]
+- [Free fermions from integer arithmetic: a Galois-theoretic test for free-fermionic spectra](deep_reads/2026-11-23-hexagon_2611.00780.md)  
+  1/10 [daily]
 - [Crystal Structures on Theta Bases](deep_reads/2026-11-23-hexagon_2611.00790.md)  
   1/10 [daily]
 - [On finite-time blow-up of the 2D inviscid Boussinesq equations](deep_reads/2026-11-23-hexagon_2611.00792.md)  
   1/10 [daily]
 - [The maximal rank of an even hyperbolic lattice with nonzero exceptional lattice](deep_reads/2026-11-23-hexagon_2611.00821.md)  
   1/10 [daily]
+- [Cluster-Crystal Realization of KR Cartan Algebras](deep_reads/2026-11-23-hexagon_2611.00816.md)  
+  0/10 [daily]
+- [The Br\"uck conjecture and the growth of entire solutions of a differential equation](deep_reads/2026-11-23-hexagon_2611.00826.md)  
+  0/10 [daily]
+- [Hecke calculations for the conditional vanishing of $K_{4k}(\mathbb{Z})$ through degree 104](deep_reads/2026-11-23-hexagon_2611.00829.md)  
+  0/10 [daily]
 - [Worst-case bias of the independence assumption for functions of two ordinal variables](deep_reads/2026-11-20-2611.24439.md)  
   6/10 [daily]
 - [Circle configurations and the hardness of promise graph and hypergraph coloring](deep_reads/2026-11-20-hexagon_2611.00619.md)  

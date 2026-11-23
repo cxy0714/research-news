@@ -17,7 +17,7 @@
 
 [→ 查看完整报告](daily/2026-11-23.md)
 
-### 精读论文（10 篇）
+### 精读论文（15 篇）
 
 - [An explicit determinantal formula for limits of iterative proportional fitting with a binary variable](deep_reads/2026-11-23-hexagon_2611.00705.md)  
   `统计计算 / 算法` · 相关性 7/10
@@ -33,12 +33,22 @@
   `其他` · 相关性 4/10
 - [Rational points on Baxter's curve and roots of unity in the eight-vertex model](deep_reads/2026-11-23-hexagon_2611.00791.md)  
   `其他` · 相关性 2/10
+- [Mixed character moments and a zero-free half-plane for unitary Hecke L-functions](deep_reads/2026-11-23-hexagon_2611.00741.md)  
+  `其他` · 相关性 1/10
+- [Free fermions from integer arithmetic: a Galois-theoretic test for free-fermionic spectra](deep_reads/2026-11-23-hexagon_2611.00780.md)  
+  `其他` · 相关性 1/10
 - [Crystal Structures on Theta Bases](deep_reads/2026-11-23-hexagon_2611.00790.md)  
   `其他` · 相关性 1/10
 - [On finite-time blow-up of the 2D inviscid Boussinesq equations](deep_reads/2026-11-23-hexagon_2611.00792.md)  
   `其他` · 相关性 1/10
 - [The maximal rank of an even hyperbolic lattice with nonzero exceptional lattice](deep_reads/2026-11-23-hexagon_2611.00821.md)  
   `其他` · 相关性 1/10
+- [Cluster-Crystal Realization of KR Cartan Algebras](deep_reads/2026-11-23-hexagon_2611.00816.md)  
+  `其他` · 相关性 0/10
+- [The Br\"uck conjecture and the growth of entire solutions of a differential equation](deep_reads/2026-11-23-hexagon_2611.00826.md)  
+  `其他` · 相关性 0/10
+- [Hecke calculations for the conditional vanishing of $K_{4k}(\mathbb{Z})$ through degree 104](deep_reads/2026-11-23-hexagon_2611.00829.md)  
+  `其他` · 相关性 0/10
 
 ## 收藏
 
