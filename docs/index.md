@@ -11,44 +11,11 @@
 - **[收藏](favorites.md)** — 登录后在各页点 ☆ 收藏的论文，自动汇总到这里（总收藏按类别分组、可切换按周；每篇可写评论，无需手动维护）。
 - **[模型测评](all_shootout.md)** — 不同 LLM 在同一批论文上的打分 / 解读对比。
 
-## 今日 · 2026-11-23
+## 今日 · 2026-11-24
 
 ### 每日 arXiv 速览
 
-[→ 查看完整报告](daily/2026-11-23.md)
-
-### 精读论文（15 篇）
-
-- [An explicit determinantal formula for limits of iterative proportional fitting with a binary variable](deep_reads/2026-11-23-hexagon_2611.00705.md)  
-  `统计计算 / 算法` · 相关性 7/10
-- [The exact Poisson–binomial comparison in every dimension](deep_reads/2026-11-23-hexagon_2611.00708.md)  
-  `数理统计 / 假设检验` · 相关性 6/10
-- [Extremizers of the expected missing mass under an entropy constraint](deep_reads/2026-11-23-hexagon_2611.00732.md)  
-  `其他` · 相关性 6/10
-- [Separate fits and joint compatibility in heterogeneous coverage: finite-label models with shared calibration](deep_reads/2026-11-23-hexagon_2611.00802.md)  
-  `数理统计 / 假设检验` · 相关性 6/10
-- [The maximum likelihood degree of no-three-way interaction models](deep_reads/2026-11-23-hexagon_2611.00734.md)  
-  `其他` · 相关性 5/10
-- [Reconstructing the Simulmatics 1960 Simulation: Mathematics, Methods and a Partial Replication](deep_reads/2026-11-23-hexagon_2611.00825.md)  
-  `其他` · 相关性 4/10
-- [Rational points on Baxter's curve and roots of unity in the eight-vertex model](deep_reads/2026-11-23-hexagon_2611.00791.md)  
-  `其他` · 相关性 2/10
-- [Mixed character moments and a zero-free half-plane for unitary Hecke L-functions](deep_reads/2026-11-23-hexagon_2611.00741.md)  
-  `其他` · 相关性 1/10
-- [Free fermions from integer arithmetic: a Galois-theoretic test for free-fermionic spectra](deep_reads/2026-11-23-hexagon_2611.00780.md)  
-  `其他` · 相关性 1/10
-- [Crystal Structures on Theta Bases](deep_reads/2026-11-23-hexagon_2611.00790.md)  
-  `其他` · 相关性 1/10
-- [On finite-time blow-up of the 2D inviscid Boussinesq equations](deep_reads/2026-11-23-hexagon_2611.00792.md)  
-  `其他` · 相关性 1/10
-- [The maximal rank of an even hyperbolic lattice with nonzero exceptional lattice](deep_reads/2026-11-23-hexagon_2611.00821.md)  
-  `其他` · 相关性 1/10
-- [Cluster-Crystal Realization of KR Cartan Algebras](deep_reads/2026-11-23-hexagon_2611.00816.md)  
-  `其他` · 相关性 0/10
-- [The Br\"uck conjecture and the growth of entire solutions of a differential equation](deep_reads/2026-11-23-hexagon_2611.00826.md)  
-  `其他` · 相关性 0/10
-- [Hecke calculations for the conditional vanishing of $K_{4k}(\mathbb{Z})$ through degree 104](deep_reads/2026-11-23-hexagon_2611.00829.md)  
-  `其他` · 相关性 0/10
+[→ 查看完整报告](daily/2026-11-24.md)
 
 ## 收藏
 
@@ -56,11 +23,11 @@
 
 ## 本周每日报告
 
+- [2026-11-23](daily/2026-11-23.md)
 - [2026-11-20](daily/2026-11-20.md)
 - [2026-11-19](daily/2026-11-19.md)
 - [2026-11-18](daily/2026-11-18.md)
 - [2026-11-17](daily/2026-11-17.md)
-- [2026-11-16](daily/2026-11-16.md)
 
 
 ---
