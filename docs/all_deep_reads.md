@@ -9433,6 +9433,10 @@
 
 - [Nonparametric Change-Point Detection for Modern Data: Representations and Statistical Guarantees](deep_reads/2026-11-26-2611.32158.md)  
   7/10 [daily]
+- [Certifying total-variation contamination by betting on trimmed kernel witnesses](deep_reads/2026-11-26-2611.33039.md)  
+  6/10 [daily]
+- [Bayesian approach to the Student's t-test based on the B-FBST](deep_reads/2026-11-26-2611.31400.md)  
+  6/10 [daily]
 - [The exact Poisson–binomial comparison in every dimension](deep_reads/2026-11-23-hexagon_2611.00708.md)  
   6/10 [daily]
 - [Separate fits and joint compatibility in heterogeneous coverage: finite-label models with shared calibration](deep_reads/2026-11-23-hexagon_2611.00802.md)  
@@ -16683,6 +16687,8 @@
 
 ### Daily
 
+- [Regression calibration for logistic regression with correlated measurement error and multiple misclassification in covariates](deep_reads/2026-11-26-2611.32878.md)  
+  6/10 [daily]
 - [Adaptive Sequential Surveillance of Infectious Diseases Under Limited Sampling Capacity](deep_reads/2026-10-29-2610.39932.md)  
   6/10 [daily]
 - [Variance estimation for generalized linear regression with binary outcome when using case-cohort data](deep_reads/2026-10-20-2610.27772.md)  
@@ -18239,8 +18245,18 @@
 
 ### Daily
 
+- [Proper and Optimal Scoring Rules for Risk-Averse Agents](deep_reads/2026-11-26-hexagon_2611.00933.md)  
+  7/10 [daily]
+- [The boundary structure of the maximum likelihood eliminant of $3\times3\times3$ tables](deep_reads/2026-11-26-hexagon_2611.00947.md)  
+  7/10 [daily]
+- [The Mean-Field Limit of High-Dimensional Euclidean Matching](deep_reads/2026-11-26-hexagon_2611.00982.md)  
+  7/10 [daily]
+- [Moderate deviations for stochastic gradient Langevin averages with a computed Poisson normalizer](deep_reads/2026-11-26-hexagon_2611.01077.md)  
+  7/10 [daily]
 - [Self-normalized moderate deviations for stochastic gradient Langevin averages with variance correction](deep_reads/2026-11-26-hexagon_2611.01079.md)  
   7/10 [daily]
+- [Differential Item Functioning: Methodological Advances in Detection, Identification, and Interpretation](deep_reads/2026-11-26-2611.31696.md)  
+  6/10 [daily]
 - [Extremizers of the expected missing mass under an entropy constraint](deep_reads/2026-11-23-hexagon_2611.00732.md)  
   6/10 [daily]
 - [The maximum likelihood degree of no-three-way interaction models](deep_reads/2026-11-23-hexagon_2611.00734.md)  

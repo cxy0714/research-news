@@ -17,7 +17,7 @@
 
 [→ 查看完整报告](daily/2026-11-26.md)
 
-### 精读论文（12 篇）
+### 精读论文（20 篇）
 
 - [Partial Identification under Imperfect Compliance via Cross-World Correlation Restriction](deep_reads/2026-11-26-2611.32615.md)  
   `因果推断` · 相关性 9/10
@@ -33,6 +33,14 @@
   `因果推断` · 相关性 8/10
 - [Aalen-Johansen as an augmented IPCW estimator](deep_reads/2026-11-26-2611.32026.md)  
   `因果推断` · 相关性 8/10
+- [Proper and Optimal Scoring Rules for Risk-Averse Agents](deep_reads/2026-11-26-hexagon_2611.00933.md)  
+  `其他` · 相关性 7/10
+- [The boundary structure of the maximum likelihood eliminant of $3\times3\times3$ tables](deep_reads/2026-11-26-hexagon_2611.00947.md)  
+  `其他` · 相关性 7/10
+- [The Mean-Field Limit of High-Dimensional Euclidean Matching](deep_reads/2026-11-26-hexagon_2611.00982.md)  
+  `其他` · 相关性 7/10
+- [Moderate deviations for stochastic gradient Langevin averages with a computed Poisson normalizer](deep_reads/2026-11-26-hexagon_2611.01077.md)  
+  `其他` · 相关性 7/10
 - [Self-normalized moderate deviations for stochastic gradient Langevin averages with variance correction](deep_reads/2026-11-26-hexagon_2611.01079.md)  
   `其他` · 相关性 7/10
 - [An entropy-adjusted invariant likelihood for incidental parameters](deep_reads/2026-11-26-2611.31707.md)  
@@ -43,6 +51,14 @@
   `因果推断` · 相关性 7/10
 - [Probabilistic index models for hierarchical survival outcomes](deep_reads/2026-11-26-2611.31624.md)  
   `因果推断` · 相关性 7/10
+- [Certifying total-variation contamination by betting on trimmed kernel witnesses](deep_reads/2026-11-26-2611.33039.md)  
+  `数理统计 / 假设检验` · 相关性 6/10
+- [Regression calibration for logistic regression with correlated measurement error and multiple misclassification in covariates](deep_reads/2026-11-26-2611.32878.md)  
+  `流行病学` · 相关性 6/10
+- [Differential Item Functioning: Methodological Advances in Detection, Identification, and Interpretation](deep_reads/2026-11-26-2611.31696.md)  
+  `其他` · 相关性 6/10
+- [Bayesian approach to the Student's t-test based on the B-FBST](deep_reads/2026-11-26-2611.31400.md)  
+  `数理统计 / 假设检验` · 相关性 6/10
 
 ## 收藏
 
