@@ -17,16 +17,32 @@
 
 [→ 查看完整报告](daily/2026-11-26.md)
 
-### 精读论文（4 篇）
+### 精读论文（12 篇）
 
 - [Partial Identification under Imperfect Compliance via Cross-World Correlation Restriction](deep_reads/2026-11-26-2611.32615.md)  
   `因果推断` · 相关性 9/10
+- [Pragmatic Deeply Debiased ML](deep_reads/2026-11-26-2611.33069.md)  
+  `效率理论 / Debiased ML` · 相关性 8/10
+- [A General Framework for Identifying the Joint Potential Outcome Distribution through Support Restrictions](deep_reads/2026-11-26-2611.31900.md)  
+  `因果推断` · 相关性 8/10
+- [Sharp Hellinger Risk of the Multivariate Gaussian NPMLE](deep_reads/2026-11-26-2611.31728.md)  
+  `非参数 / 半参数` · 相关性 8/10
 - [Generalizing Couple-Randomized Trials Under Limited Overlap and Missing Partner Linkage](deep_reads/2026-11-26-2611.32888.md)  
   `因果推断` · 相关性 8/10
 - [Asymptotically Efficient Conformal Inference for Individual Treatment Effects under Multivalued Treatments](deep_reads/2026-11-26-2611.32182.md)  
   `因果推断` · 相关性 8/10
 - [Aalen-Johansen as an augmented IPCW estimator](deep_reads/2026-11-26-2611.32026.md)  
   `因果推断` · 相关性 8/10
+- [Self-normalized moderate deviations for stochastic gradient Langevin averages with variance correction](deep_reads/2026-11-26-hexagon_2611.01079.md)  
+  `其他` · 相关性 7/10
+- [An entropy-adjusted invariant likelihood for incidental parameters](deep_reads/2026-11-26-2611.31707.md)  
+  `经济理论 / 应用` · 相关性 7/10
+- [Nonparametric Change-Point Detection for Modern Data: Representations and Statistical Guarantees](deep_reads/2026-11-26-2611.32158.md)  
+  `数理统计 / 假设检验` · 相关性 7/10
+- [Correcting for Differential Nonresponse Using Past Election Data](deep_reads/2026-11-26-2611.31662.md)  
+  `因果推断` · 相关性 7/10
+- [Probabilistic index models for hierarchical survival outcomes](deep_reads/2026-11-26-2611.31624.md)  
+  `因果推断` · 相关性 7/10
 
 ## 收藏
 

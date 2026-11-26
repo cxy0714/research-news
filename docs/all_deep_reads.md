@@ -6,12 +6,18 @@
 
 - [Partial Identification under Imperfect Compliance via Cross-World Correlation Restriction](deep_reads/2026-11-26-2611.32615.md)  
   9/10 [daily]
+- [A General Framework for Identifying the Joint Potential Outcome Distribution through Support Restrictions](deep_reads/2026-11-26-2611.31900.md)  
+  8/10 [daily]
 - [Generalizing Couple-Randomized Trials Under Limited Overlap and Missing Partner Linkage](deep_reads/2026-11-26-2611.32888.md)  
   8/10 [daily]
 - [Asymptotically Efficient Conformal Inference for Individual Treatment Effects under Multivalued Treatments](deep_reads/2026-11-26-2611.32182.md)  
   8/10 [daily]
 - [Aalen-Johansen as an augmented IPCW estimator](deep_reads/2026-11-26-2611.32026.md)  
   8/10 [daily]
+- [Correcting for Differential Nonresponse Using Past Election Data](deep_reads/2026-11-26-2611.31662.md)  
+  7/10 [daily]
+- [Probabilistic index models for hierarchical survival outcomes](deep_reads/2026-11-26-2611.31624.md)  
+  7/10 [daily]
 - [Design-Based Inference for Fuzzy Difference-in-Differences](deep_reads/2026-11-20-2611.24402.md)  
   8/10 [daily]
 - [On the Validity of Fisher Randomization Tests under the Weak Null](deep_reads/2026-11-20-2611.24821.md)  
@@ -6554,6 +6560,8 @@
 
 ### Daily
 
+- [Sharp Hellinger Risk of the Multivariate Gaussian NPMLE](deep_reads/2026-11-26-2611.31728.md)  
+  8/10 [daily]
 - [Functional Principal Component Analysis: Minimax Optimality from Sparse to Dense Designs and Beyond](deep_reads/2026-11-20-2611.24228.md)  
   8/10 [daily]
 - [Minimax estimation for simultaneous deconvolution model in random design using wavelets](deep_reads/2026-11-20-2611.23439.md)  
@@ -8982,6 +8990,8 @@
 
 ### Daily
 
+- [Pragmatic Deeply Debiased ML](deep_reads/2026-11-26-2611.33069.md)  
+  8/10 [daily]
 - [Backtesting High-Dimensional Expected Shortfall](deep_reads/2026-11-12-2611.13882.md)  
   7/10 [daily]
 - [Robust Estimation of Prior Parameters in Normal-Normal Empirical Bayes](deep_reads/2026-11-04-2611.00326.md)  
@@ -9421,6 +9431,8 @@
 
 ### Daily
 
+- [Nonparametric Change-Point Detection for Modern Data: Representations and Statistical Guarantees](deep_reads/2026-11-26-2611.32158.md)  
+  7/10 [daily]
 - [The exact Poisson–binomial comparison in every dimension](deep_reads/2026-11-23-hexagon_2611.00708.md)  
   6/10 [daily]
 - [Separate fits and joint compatibility in heterogeneous coverage: finite-label models with shared calibration](deep_reads/2026-11-23-hexagon_2611.00802.md)  
@@ -15278,6 +15290,8 @@
 
 ### Daily
 
+- [An entropy-adjusted invariant likelihood for incidental parameters](deep_reads/2026-11-26-2611.31707.md)  
+  7/10 [daily]
 - [A Tail-Geometric Approach to Kotlarski's Lemma with Order Statistics](deep_reads/2026-11-20-2611.23642.md)  
   7/10 [daily]
 - [Exploiting Common Volatility Dynamics in High-Dimensional Portfolio Selection](deep_reads/2026-11-20-2611.23952.md)  
@@ -18225,6 +18239,8 @@
 
 ### Daily
 
+- [Self-normalized moderate deviations for stochastic gradient Langevin averages with variance correction](deep_reads/2026-11-26-hexagon_2611.01079.md)  
+  7/10 [daily]
 - [Extremizers of the expected missing mass under an entropy constraint](deep_reads/2026-11-23-hexagon_2611.00732.md)  
   6/10 [daily]
 - [The maximum likelihood degree of no-three-way interaction models](deep_reads/2026-11-23-hexagon_2611.00734.md)  
