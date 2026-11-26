@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import argparse
 import logging
+import sys
 from datetime import date, timedelta
 from pathlib import Path
 
@@ -82,9 +83,42 @@ def _parse_thresholds(interests_text: str) -> tuple[float, float, float]:
     )
 
 
+class SourceOutage(RuntimeError):
+    """Zero papers collected *and* the sources are unreachable.
+
+    Distinguishes a network/proxy outage (arXiv and friends unreachable, so the
+    run would publish a bogus "0 papers" page) from a genuinely quiet day
+    (sources answer fine, there is simply nothing new, e.g. a holiday).
+    """
+
+
+def _probe_arxiv() -> bool:
+    """Cheap reachability probe: does the arXiv API answer at all?
+
+    Uses the same httpx / proxy environment as the scrapers, so a dead local
+    proxy (the classic WinError 10061 case) is caught here too.
+    """
+    import httpx
+
+    try:
+        r = httpx.get(
+            "https://export.arxiv.org/api/query",
+            params={"search_query": "all:electron", "max_results": 0},
+            timeout=20,
+            follow_redirects=True,
+        )
+    except Exception as e:  # noqa: BLE001 - any transport failure = unreachable
+        log.warning("arXiv reachability probe failed: %s", e)
+        return False
+    if r.status_code >= 500:
+        log.warning("arXiv reachability probe returned HTTP %s", r.status_code)
+        return False
+    return True
+
+
 def run(dry_run: bool = False, for_date: date | None = None,
         force: bool = False, skip_deep_reads: bool = False,
-        replace: bool = False) -> Path:
+        replace: bool = False, allow_empty: bool = False) -> Path:
     load_dotenv()
     sources_cfg, interests_text = _load_config()
     th_show, th_highlight, th_deepread = _parse_thresholds(interests_text)
@@ -111,6 +145,30 @@ def run(dry_run: bool = False, for_date: date | None = None,
     log.info("collecting papers for %s ...", report_date)
     papers = _collect_papers(sources_cfg, for_date=for_date)
     log.info("collected %d papers before dedup", len(papers))
+
+    # A zero-paper run is only legitimate when the sources actually answered.
+    # If they are unreachable (dead proxy, no network, GFW blocking), rendering
+    # would publish a clean-looking "0 篇" page and run_daily.ps1 would commit
+    # it. Abort instead, so the day stays re-runnable (see the re-run guard
+    # above, which treats a missing/empty page as safe to regenerate).
+    if not papers:
+        if allow_empty:
+            log.warning(
+                "collected 0 papers with --allow-empty/DAILY_ALLOW_EMPTY — "
+                "rendering an empty report anyway"
+            )
+        elif not _probe_arxiv():
+            log.error(
+                "collected 0 papers and arXiv is unreachable — this is a "
+                "source/network outage, not a quiet day; refusing to render and "
+                "publish an empty report (pass --allow-empty to override)"
+            )
+            raise SourceOutage("no papers collected: sources unreachable")
+        else:
+            log.info(
+                "collected 0 papers, but arXiv answers — treating this as a "
+                "quiet day"
+            )
 
     seen = load_seen()
     if force:
@@ -303,6 +361,14 @@ def main() -> None:
         help="overwrite an existing report while still honoring the seen-set; "
              "unlike --force, previously seen papers remain filtered",
     )
+    ap.add_argument(
+        "--allow-empty",
+        action="store_true",
+        help="render and publish a zero-paper report even when the sources look "
+             "unreachable (for known-quiet days); the default is to abort with "
+             "exit code 2 so a network/proxy outage can never publish an empty "
+             "page",
+    )
     args = ap.parse_args()
 
     for_date: date | None = None
@@ -311,13 +377,21 @@ def main() -> None:
     elif args.lookback_days > 0:
         for_date = date.today() - timedelta(days=args.lookback_days)
 
-    run(
-        dry_run=args.dry_run,
-        for_date=for_date,
-        force=args.force,
-        skip_deep_reads=args.skip_deep_reads,
-        replace=args.replace,
-    )
+    allow_empty = args.allow_empty or os.environ.get(
+        "DAILY_ALLOW_EMPTY", "").strip().lower() in ("1", "true", "yes")
+
+    try:
+        run(
+            dry_run=args.dry_run,
+            for_date=for_date,
+            force=args.force,
+            skip_deep_reads=args.skip_deep_reads,
+            replace=args.replace,
+            allow_empty=allow_empty,
+        )
+    except SourceOutage as e:
+        log.error("daily aborted (exit 2): %s", e)
+        sys.exit(2)
 
 
 if __name__ == "__main__":

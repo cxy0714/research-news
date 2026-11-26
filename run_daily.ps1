@@ -42,6 +42,7 @@ if (-not $mutex.WaitOne([TimeSpan]::FromHours(3))) {
     return
 }
 
+$dailyAborted = $false
 try {
     # Activate venv if present.
     $venvActivate = Join-Path $PSScriptRoot ".venv\Scripts\Activate.ps1"
@@ -57,6 +58,16 @@ try {
     } else {
         python -m research_news.daily
     }
+
+    # A zero-paper daily whose sources were unreachable exits 2. Publishing that
+    # page would show a bogus "0 篇" day on the site, so skip the remaining steps
+    # AND the commit/push below; the page is left missing/empty so a later run
+    # can regenerate it (daily.py's re-run guard allows that).
+    if ($LASTEXITCODE -eq 2) {
+        $dailyAborted = $true
+        Write-Host "[$(Get-Date -Format o)] WARNING: daily aborted - no papers collected and the sources were unreachable; skipping radar steps, commit and push"
+    }
+    else {
 
     # Fix any garbled / truncated summaries in today's report.
     python -m research_news.rerun --date $today
@@ -91,6 +102,7 @@ try {
     # — the generation itself and these stub retries — was moved to the resident
     # loop (run_deepread_loop.ps1), which owns data/highlights.json. Keep the call
     # below only if you want daily to retry today's stubs itself as well.
+    }
 }
 finally {
     $mutex.ReleaseMutex()
@@ -113,7 +125,9 @@ $pushLog = New-Object System.Collections.Generic.List[string]
 $pushLog.Add("")
 $pushLog.Add("**********************")
 $pushLog.Add("git commit/push: $(Get-Date -Format o)")
-if (git status --porcelain) {
+if ($dailyAborted) {
+    $pushLog.Add("daily aborted: no papers collected and the sources were unreachable - nothing committed, the day stays re-runnable")
+} elseif (git status --porcelain) {
     git add -A
     git commit -m "daily report $today"
     $pushed = $false
