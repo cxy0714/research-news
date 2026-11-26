@@ -4863,6 +4863,8 @@
 
 ### Daily
 
+- [Unconditional irreducibility of characteristic polynomials of symmetric Rademacher matrices](deep_reads/2026-11-26-hexagon_2611.00927.md)  
+  6/10 [daily]
 - [Spectral outliers of self-coupled covariance matrices with exact zero weights](deep_reads/2026-11-20-hexagon_2611.00662.md)  
   7/10 [daily]
 - [Dimension-free spectral laws and the risk of spectral filters](deep_reads/2026-11-18-2611.21254.md)  
@@ -9433,6 +9435,10 @@
 
 - [Nonparametric Change-Point Detection for Modern Data: Representations and Statistical Guarantees](deep_reads/2026-11-26-2611.32158.md)  
   7/10 [daily]
+- [Efficient inferential models and their fiducial connections](deep_reads/2026-11-26-2611.32930.md)  
+  6/10 [daily]
+- [A Dimension-Free Bound on the FDR of the Benjamini-Hochberg Procedure under Slowly Decaying Gaussian Correlations](deep_reads/2026-11-26-2611.32898.md)  
+  6/10 [daily]
 - [Certifying total-variation contamination by betting on trimmed kernel witnesses](deep_reads/2026-11-26-2611.33039.md)  
   6/10 [daily]
 - [Bayesian approach to the Student's t-test based on the B-FBST](deep_reads/2026-11-26-2611.31400.md)  
@@ -14119,6 +14125,8 @@
 
 ### Daily
 
+- [Hesperos & Eosphoros: A Coupled Differentiable Forced-Photometry Operator and Forward Model for SPHEREx Spectrophotometry](deep_reads/2026-11-26-2611.33092.md)  
+  6/10 [daily]
 - [Redrock: Spectroscopic Classification and Redshift Fitting for the Dark Energy Spectroscopic Instrument](deep_reads/2026-11-20-2611.23636.md)  
   6/10 [daily]
 - [Faster $\chi^2$ periodogram: Accelerating linear algebra with fast Toeplitz solvers](deep_reads/2026-11-18-2611.20300.md)  
@@ -18255,6 +18263,12 @@
   7/10 [daily]
 - [Self-normalized moderate deviations for stochastic gradient Langevin averages with variance correction](deep_reads/2026-11-26-hexagon_2611.01079.md)  
   7/10 [daily]
+- [Finding most likely Delaunay triangulations of imprecise points is NP-hard](deep_reads/2026-11-26-hexagon_2611.00951.md)  
+  6/10 [daily]
+- [Time Reversal and the Memory Cost of Prediction](deep_reads/2026-11-26-hexagon_2611.00969.md)  
+  6/10 [daily]
+- [Convergence of the one-particle quantum symmetric simple exclusion process to the KPZ equation](deep_reads/2026-11-26-hexagon_2611.00983.md)  
+  6/10 [daily]
 - [Differential Item Functioning: Methodological Advances in Detection, Identification, and Interpretation](deep_reads/2026-11-26-2611.31696.md)  
   6/10 [daily]
 - [Extremizers of the expected missing mass under an entropy constraint](deep_reads/2026-11-23-hexagon_2611.00732.md)  

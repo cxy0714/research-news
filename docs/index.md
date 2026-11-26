@@ -17,7 +17,7 @@
 
 [→ 查看完整报告](daily/2026-11-26.md)
 
-### 精读论文（20 篇）
+### 精读论文（27 篇）
 
 - [Partial Identification under Imperfect Compliance via Cross-World Correlation Restriction](deep_reads/2026-11-26-2611.32615.md)  
   `因果推断` · 相关性 9/10
@@ -51,6 +51,20 @@
   `因果推断` · 相关性 7/10
 - [Probabilistic index models for hierarchical survival outcomes](deep_reads/2026-11-26-2611.31624.md)  
   `因果推断` · 相关性 7/10
+- [Unconditional irreducibility of characteristic polynomials of symmetric Rademacher matrices](deep_reads/2026-11-26-hexagon_2611.00927.md)  
+  `高维统计 / 随机矩阵` · 相关性 6/10
+- [Finding most likely Delaunay triangulations of imprecise points is NP-hard](deep_reads/2026-11-26-hexagon_2611.00951.md)  
+  `其他` · 相关性 6/10
+- [Time Reversal and the Memory Cost of Prediction](deep_reads/2026-11-26-hexagon_2611.00969.md)  
+  `其他` · 相关性 6/10
+- [Convergence of the one-particle quantum symmetric simple exclusion process to the KPZ equation](deep_reads/2026-11-26-hexagon_2611.00983.md)  
+  `其他` · 相关性 6/10
+- [Hesperos & Eosphoros: A Coupled Differentiable Forced-Photometry Operator and Forward Model for SPHEREx Spectrophotometry](deep_reads/2026-11-26-2611.33092.md)  
+  `天体统计` · 相关性 6/10
+- [Efficient inferential models and their fiducial connections](deep_reads/2026-11-26-2611.32930.md)  
+  `数理统计 / 假设检验` · 相关性 6/10
+- [A Dimension-Free Bound on the FDR of the Benjamini-Hochberg Procedure under Slowly Decaying Gaussian Correlations](deep_reads/2026-11-26-2611.32898.md)  
+  `数理统计 / 假设检验` · 相关性 6/10
 - [Certifying total-variation contamination by betting on trimmed kernel witnesses](deep_reads/2026-11-26-2611.33039.md)  
   `数理统计 / 假设检验` · 相关性 6/10
 - [Regression calibration for logistic regression with correlated measurement error and multiple misclassification in covariates](deep_reads/2026-11-26-2611.32878.md)  
