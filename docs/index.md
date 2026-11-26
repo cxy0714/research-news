@@ -17,6 +17,17 @@
 
 [→ 查看完整报告](daily/2026-11-26.md)
 
+### 精读论文（4 篇）
+
+- [Partial Identification under Imperfect Compliance via Cross-World Correlation Restriction](deep_reads/2026-11-26-2611.32615.md)  
+  `因果推断` · 相关性 9/10
+- [Generalizing Couple-Randomized Trials Under Limited Overlap and Missing Partner Linkage](deep_reads/2026-11-26-2611.32888.md)  
+  `因果推断` · 相关性 8/10
+- [Asymptotically Efficient Conformal Inference for Individual Treatment Effects under Multivalued Treatments](deep_reads/2026-11-26-2611.32182.md)  
+  `因果推断` · 相关性 8/10
+- [Aalen-Johansen as an augmented IPCW estimator](deep_reads/2026-11-26-2611.32026.md)  
+  `因果推断` · 相关性 8/10
+
 ## 收藏
 
 - [→ 打开收藏](favorites.md) · 登录后在各页点 ☆ 收藏即可自动汇总

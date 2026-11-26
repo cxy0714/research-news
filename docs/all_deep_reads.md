@@ -4,6 +4,14 @@
 
 ### Daily
 
+- [Partial Identification under Imperfect Compliance via Cross-World Correlation Restriction](deep_reads/2026-11-26-2611.32615.md)  
+  9/10 [daily]
+- [Generalizing Couple-Randomized Trials Under Limited Overlap and Missing Partner Linkage](deep_reads/2026-11-26-2611.32888.md)  
+  8/10 [daily]
+- [Asymptotically Efficient Conformal Inference for Individual Treatment Effects under Multivalued Treatments](deep_reads/2026-11-26-2611.32182.md)  
+  8/10 [daily]
+- [Aalen-Johansen as an augmented IPCW estimator](deep_reads/2026-11-26-2611.32026.md)  
+  8/10 [daily]
 - [Design-Based Inference for Fuzzy Difference-in-Differences](deep_reads/2026-11-20-2611.24402.md)  
   8/10 [daily]
 - [On the Validity of Fisher Randomization Tests under the Weak Null](deep_reads/2026-11-20-2611.24821.md)  
