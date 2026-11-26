@@ -18287,8 +18287,28 @@
   2/10 [daily]
 - [Explicit lattice packings](deep_reads/2026-11-26-hexagon_2611.01075.md)  
   2/10 [daily]
+- [Elections with Condorcet Dimension 4](deep_reads/2026-11-26-hexagon_2611.00898.md)  
+  1/10 [daily]
+- [An Arakelov-theoretic perspective on the Alpöge–Claude argument on RH, after Calegari-Dimitrov-Tang](deep_reads/2026-11-26-hexagon_2611.00833.md)  
+  1/10 [daily]
+- [A length-minimizing curve with discontinuous velocity in a smooth sub-Riemannian structure](deep_reads/2026-11-26-hexagon_2611.00907.md)  
+  1/10 [daily]
+- [A Proof of the Galois–McKay Conjecture](deep_reads/2026-11-26-hexagon_2611.00967.md)  
+  1/10 [daily]
+- [Leopard spots, CM points, and class numbers](deep_reads/2026-11-26-hexagon_2611.00976.md)  
+  1/10 [daily]
+- [Resurgence of the squeezed Kerr oscillator: tunnel splittings, Kummer connection, and a perturbative/non-perturbative relation](deep_reads/2026-11-26-hexagon_2611.01004.md)  
+  1/10 [daily]
 - [A counterexample to rank log-concavity of Bruhat intervals](deep_reads/2026-11-26-hexagon_2611.01061.md)  
   1/10 [daily]
+- [Completing the Kim–Kim–Oh Classification of Minimal-Rank $n$-Universal Lattices for $2\le n\le 8$](deep_reads/2026-11-26-hexagon_2611.00952.md)  
+  0/10 [daily]
+- [Kim's universal octonary form over real quadratic orders](deep_reads/2026-11-26-hexagon_2611.00953.md)  
+  0/10 [daily]
+- [Counterexamples to Walther's ideal equality](deep_reads/2026-11-26-hexagon_2611.00963.md)  
+  0/10 [daily]
+- [Differential transcendence of cubic and quartic polynomial series](deep_reads/2026-11-26-hexagon_2611.01088.md)  
+  0/10 [daily]
 - [Extremizers of the expected missing mass under an entropy constraint](deep_reads/2026-11-23-hexagon_2611.00732.md)  
   6/10 [daily]
 - [The maximum likelihood degree of no-three-way interaction models](deep_reads/2026-11-23-hexagon_2611.00734.md)  

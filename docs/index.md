@@ -17,7 +17,7 @@
 
 [→ 查看完整报告](daily/2026-11-26.md)
 
-### 精读论文（36 篇）
+### 精读论文（46 篇）
 
 - [Partial Identification under Imperfect Compliance via Cross-World Correlation Restriction](deep_reads/2026-11-26-2611.32615.md)  
   `因果推断` · 相关性 9/10
@@ -89,8 +89,28 @@
   `其他` · 相关性 2/10
 - [Explicit lattice packings](deep_reads/2026-11-26-hexagon_2611.01075.md)  
   `其他` · 相关性 2/10
+- [Elections with Condorcet Dimension 4](deep_reads/2026-11-26-hexagon_2611.00898.md)  
+  `其他` · 相关性 1/10
+- [An Arakelov-theoretic perspective on the Alpöge–Claude argument on RH, after Calegari-Dimitrov-Tang](deep_reads/2026-11-26-hexagon_2611.00833.md)  
+  `其他` · 相关性 1/10
+- [A length-minimizing curve with discontinuous velocity in a smooth sub-Riemannian structure](deep_reads/2026-11-26-hexagon_2611.00907.md)  
+  `其他` · 相关性 1/10
+- [A Proof of the Galois–McKay Conjecture](deep_reads/2026-11-26-hexagon_2611.00967.md)  
+  `其他` · 相关性 1/10
+- [Leopard spots, CM points, and class numbers](deep_reads/2026-11-26-hexagon_2611.00976.md)  
+  `其他` · 相关性 1/10
+- [Resurgence of the squeezed Kerr oscillator: tunnel splittings, Kummer connection, and a perturbative/non-perturbative relation](deep_reads/2026-11-26-hexagon_2611.01004.md)  
+  `其他` · 相关性 1/10
 - [A counterexample to rank log-concavity of Bruhat intervals](deep_reads/2026-11-26-hexagon_2611.01061.md)  
   `其他` · 相关性 1/10
+- [Completing the Kim–Kim–Oh Classification of Minimal-Rank $n$-Universal Lattices for $2\le n\le 8$](deep_reads/2026-11-26-hexagon_2611.00952.md)  
+  `其他` · 相关性 0/10
+- [Kim's universal octonary form over real quadratic orders](deep_reads/2026-11-26-hexagon_2611.00953.md)  
+  `其他` · 相关性 0/10
+- [Counterexamples to Walther's ideal equality](deep_reads/2026-11-26-hexagon_2611.00963.md)  
+  `其他` · 相关性 0/10
+- [Differential transcendence of cubic and quartic polynomial series](deep_reads/2026-11-26-hexagon_2611.01088.md)  
+  `其他` · 相关性 0/10
 
 ## 收藏
 
