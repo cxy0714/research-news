@@ -17,7 +17,7 @@
 
 [→ 查看完整报告](daily/2026-11-26.md)
 
-### 精读论文（27 篇）
+### 精读论文（36 篇）
 
 - [Partial Identification under Imperfect Compliance via Cross-World Correlation Restriction](deep_reads/2026-11-26-2611.32615.md)  
   `因果推断` · 相关性 9/10
@@ -51,6 +51,8 @@
   `因果推断` · 相关性 7/10
 - [Probabilistic index models for hierarchical survival outcomes](deep_reads/2026-11-26-2611.31624.md)  
   `因果推断` · 相关性 7/10
+- [A counterexample on two kinds of positive dependence](deep_reads/2026-11-26-hexagon_2611.00840.md)  
+  `数理统计 / 假设检验` · 相关性 6/10
 - [Unconditional irreducibility of characteristic polynomials of symmetric Rademacher matrices](deep_reads/2026-11-26-hexagon_2611.00927.md)  
   `高维统计 / 随机矩阵` · 相关性 6/10
 - [Finding most likely Delaunay triangulations of imprecise points is NP-hard](deep_reads/2026-11-26-hexagon_2611.00951.md)  
@@ -73,6 +75,22 @@
   `其他` · 相关性 6/10
 - [Bayesian approach to the Student's t-test based on the B-FBST](deep_reads/2026-11-26-2611.31400.md)  
   `数理统计 / 假设检验` · 相关性 6/10
+- [Resurgence of the finite-$N$ Curie--Weiss model: metastability, the spinodal, and Lee--Yang zeros](deep_reads/2026-11-26-hexagon_2611.00950.md)  
+  `其他` · 相关性 4/10
+- [Towards a conformal field theory of critical percolation. III. Quantitative mixed fusion and subleading fields](deep_reads/2026-11-26-hexagon_2611.01000.md)  
+  `其他` · 相关性 3/10
+- [An exponential lower bound on the exact stabilizer rank](deep_reads/2026-11-26-hexagon_2611.01073.md)  
+  `其他` · 相关性 3/10
+- [Approximate Coloring Is a Promise CSP](deep_reads/2026-11-26-hexagon_2611.01095.md)  
+  `其他` · 相关性 3/10
+- [The Alpöge–Claude proof of the Riemann hypothesis explained for the Riemann zeta function](deep_reads/2026-11-26-hexagon_2611.00832.md)  
+  `其他` · 相关性 2/10
+- [Expansion in powers of Suzuki groups](deep_reads/2026-11-26-hexagon_2611.00943.md)  
+  `其他` · 相关性 2/10
+- [Explicit lattice packings](deep_reads/2026-11-26-hexagon_2611.01075.md)  
+  `其他` · 相关性 2/10
+- [A counterexample to rank log-concavity of Bruhat intervals](deep_reads/2026-11-26-hexagon_2611.01061.md)  
+  `其他` · 相关性 1/10
 
 ## 收藏
 

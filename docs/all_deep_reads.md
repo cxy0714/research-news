@@ -9435,6 +9435,8 @@
 
 - [Nonparametric Change-Point Detection for Modern Data: Representations and Statistical Guarantees](deep_reads/2026-11-26-2611.32158.md)  
   7/10 [daily]
+- [A counterexample on two kinds of positive dependence](deep_reads/2026-11-26-hexagon_2611.00840.md)  
+  6/10 [daily]
 - [Efficient inferential models and their fiducial connections](deep_reads/2026-11-26-2611.32930.md)  
   6/10 [daily]
 - [A Dimension-Free Bound on the FDR of the Benjamini-Hochberg Procedure under Slowly Decaying Gaussian Correlations](deep_reads/2026-11-26-2611.32898.md)  
@@ -18271,6 +18273,22 @@
   6/10 [daily]
 - [Differential Item Functioning: Methodological Advances in Detection, Identification, and Interpretation](deep_reads/2026-11-26-2611.31696.md)  
   6/10 [daily]
+- [Resurgence of the finite-$N$ Curie--Weiss model: metastability, the spinodal, and Lee--Yang zeros](deep_reads/2026-11-26-hexagon_2611.00950.md)  
+  4/10 [daily]
+- [Towards a conformal field theory of critical percolation. III. Quantitative mixed fusion and subleading fields](deep_reads/2026-11-26-hexagon_2611.01000.md)  
+  3/10 [daily]
+- [An exponential lower bound on the exact stabilizer rank](deep_reads/2026-11-26-hexagon_2611.01073.md)  
+  3/10 [daily]
+- [Approximate Coloring Is a Promise CSP](deep_reads/2026-11-26-hexagon_2611.01095.md)  
+  3/10 [daily]
+- [The Alpöge–Claude proof of the Riemann hypothesis explained for the Riemann zeta function](deep_reads/2026-11-26-hexagon_2611.00832.md)  
+  2/10 [daily]
+- [Expansion in powers of Suzuki groups](deep_reads/2026-11-26-hexagon_2611.00943.md)  
+  2/10 [daily]
+- [Explicit lattice packings](deep_reads/2026-11-26-hexagon_2611.01075.md)  
+  2/10 [daily]
+- [A counterexample to rank log-concavity of Bruhat intervals](deep_reads/2026-11-26-hexagon_2611.01061.md)  
+  1/10 [daily]
 - [Extremizers of the expected missing mass under an entropy constraint](deep_reads/2026-11-23-hexagon_2611.00732.md)  
   6/10 [daily]
 - [The maximum likelihood degree of no-three-way interaction models](deep_reads/2026-11-23-hexagon_2611.00734.md)  
