@@ -17,7 +17,7 @@
 
 [→ 查看完整报告](daily/2026-11-27.md)
 
-### 精读论文（27 篇）
+### 精读论文（30 篇）
 
 - [Sharp sensitivity bounds and maximin policy learning under violations of principal ignorability](deep_reads/2026-11-27-2611.33585.md)  
   `因果推断` · 相关性 9/10
@@ -71,6 +71,12 @@
   `其他` · 相关性 2/10
 - [Counting contingency tables, Kostka numbers, and Littlewood--Richardson coefficients with unary inputs is #P-complete](deep_reads/2026-11-27-hexagon_2611.01117.md)  
   `统计计算 / 算法` · 相关性 2/10
+- [Monochromatic or rainbow triangles in three dimensions](deep_reads/2026-11-27-hexagon_2611.01120.md)  
+  `其他` · 相关性 0/10
+- [Heegaard realizations of unified WRT invariants and radial comparisons with $\widehat Z$: The Poincaré sphere and completion obstructions](deep_reads/2026-11-27-hexagon_2611.01121.md)  
+  `其他` · 相关性 0/10
+- [Algebraic Comparison of Torus Boundary States and an Obstruction to Completion](deep_reads/2026-11-27-hexagon_2611.01123.md)  
+  `其他` · 相关性 0/10
 - [A counterexample to a folklore conjecture on Gelfand pairs](deep_reads/2026-11-27-hexagon_2611.01125.md)  
   `其他` · 相关性 0/10
 

@@ -18307,6 +18307,12 @@
   6/10 [daily]
 - [Uniform Quantum Fourier Transforms from Fast Integer Multiplication](deep_reads/2026-11-27-hexagon_2611.01104.md)  
   2/10 [daily]
+- [Monochromatic or rainbow triangles in three dimensions](deep_reads/2026-11-27-hexagon_2611.01120.md)  
+  0/10 [daily]
+- [Heegaard realizations of unified WRT invariants and radial comparisons with $\widehat Z$: The Poincaré sphere and completion obstructions](deep_reads/2026-11-27-hexagon_2611.01121.md)  
+  0/10 [daily]
+- [Algebraic Comparison of Torus Boundary States and an Obstruction to Completion](deep_reads/2026-11-27-hexagon_2611.01123.md)  
+  0/10 [daily]
 - [A counterexample to a folklore conjecture on Gelfand pairs](deep_reads/2026-11-27-hexagon_2611.01125.md)  
   0/10 [daily]
 - [Proper and Optimal Scoring Rules for Risk-Averse Agents](deep_reads/2026-11-26-hexagon_2611.00933.md)  
