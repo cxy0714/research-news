@@ -12547,6 +12547,8 @@
 
 ### Daily
 
+- [Counting contingency tables, Kostka numbers, and Littlewood--Richardson coefficients with unary inputs is #P-complete](deep_reads/2026-11-27-hexagon_2611.01117.md)  
+  2/10 [daily]
 - [An explicit determinantal formula for limits of iterative proportional fitting with a binary variable](deep_reads/2026-11-23-hexagon_2611.00705.md)  
   7/10 [daily]
 - [Simultaneous analysis of approximate leave-one-out cross-validation and mean-field inference II: General convex penalties](deep_reads/2026-11-19-2611.21877.md)  
@@ -14153,6 +14155,16 @@
   7/10 [daily]
 - [Photometric Uncertainty Correction for Time-Domain Surveys: Vera C. Rubin Data Preview 2 Case Study](deep_reads/2026-11-27-2611.33419.md)  
   7/10 [daily]
+- [A Bayesian Approach to Prioritizing the Follow-Up of Near-Earth Objects](deep_reads/2026-11-27-2611.34790.md)  
+  6/10 [daily]
+- [Very fast 2D inversions of Stokes profiles using neural emulators](deep_reads/2026-11-27-2611.34458.md)  
+  6/10 [daily]
+- [When precision exceeds fidelity: systematic error quantification for inference with misspecified simulators](deep_reads/2026-11-27-2611.33282.md)  
+  6/10 [daily]
+- [RIFT for the O4 era: operating points, calibration marginalization, and cross-code validation](deep_reads/2026-11-27-2611.33239.md)  
+  6/10 [daily]
+- [Modeling the LISA response in the time-frequency domain](deep_reads/2026-11-27-2611.33215.md)  
+  6/10 [daily]
 - [Hesperos & Eosphoros: A Coupled Differentiable Forced-Photometry Operator and Forward Model for SPHEREx Spectrophotometry](deep_reads/2026-11-26-2611.33092.md)  
   6/10 [daily]
 - [Redrock: Spectroscopic Classification and Redshift Fitting for the Dark Energy Spectroscopic Instrument](deep_reads/2026-11-20-2611.23636.md)  
@@ -15332,6 +15344,8 @@
 
 - [Orthogonal inference for machine learning forecasts](deep_reads/2026-11-27-2611.33187.md)  
   7/10 [daily]
+- [Gaussian Process Stochastic Frontiers with Two-Way Fixed Effects](deep_reads/2026-11-27-2611.34081.md)  
+  6/10 [daily]
 - [An entropy-adjusted invariant likelihood for incidental parameters](deep_reads/2026-11-26-2611.31707.md)  
   7/10 [daily]
 - [A Tail-Geometric Approach to Kotlarski's Lemma with Order Statistics](deep_reads/2026-11-20-2611.23642.md)  
@@ -18291,6 +18305,10 @@
   6/10 [daily]
 - [Learning to Infer: Statistical Inference through Meta Learning](deep_reads/2026-11-27-2611.33742.md)  
   6/10 [daily]
+- [Uniform Quantum Fourier Transforms from Fast Integer Multiplication](deep_reads/2026-11-27-hexagon_2611.01104.md)  
+  2/10 [daily]
+- [A counterexample to a folklore conjecture on Gelfand pairs](deep_reads/2026-11-27-hexagon_2611.01125.md)  
+  0/10 [daily]
 - [Proper and Optimal Scoring Rules for Risk-Averse Agents](deep_reads/2026-11-26-hexagon_2611.00933.md)  
   7/10 [daily]
 - [The boundary structure of the maximum likelihood eliminant of $3\times3\times3$ tables](deep_reads/2026-11-26-hexagon_2611.00947.md)  

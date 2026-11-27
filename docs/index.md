@@ -17,7 +17,7 @@
 
 [→ 查看完整报告](daily/2026-11-27.md)
 
-### 精读论文（18 篇）
+### 精读论文（27 篇）
 
 - [Sharp sensitivity bounds and maximin policy learning under violations of principal ignorability](deep_reads/2026-11-27-2611.33585.md)  
   `因果推断` · 相关性 9/10
@@ -41,6 +41,18 @@
   `因果推断` · 相关性 7/10
 - [B-SLIM: BART Sparse Linear Interactions Model for Heterogeneous Treatment Effects](deep_reads/2026-11-27-2611.33246.md)  
   `因果推断` · 相关性 7/10
+- [A Bayesian Approach to Prioritizing the Follow-Up of Near-Earth Objects](deep_reads/2026-11-27-2611.34790.md)  
+  `天体统计` · 相关性 6/10
+- [Very fast 2D inversions of Stokes profiles using neural emulators](deep_reads/2026-11-27-2611.34458.md)  
+  `天体统计` · 相关性 6/10
+- [When precision exceeds fidelity: systematic error quantification for inference with misspecified simulators](deep_reads/2026-11-27-2611.33282.md)  
+  `天体统计` · 相关性 6/10
+- [RIFT for the O4 era: operating points, calibration marginalization, and cross-code validation](deep_reads/2026-11-27-2611.33239.md)  
+  `天体统计` · 相关性 6/10
+- [Modeling the LISA response in the time-frequency domain](deep_reads/2026-11-27-2611.33215.md)  
+  `天体统计` · 相关性 6/10
+- [Gaussian Process Stochastic Frontiers with Two-Way Fixed Effects](deep_reads/2026-11-27-2611.34081.md)  
+  `经济理论 / 应用` · 相关性 6/10
 - [Fairness-Regularized Principal Component Analysis](deep_reads/2026-11-27-2611.33840.md)  
   `其他` · 相关性 6/10
 - [Estimation for High-Dimensional Hawkes Processes with Inhibition via CIR Approximation](deep_reads/2026-11-27-2611.33484.md)  
@@ -55,6 +67,12 @@
   `其他` · 相关性 6/10
 - [k-Nearest Neighbors estimation of the drift of an ergodic diffusion process under Osgood regularity](deep_reads/2026-11-27-2611.33596.md)  
   `非参数 / 半参数` · 相关性 6/10
+- [Uniform Quantum Fourier Transforms from Fast Integer Multiplication](deep_reads/2026-11-27-hexagon_2611.01104.md)  
+  `其他` · 相关性 2/10
+- [Counting contingency tables, Kostka numbers, and Littlewood--Richardson coefficients with unary inputs is #P-complete](deep_reads/2026-11-27-hexagon_2611.01117.md)  
+  `统计计算 / 算法` · 相关性 2/10
+- [A counterexample to a folklore conjecture on Gelfand pairs](deep_reads/2026-11-27-hexagon_2611.01125.md)  
+  `其他` · 相关性 0/10
 
 ## 收藏
 
