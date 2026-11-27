@@ -17,7 +17,7 @@
 
 [→ 查看完整报告](daily/2026-11-27.md)
 
-### 精读论文（9 篇）
+### 精读论文（18 篇）
 
 - [Sharp sensitivity bounds and maximin policy learning under violations of principal ignorability](deep_reads/2026-11-27-2611.33585.md)  
   `因果推断` · 相关性 9/10
@@ -25,6 +25,10 @@
   `高维统计 / 随机矩阵` · 相关性 8/10
 - [Adaptive confidence bands for a continuous treatment effect curve under shape constraints](deep_reads/2026-11-27-2611.33440.md)  
   `因果推断` · 相关性 8/10
+- [Modeling time series of high-resolution spectra using the asymmetric Hilbert-Schmidt decomposition with application to radial velocity exoplanet searches](deep_reads/2026-11-27-2611.34786.md)  
+  `天体统计` · 相关性 7/10
+- [Photometric Uncertainty Correction for Time-Domain Surveys: Vera C. Rubin Data Preview 2 Case Study](deep_reads/2026-11-27-2611.33419.md)  
+  `天体统计` · 相关性 7/10
 - [Orthogonal inference for machine learning forecasts](deep_reads/2026-11-27-2611.33187.md)  
   `经济理论 / 应用` · 相关性 7/10
 - [Design-based causal inference for ROC curves](deep_reads/2026-11-27-2611.34057.md)  
@@ -37,6 +41,20 @@
   `因果推断` · 相关性 7/10
 - [B-SLIM: BART Sparse Linear Interactions Model for Heterogeneous Treatment Effects](deep_reads/2026-11-27-2611.33246.md)  
   `因果推断` · 相关性 7/10
+- [Fairness-Regularized Principal Component Analysis](deep_reads/2026-11-27-2611.33840.md)  
+  `其他` · 相关性 6/10
+- [Estimation for High-Dimensional Hawkes Processes with Inhibition via CIR Approximation](deep_reads/2026-11-27-2611.33484.md)  
+  `其他` · 相关性 6/10
+- [Horseshoe-Type Shrinkage from Ratio-Generated Priors](deep_reads/2026-11-27-2611.33330.md)  
+  `其他` · 相关性 6/10
+- [Guarded Readmission Weighting for Robust Single-Index Frechet Regression](deep_reads/2026-11-27-2611.34349.md)  
+  `非参数 / 半参数` · 相关性 6/10
+- [Certifying a Sufficient Gaussian Dependence Regime for Learned Weighted FDR Control](deep_reads/2026-11-27-2611.33892.md)  
+  `数理统计 / 假设检验` · 相关性 6/10
+- [Learning to Infer: Statistical Inference through Meta Learning](deep_reads/2026-11-27-2611.33742.md)  
+  `其他` · 相关性 6/10
+- [k-Nearest Neighbors estimation of the drift of an ergodic diffusion process under Osgood regularity](deep_reads/2026-11-27-2611.33596.md)  
+  `非参数 / 半参数` · 相关性 6/10
 
 ## 收藏
 

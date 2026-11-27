@@ -6578,6 +6578,10 @@
 
 ### Daily
 
+- [Guarded Readmission Weighting for Robust Single-Index Frechet Regression](deep_reads/2026-11-27-2611.34349.md)  
+  6/10 [daily]
+- [k-Nearest Neighbors estimation of the drift of an ergodic diffusion process under Osgood regularity](deep_reads/2026-11-27-2611.33596.md)  
+  6/10 [daily]
 - [Sharp Hellinger Risk of the Multivariate Gaussian NPMLE](deep_reads/2026-11-26-2611.31728.md)  
   8/10 [daily]
 - [Functional Principal Component Analysis: Minimax Optimality from Sparse to Dense Designs and Beyond](deep_reads/2026-11-20-2611.24228.md)  
@@ -9449,6 +9453,8 @@
 
 ### Daily
 
+- [Certifying a Sufficient Gaussian Dependence Regime for Learned Weighted FDR Control](deep_reads/2026-11-27-2611.33892.md)  
+  6/10 [daily]
 - [Nonparametric Change-Point Detection for Modern Data: Representations and Statistical Guarantees](deep_reads/2026-11-26-2611.32158.md)  
   7/10 [daily]
 - [A counterexample on two kinds of positive dependence](deep_reads/2026-11-26-hexagon_2611.00840.md)  
@@ -14143,6 +14149,10 @@
 
 ### Daily
 
+- [Modeling time series of high-resolution spectra using the asymmetric Hilbert-Schmidt decomposition with application to radial velocity exoplanet searches](deep_reads/2026-11-27-2611.34786.md)  
+  7/10 [daily]
+- [Photometric Uncertainty Correction for Time-Domain Surveys: Vera C. Rubin Data Preview 2 Case Study](deep_reads/2026-11-27-2611.33419.md)  
+  7/10 [daily]
 - [Hesperos & Eosphoros: A Coupled Differentiable Forced-Photometry Operator and Forward Model for SPHEREx Spectrophotometry](deep_reads/2026-11-26-2611.33092.md)  
   6/10 [daily]
 - [Redrock: Spectroscopic Classification and Redshift Fitting for the Dark Energy Spectroscopic Instrument](deep_reads/2026-11-20-2611.23636.md)  
@@ -18273,6 +18283,14 @@
 
 ### Daily
 
+- [Fairness-Regularized Principal Component Analysis](deep_reads/2026-11-27-2611.33840.md)  
+  6/10 [daily]
+- [Estimation for High-Dimensional Hawkes Processes with Inhibition via CIR Approximation](deep_reads/2026-11-27-2611.33484.md)  
+  6/10 [daily]
+- [Horseshoe-Type Shrinkage from Ratio-Generated Priors](deep_reads/2026-11-27-2611.33330.md)  
+  6/10 [daily]
+- [Learning to Infer: Statistical Inference through Meta Learning](deep_reads/2026-11-27-2611.33742.md)  
+  6/10 [daily]
 - [Proper and Optimal Scoring Rules for Risk-Averse Agents](deep_reads/2026-11-26-hexagon_2611.00933.md)  
   7/10 [daily]
 - [The boundary structure of the maximum likelihood eliminant of $3\times3\times3$ tables](deep_reads/2026-11-26-hexagon_2611.00947.md)  
