@@ -17,10 +17,26 @@
 
 [→ 查看完整报告](daily/2026-11-27.md)
 
-### 精读论文（1 篇）
+### 精读论文（9 篇）
 
 - [Sharp sensitivity bounds and maximin policy learning under violations of principal ignorability](deep_reads/2026-11-27-2611.33585.md)  
   `因果推断` · 相关性 9/10
+- [CLT for Linear Spectral Statistics of sample covariances of superimposition of Separable Covariance Components](deep_reads/2026-11-27-2611.34323.md)  
+  `高维统计 / 随机矩阵` · 相关性 8/10
+- [Adaptive confidence bands for a continuous treatment effect curve under shape constraints](deep_reads/2026-11-27-2611.33440.md)  
+  `因果推断` · 相关性 8/10
+- [Orthogonal inference for machine learning forecasts](deep_reads/2026-11-27-2611.33187.md)  
+  `经济理论 / 应用` · 相关性 7/10
+- [Design-based causal inference for ROC curves](deep_reads/2026-11-27-2611.34057.md)  
+  `因果推断` · 相关性 7/10
+- [Bayesian Latent Functional Mediation Analysis with Application to Population-Scale Single-Cell Data](deep_reads/2026-11-27-2611.33714.md)  
+  `因果推断` · 相关性 7/10
+- [Geodesic Causal Forests: Learning Heterogeneous Treatment Effects for Random Objects](deep_reads/2026-11-27-2611.33350.md)  
+  `因果推断` · 相关性 7/10
+- [Addressing Missing Exposures in Causal Inference: A Practical Guide](deep_reads/2026-11-27-2611.33336.md)  
+  `因果推断` · 相关性 7/10
+- [B-SLIM: BART Sparse Linear Interactions Model for Heterogeneous Treatment Effects](deep_reads/2026-11-27-2611.33246.md)  
+  `因果推断` · 相关性 7/10
 
 ## 收藏
 

@@ -6,6 +6,18 @@
 
 - [Sharp sensitivity bounds and maximin policy learning under violations of principal ignorability](deep_reads/2026-11-27-2611.33585.md)  
   9/10 [daily]
+- [Adaptive confidence bands for a continuous treatment effect curve under shape constraints](deep_reads/2026-11-27-2611.33440.md)  
+  8/10 [daily]
+- [Design-based causal inference for ROC curves](deep_reads/2026-11-27-2611.34057.md)  
+  7/10 [daily]
+- [Bayesian Latent Functional Mediation Analysis with Application to Population-Scale Single-Cell Data](deep_reads/2026-11-27-2611.33714.md)  
+  7/10 [daily]
+- [Geodesic Causal Forests: Learning Heterogeneous Treatment Effects for Random Objects](deep_reads/2026-11-27-2611.33350.md)  
+  7/10 [daily]
+- [Addressing Missing Exposures in Causal Inference: A Practical Guide](deep_reads/2026-11-27-2611.33336.md)  
+  7/10 [daily]
+- [B-SLIM: BART Sparse Linear Interactions Model for Heterogeneous Treatment Effects](deep_reads/2026-11-27-2611.33246.md)  
+  7/10 [daily]
 - [Partial Identification under Imperfect Compliance via Cross-World Correlation Restriction](deep_reads/2026-11-26-2611.32615.md)  
   9/10 [daily]
 - [A General Framework for Identifying the Joint Potential Outcome Distribution through Support Restrictions](deep_reads/2026-11-26-2611.31900.md)  
@@ -4865,6 +4877,8 @@
 
 ### Daily
 
+- [CLT for Linear Spectral Statistics of sample covariances of superimposition of Separable Covariance Components](deep_reads/2026-11-27-2611.34323.md)  
+  8/10 [daily]
 - [Unconditional irreducibility of characteristic polynomials of symmetric Rademacher matrices](deep_reads/2026-11-26-hexagon_2611.00927.md)  
   6/10 [daily]
 - [Spectral outliers of self-coupled covariance matrices with exact zero weights](deep_reads/2026-11-20-hexagon_2611.00662.md)  
@@ -15306,6 +15320,8 @@
 
 ### Daily
 
+- [Orthogonal inference for machine learning forecasts](deep_reads/2026-11-27-2611.33187.md)  
+  7/10 [daily]
 - [An entropy-adjusted invariant likelihood for incidental parameters](deep_reads/2026-11-26-2611.31707.md)  
   7/10 [daily]
 - [A Tail-Geometric Approach to Kotlarski's Lemma with Order Statistics](deep_reads/2026-11-20-2611.23642.md)  
