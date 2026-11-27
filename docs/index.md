@@ -17,6 +17,11 @@
 
 [→ 查看完整报告](daily/2026-11-27.md)
 
+### 精读论文（1 篇）
+
+- [Sharp sensitivity bounds and maximin policy learning under violations of principal ignorability](deep_reads/2026-11-27-2611.33585.md)  
+  `因果推断` · 相关性 9/10
+
 ## 收藏
 
 - [→ 打开收藏](favorites.md) · 登录后在各页点 ☆ 收藏即可自动汇总

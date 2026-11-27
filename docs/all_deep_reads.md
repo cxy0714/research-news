@@ -4,6 +4,8 @@
 
 ### Daily
 
+- [Sharp sensitivity bounds and maximin policy learning under violations of principal ignorability](deep_reads/2026-11-27-2611.33585.md)  
+  9/10 [daily]
 - [Partial Identification under Imperfect Compliance via Cross-World Correlation Restriction](deep_reads/2026-11-26-2611.32615.md)  
   9/10 [daily]
 - [A General Framework for Identifying the Joint Potential Outcome Distribution through Support Restrictions](deep_reads/2026-11-26-2611.31900.md)  
