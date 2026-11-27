@@ -17,7 +17,7 @@
 
 [→ 查看完整报告](daily/2026-11-26.md)
 
-### 精读论文（46 篇）
+### 精读论文（47 篇）
 
 - [Partial Identification under Imperfect Compliance via Cross-World Correlation Restriction](deep_reads/2026-11-26-2611.32615.md)  
   `因果推断` · 相关性 9/10
@@ -103,6 +103,8 @@
   `其他` · 相关性 1/10
 - [A counterexample to rank log-concavity of Bruhat intervals](deep_reads/2026-11-26-hexagon_2611.01061.md)  
   `其他` · 相关性 1/10
+- [Orbit equivalence universality of the unitary group and the classification of II1 factors](deep_reads/2026-11-26-hexagon_2611.00869.md)  
+  `其他` · 相关性 0/10
 - [Completing the Kim–Kim–Oh Classification of Minimal-Rank $n$-Universal Lattices for $2\le n\le 8$](deep_reads/2026-11-26-hexagon_2611.00952.md)  
   `其他` · 相关性 0/10
 - [Kim's universal octonary form over real quadratic orders](deep_reads/2026-11-26-hexagon_2611.00953.md)  

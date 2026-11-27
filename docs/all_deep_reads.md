@@ -18301,6 +18301,8 @@
   1/10 [daily]
 - [A counterexample to rank log-concavity of Bruhat intervals](deep_reads/2026-11-26-hexagon_2611.01061.md)  
   1/10 [daily]
+- [Orbit equivalence universality of the unitary group and the classification of II1 factors](deep_reads/2026-11-26-hexagon_2611.00869.md)  
+  0/10 [daily]
 - [Completing the Kim–Kim–Oh Classification of Minimal-Rank $n$-Universal Lattices for $2\le n\le 8$](deep_reads/2026-11-26-hexagon_2611.00952.md)  
   0/10 [daily]
 - [Kim's universal octonary form over real quadratic orders](deep_reads/2026-11-26-hexagon_2611.00953.md)  
